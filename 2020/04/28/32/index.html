@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>约瑟夫出圈 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="使用单向循环链表解决约瑟夫问题    &#x2F;**     * @author cxy     * 约瑟夫问题：     *      n个小男孩围城一圈 从第k个孩子开始报数 每报m个数就出圈     *      假设有5个孩子 从第一个开始 报数2下就出圈 那么出圈的顺序：     *          2-&gt;4-&gt;1-&gt;5  最终保留3号男孩     *&#x2F;    public">
+<meta property="og:type" content="article">
+<meta property="og:title" content="约瑟夫出圈">
+<meta property="og:url" content="https://xinyichen.gitee.io/xinyichen/2020/04/28/32/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用单向循环链表解决约瑟夫问题    &#x2F;**     * @author cxy     * 约瑟夫问题：     *      n个小男孩围城一圈 从第k个孩子开始报数 每报m个数就出圈     *      假设有5个孩子 从第一个开始 报数2下就出圈 那么出圈的顺序：     *          2-&gt;4-&gt;1-&gt;5  最终保留3号男孩     *&#x2F;    public">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2020-04-28T05:35:00.000Z">
+<meta property="article:modified_time" content="2020-04-28T05:41:36.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/xinyichen/img/favicon.png"><link rel="canonical" href="https://xinyichen.gitee.io/xinyichen/2020/04/28/32/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/xinyichen/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/xinyichen/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-04-28 13:41:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/xinyichen/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div></div><hr/></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/xinyichen/">Hexo</a></span><span id="menus"><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">约瑟夫出圈</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-04-28T05:35:00.000Z" title="Created 2020-04-28 13:35:00">2020-04-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2020-04-28T05:41:36.000Z" title="Updated 2020-04-28 13:41:36">2020-04-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/xinyichen/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>使用单向循环链表解决约瑟夫问题<br>    /**<br>     * @author cxy<br>     * 约瑟夫问题：<br>     *      n个小男孩围城一圈 从第k个孩子开始报数 每报m个数就出圈<br>     *      假设有5个孩子 从第一个开始 报数2下就出圈 那么出圈的顺序：<br>     *          2-&gt;4-&gt;1-&gt;5  最终保留3号男孩<br>     */<br>    public class CircularSingleLinkedListDemo {<br>        public static void main(String[] args) {<br>            CircularSingleLinkedList list =<br>                    new CircularSingleLinkedList();<br>            list.addBoy(5);<br>            list.circleOut(1,2,5);<br>        }<br>    }</p>
+<pre><code>/**
+ * 使用环形单向列表
+ */
+class CircularSingleLinkedList&#123;
+
+    /**
+     * 头节点
+     */
+    private Boy first;
+
+    /**
+     *添加节点
+     * @param num
+     */
+    public void addBoy(int num)&#123;
+        //校验参数
+        if (num &lt; 1)&#123;
+            System.out.println(&quot;参数不合法&quot;);
+            return;
+        &#125;
+        //辅助指针用于构建环形链表
+        Boy cur = null;
+        for (int i = 1; i &lt;= num; i++) &#123;
+            //根据编号创建节点
+            Boy boy = new Boy(i);
+            //第一个节点
+            if (i == 1)&#123;
+                //设置第一个个节点first
+                this.first = boy;
+                //指向first
+                boy.setNext(first);
+                //辅助指针指向第一个节点
+                cur = first;
+            &#125;else &#123;
+                //指向第一个节点
+                boy.setNext(first);
+                //设置当前节点的下一个节点为新建节点
+                cur.setNext(boy);
+                //移动指针
+                cur = cur.getNext();
+            &#125;
+        &#125;
+    &#125;
+
+
+    /**
+     * 打印链表
+     */
+    public void printList()&#123;
+        if (first == null)&#123;
+            System.out.println(&quot;链表中无节点&quot;);
+            return;
+        &#125;
+        //辅助指针
+        Boy cur = this.first ;
+
+        while (true)&#123;
+            System.out.println(&quot;当前节点的编号为：&quot;+cur.getId());
+            //下一个节点为first时遍历结束
+            if (cur.getNext() == first)&#123;
+                break;
+            &#125;
+            //移动指针！！！
+            cur = cur.getNext();
+        &#125;
+
+    &#125;
+
+    /**
+     * 出圈
+     * @param startNum 开始的节点
+     * @param step 移动的步进
+     * @param count 总共的节点数量
+     */
+    public void circleOut(int startNum,int step,int count)&#123;
+        //判空
+        if (first == null)&#123;
+            System.out.println(&quot;链表中不存在节点&quot;);
+        &#125;
+        //参数校验
+        if(startNum&lt;0 || startNum&gt;count)&#123;
+            System.out.println(&quot;参数不合法&quot;);
+            return;
+        &#125;
+        //建立辅助指针
+        Boy helper = this.first;
+        //把辅助指针移动到first之前
+        while (helper.getNext() != first)&#123;
+            helper = helper.getNext();
+        &#125;
+        //把头指针移动到开始的节点
+        for (int i = 0; i &lt; startNum -1; i++) &#123;
+            first = first.getNext();
+            helper =  helper.getNext();
+        &#125;
+        //开始出圈
+        while (true) &#123;
+            //移动指针找到要出圈的节点
+            for (int j = 0; j &lt; step - 1; j++) &#123;
+                first = first.getNext();
+                helper = helper.getNext();
+            &#125;
+            //此时first所指的节点即为要出圈的节点
+            System.out.println(&quot;出圈的节点为:&quot;+first.getId());
+            //执行出圈操作
+            //first后移一位
+            first = first.getNext();
+            //辅助指针指向的节点的下一个节点指向first
+            helper.setNext(first);
+            //如果辅助指针和first重合那么链表只剩下一个节点
+            if (helper == first)&#123;
+                System.out.println(&quot;最终留下的节点为:&quot;+first.getId());
+                break;
+            &#125;
+
+        &#125;
+    &#125;
+&#125;
+
+/**
+ * 节点
+ */
+class Boy&#123;
+    /**
+     * 节点编号
+     */
+    private int id;
+    /**
+     * 下个节点的指针 默认为null
+     */
+    private Boy next;
+
+    public Boy(int id) &#123;
+        this.id = id;
+    &#125;
+
+    public int getId() &#123;
+        return id;
+    &#125;
+
+    /**
+     * 虽说用不到setId 但还是习惯性的给出
+     * @param id
+     */
+    public void setId(int id) &#123;
+        this.id = id;
+    &#125;
+
+    public Boy getNext() &#123;
+        return next;
+    &#125;
+
+    public void setNext(Boy next) &#123;
+        this.next = next;
+    &#125;
+
+&#125;</code></pre>
+<h2 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h2><pre><code>出圈的节点为:2
+出圈的节点为:4
+出圈的节点为:1
+出圈的节点为:5
+最终留下的节点为:3</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://xinyichen.gitee.io/xinyichen/2020/04/28/32/">https://xinyichen.gitee.io/xinyichen/2020/04/28/32/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/xinyichen/2020/04/28/33/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/xinyichen/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">数组模拟栈</div></div></a></div><div class="next-post pull-right"><a href="/xinyichen/2020/04/27/31/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/xinyichen/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">单项链表crud简单实现</div></div></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/xinyichen/null" onerror="this.onerror=null;this.src='/xinyichen/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div><div class="card-info-data-item is-center"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8D%B0"><span class="toc-number">1.</span> <span class="toc-text">打印</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/11/04/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/xinyichen/2020/11/04/hello-world/" title="Hello World">Hello World</a><time datetime="2020-11-04T04:16:09.910Z" title="Created 2020-11-04 12:16:09">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/20/62/" title="flutter基础"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter基础"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/20/62/" title="flutter基础">flutter基础</a><time datetime="2020-10-20T14:18:00.000Z" title="Created 2020-10-20 22:18:00">2020-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/10/61/" title="flutter"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/10/61/" title="flutter">flutter</a><time datetime="2020-10-10T08:19:21.000Z" title="Created 2020-10-10 16:19:21">2020-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/20/60/" title="OOM实例"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="OOM实例"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/20/60/" title="OOM实例">OOM实例</a><time datetime="2020-09-20T13:09:34.000Z" title="Created 2020-09-20 21:09:34">2020-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/12/58/" title="Java面试题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Java面试题"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/12/58/" title="Java面试题">Java面试题</a><time datetime="2020-09-12T02:52:00.000Z" title="Created 2020-09-12 10:52:00">2020-09-12</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/xinyichen/js/utils.js"></script><script src="/xinyichen/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Archives | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://xinyichen.gitee.io/xinyichen/archives/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xinyichen.gitee.io/xinyichen/null">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xinyichen.gitee.io/xinyichen/null"><link rel="shortcut icon" href="/xinyichen/img/favicon.png"><link rel="canonical" href="https://xinyichen.gitee.io/xinyichen/archives/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/xinyichen/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/xinyichen/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2020-11-04 13:17:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/xinyichen/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div></div><hr/></div></div><div id="body-wrap"><header class="not-index-bg" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/xinyichen/">Hexo</a></span><span id="menus"><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="page-site-info"><h1 id="site-title">Archives</h1></div></header><main class="layout" id="content-inner"><div id="archive"><div class="article-sort-title">Articles - 57</div><div class="article-sort"><div class="article-sort-item year">2020</div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/09/08/52/" title="EasyExcel操作Excel"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="EasyExcel操作Excel" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-09-08T08:52:38.000Z" title="Created 2020-09-08 16:52:38">2020-09-08</time></div><a class="article-sort-item-title" href="/xinyichen/2020/09/08/52/" title="EasyExcel操作Excel">EasyExcel操作Excel</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/09/08/51/" title="oss文件操作流程"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="oss文件操作流程" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-09-08T06:40:16.000Z" title="Created 2020-09-08 14:40:16">2020-09-08</time></div><a class="article-sort-item-title" href="/xinyichen/2020/09/08/51/" title="oss文件操作流程">oss文件操作流程</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/09/08/50/" title="logback日志配置"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="logback日志配置" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-09-08T06:30:28.000Z" title="Created 2020-09-08 14:30:28">2020-09-08</time></div><a class="article-sort-item-title" href="/xinyichen/2020/09/08/50/" title="logback日志配置">logback日志配置</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/09/07/49/" title="mybatis配置"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="mybatis配置" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-09-07T07:37:00.000Z" title="Created 2020-09-07 15:37:00">2020-09-07</time></div><a class="article-sort-item-title" href="/xinyichen/2020/09/07/49/" title="mybatis配置">mybatis配置</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/09/07/48/" title="微服务通用配置"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="微服务通用配置" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-09-07T07:36:47.000Z" title="Created 2020-09-07 15:36:47">2020-09-07</time></div><a class="article-sort-item-title" href="/xinyichen/2020/09/07/48/" title="微服务通用配置">微服务通用配置</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/09/07/47/" title="Swagger通用配置"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="Swagger通用配置" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-09-07T07:15:00.000Z" title="Created 2020-09-07 15:15:00">2020-09-07</time></div><a class="article-sort-item-title" href="/xinyichen/2020/09/07/47/" title="Swagger通用配置">Swagger通用配置</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/09/07/46/" title="API接口返回类通用方案"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="API接口返回类通用方案" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-09-07T07:09:00.000Z" title="Created 2020-09-07 15:09:00">2020-09-07</time></div><a class="article-sort-item-title" href="/xinyichen/2020/09/07/46/" title="API接口返回类通用方案">API接口返回类通用方案</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/08/14/45/" title="JSR303结合AdviceController开启全局数据校验"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="JSR303结合AdviceController开启全局数据校验" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-08-14T01:45:00.000Z" title="Created 2020-08-14 09:45:00">2020-08-14</time></div><a class="article-sort-item-title" href="/xinyichen/2020/08/14/45/" title="JSR303结合AdviceController开启全局数据校验">JSR303结合AdviceController开启全局数据校验</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/08/06/44/" title="GateWay配置跨域"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="GateWay配置跨域" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-08-05T20:10:39.000Z" title="Created 2020-08-06 04:10:39">2020-08-06</time></div><a class="article-sort-item-title" href="/xinyichen/2020/08/06/44/" title="GateWay配置跨域">GateWay配置跨域</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/xinyichen/2020/08/05/43/" title="stream流封装多级菜单"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="stream流封装多级菜单" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2020-08-05T15:20:00.000Z" title="Created 2020-08-05 23:20:00">2020-08-05</time></div><a class="article-sort-item-title" href="/xinyichen/2020/08/05/43/" title="stream流封装多级菜单">stream流封装多级菜单</a></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/xinyichen/archives/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/xinyichen/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/xinyichen/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/xinyichen/archives/page/6/">6</a><a class="extend next" rel="next" href="/xinyichen/archives/page/3/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/xinyichen/null" onerror="this.onerror=null;this.src='/xinyichen/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div><div class="card-info-data-item is-center"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/11/04/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/xinyichen/2020/11/04/hello-world/" title="Hello World">Hello World</a><time datetime="2020-11-04T04:16:09.910Z" title="Created 2020-11-04 12:16:09">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/20/62/" title="flutter基础"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter基础"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/20/62/" title="flutter基础">flutter基础</a><time datetime="2020-10-20T14:18:00.000Z" title="Created 2020-10-20 22:18:00">2020-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/10/61/" title="flutter"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/10/61/" title="flutter">flutter</a><time datetime="2020-10-10T08:19:21.000Z" title="Created 2020-10-10 16:19:21">2020-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/20/60/" title="OOM实例"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="OOM实例"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/20/60/" title="OOM实例">OOM实例</a><time datetime="2020-09-20T13:09:34.000Z" title="Created 2020-09-20 21:09:34">2020-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/12/58/" title="Java面试题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Java面试题"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/12/58/" title="Java面试题">Java面试题</a><time datetime="2020-09-12T02:52:00.000Z" title="Created 2020-09-12 10:52:00">2020-09-12</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>Categories</span></div><ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/MySQL/"><span class="card-category-list-name">MySQL</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">1</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E5%89%8D%E7%AB%AF/flutter/"><span class="card-category-list-name">flutter</span><span class="card-category-list-count">1</span></a></li></ul><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">总结</span><span class="card-category-list-count">20</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="card-category-list-name">数据结构</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%9E%B6%E6%9E%84/"><span class="card-category-list-name">架构</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">算法</span><span class="card-category-list-count">2</span></a></li>
+            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/xinyichen/categories/">
+                <span>More</span><i class="fas fa-angle-right"></i></a></li>
+            </ul></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/09/"><span class="card-archive-list-date">September 2020</span><span class="card-archive-list-count">14</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/07/"><span class="card-archive-list-date">July 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/05/"><span class="card-archive-list-date">May 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/04/"><span class="card-archive-list-date">April 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/03/"><span class="card-archive-list-date">March 2020</span><span class="card-archive-list-count">17</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/xinyichen/archives/">
+              <span>More</span><i class="fas fa-angle-right"  ></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">57</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2020-11-04T05:17:19.231Z"></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/xinyichen/js/utils.js"></script><script src="/xinyichen/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
