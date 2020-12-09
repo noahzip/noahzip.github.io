@@ -1,155 +1,466 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SpringCloud 注册中心:Eureka | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="1.环境搭建1. 服务中心注册1.1 服务端导入依赖&lt;!-- 注册服务 --&gt; &lt;dependency&gt;  &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;spring-cloud-starter-eureka-server&lt;&#x2F;artifactId&gt;  &amp;lt">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SpringCloud 注册中心:Eureka">
-<meta property="og:url" content="https://xinyichen.gitee.io/xinyichen/2020/03/04/11/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.环境搭建1. 服务中心注册1.1 服务端导入依赖&lt;!-- 注册服务 --&gt; &lt;dependency&gt;  &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;spring-cloud-starter-eureka-server&lt;&#x2F;artifactId&gt;  &amp;lt">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
-<meta property="article:published_time" content="2020-03-04T08:26:00.000Z">
-<meta property="article:modified_time" content="2020-03-04T08:27:18.000Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/xinyichen/img/favicon.png"><link rel="canonical" href="https://xinyichen.gitee.io/xinyichen/2020/03/04/11/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/xinyichen/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
-  root: '/xinyichen/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: 'Just',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: undefined,
-  ClickShowText: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  justifiedGallery: {
-    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isanchor: false
-};
+<!DOCTYPE HTML>
+<html lang="zh-CN">
 
-var saveToLocal = {
-  set: function setWithExpiry(key, value, ttl) {
-    const now = new Date()
-    const expiryDay = ttl * 86400000
-    const item = {
-      value: value,
-      expiry: now.getTime() + expiryDay,
-    }
-    localStorage.setItem(key, JSON.stringify(item))
-  },
 
-  get: function getWithExpiry(key) {
-    const itemStr = localStorage.getItem(key)
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="SpringCloud 注册中心:Eureka, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="1.环境搭建1. 服务中心注册1.1 服务端导入依赖&amp;lt;!-- 注册服务 --&amp;gt;
+&amp;lt;dependency&amp;gt;
+ &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;g">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>SpringCloud 注册中心:Eureka | 未见初墨</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
 
-    if (!itemStr) {
-      return undefined
-    }
-    const item = JSON.parse(itemStr)
-    const now = new Date()
-
-    if (now.getTime() > item.expiry) {
-      localStorage.removeItem(key)
-      return undefined
-    }
-    return item.value
-  }
-}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2020-03-04 16:27:18'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(function () {  window.activateDarkMode = function () {
-    document.documentElement.setAttribute('data-theme', 'dark')
-    if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-    }
-  }
-  window.activateLightMode = function () {
-    document.documentElement.setAttribute('data-theme', 'light')
-   if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-    }
-  }
-  const autoChangeMode = 'false'
-  const t = saveToLocal.get('theme')
-  if (autoChangeMode === '1') {
-    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-    if (t === undefined) {
-      if (isLightMode) activateLightMode()
-      else if (isDarkMode) activateDarkMode()
-      else if (isNotSpecified || hasNoSupport) {
-        const now = new Date()
-        const hour = now.getHours()
-        const isNight = hour <= 6 || hour >= 18
-        isNight ? activateDarkMode() : activateLightMode()
-      }
-      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
-        if (saveToLocal.get('theme') === undefined) {
-          e.matches ? activateDarkMode() : activateLightMode()
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
         }
-      })
-    } else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else if (autoChangeMode === '2') {
-    const now = new Date()
-    const hour = now.getHours()
-    const isNight = hour <= 6 || hour >= 18
-    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
-    else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else {
-    if (t === 'dark') activateDarkMode()
-    else if (t === 'light') activateLightMode()
-  }const asideStatus = saveToLocal.get('aside-status')
-if (asideStatus !== undefined) {
-   if (asideStatus === 'hide') {
-     document.documentElement.classList.add('hide-aside')
-   } else {
-     document.documentElement.classList.remove('hide-aside')
-   }
-}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/xinyichen/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div></div><hr/></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/xinyichen/">Hexo</a></span><span id="menus"><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">SpringCloud 注册中心:Eureka</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-03-04T08:26:00.000Z" title="Created 2020-03-04 16:26:00">2020-03-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2020-03-04T08:27:18.000Z" title="Updated 2020-03-04 16:27:18">2020-03-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/xinyichen/categories/Java/">Java</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h2><h4 id="1-服务中心注册"><a href="#1-服务中心注册" class="headerlink" title="1. 服务中心注册"></a>1. 服务中心注册</h4><h5 id="1-1-服务端导入依赖"><a href="#1-1-服务端导入依赖" class="headerlink" title="1.1 服务端导入依赖"></a>1.1 服务端导入依赖</h5><pre><code>&lt;!-- 注册服务 --&gt;
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="未见初墨" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">未见初墨</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/tags" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-tags"></i>
+                    
+                    <span>标签</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/about" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-user-circle-o"></i>
+                    
+                    <span>关于</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.jpg"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">未见初墨</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/tags" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-tags"></i>
+                        
+                        标签
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">SpringCloud 注册中心:Eureka</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-03-04
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-03-04
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        600
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        2 分
+                    </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h2><h4 id="1-服务中心注册"><a href="#1-服务中心注册" class="headerlink" title="1. 服务中心注册"></a>1. 服务中心注册</h4><h5 id="1-1-服务端导入依赖"><a href="#1-1-服务端导入依赖" class="headerlink" title="1.1 服务端导入依赖"></a>1.1 服务端导入依赖</h5><pre><code>&lt;!-- 注册服务 --&gt;
 &lt;dependency&gt;
  &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
  &lt;artifactId&gt;spring-cloud-starter-eureka-server&lt;/artifactId&gt;
  &lt;version&gt;1.4.7.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-<h5 id="1-2-服务中心配置application-properties"><a href="#1-2-服务中心配置application-properties" class="headerlink" title="1.2 服务中心配置application.properties"></a>1.2 服务中心配置application.properties</h5><pre><code># 服务端口
+&lt;/dependency&gt;</code></pre><h5 id="1-2-服务中心配置application-properties"><a href="#1-2-服务中心配置application-properties" class="headerlink" title="1.2 服务中心配置application.properties"></a>1.2 服务中心配置application.properties</h5><pre><code># 服务端口
 server.port=9002
 
 # 是否将自己注册到Eureka中，本身是服务器无需注册
@@ -159,68 +470,541 @@ eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 
 # Eureka客户端与Eureka服务器进行通信的地址
-eureka.client.service-url.defaultZone=http://127.0.0.1:$&#123;server.port&#125;/eureka/</code></pre>
-<h5 id="1-3-服务中心启动类添加注解-EnableEurekaServer"><a href="#1-3-服务中心启动类添加注解-EnableEurekaServer" class="headerlink" title="1.3 服务中心启动类添加注解 @EnableEurekaServer"></a>1.3 服务中心启动类添加注解 @EnableEurekaServer</h5><pre><code>@SpringBootApplication
+eureka.client.service-url.defaultZone=http://127.0.0.1:${server.port}/eureka/</code></pre><h5 id="1-3-服务中心启动类添加注解-EnableEurekaServer"><a href="#1-3-服务中心启动类添加注解-EnableEurekaServer" class="headerlink" title="1.3 服务中心启动类添加注解 @EnableEurekaServer"></a>1.3 服务中心启动类添加注解 @EnableEurekaServer</h5><pre><code>@SpringBootApplication
 @EnableEurekaServer
-public class EurekaServerApplication &#123;
-    public static void main(String[] args) &#123;
+public class EurekaServerApplication {
+    public static void main(String[] args) {
         SpringApplication.run(EurekaServerApplication.class, args);
-    &#125;
+    }
 
-&#125;</code></pre>
-<h4 id="2-客户端注册"><a href="#2-客户端注册" class="headerlink" title="2. 客户端注册"></a>2. 客户端注册</h4><h5 id="2-1-客户端导入依赖"><a href="#2-1-客户端导入依赖" class="headerlink" title="2.1 客户端导入依赖"></a>2.1 客户端导入依赖</h5><pre><code>&lt;!-- 注册客户端 --&gt;
+}</code></pre><h4 id="2-客户端注册"><a href="#2-客户端注册" class="headerlink" title="2. 客户端注册"></a>2. 客户端注册</h4><h5 id="2-1-客户端导入依赖"><a href="#2-1-客户端导入依赖" class="headerlink" title="2.1 客户端导入依赖"></a>2.1 客户端导入依赖</h5><pre><code>&lt;!-- 注册客户端 --&gt;
  &lt;dependency&gt;
      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
      &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
      &lt;version&gt;1.4.7.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-<h5 id="2-2-客户端配置application-properties"><a href="#2-2-客户端配置application-properties" class="headerlink" title="2.2 客户端配置application.properties"></a>2.2 客户端配置application.properties</h5><pre><code># 指定注册中心地址
+&lt;/dependency&gt;</code></pre><h5 id="2-2-客户端配置application-properties"><a href="#2-2-客户端配置application-properties" class="headerlink" title="2.2 客户端配置application.properties"></a>2.2 客户端配置application.properties</h5><pre><code># 指定注册中心地址
 eureka.client.service-url.defaultZone=http://127.0.0.1:9002/eureka/
 # eureka上传获取的是服务器id地址 否则是主机名
-eureka.instance.prefer-ip-address=true</code></pre>
-<h5 id="2-3-客户端启动类添加注解-EnableEurekaClient"><a href="#2-3-客户端启动类添加注解-EnableEurekaClient" class="headerlink" title="2.3 客户端启动类添加注解 @EnableEurekaClient"></a>2.3 客户端启动类添加注解 @EnableEurekaClient</h5><pre><code>@SpringBootApplication
+eureka.instance.prefer-ip-address=true</code></pre><h5 id="2-3-客户端启动类添加注解-EnableEurekaClient"><a href="#2-3-客户端启动类添加注解-EnableEurekaClient" class="headerlink" title="2.3 客户端启动类添加注解 @EnableEurekaClient"></a>2.3 客户端启动类添加注解 @EnableEurekaClient</h5><pre><code>@SpringBootApplication
 @EnableEurekaClient
-public class EduossApplication &#123;
+public class EduossApplication {
 
-    public static void main(String[] args) &#123;
+    public static void main(String[] args) {
         SpringApplication.run(EduossApplication.class, args);
-    &#125;
+    }
 
-&#125;</code></pre>
-<h2 id="2-服务发现："><a href="#2-服务发现：" class="headerlink" title="2. 服务发现："></a>2. 服务发现：</h2><p>前往注册中心路径查看服务是否加载</p>
+}</code></pre><h2 id="2-服务发现："><a href="#2-服务发现：" class="headerlink" title="2. 服务发现："></a>2. 服务发现：</h2><p>前往注册中心路径查看服务是否加载</p>
 <h2 id="3-服务调用："><a href="#3-服务调用：" class="headerlink" title="3. 服务调用："></a>3. 服务调用：</h2><h4 id="3-1-在要使用服务调用的客户端中添加依赖"><a href="#3-1-在要使用服务调用的客户端中添加依赖" class="headerlink" title="3.1 在要使用服务调用的客户端中添加依赖"></a>3.1 在要使用服务调用的客户端中添加依赖</h4><pre><code>&lt;!-- 服务调用 --&gt;
 &lt;dependency&gt;
   &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
   &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
   &lt;version&gt;2.2.1.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-<h4 id="3-2-在要使用服务调用的客户端的启动类上标-EnableFeignClients"><a href="#3-2-在要使用服务调用的客户端的启动类上标-EnableFeignClients" class="headerlink" title="3.2 在要使用服务调用的客户端的启动类上标@EnableFeignClients"></a>3.2 在要使用服务调用的客户端的启动类上标@EnableFeignClients</h4><pre><code>@SpringBootApplication
+&lt;/dependency&gt;</code></pre><h4 id="3-2-在要使用服务调用的客户端的启动类上标-EnableFeignClients"><a href="#3-2-在要使用服务调用的客户端的启动类上标-EnableFeignClients" class="headerlink" title="3.2 在要使用服务调用的客户端的启动类上标@EnableFeignClients"></a>3.2 在要使用服务调用的客户端的启动类上标@EnableFeignClients</h4><pre><code>@SpringBootApplication
 @EnableEurekaClient //这是一个客户端
 @EnableFeignClients    //允许加载服务
-public class EduServiceApplication &#123;
+public class EduServiceApplication {
 
-    public static void main(String[] args) &#123;
+    public static void main(String[] args) {
         SpringApplication.run(EduServiceApplication.class, args);
-    &#125;
+    }
 
-&#125;</code></pre>
-<h4 id="3-3-创建接口"><a href="#3-3-创建接口" class="headerlink" title="3.3 创建接口"></a>3.3 创建接口</h4><pre><code>@FeignClient(&quot;eduvideo&quot;) //要调用的服务端
+}</code></pre><h4 id="3-3-创建接口"><a href="#3-3-创建接口" class="headerlink" title="3.3 创建接口"></a>3.3 创建接口</h4><pre><code>@FeignClient("eduvideo") //要调用的服务端
 @Component
-public interface VideoClient &#123;
+public interface VideoClient {
 
     //定义调用方法的路径  必须使用@PathVariable指定参数名称
-    @DeleteMapping(&quot;/eduvideo/deleteAliyunVideoById/&#123;videoId&#125;&quot;)
-    public R deleteAliyunVideoById(@PathVariable(&quot;videoId&quot;) String videoId);
-&#125;</code></pre>
-<h4 id="3-4-在类注入中刚才创建的接口"><a href="#3-4-在类注入中刚才创建的接口" class="headerlink" title="3.4 在类注入中刚才创建的接口"></a>3.4 在类注入中刚才创建的接口</h4><pre><code>@Service
-public class EduVideoServiceImpl extends ServiceImpl&lt;EduVideoMapper, EduVideo&gt; implements EduVideoService &#123;
+    @DeleteMapping("/eduvideo/deleteAliyunVideoById/{videoId}")
+    public R deleteAliyunVideoById(@PathVariable("videoId") String videoId);
+}</code></pre><h4 id="3-4-在类注入中刚才创建的接口"><a href="#3-4-在类注入中刚才创建的接口" class="headerlink" title="3.4 在类注入中刚才创建的接口"></a>3.4 在类注入中刚才创建的接口</h4><pre><code>@Service
+public class EduVideoServiceImpl extends ServiceImpl&lt;EduVideoMapper, EduVideo&gt; implements EduVideoService {
 
     //注入client
     @Autowired
     private VideoClient videoClient;
 
-    public void removeById(String eduvideo)&#123;
+    public void removeById(String eduvideo){
          videoClient.deleteAliyunVideoById(eduvideo);
-    &#125;
-&#125;</code></pre>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://xinyichen.gitee.io/xinyichen/2020/03/04/11/">https://xinyichen.gitee.io/xinyichen/2020/03/04/11/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/xinyichen/2020/03/04/12/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/xinyichen/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">springboot上传文件出现大小限制</div></div></a></div><div class="next-post pull-right"><a href="/xinyichen/2020/03/03/10/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/xinyichen/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">关于element 文件上传出现跨域问题</div></div></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/xinyichen/null" onerror="this.onerror=null;this.src='/xinyichen/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div><div class="card-info-data-item is-center"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.</span> <span class="toc-text">1.环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E6%B3%A8%E5%86%8C"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 服务中心注册</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">1.1 服务端导入依赖</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E9%85%8D%E7%BD%AEapplication-properties"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">1.2 服务中心配置application.properties</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E5%90%AF%E5%8A%A8%E7%B1%BB%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3-EnableEurekaServer"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">1.3 服务中心启动类添加注解 @EnableEurekaServer</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B3%A8%E5%86%8C"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 客户端注册</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">2.1 客户端导入依赖</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEapplication-properties"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">2.2 客户端配置application.properties</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%90%AF%E5%8A%A8%E7%B1%BB%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3-EnableEurekaClient"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">2.3 客户端启动类添加注解 @EnableEurekaClient</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">2. 服务发现：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">3. 服务调用：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%9C%A8%E8%A6%81%E4%BD%BF%E7%94%A8%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="toc-number">3.0.1.</span> <span class="toc-text">3.1 在要使用服务调用的客户端中添加依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E5%9C%A8%E8%A6%81%E4%BD%BF%E7%94%A8%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%90%AF%E5%8A%A8%E7%B1%BB%E4%B8%8A%E6%A0%87-EnableFeignClients"><span class="toc-number">3.0.2.</span> <span class="toc-text">3.2 在要使用服务调用的客户端的启动类上标@EnableFeignClients</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E5%88%9B%E5%BB%BA%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.0.3.</span> <span class="toc-text">3.3 创建接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E5%9C%A8%E7%B1%BB%E6%B3%A8%E5%85%A5%E4%B8%AD%E5%88%9A%E6%89%8D%E5%88%9B%E5%BB%BA%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.0.4.</span> <span class="toc-text">3.4 在类注入中刚才创建的接口</span></a></li></ol></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/11/04/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/xinyichen/2020/11/04/hello-world/" title="Hello World">Hello World</a><time datetime="2020-11-04T04:16:09.910Z" title="Created 2020-11-04 12:16:09">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/20/62/" title="flutter基础"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter基础"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/20/62/" title="flutter基础">flutter基础</a><time datetime="2020-10-20T14:18:00.000Z" title="Created 2020-10-20 22:18:00">2020-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/10/61/" title="flutter"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/10/61/" title="flutter">flutter</a><time datetime="2020-10-10T08:19:21.000Z" title="Created 2020-10-10 16:19:21">2020-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/20/60/" title="OOM实例"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="OOM实例"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/20/60/" title="OOM实例">OOM实例</a><time datetime="2020-09-20T13:09:34.000Z" title="Created 2020-09-20 21:09:34">2020-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/12/58/" title="Java面试题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Java面试题"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/12/58/" title="Java面试题">Java面试题</a><time datetime="2020-09-12T02:52:00.000Z" title="Created 2020-09-12 10:52:00">2020-09-12</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/xinyichen/js/utils.js"></script><script src="/xinyichen/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
+    }
+}</code></pre><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/03/04/springboot%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%87%BA%E7%8E%B0%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="springboot上传文件出现大小限制">
+                            
+                            <span class="card-title">springboot上传文件出现大小限制</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                在application.properties中添加如下配置即可# 设置上传文件限制大小
+# 单个文件最大 1g
+spring.servlet.multipart.max-file-size=1024MB
+# 最大总上传量 1g
+sprin
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-04
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
+                                    经验&bug
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/03/04/SpringCloud%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83Eureka/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="SpringCloud 注册中心:Eureka">
+                            
+                            <span class="card-title">SpringCloud 注册中心:Eureka</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.环境搭建1. 服务中心注册1.1 服务端导入依赖&lt;!-- 注册服务 --&gt;
+&lt;dependency&gt;
+ &lt;groupId&gt;org.springframework.cloud&lt;/groupId&g
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-04
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            <span id="sitetime">载入运行时间...</span>
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="fa fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                                                                       class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fa fa-user"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                                                                         class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            
+                
+                    &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+                            class="white-color">208.1k</span>&nbsp;字
+                
+                
+                    <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" alt="icp"/>
+                <a href="http://beian.miit.gov.cn/" target="_blank">沪ICP备xxxxxxxxx号</a>
+            </span>
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2020";
+                        var startMonth = "12";
+                        var startDate = "09";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    $(function () {
+        searchFunc("/search.xml", 'searchInput', 'searchResult');
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+</body>
+</html>

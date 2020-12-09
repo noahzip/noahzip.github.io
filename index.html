@@ -1,168 +1,937 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://xinyichen.gitee.io/xinyichen/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://xinyichen.gitee.io/xinyichen/null">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xinyichen.gitee.io/xinyichen/null"><link rel="shortcut icon" href="/xinyichen/img/favicon.png"><link rel="canonical" href="https://xinyichen.gitee.io/xinyichen/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/xinyichen/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
-  root: '/xinyichen/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: 'Just',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: undefined,
-  ClickShowText: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  justifiedGallery: {
-    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isanchor: false
-};
+<!DOCTYPE HTML>
+<html lang="zh-CN">
 
-var saveToLocal = {
-  set: function setWithExpiry(key, value, ttl) {
-    const now = new Date()
-    const expiryDay = ttl * 86400000
-    const item = {
-      value: value,
-      expiry: now.getTime() + expiryDay,
-    }
-    localStorage.setItem(key, JSON.stringify(item))
-  },
 
-  get: function getWithExpiry(key) {
-    const itemStr = localStorage.getItem(key)
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="未见初墨">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>未见初墨</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
 
-    if (!itemStr) {
-      return undefined
-    }
-    const item = JSON.parse(itemStr)
-    const now = new Date()
-
-    if (now.getTime() > item.expiry) {
-      localStorage.removeItem(key)
-      return undefined
-    }
-    return item.value
-  }
-}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2020-11-04 13:17:19'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(function () {  window.activateDarkMode = function () {
-    document.documentElement.setAttribute('data-theme', 'dark')
-    if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-    }
-  }
-  window.activateLightMode = function () {
-    document.documentElement.setAttribute('data-theme', 'light')
-   if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-    }
-  }
-  const autoChangeMode = 'false'
-  const t = saveToLocal.get('theme')
-  if (autoChangeMode === '1') {
-    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-    if (t === undefined) {
-      if (isLightMode) activateLightMode()
-      else if (isDarkMode) activateDarkMode()
-      else if (isNotSpecified || hasNoSupport) {
-        const now = new Date()
-        const hour = now.getHours()
-        const isNight = hour <= 6 || hour >= 18
-        isNight ? activateDarkMode() : activateLightMode()
-      }
-      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
-        if (saveToLocal.get('theme') === undefined) {
-          e.matches ? activateDarkMode() : activateLightMode()
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
         }
-      })
-    } else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else if (autoChangeMode === '2') {
-    const now = new Date()
-    const hour = now.getHours()
-    const isNight = hour <= 6 || hour >= 18
-    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
-    else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else {
-    if (t === 'dark') activateDarkMode()
-    else if (t === 'light') activateLightMode()
-  }const asideStatus = saveToLocal.get('aside-status')
-if (asideStatus !== undefined) {
-   if (asideStatus === 'hide') {
-     document.documentElement.classList.add('hide-aside')
-   } else {
-     document.documentElement.classList.remove('hide-aside')
-   }
-}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/xinyichen/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div></div><hr/></div></div><div id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/xinyichen/">Hexo</a></span><span id="menus"><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="site-info"><h1 id="site-title">Hexo</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/11/04/hello-world/" title="Hello World">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Hello World"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/11/04/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-11-04T04:16:09.910Z" title="Created 2020-11-04 12:16:09">2020-11-04</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
 
-More info: Writing
-Run server1$ hexo server
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="未见初墨" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
-More info: Server
-Generate static files1$ hexo generate
 
-More info: Generating
-Deploy to remote sites1$ hexo deploy
+<body>
 
-More info: Deployment
-</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/10/20/62/" title="flutter基础">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter基础"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/10/20/62/" title="flutter基础">flutter基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-10-20T14:18:00.000Z" title="Created 2020-10-20 22:18:00">2020-10-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/xinyichen/categories/%E5%89%8D%E7%AB%AF/flutter/">flutter</a></span></div><div class="content">本文章知识来自于jspang（https://jspang.com/detailed?id=42# toc219），仅用于学习记录。Flutter页面的基本写法main.dart:123456789101112131415161718192021222324252627282930//导入组件import &#x27;package:flutter/material.dart&#x27;;//启动入口void main()&#123;  runApp(MyApp());&#125;//自定义的运行模块？//需要继承自 StatelessWidget 并重写build方法class MyApp extends StatelessWidget&#123;  @override  Widget build(BuildContext context) &#123;    return MaterialApp(      //app名称      title: &quot;Hello&quot;,       //页面展示的内容 	  home: Scaffold(        //bar   ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/10/10/61/" title="flutter">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/10/10/61/" title="flutter">flutter</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-10-10T08:19:21.000Z" title="Created 2020-10-10 16:19:21">2020-10-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/Java/">Java</a></span></div><div class="content">flutter组件认识：http://www.flutter.link/page/5/flutter书籍：https://book.flutterchina.club/chapter2/flutter_app_debug.htmldart语言入门：https://www.dartcn.com/samples/flutter实战项目：https://jspang.com/detailed?id=53  （这个视频需要付费，代码在章节里有，付费视频在哔哩哔哩找，有免费的）flutter-sdk下载：Android-sdk：下载：android studio软件，创建一个项目，选择sdk版本自动下，官网下载太慢（翻墙也是）组件：链接：https://pan.baidu.com/s/16-OylRnqNhlK0znv73d16g提取码：j21r 
-</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/09/20/60/" title="OOM实例">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="OOM实例"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/09/20/60/" title="OOM实例">OOM实例</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-09-20T13:09:34.000Z" title="Created 2020-09-20 21:09:34">2020-09-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="content">c++程序员 重写了finalize方法 gc回收时候调用时运行时间长 在此过程中大量的新对象涌入 造成oom
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">未见初墨</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/tags" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-tags"></i>
+                    
+                    <span>标签</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/about" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-user-circle-o"></i>
+                    
+                    <span>关于</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.jpg"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">未见初墨</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/tags" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-tags"></i>
+                        
+                        标签
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    <style>
+    .carousel-control {
+        width: 45px;
+        height: 45px;
+        line-height: 55px;
+        border-radius: 45px;
+        background: transparent;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    #prev-cover {
+        position: absolute;
+        top: 48%;
+        left: 8px;
+    }
+
+    #next-cover {
+        position: absolute;
+        top: 48%;
+        right: 8px;;
+    }
+
+    #prev-cover i {
+        margin-right: 3px;
+    }
+
+    #next-cover i {
+        margin-left: 3px;
+    }
+
+    .carousel-control:hover {
+        background-color: rgba(0, 0, 0, .4);
+    }
+
+    .carousel-control i {
+        color: #fff;
+        font-size: 2.4rem;
+    }
+</style>
+
+
+
+<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
+    
+
+    <div class="carousel-item red white-text bg-cover about-cover">
+        <div class="container">
+            <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                    未见初墨
+                
+            </div>
+
+            <div class="description center-align">
+                
+                    <span id="subtitle"></span>
+                    <script src="https://cdn.jsdelivr.net/npm/typed.js"></script>
+                    <script>
+                        var typed = new Typed("#subtitle", {
+                            strings: ['立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径','只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方'],
+                            startDelay: 300,
+                            typeSpeed: 100,
+                            loop: true,
+                            backSpeed: 50,
+                            showCursor: true
+                        });
+                    </script>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
+    </script>
+
+
+            <div class="cover-btns">
+                <a href="#indexCard" class="waves-effect waves-light btn">
+                    <i class="fa fa-angle-double-down"></i>开始阅读
+                </a>
+
+                
+            </div>
+            <div class="cover-social-link">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script>
+    $(function () {
+        let coverSlider = $('.carousel');
+
+        //用户触摸轮播自动 restartPlay 是否生效
+        let initUserPressedOrDraggedActive = false
+
+        //用户触摸轮播自动 restartPlay
+        function initUserPressedOrDragged(instance) {
+            setInterval(() => {
+                if (instance.pressed || instance.dragged) {
+                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
+                    restartPlay()
+                }
+            }, 1000)
+        }
+
+        coverSlider.carousel({
+            duration: Number('120'),
+            fullWidth: true,
+            indicators: 'true' === 'true',
+            onCycleTo() {
+                if (!initUserPressedOrDraggedActive) {
+                    // console.log('initUserPressedOrDraggedActive')
+                    initUserPressedOrDragged(this)
+                    initUserPressedOrDraggedActive = true
+                }
+            },
+        })
+
+        let carouselIntervalId;
+        
+        // Loop to call the next cover article picture.
+        let autoCarousel = function () {
+            carouselIntervalId = setInterval(function () {
+                coverSlider.carousel('next');
+            }, 5000);
+        };
+        autoCarousel();
+        
+
+        function restartPlay() {
+            
+            clearInterval(carouselIntervalId);
+            autoCarousel();
+            
+        };
+
+        
+        // prev and next cover post.
+        $('#prev-cover').click(function () {
+            coverSlider.carousel('prev');
+            restartPlay();
+        });
+        $('#next-cover').click(function () {
+            coverSlider.carousel('next');
+            restartPlay();
+        });
+        
+    });
+</script>
+
+
+
+<main class="content">
+
+    
+        <div id="indexCard" class="index-card">
+            <div class="container ">
+                <div class="card">
+                    <div class="card-content">
+                        
+                            <div class="dream">
+    
+        <div class="title center-align">
+            <i class="fa fa-lightbulb-o"></i>&nbsp;&nbsp;Moonlight
+        </div>
+    
+    <div class="row">
+        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
+            努力不一定有用，但放弃一定会后悔。》
+        </div>
+    </div>
+</div>
+
+                        
+
+                        
+                        
+                        <div id="recommend-sections" class="recommend">
+                            
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+    
+
+    <!-- 所有文章卡片 -->
+    <article id="articles" class="container articles">
+        <div class="row article-row">
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/12/09/%E5%B7%A5%E7%A8%8B%E7%BB%8F%E6%B5%8E%E5%A4%8D%E4%B9%A0%E8%B5%84%E6%96%99/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="工程经济复习资料">
+                                
+                                <span class="card-title">工程经济复习资料</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    现金流量：​    实际发生在个时间点上的资金的流出或资金的流入称为现金流量，其中流入系统的资金称为现金流入，流出系统的资金成为现金流出。
+
+净现金流量：对某系统而言，现金流入与现金流出只差称为净现金流量。
+现金流量图：一种反映经济系统资金
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-12-09
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E5%A4%8D%E4%B9%A0%E8%B5%84%E6%96%99/" class="post-category">
+                                    复习资料
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                            <div class="card-action article-tags">
+                                
+                                    <a href="/tags/%E8%87%AA%E8%80%83%E6%9C%AC%E7%A7%91/">
+                                        <span class="chip bg-color">自考本科</span>
+                                    </a>
+                                
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/11/04/How%20To%20Ask%20Questions/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="提问的智慧">
+                                
+                                <span class="card-title">提问的智慧</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    提问的智慧
+How To Ask Questions The Smart Way
+Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
+本指南英文版版权为 Eric S. Raymond
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-11-04
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-user fa-fw"></i>
+                                        xinyichen
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/11/04/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="提问的智慧">
+                                
+                                <span class="card-title">提问的智慧</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    提问的智慧
+How To Ask Questions The Smart Way
+Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
+本指南英文版版权为 Eric S. Raymond
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-11-04
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-user fa-fw"></i>
+                                        xinyichen
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/11/04/hello-world/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Hello World">
+                                
+                                <span class="card-title">Hello World</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-11-04
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-user fa-fw"></i>
+                                        xinyichen
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/10/20/62/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="flutter基础">
+                                
+                                <span class="card-title">flutter基础</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    本文章知识来自于jspang（https://jspang.com/detailed?id=42# toc219），仅用于学习记录。Flutter页面的基本写法main.dart://导入组件
+import 'package:flutter
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-10-20
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
+                                </a>
+                                        
+                                            <a href="/categories/%E5%89%8D%E7%AB%AF/flutter/" class="post-category">
+                                    flutter
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/10/20/flutter%E5%9F%BA%E7%A1%80/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="flutter基础">
+                                
+                                <span class="card-title">flutter基础</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    本文章知识来自于jspang（https://jspang.com/detailed?id=42# toc219），仅用于学习记录。Flutter页面的基本写法main.dart://导入组件
+import 'package:flutter
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-10-20
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
+                                </a>
+                                        
+                                            <a href="/categories/%E5%89%8D%E7%AB%AF/flutter/" class="post-category">
+                                    flutter
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/10/10/61/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="flutter">
+                                
+                                <span class="card-title">flutter</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    flutter组件认识：http://www.flutter.link/page/5/flutter书籍：https://book.flutterchina.club/chapter2/flutter_app_debug.htmldart语
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-10-10
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/10/10/flutter%E5%AD%A6%E4%B9%A0/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="flutter">
+                                
+                                <span class="card-title">flutter</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    flutter组件认识：http://www.flutter.link/page/5/flutter书籍：https://book.flutterchina.club/chapter2/flutter_app_debug.htmldart语
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-10-10
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/20/60/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="OOM实例">
+                                
+                                <span class="card-title">OOM实例</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    c++程序员 重写了finalize方法 gc回收时候调用时运行时间长 在此过程中大量的新对象涌入 造成oom
 java引用 ：
 强 普通引用 
-1234M m = new M();m = null;System.gc();sout(m)
+M m = new M();
+m = null;
+System.gc();
+sout(m)
+
+
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-20
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/20/OOM%E5%AE%9E%E4%BE%8B/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="OOM实例">
+                                
+                                <span class="card-title">OOM实例</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    java引用 ：
+强 普通引用 
+M m = new M();
+m = null;
+System.gc();
+sout(m)
 
 软 当堆内存不够用时才回收 
-123456789//设置最大堆大小为20//m指向强引用SoftReference SoftReference指向软引用10m的数组SoftReference&lt;byte[]&gt; m = new SoftReference&lt;&gt; (new byte[1024*1024*10]);sout(m.get());System.gc();sout(m.get()) //还能拿到值//当堆内存不够用时才回收byte[] b = new byte[1024*1024*15]sout(m.get()) //为null 
+//设置最大堆大小为20
+//m指向强引用SoftReference SoftRe
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-20
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
 
-弱 （当他不存在）gc时立即回收
-1234WeakReference&lt;M&gt; m = new WeakReference&lt;&gt;(new M());sout(m)System. ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/09/12/58/" title="Java面试题">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Java面试题"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/09/12/58/" title="Java面试题">Java面试题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-09-12T02:52:00.000Z" title="Created 2020-09-12 10:52:00">2020-09-12</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E9%9D%A2%E8%AF%95/">面试</a></span></div><div class="content">一、java基础：面向对象和面向过程的区别：
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/12/58/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Java面试题">
+                                
+                                <span class="card-title">Java面试题</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    一、java基础：面向对象和面向过程的区别：
 面向过程： 性能高  没有面向对象易维护、易扩展
 
 面向对象：性能比面向对象低 易维护、易扩展、易复用
@@ -173,172 +942,305 @@ Java** 语言有哪些特点：
 
 面向对象（封装，继承，多态）；
 
-平台无关性（ Java 虚拟机实现平台无关性）；
+平台无
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-12
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    面试
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/12/Java%E9%9D%A2%E8%AF%95%E9%A2%98/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Java面试题">
+                                
+                                <span class="card-title">Java面试题</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    一、java基础：面向对象和面向过程的区别：
+面向过程： 性能高  没有面向对象易维护、易扩展
+
+面向对象：性能比面向对象低 易维护、易扩展、易复用
+
+
+Java** 语言有哪些特点：
+简单易学；
+
+面向对象（封装，继承，多态）；
+
+平台无
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-12
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    面试
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </article>
+
+</main>
+
+
+    <div class="container paging">
+    <div class="row">
+        <div class="col s6 m4 l4">
+            
+                <a class="left btn-floating btn-large disabled">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+        </div>
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">1 / 10</div>
+        </div>
+        <div class="col s6 m4 l4">
+            
+                <a href="/page/2/"
+                   class="right btn-floating btn-large waves-effect waves-light bg-color">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+        </div>
+    </div>
+</div>
+
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            <span id="sitetime">载入运行时间...</span>
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="fa fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                                                                       class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fa fa-user"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                                                                         class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            
+                
+                    &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+                            class="white-color">208.1k</span>&nbsp;字
+                
+                
+                    <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" alt="icp"/>
+                <a href="http://beian.miit.gov.cn/" target="_blank">沪ICP备xxxxxxxxx号</a>
+            </span>
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2020";
+                        var startMonth = "12";
+                        var startDate = "09";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
 
-可靠性；
 
-安全性；
 
-支持多线程
 
-支持网络编程并且很方便
 
-编译与解释并存；
 
 
-构造器 Constructor 是否可被 override父类的私有属性和构造方法并不能被继承，所以Constructor 也就不能被 override（重写）,但是可以 overload（重载）,所以一个类中有多个构造函数。
-重载和重写的区别重载： 发生在同一个类中，方法名必须相同，参数类型不同、个数不同、顺序
-不同，方法返回值和访问修饰符可以不同，发生在编译时。
-重写： 发生在父子类中，方法名、参数列表必须相同，返回值范围小于等于父
-类，抛出的异常范围小于等于父类，访问修饰符范围大于等于父类；如果父类
-方法访问修饰符为 private 则子类就不能重写该方法
-Java 面向对象编程三大特性**:** 封装 继承 多态 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/09/11/57/" title="GC和GC Tuning">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="GC和GC Tuning"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/09/11/57/" title="GC和GC Tuning">GC和GC Tuning</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-09-11T09:13:40.000Z" title="Created 2020-09-11 17:13:40">2020-09-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="content">GC的基础知识1.什么是垃圾
-C语言申请内存：malloc free
-C++： new delete
-c/C++ 手动回收内存
-Java: new ？
-自动内存回收，编程上简单，系统不容易出错，手动释放内存，容易出两种类型的问题：
 
-忘记回收
-多次回收
+</div>
+    </div>
+</footer>
 
+<div class="progress-bar"></div>
 
-没有任何引用指向的一个对象或者多个对象（循环引用）
-2.如何定位垃圾
-引用计数（ReferenceCount）
-根可达算法(RootSearching)
 
-3.常见的垃圾回收算法
-标记清除(mark sweep) - 位置不连续 产生碎片 效率偏低（两遍扫描）
-拷贝算法 (copying) - 没有碎片，浪费空间
-标记压缩(mark compact) - 没有碎片，效率偏低（两遍扫描，指针需要调整）
 
-4.JVM内存分代模型（用于分代垃圾回收算法）
-部分垃圾回收器使用的模型
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
 
-除Epsilon ZGC Shenandoah之外的GC都是使用逻辑分代模型
-G1是逻辑分代，物理不分代
-除此之外不仅逻辑分代，而且物理分代
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    $(function () {
+        searchFunc("/search.xml", 'searchInput', 'searchResult');
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
 
 
-新生代 + 老年代 + 永久代（1.7）Perm Generation/ 元数据区(1.8) Metaspace
- ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/09/11/56/" title="volatile的用途">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="volatile的用途"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/09/11/56/" title="volatile的用途">volatile的用途</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-09-11T08:39:01.000Z" title="Created 2020-09-11 16:39:01">2020-09-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="content">1.线程可见性12345678910111213141516171819package com.mashibing.testvolatile;public class T01_ThreadVisibility &#123;    private static volatile boolean flag = true;    public static void main(String[] args) throws InterruptedException &#123;        new Thread(()-&gt; &#123;            while (flag) &#123;                //do sth            &#125;            System.out.println(&quot;end&quot;);        &#125;, &quot;server&quot;).start();        Thread.sleep(1000);        flag = false;    &#125;&#125;
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
 
- ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/09/11/55/" title="笔试题">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="笔试题"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/09/11/55/" title="笔试题">笔试题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-09-11T02:48:45.000Z" title="Created 2020-09-11 10:48:45">2020-09-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/Java/">Java</a></span></div><div class="content">第一题
-collection 
-List（存取有序有索引）
-ArrayList：基于数组 查询快
-LinkedList 基于连表 增、删快
+<!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-Set（无序，无索引）
-HashSet 实际上是一个hashMap 无序
-LinkedHashSet 继承自hashset 存取有序
+<!-- Baidu Analytics -->
 
 
+<!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
 
-和map接口
-HashMap 存取无序，键值唯一
-LinkedHashMap 继承自HashMap存取有序
 
+    <script src="/libs/others/clicklove.js" async="async"></script>
 
 
-第二题
-Lock接口
 
-ReentranLock…
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
 
 
-Callable接口
-FutureTask
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
 
+<!-- 在线聊天工具  -->
 
-第三题
-单例多线程
 
-serlvet只是在第一次请求的时候，才进行实例化，并du完成初始化操作，在后续的请求过程中，直接取已有servlet对象做请求处理，
 
-九大对象：
+<!-- 背景 canvas-nest -->
 
-request、response、session、application、out、pageContext、config、page和exception
-第四题：三种方式：
 
-创建线程让其自旋，在内部调用sleep方法达到定时效果；及其耗费资源
-Timer和TimerTask；可以对任务进行控制，初次任务可以指定delay时 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/09/11/54/" title="杂七杂八的总结">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="杂七杂八的总结"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/09/11/54/" title="杂七杂八的总结">杂七杂八的总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-09-10T16:55:11.000Z" title="Created 2020-09-11 00:55:11">2020-09-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="content">OOM实例c++程序员 重写了finalize方法 gc回收时候调用时运行时间长 在此过程中大量的新对象涌入 造成oom
-java引用 ：
-强 普通引用 
-1234M m = new M();m = null;System.gc();sout(m)
 
-软 当堆内存不够用时才回收 
-123456789//设置最大堆大小为20//m指向强引用SoftReference SoftReference指向软引用10m的数组SoftReference&lt;byte[]&gt; m = new SoftReference&lt;&gt; (new byte[1024*1024*10]);sout(m.get());System.gc();sout(m.get()) //还能拿到值//当堆内存不够用时才回收byte[] b = new byte[1024*1024*15]sout(m.get()) //为null 
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
-弱 （当他不存在）gc时立即回收
-1234WeakReference&lt;M&gt; m = new WeakReference&lt;&gt;(new M());sout(m)Sy ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/09/10/53/" title="架构设计基础原则">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="架构设计基础原则"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/09/10/53/" title="架构设计基础原则">架构设计基础原则</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-09-10T06:43:00.000Z" title="Created 2020-09-10 14:43:00">2020-09-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%9E%B6%E6%9E%84/">架构</a></span></div><div class="content">需要考虑的架构设计问题：
-云部署是大势所趋
-企业对公有云能力的期待和公有云现有能力的差距
-不能简单依赖公有云提供的SLA（service level agreement）来保障业务稳定性
 
-云上设计高可用架构需要考虑的三大要素：
-云基础设施和云服务器的高可用性
-
-企业运行业务环境的高可用性
-
-企业业务和客户端通信的高可用性（由运营商基础通信能力保障）
-
-
-应用架构设计的演进之路：1.单体架构：
-
-经典的软件三层架构
-
-逻辑上分为三层
-
-多用于传统J2EE项目
-
-
-
-2.SOA（面向服务）架构：
-
-微服务架构：
-
-
-基础架构设计原则：
-
-墨菲定律（心理学效应）：
-任何事都没有看上去的那么简单
-
-所有事都会比预计的时间长
-
-会出错的事情总是会出错
-
-如果担心某件事的发生，这件事就更有可能发生
-
-
-
-
-
-容错设计原则
-
-需要考虑到应用系统的每一个层面
-
-消除单一故障点实现高可用性
-
-
-云架构设计原则
-
-从程序开发部署的视角看
-
-系统失效的容错设计
-
-利用云原生容错的服务来增强业务的容错能力
-
-
-松耦合和无状态设计
-
-使用中间件解耦，无状态的应用能更好的伸缩
-无状态应用： Stateless  ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/xinyichen/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/xinyichen/page/6/">6</a><a class="extend next" rel="next" href="/xinyichen/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/xinyichen/null" onerror="this.onerror=null;this.src='/xinyichen/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div><div class="card-info-data-item is-center"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/11/04/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/xinyichen/2020/11/04/hello-world/" title="Hello World">Hello World</a><time datetime="2020-11-04T04:16:09.910Z" title="Created 2020-11-04 12:16:09">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/20/62/" title="flutter基础"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter基础"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/20/62/" title="flutter基础">flutter基础</a><time datetime="2020-10-20T14:18:00.000Z" title="Created 2020-10-20 22:18:00">2020-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/10/61/" title="flutter"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/10/61/" title="flutter">flutter</a><time datetime="2020-10-10T08:19:21.000Z" title="Created 2020-10-10 16:19:21">2020-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/20/60/" title="OOM实例"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="OOM实例"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/20/60/" title="OOM实例">OOM实例</a><time datetime="2020-09-20T13:09:34.000Z" title="Created 2020-09-20 21:09:34">2020-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/12/58/" title="Java面试题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Java面试题"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/12/58/" title="Java面试题">Java面试题</a><time datetime="2020-09-12T02:52:00.000Z" title="Created 2020-09-12 10:52:00">2020-09-12</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>Categories</span></div><ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/MySQL/"><span class="card-category-list-name">MySQL</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">1</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E5%89%8D%E7%AB%AF/flutter/"><span class="card-category-list-name">flutter</span><span class="card-category-list-count">1</span></a></li></ul><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">总结</span><span class="card-category-list-count">20</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="card-category-list-name">数据结构</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%9E%B6%E6%9E%84/"><span class="card-category-list-name">架构</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">算法</span><span class="card-category-list-count">2</span></a></li>
-            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/xinyichen/categories/">
-                <span>More</span><i class="fas fa-angle-right"></i></a></li>
-            </ul></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/09/"><span class="card-archive-list-date">September 2020</span><span class="card-archive-list-count">14</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/07/"><span class="card-archive-list-date">July 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/05/"><span class="card-archive-list-date">May 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/04/"><span class="card-archive-list-date">April 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/03/"><span class="card-archive-list-date">March 2020</span><span class="card-archive-list-count">17</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/xinyichen/archives/">
-              <span>More</span><i class="fas fa-angle-right"  ></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">57</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2020-11-04T05:17:19.231Z"></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/xinyichen/js/utils.js"></script><script src="/xinyichen/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
+</body>
+</html>

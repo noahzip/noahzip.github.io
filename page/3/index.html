@@ -1,274 +1,1071 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://xinyichen.gitee.io/xinyichen/page/3/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://xinyichen.gitee.io/xinyichen/null">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xinyichen.gitee.io/xinyichen/null"><link rel="shortcut icon" href="/xinyichen/img/favicon.png"><link rel="canonical" href="https://xinyichen.gitee.io/xinyichen/page/3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/xinyichen/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
-  root: '/xinyichen/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: 'Just',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: undefined,
-  ClickShowText: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  justifiedGallery: {
-    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isanchor: false
-};
+<!DOCTYPE HTML>
+<html lang="zh-CN">
 
-var saveToLocal = {
-  set: function setWithExpiry(key, value, ttl) {
-    const now = new Date()
-    const expiryDay = ttl * 86400000
-    const item = {
-      value: value,
-      expiry: now.getTime() + expiryDay,
-    }
-    localStorage.setItem(key, JSON.stringify(item))
-  },
 
-  get: function getWithExpiry(key) {
-    const itemStr = localStorage.getItem(key)
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="未见初墨">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>未见初墨</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
 
-    if (!itemStr) {
-      return undefined
-    }
-    const item = JSON.parse(itemStr)
-    const now = new Date()
-
-    if (now.getTime() > item.expiry) {
-      localStorage.removeItem(key)
-      return undefined
-    }
-    return item.value
-  }
-}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2020-11-04 13:17:19'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(function () {  window.activateDarkMode = function () {
-    document.documentElement.setAttribute('data-theme', 'dark')
-    if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-    }
-  }
-  window.activateLightMode = function () {
-    document.documentElement.setAttribute('data-theme', 'light')
-   if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-    }
-  }
-  const autoChangeMode = 'false'
-  const t = saveToLocal.get('theme')
-  if (autoChangeMode === '1') {
-    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-    if (t === undefined) {
-      if (isLightMode) activateLightMode()
-      else if (isDarkMode) activateDarkMode()
-      else if (isNotSpecified || hasNoSupport) {
-        const now = new Date()
-        const hour = now.getHours()
-        const isNight = hour <= 6 || hour >= 18
-        isNight ? activateDarkMode() : activateLightMode()
-      }
-      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
-        if (saveToLocal.get('theme') === undefined) {
-          e.matches ? activateDarkMode() : activateLightMode()
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
         }
-      })
-    } else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else if (autoChangeMode === '2') {
-    const now = new Date()
-    const hour = now.getHours()
-    const isNight = hour <= 6 || hour >= 18
-    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
-    else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else {
-    if (t === 'dark') activateDarkMode()
-    else if (t === 'light') activateLightMode()
-  }const asideStatus = saveToLocal.get('aside-status')
-if (asideStatus !== undefined) {
-   if (asideStatus === 'hide') {
-     document.documentElement.classList.add('hide-aside')
-   } else {
-     document.documentElement.classList.remove('hide-aside')
-   }
-}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/xinyichen/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div></div><hr/></div></div><div id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/xinyichen/">Hexo</a></span><span id="menus"><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="site-info"><h1 id="site-title">Hexo</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/08/04/42/" title="分布式微服务框架搭建">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="分布式微服务框架搭建"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/08/04/42/" title="分布式微服务框架搭建">分布式微服务框架搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-08-04T07:59:00.000Z" title="Created 2020-08-04 15:59:00">2020-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="content">nacos、openFeign搭建分布式微服务一、集成nacos作为注册、配置中心nacos作为注册中心：1.引入nacos依赖12345&lt;dependency&gt;    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;    &lt;artifactId&gt;spring-cloud-alibaba-nacos-discovery&lt;/artifactId&gt;    &lt;version&gt;2.1.0.RELEASE&lt;/version&gt;&lt;/dependency&gt;
 
-2.启动类添加注解123456@EnableDiscoveryClient@MapperScan(&quot;com.xxx.xxx.dao&quot;)@SpringBootApplicationpublic class XxxApplication &#123;	...&#125;
-
-3.编写配置123456789spring:   # 指定nacos地址   cloud:    nacos:      discovery ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/08/03/41/" title="npm-sass死活安装不上解决方案">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="npm-sass死活安装不上解决方案"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/08/03/41/" title="npm-sass死活安装不上解决方案">npm-sass死活安装不上解决方案</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-08-03T11:43:00.000Z" title="Created 2020-08-03 19:43:00">2020-08-03</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E7%BB%8F%E9%AA%8C-bug/">经验&amp;bug</a></span></div><div class="content">1.下载cnmpnpm提示信息不友好并且切换数据源很麻烦尝试使用cnmp
-1npm install -g cnpm --registry=https://registry.npm.taobao.org
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="未见初墨" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
+<body>
 
-2.检查python版本是否为2.7   vsc++是否已经安装检查基本环境条件是否具备
-12# 如若缺少windows构建插件 npm install global production windows-build-tools
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">未见初墨</span>
+                </a>
+            </div>
+            
 
 
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
 
-3.更新数据源 用户目录下的 .cnpmrc更改cnpm的数据源并且指定缓存与基本环境变量
-12345python&#x3D;python2.7msvs_version&#x3D;2015prefix&#x3D;C:\Program Files\nodejs\node_globalcache&#x3D;C:\Program Files\nodejs\node_cacheregistry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org&#x2F;
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/tags" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-tags"></i>
+                    
+                    <span>标签</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/about" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-user-circle-o"></i>
+                    
+                    <span>关于</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
 
 
+<div id="mobile-nav" class="side-nav sidenav">
 
-4.cnpm 安装尝试1cnpm i
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.jpg"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">未见初墨</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/tags" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-tags"></i>
+                        
+                        标签
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    <div class="bg-cover pd-header about-cover">
+    <div class="container">
+        <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                    未见初墨
+                
+            </div>
+
+            <div class="description center-align">
+                
+                    <span id="subtitle"></span>
+                    <script src="https://cdn.jsdelivr.net/npm/typed.js"></script>
+                    <script>
+                        var typed = new Typed("#subtitle", {
+                            strings: ['立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径','只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方'],
+                            startDelay: 300,
+                            typeSpeed: 100,
+                            loop: true,
+                            backSpeed: 50,
+                            showCursor: true
+                        });
+                    </script>
+                
+            </div>
+        </div>
+    </div>
+</div>
 
 
+    <script>
+        $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
+    </script>
 
-5.若失败 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/07/25/40/" title="ssm整合shiro">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="ssm整合shiro"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/07/25/40/" title="ssm整合shiro">ssm整合shiro</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-25T01:17:00.000Z" title="Created 2020-07-25 09:17:00">2020-07-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="content">
-1、在 maven 项目中引入 Shiro 依赖：123456789101112&lt;!-- shiro  --&gt;&lt;dependency&gt;    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;    &lt;artifactId&gt;shiro-all&lt;/artifactId&gt;    &lt;version&gt;1.3.2&lt;/version&gt;&lt;/dependency&gt;&lt;!-- 引入ehcache的依赖,给shiro做缓存权限用的 --&gt;		&lt;dependency&gt;    &lt;groupId&gt;net.sf.ehcache&lt;/groupId&gt;    &lt;artifactId&gt;ehcache&lt;/artifactId&gt;    &lt;version&gt;2.10.6&lt;/ve&lt;/dependency&gt;
+    </div>
+</div>
 
-2、在 web.xml 中配置 Shiro 的拦截器：12345678910111213&lt;! ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/07/14/39/" title="mysql基础">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="mysql基础"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/07/14/39/" title="mysql基础">mysql基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-14T03:49:40.000Z" title="Created 2020-07-14 11:49:40">2020-07-14</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/MySQL/">MySQL</a></span></div><div class="content">数据库相关概念​    1、DB：数据库，保存一组有组织的数据的容器​    2、DBMS：数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据​    3、SQL:结构化查询语言，用于和DBMS通信的语言
-数据库存储数据的特点​    1、将数据放到表中，表再放到库中​    2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。​    3、表具有一些特性，这些特性定义了数据在表中如何存储，类似java中 “类”的设计。​    4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似java 中的”属性”​    5、表中的数据是按行存储的，每一行类似于java中的“对象”。​    
-MySQL的常见命令1.查看当前所有的数据库
-show databases;
 
-2.打开指定的库
-use 库名
+<main class="content">
 
-3.查看当前库的所有表
-show tables;
+    
 
-4.查看其它库的所有表
-show tables from 库名;
+    
 
-5.创建表
-create table 表名(
+    <!-- 所有文章卡片 -->
+    <article id="articles" class="container articles">
+        <div class="row article-row">
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/08/oss%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="oss文件操作流程">
+                                
+                                <span class="card-title">oss文件操作流程</span>
+                            </div>
+                        </a>
 
-    列名 列类型,
-    列名 列类型，
-    。。。 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/07/14/37/" title="mysql的一些坑">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="mysql的一些坑"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/07/14/37/" title="mysql的一些坑">mysql的一些坑</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-14T01:58:00.000Z" title="Created 2020-07-14 09:58:00">2020-07-14</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E7%BB%8F%E9%AA%8C-bug/">经验&amp;bug</a></span></div><div class="content">Mysql5.7大坑：Expression # 2 of SELECT list is not in GROUP BY clause and contains nonaggregated column ‘sss.month_id’ which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
-​    MySQL 5.7.5及以上功能依赖检测功能。如果[ONLY_FULL_GROUP_BY](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html# sqlmode_only_full_group_by)启用了 SQL模式（默认情况下），则MySQL将拒绝对该选项列表，HAVING条件或 ORDER BY列表引用的子集中既不指定的GROUP BY非集合列的查询，也不在功能上依赖于它们。
-12-- 去掉ONLY_FULL_GROUP_BYSET @@global ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/05/19/36/" title="Spring注解开发">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Spring注解开发"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/05/19/36/" title="Spring注解开发">Spring注解开发</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-19T12:33:00.000Z" title="Created 2020-05-19 20:33:00">2020-05-19</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="content">Spring注解开发注册组件：一、常规的xml配置注解：1.准备要加入容器中的类123456789101112131415161718192021222324252627282930313233343536public class Person &#123;    private String name;    private Integer age;    public Person() &#123;    &#125;    public Person(String name, Integer age) &#123;        this.name = name;        this.age = age;    &#125;    public String getName() &#123;        return name;    &#125;    public void setName(String name) &#123;        this.name = name;    &#125;    public Integer getAge() &#123;    ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/04/29/34/" title="设计模式之创建者模式">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="设计模式之创建者模式"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/04/29/34/" title="设计模式之创建者模式">设计模式之创建者模式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-29T09:24:00.000Z" title="Created 2020-04-29 17:24:00">2020-04-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/">总结</a></span></div><div class="content">1.简单工厂模式：/**
- * @author  cxy
- *  简单工厂模式
- *  一个工厂类 XxxFactory，里面有一个静态方法，根据不同的参数，返回不同的实例对象
- */
-public class SimpleFactoryPatternDemo &#123;
-    public static void main(String[] args) &#123;
-        ServantFactory.servantCall(&quot;saber&quot;);
-        ServantFactory.servantCall(&quot;caster&quot;);
-    &#125;
-&#125;
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    1.引入依赖：&lt;dependencies>
+    &lt;!-- 阿里云oss依赖 -->
+    &lt;dependency>
+        &lt;groupId>com.aliyun.oss&lt;/groupId>
+  
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-08
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/08/50/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="logback日志配置">
+                                
+                                <span class="card-title">logback日志配置</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    1.移除spring中日志相关的配置2.新建文件logback-spring.xml&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;configuration  scan="true" scanP
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-08
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/08/logback%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="logback日志配置">
+                                
+                                <span class="card-title">logback日志配置</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    1.移除spring中日志相关的配置2.新建文件logback-spring.xml&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;configuration  scan="true" scanP
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-08
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/07/49/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="mybatis配置">
+                                
+                                <span class="card-title">mybatis配置</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    配置类：import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+import com.baomidou.mybatisplus.extension.injector.Logic
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/07/mybatis%E9%85%8D%E7%BD%AE/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="mybatis配置">
+                                
+                                <span class="card-title">mybatis配置</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    配置类：import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+import com.baomidou.mybatisplus.extension.injector.Logic
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/07/48/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="微服务通用配置">
+                                
+                                <span class="card-title">微服务通用配置</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    application.propertis:# 端口
+server.port=8001
+# 模块名称
+spring.application.name=service
+
+# 项目环境
+spring.profiles.active=dev
+
+#
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%80%9A%E7%94%A8%E9%85%8D%E7%BD%AE/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="微服务通用配置">
+                                
+                                <span class="card-title">微服务通用配置</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    application.propertis:# 端口
+server.port=8001
+# 模块名称
+spring.application.name=service
+
+# 项目环境
+spring.profiles.active=dev
+
+#
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/07/47/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Swagger通用配置">
+                                
+                                <span class="card-title">Swagger通用配置</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    import com.google.common.base.Predicates;import org.springframework.context.annotation.Bean;import org.springframework.c
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/07/Swagger%E9%80%9A%E7%94%A8%E9%85%8D%E7%BD%AE/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Swagger通用配置">
+                                
+                                <span class="card-title">Swagger通用配置</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    import com.google.common.base.Predicates;
+import org.springframework.context.annotation.Bean;
+import org.springframework
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/07/46/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="API接口返回类通用方案">
+                                
+                                <span class="card-title">API接口返回类通用方案</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    枚举类定义响应码:import lombok.Getter;
+import lombok.ToString;
 
 /**
- * 接口
+ * @author saber
+ * @description 《响应状态码》
  */
-interface Servant&#123;&#125;
+@Getter
+@ToStri
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
+                                    经验&bug
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/09/07/API%E6%8E%A5%E5%8F%A3%E8%BF%94%E5%9B%9E%E7%B1%BB%E9%80%9A%E7%94%A8%E6%96%B9%E6%A1%88/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="API接口返回类通用方案">
+                                
+                                <span class="card-title">API接口返回类通用方案</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    枚举类定义响应码:import lombok.Getter;
+import lombok.ToString;
 
 /**
- * 实现类1
+ * @author saber
+ * @description 《响应状态码》
  */
-class Saber implements Servant&#123;
-    public Saber()&#123;
-        System.out.println(&quot;I&#39;m saber&quot;);
-     ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/04/28/33/" title="数组模拟栈">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="数组模拟栈"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/04/28/33/" title="数组模拟栈">数组模拟栈</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-28T06:41:00.000Z" title="Created 2020-04-28 14:41:00">2020-04-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content">/**
- * @author cxy
- * 数组模拟栈
- */
-public class ArrayStackDemo &#123;
-    public static void main(String[] args) &#123;
-        ArrayStack stack = new ArrayStack(4);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        stack.push(5);
-        stack.pop();
-        stack.push(6);
-        stack.view();
-    &#125;
-&#125;
+@Getter
+@ToStri
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
+                                    经验&bug
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
 
-/**
- * 数组栈
- */
-class ArrayStack&#123;
-    /**
-     * 栈顶
-     */
-    private int top = -1;
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/08/14/45/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="JSR303结合AdviceController开启全局数据校验">
+                                
+                                <span class="card-title">JSR303结合AdviceController开启全局数据校验</span>
+                            </div>
+                        </a>
 
-    /**
-     * 存放数据的数组
-     */
-    private int ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/xinyichen/2020/04/28/32/" title="约瑟夫出圈">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="约瑟夫出圈"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/04/28/32/" title="约瑟夫出圈">约瑟夫出圈</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-28T05:35:00.000Z" title="Created 2020-04-28 13:35:00">2020-04-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content">使用单向循环链表解决约瑟夫问题    /**     * @author cxy     * 约瑟夫问题：     *      n个小男孩围城一圈 从第k个孩子开始报数 每报m个数就出圈     *      假设有5个孩子 从第一个开始 报数2下就出圈 那么出圈的顺序：     *          2-&gt;4-&gt;1-&gt;5  最终保留3号男孩     */    public class CircularSingleLinkedListDemo {        public static void main(String[] args) {            CircularSingleLinkedList list =                    new CircularSingleLinkedList();            list.addBoy(5);            list.circleOut(1,2,5);        }    }
-/**
- * 使用环形单向列表
- */
-class CircularSingleLinked ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/xinyichen/2020/04/27/31/" title="单项链表crud简单实现">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="单项链表crud简单实现"></a></div><div class="recent-post-info"><a class="article-title" href="/xinyichen/2020/04/27/31/" title="单项链表crud简单实现">单项链表crud简单实现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-27T07:28:00.000Z" title="Created 2020-04-27 15:28:00">2020-04-27</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/xinyichen/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content">class SingleLinkedList &#123;
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    业务场景：
+项目本身需要感知处理各种异常
+前端传递的数据都需要校验其合法性
+如果在每一个controller上编写异常处理与数据校验就会显得很臃肿
 
-    /**
-     * 头节点的指针 始终指向头节点
-     */
-    private HeroNode head = new HeroNode(0,null);
+解决方案：
+使用JSR303在controller标注数据校验注解，向上抛出异常
 
-    public HeroNode getHead() &#123;
-        return head;
-    &#125;
+使用A
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-08-14
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
 
-    /**
-     * 修改节点 根据heroNode.id
-     * @param heroNode
-     */
-    public void update(HeroNode heroNode)&#123;
-        //判空
-        if (head.next == null)&#123;
-            System.out.println(&quot;链表为空&quot;);
-            return;
-        &#125;
-        //获取头节点
-        HeroNode cur = head.next;
-        //遍历 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/xinyichen/page/2/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/xinyichen/">1</a><a class="page-number" href="/xinyichen/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/xinyichen/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/xinyichen/page/6/">6</a><a class="extend next" rel="next" href="/xinyichen/page/4/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/xinyichen/null" onerror="this.onerror=null;this.src='/xinyichen/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/xinyichen/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a></div><div class="card-info-data-item is-center"><a href="/xinyichen/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/11/04/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/xinyichen/2020/11/04/hello-world/" title="Hello World">Hello World</a><time datetime="2020-11-04T04:16:09.910Z" title="Created 2020-11-04 12:16:09">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/20/62/" title="flutter基础"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter基础"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/20/62/" title="flutter基础">flutter基础</a><time datetime="2020-10-20T14:18:00.000Z" title="Created 2020-10-20 22:18:00">2020-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/10/10/61/" title="flutter"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="flutter"/></a><div class="content"><a class="title" href="/xinyichen/2020/10/10/61/" title="flutter">flutter</a><time datetime="2020-10-10T08:19:21.000Z" title="Created 2020-10-10 16:19:21">2020-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/20/60/" title="OOM实例"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="OOM实例"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/20/60/" title="OOM实例">OOM实例</a><time datetime="2020-09-20T13:09:34.000Z" title="Created 2020-09-20 21:09:34">2020-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/xinyichen/2020/09/12/58/" title="Java面试题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/xinyichen/img/404.jpg'" alt="Java面试题"/></a><div class="content"><a class="title" href="/xinyichen/2020/09/12/58/" title="Java面试题">Java面试题</a><time datetime="2020-09-12T02:52:00.000Z" title="Created 2020-09-12 10:52:00">2020-09-12</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>Categories</span></div><ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/MySQL/"><span class="card-category-list-name">MySQL</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">1</span></a></li><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E5%89%8D%E7%AB%AF/flutter/"><span class="card-category-list-name">flutter</span><span class="card-category-list-count">1</span></a></li></ul><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">总结</span><span class="card-category-list-count">20</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="card-category-list-name">数据结构</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E6%9E%B6%E6%9E%84/"><span class="card-category-list-name">架构</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/xinyichen/categories/%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">算法</span><span class="card-category-list-count">2</span></a></li>
-            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/xinyichen/categories/">
-                <span>More</span><i class="fas fa-angle-right"></i></a></li>
-            </ul></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/09/"><span class="card-archive-list-date">September 2020</span><span class="card-archive-list-count">14</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/07/"><span class="card-archive-list-date">July 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/05/"><span class="card-archive-list-date">May 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/04/"><span class="card-archive-list-date">April 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/xinyichen/archives/2020/03/"><span class="card-archive-list-date">March 2020</span><span class="card-archive-list-count">17</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/xinyichen/archives/">
-              <span>More</span><i class="fas fa-angle-right"  ></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">57</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2020-11-04T05:17:19.231Z"></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/xinyichen/js/utils.js"></script><script src="/xinyichen/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
+                        
+                    </div>
+                </div>
+            
+        </div>
+    </article>
+
+</main>
+
+
+    <div class="container paging">
+    <div class="row">
+        <div class="col s6 m4 l4">
+            
+                <a href="/page/2/"
+                   class="left btn-floating btn-large waves-effect waves-light bg-color">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+        </div>
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">3 / 10</div>
+        </div>
+        <div class="col s6 m4 l4">
+            
+                <a href="/page/4/"
+                   class="right btn-floating btn-large waves-effect waves-light bg-color">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+        </div>
+    </div>
+</div>
+
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            <span id="sitetime">载入运行时间...</span>
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="fa fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                                                                       class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fa fa-user"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                                                                         class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            
+                
+                    &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+                            class="white-color">208.1k</span>&nbsp;字
+                
+                
+                    <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" alt="icp"/>
+                <a href="http://beian.miit.gov.cn/" target="_blank">沪ICP备xxxxxxxxx号</a>
+            </span>
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2020";
+                        var startMonth = "12";
+                        var startDate = "09";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    $(function () {
+        searchFunc("/search.xml", 'searchInput', 'searchResult');
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+</body>
+</html>
