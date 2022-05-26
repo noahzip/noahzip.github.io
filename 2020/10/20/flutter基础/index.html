@@ -448,11 +448,6 @@ import &#39;package:flutter">
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-                
             </div>
         </div>
         <hr class="clearfix">
@@ -1472,31 +1467,40 @@ Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2020/10/10/flutter%E5%AD%A6%E4%B9%A0/">
+                    <a href="/2020/09/20/OOM%E5%AE%9E%E4%BE%8B/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="flutter">
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="OOM实例">
                             
-                            <span class="card-title">flutter</span>
+                            <span class="card-title">OOM实例</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                flutter组件认识：http://www.flutter.link/page/5/flutter书籍：https://book.flutterchina.club/chapter2/flutter_app_debug.htmldart语
+                                java引用 ：
+强 普通引用 
+M m = new M();
+m = null;
+System.gc();
+sout(m)
+
+软 当堆内存不够用时才回收 
+//设置最大堆大小为20
+//m指向强引用SoftReference SoftRe
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-10-10
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-20
                             </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/Java/" class="post-category">
-                                    Java
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
                                 </a>
                                     
                                 
@@ -1640,34 +1644,22 @@ Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
-            <span id="year">2020</span>
+            <span id="year">2022</span>
             <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
             <br>
             <span id="sitetime">载入运行时间...</span>
             
             
-                
             
-            
-                <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="fa fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                                                                       class="white-color"></span>&nbsp;次
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fa fa-user"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                                                                         class="white-color"></span>&nbsp;人
-            </span>
             
             <br>
             
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">108.7k</span>&nbsp;字
+                            class="white-color">98k</span>&nbsp;字
                 
                 
                 <script>
@@ -1678,11 +1670,11 @@ Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
                         var days = hours * 24;
                         var years = days * 365;
                         var today = new Date();
-                        var startYear = "2020";
-                        var startMonth = "12";
-                        var startDate = "09";
-                        var startHour = "0";
-                        var startMinute = "0";
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
                         var startSecond = "0";
                         var todayYear = today.getFullYear();
                         var todayMonth = today.getMonth() + 1;
@@ -1702,11 +1694,11 @@ Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
                             diffMinutes * minutes) / seconds);
                         if (startYear == todayYear) {
                             document.getElementById("year").innerHTML = todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
                                 " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                         } else {
                             document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
                                 " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                         }
                     }
@@ -1716,7 +1708,7 @@ Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
             
 
         </div>
-        <div class="col s12 m4 l4 social-link social-statis">
+        <!-- <div class="col s12 m4 l4 social-link ">
 
 
 
@@ -1734,7 +1726,7 @@ Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
 
 
 
-</div>
+</div> -->
     </div>
 </footer>
 
@@ -1801,8 +1793,6 @@ Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
     <script src="/libs/others/clicklove.js" async="async"></script>
 
 
-
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
 
 
 <script type="text/javascript">

@@ -291,7 +291,18 @@
 
             <div class="description center-align">
                 
-                    
+                    <span id="subtitle"></span>
+                    <script src="https://github.com/mattboldt/typed.js"></script>
+                    <script>
+                        var typed = new Typed("#subtitle", {
+                            strings: ['',''],
+                            startDelay: 300,
+                            typeSpeed: 100,
+                            loop: true,
+                            backSpeed: 50,
+                            showCursor: true
+                        });
+                    </script>
                 
             </div>
         </div>
@@ -315,23 +326,18 @@
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
     <div class="statis">
-        <span class="count"><a href="/">61</a></span>
+        <span class="count"><a href="/">52</a></span>
         <span class="name">文章</span>
     </div>
 
 
 
     <div class="statis">
-        <span class="count"><a href="/categories">13</a></span>
+        <span class="count"><a href="/categories">12</a></span>
         <span class="name">分类</span>
     </div>
 
 
-
-    <div class="statis">
-        <span class="count"><a href="/tags">2</a></span>
-        <span class="name">标签</span>
-    </div>
 
 
                     </div>
@@ -345,23 +351,18 @@
                                 <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
                                     
     <div class="statis">
-        <span class="count"><a href="/">61</a></span>
+        <span class="count"><a href="/">52</a></span>
         <span class="name">文章</span>
     </div>
 
 
 
     <div class="statis">
-        <span class="count"><a href="/categories">13</a></span>
+        <span class="count"><a href="/categories">12</a></span>
         <span class="name">分类</span>
     </div>
 
 
-
-    <div class="statis">
-        <span class="count"><a href="/tags">2</a></span>
-        <span class="name">标签</span>
-    </div>
 
 
                                 </div>
@@ -477,7 +478,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,1,0,1],
+                data: [0,0,0,0,0,0,0,0,0,0,0,0,0],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a', '#3ecf8e', '#82d3f4'],
@@ -519,7 +520,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"经验&bug","value":12},{"name":"LeetCode","value":2},{"name":"算法","value":2},{"name":"总结","value":19},{"name":"Java","value":11},{"name":"算法入门","value":2},{"name":"MySQL","value":2},{"name":"前端","value":1},{"name":"flutter","value":1},{"name":"数据结构","value":6},{"name":"复习资料","value":1},{"name":"架构","value":1},{"name":"面试","value":1}],
+                data: [{"name":"LeetCode","value":2},{"name":"经验&bug","value":10},{"name":"算法","value":2},{"name":"总结","value":17},{"name":"Java","value":9},{"name":"算法入门","value":2},{"name":"MySQL","value":2},{"name":"前端","value":1},{"name":"flutter","value":1},{"name":"数据结构","value":6},{"name":"架构","value":1},{"name":"面试","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -543,7 +544,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["算法","自考本科"]
+                data: []
             }
         ],
         yAxis: [
@@ -556,7 +557,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth: 18,
-                data: [2,1],
+                data: [],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -596,34 +597,22 @@
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
-            <span id="year">2020</span>
+            <span id="year">2022</span>
             <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
             <br>
             <span id="sitetime">载入运行时间...</span>
             
             
-                
             
-            
-                <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="fa fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                                                                       class="white-color"></span>&nbsp;次
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fa fa-user"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                                                                         class="white-color"></span>&nbsp;人
-            </span>
             
             <br>
             
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">108.7k</span>&nbsp;字
+                            class="white-color">98k</span>&nbsp;字
                 
                 
                 <script>
@@ -634,11 +623,11 @@
                         var days = hours * 24;
                         var years = days * 365;
                         var today = new Date();
-                        var startYear = "2020";
-                        var startMonth = "12";
-                        var startDate = "09";
-                        var startHour = "0";
-                        var startMinute = "0";
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
                         var startSecond = "0";
                         var todayYear = today.getFullYear();
                         var todayMonth = today.getMonth() + 1;
@@ -658,11 +647,11 @@
                             diffMinutes * minutes) / seconds);
                         if (startYear == todayYear) {
                             document.getElementById("year").innerHTML = todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
                                 " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                         } else {
                             document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
                                 " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                         }
                     }
@@ -672,7 +661,7 @@
             
 
         </div>
-        <div class="col s12 m4 l4 social-link social-statis">
+        <!-- <div class="col s12 m4 l4 social-link ">
 
 
 
@@ -690,7 +679,7 @@
 
 
 
-</div>
+</div> -->
     </div>
 </footer>
 
@@ -757,8 +746,6 @@
     <script src="/libs/others/clicklove.js" async="async"></script>
 
 
-
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
 
 
 <script type="text/javascript">

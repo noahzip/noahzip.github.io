@@ -446,11 +446,6 @@
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-                
             </div>
         </div>
         <hr class="clearfix">
@@ -633,21 +628,20 @@
                 <div class="article-badge left-badge text-color">
                     <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2020/03/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%9C%80%E7%BB%88%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+                    <a href="/2020/03/18/%E4%BA%8B%E5%8A%A1%E6%80%BB%E7%BB%93/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="多线程事务的最终解决方案">
+                                <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="事务总结">
                             
-                            <span class="card-title">多线程事务的最终解决方案</span>
+                            <span class="card-title">事务总结</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1、导入jdbc-starter2、导入aop-starter &lt;dependency>
-    &lt;groupId>org.springframework.boot&lt;/groupId>
-    &lt;artifactId
+                                1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。2、事务的传播行为propagation:当前方法的事务是否要和别人公用一个事务,以及如何传播下去（里面的方法如果用事务，是否和他公用一个事务）
+Propagation propaga
                             
                         </div>
                         <div class="publish-info">
@@ -847,34 +841,22 @@ public class PmsProductCategory implements Serializable {
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
-            <span id="year">2020</span>
+            <span id="year">2022</span>
             <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
             <br>
             <span id="sitetime">载入运行时间...</span>
             
             
-                
             
-            
-                <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="fa fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                                                                       class="white-color"></span>&nbsp;次
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fa fa-user"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                                                                         class="white-color"></span>&nbsp;人
-            </span>
             
             <br>
             
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">108.7k</span>&nbsp;字
+                            class="white-color">98k</span>&nbsp;字
                 
                 
                 <script>
@@ -885,11 +867,11 @@ public class PmsProductCategory implements Serializable {
                         var days = hours * 24;
                         var years = days * 365;
                         var today = new Date();
-                        var startYear = "2020";
-                        var startMonth = "12";
-                        var startDate = "09";
-                        var startHour = "0";
-                        var startMinute = "0";
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
                         var startSecond = "0";
                         var todayYear = today.getFullYear();
                         var todayMonth = today.getMonth() + 1;
@@ -909,11 +891,11 @@ public class PmsProductCategory implements Serializable {
                             diffMinutes * minutes) / seconds);
                         if (startYear == todayYear) {
                             document.getElementById("year").innerHTML = todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
                                 " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                         } else {
                             document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
                                 " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                         }
                     }
@@ -923,7 +905,7 @@ public class PmsProductCategory implements Serializable {
             
 
         </div>
-        <div class="col s12 m4 l4 social-link social-statis">
+        <!-- <div class="col s12 m4 l4 social-link ">
 
 
 
@@ -941,7 +923,7 @@ public class PmsProductCategory implements Serializable {
 
 
 
-</div>
+</div> -->
     </div>
 </footer>
 
@@ -1008,8 +990,6 @@ public class PmsProductCategory implements Serializable {
     <script src="/libs/others/clicklove.js" async="async"></script>
 
 
-
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
 
 
 <script type="text/javascript">

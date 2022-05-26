@@ -284,7 +284,18 @@
 
             <div class="description center-align">
                 
-                    
+                    <span id="subtitle"></span>
+                    <script src="https://github.com/mattboldt/typed.js"></script>
+                    <script>
+                        var typed = new Typed("#subtitle", {
+                            strings: ['',''],
+                            startDelay: 300,
+                            typeSpeed: 100,
+                            loop: true,
+                            backSpeed: 50,
+                            showCursor: true
+                        });
+                    </script>
                 
             </div>
         </div>
@@ -313,20 +324,20 @@
                 
                     
                         
-                        <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" title="经验&bug: 12">
+                        <a href="/categories/LeetCode/" title="LeetCode: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #F9EBEA;">经验&bug
-                        <span class="tag-length">12</span>
+                          style="background-color: #F9EBEA;">LeetCode
+                        <span class="tag-length">2</span>
                     </span>
                         </a>
                     
                         
-                        <a href="/categories/LeetCode/" title="LeetCode: 2">
+                        <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" title="经验&bug: 10">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #F5EEF8;">LeetCode
-                        <span class="tag-length">2</span>
+                          style="background-color: #F5EEF8;">经验&bug
+                        <span class="tag-length">10</span>
                     </span>
                         </a>
                     
@@ -340,20 +351,20 @@
                         </a>
                     
                         
-                        <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结: 19">
+                        <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结: 17">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
                           style="background-color: #E8F8F5;">总结
-                        <span class="tag-length">19</span>
+                        <span class="tag-length">17</span>
                     </span>
                         </a>
                     
                         
-                        <a href="/categories/Java/" title="Java: 11">
+                        <a href="/categories/Java/" title="Java: 9">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                           style="background-color: #FEF9E7;">Java
-                        <span class="tag-length">11</span>
+                        <span class="tag-length">9</span>
                     </span>
                         </a>
                     
@@ -403,19 +414,10 @@
                         </a>
                     
                         
-                        <a href="/categories/%E5%A4%8D%E4%B9%A0%E8%B5%84%E6%96%99/" title="复习资料: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                          style="background-color: #F8C471;">复习资料
-                        <span class="tag-length">1</span>
-                    </span>
-                        </a>
-                    
-                        
                         <a href="/categories/%E6%9E%B6%E6%9E%84/" title="架构: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #F9E79F;">架构
+                          style="background-color: #F8C471;">架构
                         <span class="tag-length">1</span>
                     </span>
                         </a>
@@ -424,7 +426,7 @@
                         <a href="/categories/%E9%9D%A2%E8%AF%95/" title="面试: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #F9EBEA;">面试
+                          style="background-color: #F9E79F;">面试
                         <span class="tag-length">1</span>
                     </span>
                         </a>
@@ -439,48 +441,6 @@
 
     <article id="articles" class="container articles">
         <div class="row tags-posts">
-            
-                <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                    <div class="card">
-                        <a href="/2020/07/25/ssm%E6%95%B4%E5%90%88shiro/">
-                            <div class="card-image tag-image">
-                                
-                                    
-                                    <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="ssm整合shiro">
-                                
-                                <span class="card-title">ssm整合shiro</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    
-1、在 maven 项目中引入 Shiro 依赖：&lt;!-- shiro  -->
-&lt;dependency>
-    &lt;groupId>org.apache.shiro&lt;/groupId>
-    &lt;artif
-                                
-                            </div>
-                            <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-07-25
-                            </span>
-                                <span class="publish-author">
-                                    
-                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                        
-                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
-                                    总结
-                                </a>
-                                        
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
             
                 <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
@@ -583,46 +543,6 @@ public class SimpleFactoryP
                                 
                                     1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。2、事务的传播行为propagation:当前方法的事务是否要和别人公用一个事务,以及如何传播下去（里面的方法如果用事务，是否和他公用一个事务）
 Propagation propaga
-                                
-                            </div>
-                            <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-18
-                            </span>
-                                <span class="publish-author">
-                                    
-                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                        
-                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
-                                    总结
-                                </a>
-                                        
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
-            
-                <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                    <div class="card">
-                        <a href="/2020/03/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%9C%80%E7%BB%88%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
-                            <div class="card-image tag-image">
-                                
-                                    
-                                    <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="多线程事务的最终解决方案">
-                                
-                                <span class="card-title">多线程事务的最终解决方案</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    1、导入jdbc-starter2、导入aop-starter &lt;dependency>
-    &lt;groupId>org.springframework.boot&lt;/groupId>
-    &lt;artifactId
                                 
                             </div>
                             <div class="publish-info">
@@ -770,34 +690,22 @@ Propagation propaga
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
-            <span id="year">2020</span>
+            <span id="year">2022</span>
             <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
             <br>
             <span id="sitetime">载入运行时间...</span>
             
             
-                
             
-            
-                <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="fa fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                                                                       class="white-color"></span>&nbsp;次
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fa fa-user"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                                                                         class="white-color"></span>&nbsp;人
-            </span>
             
             <br>
             
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">108.7k</span>&nbsp;字
+                            class="white-color">98k</span>&nbsp;字
                 
                 
                 <script>
@@ -808,11 +716,11 @@ Propagation propaga
                         var days = hours * 24;
                         var years = days * 365;
                         var today = new Date();
-                        var startYear = "2020";
-                        var startMonth = "12";
-                        var startDate = "09";
-                        var startHour = "0";
-                        var startMinute = "0";
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
                         var startSecond = "0";
                         var todayYear = today.getFullYear();
                         var todayMonth = today.getMonth() + 1;
@@ -832,11 +740,11 @@ Propagation propaga
                             diffMinutes * minutes) / seconds);
                         if (startYear == todayYear) {
                             document.getElementById("year").innerHTML = todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
                                 " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                         } else {
                             document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
                                 " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                         }
                     }
@@ -846,7 +754,7 @@ Propagation propaga
             
 
         </div>
-        <div class="col s12 m4 l4 social-link social-statis">
+        <!-- <div class="col s12 m4 l4 social-link ">
 
 
 
@@ -864,7 +772,7 @@ Propagation propaga
 
 
 
-</div>
+</div> -->
     </div>
 </footer>
 
@@ -931,8 +839,6 @@ Propagation propaga
     <script src="/libs/others/clicklove.js" async="async"></script>
 
 
-
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
 
 
 <script type="text/javascript">
