@@ -291,18 +291,7 @@
 
             <div class="description center-align">
                 
-                    <span id="subtitle"></span>
-                    <script src="https://cdn.jsdelivr.net/npm/typed.js"></script>
-                    <script>
-                        var typed = new Typed("#subtitle", {
-                            strings: ['立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径','只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方'],
-                            startDelay: 300,
-                            typeSpeed: 100,
-                            loop: true,
-                            backSpeed: 50,
-                            showCursor: true
-                        });
-                    </script>
+                    
                 
             </div>
         </div>
@@ -478,7 +467,7 @@
         },
         xAxis: {
             type: 'category',
-            data: ["2021-03","2021-04","2021-05","2021-06","2021-07","2021-08","2021-09","2021-10","2021-11","2021-12","2022-01","2022-02","2022-03"]
+            data: ["2021-05","2021-06","2021-07","2021-08","2021-09","2021-10","2021-11","2021-12","2022-01","2022-02","2022-03","2022-04","2022-05"]
         },
         yAxis: {
             type: 'value',
@@ -488,7 +477,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,0,0,1],
+                data: [0,0,0,0,0,0,0,0,0,0,1,0,1],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a', '#3ecf8e', '#82d3f4'],
@@ -530,7 +519,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"算法","value":2},{"name":"经验&bug","value":12},{"name":"总结","value":19},{"name":"算法入门","value":2},{"name":"MySQL","value":2},{"name":"Java","value":11},{"name":"前端","value":1},{"name":"flutter","value":1},{"name":"数据结构","value":6},{"name":"复习资料","value":1},{"name":"架构","value":1},{"name":"面试","value":1},{"name":"LeetCode","value":2}],
+                data: [{"name":"经验&bug","value":12},{"name":"LeetCode","value":2},{"name":"算法","value":2},{"name":"总结","value":19},{"name":"Java","value":11},{"name":"算法入门","value":2},{"name":"MySQL","value":2},{"name":"前端","value":1},{"name":"flutter","value":1},{"name":"数据结构","value":6},{"name":"复习资料","value":1},{"name":"架构","value":1},{"name":"面试","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -636,10 +625,6 @@
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
                             class="white-color">108.7k</span>&nbsp;字
                 
-                
-                    <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" alt="icp"/>
-                <a href="http://beian.miit.gov.cn/" target="_blank">沪ICP备xxxxxxxxx号</a>
-            </span>
                 
                 <script>
                     function siteTime() {
