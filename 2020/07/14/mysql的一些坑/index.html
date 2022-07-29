@@ -450,8 +450,8 @@
             <div id="articleContent">
                 <p><strong>Mysql5.7大坑：Expression # 2 of SELECT list is not in GROUP BY clause and contains</strong><br><strong>nonaggregated column ‘sss.month_id’ which is not functionally</strong><br><strong>dependent on columns in GROUP BY clause; this is incompatible with</strong><br><strong>sql_mode=only_full_group_by</strong></p>
 <p>​    MySQL 5.7.5及以上功能依赖检测功能。如果[<code>ONLY_FULL_GROUP_BY</code>](<a href="https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#">https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#</a> sqlmode_only_full_group_by)启用了 SQL模式（默认情况下），则MySQL将拒绝对该选项列表，<code>HAVING</code>条件或 <code>ORDER BY</code>列表引用的子集中既不指定的<code>GROUP BY</code>非集合列的查询，也不在功能上依赖于它们。</p>
-<pre class="line-numbers language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- 去掉ONLY_FULL_GROUP_BY</span>
-<span class="token keyword">SET</span> @<span class="token variable">@global.sql_mode</span> <span class="token operator">=</span><span class="token string">'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-mysql"><code class="language-mysql">-- 去掉ONLY_FULL_GROUP_BY
+SET @@global.sql_mode ='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="远程连接的一系列解决方法："><a href="#远程连接的一系列解决方法：" class="headerlink" title="远程连接的一系列解决方法："></a>远程连接的一系列解决方法：</h4><p>​    <strong>ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: YES)</strong><br>​        数据库密码错误 通过修改配置文件跳过验证 ：</p>
 <pre class="line-numbers language-shell"><code class="language-shell"># 关闭mysql服务
 systemctl stop mysql
@@ -818,7 +818,7 @@ flush <span class="token keyword">privileges</span><span class="token punctuatio
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">107.6k</span>&nbsp;字
+                            class="white-color">110.6k</span>&nbsp;字
                 
                 
                 <script>
