@@ -464,7 +464,7 @@
 </li>
 <li><p>上⾯的⼏种连接⽅式，驱动表和被驱动表是由MYSQL执⾏的时候去选择的；</p>
 </li>
-<li><p><strong>straight_join</strong>：straight_join的表现完全与innerjoin⼀致，但是它限制了表的顺序，也就是说载⼊表的顺序遵循从左往右；</p>
+<li><p><strong>straight_join</strong>：straight_join的表现完全与inner join⼀致，但是它限制了表的顺序，也就是说载⼊表的顺序遵循从左往右；</p>
 <ul>
 <li>也就是说straight_join可以指定驱动表与被驱动表的顺序；</li>
 <li>如果遇到两个表的join，各⾃数据量⽐较⼤，但是关联的字段本来是有索引却没有⾛索引，然后查询⾮常慢的情况可以看看是不是MySQL⾃⼰给你调整了表的驱动顺序，然后没有使⽤到索引，并且还有⼀些额外的排序等操作；这个时候可以使⽤ straight_join 来优化试试；</li>
