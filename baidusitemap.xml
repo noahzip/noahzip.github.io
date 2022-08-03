@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://github.com/Mr-xinyichen/2022/07/24/MySQL%E4%BA%8B%E5%8A%A1/</loc>
+    <lastmod>2022-07-24</lastmod>
+  </url>
+  <url>
     <loc>https://github.com/Mr-xinyichen/2022/07/19/MySQL%E2%BD%87%E5%BF%97%EF%BC%88Redolog%20Undolog%20Binlog%EF%BC%89/</loc>
     <lastmod>2022-07-19</lastmod>
   </url>
