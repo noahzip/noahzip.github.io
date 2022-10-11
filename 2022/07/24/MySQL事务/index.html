@@ -433,14 +433,14 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        3.1k
+                        4.1k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        11 分
+                        15 分
                     </div>
                 
 
@@ -534,7 +534,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 <li>脏读、不可重复读、幻读都可能发⽣；</li>
 </ul>
 </li>
-<li><strong>读提交（ReadCommitted）</strong>：事务只能读取到其他事务已经提交的更新；<ul>
+<li><strong>读已提交（ReadCommitted）</strong>：事务只能读取到其他事务已经提交的更新；<ul>
 <li>它解决了脏读，但是不可重复读、幻读是可能发⽣的；</li>
 </ul>
 </li>
@@ -577,12 +577,13 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 <ul>
 <li><p><strong>当前数据行记录中的三个隐藏字段</strong>：</p>
 <ul>
-<li>DB_TRX_ID：6-byte的事务ID。插入或更新行的最后一个事务的事务ID</li>
-</ul>
+<li><p>DB_TRX_ID：6-byte的事务ID。插入或更新行的最后一个事务的事务ID</p>
 </li>
 <li><p>DB_ROLL_PTR：7-byte的回滚指针。就是指向对应某行记录的上一个版本，在undo log中使用。</p>
 </li>
 <li><p>DB_ROW_ID：6-byte的隐藏主键。如果数据表中没有主键，那么InnoDB会自动生成单调递增的隐藏主键（表中有主键或者非NULL的UNIQUE键时都不会包含 DB_ROW_ID列）。</p>
+</li>
+</ul>
 </li>
 <li><p><strong>undo log版本链</strong>:</p>
 <ul>
@@ -631,7 +632,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 <p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803183532829.png" alt="min_trx_id<trx_id<max_trx_id"></p>
 <pre><code>原始value =0 ，trx_id=0
 事务A（trx_id=1）更新value=1未提交，数据版本中value=1，trx_id=1
-事务B（trx_id=2）更新value=2并提交，数据版本中value=2，trx_id=2（undo log的ptr指向上一个版本）
+事务B（trx_id=2）更新value=2未提交（配图事务B描述有误，应为事务B未提交版本），数据版本中value=2，trx_id=2（undo log的ptr指向上一个版本）
 事务C（trx_id=3）开启进行快照读，ReadView：
         m_ids=[2,1,3],min_trx_id=1,min_trx_id=4(m_ids最大值+1)
 此时：数据版本中 min_trx_id&lt;trx_id=2&lt;max_trx_id,处于min和max之间，则不可见此版本，根据当前数据中的DB_ROLL_PTR找到undo log,undo log中上一条的记录的trx_id=1，同样也处于处于min和max之间，版本不可见，再根据undo log的DB_ROLL_PTR找到上一条undolog，这条记录的trx_id=0,小于min，则此版本可见，读取value=0</code></pre></li>
@@ -649,6 +650,42 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 </ul>
 </li>
 </ul>
+<ul>
+<li><p><strong>ReadView可见性总结</strong>：</p>
+<ul>
+<li>在生成ReadView之前已提交事务更新的值，可以读到</li>
+<li>在生成ReadView之前已经开启却未提交事务的更新的值，不能读到</li>
+<li>在生成ReadView之后才开启的事务更新的值，不能读到</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-基于MVCC实现读已提交（RC）"><a href="#5-基于MVCC实现读已提交（RC）" class="headerlink" title="5.基于MVCC实现读已提交（RC）"></a>5.基于MVCC实现读已提交（RC）</h2><p>前文介绍MySQL的隔离级别时描述过：<strong>MySQL可重复读级别的实现解决了脏读</strong>，核心实现就是，<strong>在读已提交的隔离级别下，每一次查询（快照读）都生成一个新的ReadView</strong></p>
+<p>For example：原始记录中value=0，trx_id=0，DB_ROLL_PTR=null存在两个事务：A(trx_id=1) B(trx_id=2)</p>
+<ul>
+<li>事务B更新value=2，未提交，此时数据版本中value=2，trx_id=2,DB_ROLL_PTR=0;</li>
+<li><strong>事务A查询value，生成ReadView</strong>：min_trx_id=1,m_ids=[1,2],max_trx_id=3,此时数据版本中trx_id=2在高低水位线之间，且在m_ids数组中，所以当前数据版本不可见；根据DB_ROLL_PTR=0回溯上一条记录，此时数据版本中trx_id=0小于低水位线，则此数据版本可见，读取value=0；</li>
+<li>事务B提交，此时数据版本value=2，trx_id=2,DB_ROLL_PTR=0;</li>
+<li><strong>事务A再次查询，生成了一个新的ReadView</strong>：min_trx_id=1,m_ids=[1],max_trx_id=3，此时当前数据版本中的trx_id虽然同样处于高低水位线之间，但不在m_ids中(说明生成Readview之前，事务B已提交），当前数据版本可见，value=2。</li>
+</ul>
+<p><strong>综上，通过每次查询生成一个新的ReadView可以实现读已提交(RC)，但不能实现可重复读（RR）</strong></p>
+<h2 id="6-基于MVCC实现可重复读（RR）"><a href="#6-基于MVCC实现可重复读（RR）" class="headerlink" title="6.基于MVCC实现可重复读（RR）"></a>6.基于MVCC实现可重复读（RR）</h2><p>MySQL的可重复读解决了幻读，核心实现是：<strong>只在事务开启时生成一个ReadView，之后此事务中的所有查询都采用这个ReadView</strong>。</p>
+<p>For example：原始记录中value=0，trx_id=0，DB_ROLL_PTR=null存在两个事务：A(trx_id=1) B(trx_id=2)</p>
+<ul>
+<li>事务B更新value=2，未提交，此时数据版本中value=2，trx_id=2,DB_ROLL_PTR=0;</li>
+<li><strong>事务A查询value，生成ReadView</strong>：min_trx_id=1,m_ids=[1,2],max_trx_id=3,此时数据版本中trx_id=2在高低水位线之间，且在m_ids数组中，所以当前数据版本不可见；根据DB_ROLL_PTR=0回溯上一条记录，此时数据版本中trx_id=0小于低水位线，则此数据版本可见，读取value=0；</li>
+<li>事务B提交，此时数据版本value=2，trx_id=2,DB_ROLL_PTR=0;</li>
+<li><strong>事务A再次查询，仍然使用初次生成的ReadView</strong>：读取value=2，结果与上次读取相同。</li>
+</ul>
+<p><strong>综上，通过每次查询都用初次生成的ReadView，可以实现可重复读（RR）</strong></p>
+<p><strong>解决幻读</strong>：其它事务插入了记录，也需要不能被读到</p>
+<p>For example：：原始记录中value=0，trx_id=0，DB_ROLL_PTR=null存在两个事务：A(trx_id=1) B(trx_id=2) C(trx_id=3)</p>
+<ul>
+<li>事务B更新value=2，未提交，此时数据版本中value=2，trx_id=2,DB_ROLL_PTR=0;</li>
+<li><strong>事务A查询value，生成ReadView</strong>：min_trx_id=1,m_ids=[1,2],max_trx_id=3,此时数据版本中trx_id=2在高低水位线之间，且在m_ids数组中，所以当前数据版本不可见；根据DB_ROLL_PTR=0回溯上一条记录，此时数据版本中trx_id=0小于低水位线，则此数据版本可见，读取value=0；</li>
+<li>事务C插入了一条记录，此时数据版本value=3，trx_id=3,DB_ROLL_PTR=1;</li>
+<li><strong>事务A再次查询，仍然使用初次生成的ReadView</strong>：min_trx_id=1,m_ids=[1,2],max_trx_id=3,此时数据版本中trx_id=3大于max_trx_id(这条数据是在事务A生成ReadView后开启的)，所以当前数据版本不可见，继续回溯。。。，读取value=0</li>
+</ul>
+<p><strong>所以，通过每次查询都用初次生成的ReadView也可以解决幻读</strong></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -954,7 +991,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">147.9k</span>&nbsp;字
+                            class="white-color">148.9k</span>&nbsp;字
                 
                 
                 <script>
