@@ -467,6 +467,8 @@
     </summary>
     
     
+      <category term="{{ category.name }}" scheme="{{ url + category.path | uriencode }}"/>
+    
     
   </entry>
   
@@ -488,10 +490,6 @@
     
     </summary>
     
-    
-      <category term="{{ category.name }}" scheme="{{ url + category.path | uriencode }}"/>
-    
-      <category term="{{ category.name }}" scheme="{{ url + category.path | uriencode }}"/>
     
     
   </entry>
