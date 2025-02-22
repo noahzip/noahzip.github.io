@@ -4,17 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="OOM实例, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="java引用 ：
-强 普通引用 
-M m = new M();
-m = null;
-System.gc();
-sout(m)
-
-软 当堆内存不够用时才回收 
-//设置最大堆大小为20
-//m指向强引用SoftReference SoftRe">
+    <meta name="keywords" content="Rust中的Vex的一些注意事项与思考, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="vec.len() 方法详解vec.len() 方法用于获取 Vec&amp;lt;T&amp;gt; 中的元素个数，它不会改变 vec 的所有权，也不会影响 vec 的可变性。
+fn main() {
+    let vec = vec![1, 2, 3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +16,7 @@ sout(m)
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>OOM实例 | 未见初墨</title>
+    <title>Rust中的Vex的一些注意事项与思考 | 未见初墨</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -284,12 +277,12 @@ sout(m)
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">OOM实例</h1>
+                    <h1 class="description center-align post-title">Rust中的Vex的一些注意事项与思考</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +406,8 @@ sout(m)
                         <div class="post-cate">
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                                <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
-                                    总结
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                             
                         </div>
@@ -426,28 +419,28 @@ sout(m)
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2020-09-20
+                        2025-02-22
                     </div>
                 
 
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2020-09-20
+                        2025-02-22
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.9k
+                        638
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        7 分
+                        2 分
                     </div>
                 
 
@@ -457,177 +450,77 @@ sout(m)
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="java引用-："><a href="#java引用-：" class="headerlink" title="java引用 ："></a>java引用 ：</h4><ul>
-<li><p>强 普通引用 </p>
-<pre class="line-numbers language-java"><code class="language-java">M m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">M</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-m <span class="token operator">=</span> null<span class="token punctuation">;</span>
-System<span class="token punctuation">.</span><span class="token function">gc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>软 当堆内存不够用时才回收 </p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//设置最大堆大小为20</span>
-<span class="token comment" spellcheck="true">//m指向强引用SoftReference SoftReference指向软引用10m的数组</span>
-SoftReference<span class="token operator">&lt;</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SoftReference</span><span class="token operator">&lt;</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span><span class="token function">gc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//还能拿到值</span>
-<span class="token comment" spellcheck="true">//当堆内存不够用时才回收</span>
-<span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">15</span><span class="token punctuation">]</span>
-<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//为null </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>弱 （当他不存在）gc时立即回收</p>
-<pre class="line-numbers language-java"><code class="language-java">WeakReference<span class="token operator">&lt;</span>M<span class="token operator">></span> m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeakReference</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">M</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
-System<span class="token punctuation">.</span><span class="token function">gc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>虚 跟踪gc回收 管理直接内存（堆外内存）零拷贝</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//gc时查询引用队列 发出通知此对象要被回收了</span>
-PhantomReference<span class="token operator">&lt;</span>M<span class="token operator">></span> m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PhantomReference</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">M</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">ReferenceQueue</span><span class="token operator">&lt;</span>M<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//null</span>
-<span class="token comment" spellcheck="true">//堆外缓冲区</span>
-ByteBuffer b <span class="token operator">=</span> ByteBuffer<span class="token punctuation">.</span><span class="token function">allocateDirect</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
+                <h2 id="vec-len-方法详解"><a href="#vec-len-方法详解" class="headerlink" title="vec.len() 方法详解"></a><code>vec.len()</code> 方法详解</h2><p><code>vec.len()</code> 方法用于获取 <code>Vec&lt;T&gt;</code> 中的元素个数，它不会改变 <code>vec</code> 的所有权，也不会影响 <code>vec</code> 的可变性。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 创建一个 Vec&lt;i32></span>
+    <span class="token keyword">let</span> vec_len <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取 vec 的长度</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"vec 长度: {}"</span><span class="token punctuation">,</span> vec_len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"vec 内容: {:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="vec-index-访问元素行为"><a href="#vec-index-访问元素行为" class="headerlink" title="vec[index] 访问元素行为"></a><code>vec[index]</code> 访问元素行为</h2><ul>
+<li><code>vec[index]</code> 访问的是 <code>vec</code> 中指定索引的元素，<strong>这是一个不可变借用</strong>。</li>
+<li>访问单个元素不会转移 <code>vec</code> 的所有权，也不会影响 <code>vec</code> 的可变性。</li>
 </ul>
-<h5 id="ThreadLocal-底层是一个map-set时-key为当前线程，v为值"><a href="#ThreadLocal-底层是一个map-set时-key为当前线程，v为值" class="headerlink" title="ThreadLocal 底层是一个map set时 key为当前线程，v为值"></a>ThreadLocal 底层是一个map set时 key为当前线程，v为值</h5><pre class="line-numbers language-java"><code class="language-java">ThreadLocal<span class="token operator">&lt;</span>Persion<span class="token operator">></span> t  <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadLocal</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//t指向的ThreadLocal是强引用 当t = null时 ThreadLocal里的map对象需要被回收 </span>
-<span class="token comment" spellcheck="true">//如果map为强引用则 map不会被回收 会造成oom</span>
-<span class="token comment" spellcheck="true">//k为null时 v访问不到但是不会被回收 所以ThreadLocal必须使用remove方法</span>
-t<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//对于线程池来说 如果不执行remove()方法线程归还后v的值还在 再次获取线程会复用旧值造成值错乱</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h5 id="程序、进程、线程："><a href="#程序、进程、线程：" class="headerlink" title="程序、进程、线程："></a>程序、进程、线程：</h5><p><strong>程序：</strong> qq.exe</p>
-<p><strong>进程：</strong> 程序启动分配内存 资源分配的基本单位</p>
-<p><strong>线程：</strong> 程序执行的基本单位</p>
-<p><strong>程序的执行顺序：</strong>a = 2+3</p>
-<ol>
-<li><p>通过总线读取数据到寄存器里</p>
-</li>
-<li><p>使用ALU计算单元完成计算返回到内存</p>
-</li>
-<li><p>pc寄存器指向下一个指令</p>
-<p>CPU的运行顺序：读指令–pc，读数据–register ，计算–AlU，会写–内存，下一条指令</p>
-</li>
-</ol>
-<h5 id="CAS："><a href="#CAS：" class="headerlink" title="CAS："></a>CAS：</h5><p><strong>操作流程</strong>：</p>
-<p>拿到旧值old1–执行计算v = old1+1–再次读取old2–进行比较old1==old2，相等就写回，不相等就再次读取一直重试</p>
-<p><img src="https://i.loli.net/2020/09/10/jPiG21S8cRTpfaE.png" alt="W_U9_Y__ND__QJ8_446~4YG.png"></p>
-<p><strong>ABA问题：</strong></p>
-<p>​     读取的旧值为0，操作完成后再次读取还是为0，但是执行了0-8-0这个过程</p>
-<p>​     解决方法 加上版本号，每次执行时版本号增加，写回时读取并比较版本号</p>
-<p><strong>CAS原子性问题</strong>：</p>
-<p>​     在操作数据时必须保证原子性，不能被其他线程修改；</p>
-<p>​     底层使用汇编指令保证 lock（锁总线） cmpxchg</p>
-<p><strong>AtomicInteger</strong>实现自旋锁：</p>
-<pre><code>private static AtomicInteger m = new AtomicInteger(0);
-//m++
-m.incrementAndGet(); 
+<p>示例代码：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> vec<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 借用 vec 的第一个元素（不可变借用）</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// `vec` 仍然可用，可以继续修改</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果需要修改元素，需要使用可变引用：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    vec<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 直接修改 vec[0] 的值</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者使用 <code>get_mut()</code> 进行安全访问（避免索引越界）：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> <span class="token function">Some</span><span class="token punctuation">(</span>first<span class="token punctuation">)</span> <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">get_mut</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 获取可变引用</span>
+        <span class="token operator">*</span>first <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 通过解引用修改值</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="for-e-in-amp-vec-遍历行为"><a href="#for-e-in-amp-vec-遍历行为" class="headerlink" title="for e in &amp;vec 遍历行为"></a><code>for e in &amp;vec</code> 遍历行为</h2><p>在 <code>for e in &amp;vec</code> 循环中，<code>e</code> 是 <code>&amp;T</code> 类型，即对 <code>vec</code> 元素的不可变借用。</p>
+<p>示例代码：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>collections<span class="token punctuation">:</span><span class="token punctuation">:</span>HashMap<span class="token punctuation">;</span>
 
-//底层调用 
-unsafe.getAndAddInt(this,valueOffset,1)+1;
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> map <span class="token operator">=</span> HashMap<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> mode <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-//getAndAddInt()调用
-this.compareAndSwapInt(var1,var2,var5,var5+var4);</code></pre><p><strong>Synchronize实现原理：</strong></p>
-<p>（对象锁）通过monitorenter和monitorexit来实现的</p>
-<p>（方法锁）使用ACC_SYNCHRONIZED修饰，。它会在常量池中增加一个标识符，获取它的monitor。</p>
-<p>锁的四种状态：一个线程偏向锁–多个线程轻度竞争–多个线程重度竞争（或自旋次数过多）重量锁</p>
-<p><strong>new：</strong></p>
-<p><strong>轻量级锁：</strong></p>
-<p>​    用户解决的锁</p>
-<p>​    cas自旋while（） 竞争很激烈时cpu上下文切换频繁消耗资源</p>
-<p><strong>重量级锁：</strong></p>
-<p>​    需要操作系统调度的锁</p>
-<p>​    加入等待队列由操作系统调度</p>
-<p><strong>偏向锁：</strong></p>
-<p>​    偏向于第一个访问锁的线程，如果在运行过程中，同步锁只有一个线程访问，不存在多线程争用的情况，则线程是不需要触发同步的，这种情况下，就会给线程加一个偏向锁。 </p>
-<p>![UQ_Y3I0_IULC@Y__4RP`M_K.png](<a href="https://i.loli.net/2020/09/10/s1oRtKhraJlXkFO.png">https://i.loli.net/2020/09/10/s1oRtKhraJlXkFO.png</a>)</p>
-<p><strong>寄存器的层次结构</strong>：</p>
-<p>cache line一次加载64个字节</p>
-<p>pc寄存器的指令计算需要x的值 首先会按序加载L1–&gt;L2–&gt;L3–&gt;内存 寄存器将x交给ALU计算 然后写回 pc寄存器读取下一个指令<br>内核2需要y的值直接从L3中读取</p>
-<p><img src="https://i.loli.net/2020/09/10/QheuWkdCc3yMz6O.png" alt="V_BMVR@QU_AOB_SL@UURIMX.png"></p>
-<p>缓存行对齐：</p>
-<p>​    xy处于同一行 当并发修改时，内核c1修改完x会通知内核c2，c2去内存中再次读取修改y，再通知c1这个过程很耗时</p>
-<p>   假设xy都为long（占用8个字节）类型，在x的前面填充7个long类型对象，在其后添加8个long对象，再执行操作，由于xy不处于同一缓存行，省去通知、读取的时间</p>
-<h5 id="缓存一致性协议：MESI-Cache（一致性协议）"><a href="#缓存一致性协议：MESI-Cache（一致性协议）" class="headerlink" title="缓存一致性协议：MESI Cache（一致性协议）"></a>缓存一致性协议：MESI Cache（一致性协议）</h5><p><strong>Modified：修改</strong></p>
-<p><strong>Exclusive：独占</strong></p>
-<p><strong>Shared：共享</strong></p>
-<p><strong>Invalid：失效</strong></p>
-<p>假设缓存行在两个核心中使用，当c1修改后会通知c2，c2将该行数据标记为Invalid，c2需要重新从内存中读取。</p>
-<h5 id="volatile："><a href="#volatile：" class="headerlink" title="volatile："></a>volatile：</h5><p><strong>线程间通信</strong></p>
-<ul>
-<li>volatile修饰的变量被当前线程修改后其他线程会感知到    </li>
-</ul>
-<p><strong>禁止指令重排序</strong></p>
-<ul>
-<li><p>如果不用volatile修饰可能发生指令重排序，<strong>invokespecial</strong>在<strong>astore_1</strong>之后执行，o拿到的时一个半初始化状态的对象</p>
-</li>
-<li><h5 id="Object-o-new-Object-的初始化过程："><a href="#Object-o-new-Object-的初始化过程：" class="headerlink" title="Object o  = new Object()的初始化过程："></a>Object o  = new Object()的初始化过程：</h5></li>
-</ul>
-<ol>
-<li><strong>new</strong>：申请一块内存空间用来存放对象</li>
-<li><strong>invokespecial</strong>：调用构造方法对属性赋值（半初始化对象)</li>
-<li><strong>astore_1</strong>：建立o和对象的关联（指针指向堆内存）</li>
-</ol>
-<h5 id="单例模式为什么需要dlc操作："><a href="#单例模式为什么需要dlc操作：" class="headerlink" title="单例模式为什么需要dlc操作："></a>单例模式为什么需要dlc操作：</h5><p>如果不用volatile修饰可能发生指令重排序，<strong>invokespecial</strong>在<strong>astore_1</strong>之后执行，INSTACE拿到的时一个半初始化状态的对象</p>
-<p>细化锁的力度将锁加载在方法内部时，当线程T1执行到第17行时被暂停，T2执行创建、返回对象，T1再次执行创建、返回对象</p>
-<p><img src="https://i.loli.net/2020/09/10/F9pB75xCHKscm38.png" alt="Q_S`@`U82B8_G8_Z_KCM_ID.png"></p>
-<p><strong>解决方法：dcl(double check lock):</strong></p>
-<p>加锁前检查一次（减少并发下的竞争），加锁后再检查一次</p>
-<p><img src="https://i.loli.net/2020/09/10/OT9kEtDHJNG2XfB.png" alt="M2_KX7_BNP3IISU1S_~F_CF.png"></p>
-<h5 id="内存屏障："><a href="#内存屏障：" class="headerlink" title="内存屏障："></a>内存屏障：</h5><p><strong>JVM层面</strong>：（happens-before原则）</p>
-<ul>
-<li>写操作 在前面添加StoreStore 在后面添加StoreLoad</li>
-<li>读操作  在之后添加LoadLoad LoadStore</li>
-</ul>
-<p><strong>Hotspot实现：</strong></p>
-<ul>
-<li><strong>lock addl</strong>总线锁定 <ul>
-<li>对共享内存的独占使用</li>
-<li>将当前处理器的缓存刷新到内存，使其他处理器的缓存失效</li>
-<li>指令无法越过这个内存屏障</li>
-</ul>
-</li>
-</ul>
-<h5 id="jvm如何确定一个对象是垃圾："><a href="#jvm如何确定一个对象是垃圾：" class="headerlink" title="jvm如何确定一个对象是垃圾："></a>jvm如何确定一个对象是垃圾：</h5><ul>
-<li><p>引用计数 reference count</p>
-</li>
-<li><p>根可达性 root searching</p>
-</li>
-</ul>
-<h5 id="GC算法有哪些："><a href="#GC算法有哪些：" class="headerlink" title="GC算法有哪些："></a>GC算法有哪些：</h5><ul>
-<li><strong>mark-sweep 标记清除</strong>（效率高 会产生碎片化问题）</li>
-<li><strong>copying 复制</strong>（浪费空间 Eden区 8:1:1 使用此算法，每次使用一半的空间，有用的拷贝到to，清除from区）</li>
-<li><strong>mark-compact标记压缩</strong>（效率低节约空间 老年代使用此算法）</li>
-</ul>
-<h5 id="垃圾回收器："><a href="#垃圾回收器：" class="headerlink" title="垃圾回收器："></a>垃圾回收器：</h5><p>分代：将内存分为两大块</p>
-<p>分区：将内存分为一片一片</p>
-<p><img src="https://s1.ax1x.com/2020/09/11/wYghWR.png" alt="wYghWR.png"></p>
-<h5 id="堆内存的逻辑分区："><a href="#堆内存的逻辑分区：" class="headerlink" title="堆内存的逻辑分区："></a>堆内存的逻辑分区：</h5><p>![LB0I_1AC2`VEA_M0_3_DA50.png](<a href="https://i.loli.net/2020/09/11/NxmGJP8M43v5Tph.png">https://i.loli.net/2020/09/11/NxmGJP8M43v5Tph.png</a>)</p>
-<h5 id="对象的生命周期："><a href="#对象的生命周期：" class="headerlink" title="对象的生命周期："></a>对象的生命周期：</h5><p>new对象 </p>
-<ul>
-<li><p>进入栈？（逃逸分析和标量替换）出栈消亡</p>
-<p>JVM通过逃逸分析确定该对象不会被外部访问。那就通过标量替换将该对象分解在栈上分配内存</p>
-<ul>
-<li><p><strong>逃逸分析</strong>：分析在程序的哪些地方可以访问到该指针，避免野指针</p>
-</li>
-<li><p><strong>标量替换：</strong>A中数据都为基本数据类型，可以用两个int数据替代</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> a<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> b<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>进入老年代（对象很大） 发生FullGC</p>
-</li>
-<li><p>进入TLAB （Thread Local Allocation Buffer）线程本地内存分配缓冲区</p>
-<ul>
-<li>进入 Eden  发生YoungGC</li>
-</ul>
-</li>
-</ul>
-<p>对象创建后进入Eden区，第一次GC时存活的对象（包括to区的）拷贝到from区，将from和to交换，清空Eden和from区，对象年龄+1，当年龄大于15后进入老年代</p>
+    <span class="token keyword">for</span> e <span class="token keyword">in</span> <span class="token operator">&amp;</span>vec <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// `e` 是 `&amp;i32` 类型，即不可变借用</span>
+        <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取或插入 0，返回 `&amp;mut i32`</span>
+        <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要解引用 `count` 才能增加值</span>
+        sum <span class="token operator">+=</span> e<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 自动解引用 `&amp;i32`，直接进行加法</span>
+
+        <span class="token comment" spellcheck="true">//mode = e; // 报错</span>
+        mode <span class="token operator">=</span> <span class="token operator">*</span>e<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要手动解引用 `e` 才能赋值给 mode</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者使用模式匹配 <code>&amp;e</code> 直接解引用：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">for</span> <span class="token operator">&amp;</span>e <span class="token keyword">in</span> <span class="token operator">&amp;</span>vec <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// `&amp;e` 直接匹配 `i32`，无需手动解引用</span>
+    <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    sum <span class="token operator">+=</span> e<span class="token punctuation">;</span>
+    mode <span class="token operator">=</span> e<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="count-1-详解"><a href="#count-1-详解" class="headerlink" title="*count += 1; 详解"></a><code>*count += 1;</code> 详解</h2><p><code>*count += 1;</code> 语法用于修改 <code>HashMap</code> 中存储的值，<code>count</code> 是一个可变引用 <code>&amp;mut i32</code>，所以需要解引用 <code>*count</code> 才能修改值。</p>
+<p>示例代码：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>collections<span class="token punctuation">:</span><span class="token punctuation">:</span>HashMap<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> map <span class="token operator">=</span> HashMap<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> key <span class="token operator">=</span> <span class="token string">"apple"</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// `or_insert(0)` 返回 `&amp;mut i32`</span>
+    <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要解引用 `count` 才能修改值</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> map<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出 {"apple": 1}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果不加 <code>*</code>，会导致编译错误：</p>
+<pre class="line-numbers language-rust"><code class="language-rust">count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ❌ 编译错误：expected integer, found `&amp;mut i32`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -703,36 +596,32 @@ this.compareAndSwapInt(var1,var2,var5,var5+var4);</code></pre><p><strong>Synchro
                 <div class="article-badge left-badge text-color">
                     <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2020/10/20/flutter%E5%9F%BA%E7%A1%80/">
+                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84(Hash%20Map)/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="flutter基础">
+                                <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Rust中的哈希映射(Hash Map)">
                             
-                            <span class="card-title">flutter基础</span>
+                            <span class="card-title">Rust中的哈希映射(Hash Map)</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                本文章知识来自于jspang（https://jspang.com/detailed?id=42# toc219），仅用于学习记录。Flutter页面的基本写法main.dart://导入组件
-import 'package:flutter
+                                哈希映射是一个存储键值对（key-value pairs）的集合。每个键是唯一的，通过键可以快速访问对应的值。Rust 提供了标准库中的 HashMap 类型来实现哈希映射。
+1. 导入 std::collections::HashMap在
                             
                         </div>
                         <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-10-20
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                         </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
-                                    前端
-                                </a>
-                                    
-                                        <a href="/categories/%E5%89%8D%E7%AB%AF/flutter/" class="post-category">
-                                    flutter
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
@@ -749,42 +638,36 @@ import 'package:flutter
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2020/09/12/Java%E9%9D%A2%E8%AF%95%E9%A2%98/">
+                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2String/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Java面试题">
+                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Rust中的字符串">
                             
-                            <span class="card-title">Java面试题</span>
+                            <span class="card-title">Rust中的字符串</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                一、java基础：面向对象和面向过程的区别：
-面向过程： 性能高  没有面向对象易维护、易扩展
+                                Rust 中的字符串有两种主要类型：
 
-面向对象：性能比面向对象低 易维护、易扩展、易复用
+String：动态堆分配的、可变的字符串类型。
+&amp;str：不可变的字符串切片类型，通常作为对 String 的引用。
 
-
-Java** 语言有哪些特点：
-简单易学；
-
-面向对象（封装，继承，多态）；
-
-平台无
+Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如何创建、使用
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-12
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/%E9%9D%A2%E8%AF%95/" class="post-category">
-                                    面试
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
