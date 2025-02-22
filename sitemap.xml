@@ -596,6 +596,20 @@
     
   </url>
   
+  <url>
+    <loc>{{ post.permalink | uriencode }}</loc>
+    
+    <lastmod>{{ post.updated | formatDate }}</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>{{ post.permalink | uriencode }}</loc>
+    
+    <lastmod>{{ post.updated | formatDate }}</lastmod>
+    
+  </url>
+  
 
   <url>
     <loc>{{ config.url | uriencode }}</loc>
