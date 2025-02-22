@@ -4,10 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Rust中的Vex的一些注意事项与思考, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="vec.len() 方法详解vec.len() 方法用于获取 Vec&amp;lt;T&amp;gt; 中的元素个数，它不会改变 vec 的所有权，也不会影响 vec 的可变性。
-fn main() {
-    let vec = vec![1, 2, 3">
+    <meta name="keywords" content="test, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content=" Rust 集合的练习题，涵盖了常见的数据结构如 Vec 和 HashMap 的应用，帮助加深对 Rust 的理解。
+use std::collections::HashMap;
+use rand::Rng;
+fn main{
+    qu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +18,7 @@ fn main() {
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>Rust中的Vex的一些注意事项与思考 | 未见初墨</title>
+    <title>test | 未见初墨</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -277,12 +279,12 @@ fn main() {
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Rust中的Vex的一些注意事项与思考</h1>
+                    <h1 class="description center-align post-title">test</h1>
                 </div>
             </div>
         </div>
@@ -433,7 +435,7 @@ fn main() {
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        638
+                        427
                     </div>
                 
 
@@ -450,77 +452,73 @@ fn main() {
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="vec-len-方法详解"><a href="#vec-len-方法详解" class="headerlink" title="vec.len() 方法详解"></a><code>vec.len()</code> 方法详解</h2><p><code>vec.len()</code> 方法用于获取 <code>Vec&lt;T&gt;</code> 中的元素个数，它不会改变 <code>vec</code> 的所有权，也不会影响 <code>vec</code> 的可变性。</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 创建一个 Vec&lt;i32></span>
-    <span class="token keyword">let</span> vec_len <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取 vec 的长度</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"vec 长度: {}"</span><span class="token punctuation">,</span> vec_len<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"vec 内容: {:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="vec-index-访问元素行为"><a href="#vec-index-访问元素行为" class="headerlink" title="vec[index] 访问元素行为"></a><code>vec[index]</code> 访问元素行为</h2><ul>
-<li><code>vec[index]</code> 访问的是 <code>vec</code> 中指定索引的元素，<strong>这是一个不可变借用</strong>。</li>
-<li>访问单个元素不会转移 <code>vec</code> 的所有权，也不会影响 <code>vec</code> 的可变性。</li>
-</ul>
-<p>示例代码：</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> x <span class="token operator">=</span> vec<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 借用 vec 的第一个元素（不可变借用）</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    vec<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// `vec` 仍然可用，可以继续修改</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如果需要修改元素，需要使用可变引用：</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    vec<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 直接修改 vec[0] 的值</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>或者使用 <code>get_mut()</code> 进行安全访问（避免索引越界）：</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token keyword">let</span> <span class="token function">Some</span><span class="token punctuation">(</span>first<span class="token punctuation">)</span> <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">get_mut</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 获取可变引用</span>
-        <span class="token operator">*</span>first <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 通过解引用修改值</span>
-    <span class="token punctuation">}</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="for-e-in-amp-vec-遍历行为"><a href="#for-e-in-amp-vec-遍历行为" class="headerlink" title="for e in &amp;vec 遍历行为"></a><code>for e in &amp;vec</code> 遍历行为</h2><p>在 <code>for e in &amp;vec</code> 循环中，<code>e</code> 是 <code>&amp;T</code> 类型，即对 <code>vec</code> 元素的不可变借用。</p>
-<p>示例代码：</p>
+                <p> Rust 集合的练习题，涵盖了常见的数据结构如 <code>Vec</code> 和 <code>HashMap</code> 的应用，帮助加深对 Rust 的理解。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>collections<span class="token punctuation">:</span><span class="token punctuation">:</span>HashMap<span class="token punctuation">;</span>
+<span class="token keyword">use</span> rand<span class="token punctuation">:</span><span class="token punctuation">:</span>Rng<span class="token punctuation">;</span>
+<span class="token keyword">fn</span> main<span class="token punctuation">{</span>
+    <span class="token function">question1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> map <span class="token operator">=</span> HashMap<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> mode <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">for</span> e <span class="token keyword">in</span> <span class="token operator">&amp;</span>vec <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// `e` 是 `&amp;i32` 类型，即不可变借用</span>
-        <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取或插入 0，返回 `&amp;mut i32`</span>
-        <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要解引用 `count` 才能增加值</span>
-        sum <span class="token operator">+=</span> e<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 自动解引用 `&amp;i32`，直接进行加法</span>
-
-        <span class="token comment" spellcheck="true">//mode = e; // 报错</span>
-        mode <span class="token operator">=</span> <span class="token operator">*</span>e<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要手动解引用 `e` 才能赋值给 mode</span>
+<span class="token keyword">fn</span> <span class="token function">question1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 生成一个包含 20 个 1~9 之间随机数的 Vec</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> Vec<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> rng <span class="token operator">=</span> rand<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">thread_rng</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token number">0</span><span class="token punctuation">..</span><span class="token number">20</span> <span class="token punctuation">{</span>
+        vec<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>rng<span class="token punctuation">.</span><span class="token function">gen_range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>或者使用模式匹配 <code>&amp;e</code> 直接解引用：</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">for</span> <span class="token operator">&amp;</span>e <span class="token keyword">in</span> <span class="token operator">&amp;</span>vec <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// `&amp;e` 直接匹配 `i32`，无需手动解引用</span>
-    <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    sum <span class="token operator">+=</span> e<span class="token punctuation">;</span>
-    mode <span class="token operator">=</span> e<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="count-1-详解"><a href="#count-1-详解" class="headerlink" title="*count += 1; 详解"></a><code>*count += 1;</code> 详解</h2><p><code>*count += 1;</code> 语法用于修改 <code>HashMap</code> 中存储的值，<code>count</code> 是一个可变引用 <code>&amp;mut i32</code>，所以需要解引用 <code>*count</code> 才能修改值。</p>
-<p>示例代码：</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>collections<span class="token punctuation">:</span><span class="token punctuation">:</span>HashMap<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> vec_len <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Generated vec: {:?}"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 计算总和，用于求平均数</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> sum<span class="token punctuation">:</span> u32 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 用 HashMap 统计每个元素出现的次数，并寻找众数</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> map <span class="token operator">=</span> HashMap<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> key <span class="token operator">=</span> <span class="token string">"apple"</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// `or_insert(0)` 返回 `&amp;mut i32`</span>
-    <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要解引用 `count` 才能修改值</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> map<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出 {"apple": 1}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如果不加 <code>*</code>，会导致编译错误：</p>
-<pre class="line-numbers language-rust"><code class="language-rust">count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ❌ 编译错误：expected integer, found `&amp;mut i32`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> mode<span class="token punctuation">:</span> u32 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> mode_count<span class="token punctuation">:</span> u32 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 遍历数组，统计出现次数</span>
+    <span class="token keyword">for</span> <span class="token operator">&amp;</span>e <span class="token keyword">in</span> <span class="token operator">&amp;</span>vec <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取该数字的出现次数，默认插入 0</span>
+        <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 计数 +1</span>
+        sum <span class="token operator">+=</span> e<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 计算总和</span>
+
+        <span class="token comment" spellcheck="true">// 记录出现最多的元素（众数）</span>
+        <span class="token keyword">if</span> <span class="token operator">*</span>count <span class="token operator">></span> mode_count <span class="token punctuation">{</span>
+            mode_count <span class="token operator">=</span> <span class="token operator">*</span>count<span class="token punctuation">;</span>
+            mode <span class="token operator">=</span> e<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 计算平均值</span>
+    <span class="token keyword">let</span> avg<span class="token punctuation">:</span> f32 <span class="token operator">=</span> sum <span class="token keyword">as</span> f32 <span class="token operator">/</span> vec_len <span class="token keyword">as</span> f32<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 对 Vec 进行排序</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 计算中位数（mid）</span>
+    <span class="token keyword">let</span> mid<span class="token punctuation">:</span> f32 <span class="token operator">=</span> <span class="token keyword">if</span> vec_len <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 若数组长度为偶数，中位数是中间两个数的平均值</span>
+        <span class="token punctuation">(</span>vec<span class="token punctuation">[</span>vec_len <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> vec<span class="token punctuation">[</span>vec_len <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f32 <span class="token operator">/</span> <span class="token number">2.0</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 若数组长度为奇数，中位数是中间的那个数</span>
+        vec<span class="token punctuation">[</span>vec_len <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token keyword">as</span> f32
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"avg: {}, mid: {}, mode: {}"</span><span class="token punctuation">,</span> avg<span class="token punctuation">,</span> mid<span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 实现一个简单的冒泡排序（可以使用 `vec.sort_unstable()` 代替）</span>
+<span class="token keyword">fn</span> <span class="token function">sort</span><span class="token punctuation">(</span>vec<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> Vec<span class="token operator">&lt;</span>u32<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token number">0</span><span class="token punctuation">..</span>vec<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">..</span>vec<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> vec<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> vec<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">{</span>
+                vec<span class="token punctuation">.</span><span class="token function">swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 使用 Rust 提供的 `swap()` 方法替代手动交换</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Sorted Vec: {:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -592,30 +590,34 @@ fn main() {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-            <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
                 <div class="article-badge left-badge text-color">
-                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+                </div>
                 <div class="card">
-                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84(Hash%20Map)/">
+                    <a href="/2025/02/22/test/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Rust中的哈希映射(Hash Map)">
+                                <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="test">
                             
-                            <span class="card-title">Rust中的哈希映射(Hash Map)</span>
+                            <span class="card-title">test</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                哈希映射是一个存储键值对（key-value pairs）的集合。每个键是唯一的，通过键可以快速访问对应的值。Rust 提供了标准库中的 HashMap 类型来实现哈希映射。
-1. 导入 std::collections::HashMap在
+                                 Rust 集合的练习题，涵盖了常见的数据结构如 Vec 和 HashMap 的应用，帮助加深对 Rust 的理解。
+use std::collections::HashMap;
+use rand::Rng;
+fn main{
+    qu
                             
                         </div>
                         <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
+                            </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -628,6 +630,7 @@ fn main() {
                             </span>
                         </div>
                     </div>
+
                     
                 </div>
             </div>
@@ -638,24 +641,21 @@ fn main() {
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2String/">
+                    <a href="/2025/02/22/Rust%E9%9B%86%E5%90%88%E7%BB%83%E4%B9%A0%E9%A2%98/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Rust中的字符串">
+                                <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Rust集合练习题">
                             
-                            <span class="card-title">Rust中的字符串</span>
+                            <span class="card-title">Rust集合练习题</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Rust 中的字符串有两种主要类型：
+                                 Rust 集合的练习题，涵盖了常见的数据结构如 Vec 和 HashMap 的应用，帮助加深对 Rust 的理解。
+1. 计算给定整数序列的平均数（mean）、中位数（mid）和众数（mode）以下是计算平均数、中位数和众数的代码实现：
 
-String：动态堆分配的、可变的字符串类型。
-&amp;str：不可变的字符串切片类型，通常作为对 String 的引用。
-
-Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如何创建、使用
                             
                         </div>
                         <div class="publish-info">
@@ -826,7 +826,7 @@ Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">172.4k</span>&nbsp;字
+                            class="white-color">174.2k</span>&nbsp;字
                 
                 
                 <script>

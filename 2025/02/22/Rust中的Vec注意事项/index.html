@@ -596,20 +596,24 @@ fn main() {
                 <div class="article-badge left-badge text-color">
                     <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84(Hash%20Map)/">
+                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2String/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Rust中的哈希映射(Hash Map)">
+                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Rust中的字符串">
                             
-                            <span class="card-title">Rust中的哈希映射(Hash Map)</span>
+                            <span class="card-title">Rust中的字符串</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                哈希映射是一个存储键值对（key-value pairs）的集合。每个键是唯一的，通过键可以快速访问对应的值。Rust 提供了标准库中的 HashMap 类型来实现哈希映射。
-1. 导入 std::collections::HashMap在
+                                Rust 中的字符串有两种主要类型：
+
+String：动态堆分配的、可变的字符串类型。
+&amp;str：不可变的字符串切片类型，通常作为对 String 的引用。
+
+Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如何创建、使用
                             
                         </div>
                         <div class="publish-info">
@@ -638,24 +642,23 @@ fn main() {
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2String/">
+                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84Vector(%E5%90%91%E9%87%8F)/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Rust中的字符串">
+                                <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Rust中的Vector(向量)">
                             
-                            <span class="card-title">Rust中的字符串</span>
+                            <span class="card-title">Rust中的Vector(向量)</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Rust 中的字符串有两种主要类型：
+                                Rust 中的 Vector (向量) 是一种动态存储的数组，允许在运行期增加或删除元素。
 
-String：动态堆分配的、可变的字符串类型。
-&amp;str：不可变的字符串切片类型，通常作为对 String 的引用。
-
-Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如何创建、使用
+1. 创建 VectorRust 中使用 Vec&lt;T&gt; 来实现 Vector。例如：
+fn main() {
+    let v: V
                             
                         </div>
                         <div class="publish-info">
@@ -826,7 +829,7 @@ Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">172.4k</span>&nbsp;字
+                            class="white-color">174.2k</span>&nbsp;字
                 
                 
                 <script>
