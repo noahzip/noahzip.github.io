@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="buffer pool 及CRUD动态过程, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="1. buffer pool 介绍InnoDB存储引擎使用了 buffer pool 内存缓冲区来提升性能 ，buffer pool 是一块内存区域，是基于内存的一个组件，也是我们必须要搞清楚的核心组件，它里面缓存了磁盘的 数据页 上真实的">
+    <meta name="keywords" content="Rust项目管理Package,Crate和模块Module, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Rust 提供了一套强大的模块系统，帮助开发者管理不断增长的项目。本章介绍如何组织 Rust 代码，使其结构清晰、可维护性强。内容涵盖 包（Packages）、Crates、模块（Modules）、路径（Paths）、use 关键字和文件拆">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>buffer pool 及CRUD动态过程 | 未见初墨</title>
+    <title>Rust项目管理Package,Crate和模块Module | 未见初墨</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -275,12 +275,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">buffer pool 及CRUD动态过程</h1>
+                    <h1 class="description center-align post-title">Rust项目管理Package,Crate和模块Module</h1>
                 </div>
             </div>
         </div>
@@ -404,8 +404,8 @@
                         <div class="post-cate">
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                                <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                             
                         </div>
@@ -417,28 +417,28 @@
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2022-06-29
+                        2025-02-22
                     </div>
                 
 
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2022-06-29
+                        2025-02-22
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.9k
+                        992
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        10 分
+                        4 分
                     </div>
                 
 
@@ -448,136 +448,150 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1-buffer-pool-介绍"><a href="#1-buffer-pool-介绍" class="headerlink" title="1. buffer pool 介绍"></a>1. buffer pool 介绍</h1><p>InnoDB存储引擎使用了 buffer pool 内存缓冲区来提升性能 ，buffer pool 是一块内存区域，是基于内存的一个组件，也是我们必须要搞清楚的核心组件，它里面缓存了磁盘的 数据页 上真实的数据；<br>我们对于 数据库 的增删改查的操作，不会直接跟磁盘打交道，而是在 buffer pool 上进行，然后配合 undo log、redo log、binlog、刷盘机制 等一起来实现了数据写入流程；</p>
-<h4 id="buffer-pool-的读写操作："><a href="#buffer-pool-的读写操作：" class="headerlink" title="buffer pool 的读写操作："></a>buffer pool 的读写操作：</h4><ul>
-<li><strong>读操作</strong>：如果要读的数据页在内存 buffer pool 中时，就直接从内存中读取后返回；不在buffer pool时，就先从磁盘中把数据页读取到buffer pool，再返回；</li>
-<li><strong>写操作</strong>：如果要更新的数据页在 内存buffer pool中时，就直接更新内存；数据不在内存中时，不会直接从磁盘中加载数据页到 buffer pool 中，而是记录到 change buffer 中；</li>
-</ul>
-<h1 id="2-buffer-pool-结构"><a href="#2-buffer-pool-结构" class="headerlink" title="2. buffer pool 结构"></a>2. buffer pool 结构</h1><h2 id="2-1-几个概念"><a href="#2-1-几个概念" class="headerlink" title="2.1 几个概念"></a>2.1 几个概念</h2><ul>
-<li><p><strong>数据页</strong>：</p>
+                <p>Rust 提供了一套强大的模块系统，帮助开发者管理不断增长的项目。本章介绍如何组织 Rust 代码，使其结构清晰、可维护性强。内容涵盖 <strong>包（Packages）、Crates、模块（Modules）、路径（Paths）、use 关键字和文件拆分</strong>。</p>
+<hr>
+<h2 id="1-管理不断增长的-Rust-项目"><a href="#1-管理不断增长的-Rust-项目" class="headerlink" title="1. 管理不断增长的 Rust 项目"></a>1. 管理不断增长的 Rust 项目</h2><p>随着项目的增长，代码库可能变得难以管理。Rust 通过 <strong>包（Packages）、Crates 和模块（Modules）</strong> 提供了一套管理代码的机制，使得代码更加模块化，易于理解和维护。</p>
+<hr>
+<h2 id="2-包（Package）和-Crate"><a href="#2-包（Package）和-Crate" class="headerlink" title="2. 包（Package）和 Crate"></a>2. 包（Package）和 Crate</h2><h3 id="2-1-什么是-Crate？"><a href="#2-1-什么是-Crate？" class="headerlink" title="2.1 什么是 Crate？"></a>2.1 什么是 Crate？</h3><p>Crate 是 Rust 代码的最小编译单元。Rust 编译器 <code>rustc</code> 可以直接编译 <code>.rs</code> 文件生成 Crate。例如：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">rustc main.rs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Crate 有两种类型：</p>
 <ul>
-<li><p>数据库中的核心数据模型一般为：表 + 行 + 字段；也就是说 数据库里面有一个一个的表，表里面有很多行数据，一行数据里面有很多的字段；</p>
-</li>
-<li><p>但是这些数据行，并不是直接一行一行的放在 buffer pool 中的，而是被抽象和组织 成了 数据页 的概念；它是把很多行数据放在一个数据页里，以数据页为单位来存储，磁盘文件中有多个数据页；</p>
-</li>
-<li><p>默认情况下，数据页 的大小是 16KB，其中包含了 很多元数据 和 实际的数据行；</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629172102305.png" alt="image-20220629172102305"></p>
-</li>
+<li><strong>二进制 Crate（Binary Crate）</strong>：可以生成可执行文件（如 <code>main.rs</code>）。</li>
+<li><strong>库 Crate（Library Crate）</strong>：用于共享代码（如 <code>lib.rs</code>）。</li>
 </ul>
-</li>
-<li><p><strong>缓存页</strong>：MySQL 在执行的时候，会把 磁盘 中的数据页加载到内存 buffer pool 中；所以在 buffer pool 中就划分出来了缓存页，缓存页跟数据页一一对应，也是 16KB；</p>
-</li>
-<li><p><strong>缓存页的元数据</strong>：对于每个缓存页，都有一个元数据结构（也就是描述信息）；这个元数据中包含了这个缓存页中：加载的数据页所属的表空间、数据页的编号、缓存页在 buffer pool 中的位移地址、组成各种链表的指针 等；</p>
-</li>
-</ul>
-<h2 id="2-2-初始化-buffer-pool"><a href="#2-2-初始化-buffer-pool" class="headerlink" title="2.2 初始化 buffer pool"></a>2.2 初始化 buffer pool</h2><p>在 MySQL 启动的时候，会按照 buffer pool 的参数（innodb_buffer_pool_size）的大小，申请一块内存区域；<br>申请好之后，会按照 16KB 的缓存页大小 + 800byte 左右的元数据结构大小，在 buffer pool 中划分出一个个的缓存页以及对于的元数据；其中所有元数据在前面一起，缓存页在后面；</p>
-<p>大概结构为：<br><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629173156202.png" alt="image-20220629173156202"></p>
-<p>最初的缓存页都是空的，当MySQL运行起来之后，对数据执行 增删改查，就会执行以下一系列操作：</p>
+<p>示例：创建一个二进制 Crate 并运行：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cargo new my_binary_project --bin
+cd my_binary_project
+cargo run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>示例：创建一个库 Crate：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cargo new my_library_project --lib
+cd my_library_project
+cargo build<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h3 id="2-2-什么是包（Package）？"><a href="#2-2-什么是包（Package）？" class="headerlink" title="2.2 什么是包（Package）？"></a>2.2 什么是包（Package）？</h3><p>包（Package）是一个提供 <strong>Cargo.toml</strong> 文件的 Rust 项目，管理一个或多个 Crate。</p>
 <ul>
-<li>数据页加载到缓存页；</li>
-<li>buffer pool 中被修改过的缓存页（也就是脏页），会被线程定时刷入到磁盘中的数据页（刷脏）；</li>
-<li>当 buffer pool 中缓存页满时，又会进行淘汰一些缓存页，淘汰的时候也要刷脏；</li>
+<li>一个包（Package）<strong>必须</strong> 包含 <strong>一个</strong> <code>Cargo.toml</code>。</li>
+<li>一个包<strong>最多</strong>可以包含 <strong>一个库 Crate</strong>。</li>
+<li>一个包<strong>可以</strong>包含多个二进制 Crate，但<strong>最多只有一个库 Crate</strong>。</li>
 </ul>
-<p>这些操作都是一个动态的过程，随着 MySQL 的运行（也就是SQL语句的执行）来动态演变的；</p>
-<h4 id="下面就来看看这些动态演变的过程："><a href="#下面就来看看这些动态演变的过程：" class="headerlink" title="下面就来看看这些动态演变的过程："></a>下面就来看看这些动态演变的过程：</h4><p>当进行CRUD操作时，需要把数据页加载到缓存页中，此时就需要知道哪些缓存页是空的，</p>
-<p><strong>怎么知道哪些缓存页是空的</strong>？</p>
-<p>MySQL为此设计了一个Free链表，本质是一个双向链表，每个节点都是一个缓存页的元数据</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629190034660.png" alt="image-20220629190034660"></p>
-<p>使用free链表将所有空闲缓存页的元数据连接起来，free_next 和free_pre是元数据的两个属性，使用一个基础节点来连接头尾节点，并记录有多少个空闲节点；</p>
-<p>所以当需要加载一个数据页到Buffer Pool时，（1）首先从free链表中获取一个元数据节点，（2）再找到对应的空闲缓存页，就可以将数据加载到缓存页中了，（3）最后再把元数据从free链表中删除。</p>
-<p><strong>那么在加载数据页时怎么知道缓存页中是否缓存过了呢？</strong></p>
-<p>MySQL为此设计了一个哈希表的数据结构</p>
-<table>
-<thead>
-<tr>
-<th align="center">key</th>
-<th align="center">value</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">表空间编号1+数据页编号1</td>
-<td align="center">缓存页地址1</td>
-</tr>
-<tr>
-<td align="center">表空间编号1+数据页编号2</td>
-<td align="center">缓存页地址2</td>
-</tr>
-<tr>
-<td align="center">…</td>
-<td align="center">…</td>
-</tr>
-</tbody></table>
-<p>当需要使用某个数据页时，就用数据页所属的表空间编号+数据页编号到哈希表中查询，如果能够查到，就使用value对应的缓存页；如果查询不到就将此数据页加载到缓存页中，并更新哈希表。</p>
-<p>缓存页中的数据仅用于查询，操作结束时缓存页与数据页中的数据一致；当进行其它操作时，缓存页与数据页中的数据不一致，这些缓存页我们称之为脏页，而只有脏页才需要写回磁盘中；</p>
-<p><strong>那么如何确定哪些缓存页是脏页呢？</strong></p>
-<p>MySQL为此设计了一个flush链表，本质上也是一个双向链表，每个节点都是一个缓存页的元数据</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629190942529.png" alt="image-20220629190942529"></p>
-<p>同样，flush_next与flush_pre都是元数据中的两个属性；flush链表最初是空的，当缓存页被更新时，就把缓存页对应的元数据加入到flush链表，此时当前缓存页就被标识为脏页；</p>
-<p>随着服务的不断运行，大量的数据页被加载到Buffer pool中，free链表节点越来越少，那么总有一个时候没有空闲缓存页</p>
-<p>（如果一个查询语句要加载的数据页很多，那么淘汰的脏页也就越多（需要先刷脏再加载），会导致查询的响应变慢（MySQL抖动））</p>
-<p><strong>那么这个时候该淘汰哪些缓存页呢？</strong></p>
-<p>MySQL采用LRU算法，并为此设计了一个LRU链表，本质上还是一个双向链表，每个节点都是一个缓存页的元数据</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629193346633.png" alt="image-20220629193346633"></p>
-<p>lru_next与lru_pre都是元数据中的两个属性</p>
-<p>当一个数据页被加载到Buffer Pool时，会将缓存页对应的元数据放到lru链表的头部；当某个缓存页被访问时，也将该缓存页对应的元数据放到lru链表的头部；这样最近频繁使用的缓存页都在链表头部，长时间未使用的缓存页在链表尾部，当需要淘汰一个缓存页时，直接淘汰了尾部节点对应的数据页即可。</p>
-<p><strong>简单LRU链表的隐患</strong></p>
+<p>示例：一个包包含一个库 Crate 和一个二进制 Crate：</p>
+<p><code>Cargo.toml</code></p>
+<pre class="line-numbers language-toml"><code class="language-toml">[package]
+name = "my_package"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "my_library"
+path = "src/lib.rs"
+
+[[bin]]
+name = "my_binary"
+path = "src/main.rs"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="3-定义模块以控制作用域和隐私性"><a href="#3-定义模块以控制作用域和隐私性" class="headerlink" title="3. 定义模块以控制作用域和隐私性"></a>3. 定义模块以控制作用域和隐私性</h2><p>模块（Modules）用于组织代码，并控制作用域和隐私性。</p>
+<h3 id="3-1-定义模块"><a href="#3-1-定义模块" class="headerlink" title="3.1 定义模块"></a>3.1 定义模块</h3><p>使用 <code>mod</code> 关键字定义模块：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">mod</span> my_module <span class="token punctuation">{</span>
+    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello from my_module!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    my_module<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-2-模块的作用域与私有性"><a href="#3-2-模块的作用域与私有性" class="headerlink" title="3.2 模块的作用域与私有性"></a>3.2 模块的作用域与私有性</h3><ul>
+<li><strong>默认情况下，模块中的项是私有的。</strong></li>
+<li>使用 <code>pub</code> 关键字将项设为公有。</li>
+<li><code>pub(crate)</code> 允许在当前 Crate 内部访问。</li>
+<li><code>pub(super)</code> 允许在父模块访问。</li>
+</ul>
+<p>示例：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">mod</span> my_module <span class="token punctuation">{</span>
+    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">public_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"This is a public function."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">fn</span> <span class="token function">private_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"This is a private function."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    my_module<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">public_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ✅ 允许访问</span>
+    <span class="token comment" spellcheck="true">// my_module::private_function(); // ❌ 编译错误</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="4-模块路径（Paths）"><a href="#4-模块路径（Paths）" class="headerlink" title="4. 模块路径（Paths）"></a>4. 模块路径（Paths）</h2><p>在 Rust 中，路径用于访问模块内部的项。路径有两种：</p>
 <ul>
-<li><p>MySQL预读机制（减少磁盘IO）</p>
+<li><strong>绝对路径</strong>：从 Crate 根开始。</li>
+<li><strong>相对路径</strong>：从当前模块开始。</li>
+</ul>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">mod</span> my_module <span class="token punctuation">{</span>
+    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello from my_module!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    my_module<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 绝对路径</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="5-使用-use-关键字引入路径"><a href="#5-使用-use-关键字引入路径" class="headerlink" title="5. 使用 use 关键字引入路径"></a>5. 使用 <code>use</code> 关键字引入路径</h2><p><code>use</code> 关键字用于将模块的路径引入作用域，以减少重复书写。</p>
+<p>示例：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">mod</span> my_module <span class="token punctuation">{</span>
+    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">use</span> my_module<span class="token punctuation">:</span><span class="token punctuation">:</span>hello<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 直接调用，不需要写 `my_module::hello()`</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>通配符引入：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>collections<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">*</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 引入 collections 模块中的所有项</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="6-将模块拆分为不同的文件"><a href="#6-将模块拆分为不同的文件" class="headerlink" title="6. 将模块拆分为不同的文件"></a>6. 将模块拆分为不同的文件</h2><p>Rust 允许将模块拆分为多个文件，提高代码的可维护性。</p>
+<p>示例：</p>
 <ul>
-<li>线性预读：当顺序的访问了一个区（extent）中的56个数据页（innodb_read_ahead_threshold）时，会把相邻的区中的所有数据页都加载到Buffer Pool中；</li>
-<li>随机预读：当Buffer Pool中缓存了一个区中13个连续的数据页时，就会把这个区中剩下的数据页加载到Buffer Pool中。</li>
-</ul>
+<li><p><code>src/main.rs</code>：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">mod</span> my_module<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    my_module<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>对于一个大表的全表扫描会把所有的数据页都加载到Buffer Pool中</p>
-</li>
-</ul>
-<p>这两种情况都会导致大量的数据页被加载到Buffer Pool中，并且会放到lru链表的头部，这些数据可能被访问一次之后再也不被访问了；</p>
-<p>而以前的热点数据被挤到lru链表的尾部，可能会被直接淘汰，后续被访问时又需要将这部分数据从磁盘加载进来，减少了效率，并且双向链表的频繁移动也会造成不必要的资源浪费。</p>
-<p>因此MySQL没有采用简单的LRU算法实现LRU链表，而是采用冷热数据分离的方式。LRU链表会被分为两个部分，热数据部分（young区域）和冷数据部分（old区域）。每个部分所占的比例可以通过innodb_old_blocks_pct参数来指定，默认为37，意思是冷数据占比3:7</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629200713945.png" alt="image-20220629200713945"></p>
-<p><strong>基于冷热数据区分离的LRU链表</strong></p>
-<p><strong>工作原理</strong>：</p>
-<ul>
-<li>数据页第一次被加载到Buffer Pool中时，对应的元数据放置在冷数据区的头部，</li>
-<li>过了1s之后（innodb_old_blocks_time，默认为1000ms），这个缓存页再次被访问了，才会被移动到LRU链表的头部，（降低调整LRU链表的频率，从而提升性能）。</li>
-<li>这样一来，冷数据区保存的都是一些被预读、全表扫描进来的只需访问一次的数据，而热数据区保存的都是一些被频繁访问的数据，此时淘汰的都是冷数据区尾部的数据，不会对热点数据的访问造成影响。</li>
-</ul>
-<p><strong>进一步优化</strong></p>
-<p>对于热数据区，如果缓存页一被访问就马上移动到头部，也会降低MySQL的性能（热点数据都是被频繁访问的，频繁移动元数据节点 也会消耗大量资源）</p>
-<p>MySQL对此的优化方案：只有当热数据区后3/4的数据被访问了，才会移动到头节点，前1/4的缓存页被访问则不移动，这样减少了链表节点的移动。</p>
-<p><strong>Redis中的LRU淘汰</strong></p>
-<p>Redis也存在单次扫描或查询操作加载过多的数据，从而造成缓存污染，对于这种情况，Redis采用的是LFU算法（基于访问频次淘汰，而不是基于最近访问时间）</p>
-<p><strong>刷脏机制</strong></p>
-<ul>
-<li>MySQL后台存在一个io线程，会定时将LRU链表冷数据区尾部的几个元数据节点对应的缓存页刷回磁盘，并清空缓存页放入free链表，并不会等到没有空闲缓存页之后再去刷盘</li>
-<li>后台io线程在MySQL不繁忙时，将flush链表中的缓存刷入磁盘，并放入free链表</li>
-</ul>
-<p><strong>CRUD执行的动态过程</strong></p>
-<p>随着CRUD操作的不断进行，free链表节点不断消耗，LRU链表不断地增加和移动，flush链表也不断地增加，同时后台io线程不断地是刷盘，使得LRU链表与flush链表中的节点不断地减少，归还到free链表中。</p>
-<p><strong>多个Buffer Pool优化并发能力</strong></p>
-<ul>
-<li><p>当多个线程同时访问Buffer Pool时，都需要去访问缓存页、元数据、各种链表等共享的数据结构；由于线程安全问题，所以必然要加锁来保证数据的安全性，性能也会随之下降；</p>
-</li>
-<li><p>MySQL提供了多个Buffer Pool的设计来应对高并发访问：</p>
-<ul>
-<li><p>1.Buffer Pool Size小于1GB时，最多分配一个Buffer Pool；</p>
-</li>
-<li><p>2.如果并发很高则需部署在大内存的服务器上，并给Buffer Pool分配较大的内存，同时指定Buffer Pool的个数，例如个Buffer Pool分配8GB的内存，设置4个Buffer Pool，那么每个Buffer Pool Size为2GB</p>
-<p>innodb_buffer_pool_size（默认为128m）=8589934952  innodb_buffer_pool_instances=4</p>
+<li><p><code>src/my_module.rs</code>：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello from my_module!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-</li>
+<p>这样 <code>my_module.rs</code> 作为 <code>mod my_module;</code> 被包含进 <code>main.rs</code>。</p>
+<hr>
+<h2 id="7-综合示例：带子模块的-Rust-项目"><a href="#7-综合示例：带子模块的-Rust-项目" class="headerlink" title="7. 综合示例：带子模块的 Rust 项目"></a>7. 综合示例：带子模块的 Rust 项目</h2><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">mod</span> parent <span class="token punctuation">{</span>
+    <span class="token keyword">pub</span> <span class="token keyword">mod</span> child <span class="token punctuation">{</span>
+        <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">say_hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello from child module!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    parent<span class="token punctuation">:</span><span class="token punctuation">:</span>child<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">say_hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>Crate</strong> 是 Rust 代码的最小单元，可以是二进制 Crate 或库 Crate。</li>
+<li><strong>Package</strong> 是由 Cargo 管理的一个或多个 Crate。</li>
+<li><strong>Modules</strong> 用于组织代码，提高可读性，并控制访问权限。</li>
+<li><strong>Paths</strong> 用于在模块树中引用项，可以是绝对路径或相对路径。</li>
+<li><strong>use 关键字</strong> 允许更方便地引入模块。</li>
+<li><strong>模块可以拆分到不同文件</strong>，让代码更整洁，符合 Rust 代码组织的最佳实践。</li>
 </ul>
-<p><strong>Buffer Pool基于chunk机制来支持运行期间动态调整大小</strong></p>
-<ul>
-<li><p>Buffer Pool是由多个chunk组成的，chunk由innodb_buffer_pool_chunk_size控制，默认为128m，例如上面2GB大小的Buffer Pool是由16个128m的chunk组成</p>
-</li>
-<li><p>每个chunk都包含了各自的缓存页和元数据，但是它们<strong>共享一套free链表、flush链表、LRU链表</strong></p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629205555393.png" alt="image-20220629205555393"></p>
-</li>
-<li><p>当要调整Buffer Pool大小时，例如将2GB的Buffer Pool调整为4GB，只需申请一系列的chunk分配给Buffer Pool即可</p>
-</li>
-</ul>
+<p>Rust 的模块系统提供了强大的代码组织能力，使得 Rust 适用于大型项目开发，同时保证代码的安全性和可维护性。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -649,43 +663,43 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-            <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
                 <div class="article-badge left-badge text-color">
-                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+                </div>
                 <div class="card">
-                    <a href="/2022/07/04/InnoDB%E5%BC%95%E6%93%8E%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
+                    <a href="/2025/02/22/Rust%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86Package,Crate%E5%92%8C%E6%A8%A1%E5%9D%97Module/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="InnoDB引擎的架构设计">
+                                <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Rust项目管理Package,Crate和模块Module">
                             
-                            <span class="card-title">InnoDB引擎的架构设计</span>
+                            <span class="card-title">Rust项目管理Package,Crate和模块Module</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                以⼀个Update语句，了解InnoDB引擎的架构设计1.buffer pool读写操作InnoDB存储引擎使⽤了buffer pool内存缓冲区来提升性能；
-
-读操作：如果要读的数据⻚在内存buffer pool中时，就直接从内存中读取后
+                                Rust 提供了一套强大的模块系统，帮助开发者管理不断增长的项目。本章介绍如何组织 Rust 代码，使其结构清晰、可维护性强。内容涵盖 包（Packages）、Crates、模块（Modules）、路径（Paths）、use 关键字和文件拆
                             
                         </div>
                         <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
+                            </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
                             </span>
                         </div>
                     </div>
+
                     
                 </div>
             </div>
@@ -696,35 +710,33 @@
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2022/06/29/Java%20%E5%BA%94%E7%94%A8%E4%B8%8E%20MySQL%20%E7%9A%84%E4%BA%A4%E4%BA%92/">
+                    <a href="/2025/02/21/Rust%E4%B8%AD%E7%9A%84%E6%9E%9A%E4%B8%BE(Eunm)/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Java 应用与 MySQL 的交互">
+                                <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Rust 中的枚举(Enum)">
                             
-                            <span class="card-title">Java 应用与 MySQL 的交互</span>
+                            <span class="card-title">Rust 中的枚举(Enum)</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1. MySQL驱动 数据库连接池作为一个 Java工程师，不知道你有没有关注过一个问题，Java程序是如何与MySQL数据库进行交互的？
+                                枚举是 Rust 中非常强大的功能，它允许我们将多个可能的值组合在一起，并且可以关联数据，甚至可以定义具有多种变体的枚举类型。以下是本节内容的详细总结：
 
-MySQL驱动
-
-应该大部分人都知道，我们首先需要配置一个 MySQL驱动，那MySQL驱动到底是
+1. 什么是枚举（Enum）？枚举（enum）允许我们定义一个数据类型，它可以是一组
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-06-29
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
