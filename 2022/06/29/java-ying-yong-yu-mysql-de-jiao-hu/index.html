@@ -98,15 +98,6 @@ MySQL驱动
         </a>
     </li>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -165,19 +156,6 @@ MySQL驱动
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -250,17 +228,6 @@ MySQL驱动
                             <i class="fa fa-fw fa-user-circle-o"></i>
                         
                         关于
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
                     </a>
                 
             </li>
@@ -399,7 +366,7 @@ MySQL驱动
                 <div class="col s7">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            <span class="chip bg-color">Awsome</span>
                         </div>
                     
                 </div>
@@ -419,39 +386,37 @@ MySQL驱动
 
             <div class="post-info">
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>
-                        发布日期: 2022-06-29
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2022-06-29
                     </div>
                 
 
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>
-                        更新日期: 2022-06-29
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2022-06-29
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-file-word-o fa-fw"></i>
-                        文章字数: 1.9k
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.9k
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-clock-o fa-fw"></i>
-                        阅读时长: 7 分
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        7 分
                     </div>
                 
 
                 
             </div>
         </div>
-        
         <hr class="clearfix">
-        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="1-MySQL驱动-数据库连接池"><a href="#1-MySQL驱动-数据库连接池" class="headerlink" title="1. MySQL驱动 数据库连接池"></a>1. MySQL驱动 数据库连接池</h1><p>作为一个 Java工程师，不知道你有没有关注过一个问题，Java程序是如何与MySQL数据库进行交互的？</p>
@@ -480,7 +445,7 @@ MySQL驱动
 </ul>
 <p>一般来说，我们的系统是部署在Tomcat中的，或者现在的springboot内置的 Tomcat，一个Tomcat服务器中是有多个线程的（Tomcat8默认为200个线程），也就是说这些线程是可以同时接收多个请求，然后并发的处理的；</p>
 <p>那把这些过程串联起来就是：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170146290.png" alt="image-20220629170146290"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170146290.png" alt="image-20220629170146290"></p>
 <ol>
 <li>部署在 Tomcat 中的Java应用，会通过数据库连接池创建一定数量的数据库连接；</li>
 <li>Tomcat 中也会有多个线程，可以同时接收用户的请求；</li>
@@ -491,7 +456,7 @@ MySQL驱动
 <p>执行之后，MySQL的连接管理器就会去验证你的账户密码和权限等；如果验证通过，就可以通过命令行来执行MySQL命令了；<br>这个客户端的连接，MySQL服务端会维护一定的时间长度（默认是8小时），也就是说如果你8小时客户端没有操作，连接管理器会自动将这个连接给断开（不然也是白白浪费资源维护这个连接，也就是要维护执行过程中使用到内存之类的资源）；</p>
 <p>当MySQL服务端接收到一个 SQL请求之后，也就是说从一个网络连接中接收到网络请求；那这个时候肯定就需要有一个线程来从网络连接中读取和解析请求；<br>也就是得到一个 SQL语句，转交给SQL接口去执行，完成底层数据的增删改查；</p>
 <p>为了执行SQL语句，MySQL的 Server层，设计了如下的 组件：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170240075.png" alt="image-20220629170240075"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170240075.png" alt="image-20220629170240075"></p>
 <p>以这条 SQL 语句为例，解释一下：</p>
 <pre><code>select id, name, age from user where id = 1;</code></pre><ul>
 <li><h4 id="解析器：对-SQL-语句做解析，也就是要让MySQL知道你这条-SQL语句，是要做什么；"><a href="#解析器：对-SQL-语句做解析，也就是要让MySQL知道你这条-SQL语句，是要做什么；" class="headerlink" title="解析器：对 SQL 语句做解析，也就是要让MySQL知道你这条 SQL语句，是要做什么；"></a>解析器：对 SQL 语句做解析，也就是要让MySQL知道你这条 SQL语句，是要做什么；</h4><ul>
@@ -552,15 +517,16 @@ MySQL驱动
 
 
 
-            <div class="tag_share">
-                <div class="post-meta__tag-list">
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                           
                         </div>
                     
                 </div>
-                <div class="post_share">
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -575,17 +541,21 @@ MySQL驱动
 
                 </div>
             </div>
-
             
         </div>
     </div>
 
-    <!-- 懒加载评论 -->
-    <button id="load-comments">加载评论</button>
-    <div id="comments-section" style="display:none;">
-        
-        
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -677,18 +647,32 @@ MySQL驱动
 </article>
 </div>
 
-<!-- 文章复制版权信息 -->
 
 
-<!-- 代码块优化 -->
-<script defer src="/"></script>
 
-<!-- 代码折行 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-    <style>
-        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
     </style>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -957,10 +941,5 @@ MySQL驱动
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

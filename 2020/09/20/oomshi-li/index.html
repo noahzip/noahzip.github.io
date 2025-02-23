@@ -103,15 +103,6 @@ sout(m)
         </a>
     </li>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -170,19 +161,6 @@ sout(m)
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -255,17 +233,6 @@ sout(m)
                             <i class="fa fa-fw fa-user-circle-o"></i>
                         
                         关于
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
                     </a>
                 
             </li>
@@ -404,7 +371,7 @@ sout(m)
                 <div class="col s7">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            <span class="chip bg-color">Awsome</span>
                         </div>
                     
                 </div>
@@ -424,39 +391,37 @@ sout(m)
 
             <div class="post-info">
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>
-                        发布日期: 2020-09-20
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-09-20
                     </div>
                 
 
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>
-                        更新日期: 2020-09-20
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-09-20
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-file-word-o fa-fw"></i>
-                        文章字数: 1.9k
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.9k
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-clock-o fa-fw"></i>
-                        阅读时长: 7 分
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        7 分
                     </div>
                 
 
                 
             </div>
         </div>
-        
         <hr class="clearfix">
-        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h4 id="java引用-："><a href="#java引用-：" class="headerlink" title="java引用 ："></a>java引用 ：</h4><ul>
@@ -512,7 +477,7 @@ t<span class="token punctuation">.</span><span class="token function">remove</sp
 </ol>
 <h5 id="CAS："><a href="#CAS：" class="headerlink" title="CAS："></a>CAS：</h5><p><strong>操作流程</strong>：</p>
 <p>拿到旧值old1–执行计算v = old1+1–再次读取old2–进行比较old1==old2，相等就写回，不相等就再次读取一直重试</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/09/10/jPiG21S8cRTpfaE.png" alt="W_U9_Y__ND__QJ8_446~4YG.png"></p>
+<p><img src="https://i.loli.net/2020/09/10/jPiG21S8cRTpfaE.png" alt="W_U9_Y__ND__QJ8_446~4YG.png"></p>
 <p><strong>ABA问题：</strong></p>
 <p>​     读取的旧值为0，操作完成后再次读取还是为0，但是执行了0-8-0这个过程</p>
 <p>​     解决方法 加上版本号，每次执行时版本号增加，写回时读取并比较版本号</p>
@@ -545,7 +510,7 @@ this.compareAndSwapInt(var1,var2,var5,var5+var4);</code></pre><p><strong>Synchro
 <p><strong>寄存器的层次结构</strong>：</p>
 <p>cache line一次加载64个字节</p>
 <p>pc寄存器的指令计算需要x的值 首先会按序加载L1–&gt;L2–&gt;L3–&gt;内存 寄存器将x交给ALU计算 然后写回 pc寄存器读取下一个指令<br>内核2需要y的值直接从L3中读取</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/09/10/QheuWkdCc3yMz6O.png" alt="V_BMVR@QU_AOB_SL@UURIMX.png"></p>
+<p><img src="https://i.loli.net/2020/09/10/QheuWkdCc3yMz6O.png" alt="V_BMVR@QU_AOB_SL@UURIMX.png"></p>
 <p>缓存行对齐：</p>
 <p>​    xy处于同一行 当并发修改时，内核c1修改完x会通知内核c2，c2去内存中再次读取修改y，再通知c1这个过程很耗时</p>
 <p>   假设xy都为long（占用8个字节）类型，在x的前面填充7个long类型对象，在其后添加8个long对象，再执行操作，由于xy不处于同一缓存行，省去通知、读取的时间</p>
@@ -571,10 +536,10 @@ this.compareAndSwapInt(var1,var2,var5,var5+var4);</code></pre><p><strong>Synchro
 </ol>
 <h5 id="单例模式为什么需要dlc操作："><a href="#单例模式为什么需要dlc操作：" class="headerlink" title="单例模式为什么需要dlc操作："></a>单例模式为什么需要dlc操作：</h5><p>如果不用volatile修饰可能发生指令重排序，<strong>invokespecial</strong>在<strong>astore_1</strong>之后执行，INSTACE拿到的时一个半初始化状态的对象</p>
 <p>细化锁的力度将锁加载在方法内部时，当线程T1执行到第17行时被暂停，T2执行创建、返回对象，T1再次执行创建、返回对象</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/09/10/F9pB75xCHKscm38.png" alt="Q_S`@`U82B8_G8_Z_KCM_ID.png"></p>
+<p><img src="https://i.loli.net/2020/09/10/F9pB75xCHKscm38.png" alt="Q_S`@`U82B8_G8_Z_KCM_ID.png"></p>
 <p><strong>解决方法：dcl(double check lock):</strong></p>
 <p>加锁前检查一次（减少并发下的竞争），加锁后再检查一次</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/09/10/OT9kEtDHJNG2XfB.png" alt="M2_KX7_BNP3IISU1S_~F_CF.png"></p>
+<p><img src="https://i.loli.net/2020/09/10/OT9kEtDHJNG2XfB.png" alt="M2_KX7_BNP3IISU1S_~F_CF.png"></p>
 <h5 id="内存屏障："><a href="#内存屏障：" class="headerlink" title="内存屏障："></a>内存屏障：</h5><p><strong>JVM层面</strong>：（happens-before原则）</p>
 <ul>
 <li>写操作 在前面添加StoreStore 在后面添加StoreLoad</li>
@@ -602,7 +567,7 @@ this.compareAndSwapInt(var1,var2,var5,var5+var4);</code></pre><p><strong>Synchro
 </ul>
 <h5 id="垃圾回收器："><a href="#垃圾回收器：" class="headerlink" title="垃圾回收器："></a>垃圾回收器：</h5><p>分代：将内存分为两大块</p>
 <p>分区：将内存分为一片一片</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://s1.ax1x.com/2020/09/11/wYghWR.png" alt="wYghWR.png"></p>
+<p><img src="https://s1.ax1x.com/2020/09/11/wYghWR.png" alt="wYghWR.png"></p>
 <h5 id="堆内存的逻辑分区："><a href="#堆内存的逻辑分区：" class="headerlink" title="堆内存的逻辑分区："></a>堆内存的逻辑分区：</h5><p>![LB0I_1AC2`VEA_M0_3_DA50.png](<a href="https://i.loli.net/2020/09/11/NxmGJP8M43v5Tph.png">https://i.loli.net/2020/09/11/NxmGJP8M43v5Tph.png</a>)</p>
 <h5 id="对象的生命周期："><a href="#对象的生命周期：" class="headerlink" title="对象的生命周期："></a>对象的生命周期：</h5><p>new对象 </p>
 <ul>
@@ -656,15 +621,16 @@ this.compareAndSwapInt(var1,var2,var5,var5+var4);</code></pre><p><strong>Synchro
 
 
 
-            <div class="tag_share">
-                <div class="post-meta__tag-list">
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                           
                         </div>
                     
                 </div>
-                <div class="post_share">
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -679,17 +645,21 @@ this.compareAndSwapInt(var1,var2,var5,var5+var4);</code></pre><p><strong>Synchro
 
                 </div>
             </div>
-
             
         </div>
     </div>
 
-    <!-- 懒加载评论 -->
-    <button id="load-comments">加载评论</button>
-    <div id="comments-section" style="display:none;">
-        
-        
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -796,18 +766,32 @@ Java** 语言有哪些特点：
 </article>
 </div>
 
-<!-- 文章复制版权信息 -->
 
 
-<!-- 代码块优化 -->
-<script defer src="/"></script>
 
-<!-- 代码折行 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-    <style>
-        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
     </style>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1076,10 +1060,5 @@ Java** 语言有哪些特点：
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

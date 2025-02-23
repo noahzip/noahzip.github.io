@@ -98,15 +98,6 @@
         </a>
     </li>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -165,19 +156,6 @@
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -250,17 +228,6 @@
                             <i class="fa fa-fw fa-user-circle-o"></i>
                         
                         关于
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
                     </a>
                 
             </li>
@@ -399,7 +366,7 @@
                 <div class="col s7">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            <span class="chip bg-color">Awsome</span>
                         </div>
                     
                 </div>
@@ -419,47 +386,45 @@
 
             <div class="post-info">
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>
-                        发布日期: 2022-07-28
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2022-07-28
                     </div>
                 
 
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>
-                        更新日期: 2022-07-28
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2022-07-28
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-file-word-o fa-fw"></i>
-                        文章字数: 7.3k
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        7.3k
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-clock-o fa-fw"></i>
-                        阅读时长: 26 分
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        26 分
                     </div>
                 
 
                 
             </div>
         </div>
-        
         <hr class="clearfix">
-        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="MySQL的锁"><a href="#MySQL的锁" class="headerlink" title="MySQL的锁"></a>MySQL的锁</h1><h2 id="1-MySQL-锁结构"><a href="#1-MySQL-锁结构" class="headerlink" title="1. MySQL 锁结构"></a><strong>1</strong>. MySQL 锁结构</h2><p>我们前⾯讨论了对于当前读是需要通过加锁来实现的，那这个加锁，到底是加的⼀个什么锁呢？或者说这个锁的结构是什么样的</p>
 <p>⾸先对于这样⼀条记录：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804091159231.png" alt="record"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804091159231.png" alt="record"></p>
 <p>最开始它是没有锁的； </p>
 <p>当⼀个事务想要对这条记录做编辑时，就得对这条记录进⾏加锁，这个加锁是通过⼀个与这条记录相关联的锁结构来实现的； </p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804091251680.png" alt="锁结构"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804091251680.png" alt="锁结构"></p>
 <p>这个锁结构中内容很多，这⾥就只简略的提供了<strong>两个属性：</strong></p>
 <ul>
 <li><strong>trx信息</strong>：这个锁结构是哪个事务⽣成的，即是哪个事务加的这把锁；</li>
@@ -483,7 +448,7 @@
 </ul>
 </li>
 <li><p>到此时的图示⼤概为这个样⼦：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804091736449.png" alt="加锁流程1"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804091736449.png" alt="加锁流程1"></p>
 </li>
 <li><p>当T1事务提交之后，就会把它⽣成的锁结构给释放掉；然后看看还有没有其他事务在等待获取锁；</p>
 <ul>
@@ -493,7 +458,7 @@
 </ul>
 </li>
 <li><p>此时的图示为：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804092042639.png" alt="加锁流程2"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804092042639.png" alt="加锁流程2"></p>
 </li>
 </ul>
 <p><strong>总结⼀下：</strong></p>
@@ -523,7 +488,7 @@ SELECT * FROM t LOCK IN SHARE MODE;<span aria-hidden="true" class="line-numbers-
 <li>等待状态是⼀样的；</li>
 </ul>
 <p>示例图：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804092457669.png" alt="InnoDB事务锁表结构"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804092457669.png" alt="InnoDB事务锁表结构"></p>
 <ul>
 <li><p><strong>锁所在的事务信息</strong>：⼀个指针，指向了⽣成这个锁结构的事务；（可通过这个指针找到事务的全部信息）</p>
 </li>
@@ -540,7 +505,7 @@ SELECT * FROM t LOCK IN SHARE MODE;<span aria-hidden="true" class="line-numbers-
 </li>
 <li><p><strong>type_mode</strong>：⼀个32位的数，被分成了lock_mode、lock_type、rec_lock_type:</p>
 <ul>
-<li><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804092801655.png" alt="type_mode"></li>
+<li><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804092801655.png" alt="type_mode"></li>
 <li><strong>lock_mode</strong>：占低4位，可选值也就是锁的类型：<ul>
 <li>LOCK_IS（⼗进制的0）：表示共享意向锁，也就是IS锁； </li>
 <li>LOCK_IX（⼗进制的1）：表示独占意向锁，也就是IX锁； </li>
@@ -573,10 +538,10 @@ SELECT * FROM t LOCK IN SHARE MODE;<span aria-hidden="true" class="line-numbers-
 <li><p><strong>其他信息</strong>：⼀般就是为锁结构设计的⼀些哈希表和链表；</p>
 </li>
 <li><p><strong>⼀堆⽐特位</strong>：如果是⾏锁结构的话，在该结构末尾还放置了⼀堆⽐特位，⽐特位的数量是由上⾯提到的n_bits属性表示的；</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804093410215.png" alt="比特位和heap_no的映射"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804093410215.png" alt="比特位和heap_no的映射"></p>
 </li>
 <li><p>前⾯在讲数据⻚的物理结构时讲过⼀个heap_no的概念：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804093629249.png" alt="heap_no"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804093629249.png" alt="heap_no"></p>
 <ul>
 <li>所以这⾥的⼀堆bit位和数据⻚中的⾏记录的映射关系就是通过heap_no来映射的</li>
 </ul>
@@ -789,7 +754,7 @@ PRIMARY KEY (id) ) Engine=InnoDB CHARSET=utf8;<span aria-hidden="true" class="li
 </li>
 </ul>
 <p>这⾥可能⼤家会有点奇怪，为什么MySQL的默认值采⽤的是1⽽不是2呢？明显2⾥⾯所有的⾃增锁申请到之后就⻢上释放，对于插⼊性能来讲更好；</p>
-<pre><code>来看⼀下这个场景：</code></pre><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804102816988.png" alt="innodb_autoinc_lock_mode场景"></p>
+<pre><code>来看⼀下这个场景：</code></pre><p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804102816988.png" alt="innodb_autoinc_lock_mode场景"></p>
 <p>t表和t2表完全⼀样，都是⼀个⾃增的主键id和另外两个字段；</p>
 <ul>
 <li>sessionA先往t表中插⼊了4⾏数据；</li>
@@ -819,7 +784,7 @@ PRIMARY KEY (id) ) Engine=InnoDB CHARSET=utf8;<span aria-hidden="true" class="li
 <p>（⽽出现这个问题的原因是：对于 sessionB 的 insert … select 语句，⽣成了 不连续的 id；当⽤statement格式的binlog来串⾏执⾏时，是没法做到顺序相同的） </p>
 <p>上⾯是 假设使⽤的innodb_autoinc_lock_mode=2 ，那么按照 MySQL原本默认值innodb_autoinc_lock_mode=1 来看看是什么样； </p>
 <p>当值为1时，对于insert … select这样批量插⼊的语句，⾃增锁会等到语句结束之后才被释放； </p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804102816988.png" alt="innodb_autoinc_lock_mode场景"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804102816988.png" alt="innodb_autoinc_lock_mode场景"></p>
 <ul>
 <li>假设sessionB先执⾏，它去申请⾃增锁，申请到之后必须等到insert语句执⾏结束才会释放，则此时：<ul>
 <li>sessionB执⾏完成，数据为：(1,1,1)、(2,2,2)、(3,3,3)、(4,4,4)；</li>
@@ -893,7 +858,7 @@ PRIMARY KEY (id) ) Engine=InnoDB CHARSET=utf8;<span aria-hidden="true" class="li
 </li>
 </ul>
 <p>这⾥来看⼀个示例：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804104418129.png" alt="MDL示例"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804104418129.png" alt="MDL示例"></p>
 <ul>
 <li><p>sessionA先启动⼀个事务，执⾏的是select操作，因此会对表t加⼀个MDL读锁，并且未提交事务；</p>
 </li>
@@ -981,7 +946,7 @@ PRIMARY KEY (id) ) Engine=InnoDB CHARSET=utf8;<span aria-hidden="true" class="li
 </li>
 </ul>
 <p>我们这⾥看⼀下关于<strong>MySQL的⾏锁产⽣死锁的示例</strong>：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804111627194.png" alt="MySQL的⾏锁产⽣死锁的示例"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220804111627194.png" alt="MySQL的⾏锁产⽣死锁的示例"></p>
 <ul>
 <li>事务A启动⼀个事务，执⾏update操作，whereid=1因此会对id=1这⾏数据加锁；</li>
 <li>事务B启动⼀个事务，执⾏update操作，whereid=2因此会对id=2这⾏数据加锁；</li>
@@ -1045,15 +1010,16 @@ PRIMARY KEY (id) ) Engine=InnoDB CHARSET=utf8;<span aria-hidden="true" class="li
 
 
 
-            <div class="tag_share">
-                <div class="post-meta__tag-list">
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                           
                         </div>
                     
                 </div>
-                <div class="post_share">
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -1068,17 +1034,21 @@ PRIMARY KEY (id) ) Engine=InnoDB CHARSET=utf8;<span aria-hidden="true" class="li
 
                 </div>
             </div>
-
             
         </div>
     </div>
 
-    <!-- 懒加载评论 -->
-    <button id="load-comments">加载评论</button>
-    <div id="comments-section" style="display:none;">
-        
-        
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -1176,18 +1146,32 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 </article>
 </div>
 
-<!-- 文章复制版权信息 -->
 
 
-<!-- 代码块优化 -->
-<script defer src="/"></script>
 
-<!-- 代码折行 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-    <style>
-        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
     </style>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1456,10 +1440,5 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

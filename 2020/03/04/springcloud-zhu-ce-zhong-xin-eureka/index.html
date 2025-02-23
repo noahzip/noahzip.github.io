@@ -96,15 +96,6 @@
         </a>
     </li>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -163,19 +154,6 @@
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -248,17 +226,6 @@
                             <i class="fa fa-fw fa-user-circle-o"></i>
                         
                         关于
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
                     </a>
                 
             </li>
@@ -397,7 +364,7 @@
                 <div class="col s7">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            <span class="chip bg-color">Awsome</span>
                         </div>
                     
                 </div>
@@ -417,39 +384,37 @@
 
             <div class="post-info">
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>
-                        发布日期: 2020-03-04
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-03-04
                     </div>
                 
 
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>
-                        更新日期: 2020-03-04
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-03-04
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-file-word-o fa-fw"></i>
-                        文章字数: 582
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        582
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-clock-o fa-fw"></i>
-                        阅读时长: 2 分
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        2 分
                     </div>
                 
 
                 
             </div>
         </div>
-        
         <hr class="clearfix">
-        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h2><h4 id="1-服务中心注册"><a href="#1-服务中心注册" class="headerlink" title="1. 服务中心注册"></a>1. 服务中心注册</h4><h5 id="1-1-服务端导入依赖"><a href="#1-1-服务端导入依赖" class="headerlink" title="1.1 服务端导入依赖"></a>1.1 服务端导入依赖</h5><pre><code>&lt;!-- 注册服务 --&gt;
@@ -553,15 +518,16 @@ public class EurekaServerApplication {
 
 
 
-            <div class="tag_share">
-                <div class="post-meta__tag-list">
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                           
                         </div>
                     
                 </div>
-                <div class="post_share">
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -576,17 +542,21 @@ public class EurekaServerApplication {
 
                 </div>
             </div>
-
             
         </div>
     </div>
 
-    <!-- 懒加载评论 -->
-    <button id="load-comments">加载评论</button>
-    <div id="comments-section" style="display:none;">
-        
-        
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -682,18 +652,32 @@ Access to XMLHttpRequest at 'http://localhost:9001/eduvideo/uploadAliyunVideo' f
 </article>
 </div>
 
-<!-- 文章复制版权信息 -->
 
 
-<!-- 代码块优化 -->
-<script defer src="/"></script>
 
-<!-- 代码折行 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-    <style>
-        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
     </style>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -962,10 +946,5 @@ Access to XMLHttpRequest at 'http://localhost:9001/eduvideo/uploadAliyunVideo' f
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

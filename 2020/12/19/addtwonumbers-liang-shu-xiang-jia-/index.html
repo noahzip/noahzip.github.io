@@ -95,15 +95,6 @@ You are given two non-empty linked lists representing two non-negative integers.
         </a>
     </li>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -162,19 +153,6 @@ You are given two non-empty linked lists representing two non-negative integers.
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -247,17 +225,6 @@ You are given two non-empty linked lists representing two non-negative integers.
                             <i class="fa fa-fw fa-user-circle-o"></i>
                         
                         关于
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
                     </a>
                 
             </li>
@@ -396,7 +363,7 @@ You are given two non-empty linked lists representing two non-negative integers.
                 <div class="col s7">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            <span class="chip bg-color">Awsome</span>
                         </div>
                     
                 </div>
@@ -416,39 +383,37 @@ You are given two non-empty linked lists representing two non-negative integers.
 
             <div class="post-info">
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>
-                        发布日期: 2020-12-19
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-12-19
                     </div>
                 
 
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>
-                        更新日期: 2020-12-19
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-12-19
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-file-word-o fa-fw"></i>
-                        文章字数: 545
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        545
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-clock-o fa-fw"></i>
-                        阅读时长: 2 分
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        2 分
                     </div>
                 
 
                 
             </div>
         </div>
-        
         <hr class="clearfix">
-        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>N2AddTwoNumbers（两数相加）</p>
@@ -463,7 +428,7 @@ Explanation: 342 + 465 = 807.
 链接：https://leetcode-cn.com/problems/add-two-numbers</code></pre><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><ul>
 <li>将两个链表看成是相同长度的进行遍历，如果一个链表较短则在后面面补 0，比如 999 + 99 = 999 + 990 = 8901<br>每一位计算的同时需要考虑上一位的进位问题，而当前位计算结束后同样需要更新进位值<br>小技巧：对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。</li>
 </ul>
-<p>  <img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/12/18/HndhBC7DaGxsAWI.png" alt="1.png"></p>
+<p>  <img src="https://i.loli.net/2020/12/18/HndhBC7DaGxsAWI.png" alt="1.png"></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> ListNode <span class="token function">addTwoNumbers</span><span class="token punctuation">(</span>ListNode l1<span class="token punctuation">,</span> ListNode l2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
        <span class="token comment" spellcheck="true">//用于标识头部的指针</span>
@@ -530,15 +495,16 @@ Explanation: 342 + 465 = 807.
 
 
 
-            <div class="tag_share">
-                <div class="post-meta__tag-list">
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                           
                         </div>
                     
                 </div>
-                <div class="post_share">
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -553,17 +519,21 @@ Explanation: 342 + 465 = 807.
 
                 </div>
             </div>
-
             
         </div>
     </div>
 
-    <!-- 懒加载评论 -->
-    <button id="load-comments">加载评论</button>
-    <div id="comments-section" style="display:none;">
-        
-        
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -655,18 +625,32 @@ Explanation: 342 + 465 = 807.
 </article>
 </div>
 
-<!-- 文章复制版权信息 -->
 
 
-<!-- 代码块优化 -->
-<script defer src="/"></script>
 
-<!-- 代码折行 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-    <style>
-        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
     </style>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -935,10 +919,5 @@ Explanation: 342 + 465 = 807.
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

@@ -96,15 +96,6 @@
         </a>
     </li>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -163,19 +154,6 @@
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -248,17 +226,6 @@
                             <i class="fa fa-fw fa-user-circle-o"></i>
                         
                         关于
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
                     </a>
                 
             </li>
@@ -397,7 +364,7 @@
                 <div class="col s7">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            <span class="chip bg-color">Awsome</span>
                         </div>
                     
                 </div>
@@ -417,39 +384,37 @@
 
             <div class="post-info">
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>
-                        发布日期: 2022-07-04
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2022-07-04
                     </div>
                 
 
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>
-                        更新日期: 2022-07-04
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2022-07-04
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-file-word-o fa-fw"></i>
-                        文章字数: 2.9k
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.9k
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-clock-o fa-fw"></i>
-                        阅读时长: 10 分
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        10 分
                     </div>
                 
 
                 
             </div>
         </div>
-        
         <hr class="clearfix">
-        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="以⼀个Update语句，了解InnoDB引擎的架构设计"><a href="#以⼀个Update语句，了解InnoDB引擎的架构设计" class="headerlink" title="以⼀个Update语句，了解InnoDB引擎的架构设计"></a>以⼀个Update语句，了解InnoDB引擎的架构设计</h1><h2 id="1-buffer-pool读写操作"><a href="#1-buffer-pool读写操作" class="headerlink" title="1.buffer pool读写操作"></a><strong>1</strong>.buffer pool读写操作</h2><p>InnoDB存储引擎使⽤了buffer pool内存缓冲区来提升性能；</p>
@@ -509,10 +474,10 @@
 </li>
 </ul>
 <p>据直接就写到磁盘？这⾥就涉及到⼀个概念：<strong>顺序IO和随机IO</strong>；</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220728142151040.png" alt="顺序IO及随机IO"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220728142151040.png" alt="顺序IO及随机IO"></p>
 <p>○<strong>顺序IO</strong>：指读写操作的访问地址连续，所以顺序IO的性能很好；（⼀般数据备份、写⽇志等是顺序IO）</p>
 <p>○<strong>随机IO</strong>：读写操作的的访问地址不连续，随机分布在磁盘的地址空间中，所以可想⽽知随机IO的性能很差；（⼀般SQL⽂件是随机IO）</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220728142341455.png" alt="磁盘IO"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220728142341455.png" alt="磁盘IO"></p>
 <p>从这个对⽐图中可看出，差距基本在⼏个数量级以上</p>
 <p>所以，<strong>MySQL这样设计的⽬的</strong>就是：</p>
 <ul>
@@ -528,7 +493,7 @@
 <li><strong>读操作：</strong>如果读取的数据页在Buffer Pool中直接返回；不在时，则在磁盘中查询，并将数据页加载到BufferPool中，再返回。</li>
 <li><strong>写操作：</strong>若需要更新的数据页在Buffer Pool中直接更新BufferPool中的数据页；不在时，从磁盘中加载数据页，再更新</li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220728183809478.png" alt="image-20220728183809478"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220728183809478.png" alt="image-20220728183809478"></p>
 <h3 id="1-更新时，这条记录所在的数据页不在Buffer-Pool中，则先将数据页加载到Buffer中"><a href="#1-更新时，这条记录所在的数据页不在Buffer-Pool中，则先将数据页加载到Buffer中" class="headerlink" title="1.更新时，这条记录所在的数据页不在Buffer Pool中，则先将数据页加载到Buffer中"></a>1.更新时，这条记录所在的数据页不在Buffer Pool中，则先将数据页加载到Buffer中</h3><h3 id="2-维护undoLog日志，InnoDB为了支持事务回滚，先把原来的的数据记录到undoLog日志（逻辑日志），具体体现为delete操作时写入insert语句，发生回滚时执行insert"><a href="#2-维护undoLog日志，InnoDB为了支持事务回滚，先把原来的的数据记录到undoLog日志（逻辑日志），具体体现为delete操作时写入insert语句，发生回滚时执行insert" class="headerlink" title="2.维护undoLog日志，InnoDB为了支持事务回滚，先把原来的的数据记录到undoLog日志（逻辑日志），具体体现为delete操作时写入insert语句，发生回滚时执行insert"></a>2.维护undoLog日志，InnoDB为了支持事务回滚，先把原来的的数据记录到undoLog日志（逻辑日志），具体体现为delete操作时写入insert语句，发生回滚时执行insert</h3><h3 id="3-更新BufferPool中的数据，此时BufferPool中name-’bob’-磁盘中name-”fox”-数据不一致，BufferPool中这行数据为脏数据，所在数据页为脏页"><a href="#3-更新BufferPool中的数据，此时BufferPool中name-’bob’-磁盘中name-”fox”-数据不一致，BufferPool中这行数据为脏数据，所在数据页为脏页" class="headerlink" title="3.更新BufferPool中的数据，此时BufferPool中name=’bob’,磁盘中name=”fox”,数据不一致，BufferPool中这行数据为脏数据，所在数据页为脏页"></a>3.更新BufferPool中的数据，此时BufferPool中name=’bob’,磁盘中name=”fox”,数据不一致，BufferPool中这行数据为脏数据，所在数据页为脏页</h3><h3 id="4-若此时发生宕机，Buffer-Pool中数据丢失，破坏了一致性，所以在执行上述操作时，应将脏页写入redoLog中，在MySQL恢复后更新磁盘中的数据。"><a href="#4-若此时发生宕机，Buffer-Pool中数据丢失，破坏了一致性，所以在执行上述操作时，应将脏页写入redoLog中，在MySQL恢复后更新磁盘中的数据。" class="headerlink" title="4.若此时发生宕机，Buffer Pool中数据丢失，破坏了一致性，所以在执行上述操作时，应将脏页写入redoLog中，在MySQL恢复后更新磁盘中的数据。"></a>4.若此时发生宕机，Buffer Pool中数据丢失，破坏了一致性，所以在执行上述操作时，应将脏页写入redoLog中，在MySQL恢复后更新磁盘中的数据。</h3><p><strong>WAL机制：先写日志再写磁盘，为提升效率，MySQL提供了redolog Buffer,在事务提交时根据策略刷入。</strong></p>
 <h3 id="5-事务提交时，redolog-Buffer刷盘策略（Innodb-flush-log-at-trx-commit）："><a href="#5-事务提交时，redolog-Buffer刷盘策略（Innodb-flush-log-at-trx-commit）：" class="headerlink" title="5.事务提交时，redolog Buffer刷盘策略（Innodb_flush_log_at_trx_commit）："></a>5.事务提交时，redolog Buffer刷盘策略（Innodb_flush_log_at_trx_commit）：</h3><p>0:每次事务提交时，数据都只存在redoLog Buffer中,不刷入磁盘（MySQL宕机可能会丢失数据）<br>1：每次事务提交时，数据把redolog Buffer的数据刷入磁盘（MySQL不会丢失数据）<br>2：每次事务提交时，数据把redolog Buffer的数据刷入OS Cache，而不是写入磁盘，所有速度很快，效率基本接近0的配置（仍可能丢失数据）</p>
 <h3 id="6-事务提交时除了写入redoLog还会写入binLog（归档日志）"><a href="#6-事务提交时除了写入redoLog还会写入binLog（归档日志）" class="headerlink" title="6.事务提交时除了写入redoLog还会写入binLog（归档日志）"></a>6.事务提交时除了写入redoLog还会写入binLog（归档日志）</h3><p><strong>binLog是逻辑日志，记录的是原始SQL</strong></p>
@@ -606,15 +571,16 @@ id    name    time
 
 
 
-            <div class="tag_share">
-                <div class="post-meta__tag-list">
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                           
                         </div>
                     
                 </div>
-                <div class="post_share">
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -629,17 +595,21 @@ id    name    time
 
                 </div>
             </div>
-
             
         </div>
     </div>
 
-    <!-- 懒加载评论 -->
-    <button id="load-comments">加载评论</button>
-    <div id="comments-section" style="display:none;">
-        
-        
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -732,18 +702,32 @@ id    name    time
 </article>
 </div>
 
-<!-- 文章复制版权信息 -->
 
 
-<!-- 代码块优化 -->
-<script defer src="/"></script>
 
-<!-- 代码折行 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-    <style>
-        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
     </style>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1012,10 +996,5 @@ id    name    time
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

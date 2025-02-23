@@ -4,7 +4,10 @@ var searchFunc = function (path, search_id, content_id) {
         url: path,
         dataType: "xml",
         success: function (xmlResponse) {
-            // get the contents from search data
+            // 获取站点根路径，确保 URL 绝对路径
+            var rootPath = window.location.origin + "/";
+
+            // 解析搜索数据
             var datas = $("entry", xmlResponse).map(function () {
                 return {
                     title: $("title", this).text(),
@@ -12,6 +15,7 @@ var searchFunc = function (path, search_id, content_id) {
                     url: $("url", this).text()
                 };
             }).get();
+
             var $input = document.getElementById(search_id);
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function () {
@@ -21,17 +25,19 @@ var searchFunc = function (path, search_id, content_id) {
                 if (this.value.trim().length <= 0) {
                     return;
                 }
-                // perform local searching
+
+                // 进行本地搜索
                 datas.forEach(function (data) {
                     var isMatch = true;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
                     var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                    var data_url = data.url;
+                    var data_url = rootPath + data.url.replace(/^\//, ''); // 修正 URL
                     var index_title = -1;
                     var index_content = -1;
                     var first_occur = -1;
-                    // only match artiles with not empty titles and contents
+
+                    // 仅匹配不为空的标题和内容
                     if (data_title != '' && data_content != '') {
                         keywords.forEach(function (keyword, i) {
                             index_title = data_title.indexOf(keyword);
@@ -48,12 +54,12 @@ var searchFunc = function (path, search_id, content_id) {
                             }
                         });
                     }
-                    // show search results
+
+                    // 显示搜索结果
                     if (isMatch) {
-                        str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                        str += "<li><a href='" + data_url + "' class='search-result-title'>" + data.title + "</a>";
                         var content = data.content.trim().replace(/<[^>]+>/g, "");
                         if (first_occur >= 0) {
-                            // cut out 100 characters
                             var start = first_occur - 20;
                             var end = first_occur + 80;
                             if (start < 0) {
@@ -66,7 +72,8 @@ var searchFunc = function (path, search_id, content_id) {
                                 end = content.length;
                             }
                             var match_content = content.substr(start, end);
-                            // highlight all keywords
+
+                            // 关键字高亮
                             keywords.forEach(function (keyword) {
                                 var regS = new RegExp(keyword, "gi");
                                 match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
@@ -77,6 +84,7 @@ var searchFunc = function (path, search_id, content_id) {
                         str += "</li>";
                     }
                 });
+
                 str += "</ul>";
                 $resultContent.innerHTML = str;
             });

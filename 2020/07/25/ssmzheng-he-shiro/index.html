@@ -98,15 +98,6 @@
         </a>
     </li>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -165,19 +156,6 @@
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -250,17 +228,6 @@
                             <i class="fa fa-fw fa-user-circle-o"></i>
                         
                         关于
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
                     </a>
                 
             </li>
@@ -399,7 +366,7 @@
                 <div class="col s7">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            <span class="chip bg-color">Awsome</span>
                         </div>
                     
                 </div>
@@ -419,42 +386,40 @@
 
             <div class="post-info">
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>
-                        发布日期: 2020-07-25
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-07-25
                     </div>
                 
 
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>
-                        更新日期: 2020-07-25
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-07-25
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-file-word-o fa-fw"></i>
-                        文章字数: 1.5k
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.5k
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-clock-o fa-fw"></i>
-                        阅读时长: 6 分
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        6 分
                     </div>
                 
 
                 
             </div>
         </div>
-        
         <hr class="clearfix">
-        
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/07/25/TCxpAZJwRkBEHLs.png" alt="shiro.png"></p>
+                <p><img src="https://i.loli.net/2020/07/25/TCxpAZJwRkBEHLs.png" alt="shiro.png"></p>
 <h4 id="1、在-maven-项目中引入-Shiro-依赖："><a href="#1、在-maven-项目中引入-Shiro-依赖：" class="headerlink" title="1、在 maven 项目中引入 Shiro 依赖："></a><strong>1、在 maven 项目中引入 Shiro 依赖：</strong></h4><pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- shiro  --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.shiro<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
@@ -568,7 +533,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>和 Shiro 拦截规则 的跳转 url 保持一致，jsp页面简单写了几个字</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190228103721872.png" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20190228103721872.png" alt=""></p>
 <h4 id="6、自定义-ShiroRealm-实现："><a href="#6、自定义-ShiroRealm-实现：" class="headerlink" title="6、自定义 ShiroRealm 实现："></a><strong>6、自定义 ShiroRealm 实现：</strong></h4><p>如果<strong>实现 Realm 接口</strong>，参数 token 会被传递到 supports 方法上</p>
 <p>继承 <strong>AuthenticatingRealm</strong> 类，参数 token 会被传递到 <strong>doGetAuthenticationInfo</strong> 方法上</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ShiroRealm</span> <span class="token keyword">extends</span> <span class="token class-name">AuthenticatingRealm</span><span class="token punctuation">{</span>
@@ -603,24 +568,24 @@
     <span class="token punctuation">}</span>    
  <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h4 id="shiro-登录步骤分析"><a href="#shiro-登录步骤分析" class="headerlink" title="shiro 登录步骤分析:"></a>shiro 登录步骤分析:</h4><h5 id="1）表单提交后进入login方法后-调用-subject-login-token"><a href="#1）表单提交后进入login方法后-调用-subject-login-token" class="headerlink" title="1）表单提交后进入login方法后 调用 subject.login(token);"></a>1）表单提交后进入login方法后 调用 subject.login(token);</h5><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301103821902.png" alt=""></p>
-<h5 id="2）Subject-是通过-securityManager-调用-login-方法-来进行登录操作"><a href="#2）Subject-是通过-securityManager-调用-login-方法-来进行登录操作" class="headerlink" title="2）Subject 是通过 securityManager 调用 login() 方法 来进行登录操作"></a>2）Subject 是通过 securityManager 调用 login() 方法 来进行登录操作</h5><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301104227765.png" alt=""></p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301104312474.png" alt=""></p>
+<h4 id="shiro-登录步骤分析"><a href="#shiro-登录步骤分析" class="headerlink" title="shiro 登录步骤分析:"></a>shiro 登录步骤分析:</h4><h5 id="1）表单提交后进入login方法后-调用-subject-login-token"><a href="#1）表单提交后进入login方法后-调用-subject-login-token" class="headerlink" title="1）表单提交后进入login方法后 调用 subject.login(token);"></a>1）表单提交后进入login方法后 调用 subject.login(token);</h5><p><img src="https://img-blog.csdnimg.cn/20190301103821902.png" alt=""></p>
+<h5 id="2）Subject-是通过-securityManager-调用-login-方法-来进行登录操作"><a href="#2）Subject-是通过-securityManager-调用-login-方法-来进行登录操作" class="headerlink" title="2）Subject 是通过 securityManager 调用 login() 方法 来进行登录操作"></a>2）Subject 是通过 securityManager 调用 login() 方法 来进行登录操作</h5><p><img src="https://img-blog.csdnimg.cn/20190301104227765.png" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20190301104312474.png" alt=""></p>
 <h5 id="3）-DefaultSecurityManager-类"><a href="#3）-DefaultSecurityManager-类" class="headerlink" title="3） DefaultSecurityManager 类"></a>3） DefaultSecurityManager 类</h5><p> 该方法里会验证登录信息，如果登录通过会返回登录信息，如不通过则抛出异常；authenticate 方法定义在父类AuthenticatingSecurityManager 中；</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301104527760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
-<h5 id="4）AuthenticatingSecurityManager-类"><a href="#4）AuthenticatingSecurityManager-类" class="headerlink" title="4）AuthenticatingSecurityManager 类"></a>4）AuthenticatingSecurityManager 类</h5><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301105327873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
-<h5 id="5）AbstractAuthenticator-类"><a href="#5）AbstractAuthenticator-类" class="headerlink" title="5）AbstractAuthenticator 类"></a>5）AbstractAuthenticator 类</h5><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301111316794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20190301104527760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
+<h5 id="4）AuthenticatingSecurityManager-类"><a href="#4）AuthenticatingSecurityManager-类" class="headerlink" title="4）AuthenticatingSecurityManager 类"></a>4）AuthenticatingSecurityManager 类</h5><p><img src="https://img-blog.csdnimg.cn/20190301105327873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
+<h5 id="5）AbstractAuthenticator-类"><a href="#5）AbstractAuthenticator-类" class="headerlink" title="5）AbstractAuthenticator 类"></a>5）AbstractAuthenticator 类</h5><p><img src="https://img-blog.csdnimg.cn/20190301111316794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
 <h5 id="6）ModularRealmAuthenticator-类"><a href="#6）ModularRealmAuthenticator-类" class="headerlink" title="6）ModularRealmAuthenticator 类"></a><strong>6）ModularRealmAuthenticator 类</strong></h5><p> 4、5 的 <strong>authenticate</strong> 方法 都交给了 这个类的 <strong>doAuthenticate</strong> 方法执行(单个realm的处理方法 <strong>doSingleRealmAuthentication</strong>)</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301111948175.png" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20190301111948175.png" alt=""></p>
 <h5 id="7）ModularRealmAuthenticator-类"><a href="#7）ModularRealmAuthenticator-类" class="headerlink" title="7）ModularRealmAuthenticator 类"></a>7）ModularRealmAuthenticator 类</h5><p>红色标记部分，就是真正的<strong>调用Reaml来实现登录</strong></p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301112026568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
-<h5 id="8）AuthenticatingRealm-类"><a href="#8）AuthenticatingRealm-类" class="headerlink" title="8）AuthenticatingRealm 类"></a><strong>8）AuthenticatingRealm 类</strong></h5><h5 id="第一个标记是从缓存中查看，该用户是否已经登录。如果已经登录怎么直接完成了登录流程；"><a href="#第一个标记是从缓存中查看，该用户是否已经登录。如果已经登录怎么直接完成了登录流程；" class="headerlink" title="第一个标记是从缓存中查看，该用户是否已经登录。如果已经登录怎么直接完成了登录流程；"></a>第一个标记是从缓存中查看，该用户是否已经登录。如果已经登录怎么直接完成了登录流程；</h5><h5 id="第二个标记是根据用户信息，去获取数据库保存的该用户的密码等信息；"><a href="#第二个标记是根据用户信息，去获取数据库保存的该用户的密码等信息；" class="headerlink" title="第二个标记是根据用户信息，去获取数据库保存的该用户的密码等信息；"></a>第二个标记是根据用户信息，去获取数据库保存的该用户的密码等信息；</h5><h5 id="第三个标记是利用第二个标记得到的数据库该用户的信息和本次登录该用户的信息经行比较，如果正确则验证通过，返回用户信息。如果不通过则验证失败，登录不成功，抛出错误"><a href="#第三个标记是利用第二个标记得到的数据库该用户的信息和本次登录该用户的信息经行比较，如果正确则验证通过，返回用户信息。如果不通过则验证失败，登录不成功，抛出错误" class="headerlink" title="第三个标记是利用第二个标记得到的数据库该用户的信息和本次登录该用户的信息经行比较，如果正确则验证通过，返回用户信息。如果不通过则验证失败，登录不成功，抛出错误"></a>第三个标记是利用第二个标记得到的数据库该用户的信息和本次登录该用户的信息经行比较，如果正确则验证通过，返回用户信息。如果不通过则验证失败，登录不成功，抛出错误</h5><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301112531602.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20190301112026568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
+<h5 id="8）AuthenticatingRealm-类"><a href="#8）AuthenticatingRealm-类" class="headerlink" title="8）AuthenticatingRealm 类"></a><strong>8）AuthenticatingRealm 类</strong></h5><h5 id="第一个标记是从缓存中查看，该用户是否已经登录。如果已经登录怎么直接完成了登录流程；"><a href="#第一个标记是从缓存中查看，该用户是否已经登录。如果已经登录怎么直接完成了登录流程；" class="headerlink" title="第一个标记是从缓存中查看，该用户是否已经登录。如果已经登录怎么直接完成了登录流程；"></a>第一个标记是从缓存中查看，该用户是否已经登录。如果已经登录怎么直接完成了登录流程；</h5><h5 id="第二个标记是根据用户信息，去获取数据库保存的该用户的密码等信息；"><a href="#第二个标记是根据用户信息，去获取数据库保存的该用户的密码等信息；" class="headerlink" title="第二个标记是根据用户信息，去获取数据库保存的该用户的密码等信息；"></a>第二个标记是根据用户信息，去获取数据库保存的该用户的密码等信息；</h5><h5 id="第三个标记是利用第二个标记得到的数据库该用户的信息和本次登录该用户的信息经行比较，如果正确则验证通过，返回用户信息。如果不通过则验证失败，登录不成功，抛出错误"><a href="#第三个标记是利用第二个标记得到的数据库该用户的信息和本次登录该用户的信息经行比较，如果正确则验证通过，返回用户信息。如果不通过则验证失败，登录不成功，抛出错误" class="headerlink" title="第三个标记是利用第二个标记得到的数据库该用户的信息和本次登录该用户的信息经行比较，如果正确则验证通过，返回用户信息。如果不通过则验证失败，登录不成功，抛出错误"></a>第三个标记是利用第二个标记得到的数据库该用户的信息和本次登录该用户的信息经行比较，如果正确则验证通过，返回用户信息。如果不通过则验证失败，登录不成功，抛出错误</h5><p><img src="https://img-blog.csdnimg.cn/20190301112531602.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDAyODU0,size_16,color_FFFFFF,t_70" alt=""></p>
 <hr>
 <h4 id="Shiro如何完成验证："><a href="#Shiro如何完成验证：" class="headerlink" title="Shiro如何完成验证："></a>Shiro如何完成验证：</h4><p>1）在 UsernamePasswordToken 类的 方法打断点</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301113629187.png" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20190301113629187.png" alt=""></p>
 <p>2）在 SimpleCredentialsMatcher 类 打断点：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301113709918.png" alt=""></p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://img-blog.csdnimg.cn/20190301113918596.png" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20190301113709918.png" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20190301113918596.png" alt=""></p>
 <h5 id="3）shiro进行对比密码的是一个接口：CredentialsMatcher"><a href="#3）shiro进行对比密码的是一个接口：CredentialsMatcher" class="headerlink" title="3）shiro进行对比密码的是一个接口：CredentialsMatcher"></a>3）shiro进行对比密码的是一个接口：CredentialsMatcher</h5><p>此接口的实现类：</p>
 <p><strong>SimpleCredentialsMatcher</strong>：<strong>没有对密码进行加密</strong>，</p>
 <p><strong>HashedCredentialsMatcher</strong>： <strong>实现了对密码的加密</strong></p>
@@ -652,15 +617,16 @@
 
 
 
-            <div class="tag_share">
-                <div class="post-meta__tag-list">
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                           
                         </div>
                     
                 </div>
-                <div class="post_share">
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -675,17 +641,21 @@
 
                 </div>
             </div>
-
             
         </div>
     </div>
 
-    <!-- 懒加载评论 -->
-    <button id="load-comments">加载评论</button>
-    <div id="comments-section" style="display:none;">
-        
-        
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -778,18 +748,32 @@
 </article>
 </div>
 
-<!-- 文章复制版权信息 -->
 
 
-<!-- 代码块优化 -->
-<script defer src="/"></script>
 
-<!-- 代码折行 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-    <style>
-        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
     </style>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1058,10 +1042,5 @@
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

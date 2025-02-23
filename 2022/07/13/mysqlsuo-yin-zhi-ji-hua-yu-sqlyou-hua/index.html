@@ -95,15 +95,6 @@
         </a>
     </li>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -162,19 +153,6 @@
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -247,17 +225,6 @@
                             <i class="fa fa-fw fa-user-circle-o"></i>
                         
                         关于
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
                     </a>
                 
             </li>
@@ -396,7 +363,7 @@
                 <div class="col s7">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            <span class="chip bg-color">Awsome</span>
                         </div>
                     
                 </div>
@@ -416,39 +383,37 @@
 
             <div class="post-info">
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>
-                        发布日期: 2022-07-13
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2022-07-13
                     </div>
                 
 
                 
-                    <div class="post-date">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>
-                        更新日期: 2022-07-13
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2022-07-13
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-file-word-o fa-fw"></i>
-                        文章字数: 6.2k
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        6.2k
                     </div>
                 
 
                 
-                    <div>
-                        <i class="fa fa-clock-o fa-fw"></i>
-                        阅读时长: 22 分
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        22 分
                     </div>
                 
 
                 
             </div>
         </div>
-        
         <hr class="clearfix">
-        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="MySQL索引执⾏计划与SQL优化"><a href="#MySQL索引执⾏计划与SQL优化" class="headerlink" title="MySQL索引执⾏计划与SQL优化"></a>MySQL索引执⾏计划与SQL优化</h1><h2 id="1-MySQL多表join的实现⽅式"><a href="#1-MySQL多表join的实现⽅式" class="headerlink" title="1. MySQL多表join的实现⽅式"></a><strong>1</strong>. MySQL多表join的实现⽅式</h2><h3 id="1-1基本概念："><a href="#1-1基本概念：" class="headerlink" title="1.1基本概念："></a>1.1基本概念：</h3><ul>
@@ -528,7 +493,7 @@
 <li>把t1表中的所有数据读⼊线程内存join_buffer中，由于我们这个语句中写的是select*，因此是把整个t1表所有字段放⼊了内存；</li>
 <li>扫描表t2，将表t2中的每⼀⾏取出来，到join_buffer中去做⽐较，如果满⾜t1.a=t2.b时，就放⼊结果集：</li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730144310938.png" alt="BNL"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730144310938.png" alt="BNL"></p>
 <p>PS:</p>
 <ul>
 <li><p>在这个过程中，对于t1表和t2表都做了⼀次全表扫描，因此总的扫描⾏数为100+1000=1100；</p>
@@ -571,7 +536,7 @@ select * from t1 where a>=1 and a<=100; <span aria-hidden="true" class="line-num
 <ul>
 <li>主键索引⻚是⼀棵B+树，在这颗树上，每次也只能根据⼀个主键id进⾏查找数据；所以回表肯定是⼀⾏⼀⾏的回的；</li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730145043739.png" alt="回表"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730145043739.png" alt="回表"></p>
 <p>但是⼀般来说，字段c和主键id是没有什么顺序关系的，当你使⽤索引c查询出来的⼀批有序的数据，它们对应的主键id基本都是⽆序的；</p>
 <p>此时去做回表的话，那不就是⽤⼀批⽆序的主键id去主键索引中进⾏查找，也就出现了随机访问，随机IO，性能就会很低了；</p>
 <p><strong>优化思路</strong>：</p>
@@ -581,7 +546,7 @@ select * from t1 where a>=1 and a<=100; <span aria-hidden="true" class="line-num
 <li>在内存中对read_rnd_buffer中的所有id进⾏⼀个递增的排序；</li>
 <li>然后将排序之后的id数组，再到主键索引中进⾏回表查找，得到所有数据信息后放⼊结果集；这个时候，去主键索引中回表的所有ID，都是递增的，也就能实现顺序读取，转变为了顺序IO，提升了性能。</li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730145304827.png" alt="MMR"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730145304827.png" alt="MMR"></p>
 <p>跟join_buffer⼀样，read_rnd_buffer⼤⼩受参数read_rnd_buffer_size控制，当read_rnd_buffer放满时，也是分段去多次这样执⾏即可；</p>
 <p>另外，现在MySQL的优化器中在判断执⾏成本时，倾向于不使⽤MRR，因此MRR不是都会⽤到的；如果你想要稳定地使⽤MMR，需要设置<strong>setoptimizer_switch=”mrr_cost_based=off”</strong>，把mrr_cost_based设置为off，就是<strong>固定使⽤MRR</strong>了；</p>
 <h4 id="1-2-5-Batched-Key-Access（BKA）批量索引键值访问"><a href="#1-2-5-Batched-Key-Access（BKA）批量索引键值访问" class="headerlink" title="1.2.5 Batched Key Access（BKA）批量索引键值访问"></a><strong>1</strong>.<strong>2</strong>.<strong>5</strong> Batched Key Access（BKA）批量索引键值访问</h4><p>这个Batched Key Access，是对Index Nested-Loop Join（NLJ）的优化；</p>
@@ -600,7 +565,7 @@ select * from t1 where a>=1 and a<=100; <span aria-hidden="true" class="line-num
 </ul>
 </li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730145640250.png" alt="BKA"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730145640250.png" alt="BKA"></p>
 <p>同样，如果<strong>要使⽤BKA优化算法</strong>的话，也需要设置：</p>
 <p><strong>set optimizer_switch=’mrr=on,mrr_cost_based=off,batched_key_access=on’;</strong></p>
 <p>前⾯两个参数是启⽤MRR，因为 BKA算法的优化要依赖于MRR；后⾯⼀个参数是启BKA；</p>
@@ -633,14 +598,14 @@ select * from t1 where a>=1 and a<=100; <span aria-hidden="true" class="line-num
 <ul>
 <li><p>server层</p>
 <pre class="line-numbers language-MySQL"><code class="language-MySQL">SELECT * FROM mysql.server_cost;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730150644850.png" alt="server层"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730150644850.png" alt="server层"></p>
 <ul>
 <li>这⾥我们要关注的是最后这个<strong>row_evaluate_cost</strong>，即上⾯说的读取或者检测⼀条数据是否符合条件的成本为0.2； </li>
 </ul>
 </li>
 <li><p>engine层</p>
 <pre class="line-numbers language-MySQL"><code class="language-MySQL">SELECT * FROM mysql.engine_cost;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730151045382.png" alt="engine"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730151045382.png" alt="engine"></p>
 <ul>
 <li>这⾥我们要关注的是<strong>io_block_read_cost</strong>，即上⾯说的从磁盘中读取⼀个数据⻚的成本为 1； </li>
 </ul>
@@ -659,7 +624,7 @@ select * from t where x1 = xxx;<span aria-hidden="true" class="line-numbers-rows
 <li>有⼀个命令为：<strong>show table status like’表名’;</strong></li>
 <li>这个命令可以拿到你的表的统计信息，当你在对表进⾏增删改查的时候，MySQL会⾃动给你维护这个表的⼀些这些统计信息；</li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730152027878.png" alt="show table status"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730152027878.png" alt="show table status"></p>
 <ul>
 <li><p>这⾥有两个字段：</p>
 <ul>
@@ -689,7 +654,7 @@ select * from t where x1 = xxx;<span aria-hidden="true" class="line-numbers-rows
 <p>这⾥使⽤这个语句可以查出：</p>
 <pre class="line-numbers language-MySQL"><code class="language-MySQL">EXPLAIN format=json
 SELECT * FROM `server` WHERE id = 1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730153116210.png" alt="主键索引成本"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730153116210.png" alt="主键索引成本"></p>
 <p>这⾥的 <strong>query_cost</strong> 就是执⾏这个查询语句的⼤概成本了</p>
 <p>当改为范围查询时：</p>
 <pre class="line-numbers language-MySQL"><code class="language-MySQL">EXPLAIN format=json
@@ -786,7 +751,7 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.m1 = t2.m2 WHERE t2.m2 = 2;
 <p>这些东⻄都是MySQL内部的执⾏，那我们怎么知道MySQL具体是怎么执⾏的呢？</p>
 <p>为此，MySQL提供了explain关键字，⽤它也就可以让我们查看每个语句的具体执⾏计划；⽤法就是在你的SQL语句之前，直接加⼀个explain就⾏了；然后explain会给你输出⼀个列表，这个列表也就是MySQL对于你这条SQL语句的的执⾏计划，所以我们需要去看懂这个列表中每⼀列的含义，然后在看懂之后去思考怎么改写⾃⼰的SQL语句，使得执⾏起来更快；这其实就是SQL优化了；</p>
 <p>我们先⼤概来看看explain中每⼀列的含义吧，后⾯再⼀个⼀个的详细解释：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730155255465.png" alt="explain含义"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730155255465.png" alt="explain含义"></p>
 <p>先创建两个示例表 t1， t2,并插入一些数据</p>
 <pre class="line-numbers language-mysql"><code class="language-mysql">CREATE TABLE t1 (
  id INT NOT NULL AUTO_INCREMENT,
@@ -856,7 +821,7 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.m1 = t2.m2 WHERE t2.m2 = 2;
 <li><p>如果索引列可以存储NULL值，则再在上⾯key_len计算值上加1字节；</p>
 </li>
 <li><p>对于使⽤了变⻓类型的索引列，都会有2字节的空间来存储实际数据占⽤的存储空间⻓度，则再在上⾯key_len计算值上加1字节；</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730160704629.png" alt="key_len"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730160704629.png" alt="key_len"></p>
 <ul>
 <li>key1 是 varchar(100)，则 3 *100 = 300； </li>
 <li>key1 允许为 NULL，则再加 1 为 301； </li>
@@ -864,7 +829,7 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.m1 = t2.m2 WHERE t2.m2 = 2;
 </ul>
 </li>
 <li><p><strong>对于联合索引⽽⾔</strong></p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="C:%5CUsers%5Ckarakal%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220730160855760.png" alt="key_len"></p>
+<p><img src="C:%5CUsers%5Ckarakal%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220730160855760.png" alt="key_len"></p>
 </li>
 <li><p>这⾥的 611，也就是： </p>
 <ul>
@@ -879,7 +844,7 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.m1 = t2.m2 WHERE t2.m2 = 2;
 <li>当决定使⽤全表扫描的⽅式对某个表进⾏查询时，rows就表示整个表的评估⾏数；</li>
 <li>当决定使⽤索引的⽅式对某个表进⾏查询时，rows就表示要扫描的索引中的⾏数；</li>
 </ul>
-<h3 id="3-10-filtered"><a href="#3-10-filtered" class="headerlink" title="3.10 filtered"></a><strong>3</strong>.<strong>10</strong> filtered</h3><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730161123032.png" alt="filtered"></p>
+<h3 id="3-10-filtered"><a href="#3-10-filtered" class="headerlink" title="3.10 filtered"></a><strong>3</strong>.<strong>10</strong> filtered</h3><p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730161123032.png" alt="filtered"></p>
 <ul>
 <li>这⾥使⽤idx_key1索引进⾏查询，从rows列可以看出评估出来满⾜条件的有15条记录；</li>
 <li>filtered中的10表示这15条记录中，有多少条满⾜条件common_field=1000；</li>
@@ -951,15 +916,16 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.m1 = t2.m2 WHERE t2.m2 = 2;
 
 
 
-            <div class="tag_share">
-                <div class="post-meta__tag-list">
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                           
                         </div>
                     
                 </div>
-                <div class="post_share">
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -974,17 +940,21 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.m1 = t2.m2 WHERE t2.m2 = 2;
 
                 </div>
             </div>
-
             
         </div>
     </div>
 
-    <!-- 懒加载评论 -->
-    <button id="load-comments">加载评论</button>
-    <div id="comments-section" style="display:none;">
-        
-        
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -1078,18 +1048,32 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.m1 = t2.m2 WHERE t2.m2 = 2;
 </article>
 </div>
 
-<!-- 文章复制版权信息 -->
 
 
-<!-- 代码块优化 -->
-<script defer src="/"></script>
 
-<!-- 代码折行 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-    <style>
-        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
     </style>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1358,10 +1342,5 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.m1 = t2.m2 WHERE t2.m2 = 2;
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>
