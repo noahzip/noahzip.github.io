@@ -68,15 +68,6 @@
     </li>
     
     <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fa fa-tags"></i>
-            
-            <span>标签</span>
-        </a>
-    </li>
-    
-    <li class="hide-on-med-and-down">
         <a href="/categories" class="waves-effect waves-light">
             
             <i class="fa fa-bookmark"></i>
@@ -103,6 +94,15 @@
         </a>
     </li>
     
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
     <li>
         <a href="#searchModal" class="modal-trigger waves-effect waves-light">
             <i id="searchIcon" class="fa fa-search" title="搜索"></i>
@@ -122,19 +122,6 @@
                         <i class="fa fa-home"></i>
                     
                     <span>首页</span>
-                </a>
-
-            
-        </li>
-    
-        <li class="hide-on-med-and-down nav-item">
-
-            
-                <a href="/tags" class="waves-effect waves-light">
-                    
-                        <i class="fa fa-tags"></i>
-                    
-                    <span>标签</span>
                 </a>
 
             
@@ -174,6 +161,19 @@
                         <i class="fa fa-user-circle-o"></i>
                     
                     <span>关于</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/tags" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-tags"></i>
+                    
+                    <span>标签</span>
                 </a>
 
             
@@ -219,17 +219,6 @@
         
             <li class="m-nav-item">
                 
-                    <a href="/tags" class="waves-effect waves-light">
-                        
-                            <i class="fa fa-fw fa-tags"></i>
-                        
-                        标签
-                    </a>
-                
-            </li>
-        
-            <li class="m-nav-item">
-                
                     <a href="/categories" class="waves-effect waves-light">
                         
                             <i class="fa fa-fw fa-bookmark"></i>
@@ -261,6 +250,17 @@
                 
             </li>
         
+            <li class="m-nav-item">
+                
+                    <a href="/tags" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-tags"></i>
+                        
+                        标签
+                    </a>
+                
+            </li>
+        
         
     </ul>
 </div>
@@ -286,7 +286,7 @@
             <div class="description center-align">
                 
                     <span id="subtitle"></span>
-                    <script src="https://cdn.bootcss.com/typed.js/2.0.5/typed.js"></script>
+                    <script src="/libs/typed.js"></script>
                     <script>
                         var typed = new Typed("#subtitle", {
                             strings: ['立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径','只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方'],
@@ -324,58 +324,11 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2020/09/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%80%9A%E7%94%A8%E9%85%8D%E7%BD%AE/">
-                            <div class="card-image">
-                                
-                                    
-                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="微服务通用配置">
-                                
-                                <span class="card-title">微服务通用配置</span>
-                            </div>
-                        </a>
-
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    application.propertis:# 端口
-server.port=8001
-# 模块名称
-spring.application.name=service
-
-# 项目环境
-spring.profiles.active=dev
-
-#
-                                
-                            </div>
-                            <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
-                            </span>
-                                <span class="publish-author">
-                                    
-                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                        
-                                            <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
-                                    总结
-                                </a>
-                                        
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
-            
-                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                    <div class="card">
                         <a href="/2020/09/07/Swagger%E9%80%9A%E7%94%A8%E9%85%8D%E7%BD%AE/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Swagger通用配置">
+                                    <img src="/medias/featureimages/3.png" class="responsive-img" alt="Swagger通用配置">
                                 
                                 <span class="card-title">Swagger通用配置</span>
                             </div>
@@ -416,7 +369,7 @@ import org.springframework
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="API接口返回类通用方案">
+                                    <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="API接口返回类通用方案">
                                 
                                 <span class="card-title">API接口返回类通用方案</span>
                             </div>
@@ -463,7 +416,7 @@ import lombok.ToString;
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="JSR303结合AdviceController开启全局数据校验">
+                                    <img src="/medias/featureimages/6.png" class="responsive-img" alt="JSR303结合AdviceController开启全局数据校验">
                                 
                                 <span class="card-title">JSR303结合AdviceController开启全局数据校验</span>
                             </div>
@@ -510,7 +463,7 @@ import lombok.ToString;
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="GateWay配置跨域">
+                                    <img src="/medias/featureimages/2.png" class="responsive-img" alt="GateWay配置跨域">
                                 
                                 <span class="card-title">GateWay配置跨域</span>
                             </div>
@@ -553,7 +506,7 @@ import lombok.ToString;
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="stream流封装多级菜单">
+                                    <img src="/medias/featureimages/26.png" class="responsive-img" alt="stream流封装多级菜单">
                                 
                                 <span class="card-title">stream流封装多级菜单</span>
                             </div>
@@ -599,7 +552,7 @@ public List&lt;CategoryEntity> listWithTree() {
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="分布式微服务框架搭建">
+                                    <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="分布式微服务框架搭建">
                                 
                                 <span class="card-title">分布式微服务框架搭建</span>
                             </div>
@@ -639,7 +592,7 @@ public List&lt;CategoryEntity> listWithTree() {
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="ssm整合shiro">
+                                    <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="ssm整合shiro">
                                 
                                 <span class="card-title">ssm整合shiro</span>
                             </div>
@@ -682,7 +635,7 @@ public List&lt;CategoryEntity> listWithTree() {
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="mysql基础">
+                                    <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="mysql基础">
                                 
                                 <span class="card-title">mysql基础</span>
                             </div>
@@ -722,7 +675,7 @@ public List&lt;CategoryEntity> listWithTree() {
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="mysql的一些坑">
+                                    <img src="/medias/featureimages/0.png" class="responsive-img" alt="mysql的一些坑">
                                 
                                 <span class="card-title">mysql的一些坑</span>
                             </div>
@@ -761,7 +714,7 @@ public List&lt;CategoryEntity> listWithTree() {
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Spring注解开发">
+                                    <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Spring注解开发">
                                 
                                 <span class="card-title">Spring注解开发</span>
                             </div>
@@ -804,7 +757,7 @@ public List&lt;CategoryEntity> listWithTree() {
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="设计模式之创建者模式">
+                                    <img src="/medias/featureimages/25.png" class="responsive-img" alt="设计模式之创建者模式">
                                 
                                 <span class="card-title">设计模式之创建者模式</span>
                             </div>
@@ -842,6 +795,51 @@ public class SimpleFactoryP
                     </div>
                 </div>
             
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2020/04/28/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E6%A0%88/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="数组模拟栈">
+                                
+                                <span class="card-title">数组模拟栈</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    /**
+ * @author cxy
+ * 数组模拟栈
+ */
+public class ArrayStackDemo {
+    public static void main(String[] args) {
+        Array
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-04-28
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                    数据结构
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
         </div>
     </article>
 
@@ -859,7 +857,7 @@ public class SimpleFactoryP
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">5 / 8</div>
+            <div class="center-align b-text-gray">5 / 7</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -893,7 +891,7 @@ public class SimpleFactoryP
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">174.2k</span>&nbsp;字
+                            class="white-color">173.8k</span>&nbsp;字
                 
                 
                 <script>
