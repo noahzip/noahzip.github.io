@@ -1078,12 +1078,19 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
     </div>
 </div>
 
+<!-- 异步加载 search.js -->
 <script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
 <script type="text/javascript">
     $(function () {
-        searchFunc("/search.xml", 'searchInput', 'searchResult');
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
     });
 </script>
+
 <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
@@ -1106,20 +1113,6 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 
 
 <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
 
     <script src="/libs/others/clicklove.js" async="async"></script>
