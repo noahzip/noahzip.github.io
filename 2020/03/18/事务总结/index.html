@@ -416,37 +416,39 @@ Propagation propaga">
 
             <div class="post-info">
                 
-                    <div class="post-date info-break-policy">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2020-03-18
+                    <div class="post-date">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>
+                        发布日期: 2020-03-18
                     </div>
                 
 
                 
-                    <div class="post-date info-break-policy">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2020-03-18
+                    <div class="post-date">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>
+                        更新日期: 2020-03-18
                     </div>
                 
 
                 
-                    <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.1k
+                    <div>
+                        <i class="fa fa-file-word-o fa-fw"></i>
+                        文章字数: 1.1k
                     </div>
                 
 
                 
-                    <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                    <div>
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        阅读时长: 4 分
                     </div>
                 
 
                 
             </div>
         </div>
+        
         <hr class="clearfix">
+        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。"><a href="#1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。" class="headerlink" title="1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。"></a>1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。</h2><h2 id="2、事务的传播行为"><a href="#2、事务的传播行为" class="headerlink" title="2、事务的传播行为"></a>2、事务的传播行为</h2><p>propagation:当前方法的事务是否要和别人公用一个事务,以及如何传播下去（里面的方法如果用事务，是否和他公用一个事务）</p>
@@ -591,16 +593,15 @@ A<span class="token punctuation">{</span>
 
 
 
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
                     
                         <div class="article-tag">
                             <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
-                <div class="post_share"
-                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                <div class="post_share">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -615,21 +616,17 @@ A<span class="token punctuation">{</span>
 
                 </div>
             </div>
+
             
         </div>
     </div>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    <!-- 懒加载评论 -->
+    <button id="load-comments">加载评论</button>
+    <div id="comments-section" style="display:none;">
+        
+        
+    </div>
 
     
 
@@ -725,32 +722,18 @@ A<span class="token punctuation">{</span>
 </article>
 </div>
 
+<!-- 文章复制版权信息 -->
 
 
+<!-- 代码块优化 -->
+<script defer src="/"></script>
 
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码折行 -->
 
-<!-- 代码语言 -->
-
-    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-
-<!-- 代码块折行 -->
-
-    <style type="text/css">
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
+    <style>
+        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
     </style>
+
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -956,12 +939,19 @@ A<span class="token punctuation">{</span>
     </div>
 </div>
 
+<!-- 异步加载 search.js -->
 <script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
 <script type="text/javascript">
     $(function () {
-        searchFunc("/search.xml", 'searchInput', 'searchResult');
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
     });
 </script>
+
 <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">

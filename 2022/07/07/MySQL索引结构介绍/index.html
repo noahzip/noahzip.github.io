@@ -418,37 +418,39 @@
 
             <div class="post-info">
                 
-                    <div class="post-date info-break-policy">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2022-07-07
+                    <div class="post-date">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>
+                        发布日期: 2022-07-07
                     </div>
                 
 
                 
-                    <div class="post-date info-break-policy">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2022-07-07
+                    <div class="post-date">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>
+                        更新日期: 2022-07-07
                     </div>
                 
 
                 
-                    <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        4.7k
+                    <div>
+                        <i class="fa fa-file-word-o fa-fw"></i>
+                        文章字数: 4.7k
                     </div>
                 
 
                 
-                    <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        16 分
+                    <div>
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        阅读时长: 16 分
                     </div>
                 
 
                 
             </div>
         </div>
+        
         <hr class="clearfix">
+        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="MySQL索引结构介绍"><a href="#MySQL索引结构介绍" class="headerlink" title="MySQL索引结构介绍"></a>MySQL索引结构介绍</h1><p>在介绍索引之前，我们先思考⼀下如果没有索引的时候，要查找会有什么问题？</p>
@@ -705,16 +707,15 @@
 
 
 
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
                     
                         <div class="article-tag">
                             <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
-                <div class="post_share"
-                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                <div class="post_share">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -729,21 +730,17 @@
 
                 </div>
             </div>
+
             
         </div>
     </div>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    <!-- 懒加载评论 -->
+    <button id="load-comments">加载评论</button>
+    <div id="comments-section" style="display:none;">
+        
+        
+    </div>
 
     
 
@@ -837,32 +834,18 @@
 </article>
 </div>
 
+<!-- 文章复制版权信息 -->
 
 
+<!-- 代码块优化 -->
+<script defer src="/"></script>
 
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码折行 -->
 
-<!-- 代码语言 -->
-
-    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-
-<!-- 代码块折行 -->
-
-    <style type="text/css">
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
+    <style>
+        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
     </style>
+
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1068,12 +1051,19 @@
     </div>
 </div>
 
+<!-- 异步加载 search.js -->
 <script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
 <script type="text/javascript">
     $(function () {
-        searchFunc("/search.xml", 'searchInput', 'searchResult');
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
     });
 </script>
+
 <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">

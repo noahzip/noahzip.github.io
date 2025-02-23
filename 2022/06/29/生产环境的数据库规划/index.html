@@ -416,37 +416,39 @@
 
             <div class="post-info">
                 
-                    <div class="post-date info-break-policy">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2022-06-29
+                    <div class="post-date">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>
+                        发布日期: 2022-06-29
                     </div>
                 
 
                 
-                    <div class="post-date info-break-policy">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2022-06-29
+                    <div class="post-date">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>
+                        更新日期: 2022-06-29
                     </div>
                 
 
                 
-                    <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        4.8k
+                    <div>
+                        <i class="fa fa-file-word-o fa-fw"></i>
+                        文章字数: 4.8k
                     </div>
                 
 
                 
-                    <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        20 分
+                    <div>
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        阅读时长: 20 分
                     </div>
                 
 
                 
             </div>
         </div>
+        
         <hr class="clearfix">
+        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="生产环境的数据库规划"><a href="#生产环境的数据库规划" class="headerlink" title="生产环境的数据库规划"></a>生产环境的数据库规划</h1><h2 id="1-1-生产环境的数据库服务器配置"><a href="#1-1-生产环境的数据库服务器配置" class="headerlink" title="1.1 生产环境的数据库服务器配置"></a>1.1 生产环境的数据库服务器配置</h2><p>一般来说，对于我们这种Java开发者，可能并不会去关心MySQL的服务器配置什么的，大点的公司基本都是DBA给出或者运维给出的；</p>
@@ -745,16 +747,15 @@ KiB Swap:  2097148 total,  1222396 free,   874752 used.  1242384 avail Mem
 
 
 
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
                     
                         <div class="article-tag">
                             <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
-                <div class="post_share"
-                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                <div class="post_share">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -769,21 +770,17 @@ KiB Swap:  2097148 total,  1222396 free,   874752 used.  1242384 avail Mem
 
                 </div>
             </div>
+
             
         </div>
     </div>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    <!-- 懒加载评论 -->
+    <button id="load-comments">加载评论</button>
+    <div id="comments-section" style="display:none;">
+        
+        
+    </div>
 
     
 
@@ -879,32 +876,18 @@ You are given two non-empty linked lists representing two non-negative integers.
 </article>
 </div>
 
+<!-- 文章复制版权信息 -->
 
 
+<!-- 代码块优化 -->
+<script defer src="/"></script>
 
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码折行 -->
 
-<!-- 代码语言 -->
-
-    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-
-<!-- 代码块折行 -->
-
-    <style type="text/css">
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
+    <style>
+        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
     </style>
+
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1110,12 +1093,19 @@ You are given two non-empty linked lists representing two non-negative integers.
     </div>
 </div>
 
+<!-- 异步加载 search.js -->
 <script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
 <script type="text/javascript">
     $(function () {
-        searchFunc("/search.xml", 'searchInput', 'searchResult');
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
     });
 </script>
+
 <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">

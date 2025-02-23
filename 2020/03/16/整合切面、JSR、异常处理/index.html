@@ -425,37 +425,39 @@
 
             <div class="post-info">
                 
-                    <div class="post-date info-break-policy">
-                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2020-03-16
+                    <div class="post-date">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>
+                        发布日期: 2020-03-16
                     </div>
                 
 
                 
-                    <div class="post-date info-break-policy">
-                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2020-03-16
+                    <div class="post-date">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>
+                        更新日期: 2020-03-16
                     </div>
                 
 
                 
-                    <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        856
+                    <div>
+                        <i class="fa fa-file-word-o fa-fw"></i>
+                        文章字数: 856
                     </div>
                 
 
                 
-                    <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                    <div>
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        阅读时长: 4 分
                     </div>
                 
 
                 
             </div>
         </div>
+        
         <hr class="clearfix">
+        
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="1-切面编写"><a href="#1-切面编写" class="headerlink" title="1.切面编写"></a>1.切面编写</h2><ul>
@@ -585,16 +587,15 @@
 
 
 
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
                     
                         <div class="article-tag">
                             <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
-                <div class="post_share"
-                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                <div class="post_share">
                     <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
     
@@ -609,21 +610,17 @@
 
                 </div>
             </div>
+
             
         </div>
     </div>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    <!-- 懒加载评论 -->
+    <button id="load-comments">加载评论</button>
+    <div id="comments-section" style="display:none;">
+        
+        
+    </div>
 
     
 
@@ -719,32 +716,18 @@ public class PmsProductCategory implements Serializable {
 </article>
 </div>
 
+<!-- 文章复制版权信息 -->
 
 
+<!-- 代码块优化 -->
+<script defer src="/"></script>
 
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码折行 -->
 
-<!-- 代码语言 -->
-
-    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-
-<!-- 代码块折行 -->
-
-    <style type="text/css">
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
+    <style>
+        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
     </style>
+
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -950,12 +933,19 @@ public class PmsProductCategory implements Serializable {
     </div>
 </div>
 
+<!-- 异步加载 search.js -->
 <script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
 <script type="text/javascript">
     $(function () {
-        searchFunc("/search.xml", 'searchInput', 'searchResult');
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
     });
 </script>
+
 <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
