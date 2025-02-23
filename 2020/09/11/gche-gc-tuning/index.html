@@ -1,0 +1,1599 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="GC和GC Tuning, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="GC的基础知识1.什么是垃圾
+C语言申请内存：malloc free
+C++： new delete
+c/C++ 手动回收内存
+Java: new ？
+自动内存回收，编程上简单，系统不容易出错，手动释放内存，容易出两种类型的问题：
+
+忘记回">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>GC和GC Tuning | 未见初墨</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="未见初墨" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">未见初墨</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/about" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-user-circle-o"></i>
+                    
+                    <span>关于</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/tags" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-tags"></i>
+                    
+                    <span>标签</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">未见初墨</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/tags" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-tags"></i>
+                        
+                        标签
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GC和GC Tuning</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>
+                        发布日期: 2020-09-11
+                    </div>
+                
+
+                
+                    <div class="post-date">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>
+                        更新日期: 2020-09-11
+                    </div>
+                
+
+                
+                    <div>
+                        <i class="fa fa-file-word-o fa-fw"></i>
+                        文章字数: 7k
+                    </div>
+                
+
+                
+                    <div>
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        阅读时长: 31 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        
+        <hr class="clearfix">
+        
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="GC的基础知识"><a href="#GC的基础知识" class="headerlink" title="GC的基础知识"></a>GC的基础知识</h3><h4 id="1-什么是垃圾"><a href="#1-什么是垃圾" class="headerlink" title="1.什么是垃圾"></a>1.什么是垃圾</h4><blockquote>
+<p>C语言申请内存：malloc free</p>
+<p>C++： new delete</p>
+<p>c/C++ 手动回收内存</p>
+<p>Java: new ？</p>
+<p>自动内存回收，编程上简单，系统不容易出错，手动释放内存，容易出两种类型的问题：</p>
+<ol>
+<li>忘记回收</li>
+<li>多次回收</li>
+</ol>
+</blockquote>
+<p>没有任何引用指向的一个对象或者多个对象（循环引用）</p>
+<h4 id="2-如何定位垃圾"><a href="#2-如何定位垃圾" class="headerlink" title="2.如何定位垃圾"></a>2.如何定位垃圾</h4><ol>
+<li>引用计数（ReferenceCount）</li>
+<li>根可达算法(RootSearching)</li>
+</ol>
+<h4 id="3-常见的垃圾回收算法"><a href="#3-常见的垃圾回收算法" class="headerlink" title="3.常见的垃圾回收算法"></a>3.常见的垃圾回收算法</h4><ol>
+<li>标记清除(mark sweep) - 位置不连续 产生碎片 效率偏低（两遍扫描）</li>
+<li>拷贝算法 (copying) - 没有碎片，浪费空间</li>
+<li>标记压缩(mark compact) - 没有碎片，效率偏低（两遍扫描，指针需要调整）</li>
+</ol>
+<h4 id="4-JVM内存分代模型（用于分代垃圾回收算法）"><a href="#4-JVM内存分代模型（用于分代垃圾回收算法）" class="headerlink" title="4.JVM内存分代模型（用于分代垃圾回收算法）"></a>4.JVM内存分代模型（用于分代垃圾回收算法）</h4><ol>
+<li><p>部分垃圾回收器使用的模型</p>
+<blockquote>
+<p>除Epsilon ZGC Shenandoah之外的GC都是使用逻辑分代模型</p>
+<p>G1是逻辑分代，物理不分代</p>
+<p>除此之外不仅逻辑分代，而且物理分代</p>
+</blockquote>
+</li>
+<li><p>新生代 + 老年代 + 永久代（1.7）Perm Generation/ 元数据区(1.8) Metaspace</p>
+<ol>
+<li>永久代 元数据 - Class</li>
+<li>永久代必须指定大小限制 ，元数据可以设置，也可以不设置，无上限（受限于物理内存）</li>
+<li>字符串常量 1.7 - 永久代，1.8 - 堆</li>
+<li>MethodArea逻辑概念 - 永久代、元数据</li>
+</ol>
+</li>
+<li><p>新生代 = Eden + 2个suvivor区 </p>
+<ol>
+<li>YGC回收之后，大多数的对象会被回收，活着的进入s0</li>
+<li>再次YGC，活着的对象eden + s0 -&gt; s1</li>
+<li>再次YGC，eden + s1 -&gt; s0</li>
+<li>年龄足够 -&gt; 老年代 （15 CMS 6）</li>
+<li>s区装不下 -&gt; 老年代</li>
+</ol>
+</li>
+<li><p>老年代</p>
+<ol>
+<li>顽固分子</li>
+<li>老年代满了FGC Full GC</li>
+</ol>
+</li>
+<li><p>GC Tuning (Generation)</p>
+<ol>
+<li>尽量减少FGC</li>
+<li>MinorGC = YGC</li>
+<li>MajorGC = FGC</li>
+</ol>
+</li>
+<li><p>对象分配过程图<br><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3.png" alt=""></p>
+</li>
+<li><p>动态年龄：（不重要）<br><a href="https://www.jianshu.com/p/989d3b06a49d">https://www.jianshu.com/p/989d3b06a49d</a></p>
+</li>
+<li><p>分配担保：（不重要）<br>YGC期间 survivor区空间不够了 空间担保直接进入老年代<br>参考：<a href="https://cloud.tencent.com/developer/article/1082730">https://cloud.tencent.com/developer/article/1082730</a></p>
+</li>
+</ol>
+<h4 id="5-常见的垃圾回收器"><a href="#5-常见的垃圾回收器" class="headerlink" title="5.常见的垃圾回收器"></a>5.常见的垃圾回收器</h4><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="%E5%B8%B8%E7%94%A8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8.png" alt="常用垃圾回收器"></p>
+<ol>
+<li>垃圾回收器的发展路线，是随着内存越来越大的过程而演进<br>从分代算法演化到不分代算法<br>Serial算法 几十兆<br>Parallel算法 几个G<br>CMS 几十个G  - 承上启下，开始并发回收 -<br>.- 三色标记 - </li>
+<li>JDK诞生 Serial追随 提高效率，诞生了PS，为了配合CMS，诞生了PN，CMS是1.4版本后期引入，CMS是里程碑式的GC，它开启了并发回收的过程，但是CMS毛病较多，因此目前任何一个JDK版本默认是CMS<br>并发垃圾回收是因为无法忍受STW</li>
+<li>Serial 年轻代 串行回收</li>
+<li>PS 年轻代 并行回收</li>
+<li>ParNew 年轻代 配合CMS的并行回收</li>
+<li>SerialOld </li>
+<li>ParallelOld</li>
+<li>ConcurrentMarkSweep 老年代 并发的， 垃圾回收和应用程序同时运行，降低STW的时间(200ms)<br>CMS问题比较多，所以现在没有一个版本默认是CMS，只能手工指定<br>CMS既然是MarkSweep，就一定会有碎片化的问题，碎片到达一定程度，CMS的老年代分配对象分配不下的时候，使用SerialOld 进行老年代回收<br>想象一下：<br>PS + PO -&gt; 加内存 换垃圾回收器 -&gt; PN + CMS + SerialOld（几个小时 - 几天的STW）<br>几十个G的内存，单线程回收 -&gt; G1 + FGC 几十个G -&gt; 上T内存的服务器 ZGC<br>算法：三色标记 + Incremental Update</li>
+<li>G1(200ms - 10ms)<br>算法：三色标记 + SATB</li>
+<li>ZGC (10ms - 1ms) PK C++<br>   算法：ColoredPointers + LoadBarrier</li>
+<li>Shenandoah<br>算法：ColoredPointers + WriteBarrier</li>
+<li>Eplison</li>
+<li>PS 和 PN区别的延伸阅读：<br>▪<a href="https://docs.oracle.com/en/java/javase/13/gctuning/ergonomics.html">https://docs.oracle.com/en/java/javase/13/gctuning/ergonomics.html# GUID-3D0BB91E-9BFF-4EBB-B523-14493A860E73</a></li>
+<li>垃圾收集器跟内存大小的关系<ol>
+<li>Serial 几十兆</li>
+<li>PS 上百兆 - 几个G</li>
+<li>CMS - 20G</li>
+<li>G1 - 上百G</li>
+<li>ZGC - 4T - 16T（JDK13）</li>
+</ol>
+</li>
+</ol>
+<p>1.8默认的垃圾回收：PS + ParallelOld</p>
+<h3 id="常见垃圾回收器组合参数设定：-1-8"><a href="#常见垃圾回收器组合参数设定：-1-8" class="headerlink" title="常见垃圾回收器组合参数设定：(1.8)"></a>常见垃圾回收器组合参数设定：(1.8)</h3><ul>
+<li><p>-XX:+UseSerialGC = Serial New (DefNew) + Serial Old</p>
+<ul>
+<li>小型程序。默认情况下不会是这种选项，HotSpot会根据计算及配置和JDK版本自动选择收集器</li>
+</ul>
+</li>
+<li><p>-XX:+UseParNewGC = ParNew + SerialOld</p>
+<ul>
+<li>这个组合已经很少用（在某些版本中已经废弃）</li>
+<li><a href="https://stackoverflow.com/questions/34962257/why-remove-support-for-parnewserialold-anddefnewcms-in-the-future">https://stackoverflow.com/questions/34962257/why-remove-support-for-parnewserialold-anddefnewcms-in-the-future</a></li>
+</ul>
+</li>
+<li><p>-XX:+UseConc<font color="red">(urrent)</font>MarkSweepGC = ParNew + CMS + Serial Old</p>
+</li>
+<li><p>-XX:+UseParallelGC = Parallel Scavenge + Parallel Old (1.8默认) 【PS + SerialOld】</p>
+</li>
+<li><p>-XX:+UseParallelOldGC = Parallel Scavenge + Parallel Old</p>
+</li>
+<li><p>-XX:+UseG1GC = G1</p>
+</li>
+<li><p>Linux中没找到默认GC的查看方法，而windows中会打印UseParallelGC </p>
+<ul>
+<li>java +XX:+PrintCommandLineFlags -version</li>
+<li>通过GC的日志来分辨</li>
+</ul>
+</li>
+<li><p>Linux下1.8版本默认的垃圾回收器到底是什么？</p>
+<ul>
+<li>1.8.0_181 默认（看不出来）Copy MarkCompact</li>
+<li>1.8.0_222 默认 PS + PO</li>
+</ul>
+</li>
+</ul>
+<h3 id="JVM调优第一步，了解JVM常用命令行参数"><a href="#JVM调优第一步，了解JVM常用命令行参数" class="headerlink" title="JVM调优第一步，了解JVM常用命令行参数"></a>JVM调优第一步，了解JVM常用命令行参数</h3><ul>
+<li><p>JVM的命令行参数参考：<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html</a></p>
+</li>
+<li><p>HotSpot参数分类</p>
+<blockquote>
+<p>标准： - 开头，所有的HotSpot都支持</p>
+<p>非标准：-X 开头，特定版本HotSpot支持特定命令</p>
+<p>不稳定：-XX 开头，下个版本可能取消</p>
+</blockquote>
+<p>java -version</p>
+<p>java -X</p>
+</li>
+</ul>
+<p>  java -XX:+PrintFlagsWithComments //只有debug版本能用</p>
+<p>  试验用程序：</p>
+<pre class="line-numbers language-java"><code class="language-java">  <span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+  <span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>LinkedList<span class="token punctuation">;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloGC</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"HelloGC!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      List list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol>
+<li>区分概念：内存泄漏memory leak，内存溢出out of memory</li>
+<li>java -XX:+PrintCommandLineFlags HelloGC</li>
+<li>java -Xmn10M -Xms40M -Xmx60M -XX:+PrintCommandLineFlags -XX:+PrintGC  HelloGC<br>PrintGCDetails PrintGCTimeStamps PrintGCCauses</li>
+<li>java -XX:+UseConcMarkSweepGC -XX:+PrintCommandLineFlags HelloGC</li>
+<li>java -XX:+PrintFlagsInitial 默认参数值</li>
+<li>java -XX:+PrintFlagsFinal 最终参数值</li>
+<li>java -XX:+PrintFlagsFinal | grep xxx 找到对应的参数</li>
+<li>java -XX:+PrintFlagsFinal -version |grep GC</li>
+<li>java -XX:+PrintFlagsFinal -version | wc -l<br>共728个参数</li>
+</ol>
+<h3 id="PS-GC日志详解"><a href="#PS-GC日志详解" class="headerlink" title="PS GC日志详解"></a>PS GC日志详解</h3><p>每种垃圾回收器的日志格式是不同的！</p>
+<p>PS日志格式</p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="./GC%E6%97%A5%E5%BF%97%E8%AF%A6%E8%A7%A3.png" alt="GC日志详解"></p>
+<p>heap dump部分：</p>
+<pre class="line-numbers language-java"><code class="language-java">eden space 5632K<span class="token punctuation">,</span> <span class="token number">94</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff980000</span><span class="token punctuation">,</span><span class="token number">0x00000000ffeb3e28</span><span class="token punctuation">,</span><span class="token number">0x00000000fff00000</span><span class="token punctuation">)</span>
+                            后面的内存地址指的是，起始地址，使用空间结束地址，整体空间结束地址<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="GCHeapDump.png" alt="GCHeapDump"></p>
+<p>total = eden + 1个survivor</p>
+<h3 id="调优前的基础概念："><a href="#调优前的基础概念：" class="headerlink" title="调优前的基础概念："></a>调优前的基础概念：</h3><ol>
+<li>吞吐量：用户代码时间 /（用户代码执行时间 + 垃圾回收时间）</li>
+<li>响应时间：STW越短，响应时间越好</li>
+</ol>
+<p>所谓调优，首先确定，追求啥？吞吐量优先，还是响应时间优先？还是在满足一定的响应时间的情况下，要求达到多大的吞吐量…</p>
+<p>问题：</p>
+<p>科学计算，吞吐量。数据挖掘，thrput。吞吐量优先的一般：（PS + PO）</p>
+<p>响应时间：网站 GUI API （1.8 G1）</p>
+<h3 id="什么是调优？"><a href="#什么是调优？" class="headerlink" title="什么是调优？"></a>什么是调优？</h3><ol>
+<li>根据需求进行JVM规划和预调优</li>
+<li>优化运行JVM运行环境（慢，卡顿）</li>
+<li>解决JVM运行过程中出现的各种问题(OOM)</li>
+</ol>
+<h3 id="调优，从规划开始"><a href="#调优，从规划开始" class="headerlink" title="调优，从规划开始"></a>调优，从规划开始</h3><ul>
+<li><p>调优，从业务场景开始，没有业务场景的调优都是耍流氓</p>
+</li>
+<li><p>无监控（压力测试，能看到结果），不调优</p>
+</li>
+<li><p>步骤：</p>
+<ol>
+<li>熟悉业务场景（没有最好的垃圾回收器，只有最合适的垃圾回收器）<ol>
+<li>响应时间、停顿时间 [CMS G1 ZGC] （需要给用户作响应）</li>
+<li>吞吐量 = 用户时间 /( 用户时间 + GC时间) [PS]</li>
+</ol>
+</li>
+<li>选择回收器组合</li>
+<li>计算内存需求（经验值 1.5G 16G）</li>
+<li>选定CPU（越高越好）</li>
+<li>设定年代大小、升级年龄</li>
+<li>设定日志参数<ol>
+<li>-Xloggc:/opt/xxx/logs/xxx-xxx-gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCCause</li>
+<li>或者每天产生一个日志文件</li>
+</ol>
+</li>
+<li>观察日志情况</li>
+</ol>
+</li>
+<li><p>案例1：垂直电商，最高每日百万订单，处理订单系统需要什么样的服务器配置？</p>
+<blockquote>
+<p>这个问题比较业余，因为很多不同的服务器配置都能支撑(1.5G 16G)</p>
+<p>1小时360000集中时间段， 100个订单/秒，（找一小时内的高峰期，1000订单/秒）</p>
+<p>经验值，</p>
+<p>非要计算：一个订单产生需要多少内存？512K * 1000 500M内存</p>
+<p>专业一点儿问法：要求响应时间100ms</p>
+<p>压测！</p>
+</blockquote>
+</li>
+<li><p>案例2：12306遭遇春节大规模抢票应该如何支撑？</p>
+<blockquote>
+<p>12306应该是中国并发量最大的秒杀网站：</p>
+<p>号称并发量100W最高</p>
+<p>CDN -&gt; LVS -&gt; NGINX -&gt; 业务系统 -&gt; 每台机器1W并发（10K问题） 100台机器</p>
+<p>普通电商订单 -&gt; 下单 -&gt;订单系统（IO）减库存 -&gt;等待用户付款</p>
+<p>12306的一种可能的模型： 下单 -&gt; 减库存 和 订单(redis kafka) 同时异步进行 -&gt;等付款</p>
+<p>减库存最后还会把压力压到一台服务器</p>
+<p>可以做分布式本地库存 + 单独服务器做库存均衡</p>
+<p>大流量的处理方法：分而治之</p>
+</blockquote>
+</li>
+<li><p>怎么得到一个事务会消耗多少内存？</p>
+<blockquote>
+<ol>
+<li><p>弄台机器，看能承受多少TPS？是不是达到目标？扩容或调优，让它达到</p>
+</li>
+<li><p>用压测来确定</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h3 id="优化环境"><a href="#优化环境" class="headerlink" title="优化环境"></a>优化环境</h3><ol>
+<li>有一个50万PV的资料类网站（从磁盘提取文档到内存）原服务器32位，1.5G<br>的堆，用户反馈网站比较缓慢，因此公司决定升级，新的服务器为64位，16G<br>的堆内存，结果用户反馈卡顿十分严重，反而比以前效率更低了<ol>
+<li>为什么原网站慢?<br>很多用户浏览数据，很多数据load到内存，内存不足，频繁GC，STW长，响应时间变慢</li>
+<li>为什么会更卡顿？<br>内存越大，FGC时间越长</li>
+<li>咋办？<br>PS -&gt; PN + CMS 或者 G1</li>
+</ol>
+</li>
+<li>系统CPU经常100%，如何调优？(面试高频)<br>CPU100%那么一定有线程在占用系统资源，<ol>
+<li>找出哪个进程cpu高（top）</li>
+<li>该进程中的哪个线程cpu高（top -Hp）</li>
+<li>导出该线程的堆栈 (jstack)</li>
+<li>查找哪个方法（栈帧）消耗时间 (jstack)</li>
+<li>工作线程占比高 | 垃圾回收线程占比高</li>
+</ol>
+</li>
+<li>系统内存飙高，如何查找问题？（面试高频）<ol>
+<li>导出堆内存 (jmap)</li>
+<li>分析 (jhat jvisualvm mat jprofiler … )</li>
+</ol>
+</li>
+<li>如何监控JVM<ol>
+<li>jstat jvisualvm jprofiler arthas top…</li>
+</ol>
+</li>
+</ol>
+<h3 id="解决JVM运行中的问题"><a href="#解决JVM运行中的问题" class="headerlink" title="解决JVM运行中的问题"></a>解决JVM运行中的问题</h3><h4 id="一个案例理解常用工具"><a href="#一个案例理解常用工具" class="headerlink" title="一个案例理解常用工具"></a>一个案例理解常用工具</h4><ol>
+<li><p>测试代码：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>mashibing<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span>gc<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>math<span class="token punctuation">.</span>BigDecimal<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Date<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>ScheduledThreadPoolExecutor<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>ThreadPoolExecutor<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>TimeUnit<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * 从数据库中读取信用数据，套用模型，并把结果进行记录和传输
+ */</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">T15_FullGC_Problem01</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">CardInfo</span> <span class="token punctuation">{</span>
+        BigDecimal price <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String name <span class="token operator">=</span> <span class="token string">"张三"</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> age <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+        Date birthdate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">m</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> ScheduledThreadPoolExecutor executor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ScheduledThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor<span class="token punctuation">.</span>DiscardOldestPolicy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        executor<span class="token punctuation">.</span><span class="token function">setMaximumPoolSize</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">modelFit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">modelFit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span>CardInfo<span class="token operator">></span> taskList <span class="token operator">=</span> <span class="token function">getAllCardInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        taskList<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>info <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// do something</span>
+            executor<span class="token punctuation">.</span><span class="token function">scheduleWithFixedDelay</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//do sth with info</span>
+                info<span class="token punctuation">.</span><span class="token function">m</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> List<span class="token operator">&lt;</span>CardInfo<span class="token operator">></span> <span class="token function">getAllCardInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span>CardInfo<span class="token operator">></span> taskList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            CardInfo ci <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CardInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            taskList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>ci<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> taskList<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>java -Xms200M -Xmx200M -XX:+PrintGC com.mashibing.jvm.gc.T15_FullGC_Problem01</p>
+</li>
+<li><p>一般是运维团队首先受到报警信息（CPU Memory）</p>
+</li>
+<li><p>top命令观察到问题：内存不断增长 CPU占用率居高不下</p>
+</li>
+<li><p>top -Hp 观察进程中的线程，哪个线程CPU和内存占比高</p>
+</li>
+<li><p>jps定位具体java进程<br>jstack 定位线程状况，重点关注：WAITING BLOCKED<br>eg.<br>waiting on &lt;0x0000000088ca3310&gt; (a java.lang.Object)<br>假如有一个进程中100个线程，很多线程都在waiting on <xx> ，一定要找到是哪个线程持有这把锁<br>怎么找？搜索jstack dump的信息，找<xx> ，看哪个线程持有这把锁RUNNABLE<br>作业：1：写一个死锁程序，用jstack观察 2 ：写一个程序，一个线程持有锁不释放，其他线程等待</xx></xx></p>
+</li>
+<li><p>为什么阿里规范里规定，线程的名称（尤其是线程池）都要写有意义的名称<br>怎么样自定义线程池里的线程名称？（自定义ThreadFactory）</p>
+</li>
+<li><p>jinfo pid </p>
+</li>
+<li><p>jstat -gc 动态观察gc情况 / 阅读GC日志发现频繁GC / arthas观察 / jconsole/jvisualVM/ Jprofiler（最好用）<br>jstat -gc 4655 500 : 每个500个毫秒打印GC的情况<br>如果面试官问你是怎么定位OOM问题的？如果你回答用图形界面（错误）<br>1：已经上线的系统不用图形界面用什么？（cmdline arthas）<br>2：图形界面到底用在什么地方？测试！测试的时候进行监控！（压测观察）</p>
+</li>
+<li><p>jmap - histo 4655 | head -20，查找有多少对象产生</p>
+</li>
+<li><p>jmap -dump:format=b,file=xxx pid ：</p>
+<p>线上系统，内存特别大，jmap执行期间会对进程产生很大影响，甚至卡顿（电商不适合）<br>1：设定了参数HeapDump，OOM的时候会自动产生堆转储文件（不是很专业，因为多有监控，内存增长就会报警）<br>2：<font color="red">很多服务器备份（高可用），停掉这台服务器对其他服务器不影响</font><br>3：在线定位(一般小点儿公司用不到)</p>
+<p>4：在测试环境中压测（产生类似内存增长问题，在堆还不是很大的时候进行转储）</p>
+</li>
+<li><p>java -Xms20M -Xmx20M -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError com.mashibing.jvm.gc.T15_FullGC_Problem01</p>
+</li>
+<li><p>使用MAT / jhat /jvisualvm 进行dump文件分析<br> <a href="https://www.cnblogs.com/baihuitestsoftware/articles/6406271.html">https://www.cnblogs.com/baihuitestsoftware/articles/6406271.html</a><br>jhat -J-mx512M xxx.dump<br><a href="http://192.168.17.11:7000">http://192.168.17.11:7000</a><br>拉到最后：找到对应链接<br>可以使用OQL查找特定问题对象</p>
+</li>
+<li><p>找到代码的问题</p>
+</li>
+</ol>
+<h4 id="jconsole远程连接"><a href="#jconsole远程连接" class="headerlink" title="jconsole远程连接"></a>jconsole远程连接</h4><ol>
+<li><p>程序启动加入参数：</p>
+<blockquote>
+<pre class="line-numbers language-shell"><code class="language-shell">java -Djava.rmi.server.hostname=192.168.17.11 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=11111 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false XXX<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</blockquote>
+</li>
+<li><p>如果遭遇 Local host name unknown：XXX的错误，修改/etc/hosts文件，把XXX加入进去</p>
+<blockquote>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token number">192.168</span><span class="token punctuation">.</span><span class="token number">17.11</span> basic localhost localhost<span class="token punctuation">.</span>localdomain localhost4 localhost4<span class="token punctuation">.</span>localdomain4
+<span class="token operator">:</span><span class="token operator">:</span><span class="token number">1</span>         localhost localhost<span class="token punctuation">.</span>localdomain localhost6 localhost6<span class="token punctuation">.</span>localdomain6<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</blockquote>
+</li>
+<li><p>关闭linux防火墙（实战中应该打开对应端口）</p>
+<blockquote>
+<pre class="line-numbers language-shell"><code class="language-shell">service iptables stop
+chkconfig iptables off # 永久关闭<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</blockquote>
+</li>
+<li><p>windows上打开 jconsole远程连接 192.168.17.11:11111</p>
+</li>
+</ol>
+<h4 id="jvisualvm远程连接"><a href="#jvisualvm远程连接" class="headerlink" title="jvisualvm远程连接"></a>jvisualvm远程连接</h4><p> <a href="https://www.cnblogs.com/liugh/p/7620336.html">https://www.cnblogs.com/liugh/p/7620336.html</a> （简单做法）</p>
+<h4 id="jprofiler-收费"><a href="#jprofiler-收费" class="headerlink" title="jprofiler (收费)"></a>jprofiler (收费)</h4><h4 id="arthas在线排查工具"><a href="#arthas在线排查工具" class="headerlink" title="arthas在线排查工具"></a>arthas在线排查工具</h4><ul>
+<li>为什么需要在线排查？<br>在生产上我们经常会碰到一些不好排查的问题，例如线程安全问题，用最简单的threaddump或者heapdump不好查到问题原因。为了排查这些问题，有时我们会临时加一些日志，比如在一些关键的函数里打印出入参，然后重新打包发布，如果打了日志还是没找到问题，继续加日志，重新打包发布。对于上线流程复杂而且审核比较严的公司，从改代码到上线需要层层的流转，会大大影响问题排查的进度。 </li>
+<li>jvm观察jvm信息</li>
+<li>thread定位线程问题</li>
+<li>dashboard 观察系统情况</li>
+<li>heapdump + jhat分析</li>
+<li>jad反编译<br>动态代理生成类的问题定位<br>第三方的类（观察代码）<br>版本问题（确定自己最新提交的版本是不是被使用）</li>
+<li>redefine 热替换<br>目前有些限制条件：只能改方法实现（方法已经运行完成），不能改方法名， 不能改属性<br>m() -&gt; mm()</li>
+<li>sc  - search class</li>
+<li>watch  - watch method</li>
+<li>没有包含的功能：jmap</li>
+</ul>
+<h3 id="GC算法的基础概念"><a href="#GC算法的基础概念" class="headerlink" title="GC算法的基础概念"></a>GC算法的基础概念</h3><ul>
+<li>Card Table<br>由于做YGC时，需要扫描整个OLD区，效率非常低，所以JVM设计了CardTable， 如果一个OLD区CardTable中有对象指向Y区，就将它设为Dirty，下次扫描时，只需要扫描Dirty Card<br>在结构上，Card Table用BitMap来实现</li>
+</ul>
+<h3 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h3><h4 id="CMS的问题"><a href="#CMS的问题" class="headerlink" title="CMS的问题"></a>CMS的问题</h4><ol>
+<li><p>Memory Fragmentation</p>
+<blockquote>
+<p>-XX:+UseCMSCompactAtFullCollection<br>-XX:CMSFullGCsBeforeCompaction 默认为0 指的是经过多少次FGC才进行压缩</p>
+</blockquote>
+</li>
+<li><p>Floating Garbage</p>
+<blockquote>
+<p>Concurrent Mode Failure<br>产生：if the concurrent collector is unable to finish reclaiming the unreachable objects before the tenured generation fills up, or if an allocation cannot be satisfiedwith the available free space blocks in the tenured generation, then theapplication is paused and the collection is completed with all the applicationthreads stopped</p>
+<p>解决方案：降低触发CMS的阈值</p>
+<p>PromotionFailed</p>
+<p>解决方案类似，保持老年代有足够的空间</p>
+<p>–XX:CMSInitiatingOccupancyFraction 92% 可以降低这个值，让CMS保持老年代足够的空间</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="CMS日志分析"><a href="#CMS日志分析" class="headerlink" title="CMS日志分析"></a>CMS日志分析</h4><p>执行命令：java -Xms20M -Xmx20M -XX:+PrintGCDetails -XX:+UseConcMarkSweepGC com.mashibing.jvm.gc.T15_FullGC_Problem01</p>
+<p>[GC (Allocation Failure) [ParNew: 6144K-&gt;640K(6144K), 0.0265885 secs] 6585K-&gt;2770K(19840K), 0.0268035 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] </p>
+<blockquote>
+<p>ParNew：年轻代收集器</p>
+<p>6144-&gt;640：收集前后的对比</p>
+<p>（6144）：整个年轻代容量</p>
+<p>6585 -&gt; 2770：整个堆的情况</p>
+<p>（19840）：整个堆大小</p>
+</blockquote>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>CMS Initial Mark<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span> CMS<span class="token operator">-</span>initial<span class="token operator">-</span>mark<span class="token operator">:</span> <span class="token function">8511K</span><span class="token punctuation">(</span>13696K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token function">9866K</span><span class="token punctuation">(</span>19840K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0040321</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.01</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+    <span class="token comment" spellcheck="true">//8511 (13696) : 老年代使用（最大）</span>
+    <span class="token comment" spellcheck="true">//9866 (19840) : 整个堆使用（最大）</span>
+<span class="token punctuation">[</span>CMS<span class="token operator">-</span>concurrent<span class="token operator">-</span>mark<span class="token operator">-</span>start<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>CMS<span class="token operator">-</span>concurrent<span class="token operator">-</span>mark<span class="token operator">:</span> <span class="token number">0.018</span><span class="token operator">/</span><span class="token number">0.018</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.01</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.02</span> secs<span class="token punctuation">]</span> 
+    <span class="token comment" spellcheck="true">//这里的时间意义不大，因为是并发执行</span>
+<span class="token punctuation">[</span>CMS<span class="token operator">-</span>concurrent<span class="token operator">-</span>preclean<span class="token operator">-</span>start<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>CMS<span class="token operator">-</span>concurrent<span class="token operator">-</span>preclean<span class="token operator">:</span> <span class="token number">0.000</span><span class="token operator">/</span><span class="token number">0.000</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+    <span class="token comment" spellcheck="true">//标记Card为Dirty，也称为Card Marking</span>
+<span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>CMS Final Remark<span class="token punctuation">)</span> <span class="token punctuation">[</span>YG occupancy<span class="token operator">:</span> <span class="token number">1597</span> <span class="token function">K</span> <span class="token punctuation">(</span><span class="token number">6144</span> K<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token function">Rescan</span> <span class="token punctuation">(</span>parallel<span class="token punctuation">)</span> <span class="token punctuation">,</span> <span class="token number">0.0008396</span> secs<span class="token punctuation">]</span><span class="token punctuation">[</span>weak refs processing<span class="token punctuation">,</span> <span class="token number">0.0000138</span> secs<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token keyword">class</span> <span class="token class-name">unloading</span><span class="token punctuation">,</span> <span class="token number">0.0005404</span> secs<span class="token punctuation">]</span><span class="token punctuation">[</span>scrub symbol table<span class="token punctuation">,</span> <span class="token number">0.0006169</span> secs<span class="token punctuation">]</span><span class="token punctuation">[</span>scrub string table<span class="token punctuation">,</span> <span class="token number">0.0004903</span> secs<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span> CMS<span class="token operator">-</span>remark<span class="token operator">:</span> <span class="token function">8511K</span><span class="token punctuation">(</span>13696K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token function">10108K</span><span class="token punctuation">(</span>19840K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0039567</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+    <span class="token comment" spellcheck="true">//STW阶段，YG occupancy:年轻代占用及容量</span>
+    <span class="token comment" spellcheck="true">//[Rescan (parallel)：STW下的存活对象标记</span>
+    <span class="token comment" spellcheck="true">//weak refs processing: 弱引用处理</span>
+    <span class="token comment" spellcheck="true">//class unloading: 卸载用不到的class</span>
+    <span class="token comment" spellcheck="true">//scrub symbol(string) table: </span>
+        <span class="token comment" spellcheck="true">//cleaning up symbol and string tables which hold class-level metadata and </span>
+        <span class="token comment" spellcheck="true">//internalized string respectively</span>
+    <span class="token comment" spellcheck="true">//CMS-remark: 8511K(13696K): 阶段过后的老年代占用及容量</span>
+    <span class="token comment" spellcheck="true">//10108K(19840K): 阶段过后的堆占用及容量</span>
+
+<span class="token punctuation">[</span>CMS<span class="token operator">-</span>concurrent<span class="token operator">-</span>sweep<span class="token operator">-</span>start<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>CMS<span class="token operator">-</span>concurrent<span class="token operator">-</span>sweep<span class="token operator">:</span> <span class="token number">0.005</span><span class="token operator">/</span><span class="token number">0.005</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.01</span> secs<span class="token punctuation">]</span> 
+    <span class="token comment" spellcheck="true">//标记已经完成，进行并发清理</span>
+<span class="token punctuation">[</span>CMS<span class="token operator">-</span>concurrent<span class="token operator">-</span>reset<span class="token operator">-</span>start<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>CMS<span class="token operator">-</span>concurrent<span class="token operator">-</span>reset<span class="token operator">:</span> <span class="token number">0.000</span><span class="token operator">/</span><span class="token number">0.000</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true">//重置内部结构，为下次GC做准备</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h3><ol>
+<li>▪<a href="https://www.oracle.com/technical-resources/articles/java/g1gc.html">https://www.oracle.com/technical-resources/articles/java/g1gc.html</a></li>
+</ol>
+<h4 id="G1日志详解"><a href="#G1日志详解" class="headerlink" title="G1日志详解"></a>G1日志详解</h4><pre class="line-numbers language-java"><code class="language-java"><span class="token punctuation">[</span>GC <span class="token function">pause</span> <span class="token punctuation">(</span>G1 Evacuation Pause<span class="token punctuation">)</span> <span class="token punctuation">(</span>young<span class="token punctuation">)</span> <span class="token punctuation">(</span>initial<span class="token operator">-</span>mark<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0015790</span> secs<span class="token punctuation">]</span>
+<span class="token comment" spellcheck="true">//young -> 年轻代 Evacuation-> 复制存活对象 </span>
+<span class="token comment" spellcheck="true">//initial-mark 混合回收的阶段，这里是YGC混合老年代回收</span>
+   <span class="token punctuation">[</span>Parallel Time<span class="token operator">:</span> <span class="token number">1.5</span> ms<span class="token punctuation">,</span> GC Workers<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true">//一个GC线程</span>
+      <span class="token punctuation">[</span>GC Worker <span class="token function">Start</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">92635.7</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Ext Root <span class="token function">Scanning</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">1.1</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Update <span class="token function">RS</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">0.0</span><span class="token punctuation">]</span>
+         <span class="token punctuation">[</span>Processed Buffers<span class="token operator">:</span>  <span class="token number">1</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Scan <span class="token function">RS</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">0.0</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Code Root <span class="token function">Scanning</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">0.0</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Object <span class="token function">Copy</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">0.1</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span><span class="token function">Termination</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">0.0</span><span class="token punctuation">]</span>
+         <span class="token punctuation">[</span>Termination Attempts<span class="token operator">:</span>  <span class="token number">1</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>GC Worker <span class="token function">Other</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">0.0</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>GC Worker <span class="token function">Total</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">1.2</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>GC Worker <span class="token function">End</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token number">92636.9</span><span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>Code Root Fixup<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>Code Root Purge<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>Clear CT<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>Other<span class="token operator">:</span> <span class="token number">0.1</span> ms<span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Choose CSet<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Ref Proc<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Ref Enq<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Redirty Cards<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Humongous Register<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Humongous Reclaim<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+      <span class="token punctuation">[</span>Free CSet<span class="token operator">:</span> <span class="token number">0.0</span> ms<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>Eden<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">.</span><span class="token function">0B</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">.</span>0K<span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">.</span><span class="token function">0B</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">.</span>0K<span class="token punctuation">)</span> Survivors<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">.</span>0B<span class="token operator">-</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">.</span>0B Heap<span class="token operator">:</span> <span class="token number">18</span><span class="token punctuation">.</span><span class="token function">8M</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>0M<span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token number">18</span><span class="token punctuation">.</span><span class="token function">8M</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>0M<span class="token punctuation">)</span><span class="token punctuation">]</span>
+ <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+<span class="token comment" spellcheck="true">//以下是混合回收其他阶段</span>
+<span class="token punctuation">[</span>GC concurrent<span class="token operator">-</span>root<span class="token operator">-</span>region<span class="token operator">-</span>scan<span class="token operator">-</span>start<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>GC concurrent<span class="token operator">-</span>root<span class="token operator">-</span>region<span class="token operator">-</span>scan<span class="token operator">-</span>end<span class="token punctuation">,</span> <span class="token number">0.0000078</span> secs<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>GC concurrent<span class="token operator">-</span>mark<span class="token operator">-</span>start<span class="token punctuation">]</span>
+<span class="token comment" spellcheck="true">//无法evacuation，进行FGC</span>
+<span class="token punctuation">[</span>Full <span class="token function">GC</span> <span class="token punctuation">(</span>Allocation Failure<span class="token punctuation">)</span>  18M<span class="token operator">-</span><span class="token operator">></span><span class="token function">18M</span><span class="token punctuation">(</span>20M<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0719656</span> secs<span class="token punctuation">]</span>
+   <span class="token punctuation">[</span>Eden<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">.</span><span class="token function">0B</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">.</span>0K<span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">.</span><span class="token function">0B</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">.</span>0K<span class="token punctuation">)</span> Survivors<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">.</span>0B<span class="token operator">-</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">.</span>0B Heap<span class="token operator">:</span> <span class="token number">18</span><span class="token punctuation">.</span><span class="token function">8M</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>0M<span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token number">18</span><span class="token punctuation">.</span><span class="token function">8M</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>0M<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>Metaspace<span class="token operator">:</span> <span class="token number">38</span>
+76K<span class="token operator">-</span><span class="token operator">></span><span class="token function">3876K</span><span class="token punctuation">(</span>1056768K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.07</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.07</span> secs<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="案例汇总"><a href="#案例汇总" class="headerlink" title="案例汇总"></a>案例汇总</h3><p>OOM产生的原因多种多样，有些程序未必产生OOM，不断FGC(CPU飙高，但内存回收特别少) （上面案例）</p>
+<ol>
+<li><p>硬件升级系统反而卡顿的问题（见上）</p>
+</li>
+<li><p>线程池不当运用产生OOM问题（见上）<br>不断的往List里加对象（实在太LOW）</p>
+</li>
+<li><p>smile jira问题<br>实际系统不断重启<br>解决问题 加内存 + 更换垃圾回收器 G1<br>真正问题在哪儿？不知道</p>
+</li>
+<li><p>tomcat http-header-size过大问题（Hector）</p>
+</li>
+<li><p>lambda表达式导致方法区溢出问题(MethodArea / Perm Metaspace)<br>LambdaGC.java     -XX:MaxMetaspaceSize=9M -XX:+PrintGCDetails</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token string">"C:\Program Files\Java\jdk1.8.0_181\bin\java.exe"</span> <span class="token operator">-</span>XX<span class="token operator">:</span>MaxMetaspaceSize<span class="token operator">=</span>9M <span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>PrintGCDetails <span class="token string">"-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2019.1\lib\idea_rt.jar=49316:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2019.1\bin"</span> <span class="token operator">-</span>Dfile<span class="token punctuation">.</span>encoding<span class="token operator">=</span>UTF<span class="token operator">-</span><span class="token number">8</span> <span class="token operator">-</span>classpath <span class="token string">"C:\Program Files\Java\jdk1.8.0_181\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_181\jre\lib\rt.jar;C:\work\ijprojects\JVM\out\production\JVM;C:\work\ijprojects\ObjectSize\out\artifacts\ObjectSize_jar\ObjectSize.jar"</span> com<span class="token punctuation">.</span>mashibing<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span>gc<span class="token punctuation">.</span>LambdaGC
+<span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>Metadata GC Threshold<span class="token punctuation">)</span> <span class="token punctuation">[</span>PSYoungGen<span class="token operator">:</span> 11341K<span class="token operator">-</span><span class="token operator">></span><span class="token function">1880K</span><span class="token punctuation">(</span>38400K<span class="token punctuation">)</span><span class="token punctuation">]</span> 11341K<span class="token operator">-</span><span class="token operator">></span><span class="token function">1888K</span><span class="token punctuation">(</span>125952K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0022190</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+<span class="token punctuation">[</span>Full <span class="token function">GC</span> <span class="token punctuation">(</span>Metadata GC Threshold<span class="token punctuation">)</span> <span class="token punctuation">[</span>PSYoungGen<span class="token operator">:</span> 1880K<span class="token operator">-</span><span class="token operator">></span><span class="token function">0K</span><span class="token punctuation">(</span>38400K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>ParOldGen<span class="token operator">:</span> 8K<span class="token operator">-</span><span class="token operator">></span><span class="token function">1777K</span><span class="token punctuation">(</span>35328K<span class="token punctuation">)</span><span class="token punctuation">]</span> 1888K<span class="token operator">-</span><span class="token operator">></span><span class="token function">1777K</span><span class="token punctuation">(</span>73728K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>Metaspace<span class="token operator">:</span> 8164K<span class="token operator">-</span><span class="token operator">></span><span class="token function">8164K</span><span class="token punctuation">(</span>1056768K<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0.0100681</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.02</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.01</span> secs<span class="token punctuation">]</span> 
+<span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>Last ditch collection<span class="token punctuation">)</span> <span class="token punctuation">[</span>PSYoungGen<span class="token operator">:</span> 0K<span class="token operator">-</span><span class="token operator">></span><span class="token function">0K</span><span class="token punctuation">(</span>38400K<span class="token punctuation">)</span><span class="token punctuation">]</span> 1777K<span class="token operator">-</span><span class="token operator">></span><span class="token function">1777K</span><span class="token punctuation">(</span>73728K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0005698</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+<span class="token punctuation">[</span>Full <span class="token function">GC</span> <span class="token punctuation">(</span>Last ditch collection<span class="token punctuation">)</span> <span class="token punctuation">[</span>PSYoungGen<span class="token operator">:</span> 0K<span class="token operator">-</span><span class="token operator">></span><span class="token function">0K</span><span class="token punctuation">(</span>38400K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>ParOldGen<span class="token operator">:</span> 1777K<span class="token operator">-</span><span class="token operator">></span><span class="token function">1629K</span><span class="token punctuation">(</span>67584K<span class="token punctuation">)</span><span class="token punctuation">]</span> 1777K<span class="token operator">-</span><span class="token operator">></span><span class="token function">1629K</span><span class="token punctuation">(</span>105984K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>Metaspace<span class="token operator">:</span> 8164K<span class="token operator">-</span><span class="token operator">></span><span class="token function">8156K</span><span class="token punctuation">(</span>1056768K<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0.0124299</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.06</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.01</span> secs<span class="token punctuation">]</span> 
+java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>InvocationTargetException
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>NativeMethodAccessorImpl<span class="token punctuation">.</span><span class="token function">invoke0</span><span class="token punctuation">(</span>Native Method<span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>NativeMethodAccessorImpl<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>NativeMethodAccessorImpl<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">62</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>DelegatingMethodAccessorImpl<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>DelegatingMethodAccessorImpl<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">43</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>Method<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>Method<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">498</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>instrument<span class="token punctuation">.</span>InstrumentationImpl<span class="token punctuation">.</span><span class="token function">loadClassAndStartAgent</span><span class="token punctuation">(</span>InstrumentationImpl<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">388</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>instrument<span class="token punctuation">.</span>InstrumentationImpl<span class="token punctuation">.</span><span class="token function">loadClassAndCallAgentmain</span><span class="token punctuation">(</span>InstrumentationImpl<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">411</span><span class="token punctuation">)</span>
+Caused by<span class="token operator">:</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>OutOfMemoryError<span class="token operator">:</span> Compressed <span class="token keyword">class</span> <span class="token class-name">space</span>
+    at sun<span class="token punctuation">.</span>misc<span class="token punctuation">.</span>Unsafe<span class="token punctuation">.</span><span class="token function">defineClass</span><span class="token punctuation">(</span>Native Method<span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>ClassDefiner<span class="token punctuation">.</span><span class="token function">defineClass</span><span class="token punctuation">(</span>ClassDefiner<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">63</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>MethodAccessorGenerator$<span class="token number">1</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>MethodAccessorGenerator<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">399</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>MethodAccessorGenerator$<span class="token number">1</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>MethodAccessorGenerator<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">394</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>security<span class="token punctuation">.</span>AccessController<span class="token punctuation">.</span><span class="token function">doPrivileged</span><span class="token punctuation">(</span>Native Method<span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>MethodAccessorGenerator<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span>MethodAccessorGenerator<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">393</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>MethodAccessorGenerator<span class="token punctuation">.</span><span class="token function">generateSerializationConstructor</span><span class="token punctuation">(</span>MethodAccessorGenerator<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">112</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>ReflectionFactory<span class="token punctuation">.</span><span class="token function">generateConstructor</span><span class="token punctuation">(</span>ReflectionFactory<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">398</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>ReflectionFactory<span class="token punctuation">.</span><span class="token function">newConstructorForSerialization</span><span class="token punctuation">(</span>ReflectionFactory<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">360</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectStreamClass<span class="token punctuation">.</span><span class="token function">getSerializableConstructor</span><span class="token punctuation">(</span>ObjectStreamClass<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">1574</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectStreamClass<span class="token punctuation">.</span>access$<span class="token function">1500</span><span class="token punctuation">(</span>ObjectStreamClass<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">79</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectStreamClass$<span class="token number">3</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>ObjectStreamClass<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">519</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectStreamClass$<span class="token number">3</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>ObjectStreamClass<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">494</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>security<span class="token punctuation">.</span>AccessController<span class="token punctuation">.</span><span class="token function">doPrivileged</span><span class="token punctuation">(</span>Native Method<span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectStreamClass<span class="token punctuation">.</span>&lt;init<span class="token operator">></span><span class="token punctuation">(</span>ObjectStreamClass<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">494</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectStreamClass<span class="token punctuation">.</span><span class="token function">lookup</span><span class="token punctuation">(</span>ObjectStreamClass<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">391</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectOutputStream<span class="token punctuation">.</span><span class="token function">writeObject0</span><span class="token punctuation">(</span>ObjectOutputStream<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">1134</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectOutputStream<span class="token punctuation">.</span><span class="token function">defaultWriteFields</span><span class="token punctuation">(</span>ObjectOutputStream<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">1548</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectOutputStream<span class="token punctuation">.</span><span class="token function">writeSerialData</span><span class="token punctuation">(</span>ObjectOutputStream<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">1509</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectOutputStream<span class="token punctuation">.</span><span class="token function">writeOrdinaryObject</span><span class="token punctuation">(</span>ObjectOutputStream<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">1432</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectOutputStream<span class="token punctuation">.</span><span class="token function">writeObject0</span><span class="token punctuation">(</span>ObjectOutputStream<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">1178</span><span class="token punctuation">)</span>
+    at java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>ObjectOutputStream<span class="token punctuation">.</span><span class="token function">writeObject</span><span class="token punctuation">(</span>ObjectOutputStream<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">348</span><span class="token punctuation">)</span>
+    at javax<span class="token punctuation">.</span>management<span class="token punctuation">.</span>remote<span class="token punctuation">.</span>rmi<span class="token punctuation">.</span>RMIConnectorServer<span class="token punctuation">.</span><span class="token function">encodeJRMPStub</span><span class="token punctuation">(</span>RMIConnectorServer<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">727</span><span class="token punctuation">)</span>
+    at javax<span class="token punctuation">.</span>management<span class="token punctuation">.</span>remote<span class="token punctuation">.</span>rmi<span class="token punctuation">.</span>RMIConnectorServer<span class="token punctuation">.</span><span class="token function">encodeStub</span><span class="token punctuation">(</span>RMIConnectorServer<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">719</span><span class="token punctuation">)</span>
+    at javax<span class="token punctuation">.</span>management<span class="token punctuation">.</span>remote<span class="token punctuation">.</span>rmi<span class="token punctuation">.</span>RMIConnectorServer<span class="token punctuation">.</span><span class="token function">encodeStubInAddress</span><span class="token punctuation">(</span>RMIConnectorServer<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">690</span><span class="token punctuation">)</span>
+    at javax<span class="token punctuation">.</span>management<span class="token punctuation">.</span>remote<span class="token punctuation">.</span>rmi<span class="token punctuation">.</span>RMIConnectorServer<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span>RMIConnectorServer<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">439</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>management<span class="token punctuation">.</span>jmxremote<span class="token punctuation">.</span>ConnectorBootstrap<span class="token punctuation">.</span><span class="token function">startLocalConnectorServer</span><span class="token punctuation">(</span>ConnectorBootstrap<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">550</span><span class="token punctuation">)</span>
+    at sun<span class="token punctuation">.</span>management<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span><span class="token function">startLocalManagementAgent</span><span class="token punctuation">(</span>Agent<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">137</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>直接内存溢出问题（少见）<br>《深入理解Java虚拟机》P59，使用Unsafe分配直接内存，或者使用NIO的问题</p>
+</li>
+<li><p>栈溢出问题<br>-Xss设定太小</p>
+</li>
+<li><p>比较一下这两段程序的异同，分析哪一个是更优的写法：</p>
+<pre class="line-numbers language-java"><code class="language-java">Object o <span class="token operator">=</span> null<span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//业务处理</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Object o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>重写finalize引发频繁GC<br>小米云，HBase同步系统，系统通过nginx访问超时报警，最后排查，C++程序员重写finalize引发频繁GC问题<br>为什么C++程序员会重写finalize？（new delete）<br>finalize耗时比较长（200ms）</p>
+</li>
+<li><p>如果有一个系统，内存一直消耗不超过10%，但是观察GC日志，发现FGC总是频繁产生，会是什么引起的？<br>System.gc() (这个比较Low)</p>
+</li>
+<li><p>Distuptor有个可以设置链的长度，如果过大，然后对象大，消费完不主动释放，会溢出 (来自 死物风情)</p>
+</li>
+<li><p>用jvm都会溢出，mycat用崩过，1.6.5某个临时版本解析sql子查询算法有问题，9个exists的联合sql就导致生成几百万的对象（来自 死物风情）</p>
+</li>
+<li><p>new 大量线程，会产生 native thread OOM，（low）应该用线程池，<br>解决方案：减少堆空间（太TMlow了）,预留更多内存产生native thread<br>JVM内存占物理内存比例 50% - 80%</p>
+</li>
+</ol>
+<h3 id="GC常用参数"><a href="#GC常用参数" class="headerlink" title="GC常用参数"></a>GC常用参数</h3><ul>
+<li>-Xmn -Xms -Xmx -Xss<br>年轻代 最小堆 最大堆 栈空间</li>
+<li>-XX:+UseTLAB<br>使用TLAB，默认打开</li>
+<li>-XX:+PrintTLAB<br>打印TLAB的使用情况</li>
+<li>-XX:TLABSize<br>设置TLAB大小</li>
+<li>-XX:+DisableExplictGC<br>System.gc()不管用 ，FGC</li>
+<li>-XX:+PrintGC</li>
+<li>-XX:+PrintGCDetails</li>
+<li>-XX:+PrintHeapAtGC</li>
+<li>-XX:+PrintGCTimeStamps</li>
+<li>-XX:+PrintGCApplicationConcurrentTime (低)<br>打印应用程序时间</li>
+<li>-XX:+PrintGCApplicationStoppedTime （低）<br>打印暂停时长</li>
+<li>-XX:+PrintReferenceGC （重要性低）<br>记录回收了多少种不同引用类型的引用</li>
+<li>-verbose:class<br>类加载详细过程</li>
+<li>-XX:+PrintVMOptions</li>
+<li>-XX:+PrintFlagsFinal  -XX:+PrintFlagsInitial<br>必须会用</li>
+<li>-Xloggc:opt/log/gc.log</li>
+<li>-XX:MaxTenuringThreshold<br>升代年龄，最大值15</li>
+<li>锁自旋次数 -XX:PreBlockSpin 热点代码检测参数-XX:CompileThreshold 逃逸分析 标量替换 …<br>这些不建议设置</li>
+</ul>
+<h3 id="Parallel常用参数"><a href="#Parallel常用参数" class="headerlink" title="Parallel常用参数"></a>Parallel常用参数</h3><ul>
+<li>-XX:SurvivorRatio</li>
+<li>-XX:PreTenureSizeThreshold<br>大对象到底多大</li>
+<li>-XX:MaxTenuringThreshold</li>
+<li>-XX:+ParallelGCThreads<br>并行收集器的线程数，同样适用于CMS，一般设为和CPU核数相同</li>
+<li>-XX:+UseAdaptiveSizePolicy<br>自动选择各区大小比例</li>
+</ul>
+<h3 id="CMS常用参数"><a href="#CMS常用参数" class="headerlink" title="CMS常用参数"></a>CMS常用参数</h3><ul>
+<li>-XX:+UseConcMarkSweepGC</li>
+<li>-XX:ParallelCMSThreads<br>CMS线程数量</li>
+<li>-XX:CMSInitiatingOccupancyFraction<br>使用多少比例的老年代后开始CMS收集，默认是68%(近似值)，如果频繁发生SerialOld卡顿，应该调小，（频繁CMS回收）</li>
+<li>-XX:+UseCMSCompactAtFullCollection<br>在FGC时进行压缩</li>
+<li>-XX:CMSFullGCsBeforeCompaction<br>多少次FGC之后进行压缩</li>
+<li>-XX:+CMSClassUnloadingEnabled</li>
+<li>-XX:CMSInitiatingPermOccupancyFraction<br>达到什么比例时进行Perm回收</li>
+<li>GCTimeRatio<br>设置GC时间占用程序运行时间的百分比</li>
+<li>-XX:MaxGCPauseMillis<br>停顿时间，是一个建议时间，GC会尝试用各种手段达到这个时间，比如减小年轻代</li>
+</ul>
+<h3 id="G1常用参数"><a href="#G1常用参数" class="headerlink" title="G1常用参数"></a>G1常用参数</h3><ul>
+<li>-XX:+UseG1GC</li>
+<li>-XX:MaxGCPauseMillis<br>建议值，G1会尝试调整Young区的块数来达到这个值</li>
+<li>-XX:GCPauseIntervalMillis<br>？GC的间隔时间</li>
+<li>-XX:+G1HeapRegionSize<br>分区大小，建议逐渐增大该值，1 2 4 8 16 32。<br>随着size增加，垃圾的存活时间更长，GC间隔更长，但每次GC的时间也会更长<br>ZGC做了改进（动态区块大小）</li>
+<li>G1NewSizePercent<br>新生代最小比例，默认为5%</li>
+<li>G1MaxNewSizePercent<br>新生代最大比例，默认为60%</li>
+<li>GCTimeRatio<br>GC时间建议比例，G1会根据这个值调整堆空间</li>
+<li>ConcGCThreads<br>线程数量</li>
+<li>InitiatingHeapOccupancyPercent<br>启动G1的堆空间占用比例</li>
+</ul>
+<h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4><ol>
+<li><p>-XX:MaxTenuringThreshold控制的是什么？<br>A: 对象升入老年代的年龄</p>
+<pre><code>  B: 老年代触发FGC时的内存垃圾比例</code></pre></li>
+<li><p>生产环境中，倾向于将最大堆内存和最小堆内存设置为：（为什么？）<br>A: 相同 B：不同</p>
+</li>
+<li><p>JDK1.8默认的垃圾回收器是：<br>A: ParNew + CMS</p>
+<pre><code>  B: G1
+  C: PS + ParallelOld
+  D: 以上都不是</code></pre></li>
+<li><p>什么是响应时间优先？</p>
+</li>
+<li><p>什么是吞吐量优先？</p>
+</li>
+<li><p>ParNew和PS的区别是什么？</p>
+</li>
+<li><p>ParNew和ParallelOld的区别是什么？（年代不同，算法不同）</p>
+</li>
+<li><p>长时间计算的场景应该选择：A：停顿时间 B: 吞吐量</p>
+</li>
+<li><p>大规模电商网站应该选择：A：停顿时间 B: 吞吐量</p>
+</li>
+<li><p>HotSpot的垃圾收集器最常用有哪些？</p>
+</li>
+<li><p>常见的HotSpot垃圾收集器组合有哪些？</p>
+</li>
+<li><p>JDK1.7 1.8 1.9的默认垃圾回收器是什么？如何查看？</p>
+</li>
+<li><p>所谓调优，到底是在调什么？</p>
+</li>
+<li><p>如果采用PS + ParrallelOld组合，怎么做才能让系统基本不产生FGC</p>
+</li>
+<li><p>如果采用ParNew + CMS组合，怎样做才能够让系统基本不产生FGC</p>
+<p> 1.加大JVM内存</p>
+<p> 2.加大Young的比例</p>
+<p> 3.提高Y-O的年龄</p>
+<p> 4.提高S区比例</p>
+<p> 5.避免代码内存泄漏</p>
+</li>
+<li><p>G1是否分代？G1垃圾回收器会产生FGC吗？</p>
+</li>
+<li><p>如果G1产生FGC，你应该做什么？</p>
+<pre><code>1. 扩内存
+2. 提高CPU性能（回收的快，业务逻辑产生对象的速度固定，垃圾回收越快，内存空间越大）
+3. 降低MixedGC触发的阈值，让MixedGC提早发生（默认是45%）</code></pre><ol start="18">
+<li><p>问：生产环境中能够随随便便的dump吗？<br>小堆影响不大，大堆会有服务暂停或卡顿（加live可以缓解），dump前会有FGC</p>
+</li>
+<li><p>问：常见的OOM问题有哪些？<br>栈 堆 MethodArea 直接内存</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://blogs.oracle.com/jonthecollector/our-collectors">https://blogs.oracle.com/</a><a href="https://blogs.oracle.com/jonthecollector/our-collectors">jonthecollector</a><a href="https://blogs.oracle.com/jonthecollector/our-collectors">/our-collectors</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html</a></li>
+<li><a href="http://java.sun.com/javase/technologies/hotspot/vmoptions.jsp">http://java.sun.com/javase/technologies/hotspot/vmoptions.jsp</a></li>
+<li>JVM调优参考文档：<a href="https://docs.oracle.com/en/java/javase/13/gctuning/introduction-garbage-collection-tuning.html#">https://docs.oracle.com/en/java/javase/13/gctuning/introduction-garbage-collection-tuning.html#</a> GUID-8A443184-7E07-4B71-9777-4F12947C8184 </li>
+<li><a href="https://www.cnblogs.com/nxlhero/p/11660854.html">https://www.cnblogs.com/nxlhero/p/11660854.html</a> 在线排查工具</li>
+<li><a href="https://www.jianshu.com/p/507f7e0cc3a3">https://www.jianshu.com/p/507f7e0cc3a3</a> arthas常用命令</li>
+<li>Arthas手册：<ol>
+<li>启动arthas java -jar arthas-boot.jar</li>
+<li>绑定java进程</li>
+<li>dashboard命令观察系统整体情况</li>
+<li>help 查看帮助</li>
+<li>help xx 查看具体命令帮助</li>
+</ol>
+</li>
+<li>jmap命令参考： <a href="https://www.jianshu.com/p/507f7e0cc3a3">https://www.jianshu.com/p/507f7e0cc3a3</a> <ol>
+<li>jmap -heap pid</li>
+<li>jmap -histo pid</li>
+<li>jmap -clstats pid</li>
+</ol>
+</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <!-- 懒加载评论 -->
+    <button id="load-comments">加载评论</button>
+    <div id="comments-section" style="display:none;">
+        
+        
+    </div>
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/09/12/javamian-shi-ti/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/15.png" class="responsive-img" alt="Java面试题">
+                            
+                            <span class="card-title">Java面试题</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、java基础：面向对象和面向过程的区别：
+面向过程： 性能高  没有面向对象易维护、易扩展
+
+面向对象：性能比面向对象低 易维护、易扩展、易复用
+
+
+Java** 语言有哪些特点：
+简单易学；
+
+面向对象（封装，继承，多态）；
+
+平台无
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-12
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    面试
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/09/11/volatilede-yong-tu/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/25.png" class="responsive-img" alt="volatile的用途">
+                            
+                            <span class="card-title">volatile的用途</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.线程可见性package com.mashibing.testvolatile;
+
+public class T01_ThreadVisibility {
+    private static volatile boolean flag
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+<!-- 文章复制版权信息 -->
+
+
+<!-- 代码块优化 -->
+<script defer src="/"></script>
+
+<!-- 代码折行 -->
+
+    <style>
+        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+    </style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+            <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+            
+                
+                    &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+                            class="white-color">173.8k</span>&nbsp;字
+                
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

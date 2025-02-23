@@ -1,0 +1,1076 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="杂七杂八的总结, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="java引用 ：
+强 普通引用 
+M m = new M();
+m = null;
+System.gc();
+sout(m)
+
+软 当堆内存不够用时才回收 
+//设置最大堆大小为20
+//m指向强引用SoftReference SoftRe">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>杂七杂八的总结 | 未见初墨</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="未见初墨" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">未见初墨</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/about" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-user-circle-o"></i>
+                    
+                    <span>关于</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/tags" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-tags"></i>
+                    
+                    <span>标签</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">未见初墨</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/tags" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-tags"></i>
+                        
+                        标签
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">杂七杂八的总结</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>
+                        发布日期: 2020-09-11
+                    </div>
+                
+
+                
+                    <div class="post-date">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>
+                        更新日期: 2020-09-11
+                    </div>
+                
+
+                
+                    <div>
+                        <i class="fa fa-file-word-o fa-fw"></i>
+                        文章字数: 1.9k
+                    </div>
+                
+
+                
+                    <div>
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        阅读时长: 7 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        
+        <hr class="clearfix">
+        
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h4 id="java引用-："><a href="#java引用-：" class="headerlink" title="java引用 ："></a>java引用 ：</h4><ul>
+<li><p>强 普通引用 </p>
+<pre class="line-numbers language-java"><code class="language-java">M m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">M</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+m <span class="token operator">=</span> null<span class="token punctuation">;</span>
+System<span class="token punctuation">.</span><span class="token function">gc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>软 当堆内存不够用时才回收 </p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//设置最大堆大小为20</span>
+<span class="token comment" spellcheck="true">//m指向强引用SoftReference SoftReference指向软引用10m的数组</span>
+SoftReference<span class="token operator">&lt;</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SoftReference</span><span class="token operator">&lt;</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span><span class="token function">gc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//还能拿到值</span>
+<span class="token comment" spellcheck="true">//当堆内存不够用时才回收</span>
+<span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">15</span><span class="token punctuation">]</span>
+<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//为null </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>弱 （当他不存在）gc时立即回收</p>
+<pre class="line-numbers language-java"><code class="language-java">WeakReference<span class="token operator">&lt;</span>M<span class="token operator">></span> m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeakReference</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">M</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+System<span class="token punctuation">.</span><span class="token function">gc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>虚 跟踪gc回收 管理直接内存（堆外内存）零拷贝</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//gc时查询引用队列 发出通知此对象要被回收了</span>
+PhantomReference<span class="token operator">&lt;</span>M<span class="token operator">></span> m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PhantomReference</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">M</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">ReferenceQueue</span><span class="token operator">&lt;</span>M<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sout</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//null</span>
+<span class="token comment" spellcheck="true">//堆外缓冲区</span>
+ByteBuffer b <span class="token operator">=</span> ByteBuffer<span class="token punctuation">.</span><span class="token function">allocateDirect</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h5 id="ThreadLocal-底层是一个map-set时-key为当前线程，v为值"><a href="#ThreadLocal-底层是一个map-set时-key为当前线程，v为值" class="headerlink" title="ThreadLocal 底层是一个map set时 key为当前线程，v为值"></a>ThreadLocal 底层是一个map set时 key为当前线程，v为值</h5><pre class="line-numbers language-java"><code class="language-java">ThreadLocal<span class="token operator">&lt;</span>Persion<span class="token operator">></span> t  <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadLocal</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//t指向的ThreadLocal是强引用 当t = null时 ThreadLocal里的map对象需要被回收 </span>
+<span class="token comment" spellcheck="true">//如果map为强引用则 map不会被回收 会造成oom</span>
+<span class="token comment" spellcheck="true">//k为null时 v访问不到但是不会被回收 所以ThreadLocal必须使用remove方法</span>
+t<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//对于线程池来说 如果不执行remove()方法线程归还后v的值还在 再次获取线程会复用旧值造成值错乱</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="程序、进程、线程："><a href="#程序、进程、线程：" class="headerlink" title="程序、进程、线程："></a>程序、进程、线程：</h5><p><strong>程序：</strong> qq.exe</p>
+<p><strong>进程：</strong> 程序启动分配内存 资源分配的基本单位</p>
+<p><strong>线程：</strong> 程序执行的基本单位</p>
+<p><strong>程序的执行顺序：</strong>a = 2+3</p>
+<ol>
+<li><p>通过总线读取数据到寄存器里</p>
+</li>
+<li><p>使用ALU计算单元完成计算返回到内存</p>
+</li>
+<li><p>pc寄存器指向下一个指令</p>
+<p>CPU的运行顺序：读指令–pc，读数据–register ，计算–AlU，会写–内存，下一条指令</p>
+</li>
+</ol>
+<h5 id="CAS："><a href="#CAS：" class="headerlink" title="CAS："></a>CAS：</h5><p><strong>操作流程</strong>：</p>
+<p>拿到旧值old1–执行计算v = old1+1–再次读取old2–进行比较old1==old2，相等就写回，不相等就再次读取一直重试</p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/09/10/jPiG21S8cRTpfaE.png" alt="W_U9_Y__ND__QJ8_446~4YG.png"></p>
+<p><strong>ABA问题：</strong></p>
+<p>​     读取的旧值为0，操作完成后再次读取还是为0，但是执行了0-8-0这个过程</p>
+<p>​     解决方法 加上版本号，每次执行时版本号增加，写回时读取并比较版本号</p>
+<p><strong>CAS原子性问题</strong>：</p>
+<p>​     在操作数据时必须保证原子性，不能被其他线程修改；</p>
+<p>​     底层使用汇编指令保证 lock（锁总线） cmpxchg</p>
+<p><strong>AtomicInteger</strong>实现自旋锁：</p>
+<pre><code>private static AtomicInteger m = new AtomicInteger(0);
+//m++
+m.incrementAndGet(); 
+
+//底层调用 
+unsafe.getAndAddInt(this,valueOffset,1)+1;
+
+//getAndAddInt()调用
+this.compareAndSwapInt(var1,var2,var5,var5+var4);</code></pre><p><strong>Synchronize实现原理：</strong>一个线程偏向锁–多个线程轻度竞争cas–多个线程重度竞争（或自旋次数过多）重量锁</p>
+<p>锁的四种状态：</p>
+<p><strong>new：</strong></p>
+<p><strong>轻量级锁：</strong></p>
+<p>​    用户解决的锁</p>
+<p>​    cas自旋while（） 竞争很激烈时cpu上下文切换频繁消耗资源</p>
+<p><strong>重量级锁：</strong></p>
+<p>​    需要操作系统调度的锁</p>
+<p>​    加入等待队列由操作系统调度</p>
+<p><strong>偏向锁：</strong></p>
+<p>​    偏向于第一个访问锁的线程，如果在运行过程中，同步锁只有一个线程访问，不存在多线程争用的情况，则线程是不需要触发同步的，这种情况下，就会给线程加一个偏向锁。 </p>
+<p>![UQ_Y3I0_IULC@Y__4RP`M_K.png](<a href="https://i.loli.net/2020/09/10/s1oRtKhraJlXkFO.png">https://i.loli.net/2020/09/10/s1oRtKhraJlXkFO.png</a>)</p>
+<p><strong>寄存器的层次结构</strong>：</p>
+<p>cache line一次加载64个字节</p>
+<p>pc寄存器的指令计算需要x的值 首先会按序加载L1–&gt;L2–&gt;L3–&gt;内存 寄存器将x交给ALU计算 然后写回 pc寄存器读取下一个指令<br>内核2需要y的值直接从L3中读取</p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/09/10/QheuWkdCc3yMz6O.png" alt="V_BMVR@QU_AOB_SL@UURIMX.png"></p>
+<p>缓存行对齐：</p>
+<p>​    xy处于同一行 当并发修改时，内核c1修改完x会通知内核c2，c2去内存中再次读取修改y，再通知c1这个过程很耗时</p>
+<p>   假设xy都为long（占用8个字节）类型，在x的前面填充7个long类型对象，在其后添加8个long对象，再执行操作，由于xy不处于同一缓存行，省去通知、读取的时间</p>
+<h5 id="缓存一致性协议：MESI-Cache（一致性协议）"><a href="#缓存一致性协议：MESI-Cache（一致性协议）" class="headerlink" title="缓存一致性协议：MESI Cache（一致性协议）"></a>缓存一致性协议：MESI Cache（一致性协议）</h5><p><strong>Modified：修改</strong></p>
+<p><strong>Exclusive：独占</strong></p>
+<p><strong>Shared：共享</strong></p>
+<p><strong>Invalid：失效</strong></p>
+<p>假设缓存行在两个核心中使用，当c1修改后会通知c2，c2将该行数据标记为Invalid，c2需要重新从内存中读取。</p>
+<h5 id="volatile："><a href="#volatile：" class="headerlink" title="volatile："></a>volatile：</h5><p><strong>线程间通信</strong></p>
+<ul>
+<li>volatile修饰的变量被当前线程修改后其他线程会感知到    </li>
+</ul>
+<p><strong>禁止指令重排序</strong></p>
+<ul>
+<li><p>如果不用volatile修饰可能发生指令重排序，<strong>invokespecial</strong>在<strong>astore_1</strong>之后执行，o拿到的时一个半初始化状态的对象</p>
+</li>
+<li><h5 id="Object-o-new-Object-的初始化过程："><a href="#Object-o-new-Object-的初始化过程：" class="headerlink" title="Object o  = new Object()的初始化过程："></a>Object o  = new Object()的初始化过程：</h5></li>
+</ul>
+<ol>
+<li><strong>new</strong>：申请一块内存空间用来存放对象</li>
+<li><strong>invokespecial</strong>：调用构造方法对属性赋值（半初始化对象)</li>
+<li><strong>astore_1</strong>：建立o和对象的关联（指针指向堆内存）</li>
+</ol>
+<h5 id="单例模式为什么需要dlc操作："><a href="#单例模式为什么需要dlc操作：" class="headerlink" title="单例模式为什么需要dlc操作："></a>单例模式为什么需要dlc操作：</h5><p>如果不用volatile修饰可能发生指令重排序，<strong>invokespecial</strong>在<strong>astore_1</strong>之后执行，INSTACE拿到的时一个半初始化状态的对象</p>
+<p>细化锁的力度将锁加载在方法内部时，当线程T1执行到第17行时被暂停，T2执行创建、返回对象，T1再次执行创建、返回对象</p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/09/10/F9pB75xCHKscm38.png" alt="Q_S`@`U82B8_G8_Z_KCM_ID.png"></p>
+<p><strong>解决方法：dcl(double check lock):</strong></p>
+<p>加锁前检查一次（减少并发下的竞争），加锁后再检查一次</p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/09/10/OT9kEtDHJNG2XfB.png" alt="M2_KX7_BNP3IISU1S_~F_CF.png"></p>
+<h5 id="内存屏障："><a href="#内存屏障：" class="headerlink" title="内存屏障："></a>内存屏障：</h5><p><strong>JVM层面</strong>：（happens-before原则）</p>
+<ul>
+<li>写操作 在前面添加StoreStore 在后面添加StoreLoad</li>
+<li>读操作  在之后添加LoadLoad LoadStore</li>
+</ul>
+<p><strong>Hotspot实现：</strong></p>
+<ul>
+<li><strong>lock addl</strong>总线锁定 <ul>
+<li>对共享内存的独占使用</li>
+<li>将当前处理器的缓存刷新到内存，使其他处理器的缓存失效</li>
+<li>指令无法越过这个内存屏障</li>
+</ul>
+</li>
+</ul>
+<h5 id="jvm如何确定一个对象是垃圾："><a href="#jvm如何确定一个对象是垃圾：" class="headerlink" title="jvm如何确定一个对象是垃圾："></a>jvm如何确定一个对象是垃圾：</h5><ul>
+<li><p>引用计数 reference count</p>
+</li>
+<li><p>根可达性 root searching</p>
+</li>
+</ul>
+<h5 id="GC算法有哪些："><a href="#GC算法有哪些：" class="headerlink" title="GC算法有哪些："></a>GC算法有哪些：</h5><ul>
+<li><strong>mark-sweep 标记清除</strong>（效率高 会产生碎片化问题）</li>
+<li><strong>copying 复制</strong>（浪费空间 Eden区 8:1:1 使用此算法，每次使用一半的空间，有用的拷贝到to，清除from区）</li>
+<li><strong>mark-compact标记压缩</strong>（效率低节约空间 老年代使用此算法）</li>
+</ul>
+<h5 id="垃圾回收器："><a href="#垃圾回收器：" class="headerlink" title="垃圾回收器："></a>垃圾回收器：</h5><p>分代：将内存分为两大块</p>
+<p>分区：将内存分为一片一片</p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://s1.ax1x.com/2020/09/11/wYghWR.png" alt="wYghWR.png"></p>
+<h5 id="堆内存的逻辑分区："><a href="#堆内存的逻辑分区：" class="headerlink" title="堆内存的逻辑分区："></a>堆内存的逻辑分区：</h5><p>![LB0I_1AC2`VEA_M0_3_DA50.png](<a href="https://i.loli.net/2020/09/11/NxmGJP8M43v5Tph.png">https://i.loli.net/2020/09/11/NxmGJP8M43v5Tph.png</a>)</p>
+<h5 id="对象的生命周期："><a href="#对象的生命周期：" class="headerlink" title="对象的生命周期："></a>对象的生命周期：</h5><p>new对象 </p>
+<ul>
+<li><p>进入栈？（逃逸分析和标量替换）出栈消亡</p>
+<p>JVM通过逃逸分析确定该对象不会被外部访问。那就通过标量替换将该对象分解在栈上分配内存</p>
+<ul>
+<li><p><strong>逃逸分析</strong>：分析在程序的哪些地方可以访问到该指针，避免野指针</p>
+</li>
+<li><p><strong>标量替换：</strong>A中数据都为基本数据类型，可以用两个int数据替代</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>进入老年大（对象很大） 发生FullGC</p>
+</li>
+<li><p>进入TLAB （Thread Local Allocation Buffer）线程本地内存分配缓冲区</p>
+<ul>
+<li>进入 Eden  发生YoungGC</li>
+</ul>
+</li>
+</ul>
+<p>对象创建后进入Eden区，第一次GC时存活的对象（包括to区的）拷贝到from区，将from和to交换，清空Eden和from区，对象年龄+1，当年龄大于15后进入老年代</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <!-- 懒加载评论 -->
+    <button id="load-comments">加载评论</button>
+    <div id="comments-section" style="display:none;">
+        
+        
+    </div>
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/09/11/volatilede-yong-tu/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/25.png" class="responsive-img" alt="volatile的用途">
+                            
+                            <span class="card-title">volatile的用途</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.线程可见性package com.mashibing.testvolatile;
+
+public class T01_ThreadVisibility {
+    private static volatile boolean flag
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-11
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/09/10/jia-gou-she-ji-ji-chu-yuan-ze/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="架构设计基础原则">
+                            
+                            <span class="card-title">架构设计基础原则</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                需要考虑的架构设计问题：
+云部署是大势所趋
+企业对公有云能力的期待和公有云现有能力的差距
+不能简单依赖公有云提供的SLA（service level agreement）来保障业务稳定性
+
+云上设计高可用架构需要考虑的三大要素：
+云基础设施
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-10
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+<!-- 文章复制版权信息 -->
+
+
+<!-- 代码块优化 -->
+<script defer src="/"></script>
+
+<!-- 代码折行 -->
+
+    <style>
+        code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+    </style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+            <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+            
+                
+                    &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+                            class="white-color">173.8k</span>&nbsp;字
+                
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
