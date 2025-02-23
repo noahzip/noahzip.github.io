@@ -275,19 +275,376 @@ public void test(){
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">关于junit单元化测试</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
+                                    经验&bug
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-04-23
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-04-23
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        663
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="junit是自动化单元测试，不支持手动录入数据。"><a href="#junit是自动化单元测试，不支持手动录入数据。" class="headerlink" title="junit是自动化单元测试，不支持手动录入数据。"></a>junit是自动化单元测试，不支持手动录入数据。</h3><h4 id="第一种方式：参数化测试"><a href="#第一种方式：参数化测试" class="headerlink" title="第一种方式：参数化测试"></a>第一种方式：参数化测试</h4><p>1.固定参数:</p>
+<pre><code>public void test(){
+    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("saber".getBytes());
+    System.setIn(byteArrayInputStream);
+    Scanner sc = new Scanner(System.in);
+    String s = sc.nextLine();
+    System.out.println("输入的是"+s);
+}</code></pre><p>2.复杂参数举例：</p>
+<pre><code>/**
+ * @author cxy
+ * 参数化测试斐波那契额数列
+ * 当类被@RunWith注解修饰，或者类继承了一个被该注解修饰的类，
+ * JUnit将会使用这个注解所指明的运行器（runner）来运行测试，而不使用JUnit默认的运行器。
+ */
+@RunWith(Parameterized.class)
+public class FibonacciTest {
+
+    /**
+     * 测试多个参数
+     * Junit4 中通过 Parameterized 运行器实现参数化测试。该方法必须是静态的
+     * {index}: 当前参数的索引
+     * {0}, {1}, …: 第一个参数，第二个参数等,参数值..
+     */
+    @Parameterized.Parameters(name = "{index}: fib({0})={1}")
+    public static Collection&lt;Object[]&gt; data() {
+        return Arrays.asList(new Object[][]{
+                {0, 0}, {1, 1}, {2, 1}, {3, 2}, {4, 3}, {5, 5}, {6, 8}
+        });
+    }
+
+    //如果你的测试只需要单个参数，则不需要将其包装成数组
+    //@Parameterized.Parameters
+    //public static Iterable&lt;? extends Object&gt; data() {
+    //    return Arrays.asList("first test", "second test");
+    //}
+
+    /**
+     * 使用无参构造必须 @Parameterized.Parameter注入属性
+     */
+    public FibonacciTest() {
+    }
+
+    /**
+     * 输入参数
+     * 如果使用无参构造 @Parameterized.Parameter 属性注入
+     */
+    @Parameterized.Parameter
+    public int fInput;
+
+    /**
+     * 期待的结果
+     */
+    @Parameterized.Parameter(1)
+    public int fExpected;
+
+    //使用带参构造注入属性
+    //    public FibonacciTest(int input, int expected){
+    //        fInput = input;
+    //        fExpected = expected;
+    //    }
+
+    /**
+     * 待测试的方法
+     */
+    public static class Fibonacci {
+        public static int compute(int n) {
+            int result = 0;
+
+            if (n &lt;= 1) {
+                result = n;
+            } else {
+                result = compute(n - 1) + compute(n - 2);
+            }
+            return result;
+        }
+    }
+
+    @Test
+    public void testFibonacci() {
+        Assert.assertEquals(fExpected, Fibonacci.compute(fInput));
+    }
+}</code></pre><h5 id="第二种方式：读取资源文件测试"><a href="#第二种方式：读取资源文件测试" class="headerlink" title="第二种方式：读取资源文件测试"></a>第二种方式：读取资源文件测试</h5><p>将待测试的类放到test的资源文件中，如果是复杂类型选择json文件读取时解析</p>
+<pre><code>public class MainTest {
+
+    private List&lt;String&gt; datas;
+
+    @Before
+    public void init() throws IOException {
+        //输入流读取文件
+        InputStream inputStream = this.getClass().getResource("/data.txt").openStream();
+        datas = IOUtils.readLines(inputStream, Charset.forName("utf-8"));
+    }
+
+    @Test
+    public void test() {
+        SomeClass someClass = new SomeClass();
+        for (String line : datas) {
+            String[] split = line.split(",");
+            Assert.assertEquals(split[1], someClass.someMethod(split[0]));
+        }
+
+    }
+}</code></pre><h3 id="那么我就想手动输入测试数据呢？"><a href="#那么我就想手动输入测试数据呢？" class="headerlink" title="那么我就想手动输入测试数据呢？"></a>那么我就想手动输入测试数据呢？</h3><p>可以使用以下的方式</p>
+<h4 id="1、直接使用main函数"><a href="#1、直接使用main函数" class="headerlink" title="1、直接使用main函数"></a>1、直接使用main函数</h4><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Scanner sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入一个单词:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String s <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"输入的是"</span> <span class="token operator">+</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2、修改虚拟机参数-设置参数为"><a href="#2、修改虚拟机参数-设置参数为" class="headerlink" title="2、修改虚拟机参数 设置参数为"></a>2、修改虚拟机参数 设置参数为</h4><p>-Deditable.java.test.console=true</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test02</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Scanner sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入一个单词:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String s <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"输入的是"</span> <span class="token operator">+</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/04/23/%E5%85%B3%E4%BA%8E%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/12.png" class="responsive-img" alt="关于枚举类的一些坑">
+                            
+                            <span class="card-title">关于枚举类的一些坑</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                /**
+ * @author
+ *  枚举类中添加外部访问的方法
+ */
+public enum Color {
+
+    /**
+     * @see
+     */
+    RED("红色", 1),
+    GREEN("绿色", 
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-04-23
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
+                                    经验&bug
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/04/21/%E5%AE%9E%E7%8E%B0RBTree%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/28.png" class="responsive-img" alt="实现RBTree核心方法">
+                            
+                            <span class="card-title">实现RBTree核心方法</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1、自定义RbTreepublic class RbTree&lt;K extends Comparable&lt;K>, V> {
+    private static final boolean RED = true;
+    priv
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-04-21
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                    数据结构
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

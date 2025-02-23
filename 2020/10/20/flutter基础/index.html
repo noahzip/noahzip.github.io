@@ -274,19 +274,1158 @@ import &#39;package:flutter">
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">flutter基础</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
+                                </a>
+                            
+                                <a href="/categories/%E5%89%8D%E7%AB%AF/flutter/" class="post-category">
+                                    flutter
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-10-20
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-10-26
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.9k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        15 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="本文章知识来自于jspang（https-jspang-com-detailed-id-42-toc219），仅用于学习记录。"><a href="#本文章知识来自于jspang（https-jspang-com-detailed-id-42-toc219），仅用于学习记录。" class="headerlink" title="本文章知识来自于jspang（https://jspang.com/detailed?id=42# toc219），仅用于学习记录。"></a>本文章知识来自于jspang（<a href="https://jspang.com/detailed?id=42#">https://jspang.com/detailed?id=42#</a> toc219），仅用于学习记录。</h2><h2 id="Flutter页面的基本写法main-dart"><a href="#Flutter页面的基本写法main-dart" class="headerlink" title="Flutter页面的基本写法main.dart:"></a>Flutter页面的基本写法main.dart:</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token comment" spellcheck="true">//导入组件</span>
+<span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//启动入口</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">MyApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//自定义的运行模块？</span>
+<span class="token comment" spellcheck="true">//需要继承自 StatelessWidget 并重写build方法</span>
+<span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      <span class="token comment" spellcheck="true">//app名称</span>
+      title<span class="token punctuation">:</span> <span class="token string">"Hello"</span><span class="token punctuation">,</span>
+       <span class="token comment" spellcheck="true">//页面展示的内容</span>
+       home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        <span class="token comment" spellcheck="true">//bar</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//内容</span>
+        body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+          child<span class="token punctuation">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"hello world "</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p>![0Y_Q0@`U1_A_ZPE_3559__C.png](<a href="https://i.loli.net/2020/10/20/joc9fil76LPmZqw.png">https://i.loli.net/2020/10/20/joc9fil76LPmZqw.png</a>)</p>
+<h2 id="调整文本："><a href="#调整文本：" class="headerlink" title="调整文本："></a>调整文本：</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">MyApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      <span class="token comment" spellcheck="true">//app名称</span>
+      title<span class="token punctuation">:</span> <span class="token string">"Hello"</span><span class="token punctuation">,</span>
+       <span class="token comment" spellcheck="true">//页面展示的内容</span>
+       home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        <span class="token comment" spellcheck="true">//bar</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//内容</span>
+       body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+          child<span class="token punctuation">:</span> <span class="token function">Text</span><span class="token punctuation">(</span>
+              <span class="token string">"Stack Overflow is an open community "</span>
+                  <span class="token string">"for anyone that codes. We help you get "</span>
+                  <span class="token string">"answers to your toughest coding questions, "</span>
+                  <span class="token string">"share knowledge with your coworkers in private, "</span>
+                  <span class="token string">"and find your next dream job."</span><span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//左对齐</span>
+            textAlign<span class="token punctuation">:</span> TextAlign<span class="token punctuation">.</span>left<span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//最大显示1行</span>
+            maxLines<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//超出显示的部分怎么处理</span>
+            overflow<span class="token punctuation">:</span> TextOverflow<span class="token punctuation">.</span>ellipsis<span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//调整文本的样式</span>
+            style<span class="token punctuation">:</span> <span class="token function">TextStyle</span><span class="token punctuation">(</span>
+                <span class="token comment" spellcheck="true">//字号</span>
+              fontSize<span class="token punctuation">:</span> <span class="token number">25.0</span><span class="token punctuation">,</span>
+                <span class="token comment" spellcheck="true">//颜色</span>
+              color<span class="token punctuation">:</span> Color<span class="token punctuation">.</span><span class="token function">fromARGB</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">125</span><span class="token punctuation">,</span> <span class="token number">125</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token comment" spellcheck="true">//下划线</span>
+              decoration<span class="token punctuation">:</span> TextDecoration<span class="token punctuation">.</span>underline<span class="token punctuation">,</span>
+                <span class="token comment" spellcheck="true">//下划线的类型</span>
+              decorationStyle<span class="token punctuation">:</span> TextDecorationStyle<span class="token punctuation">.</span>solid<span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/20/OWL74SmzuqjrPeM.png" alt="NP~IGB90UZCLQ__3M33GLA6.png"></p>
+<h2 id="页面容器Container："><a href="#页面容器Container：" class="headerlink" title="页面容器Container："></a>页面容器Container：</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">MyApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"Hello"</span><span class="token punctuation">,</span>
+       home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+            <span class="token comment" spellcheck="true">//内部是一个Container</span>
+          child<span class="token punctuation">:</span> <span class="token function">Container</span><span class="token punctuation">(</span>
+            child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span>
+                <span class="token comment" spellcheck="true">//显示的文本</span>
+                <span class="token string">"hello saber"</span><span class="token punctuation">,</span>
+                <span class="token comment" spellcheck="true">//文本的样式...</span>
+                style<span class="token punctuation">:</span> <span class="token function">TextStyle</span><span class="token punctuation">(</span>
+                  fontSize<span class="token punctuation">:</span> <span class="token number">40.0</span><span class="token punctuation">,</span>
+                <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//容器靠左上浮动</span>
+            alignment<span class="token punctuation">:</span> Alignment<span class="token punctuation">.</span>topLeft<span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//容器的尺寸</span>
+            width<span class="token punctuation">:</span> <span class="token number">500.0</span><span class="token punctuation">,</span>
+            height<span class="token punctuation">:</span> <span class="token number">400.0</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">// color: Colors.lightGreenAccent,</span>
+            <span class="token comment" spellcheck="true">//内边距</span>
+            padding<span class="token punctuation">:</span> <span class="token keyword">const</span> EdgeInsets<span class="token punctuation">.</span><span class="token function">fromLTRB</span><span class="token punctuation">(</span><span class="token number">10.0</span><span class="token punctuation">,</span><span class="token number">30.0</span><span class="token punctuation">,</span><span class="token number">0.0</span><span class="token punctuation">,</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//外边距</span>
+            margin<span class="token punctuation">:</span> <span class="token keyword">const</span> EdgeInsets<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">10.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//颜色渐变</span>
+            decoration<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">BoxDecoration</span><span class="token punctuation">(</span>
+              gradient<span class="token punctuation">:</span> <span class="token keyword">const</span> <span class="token function">LinearGradient</span><span class="token punctuation">(</span>
+                colors<span class="token punctuation">:</span> <span class="token punctuation">[</span>Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span>Colors<span class="token punctuation">.</span>green<span class="token punctuation">,</span>Colors<span class="token punctuation">.</span>purple<span class="token punctuation">]</span>
+              <span class="token punctuation">)</span><span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//边框</span>
+              border<span class="token punctuation">:</span> Border<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>width<span class="token punctuation">:</span><span class="token number">2.0</span><span class="token punctuation">,</span>color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>red<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/20/HZn96JqCP1W2XVd.png" alt="U6QOXZ8ZE6XFDP_S~_8L1_Y.png"></p>
+<h2 id="导入图片："><a href="#导入图片：" class="headerlink" title="导入图片："></a>导入图片：</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">MyApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+            title<span class="token punctuation">:</span> <span class="token string">"hello"</span><span class="token punctuation">,</span>
+            home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+                appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+                    title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"MyApp"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+                    <span class="token comment" spellcheck="true">//引入容器</span>
+                    child<span class="token punctuation">:</span> <span class="token function">Container</span><span class="token punctuation">(</span>
+                        <span class="token comment" spellcheck="true">//引入网络图片 本地图片使用file</span>
+                        child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span>
+                            <span class="token string">'https://picabstract-preview-ftn.weiyun.com/'</span>
+                                    <span class="token string">'ftn_pic_abs_v3/6d37e151e59ca439abe2654102a31'</span>
+                                    <span class="token string">'63bee41ca67113bb3add51aa2fc9e16f27d0959cef2'</span>
+                                    <span class="token string">'a9b3625f7174e0aa15dbd830?pictype=scale&amp;from='</span>
+                                    <span class="token string">'30113&amp;version=3.3.3.3&amp;uin=1170398847&amp;fname='</span>
+                                    <span class="token string">'httpi0.hdslb.combfsarticledc607d09ad1347811af3fdb.'</span>
+                                    <span class="token string">'jpg&amp;size=750miui.com%2Fforum%2F201311%2F27%2F222526bjdipmjgzj1ibim7.jpg'</span><span class="token punctuation">,</span>
+                            <span class="token comment" spellcheck="true">//对图像进行缩放 一般使用fill调整</span>
+                            scale<span class="token punctuation">:</span> <span class="token number">1.0</span><span class="token punctuation">,</span>
+
+                            <span class="token comment" spellcheck="true">//图像重复平铺整个容器 X、Y表示只用于横、纵向</span>
+                            <span class="token comment" spellcheck="true">//repeat: ImageRepeat.repeat,</span>
+
+                            <span class="token comment" spellcheck="true">//填充整个容器</span>
+                            <span class="token comment" spellcheck="true">//fit: BoxFit.fill,</span>
+                            <span class="token comment" spellcheck="true">//全图显示</span>
+                            <span class="token comment" spellcheck="true">//fit: BoxFit.contain,</span>
+                            <span class="token comment" spellcheck="true">//按比例放大填充整个容器</span>
+                            fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">,</span>
+                            <span class="token comment" spellcheck="true">//高度充满</span>
+                            <span class="token comment" spellcheck="true">//fit: BoxFit.fitHeight,</span>
+                            <span class="token comment" spellcheck="true">//宽度充满</span>
+                            <span class="token comment" spellcheck="true">//fit: BoxFit.fitWidth,</span>
+                            <span class="token comment" spellcheck="true">//和contain类似，但是不允许显示超过原图片大小</span>
+                            <span class="token comment" spellcheck="true">//fit: BoxFit.scaleDown,</span>
+
+                            <span class="token comment" spellcheck="true">//要混合的颜色</span>
+                            color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>greenAccent<span class="token punctuation">,</span>
+                            <span class="token comment" spellcheck="true">//图片颜色混合模式</span>
+                            colorBlendMode<span class="token punctuation">:</span> BlendMode<span class="token punctuation">.</span>exclusion<span class="token punctuation">,</span>
+
+                        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                        <span class="token comment" spellcheck="true">//容器尺寸 可以从context中动态获取以适应不同设备</span>
+                        width<span class="token punctuation">:</span> <span class="token number">450.0</span> <span class="token punctuation">,</span>
+                        height<span class="token punctuation">:</span> <span class="token number">610.0</span><span class="token punctuation">,</span>
+                        <span class="token comment" spellcheck="true">//容器 颜色</span>
+                        color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span>
+                    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<pre><code>**未开启图片颜色混合：**</code></pre><p><img src="https://i.loli.net/2020/10/21/kU78jEalWZpXtCQ.png" alt="XF8J3OKY_@I_QHL_H7@J2DI.png"></p>
+<pre><code>**开启图片颜色混合：**</code></pre><p><img src="https://i.loli.net/2020/10/21/izDm56LYqBMfgec.png" alt="DZN18~V7H@JT_XC__BH9TBI.png"></p>
+<h2 id="纵向ListView列表组件"><a href="#纵向ListView列表组件" class="headerlink" title="纵向ListView列表组件:"></a>纵向ListView列表组件:</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">myApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">myApp</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"myApp"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"ListView"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//定义listview</span>
+        body<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">ListView</span><span class="token punctuation">(</span>
+          children<span class="token punctuation">:</span> <span class="token operator">&lt;</span>Widget<span class="token operator">></span><span class="token punctuation">[</span>
+            <span class="token keyword">new</span> <span class="token class-name">ListTile</span><span class="token punctuation">(</span>
+              <span class="token comment" spellcheck="true">//图表类型</span>
+              leading<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>Icons<span class="token punctuation">.</span>access_time<span class="token punctuation">)</span><span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//名称</span>
+              title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"access_time"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">ListTile</span><span class="token punctuation">(</span>
+              leading<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>Icons<span class="token punctuation">.</span>account_balance<span class="token punctuation">)</span><span class="token punctuation">,</span>
+              title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"account_balance"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//图片</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span>
+              <span class="token string">'https://picabstract-preview-ftn.weiyun.com/'</span>
+                  <span class="token string">'ftn_pic_abs_v3/6d37e151e59ca439abe2654102a31'</span>
+                  <span class="token string">'63bee41ca67113bb3add51aa2fc9e16f27d0959cef2'</span>
+                  <span class="token string">'a9b3625f7174e0aa15dbd830?pictype=scale&amp;from='</span>
+                  <span class="token string">'30113&amp;version=3.3.3.3&amp;uin=1170398847&amp;fname='</span>
+                  <span class="token string">'httpi0.hdslb.combfsarticledc607d09ad1347811af3fdb.'</span>
+                  <span class="token string">'jpg&amp;size=750miui.com%2Fforum%2F201311%2F27%2F222526bjdipmjgzj1ibim7.jpg'</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p>![64KDKJ__O2PXL7B`796GEFC.png](<a href="https://i.loli.net/2020/10/25/arUEo5vGuxVRY1s.png">https://i.loli.net/2020/10/25/arUEo5vGuxVRY1s.png</a>)</p>
+<h2 id="横向ListView列表组件"><a href="#横向ListView列表组件" class="headerlink" title="横向ListView列表组件:"></a>横向ListView列表组件:</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">myApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">myApp</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">'myApp'</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+       body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+         child<span class="token punctuation">:</span> <span class="token function">Container</span><span class="token punctuation">(</span>
+           height<span class="token punctuation">:</span> <span class="token number">200.0</span><span class="token punctuation">,</span>
+           child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">ListView</span><span class="token punctuation">(</span>
+             <span class="token comment" spellcheck="true">//滚动方式 横向：Axis.horizontal  纵向：Axis.vertical</span>
+             scrollDirection<span class="token punctuation">:</span> Axis<span class="token punctuation">.</span>horizontal<span class="token punctuation">,</span>
+             children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+               <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+                 width<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+                 color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span>
+                 child<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+                    child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"lightBlue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                 <span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+               <span class="token punctuation">)</span><span class="token punctuation">,</span>
+               <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+                 width<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+                 color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>amber<span class="token punctuation">,</span>
+                 child<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+                   child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"amber"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                 <span class="token punctuation">)</span><span class="token punctuation">,</span>
+               <span class="token punctuation">)</span><span class="token punctuation">,</span>
+               <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+                 width<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+                 color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>deepOrange<span class="token punctuation">,</span>
+                 child<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+                   child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"deepOrange"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                 <span class="token punctuation">)</span><span class="token punctuation">,</span>
+               <span class="token punctuation">)</span><span class="token punctuation">,</span>
+               <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+                 width<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+                 color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>deepOrangeAccent<span class="token punctuation">,</span>
+                 child<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+                   child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"deepAccent"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                 <span class="token punctuation">)</span><span class="token punctuation">,</span>
+               <span class="token punctuation">)</span><span class="token punctuation">,</span>
+             <span class="token punctuation">]</span><span class="token punctuation">,</span>
+           <span class="token punctuation">)</span><span class="token punctuation">,</span>
+         <span class="token punctuation">)</span><span class="token punctuation">,</span>
+       <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p>![3R_I~_6U___WJH_YWO`7YGV.png](<a href="https://i.loli.net/2020/10/25/YkpBQLlwoFsNWnU.png">https://i.loli.net/2020/10/25/YkpBQLlwoFsNWnU.png</a>)</p>
+<p>​    <strong>代码优化</strong></p>
+<pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">myApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">myApp</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"ListView Widget"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+          child<span class="token punctuation">:</span> <span class="token function">Container</span><span class="token punctuation">(</span>
+            height<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//引用定义的组件</span>
+            child<span class="token punctuation">:</span> <span class="token function">MyList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//新建一个类继承StatelessWidget 返回一个ListView</span>
+<span class="token keyword">class</span> <span class="token class-name">MyList</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">ListView</span><span class="token punctuation">(</span>
+      scrollDirection<span class="token punctuation">:</span> Axis<span class="token punctuation">.</span>horizontal<span class="token punctuation">,</span>
+      children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+        <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+          width<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+          color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span>
+          child<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+            child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"lightBlue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+        width<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+        color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>amber<span class="token punctuation">,</span>
+        child<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+        child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"amber"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+        width<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+        color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>deepOrange<span class="token punctuation">,</span>
+        child<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+        child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"deepOrange"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+        width<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+        color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>deepOrangeAccent<span class="token punctuation">,</span>
+        child<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+        child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"deepAccent"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/X6h4D2vOxEWbc9o.png" alt="WI_7BR_S_KTH3Y2WP_I_8OV.png"></p>
+<h2 id="动态ListView列表"><a href="#动态ListView列表" class="headerlink" title="动态ListView列表:"></a>动态ListView列表:</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">app</span><span class="token punctuation">(</span>
+    <span class="token comment" spellcheck="true">//传入一个数组</span>
+    items<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"item $index"</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">app</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token keyword">final</span> List<span class="token operator">&lt;</span>String<span class="token operator">></span> items<span class="token punctuation">;</span>
+  <span class="token function">app</span><span class="token punctuation">(</span><span class="token punctuation">{</span>Key key<span class="token punctuation">,</span><span class="token metadata symbol">@required</span> <span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">super</span><span class="token punctuation">(</span>key<span class="token punctuation">:</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        <span class="token comment" spellcheck="true">//构建列表</span>
+        body<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">ListView<span class="token punctuation">.</span>builder</span><span class="token punctuation">(</span>
+          <span class="token comment" spellcheck="true">//取出列表的容量</span>
+          itemCount<span class="token punctuation">:</span> items<span class="token punctuation">.</span>length<span class="token punctuation">,</span>
+          itemBuilder<span class="token punctuation">:</span> <span class="token punctuation">(</span>context<span class="token punctuation">,</span>index<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ListTile</span><span class="token punctuation">(</span>
+              title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"${items[index]}"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/j6EehdSZvl5HcKI.png" alt="E__VHL01_ER8WS1L__R6UKE.png"></p>
+<h2 id="GridView网格列表"><a href="#GridView网格列表" class="headerlink" title="GridView网格列表:"></a>GridView网格列表:</h2><h3 id="文字网格："><a href="#文字网格：" class="headerlink" title="文字网格："></a>文字网格：</h3><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">app</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">app</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        body<span class="token punctuation">:</span> GridView<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>
+          <span class="token comment" spellcheck="true">//内边距</span>
+          padding<span class="token punctuation">:</span> <span class="token keyword">const</span> EdgeInsets<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">50.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//网格的数量（一行放几个元素）</span>
+          crossAxisCount<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//网格间的间隙</span>
+          crossAxisSpacing<span class="token punctuation">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+          children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+            <span class="token keyword">const</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"Stack Overflow is an open community"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">const</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"for anyone that codes. We help you get"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">const</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"answers to your toughest coding questions"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">const</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"share knowledge with your coworkers in private"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">const</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"and find your next dream job"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">const</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"Don't give up,you can make a difference!"</span><span class="token punctuation">)</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/ew2f3xtOvjsXNLW.png" alt="LOOUZZL_Q~CG8UXF_8P6_BA.png"></p>
+<h2 id="网格图片列表："><a href="#网格图片列表：" class="headerlink" title="网格图片列表："></a>网格图片列表：</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">app</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">app</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"电影列表"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          backgroundColor<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        body<span class="token punctuation">:</span> <span class="token function">GridView</span><span class="token punctuation">(</span>
+          gridDelegate<span class="token punctuation">:</span> <span class="token function">SliverGridDelegateWithFixedCrossAxisCount</span><span class="token punctuation">(</span>
+              crossAxisCount<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//网格之间的距离</span>
+              mainAxisSpacing<span class="token punctuation">:</span> <span class="token number">2.0</span><span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//横轴的间距</span>
+              crossAxisSpacing<span class="token punctuation">:</span> <span class="token number">2.0</span><span class="token punctuation">,</span>
+              <span class="token comment" spellcheck="true">//childAspectRatio:宽高比，宽是高的2倍就写2.0，如果高是宽的2倍就写0.5。</span>
+              childAspectRatio<span class="token punctuation">:</span> <span class="token number">0.68</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/10/22/104316.77318635_180X260X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/10/10/112514.30587089_180X260X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/11/13/093605.61422332_180X260X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/11/07/092515.55805319_180X260X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/11/21/090246.16772408_135X190X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/11/17/162028.94879602_135X190X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/11/19/165350.52237320_135X190X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/11/16/115256.24365160_180X260X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">Image<span class="token punctuation">.</span>network</span><span class="token punctuation">(</span><span class="token string">'http://img5.mtime.cn/mt/2018/11/20/141608.71613590_135X190X4.jpg'</span><span class="token punctuation">,</span>fit<span class="token punctuation">:</span> BoxFit<span class="token punctuation">.</span>cover<span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/j4T839ZiUmte61W.png" alt="_1VKHD`~6`1FIRO7OF_3HF4.png"></p>
+<h2 id="Row-水平（横向）布局："><a href="#Row-水平（横向）布局：" class="headerlink" title="Row 水平（横向）布局："></a>Row 水平（横向）布局：</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">app</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">app</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"水平方向布局"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//横向布局</span>
+        body<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Row</span><span class="token punctuation">(</span>
+          children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+            <span class="token comment" spellcheck="true">//不灵活的横向布局</span>
+            <span class="token keyword">new</span> <span class="token class-name">RaisedButton</span><span class="token punctuation">(</span>
+              onPressed<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">,</span>
+              color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span>
+              child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"row1"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//灵活的横向布局</span>
+            <span class="token function">Expanded</span><span class="token punctuation">(</span>child<span class="token punctuation">:</span>
+            <span class="token keyword">new</span> <span class="token class-name">RaisedButton</span><span class="token punctuation">(</span>
+              onPressed<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">,</span>
+              color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightGreen<span class="token punctuation">,</span>
+              child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"row2"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">Expanded</span><span class="token punctuation">(</span>child<span class="token punctuation">:</span>
+            <span class="token keyword">new</span> <span class="token class-name">RaisedButton</span><span class="token punctuation">(</span>
+              onPressed<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">,</span>
+              color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightGreenAccent<span class="token punctuation">,</span>
+              child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"row3"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">Expanded</span><span class="token punctuation">(</span>child<span class="token punctuation">:</span>
+            <span class="token keyword">new</span> <span class="token class-name">RaisedButton</span><span class="token punctuation">(</span>
+              onPressed<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">,</span>
+              color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightGreenAccent<span class="token punctuation">,</span>
+              child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"row3"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">Expanded</span><span class="token punctuation">(</span>child<span class="token punctuation">:</span>
+            <span class="token keyword">new</span> <span class="token class-name">RaisedButton</span><span class="token punctuation">(</span>
+              onPressed<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">,</span>
+              color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlueAccent<span class="token punctuation">,</span>
+              child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"row4"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">RaisedButton</span><span class="token punctuation">(</span>
+              onPressed<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">,</span>
+              color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>red<span class="token punctuation">,</span>
+              child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"row5"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/cuHoOJw3DyEdSYW.png" alt="R~OFE1XHH0__@_6W835W_~T.png"></p>
+<h2 id="Column-垂直（纵向）布局："><a href="#Column-垂直（纵向）布局：" class="headerlink" title="Column 垂直（纵向）布局："></a>Column 垂直（纵向）布局：</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/cupertino.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">app</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">app</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"垂直方向布局"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//纵向布局</span>
+       body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+         child<span class="token punctuation">:</span> <span class="token function">Column</span><span class="token punctuation">(</span>
+           <span class="token comment" spellcheck="true">//文字 副轴对齐方式</span>
+           crossAxisAlignment<span class="token punctuation">:</span> CrossAxisAlignment<span class="token punctuation">.</span>center<span class="token punctuation">,</span>
+           <span class="token comment" spellcheck="true">//文字 主轴对齐方式</span>
+           mainAxisAlignment<span class="token punctuation">:</span> MainAxisAlignment<span class="token punctuation">.</span>center<span class="token punctuation">,</span>
+           children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+             <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"Stack Overflow is an open community"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+             <span class="token function">Expanded</span><span class="token punctuation">(</span>child<span class="token punctuation">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"answers to your toughest coding questions"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+             <span class="token function">Expanded</span><span class="token punctuation">(</span>child<span class="token punctuation">:</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"share knowledge with your coworkers in private"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+             <span class="token function">Expanded</span><span class="token punctuation">(</span>child<span class="token punctuation">:</span>  <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"and find your next dream job"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+             <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">"Don't give up,you can make a difference!"</span><span class="token punctuation">)</span>
+           <span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">)</span><span class="token punctuation">,</span>
+       <span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/o1xQ6ZCb8ayvGqH.png" alt="_YTU_E9T8E5_LFV87_WN9AK.png"></p>
+<h2 id="Stack层叠布局："><a href="#Stack层叠布局：" class="headerlink" title="Stack层叠布局："></a>Stack层叠布局：</h2><h3 id="使用container的方式："><a href="#使用container的方式：" class="headerlink" title="使用container的方式："></a>使用container的方式：</h3><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/cupertino.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">app</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">app</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//层叠布局</span>
+    <span class="token keyword">var</span> stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stack</span><span class="token punctuation">(</span>
+      <span class="token comment" spellcheck="true">//对齐方式, 主轴和副轴</span>
+      alignment<span class="token punctuation">:</span> <span class="token keyword">const</span> <span class="token function">FractionalOffset</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+        <span class="token comment" spellcheck="true">//头像</span>
+        <span class="token keyword">new</span> <span class="token class-name">CircleAvatar</span><span class="token punctuation">(</span>
+          backgroundImage<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">NetworkImage</span><span class="token punctuation">(</span><span class="token string">'https://picabstract-preview-ftn.weiyun.com/'</span>
+                                            <span class="token string">'ftn_pic_abs_v3/6d37e151e59ca439abe2654102a31'</span>
+                                            <span class="token string">'63bee41ca67113bb3add51aa2fc9e16f27d0959cef2'</span>
+                                            <span class="token string">'a9b3625f7174e0aa15dbd830?pictype=scale&amp;from='</span>
+                                            <span class="token string">'30113&amp;version=3.3.3.3&amp;uin=1170398847&amp;fname='</span>
+                                            <span class="token string">'httpi0.hdslb.combfsarticledc607d09ad1347811af3fdb.'</span>
+                                            <span class="token string">'jpg&amp;size=750miui.com%2Fforum%2F201311%2F27%2F22252'</span>
+
+                                            <span class="token string">'6bjdipmjgzj1ibim7.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//弧度</span>
+          radius<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//容器</span>
+        <span class="token keyword">new</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+          decoration<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">BoxDecoration</span><span class="token punctuation">(</span>
+            color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//边距</span>
+          padding<span class="token punctuation">:</span> EdgeInsets<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">5.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"avatar"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"层叠布局"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+       body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+         <span class="token comment" spellcheck="true">//引入变量</span>
+        child<span class="token punctuation">:</span> stack<span class="token punctuation">,</span>
+       <span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/3JaSbxOpoKWkl1g.png" alt="I@_7AC2_N~XHE_3__HLGPIW.png"></p>
+<h3 id="使用Positioned的方式："><a href="#使用Positioned的方式：" class="headerlink" title="使用Positioned的方式："></a>使用Positioned的方式：</h3><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/cupertino.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">app</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">app</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//层叠布局</span>
+    <span class="token keyword">var</span> stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stack</span><span class="token punctuation">(</span>
+      <span class="token comment" spellcheck="true">//对齐方式, 主轴和副轴</span>
+      alignment<span class="token punctuation">:</span> <span class="token keyword">const</span> <span class="token function">FractionalOffset</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+        <span class="token comment" spellcheck="true">//头像</span>
+        <span class="token keyword">new</span> <span class="token class-name">CircleAvatar</span><span class="token punctuation">(</span>
+          backgroundImage<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">NetworkImage</span><span class="token punctuation">(</span><span class="token string">'https://picabstract-preview-ftn.weiyun.com/'</span>
+                                            <span class="token string">'ftn_pic_abs_v3/6d37e151e59ca439abe2654102a31'</span>
+                                            <span class="token string">'63bee41ca67113bb3add51aa2fc9e16f27d0959cef2'</span>
+                                            <span class="token string">'a9b3625f7174e0aa15dbd830?pictype=scale&amp;from='</span>
+                                            <span class="token string">'30113&amp;version=3.3.3.3&amp;uin=1170398847&amp;fname='</span>
+                                            <span class="token string">'httpi0.hdslb.combfsarticledc607d09ad1347811af3fdb.'</span>
+                                            <span class="token string">'jpg&amp;size=750miui.com%2Fforum%2F201311%2F27%2F22252'</span>
+
+                                            <span class="token string">'6bjdipmjgzj1ibim7.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//弧度</span>
+          radius<span class="token punctuation">:</span> <span class="token number">100.0</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Positioned</span><span class="token punctuation">(</span>
+          <span class="token comment" spellcheck="true">//顶部</span>
+          top<span class="token punctuation">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+          left<span class="token punctuation">:</span> <span class="token number">85.0</span><span class="token punctuation">,</span>
+          child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"avatar"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Positioned</span><span class="token punctuation">(</span>
+          <span class="token comment" spellcheck="true">//底部</span>
+          bottom<span class="token punctuation">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+          right<span class="token punctuation">:</span> <span class="token number">85.0</span><span class="token punctuation">,</span>
+          child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"头像"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"层叠布局"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+       body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+         <span class="token comment" spellcheck="true">//引入变量</span>
+        child<span class="token punctuation">:</span> stack<span class="token punctuation">,</span>
+       <span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/sYnxMjTyRkudqa2.png" alt="3TI7_N_@9KU~D~WOHY2M8_Q.png"></p>
+<h2 id="卡片式布局："><a href="#卡片式布局：" class="headerlink" title="卡片式布局："></a>卡片式布局：</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/cupertino.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">app</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">app</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//卡片布局</span>
+    <span class="token keyword">var</span> card <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Card</span><span class="token punctuation">(</span>
+      child<span class="token punctuation">:</span> <span class="token function">Column</span><span class="token punctuation">(</span>
+        children<span class="token punctuation">:</span><span class="token operator">&lt;</span>Widget<span class="token operator">></span> <span class="token punctuation">[</span>
+          <span class="token function">ListTile</span><span class="token punctuation">(</span>
+            <span class="token comment" spellcheck="true">//主标题</span>
+            title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"重庆市夔牛科技有限公司"</span><span class="token punctuation">,</span>style<span class="token punctuation">:</span> <span class="token function">TextStyle</span><span class="token punctuation">(</span>fontWeight<span class="token punctuation">:</span> FontWeight<span class="token punctuation">.</span>w500<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//副标题</span>
+            subtitle<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"陈先生:12345678911"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//图标</span>
+            leading<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>Icons<span class="token punctuation">.</span>account_box<span class="token punctuation">,</span>color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//分割线</span>
+          <span class="token keyword">new</span> <span class="token class-name">Divider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token function">ListTile</span><span class="token punctuation">(</span>
+            <span class="token comment" spellcheck="true">//主标题</span>
+            title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"重庆市夔牛科技有限公司"</span><span class="token punctuation">,</span>style<span class="token punctuation">:</span> <span class="token function">TextStyle</span><span class="token punctuation">(</span>fontWeight<span class="token punctuation">:</span> FontWeight<span class="token punctuation">.</span>w500<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//副标题</span>
+            subtitle<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"陈先生:12345678911"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//图标</span>
+            leading<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>Icons<span class="token punctuation">.</span>account_box<span class="token punctuation">,</span>color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//分割线</span>
+          <span class="token keyword">new</span> <span class="token class-name">Divider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token function">ListTile</span><span class="token punctuation">(</span>
+            <span class="token comment" spellcheck="true">//主标题</span>
+            title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"重庆市夔牛科技有限公司"</span><span class="token punctuation">,</span>style<span class="token punctuation">:</span> <span class="token function">TextStyle</span><span class="token punctuation">(</span>fontWeight<span class="token punctuation">:</span> FontWeight<span class="token punctuation">.</span>w500<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//副标题</span>
+            subtitle<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"陈先生:12345678911"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//图标</span>
+            leading<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>Icons<span class="token punctuation">.</span>account_box<span class="token punctuation">,</span>color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//分割线</span>
+          <span class="token keyword">new</span> <span class="token class-name">Divider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token function">ListTile</span><span class="token punctuation">(</span>
+            <span class="token comment" spellcheck="true">//主标题</span>
+            title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"重庆市夔牛科技有限公司"</span><span class="token punctuation">,</span>style<span class="token punctuation">:</span> <span class="token function">TextStyle</span><span class="token punctuation">(</span>fontWeight<span class="token punctuation">:</span> FontWeight<span class="token punctuation">.</span>w500<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//副标题</span>
+            subtitle<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"陈先生:12345678911"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//图标</span>
+            leading<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>Icons<span class="token punctuation">.</span>account_box<span class="token punctuation">,</span>color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//分割线</span>
+          <span class="token keyword">new</span> <span class="token class-name">Divider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token function">ListTile</span><span class="token punctuation">(</span>
+            <span class="token comment" spellcheck="true">//主标题</span>
+            title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"重庆市夔牛科技有限公司"</span><span class="token punctuation">,</span>style<span class="token punctuation">:</span> <span class="token function">TextStyle</span><span class="token punctuation">(</span>fontWeight<span class="token punctuation">:</span> FontWeight<span class="token punctuation">.</span>w500<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//副标题</span>
+            subtitle<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"陈先生:12345678911"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//图标</span>
+            leading<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>Icons<span class="token punctuation">.</span>account_box<span class="token punctuation">,</span>color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//分割线</span>
+          <span class="token keyword">new</span> <span class="token class-name">Divider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token function">ListTile</span><span class="token punctuation">(</span>
+            <span class="token comment" spellcheck="true">//主标题</span>
+            title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"重庆市夔牛科技有限公司"</span><span class="token punctuation">,</span>style<span class="token punctuation">:</span> <span class="token function">TextStyle</span><span class="token punctuation">(</span>fontWeight<span class="token punctuation">:</span> FontWeight<span class="token punctuation">.</span>w500<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//副标题</span>
+            subtitle<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"陈先生:12345678911"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//图标</span>
+            leading<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>Icons<span class="token punctuation">.</span>account_box<span class="token punctuation">,</span>color<span class="token punctuation">:</span> Colors<span class="token punctuation">.</span>lightBlue<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+      title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+      home<span class="token punctuation">:</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+          title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"卡片式布局"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+       body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+         <span class="token comment" spellcheck="true">//引入变量</span>
+        child<span class="token punctuation">:</span> card<span class="token punctuation">,</span>
+       <span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://i.loli.net/2020/10/25/znV2R6QlhJAqSuD.png" alt="0NHQ56_6_WDKVY__KBPY1TP.png"></p>
+<h2 id="RaisedButton按钮组件（页面跳转）"><a href="#RaisedButton按钮组件（页面跳转）" class="headerlink" title="RaisedButton按钮组件（页面跳转）:"></a>RaisedButton按钮组件（页面跳转）:</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/cupertino.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">MaterialApp</span><span class="token punctuation">(</span>
+    title<span class="token punctuation">:</span> <span class="token string">"navigator"</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">//这里需要一个Scaffold</span>
+    home<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">FirstSreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">FirstSreen</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//所以这里返回一个Scaffold</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span>  <span class="token class-name">Scaffold</span><span class="token punctuation">(</span>
+      appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+        title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"导航页"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+        <span class="token comment" spellcheck="true">//使用RaisedButton</span>
+        child<span class="token punctuation">:</span> <span class="token function">RaisedButton</span><span class="token punctuation">(</span>
+          <span class="token comment" spellcheck="true">//设置按钮的名称</span>
+          child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"查看详情"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment" spellcheck="true">//绑定点击事件</span>
+          onPressed<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            Navigator<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">MaterialPageRoute</span><span class="token punctuation">(</span>
+              <span class="token comment" spellcheck="true">//点击后去创建一个SecondScreen</span>
+              builder<span class="token punctuation">:</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">new</span> <span class="token class-name">SecondScreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">SecondScreen</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+      appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+        title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"详情页"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+        child<span class="token punctuation">:</span> <span class="token function">RaisedButton</span><span class="token punctuation">(</span>
+          child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"返回"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          onPressed<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            Navigator<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<h5 id="导航页："><a href="#导航页：" class="headerlink" title="导航页："></a>导航页：</h5><p><img src="https://i.loli.net/2020/10/25/nC2GxMYlryg7E4W.png" alt="J4R7YOIGO@GAVXK`~NZ_`QO.png"></p>
+<h5 id="详情页："><a href="#详情页：" class="headerlink" title="详情页："></a>详情页：</h5><p>![TUGVHTKQZ~1_E_@`A_ECS@A.png](<a href="https://i.loli.net/2020/10/25/WZ6NYiLPnDrEwHF.png">https://i.loli.net/2020/10/25/WZ6NYiLPnDrEwHF.png</a>)</p>
+<h2 id="导航参数的传递："><a href="#导航参数的传递：" class="headerlink" title="导航参数的传递："></a>导航参数的传递：</h2><pre class="line-numbers language-dart"><code class="language-dart"><span class="token keyword">import</span> <span class="token string">'package:flutter/material.dart'</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">Product</span><span class="token punctuation">{</span>
+  <span class="token keyword">final</span> String title<span class="token punctuation">;</span>
+  <span class="token keyword">final</span> String description<span class="token punctuation">;</span>
+  <span class="token function">Product</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>title<span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>description<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">runApp</span><span class="token punctuation">(</span><span class="token function">MaterialApp</span><span class="token punctuation">(</span>
+    title<span class="token punctuation">:</span> <span class="token string">"app"</span><span class="token punctuation">,</span>
+    home<span class="token punctuation">:</span> <span class="token function">ProductList</span><span class="token punctuation">(</span>
+      products<span class="token punctuation">:</span>List<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span>
+              <span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">Product</span><span class="token punctuation">(</span><span class="token string">'商品 $i'</span><span class="token punctuation">,</span> <span class="token string">'这是一个商品详情页，标号为$i'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ProductList</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token keyword">final</span> List<span class="token operator">&lt;</span>Product<span class="token operator">></span> products<span class="token punctuation">;</span>
+  <span class="token function">ProductList</span><span class="token punctuation">(</span><span class="token punctuation">{</span>Key key<span class="token punctuation">,</span><span class="token metadata symbol">@required</span> <span class="token keyword">this</span><span class="token punctuation">.</span>products<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">super</span><span class="token punctuation">(</span>key<span class="token punctuation">:</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+      appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+        title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">"商品列表"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      body<span class="token punctuation">:</span> ListView<span class="token punctuation">.</span><span class="token function">builder</span><span class="token punctuation">(</span>
+        itemCount<span class="token punctuation">:</span> products<span class="token punctuation">.</span>length<span class="token punctuation">,</span>
+        itemBuilder<span class="token punctuation">:</span> <span class="token punctuation">(</span>context<span class="token punctuation">,</span>index<span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token function">ListTile</span><span class="token punctuation">(</span>
+            title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span>products<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            onTap<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+              Navigator<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token function">MaterialPageRoute</span><span class="token punctuation">(</span>
+                builder<span class="token punctuation">:</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">new</span> <span class="token class-name">ProductDetail</span><span class="token punctuation">(</span>product<span class="token punctuation">:</span> products<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+              <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ProductDetail</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span><span class="token punctuation">{</span>
+  <span class="token keyword">final</span> Product product<span class="token punctuation">;</span>
+  <span class="token function">ProductDetail</span><span class="token punctuation">(</span><span class="token punctuation">{</span>Key key<span class="token punctuation">,</span><span class="token metadata symbol">@required</span> <span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">super</span><span class="token punctuation">(</span>key<span class="token punctuation">:</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token metadata symbol">@override</span>
+  Widget <span class="token function">build</span><span class="token punctuation">(</span>BuildContext context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Scaffold</span><span class="token punctuation">(</span>
+      appBar<span class="token punctuation">:</span> <span class="token function">AppBar</span><span class="token punctuation">(</span>
+        title<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">'${product.description}'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      body<span class="token punctuation">:</span> <span class="token function">Center</span><span class="token punctuation">(</span>
+        child<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string">'${product.description}'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>运行效果：</strong></p>
+<h5 id="导航页：-1"><a href="#导航页：-1" class="headerlink" title="导航页："></a>导航页：</h5><p><img src="https://i.loli.net/2020/10/26/VIugYDXtUZMe3dz.png" alt="_LGP_I_XLJW2_L8KY3__AM5.png"></p>
+<p><strong>详情页：</strong></p>
+<p><img src="https://i.loli.net/2020/10/26/dHgSq1rWiNzbKe5.png" alt="RRNR_PM_R_1F_XMQRP_7_G5.png"></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/11/04/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/3.png" class="responsive-img" alt="提问的智慧">
+                            
+                            <span class="card-title">提问的智慧</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                提问的智慧
+How To Ask Questions The Smart Way
+Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
+本指南英文版版权为 Eric S. Raymond
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-11-04
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-user fa-fw"></i>
+                                    xinyichen
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/09/20/OOM%E5%AE%9E%E4%BE%8B/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/12.png" class="responsive-img" alt="OOM实例">
+                            
+                            <span class="card-title">OOM实例</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                java引用 ：
+强 普通引用 
+M m = new M();
+m = null;
+System.gc();
+sout(m)
+
+软 当堆内存不够用时才回收 
+//设置最大堆大小为20
+//m指向强引用SoftReference SoftRe
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

@@ -274,19 +274,349 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Rust 控制流</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-02-20
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-02-20
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        945
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        4 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Rust 提供了多种控制流结构，包括 <code>if</code> 表达式、循环（<code>loop</code>、<code>while</code>、<code>for</code>）以及 <code>match</code> 表达式。这些结构允许你根据不同的条件执行代码。</p>
+<h2 id="1-if-表达式"><a href="#1-if-表达式" class="headerlink" title="1. if 表达式"></a>1. <code>if</code> 表达式</h2><p>Rust 的 <code>if</code> 语句不仅仅是条件判断语句，它也可以作为表达式使用，这意味着 <code>if</code> 的结果可以被赋值给一个变量。</p>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> number <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Number is divisible by 4"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> number <span class="token operator">%</span> <span class="token number">3</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Number is divisible by 3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Number is not divisible by 4 or 3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>if</code> 语句还可以用于返回值：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> condition <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token keyword">if</span> condition <span class="token punctuation">{</span> <span class="token number">5</span> <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token number">6</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 使用 if 表达式返回值</span>
+<span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value of number is: {}"</span><span class="token punctuation">,</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-loop-循环"><a href="#2-loop-循环" class="headerlink" title="2. loop 循环"></a>2. <code>loop</code> 循环</h2><p><code>loop</code> 是 Rust 中最基本的循环形式，它会一直执行，直到显式地被打断。</p>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">loop</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"This will loop forever!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>要打破无限循环，可以使用 <code>break</code> 语句。</p>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> <span class="token keyword">mut</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">loop</span> <span class="token punctuation">{</span>
+    counter <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> counter <span class="token operator">==</span> <span class="token number">10</span> <span class="token punctuation">{</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 退出循环</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-1-嵌套循环"><a href="#2-1-嵌套循环" class="headerlink" title="2.1 嵌套循环"></a>2.1 嵌套循环</h3><p>如果存在嵌套循环，<code>break</code> 和 <code>continue</code> 应用于此时最内层的循环。你可以选择在一个循环上指定一个<strong>循环标签</strong>（<em>loop label</em>），然后将标签与 <code>break</code> 或 <code>continue</code> 一起使用，使这些关键字应用于已标记的循环而不是最内层的循环。</p>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  
+    'counting_up<span class="token punctuation">:</span> <span class="token keyword">loop</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 外层循环，标记为 'counting_up 用于跳出循环</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"count = {}"</span><span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token keyword">let</span> <span class="token keyword">mut</span> remaining <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 初始化剩余次数为 10</span>
+
+        <span class="token keyword">loop</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 内层循环</span>
+            <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"remaining = {}"</span><span class="token punctuation">,</span> remaining<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 打印当前的 remaining 值</span>
+            <span class="token keyword">if</span> remaining <span class="token operator">==</span> <span class="token number">9</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 如果 remaining 值为 9，则跳出内层循环</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> count <span class="token operator">==</span> <span class="token number">2</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 如果 count 值为 2，跳出外层循环</span>
+                <span class="token keyword">break</span> 'counting_up<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            remaining <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">;</span>  
+        <span class="token punctuation">}</span>
+
+        count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"End count = {}"</span><span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="3-while-循环"><a href="#3-while-循环" class="headerlink" title="3. while 循环"></a>3. <code>while</code> 循环</h2><p><code>while</code> 循环基于某个条件判断是否继续执行，直到条件为 <code>false</code> 时停止。</p>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> <span class="token keyword">mut</span> number <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+
+<span class="token keyword">while</span> number <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}!"</span><span class="token punctuation">,</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    number <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"LIFTOFF!!!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="4-for-循环"><a href="#4-for-循环" class="headerlink" title="4. for 循环"></a>4. <code>for</code> 循环</h2><p><code>for</code> 循环是迭代集合的常见方式。在 Rust 中，<code>for</code> 循环用于遍历一个集合（如数组、范围等）。</p>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> element <span class="token keyword">in</span> a<span class="token punctuation">.</span><span class="token function">iter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value is: {}"</span><span class="token punctuation">,</span> element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Rust 也提供了非常灵活的范围类型，可以轻松创建一个循环的范围。</p>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">for</span> number <span class="token keyword">in</span> <span class="token number">1</span><span class="token punctuation">..</span><span class="token number">4</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 注意这个范围是半开区间</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Number: {}"</span><span class="token punctuation">,</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="5-match-表达式"><a href="#5-match-表达式" class="headerlink" title="5. match 表达式"></a>5. <code>match</code> 表达式</h2><p><code>match</code> 表达式是 Rust 中非常强大和灵活的控制流结构，用来进行模式匹配。它类似于其他语言中的 <code>switch</code> 语句，但更加复杂和强大。</p>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token number">13</span><span class="token punctuation">;</span>
+
+<span class="token keyword">match</span> number <span class="token punctuation">{</span>
+    <span class="token number">1</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"One"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token number">2</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Two"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token number">3</span><span class="token punctuation">..</span><span class="token operator">=</span><span class="token number">12</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Between 3 and 12"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 匹配 3 到 12 的范围</span>
+    <span class="token number">13</span> <span class="token operator">|</span> <span class="token number">14</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Thirteen or Fourteen"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 使用 `|` 来匹配多个值</span>
+    _ <span class="token keyword">if</span> number <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Even number"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 使用 `if` 来进一步判断</span>
+    _ <span class="token operator">=</span><span class="token operator">></span> <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Anything else"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 默认匹配</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>match</code> 表达式可以匹配字面值、范围、以及更多复杂的模式。</p>
+<h2 id="6-控制流的表达式"><a href="#6-控制流的表达式" class="headerlink" title="6. 控制流的表达式"></a>6. 控制流的表达式</h2><p>在 Rust 中，<code>if</code>、<code>loop</code>、<code>while</code>、<code>for</code>、<code>match</code> 都是表达式，这意味着它们的结果可以直接用于赋值或其他操作。</p>
+<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><ul>
+<li>Rust 提供了 <code>if</code>、<code>loop</code>、<code>while</code>、<code>for</code> 和 <code>match</code> 等控制流结构。</li>
+<li><code>if</code> 是条件判断结构，可以作为表达式返回值。</li>
+<li><code>loop</code> 是无限循环，需使用 <code>break</code> 来退出。</li>
+<li><code>while</code> 循环基于条件判断，适合执行条件限定的操作。</li>
+<li><code>for</code> 循环通常用于遍历集合。</li>
+<li><code>match</code> 是一种强大的模式匹配表达式，可以处理不同的条件并进行复杂的匹配。</li>
+</ul>
+<p>通过这些控制流语句，你可以在 Rust 中高效地管理代码的执行流。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/02/21/Rust%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83Ownership/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/10.png" class="responsive-img" alt="Rust中的所有权Ownership">
+                            
+                            <span class="card-title">Rust中的所有权Ownership</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Rust 的所有权（Ownership）系统是其内存管理的核心之一，它避免了垃圾回收（GC）机制而确保了内存的安全管理。通过所有权系统，Rust 在编译时就能保证内存使用的安全性，避免了程序运行时的内存管理问题。
+1. 所有权的基本规则Ru
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/02/20/Rust%E5%87%BD%E6%95%B0%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.png" class="responsive-img" alt="Rust 函数如何工作">
+                            
+                            <span class="card-title">Rust 函数如何工作</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 引言在 Rust 中，函数是程序的基本构建块之一，允许我们封装一段代码，使其能够多次调用。Rust 提供了多种不同形式的函数，包括带参数和返回值的函数。理解函数的工作方式是编写 Rust 程序的基础。
+2. 定义函数Rust 中的函数
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

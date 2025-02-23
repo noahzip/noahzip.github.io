@@ -280,19 +280,551 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">单项链表crud简单实现</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                    数据结构
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-04-27
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-04-27
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.1k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        5 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">SingleLinkedList</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 头节点的指针 始终指向头节点
+     */</span>
+    <span class="token keyword">private</span> HeroNode head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HeroNode</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> HeroNode <span class="token function">getHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 修改节点 根据heroNode.id
+     * @param heroNode
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">update</span><span class="token punctuation">(</span>HeroNode heroNode<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//判空</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>head<span class="token punctuation">.</span>next <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"链表为空"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//获取头节点</span>
+        HeroNode cur <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//遍历</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token operator">!=</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//id相等修改值</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cur<span class="token punctuation">.</span>id <span class="token operator">==</span> heroNode<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                cur<span class="token punctuation">.</span>name <span class="token operator">=</span> heroNode<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//指针后移</span>
+            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 按照id顺序插入链表
+     * @param newNode
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">addNodeById</span><span class="token punctuation">(</span>HeroNode newNode<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//获取头节点的指针</span>
+        HeroNode temp  <span class="token operator">=</span>  head<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//遍历链表 寻找插入的位置</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>temp<span class="token punctuation">.</span>next<span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">.</span>next<span class="token punctuation">.</span>id <span class="token operator">==</span> newNode<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"节点编号%d已存在请校验数据！\n"</span><span class="token punctuation">,</span>newNode<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">.</span>next<span class="token punctuation">.</span>id <span class="token operator">></span> newNode<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               <span class="token comment" spellcheck="true">//添加元素不处于链表末尾</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//移动指针</span>
+            temp <span class="token operator">=</span> temp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//temp指向尾部节点 并且链表中没有相同的节点id</span>
+        newNode<span class="token punctuation">.</span>next <span class="token operator">=</span> temp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        temp<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 按照servantid删除节点
+     * @param id
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">delNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//获取头节点的指针</span>
+        HeroNode temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//从第一个节点开始遍历链表</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>temp<span class="token punctuation">.</span>next <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">.</span>next<span class="token punctuation">.</span>id <span class="token operator">==</span> id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//如果id相同就执行删除</span>
+                <span class="token comment" spellcheck="true">//当删除的为第一个节点时 移动头指针 相当于 head.next = head.next.next</span>
+                temp<span class="token punctuation">.</span>next <span class="token operator">=</span> temp<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//移动指针</span>
+            temp <span class="token operator">=</span> temp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"要删除的%d号数据不存在\n"</span><span class="token punctuation">,</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 插入到末尾
+     * @param newNode
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addNode</span><span class="token punctuation">(</span>HeroNode newNode<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//获取头节点的指针</span>
+        HeroNode temp <span class="token operator">=</span>  head<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//移动指针到链表末尾 如果链表为null则直接插入</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>temp<span class="token punctuation">.</span>next <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           temp <span class="token operator">=</span> temp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//插入到末尾</span>
+        temp<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 打印链表
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//头指针无需打印 获取第一个节点</span>
+        HeroNode temp <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//遍历链表</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>temp <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>temp<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            temp <span class="token operator">=</span> temp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 反转链表
+     * @param head
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">revsLinkedList</span><span class="token punctuation">(</span>HeroNode head<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">//链表为空或只有一个节点 不执行操作</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>head<span class="token punctuation">.</span>next <span class="token operator">==</span> null <span class="token operator">||</span> head<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">//头节点</span>
+        HeroNode cur <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//反转后的头指针</span>
+        HeroNode revs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HeroNode</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//后继节点</span>
+        HeroNode next<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//保存后继节点</span>
+            next <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//让当前节点指向revs的下一个节点</span>
+            cur<span class="token punctuation">.</span>next <span class="token operator">=</span> revs<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//让revs指向当前节点</span>
+            revs<span class="token punctuation">.</span>next <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//移动指针</span>
+            cur <span class="token operator">=</span> next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//让原始指针指向反转后的第一个节点</span>
+        head<span class="token punctuation">.</span>next <span class="token operator">=</span> revs<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 计算有效节点的个数
+     * @param head
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">countLikedNode</span><span class="token punctuation">(</span>HeroNode head <span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//统计变量</span>
+        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//获取第一个节点</span>
+        HeroNode cur <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//链表为空 返回0</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>cur <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> count<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token operator">!=</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//统计变量自增</span>
+            count<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//移动指针</span>
+            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> count<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 返回从末位数的第index个节点
+     *
+     * @param head
+     * @param index
+     * @return
+     */</span>
+    <span class="token keyword">public</span> HeroNode <span class="token function">lastIndexOfNode</span><span class="token punctuation">(</span>HeroNode head<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>head<span class="token punctuation">.</span>next <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"链表为空"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//统计节点的个数</span>
+        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token function">countLikedNode</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//校验索引是否合法</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>index<span class="token operator">></span>count<span class="token operator">||</span>index<span class="token operator">&lt;=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"索引不合法,size : "</span><span class="token operator">+</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        HeroNode cur <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count<span class="token operator">-</span>index <span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> cur<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 逆序打印链表 利用栈
+     * @param head 链表的头指针
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">revsPrint</span><span class="token punctuation">(</span>HeroNode head<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>head<span class="token punctuation">.</span>next <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"链表为空"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        HeroNode cur <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        Stack<span class="token operator">&lt;</span>HeroNode<span class="token operator">></span> nodeStack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stack</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//压栈</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cur<span class="token operator">!=</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            nodeStack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//弹栈</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>nodeStack<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            HeroNode pop <span class="token operator">=</span> nodeStack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>pop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">HeroNode</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> HeroNode next<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">HeroNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">,</span> String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"HeroNode{"</span> <span class="token operator">+</span>
+                <span class="token string">"id="</span> <span class="token operator">+</span> id <span class="token operator">+</span>
+                <span class="token string">", name='"</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
+                <span class="token string">'}'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HeroNode h <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HeroNode</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"saber"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    HeroNode h1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HeroNode</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">"caster"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    HeroNode h2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HeroNode</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">"lancer"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SingleLinkedList singleLinkedList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SingleLinkedList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">addNode</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">addNode</span><span class="token punctuation">(</span>h1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">addNode</span><span class="token punctuation">(</span>h2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> singleLinkedList<span class="token punctuation">.</span>
+            <span class="token function">countLikedNode</span><span class="token punctuation">(</span>singleLinkedList<span class="token punctuation">.</span><span class="token function">getHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"链表一共有%d个节点\n"</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"反转前"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//singleLinkedList.revsLinkedList(singleLinkedList.getHead());</span>
+
+    <span class="token comment" spellcheck="true">//        singleLinkedList.addNodeById(h2);</span>
+    <span class="token comment" spellcheck="true">//        singleLinkedList.addNodeById(h);</span>
+    <span class="token comment" spellcheck="true">//        singleLinkedList.delNode(1);</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">addNodeById</span><span class="token punctuation">(</span>h1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"反转后"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"查找倒数第二个节点"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    HeroNode node <span class="token operator">=</span>
+            singleLinkedList<span class="token punctuation">.</span><span class="token function">lastIndexOfNode</span><span class="token punctuation">(</span>
+                    singleLinkedList<span class="token punctuation">.</span><span class="token function">getHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"逆序打印=========>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">revsPrint</span><span class="token punctuation">(</span>singleLinkedList<span class="token punctuation">.</span><span class="token function">getHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    HeroNode h3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HeroNode</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">"archer"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>h3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"修改后"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    singleLinkedList<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h2><pre class="line-numbers language-java"><code class="language-java">链表一共有<span class="token number">3</span>个节点
+反转前
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'saber'</span><span class="token punctuation">}</span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'caster'</span><span class="token punctuation">}</span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'lancer'</span><span class="token punctuation">}</span>
+节点编号<span class="token number">3</span>已存在请校验数据！
+反转后
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'saber'</span><span class="token punctuation">}</span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'caster'</span><span class="token punctuation">}</span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'lancer'</span><span class="token punctuation">}</span>
+查找倒数第二个节点
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'caster'</span><span class="token punctuation">}</span>
+逆序打印<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span><span class="token operator">></span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'lancer'</span><span class="token punctuation">}</span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'caster'</span><span class="token punctuation">}</span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'saber'</span><span class="token punctuation">}</span>
+修改后
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'saber'</span><span class="token punctuation">}</span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'caster'</span><span class="token punctuation">}</span>
+HeroNode<span class="token punctuation">{</span>id<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'archer'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/04/28/%E7%BA%A6%E7%91%9F%E5%A4%AB%E5%87%BA%E5%9C%88/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="约瑟夫出圈">
+                            
+                            <span class="card-title">约瑟夫出圈</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                使用单向循环链表解决约瑟夫问题
+/**
+ * @author cxy
+ * 约瑟夫问题：
+ *      n个小男孩围城一圈 从第k个孩子开始报数 每报m个数就出圈
+ *      假设有5个孩子 从第一个开始 报数2下就出圈 那么出圈的顺
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-04-28
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                    数据结构
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/04/26/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E5%8D%95%E5%90%91%E9%98%9F%E5%88%97/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/27.png" class="responsive-img" alt="数组模拟单向队列">
+                            
+                            <span class="card-title">数组模拟单向队列</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                /**
+ * @author cxy
+ * 数组模拟队列
+ */
+public class ArrayQueue&lt;E> {
+
+    /**
+     * 默认容量
+     */
+    private final int init
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-04-26
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                    数据结构
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

@@ -274,19 +274,316 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Rust变量和可变性</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-02-20
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-02-20
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        983
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>在本节中，我们将介绍 Rust 中的变量和如何使用它们。Rust 对于变量的默认处理方式是不可变的，但它也提供了在需要时声明可变变量的方法。</p>
+<h2 id="2-变量的默认不可变性"><a href="#2-变量的默认不可变性" class="headerlink" title="2. 变量的默认不可变性"></a>2. 变量的默认不可变性</h2><p>Rust 中的变量默认是不可变的。也就是说，声明一个变量后，我们不能修改它的值，除非显式地标注它为可变的。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value of x is: {}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// x = 6; //  ^^^^^ cannot assign twice to immutable variable </span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上述代码会报错，因为变量 <code>x</code> 默认是不可变的。如果试图修改它的值，Rust 会提示编译错误。</p>
+<h2 id="3-声明可变变量"><a href="#3-声明可变变量" class="headerlink" title="3. 声明可变变量"></a>3. 声明可变变量</h2><p>要使变量变得可变，必须使用 <code>mut</code> 关键字。在 Rust 中，只有显式标注为 <code>mut</code> 的变量才是可变的。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value of x is: {}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    x <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 修改 x 的值是允许的</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value of x is now: {}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这个例子中，<code>x</code> 被标记为可变的，因此可以修改它的值。</p>
+<h2 id="4-常量"><a href="#4-常量" class="headerlink" title="4. 常量"></a>4. 常量</h2><p>除了变量，Rust 还支持常量。常量与变量不同，它们的值一旦确定就不能改变。常量的声明需要使用 <code>const</code> 关键字。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">const</span> MAX_POINTS<span class="token punctuation">:</span> u32 <span class="token operator">=</span> <span class="token number">100_000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>常量的特点：</p>
+<ul>
+<li>必须在声明时赋值。</li>
+<li>常量的类型必须显式声明。</li>
+<li>常量可以在任何作用域中使用，包括全局作用域。</li>
+</ul>
+<h2 id="5-数据类型的推断"><a href="#5-数据类型的推断" class="headerlink" title="5. 数据类型的推断"></a>5. 数据类型的推断</h2><p>Rust 会根据上下文自动推断变量的数据类型，但我们也可以显式指定数据类型。如果没有显式指定，Rust 会根据初始化值推断类型。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Rust 推断 x 的类型为 i32</span>
+    <span class="token keyword">let</span> y<span class="token punctuation">:</span> f64 <span class="token operator">=</span> <span class="token number">42.0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 显式指定 y 的类型为 f64</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="6-不同的变量"><a href="#6-不同的变量" class="headerlink" title="6. 不同的变量"></a>6. 不同的变量</h2><p>Rust 中的变量分为两种类型：</p>
+<ul>
+<li><p><strong>可变变量</strong>：使用 <code>mut</code> 关键字来声明。</p>
+</li>
+<li><p><strong>不可变变量</strong>：默认情况下所有变量都是不可变的。</p>
+</li>
+</ul>
+<h2 id="7-变量遮蔽"><a href="#7-变量遮蔽" class="headerlink" title="7.变量遮蔽"></a>7.变量遮蔽</h2><p>Rust 允许我们在同一作用域中使用相同的变量名重新声明变量，这叫做 变量遮蔽。与可变变量不同，变量遮蔽无需使用 mut 关键字，即便是不可变的变量也可以被遮蔽。遮蔽的变量可以有不同的类型或值。</p>
+<pre class="line-numbers language-rust"><code class="language-rust">
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// x 是不可变的</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value of x is: {}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// x 被遮蔽，重新赋值</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value of x is now: {}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// x 的类型发生了变化</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value of x in the inner scope is: {}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The value of x after the inner scope is: {}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出：</p>
+<pre><code>The value of x is: 5
+The value of x is now: 6
+The value of x in the inner scope is: Hello
+The value of x after the inner scope is: 6</code></pre><p>在这个例子中，x 的值先是 5，然后被重新赋值为 6，并且在内层作用域中，x 被遮蔽为一个字符串 “Hello”。当内层作用域结束后，原始的 x（值为 6）会继续有效。</p>
+<h4 id="变量遮蔽的特点："><a href="#变量遮蔽的特点：" class="headerlink" title="变量遮蔽的特点："></a>变量遮蔽的特点：</h4><ul>
+<li><strong>无需 <code>mut</code></strong>：通过遮蔽，变量可以改变其值或者类型，而不需要使用 <code>mut</code>。</li>
+<li><strong>新的变量覆盖旧变量</strong>：当在同一作用域内使用相同的名称重新声明变量时，原变量会被新的变量遮蔽。</li>
+<li><strong>类型可以变化</strong>：通过变量遮蔽，可以将同一个变量从一种类型转换为另一种类型。</li>
+</ul>
+<h2 id="8-小结"><a href="#8-小结" class="headerlink" title="8. 小结"></a>8. 小结</h2><ul>
+<li>变量默认是不可变的，除非使用 <code>mut</code> 关键字声明为可变。</li>
+<li>常量一旦定义后不能修改，且必须显式声明类型。</li>
+<li>Rust 会推断数据类型，但可以通过显式声明来指定类型。</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/02/20/Rust%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/25.png" class="responsive-img" alt="Rust 数据类型">
+                            
+                            <span class="card-title">Rust 数据类型</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 引言Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，意味着在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。
+2. 基本数据类型Rust 的基本数据类型可以分为标量类型
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/02/20/GuessNumber/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Guess Number">
+                            
+                            <span class="card-title">Guess Number</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 项目结构与初始化
+创建新项目：通过 cargo new guessing_game 命令创建一个名为 guessing_game 的 Rust 项目。
+项目包含的文件：
+Cargo.toml：项目的元数据文件，包含项目的配置信息。
+s
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

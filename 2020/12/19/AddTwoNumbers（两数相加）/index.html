@@ -274,19 +274,301 @@ You are given two non-empty linked lists representing two non-negative integers.
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">AddTwoNumbers（两数相加）</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/LeetCode/" class="post-category">
+                                    LeetCode
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-12-19
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-12-19
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        545
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        2 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>N2AddTwoNumbers（两数相加）</p>
+<pre><code>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Input: l1 = [2,4,3], l2 = [5,6,4]
+Output: [7,0,8]
+
+Explanation: 342 + 465 = 807.
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/add-two-numbers</code></pre><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><ul>
+<li>将两个链表看成是相同长度的进行遍历，如果一个链表较短则在后面面补 0，比如 999 + 99 = 999 + 990 = 8901<br>每一位计算的同时需要考虑上一位的进位问题，而当前位计算结束后同样需要更新进位值<br>小技巧：对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。</li>
+</ul>
+<p>  <img src="https://i.loli.net/2020/12/18/HndhBC7DaGxsAWI.png" alt="1.png"></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> ListNode <span class="token function">addTwoNumbers</span><span class="token punctuation">(</span>ListNode l1<span class="token punctuation">,</span> ListNode l2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token comment" spellcheck="true">//用于标识头部的指针</span>
+       ListNode pre <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ListNode</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment" spellcheck="true">//用于记录每个节点值的指针</span>
+       ListNode cur <span class="token operator">=</span> pre<span class="token punctuation">;</span>
+       <span class="token comment" spellcheck="true">//进位标记</span>
+       <span class="token keyword">int</span> carry <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+       <span class="token comment" spellcheck="true">//当两个链表都置于尾部时跳出</span>
+       <span class="token keyword">while</span><span class="token punctuation">(</span>l1<span class="token operator">!=</span>null <span class="token operator">||</span> l2<span class="token operator">!=</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+           <span class="token comment" spellcheck="true">//节点如果为null则补零</span>
+           <span class="token keyword">int</span> x<span class="token operator">=</span>l1<span class="token operator">==</span>null<span class="token operator">?</span><span class="token number">0</span><span class="token operator">:</span>l1<span class="token punctuation">.</span>val<span class="token punctuation">;</span>
+           <span class="token keyword">int</span> y<span class="token operator">=</span>l2<span class="token operator">==</span>null<span class="token operator">?</span><span class="token number">0</span><span class="token operator">:</span>l2<span class="token punctuation">.</span>val<span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//计算两数之和 需要带上进位标记值</span>
+           <span class="token keyword">int</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y <span class="token operator">+</span>carry<span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//获取进位标记</span>
+           carry <span class="token operator">=</span> sum <span class="token operator">/</span> <span class="token number">10</span><span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//获取和值</span>
+           sum <span class="token operator">=</span> sum <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//将值写入下个节点 （因为是从0开始）</span>
+           cur<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ListNode</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//移动记录指针</span>
+           cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//移动递归指针</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>l1 <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               l1 <span class="token operator">=</span> l1<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+           <span class="token keyword">if</span><span class="token punctuation">(</span>l2 <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+               l2 <span class="token operator">=</span> l2<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span>
+       <span class="token comment" spellcheck="true">//当两个链表都走到结尾还存在进位标记时则需将进位值写入下一位</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>carry <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+           cur<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ListNode</span><span class="token punctuation">(</span>carry<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+       <span class="token comment" spellcheck="true">//返回记录链表</span>
+       <span class="token keyword">return</span> pre<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2022/06/29/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%84%E5%88%92/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="生产环境的数据库规划">
+                            
+                            <span class="card-title">生产环境的数据库规划</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                生产环境的数据库规划1.1 生产环境的数据库服务器配置一般来说，对于我们这种Java开发者，可能并不会去关心MySQL的服务器配置什么的，大点的公司基本都是DBA给出或者运维给出的；
+但是我认为对于MySQL这种组件，我们不能局限于使用，还
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2022-06-29
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/12/19/TwoSum%EF%BC%88%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%89/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="TwoSum（两数之和）">
+                            
+                            <span class="card-title">TwoSum（两数之和）</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                N1TwoSum（两数之和）Given an array of integers nums and an integer target, return indices of the two numbers such that they ad
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-12-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/LeetCode/" class="post-category">
+                                    LeetCode
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

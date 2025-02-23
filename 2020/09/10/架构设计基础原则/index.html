@@ -279,19 +279,390 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">架构设计基础原则</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-09-10
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-09-10
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        970
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h4 id="需要考虑的架构设计问题："><a href="#需要考虑的架构设计问题：" class="headerlink" title="需要考虑的架构设计问题："></a>需要考虑的架构设计问题：</h4><ul>
+<li>云部署是大势所趋</li>
+<li>企业对公有云能力的期待和公有云现有能力的差距</li>
+<li>不能简单依赖公有云提供的SLA（service level agreement）来保障业务稳定性</li>
+</ul>
+<h4 id="云上设计高可用架构需要考虑的三大要素："><a href="#云上设计高可用架构需要考虑的三大要素：" class="headerlink" title="云上设计高可用架构需要考虑的三大要素："></a>云上设计高可用架构需要考虑的三大要素：</h4><ul>
+<li><p>云基础设施和云服务器的高可用性</p>
+</li>
+<li><p>企业运行业务环境的高可用性</p>
+</li>
+<li><p>企业业务和客户端通信的高可用性（由运营商基础通信能力保障）</p>
+</li>
+</ul>
+<h4 id="应用架构设计的演进之路："><a href="#应用架构设计的演进之路：" class="headerlink" title="应用架构设计的演进之路："></a>应用架构设计的演进之路：</h4><p><strong>1.单体架构：</strong></p>
+<ul>
+<li><p>经典的软件三层架构</p>
+</li>
+<li><p>逻辑上分为三层</p>
+</li>
+<li><p>多用于传统J2EE项目</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2020/09/10/NWcZCo7y8nFvPKm.png" alt="image.png"></p>
+<p><strong>2.SOA（面向服务）架构：</strong></p>
+<p><img src="https://i.loli.net/2020/09/10/J6AFCqYOgGuWHEp.png" alt="EMKJRZ02H8LDPMETZ_KX_RB.png"></p>
+<p><strong>微服务架构</strong>：</p>
+<p><img src="https://i.loli.net/2020/09/10/1CjlxiSZntG72oK.png" alt="_7UKTZ@M145D3MIGBB7QJSO.png"></p>
+<hr>
+<p><strong>基础架构设计原则：</strong></p>
+<ol>
+<li><h4 id="墨菲定律（心理学效应）："><a href="#墨菲定律（心理学效应）：" class="headerlink" title="墨菲定律（心理学效应）："></a>墨菲定律（心理学效应）：</h4><ul>
+<li><p>任何事都没有看上去的那么简单</p>
+</li>
+<li><p>所有事都会比预计的时间长</p>
+</li>
+<li><p>会出错的事情总是会出错</p>
+</li>
+<li><p>如果担心某件事的发生，这件事就更有可能发生</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p><strong>容错设计原则</strong></p>
+</li>
+<li><p><strong>需要考虑到应用系统的每一个层面</strong></p>
+</li>
+<li><p><strong>消除单一故障点实现高可用性</strong></p>
+</li>
+</ol>
+<p><strong>云架构设计原则</strong></p>
+<ol>
+<li><p><strong>从程序开发部署的视角看</strong></p>
+<ul>
+<li><p>系统失效的容错设计</p>
+<ul>
+<li>利用云原生容错的服务来增强业务的容错能力</li>
+</ul>
+</li>
+<li><p>松耦合和无状态设计</p>
+<ul>
+<li>使用中间件解耦，无状态的应用能更好的伸缩<ul>
+<li><strong>无状态应用：</strong> Stateless Application 是指并不会在会话中保存下次会话中去要的客户端数据。 每一个会话都像首次执行一样，不会依赖之前的数据进行响应。</li>
+<li><strong>有状态的应用：</strong> Stateful Application 是指会在会话中保存客户端的数据，并在客户端下一次的请求中来使用那些数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>可扩展和自动缩放设计</p>
+<ul>
+<li>利用云端的弹性伸缩机制来增加资源的灵活性</li>
+</ul>
+</li>
+<li><p>安全的设计</p>
+<ul>
+<li>贯穿安全的的理念，减少不必要的暴露面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p><strong>从服务模块部署的视角看</strong></p>
+<ul>
+<li>高可用性（HA）、容灾和灾难恢复（DR）是不可忽略的两块内容</li>
+<li>高可用性的部署哟啊面向于将业务完全部署在云端的场景</li>
+<li>容灾和灾难恢复面向本地机房和云端业余打通的场景</li>
+</ul>
+</li>
+</ol>
+<p><strong>高可用架构设计原则：</strong></p>
+<ul>
+<li>服务器级别的容错恢复</li>
+<li>云服务区域级别的容错与恢复</li>
+<li>云平台级别的容错与恢复</li>
+<li>应用系统的<strong>SOA</strong>和服务化</li>
+<li>使用云端工具构建自动化平台，用代码管理基础设施</li>
+</ul>
+<p><strong>高可用（HA）场景：</strong></p>
+<ul>
+<li>将应用程序设置为无状态，可通过重启进程或服务器恢复</li>
+<li>将无状态的应用程序部署在负载均衡后面</li>
+<li>设置弹性伸缩功能，使得云平台可以根据性能指标做出响应</li>
+<li>设置好应用环境的基础镜像模板，便于快速恢复</li>
+</ul>
+<p><strong>应用场景</strong>：</p>
+<ol>
+<li><p>服务器级别的容错和恢复</p>
+<ul>
+<li>负载均衡节点的检查，当发现某个节点的健康出现问题时，剔除该节点</li>
+</ul>
+<p><img src="https://i.loli.net/2020/09/10/6yv5ZaGfRjrK1ed.png" alt="image.png"></p>
+</li>
+<li><p>使用弹性伸缩功能快速调整集群</p>
+<ul>
+<li>ops增加到阈值时根据提前定制的策略自动扩容</li>
+<li>ops减小到阈值时根据提前定制的策略自动缩容</li>
+</ul>
+<p><img src="https://i.loli.net/2020/09/10/SKPZWmhB2vtrzEY.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2020/09/10/ew7uL4JhpnXyavA.png" alt="image.png"></p>
+</li>
+<li><p>区域级别的容错和恢复</p>
+<ul>
+<li>某个区域服务器宕机时将业务迁移到其他区域服务器</li>
+</ul>
+<p><img src="https://i.loli.net/2020/09/10/jK53lS7zqVENavP.png" alt="image.png"></p>
+</li>
+<li><p>多可用区部署的容错和恢复</p>
+<p><img src="https://i.loli.net/2020/09/10/uq9XjdCLeRwKEmy.png" alt="image.png"></p>
+</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/09/11/%E5%BC%95%E7%94%A8%E4%B8%8E%E9%94%81/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/8.png" class="responsive-img" alt="杂七杂八的总结">
+                            
+                            <span class="card-title">杂七杂八的总结</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                java引用 ：
+强 普通引用 
+M m = new M();
+m = null;
+System.gc();
+sout(m)
+
+软 当堆内存不够用时才回收 
+//设置最大堆大小为20
+//m指向强引用SoftReference SoftRe
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-11
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/09/08/EasyExcel%E6%93%8D%E4%BD%9CExcel/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="EasyExcel操作Excel">
+                            
+                            <span class="card-title">EasyExcel操作Excel</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.引入依赖&lt;!-- 本质是对POI的封装所以需要POI的依赖导入 注意版本匹配 -->
+&lt;dependency>
+    &lt;groupId>com.alibaba&lt;/groupId>
+    &lt;artifac
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-08
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

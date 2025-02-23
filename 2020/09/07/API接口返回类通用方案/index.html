@@ -281,19 +281,413 @@ import lombok.ToString;
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">API接口返回类通用方案</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
+                                    经验&bug
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-09-07
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-09-07
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        690
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h4 id="枚举类定义响应码"><a href="#枚举类定义响应码" class="headerlink" title="枚举类定义响应码:"></a>枚举类定义响应码:</h4><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">import</span> lombok<span class="token punctuation">.</span>Getter<span class="token punctuation">;</span>
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span>ToString<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @author saber
+ * @description 《响应状态码》
+ */</span>
+<span class="token annotation punctuation">@Getter</span>
+<span class="token annotation punctuation">@ToString</span>
+<span class="token keyword">public</span> <span class="token keyword">enum</span> ResultCodeEnum <span class="token punctuation">{</span>
+
+    <span class="token function">SUCCESS</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token number">20000</span><span class="token punctuation">,</span><span class="token string">"成功"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">UNKNOWN_REASON</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">20001</span><span class="token punctuation">,</span> <span class="token string">"未知错误"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">BAD_SQL_GRAMMAR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">21001</span><span class="token punctuation">,</span> <span class="token string">"sql语法错误"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">JSON_PARSE_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">21002</span><span class="token punctuation">,</span> <span class="token string">"json解析异常"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">PARAM_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">21003</span><span class="token punctuation">,</span> <span class="token string">"参数不正确"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">FILE_UPLOAD_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">21004</span><span class="token punctuation">,</span> <span class="token string">"文件上传错误"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">FILE_DELETE_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">21005</span><span class="token punctuation">,</span> <span class="token string">"文件刪除错误"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">EXCEL_DATA_IMPORT_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">21006</span><span class="token punctuation">,</span> <span class="token string">"Excel数据导入错误"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">VIDEO_UPLOAD_ALIYUN_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">22001</span><span class="token punctuation">,</span> <span class="token string">"视频上传至阿里云失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">VIDEO_UPLOAD_TOMCAT_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">22002</span><span class="token punctuation">,</span> <span class="token string">"视频上传至业务服务器失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">VIDEO_DELETE_ALIYUN_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">22003</span><span class="token punctuation">,</span> <span class="token string">"阿里云视频文件删除失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">FETCH_VIDEO_UPLOADAUTH_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">22004</span><span class="token punctuation">,</span> <span class="token string">"获取上传地址和凭证失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">REFRESH_VIDEO_UPLOADAUTH_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">22005</span><span class="token punctuation">,</span> <span class="token string">"刷新上传地址和凭证失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">FETCH_PLAYAUTH_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">22006</span><span class="token punctuation">,</span> <span class="token string">"获取播放凭证失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">URL_ENCODE_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">23001</span><span class="token punctuation">,</span> <span class="token string">"URL编码失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">ILLEGAL_CALLBACK_REQUEST_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">23002</span><span class="token punctuation">,</span> <span class="token string">"非法回调请求"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">FETCH_ACCESSTOKEN_FAILD</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">23003</span><span class="token punctuation">,</span> <span class="token string">"获取accessToken失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">FETCH_USERINFO_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">23004</span><span class="token punctuation">,</span> <span class="token string">"获取用户信息失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">LOGIN_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">23005</span><span class="token punctuation">,</span> <span class="token string">"登录失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">COMMENT_EMPTY</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">24006</span><span class="token punctuation">,</span> <span class="token string">"评论内容必须填写"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">PAY_RUN</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">25000</span><span class="token punctuation">,</span> <span class="token string">"支付中"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">PAY_UNIFIEDORDER_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">25001</span><span class="token punctuation">,</span> <span class="token string">"统一下单错误"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">PAY_ORDERQUERY_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">25002</span><span class="token punctuation">,</span> <span class="token string">"查询支付结果错误"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">ORDER_EXIST_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">25003</span><span class="token punctuation">,</span> <span class="token string">"课程已购买"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">GATEWAY_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">26000</span><span class="token punctuation">,</span> <span class="token string">"服务不能访问"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">CODE_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28000</span><span class="token punctuation">,</span> <span class="token string">"验证码错误"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token function">LOGIN_PHONE_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28009</span><span class="token punctuation">,</span> <span class="token string">"手机号码不正确"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">LOGIN_MOBILE_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28001</span><span class="token punctuation">,</span> <span class="token string">"账号不正确"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">LOGIN_PASSWORD_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28008</span><span class="token punctuation">,</span> <span class="token string">"密码不正确"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">LOGIN_DISABLED_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28002</span><span class="token punctuation">,</span> <span class="token string">"该用户已被禁用"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">REGISTER_MOBLE_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28003</span><span class="token punctuation">,</span> <span class="token string">"手机号已被注册"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">LOGIN_AUTH</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28004</span><span class="token punctuation">,</span> <span class="token string">"需要登录"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">LOGIN_ACL</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28005</span><span class="token punctuation">,</span> <span class="token string">"没有权限"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">SMS_SEND_ERROR</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28006</span><span class="token punctuation">,</span> <span class="token string">"短信发送失败"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">SMS_SEND_ERROR_BUSINESS_LIMIT_CONTROL</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">28007</span><span class="token punctuation">,</span> <span class="token string">"短信发送过于频繁"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">MY_VALUE</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">30000</span><span class="token punctuation">,</span> <span class="token string">"我的错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token keyword">private</span> Boolean success<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> Integer code<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> String message<span class="token punctuation">;</span>
+
+    <span class="token function">ResultCodeEnum</span><span class="token punctuation">(</span>Boolean success<span class="token punctuation">,</span> Integer code<span class="token punctuation">,</span> String message<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>success <span class="token operator">=</span> success<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>message <span class="token operator">=</span> message<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="返回类定义"><a href="#返回类定义" class="headerlink" title="返回类定义:"></a>返回类定义:</h4><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">import</span> io<span class="token punctuation">.</span>swagger<span class="token punctuation">.</span>annotations<span class="token punctuation">.</span>ApiModelProperty<span class="token punctuation">;</span>
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span>Data<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>HashMap<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Map<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @author saber
+ * @description 《前端需求的返回类》
+ */</span>
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">R</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"是否成功"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> Boolean success<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"返回码"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> Integer code<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"返回消息"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> String message<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"返回数据"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment" spellcheck="true">/**
+     * 把构造方法私有,通过静态方法调用
+     */</span>
+    <span class="token keyword">private</span> <span class="token function">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> R <span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        R r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span>ResultCodeEnum<span class="token punctuation">.</span>SUCCESS<span class="token punctuation">.</span><span class="token function">getSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>ResultCodeEnum<span class="token punctuation">.</span>SUCCESS<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span>ResultCodeEnum<span class="token punctuation">.</span>SUCCESS<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> R <span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        R r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span>ResultCodeEnum<span class="token punctuation">.</span>UNKNOWN_REASON<span class="token punctuation">.</span><span class="token function">getSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>ResultCodeEnum<span class="token punctuation">.</span>UNKNOWN_REASON<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span>ResultCodeEnum<span class="token punctuation">.</span>UNKNOWN_REASON<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> R <span class="token function">setResult</span><span class="token punctuation">(</span>ResultCodeEnum resultCodeEnum<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        R r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span>resultCodeEnum<span class="token punctuation">.</span><span class="token function">getSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>resultCodeEnum<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span>resultCodeEnum<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> R <span class="token function">success</span><span class="token punctuation">(</span>Boolean success<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span>success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> R <span class="token function">message</span><span class="token punctuation">(</span>String message<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> R <span class="token function">code</span><span class="token punctuation">(</span>Integer code<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> R <span class="token function">data</span><span class="token punctuation">(</span>String key<span class="token punctuation">,</span> Object value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> R <span class="token function">data</span><span class="token punctuation">(</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> map<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="调用："><a href="#调用：" class="headerlink" title="调用："></a>调用：</h4><pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"getInfo/{id}"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> R <span class="token function">getInfo</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> String id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Persion persion <span class="token operator">=</span> persionService<span class="token punctuation">.</span><span class="token function">getById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> R<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">,</span>persion<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/09/07/Swagger%E9%80%9A%E7%94%A8%E9%85%8D%E7%BD%AE/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/3.png" class="responsive-img" alt="Swagger通用配置">
+                            
+                            <span class="card-title">Swagger通用配置</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                import com.google.common.base.Predicates;
+import org.springframework.context.annotation.Bean;
+import org.springframework
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-09-07
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/08/14/JSR303%E7%BB%93%E5%90%88AdviceController%E5%BC%80%E5%90%AF%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/6.png" class="responsive-img" alt="JSR303结合AdviceController开启全局数据校验">
+                            
+                            <span class="card-title">JSR303结合AdviceController开启全局数据校验</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                业务场景：
+项目本身需要感知处理各种异常
+前端传递的数据都需要校验其合法性
+如果在每一个controller上编写异常处理与数据校验就会显得很臃肿
+
+解决方案：
+使用JSR303在controller标注数据校验注解，向上抛出异常
+
+使用A
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-08-14
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

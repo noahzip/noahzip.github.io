@@ -275,19 +275,327 @@ fn main() {
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Rust中的Vex的一些注意事项与思考</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-02-22
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-02-22
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        638
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        2 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="vec-len-方法详解"><a href="#vec-len-方法详解" class="headerlink" title="vec.len() 方法详解"></a><code>vec.len()</code> 方法详解</h2><p><code>vec.len()</code> 方法用于获取 <code>Vec&lt;T&gt;</code> 中的元素个数，它不会改变 <code>vec</code> 的所有权，也不会影响 <code>vec</code> 的可变性。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 创建一个 Vec&lt;i32></span>
+    <span class="token keyword">let</span> vec_len <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取 vec 的长度</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"vec 长度: {}"</span><span class="token punctuation">,</span> vec_len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"vec 内容: {:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="vec-index-访问元素行为"><a href="#vec-index-访问元素行为" class="headerlink" title="vec[index] 访问元素行为"></a><code>vec[index]</code> 访问元素行为</h2><ul>
+<li><code>vec[index]</code> 访问的是 <code>vec</code> 中指定索引的元素，<strong>这是一个不可变借用</strong>。</li>
+<li>访问单个元素不会转移 <code>vec</code> 的所有权，也不会影响 <code>vec</code> 的可变性。</li>
+</ul>
+<p>示例代码：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> vec<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 借用 vec 的第一个元素（不可变借用）</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// `vec` 仍然可用，可以继续修改</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果需要修改元素，需要使用可变引用：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    vec<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 直接修改 vec[0] 的值</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者使用 <code>get_mut()</code> 进行安全访问（避免索引越界）：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> <span class="token function">Some</span><span class="token punctuation">(</span>first<span class="token punctuation">)</span> <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">get_mut</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 获取可变引用</span>
+        <span class="token operator">*</span>first <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 通过解引用修改值</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> vec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="for-e-in-amp-vec-遍历行为"><a href="#for-e-in-amp-vec-遍历行为" class="headerlink" title="for e in &amp;vec 遍历行为"></a><code>for e in &amp;vec</code> 遍历行为</h2><p>在 <code>for e in &amp;vec</code> 循环中，<code>e</code> 是 <code>&amp;T</code> 类型，即对 <code>vec</code> 元素的不可变借用。</p>
+<p>示例代码：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>collections<span class="token punctuation">:</span><span class="token punctuation">:</span>HashMap<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> vec <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> map <span class="token operator">=</span> HashMap<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> mode <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> e <span class="token keyword">in</span> <span class="token operator">&amp;</span>vec <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// `e` 是 `&amp;i32` 类型，即不可变借用</span>
+        <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取或插入 0，返回 `&amp;mut i32`</span>
+        <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要解引用 `count` 才能增加值</span>
+        sum <span class="token operator">+=</span> e<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 自动解引用 `&amp;i32`，直接进行加法</span>
+
+        <span class="token comment" spellcheck="true">//mode = e; // 报错</span>
+        mode <span class="token operator">=</span> <span class="token operator">*</span>e<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要手动解引用 `e` 才能赋值给 mode</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者使用模式匹配 <code>&amp;e</code> 直接解引用：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">for</span> <span class="token operator">&amp;</span>e <span class="token keyword">in</span> <span class="token operator">&amp;</span>vec <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// `&amp;e` 直接匹配 `i32`，无需手动解引用</span>
+    <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    sum <span class="token operator">+=</span> e<span class="token punctuation">;</span>
+    mode <span class="token operator">=</span> e<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="count-1-详解"><a href="#count-1-详解" class="headerlink" title="*count += 1; 详解"></a><code>*count += 1;</code> 详解</h2><p><code>*count += 1;</code> 语法用于修改 <code>HashMap</code> 中存储的值，<code>count</code> 是一个可变引用 <code>&amp;mut i32</code>，所以需要解引用 <code>*count</code> 才能修改值。</p>
+<p>示例代码：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>collections<span class="token punctuation">:</span><span class="token punctuation">:</span>HashMap<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> map <span class="token operator">=</span> HashMap<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> key <span class="token operator">=</span> <span class="token string">"apple"</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> count <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">or_insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// `or_insert(0)` 返回 `&amp;mut i32`</span>
+    <span class="token operator">*</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 需要解引用 `count` 才能修改值</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> map<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出 {"apple": 1}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果不加 <code>*</code>，会导致编译错误：</p>
+<pre class="line-numbers language-rust"><code class="language-rust">count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ❌ 编译错误：expected integer, found `&amp;mut i32`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2String/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Rust中的字符串">
+                            
+                            <span class="card-title">Rust中的字符串</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Rust 中的字符串有两种主要类型：
+
+String：动态堆分配的、可变的字符串类型。
+&amp;str：不可变的字符串切片类型，通常作为对 String 的引用。
+
+Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如何创建、使用
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/02/22/Rust%E4%B8%AD%E7%9A%84Vector(%E5%90%91%E9%87%8F)/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/15.png" class="responsive-img" alt="Rust中的Vector(向量)">
+                            
+                            <span class="card-title">Rust中的Vector(向量)</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Rust 中的 Vector (向量) 是一种动态存储的数组，允许在运行期增加或删除元素。
+
+1. 创建 VectorRust 中使用 Vec&lt;T&gt; 来实现 Vector。例如：
+fn main() {
+    let v: V
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

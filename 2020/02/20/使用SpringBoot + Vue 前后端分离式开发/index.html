@@ -277,19 +277,618 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">尚硅谷在线教育项目技术总结</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-02-20
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-02-21
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.1k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <hr>
+<p><strong>使用SpringBoot + Vue 前后端分离式开发</strong></p>
+<h2 id="前端部分："><a href="#前端部分：" class="headerlink" title="前端部分："></a>前端部分：</h2><h3 id="1-前端使用vscode-安装nodejs-使用npm进行项目管理"><a href="#1-前端使用vscode-安装nodejs-使用npm进行项目管理" class="headerlink" title="1.前端使用vscode 安装nodejs 使用npm进行项目管理"></a>1.前端使用vscode 安装nodejs 使用npm进行项目管理</h3><pre class="line-numbers language-shell"><code class="language-shell">    nmp常用命令：
+        全局安装组件 ：nmp install -g xxx
+        更新依赖 ： nmp install (一般在导入时使用)
+        运行项目 : nmp run dev (dev表示开发环境）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-安装Vue、Element"><a href="#2-安装Vue、Element" class="headerlink" title="2.安装Vue、Element"></a>2.安装Vue、Element</h3><p>使用id选择器以及插值表达式对div内容进行渲染：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+{{ message }}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+var app = new Vue({
+    el: '# app',
+    data: {
+    message: 'Hello Vue!'
+    }
+})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="vue常用语法："><a href="#vue常用语法：" class="headerlink" title="vue常用语法："></a>vue常用语法：</h4><p><strong>插入文本<br></strong><br>插值表达式：  {{ }}<br><br>    <span>Message: {{ msg }}</span>    </p>
+<p><strong>插入html文本</strong>：      v-html=”rawHtml”<br>    <span v-html="rawHtml"></span></p>
+<h4 id="vue常用指令："><a href="#vue常用指令：" class="headerlink" title="vue常用指令："></a>vue常用指令：</h4><p><strong>条件判断</strong> ： v-if<br>     //当seen为true时 text才会显示<br>    </p><p v-if="seen">text</p><p></p>
+<p>对应的还有： v-else<br>     //当seen为false时 text才会显示<br>    </p><p v-else="seen">text</p><p></p>
+<p><strong>HTML属性取值</strong>：  v-bind:id=”dynamicId” 缩写为 :id<br>    //这里的id是某一个元素的id属性<br>    </p><div v-bind:id="dynamicId"></div><br>        //缩写<br>    <div :id="dynamicId"></div><p></p>
+<p><strong>双向数据绑定</strong>： v-model=””<br>    //当原始数据或者input里的值某一个发生变化另一个随之改变<br>    <input v-model="message"></p>
+<p><strong>绑定事件</strong> ： v-on:click=”doSomething” 缩写为 @:click<br>    <a v-on:click="doSomething"><br>    //缩写<br>     &lt;a @click=”doSomething”&gt;</a></p>
+<p><strong>循环</strong>： v-for=”变量 in 数据”</p>
+<pre><code>&lt;!--循环遍历--&gt;
+&lt;ul&gt;
+  &lt;template v-for="site in sites"&gt;
+    &lt;li&gt;{{ site.name }}&lt;/li&gt;
+  &lt;/template&gt;
+&lt;/ul&gt;</code></pre><h4 id="路由绑定"><a href="#路由绑定" class="headerlink" title="路由绑定:"></a>路由绑定:</h4><pre><code>{
+    path: '/teacher',
+    component: Layout,
+    redirect: '/teacher/list',
+    name: '讲师管理',
+    meta: { title: '讲师管理', icon: 'example' },
+    children: [
+      {
+        path: 'list',
+        name: '讲师列表',
+        component: () =&gt; import('@/views/edu/teacher/list'),
+        meta: { title: '讲师列表', icon: 'table' }
+      },
+      {
+        path: 'edit/:id', //传递id
+        name: '修改讲师',
+        component: () =&gt; import('@/views/edu/teacher/add'),
+        meta: { title: '修改讲师', icon: 'tree' },
+        hidden: true //隐藏该路由
+      }
+    ]
+  },</code></pre><h4 id="监听路由"><a href="#监听路由" class="headerlink" title="监听路由:"></a>监听路由:</h4><pre><code> watch:{ //监听路由
+        $route(to,from){
+            console.log('watch $route')
+            this.init()//一般用于页面初始化清空参数
+        }
+    },</code></pre><h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局:"></a>页面布局:</h2><p>每个页面都由两部分组成</p>
+<pre><code>&lt;/template&gt;
+    //页面显示内容
+    ...
+&lt;/template&gt;
+&lt;script&gt;
+    //script代码
+    //首先引入要使用的js文件 JS是引用名 可以自定义
+    import JS from '@/api/edu/teacher'
+    export default{
+    data(){ //定义变量和初始值
+        return{
+            var1:"1",
+            var2:{}
+            ...
+        }
+    },
+
+    watch:{ //监听路由
+        $route(to,from){
+            console.log('watch $route')
+            this.xxx()
+        }
+    },
+
+    created(){//在页面渲染之前会执行该方法
+        this.xxx()
+
+    },
+
+    methods:{//具体的方法调用
+        xxx(){
+             JS.xxx(xxx) //调用JS中的xxx方法
+             .then(response=&gt;{ //请求成功执行该方法
+                })
+             .catch(()=&gt;){ //请求失败执行该方法
+                })    
+        }
+    }
+&lt;/script&gt;</code></pre><h2 id="关于JS文件定义方法"><a href="#关于JS文件定义方法" class="headerlink" title="关于JS文件定义方法:"></a>关于JS文件定义方法:</h2><pre><code>//模板提供的组件 axios的封装
+import request from '@/utils/request'
+export default{
+     //具体方法
+    xxx(var1,var2,...){
+            return request({
+                //后台接口路径 携带普通参数使用 +var的方式
+                url: '/接口地址/'+var1,
+                //提交方式
+                method: 'post',
+                // 传递复杂数据（json）
+                data: var2
+                // params：serchObj  
+             })
+    },       </code></pre><p>​             </p>
+<h2 id="后端部分"><a href="#后端部分" class="headerlink" title="后端部分:"></a>后端部分:</h2><h3 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1.创建数据库"></a>1.创建数据库</h3><h3 id="2-创建SpringBoot项目根据需求分模块"><a href="#2-创建SpringBoot项目根据需求分模块" class="headerlink" title="2.创建SpringBoot项目根据需求分模块"></a>2.创建SpringBoot项目根据需求分模块</h3><h3 id="3-在pom-xml文件中导入并管理依赖"><a href="#3-在pom-xml文件中导入并管理依赖" class="headerlink" title="3.在pom.xml文件中导入并管理依赖"></a>3.在pom.xml文件中导入并管理依赖</h3><h3 id="4-配置application-properties"><a href="#4-配置application-properties" class="headerlink" title="4.配置application.properties"></a>4.配置application.properties</h3><pre class="line-numbers language-properties"><code class="language-properties"><span class="token comment" spellcheck="true"># 服务端口</span>
+<span class="token attr-name">server.port</span><span class="token punctuation">=</span><span class="token attr-value">8101</span>
+
+<span class="token comment" spellcheck="true"># 服务名</span>
+<span class="token attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token attr-value">xxxx</span>
+
+<span class="token comment" spellcheck="true"># 环境设置：dev、test、prod</span>
+<span class="token attr-name">spring.profiles.active</span><span class="token punctuation">=</span><span class="token attr-value">dev</span>
+
+<span class="token comment" spellcheck="true"># mysql数据库连接</span>
+<span class="token attr-name">spring.datasource.driver-class-name</span><span class="token punctuation">=</span><span class="token attr-value">com.mysql.jdbc.Driver</span>
+<span class="token attr-name">spring.datasource.url</span><span class="token punctuation">=</span><span class="token attr-value">jdbc:mysql://localhost:3306/database?characterEncoding=utf-8&amp;useSSL=false</span>
+<span class="token attr-name">spring.datasource.username</span><span class="token punctuation">=</span><span class="token attr-value">username</span>
+<span class="token attr-name">spring.datasource.password</span><span class="token punctuation">=</span><span class="token attr-value">password</span>
+
+<span class="token comment" spellcheck="true"># Hikari是Spring Boot 2.0之后默认整合的数据库连接池，比druid更快的数据库连接池</span>
+<span class="token comment" spellcheck="true"># 数据源类型</span>
+<span class="token attr-name">spring.datasource.type</span><span class="token punctuation">=</span><span class="token attr-value">com.zaxxer.hikari.HikariDataSource</span>
+<span class="token comment" spellcheck="true"># 连接池名称，默认HikariPool-1</span>
+<span class="token attr-name">spring.datasource.hikari.pool-name</span><span class="token punctuation">=</span><span class="token attr-value">GuliHikariPool</span>
+
+<span class="token comment" spellcheck="true"># 最大连接数，小于等于0会被重置为默认值10；大于零小于1会被重置为minimum-idle的值</span>
+<span class="token attr-name">spring.datasource.hikari.maximum-pool-size</span><span class="token punctuation">=</span><span class="token attr-value">12</span>
+
+<span class="token comment" spellcheck="true"># 连接超时时间:毫秒，小于250毫秒，否则被重置为默认值30秒</span>
+<span class="token attr-name">spring.datasource.hikari.connection-timeout</span><span class="token punctuation">=</span><span class="token attr-value">60000</span>
+
+<span class="token comment" spellcheck="true"># 最小空闲连接，默认值10，小于0或大于maximum-pool-size，都会重置为maximum-pool-size</span>
+<span class="token attr-name">spring.datasource.hikari.minimum-idle</span><span class="token punctuation">=</span><span class="token attr-value">10</span>
+
+<span class="token comment" spellcheck="true"># 空闲连接超时时间，默认值600000（10分钟），大于等于max-lifetime且max-lifetime>0，会被重置为0；不等于0且小于10秒，会被重置为10秒。</span>
+<span class="token comment" spellcheck="true"># 只有空闲连接数大于最大连接数且空闲时间超过该值，才会被释放</span>
+<span class="token attr-name">spring.datasource.hikari.idle-timeout</span><span class="token punctuation">=</span><span class="token attr-value">500000</span>
+
+<span class="token comment" spellcheck="true"># 连接最大存活时间.不等于0且小于30秒，会被重置为默认值30分钟.设置应该比mysql设置的超时时间短</span>
+<span class="token attr-name">spring.datasource.hikari.max-lifetime</span><span class="token punctuation">=</span><span class="token attr-value">540000</span>
+
+<span class="token comment" spellcheck="true"># 连接测试查询</span>
+<span class="token attr-name">spring.datasource.hikari.connection-test-query</span><span class="token punctuation">=</span><span class="token attr-value">SELECT 1</span>
+
+<span class="token comment" spellcheck="true"># mybatis日志</span>
+<span class="token attr-name">mybatis-plus.configuration.log-impl</span><span class="token punctuation">=</span><span class="token attr-value">org.apache.ibatis.logging.stdout.StdOutImpl</span>
+
+<span class="token comment" spellcheck="true"># json时间格式</span>
+<span class="token attr-name">spring.jackson.date-format</span><span class="token punctuation">=</span><span class="token attr-value">yyyy-MM-dd HH:mm:ss</span>
+<span class="token attr-name">spring.jackson.time-zone</span><span class="token punctuation">=</span><span class="token attr-value">GMT+8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="5-导入velocity-模板引擎"><a href="#5-导入velocity-模板引擎" class="headerlink" title="5.导入velocity 模板引擎"></a>5.导入velocity 模板引擎</h3><pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- velocity 模板引擎, Mybatis Plus 代码生成器需要 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.velocity<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>velocity-engine-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="6-导入lombok-swagger"><a href="#6-导入lombok-swagger" class="headerlink" title="6.导入lombok swagger"></a>6.导入lombok swagger</h3><pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!--lombok用来简化实体类：需要安装lombok插件--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.projectlombok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>lombok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+
+ <span class="token comment" spellcheck="true">&lt;!--swagger--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.springfox<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>springfox-swagger2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="7-使用代码构造器生成-service层-dao层-bean层"><a href="#7-使用代码构造器生成-service层-dao层-bean层" class="headerlink" title="7.使用代码构造器生成 service层 dao层 bean层"></a>7.使用代码构造器生成 service层 dao层 bean层</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>DbType<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>FieldFill<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>IdType<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>generator<span class="token punctuation">.</span>AutoGenerator<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>generator<span class="token punctuation">.</span>config<span class="token punctuation">.</span>DataSourceConfig<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>generator<span class="token punctuation">.</span>config<span class="token punctuation">.</span>GlobalConfig<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>generator<span class="token punctuation">.</span>config<span class="token punctuation">.</span>PackageConfig<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>generator<span class="token punctuation">.</span>config<span class="token punctuation">.</span>StrategyConfig<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>generator<span class="token punctuation">.</span>config<span class="token punctuation">.</span>po<span class="token punctuation">.</span>TableFill<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>generator<span class="token punctuation">.</span>config<span class="token punctuation">.</span>rules<span class="token punctuation">.</span>DateType<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>baomidou<span class="token punctuation">.</span>mybatisplus<span class="token punctuation">.</span>generator<span class="token punctuation">.</span>config<span class="token punctuation">.</span>rules<span class="token punctuation">.</span>NamingStrategy<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>Test<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>test<span class="token punctuation">.</span>context<span class="token punctuation">.</span>SpringBootTest<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@SpringBootTest</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CodeGenerator</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">genCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        String moduleName <span class="token operator">=</span> <span class="token string">"edu"</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 1、创建代码生成器</span>
+        AutoGenerator mpg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AutoGenerator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 2、全局配置</span>
+        GlobalConfig gc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GlobalConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String projectPath <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">"user.dir"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        gc<span class="token punctuation">.</span><span class="token function">setOutputDir</span><span class="token punctuation">(</span>projectPath <span class="token operator">+</span> <span class="token string">"/src/main/java"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        gc<span class="token punctuation">.</span><span class="token function">setAuthor</span><span class="token punctuation">(</span><span class="token string">"Chenxinyi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//作者</span>
+        gc<span class="token punctuation">.</span><span class="token function">setOpen</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//生成后是否打开资源管理器</span>
+        gc<span class="token punctuation">.</span><span class="token function">setFileOverride</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//重新生成时文件是否覆盖</span>
+        gc<span class="token punctuation">.</span><span class="token function">setServiceName</span><span class="token punctuation">(</span><span class="token string">"%sService"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//去掉Service接口的首字母I</span>
+        gc<span class="token punctuation">.</span><span class="token function">setIdType</span><span class="token punctuation">(</span>IdType<span class="token punctuation">.</span>ID_WORKER_STR<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//主键策略</span>
+        gc<span class="token punctuation">.</span><span class="token function">setDateType</span><span class="token punctuation">(</span>DateType<span class="token punctuation">.</span>ONLY_DATE<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//定义生成的实体类中日期类型</span>
+        gc<span class="token punctuation">.</span><span class="token function">setSwagger2</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//开启Swagger2模式</span>
+
+        mpg<span class="token punctuation">.</span><span class="token function">setGlobalConfig</span><span class="token punctuation">(</span>gc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 3、数据源配置</span>
+        DataSourceConfig dsc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DataSourceConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dsc<span class="token punctuation">.</span><span class="token function">setUrl</span><span class="token punctuation">(</span><span class="token string">"jdbc:mysql://localhost:3306/eduonline"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dsc<span class="token punctuation">.</span><span class="token function">setDriverName</span><span class="token punctuation">(</span><span class="token string">"com.mysql.jdbc.Driver"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dsc<span class="token punctuation">.</span><span class="token function">setUsername</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dsc<span class="token punctuation">.</span><span class="token function">setPassword</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dsc<span class="token punctuation">.</span><span class="token function">setDbType</span><span class="token punctuation">(</span>DbType<span class="token punctuation">.</span>MYSQL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mpg<span class="token punctuation">.</span><span class="token function">setDataSource</span><span class="token punctuation">(</span>dsc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 4、包配置</span>
+        PackageConfig pc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PackageConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//pc.setModuleName(moduleName); //模块名</span>
+        pc<span class="token punctuation">.</span><span class="token function">setParent</span><span class="token punctuation">(</span><span class="token string">"com.eduonline.eduservice"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pc<span class="token punctuation">.</span><span class="token function">setController</span><span class="token punctuation">(</span><span class="token string">"controller"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pc<span class="token punctuation">.</span><span class="token function">setEntity</span><span class="token punctuation">(</span><span class="token string">"entity"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pc<span class="token punctuation">.</span><span class="token function">setService</span><span class="token punctuation">(</span><span class="token string">"service"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pc<span class="token punctuation">.</span><span class="token function">setMapper</span><span class="token punctuation">(</span><span class="token string">"mapper"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mpg<span class="token punctuation">.</span><span class="token function">setPackageInfo</span><span class="token punctuation">(</span>pc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 5、策略配置</span>
+        StrategyConfig strategy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StrategyConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        strategy<span class="token punctuation">.</span><span class="token function">setInclude</span><span class="token punctuation">(</span>moduleName <span class="token operator">+</span> <span class="token string">"_\\w*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//设置要映射的表名</span>
+        strategy<span class="token punctuation">.</span><span class="token function">setNaming</span><span class="token punctuation">(</span>NamingStrategy<span class="token punctuation">.</span>underline_to_camel<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据库表映射到实体的命名策略</span>
+        strategy<span class="token punctuation">.</span><span class="token function">setTablePrefix</span><span class="token punctuation">(</span>pc<span class="token punctuation">.</span><span class="token function">getModuleName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"_"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//设置表前缀不生成</span>
+
+        strategy<span class="token punctuation">.</span><span class="token function">setColumnNaming</span><span class="token punctuation">(</span>NamingStrategy<span class="token punctuation">.</span>underline_to_camel<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据库表字段映射到实体的命名策略</span>
+        strategy<span class="token punctuation">.</span><span class="token function">setEntityLombokModel</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// lombok 模型 @Accessors(chain = true) setter链式操作</span>
+
+        strategy<span class="token punctuation">.</span><span class="token function">setLogicDeleteFieldName</span><span class="token punctuation">(</span><span class="token string">"is_deleted"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//逻辑删除字段名</span>
+        <span class="token comment" spellcheck="true">//strategy.setEntityBooleanColumnRemoveIsPrefix(true);//去掉布尔值的is_前缀</span>
+
+        <span class="token comment" spellcheck="true">//自动填充</span>
+        TableFill gmtCreate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TableFill</span><span class="token punctuation">(</span><span class="token string">"gmt_create"</span><span class="token punctuation">,</span> FieldFill<span class="token punctuation">.</span>INSERT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        TableFill gmtModified <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TableFill</span><span class="token punctuation">(</span><span class="token string">"gmt_modified"</span><span class="token punctuation">,</span> FieldFill<span class="token punctuation">.</span>INSERT_UPDATE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ArrayList<span class="token operator">&lt;</span>TableFill<span class="token operator">></span> tableFills <span class="token operator">=</span> <span class="token keyword">new</span>  <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>TableFill<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        tableFills<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>gmtCreate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        tableFills<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>gmtModified<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        strategy<span class="token punctuation">.</span><span class="token function">setTableFillList</span><span class="token punctuation">(</span>tableFills<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        strategy<span class="token punctuation">.</span><span class="token function">setVersionFieldName</span><span class="token punctuation">(</span><span class="token string">"version"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//乐观锁列</span>
+
+        strategy<span class="token punctuation">.</span><span class="token function">setRestControllerStyle</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//restful api风格控制器</span>
+        strategy<span class="token punctuation">.</span><span class="token function">setControllerMappingHyphenStyle</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//url中驼峰转连字符</span>
+
+        mpg<span class="token punctuation">.</span><span class="token function">setStrategy</span><span class="token punctuation">(</span>strategy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 6、执行</span>
+        mpg<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="8-在实体Bean类上标注-Data注解-免除写geteer-settter"><a href="#8-在实体Bean类上标注-Data注解-免除写geteer-settter" class="headerlink" title="8.在实体Bean类上标注     @Data注解 免除写geteer/settter"></a>8.在实体Bean类上标注     @Data注解 免除写geteer/settter</h3><h3 id="9-定义返回数据实体类"><a href="#9-定义返回数据实体类" class="headerlink" title="9.定义返回数据实体类"></a>9.定义返回数据实体类</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>eduonline<span class="token punctuation">.</span>common<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * 在接口内部定义状态码 实现类可通过链式编程调用
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ResultCode</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">int</span> SUCCESS<span class="token operator">=</span><span class="token number">20000</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//成功</span>
+
+    <span class="token keyword">int</span> ERROR<span class="token operator">=</span><span class="token number">20001</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//失败</span>
+
+    <span class="token keyword">int</span> AUTH<span class="token operator">=</span><span class="token number">30000</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//没有权限</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>具体的类：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>eduonline<span class="token punctuation">.</span>common<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span>Data<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>HashMap<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Map<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * 定义具体的数据格式
+ */</span>
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">R</span> <span class="token keyword">implements</span> <span class="token class-name">ResultCode</span><span class="token punctuation">{</span>
+
+<span class="token keyword">private</span> Boolean success<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//操作是否成功</span>
+
+<span class="token keyword">private</span> Integer code<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//响应状态码</span>
+
+<span class="token keyword">private</span> String message<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//响应消息</span>
+
+<span class="token keyword">private</span> Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span>Object<span class="token operator">></span> data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//响应数据</span>
+
+<span class="token keyword">private</span> <span class="token function">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//操作成功 调用该方法</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> R <span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        R r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>ResultCode<span class="token punctuation">.</span>SUCCESS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"操作成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">//操作失败</span>
+        <span class="token keyword">public</span> <span class="token keyword">static</span> R <span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        R r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>ResultCode<span class="token punctuation">.</span>ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        r<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"操作失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> R <span class="token function">success</span><span class="token punctuation">(</span>Boolean success<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span>success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> R <span class="token function">message</span><span class="token punctuation">(</span>String message<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> R <span class="token function">code</span><span class="token punctuation">(</span>Integer code<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> R <span class="token function">data</span><span class="token punctuation">(</span>String key<span class="token punctuation">,</span> Object value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> R <span class="token function">data</span><span class="token punctuation">(</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> map<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>​    </p>
+<h3 id="8-编写Controller控制器"><a href="#8-编写Controller控制器" class="headerlink" title="8.编写Controller控制器"></a>8.编写Controller控制器</h3><p>别忘了@CrossOrigin注解 解决跨域问题</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@CrossOrigin</span> <span class="token comment" spellcheck="true">//解决跨域</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/edu-teacher"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EduTeacherController</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="9-特别的"><a href="#9-特别的" class="headerlink" title="9.特别的"></a>9.特别的</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 查询条件封装类
+ * 前端传入的查询数据可能会与实体类字段有出入，
+ *我的做法是专门定义一个类用于封装前端传递的查询条件
+ */</span>
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span>Data<span class="token punctuation">;</span>   
+    <span class="token annotation punctuation">@Data</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">QueryTeacher</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String level<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String begin<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String end<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/02/21/Mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.png" class="responsive-img" alt="Mybatis逆向工程使用方法">
+                            
+                            <span class="card-title">Mybatis逆向工程使用方法</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.pom导入mybatis代码构造器坐标依赖&lt;dependency>
+   &lt;groupId>org.mybatis.generator&lt;/groupId>
+   &lt;artifactId>mybatis-gener
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-02-21
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/02/20/MySql%E7%BB%83%E4%B9%A0%E9%A2%98/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="MySql练习题">
+                            
+                            <span class="card-title">MySql练习题</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                –建表
+–学生表
+CREATE TABLE `Student`(
+`s_id` VARCHAR(20),
+`s_name` VARCHAR(20) NOT NULL DEFAULT '',
+`s_birth` VARCHAR(20) NOT
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-02-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

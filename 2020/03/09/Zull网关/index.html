@@ -277,19 +277,377 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/28.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Zull网关</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-03-09
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-03-09
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        773
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="1-导入依赖"><a href="#1-导入依赖" class="headerlink" title="1.导入依赖"></a>1.导入依赖</h3><pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+    <span class="token comment" spellcheck="true">&lt;!--网关--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-zuul<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-配置application-properties"><a href="#2-配置application-properties" class="headerlink" title="2.配置application.properties"></a>2.配置application.properties</h3><pre class="line-numbers language-properties"><code class="language-properties">服务端口
+<span class="token attr-name">server.port</span><span class="token punctuation">=</span><span class="token attr-value">9003</span>
+<span class="token comment" spellcheck="true"># 服务名</span>
+<span class="token attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token attr-value">edugateway</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-创建启动类-标注-EnableZuulProxy"><a href="#3-创建启动类-标注-EnableZuulProxy" class="headerlink" title="3.创建启动类 标注@EnableZuulProxy"></a>3.创建启动类 标注@EnableZuulProxy</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableZuulProxy</span> <span class="token comment" spellcheck="true">//作为网关启动</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EduGatewayApplication</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>EduGatewayApplication<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-功能配置"><a href="#4-功能配置" class="headerlink" title="4.功能配置"></a>4.功能配置</h3><h5 id="4-1-端口映射-（不适用于集群服务器）"><a href="#4-1-端口映射-（不适用于集群服务器）" class="headerlink" title="4.1 端口映射 （不适用于集群服务器）"></a>4.1 端口映射 （不适用于集群服务器）</h5><pre class="line-numbers language-properties"><code class="language-properties"><span class="token comment" spellcheck="true">## 输入的路径包含eduservice 跳转到 8101端口</span>
+<span class="token comment" spellcheck="true"># zuul.routes.api-edu.path=/eduservice/**</span>
+<span class="token comment" spellcheck="true"># zuul.routes.api-edu.url=http://localhost:8101/eduservice/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>访问方式: <a href="http://localhost:网关端口/eduservice/controller路径">http://localhost:网关端口/eduservice/controller路径</a></p>
+<h5 id="4-2-在服务中心注册以支持集群-通过服务名访问"><a href="#4-2-在服务中心注册以支持集群-通过服务名访问" class="headerlink" title="4.2 在服务中心注册以支持集群 通过服务名访问"></a>4.2 在服务中心注册以支持集群 通过服务名访问</h5><pre class="line-numbers language-properties"><code class="language-properties"><span class="token comment" spellcheck="true"># 指定注册中心地址</span>
+<span class="token attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token attr-value">http://127.0.0.1:9002/eureka/</span>
+<span class="token comment" spellcheck="true"># eureka上传获取的是服务器id地址 否则是主机名</span>
+<span class="token attr-name">eureka.instance.prefer-ip-address</span><span class="token punctuation">=</span><span class="token attr-value">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>需要注意的是需要在网关启动类上标注 @EnableEurekaClient<br><br>访问方式:<a href="http://localhost:网关端口/服务名/controller路径">http://localhost:网关端口/服务名/controller路径</a></p>
+<h5 id="4-3-禁止暴露接口"><a href="#4-3-禁止暴露接口" class="headerlink" title="4.3 禁止暴露接口"></a>4.3 禁止暴露接口</h5><pre class="line-numbers language-properties"><code class="language-properties"><span class="token comment" spellcheck="true">## 禁止eduservice对外提供接口</span>
+<span class="token comment" spellcheck="true"># zuul.ignored-services=eduservice</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h5 id="4-4-禁止通过网关访问路由"><a href="#4-4-禁止通过网关访问路由" class="headerlink" title="4.4 禁止通过网关访问路由"></a>4.4 禁止通过网关访问路由</h5><pre class="line-numbers language-properties"><code class="language-properties"><span class="token comment" spellcheck="true">###  禁止通过网关访问路由 </span>
+<span class="token comment" spellcheck="true"># zuul.ignored-patterns=/**/eduservice/**</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h5 id="4-5-自定义路由映射"><a href="#4-5-自定义路由映射" class="headerlink" title="4.5 自定义路由映射"></a>4.5 自定义路由映射</h5><pre class="line-numbers language-properties"><code class="language-properties"><span class="token comment" spellcheck="true">###  自定义路由映射 起别名 </span>
+<span class="token comment" spellcheck="true"># zuul.routes.eduservice=/service/**</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="5-特别注意-Zuul默认不传递cookie"><a href="#5-特别注意-Zuul默认不传递cookie" class="headerlink" title="5.特别注意 Zuul默认不传递cookie"></a>5.特别注意 Zuul默认不传递cookie</h3><h5 id="使用postman的设置header提交"><a href="#使用postman的设置header提交" class="headerlink" title="使用postman的设置header提交"></a>使用postman的设置header提交</h5><h5 id="cookie-”cokie”"><a href="#cookie-”cokie”" class="headerlink" title="cookie=”cokie”"></a>cookie=”cokie”</h5><h5 id="token-”token”"><a href="#token-”token”" class="headerlink" title="token=”token”"></a>token=”token”</h5><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">zuulCookieTest</span><span class="token punctuation">(</span>HttpServletRequest request<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    String cookie <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"cookie"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String token <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"token"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"cookie:"</span><span class="token operator">+</span>cookie<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"token:"</span><span class="token operator">+</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="打印结果"><a href="#打印结果" class="headerlink" title="打印结果:"></a>打印结果:</h5><p>cookie:null </p>
+<p>token:token</p>
+<pre class="line-numbers language-properties"><code class="language-properties"><span class="token comment" spellcheck="true"># 还原被网关过滤的请求头</span>
+<span class="token attr-name">zuul.sensitive-headers</span><span class="token punctuation">=</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h5 id="打印结果-1"><a href="#打印结果-1" class="headerlink" title="打印结果:"></a>打印结果:</h5><p>cookie:cookie</p>
+<p>token:token</p>
+<hr>
+<h3 id="6-Zull过滤器"><a href="#6-Zull过滤器" class="headerlink" title="6.Zull过滤器"></a>6.Zull过滤器</h3><h4 id="6-1生命周期："><a href="#6-1生命周期：" class="headerlink" title="6.1生命周期："></a>6.1生命周期：</h4><h5 id="1-Pre-到达网关前执行"><a href="#1-Pre-到达网关前执行" class="headerlink" title="1.Pre:到达网关前执行"></a>1.Pre:到达网关前执行</h5><h5 id="2-Routing-经过网关到达服务器之前执行"><a href="#2-Routing-经过网关到达服务器之前执行" class="headerlink" title="2.Routing:经过网关到达服务器之前执行"></a>2.Routing:经过网关到达服务器之前执行</h5><h5 id="3-Post-经过服务器之后执行"><a href="#3-Post-经过服务器之后执行" class="headerlink" title="3.Post:经过服务器之后执行"></a>3.Post:经过服务器之后执行</h5><h5 id="4-Error-发生错误执行"><a href="#4-Error-发生错误执行" class="headerlink" title="4.Error:发生错误执行"></a>4.Error:发生错误执行</h5><hr>
+<h4 id="6-2过滤器的配置与使用"><a href="#6-2过滤器的配置与使用" class="headerlink" title="6.2过滤器的配置与使用"></a>6.2过滤器的配置与使用</h4><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 模拟鉴权
+ */</span>
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LoginFilter</span> <span class="token keyword">extends</span> <span class="token class-name">ZuulFilter</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 定义过滤器的类型（生命周期）
+     * @return  PRE_TYPE:到达网关前执行
+     *          ROUTE_TYPE:经过网关到达服务器之前执行
+     *          POST_TYPE:经过服务器之后执行
+     *          ERROR_TYPE:发生错误执行
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">filterType</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> PRE_TYPE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 过滤器执行顺序
+     * @return  返回的值越小越先执行
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">filterOrder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 决定是否要执行下面的run()方法
+     * @return  false:过滤器放行 不执行run()
+     *          true :过滤器拦截 执行run()
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">shouldFilter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//判断：访问路径包含 eduvideo/getPlayAuth 进行登录校验</span>
+        String playUrl <span class="token operator">=</span> <span class="token string">"eduvideo/getPlayAuth"</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//1.获取请求路径uri</span>
+        RequestContext currentContext <span class="token operator">=</span> RequestContext<span class="token punctuation">.</span><span class="token function">getCurrentContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        HttpServletRequest request <span class="token operator">=</span> currentContext<span class="token punctuation">.</span><span class="token function">getRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String requestURI <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>requestURI<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//2.根据uri判断</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>StringUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>requestURI<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>requestURI<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>playUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//拦截</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//放行</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 过滤器的具体逻辑
+     * @return
+     * @throws ZuulException
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Object <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> ZuulException <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"run执行了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        RequestContext currentContext <span class="token operator">=</span> RequestContext<span class="token punctuation">.</span><span class="token function">getCurrentContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        HttpServletRequest request <span class="token operator">=</span> currentContext<span class="token punctuation">.</span><span class="token function">getRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String token <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"token"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>StringUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//用户未登录 不包含token</span>
+            currentContext<span class="token punctuation">.</span><span class="token function">setSendZuulResponse</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//后面不能访问</span>
+            <span class="token comment" spellcheck="true">//设置状态码</span>
+            currentContext<span class="token punctuation">.</span><span class="token function">setResponseStatusCode</span><span class="token punctuation">(</span>HttpStatus<span class="token punctuation">.</span>UNAUTHORIZED<span class="token punctuation">.</span><span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/03/09/Comparable%E6%8E%92%E5%BA%8F/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Comparable排序">
+                            
+                            <span class="card-title">Comparable排序</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                实体类实现Comparable接口：public class Student implements Comparable&lt;Student> {
+    private int age;
+    private String name;
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-09
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                                    
+                                        <a href="/categories/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" class="post-category">
+                                    算法入门
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/03/08/%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95%E6%80%BB%E7%BB%93/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="微信登录总结">
+                            
+                            <span class="card-title">微信登录总结</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                步骤简介：1.用户点击微信登录 生成二维码
+2.用户扫描二维码 调用回调方法 返回扫码后的票据
+3.使用票据请求微信后台能够获得扫码人的信息凭证和微信id
+4.使用信息凭证和微信id请求微信后端获得扫码人的信息
+
+具体操作：1.前台点击微信
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-08
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

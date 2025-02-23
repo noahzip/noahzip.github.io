@@ -275,19 +275,517 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Rust 方法语法(Method Syntax)</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-02-21
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-02-21
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.2k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        5 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Rust 提供了一种 <strong>方法（method）</strong> 语法，让我们可以将行为与结构体（struct）、枚举（enum）或 trait 关联起来。这一节介绍了 <strong>如何定义和调用方法、<code>self</code> 的作用、方法 vs 关联函数的区别</strong> 等内容。</p>
+<hr>
+<h2 id="1-方法的定义"><a href="#1-方法的定义" class="headerlink" title="1. 方法的定义"></a><strong>1. 方法的定义</strong></h2><p>方法与普通函数类似，但<strong>它们必须在 <code>impl</code> 代码块中定义，并且第一个参数通常是 <code>self</code></strong>，代表该方法作用于的实例：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Rectangle <span class="token punctuation">{</span>
+    width<span class="token punctuation">:</span> u32<span class="token punctuation">,</span>
+    height<span class="token punctuation">:</span> u32<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Rectangle <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">area</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> u32 <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// `self` 代表当前结构体的实例</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>width <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>height
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> rect <span class="token operator">=</span> Rectangle <span class="token punctuation">{</span>
+        width<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+        height<span class="token punctuation">:</span> <span class="token number">50</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The area of the rectangle is {} square pixels."</span><span class="token punctuation">,</span> rect<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>✅ <code>rect.area()</code> 直接调用方法，而不是 <code>area(&amp;rect)</code>，更符合直觉。</p>
+<hr>
+<h2 id="2-self-参数解析"><a href="#2-self-参数解析" class="headerlink" title="2. self 参数解析"></a><strong>2. <code>self</code> 参数解析</strong></h2><p><code>self</code> 参数在 <code>impl</code> 代码块的方法中，表示该方法作用于的实例：</p>
+<table>
+<thead>
+<tr>
+<th><code>self</code> 参数类型</th>
+<th>说明</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;self</code></td>
+<td><strong>不可变借用</strong></td>
+<td>只读访问字段，不修改结构体</td>
+</tr>
+<tr>
+<td><code>&amp;mut self</code></td>
+<td><strong>可变借用</strong></td>
+<td>修改结构体字段</td>
+</tr>
+<tr>
+<td><code>self</code></td>
+<td><strong>获取所有权</strong></td>
+<td>方法调用后，实例被移动</td>
+</tr>
+</tbody></table>
+<h3 id="1-amp-self（不可变借用）"><a href="#1-amp-self（不可变借用）" class="headerlink" title="(1) &amp;self（不可变借用）"></a><strong>(1) <code>&amp;self</code>（不可变借用）</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">impl</span> Rectangle <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">area</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> u32 <span class="token punctuation">{</span>  
+        <span class="token keyword">self</span><span class="token punctuation">.</span>width <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>height
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>只<strong>读取</strong>结构体字段，不会修改它。</li>
+<li><code>self</code> 等价于 <code>&amp;self: Rectangle</code>。</li>
+</ul>
+<p>✅ <strong>适用于只访问数据，而不修改数据的方法</strong>。</p>
+<hr>
+<h3 id="2-amp-mut-self（可变借用）"><a href="#2-amp-mut-self（可变借用）" class="headerlink" title="(2) &amp;mut self（可变借用）"></a><strong>(2) <code>&amp;mut self</code>（可变借用）</strong></h3><p>如果方法需要修改结构体字段，必须使用 <code>&amp;mut self</code>：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Counter <span class="token punctuation">{</span>
+    value<span class="token punctuation">:</span> u32<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Counter <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">increment</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>value <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> counter <span class="token operator">=</span> Counter <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 实例必须是可变的</span>
+    counter<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 修改字段</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Counter value: {}"</span><span class="token punctuation">,</span> counter<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>✅ <code>&amp;mut self</code> 允许修改 <code>value</code>，但<strong>调用方法的实例 <code>counter</code> 必须是 <code>mut</code></strong>，否则会报错。</p>
+<hr>
+<h3 id="3-self（获取所有权）"><a href="#3-self（获取所有权）" class="headerlink" title="(3) self（获取所有权）"></a><strong>(3) <code>self</code>（获取所有权）</strong></h3><p>有时候，方法需要 <strong>消耗（consume）结构体</strong>，即方法调用后该实例不再可用：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Person <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Person <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">into_name</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> String <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 获取所有权</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>name
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> p <span class="token operator">=</span> Person <span class="token punctuation">{</span> name<span class="token punctuation">:</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"Alice"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> name <span class="token operator">=</span> p<span class="token punctuation">.</span><span class="token function">into_name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// `p` 在这里被移动，之后不能再使用</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Name: {}"</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>✅ <code>self</code> 代表整个实例所有权的转移，<code>p</code> 在 <code>into_name()</code> 调用后不再有效。</p>
+<hr>
+<h2 id="3-关联函数（Associated-Functions）"><a href="#3-关联函数（Associated-Functions）" class="headerlink" title="3. 关联函数（Associated Functions）"></a><strong>3. 关联函数（Associated Functions）</strong></h2><p>方法<strong>不一定需要 <code>self</code></strong> 作为参数，例如 <code>new()</code> 用于创建实例：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">impl</span> Rectangle <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>width<span class="token punctuation">:</span> u32<span class="token punctuation">,</span> height<span class="token punctuation">:</span> u32<span class="token punctuation">)</span> <span class="token punctuation">-></span> Self <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// Self 代表结构体类型</span>
+        Self <span class="token punctuation">{</span> width<span class="token punctuation">,</span> height <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> rect <span class="token operator">=</span> Rectangle<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 直接使用结构体名调用</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Rectangle: {} x {}"</span><span class="token punctuation">,</span> rect<span class="token punctuation">.</span>width<span class="token punctuation">,</span> rect<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>✅ 关联函数 <strong>通常作为构造函数</strong>，用来返回 <code>Self</code> 类型的实例。</p>
+<hr>
+<h2 id="4-方法调用的自动引用与解引用"><a href="#4-方法调用的自动引用与解引用" class="headerlink" title="4. 方法调用的自动引用与解引用"></a><strong>4. 方法调用的自动引用与解引用</strong></h2><p>Rust <strong>自动为方法调用添加 <code>&amp;</code> 或 <code>&amp;mut</code></strong>：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Circle <span class="token punctuation">{</span>
+    radius<span class="token punctuation">:</span> f64<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Circle <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">area</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> f64 <span class="token punctuation">{</span>
+        <span class="token number">3.14</span> <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>radius <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>radius
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> circle <span class="token operator">=</span> Circle <span class="token punctuation">{</span> radius<span class="token punctuation">:</span> <span class="token number">5.0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Area: {}"</span><span class="token punctuation">,</span> circle<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 自动添加 &amp;circle</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>✅ <code>circle.area()</code> <strong>自动传递 <code>&amp;circle</code></strong>，所以 <code>area(&amp;self)</code> 方法可以正常调用。</p>
+<hr>
+<h2 id="5-多个-impl-代码块"><a href="#5-多个-impl-代码块" class="headerlink" title="5. 多个 impl 代码块"></a><strong>5. 多个 <code>impl</code> 代码块</strong></h2><p>一个结构体可以有多个 <code>impl</code> 代码块：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Point <span class="token punctuation">{</span>
+    x<span class="token punctuation">:</span> i32<span class="token punctuation">,</span>
+    y<span class="token punctuation">:</span> i32<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Point <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">distance_from_origin</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> f64 <span class="token punctuation">{</span>
+        <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>x<span class="token punctuation">.</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">self</span><span class="token punctuation">.</span>y<span class="token punctuation">.</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f64<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Point <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> i32<span class="token punctuation">,</span> y<span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-></span> Self <span class="token punctuation">{</span>
+        Self <span class="token punctuation">{</span> x<span class="token punctuation">,</span> y <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> p <span class="token operator">=</span> Point<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Distance: {}"</span><span class="token punctuation">,</span> p<span class="token punctuation">.</span><span class="token function">distance_from_origin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>✅ Rust 允许多个 <code>impl</code>，使代码更清晰，避免 <code>impl</code> 代码块过长。</p>
+<hr>
+<h2 id="6-方法-vs-关联函数"><a href="#6-方法-vs-关联函数" class="headerlink" title="6. 方法 vs 关联函数"></a><strong>6. 方法 vs 关联函数</strong></h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>方法（Method）</th>
+<th>关联函数（Associated Function）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定义方式</td>
+<td>需要 <code>self</code> 作为参数</td>
+<td>没有 <code>self</code></td>
+</tr>
+<tr>
+<td>调用方式</td>
+<td><code>instance.method()</code></td>
+<td><code>Type::function()</code></td>
+</tr>
+<tr>
+<td>作用</td>
+<td>作用于实例</td>
+<td>作用于类型本身（如构造实例）</td>
+</tr>
+</tbody></table>
+<h3 id="示例对比"><a href="#示例对比" class="headerlink" title="示例对比"></a><strong>示例对比</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> User <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> User <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">-></span> Self <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 关联函数</span>
+        Self <span class="token punctuation">{</span> name <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">fn</span> <span class="token function">get_name</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token operator">&amp;</span>str <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 方法</span>
+        <span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">.</span>name
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> u <span class="token operator">=</span> User<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"Bob"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 关联函数调用</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> u<span class="token punctuation">.</span><span class="token function">get_name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 方法调用</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="7-代码总结"><a href="#7-代码总结" class="headerlink" title="7. 代码总结"></a><strong>7. 代码总结</strong></h2><pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[derive(Debug)]</span>
+<span class="token keyword">struct</span> Rectangle <span class="token punctuation">{</span>
+    width<span class="token punctuation">:</span> u32<span class="token punctuation">,</span>
+    height<span class="token punctuation">:</span> u32<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Rectangle <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>width<span class="token punctuation">:</span> u32<span class="token punctuation">,</span> height<span class="token punctuation">:</span> u32<span class="token punctuation">)</span> <span class="token punctuation">-></span> Self <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 关联函数（构造）</span>
+        Self <span class="token punctuation">{</span> width<span class="token punctuation">,</span> height <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">fn</span> <span class="token function">area</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> u32 <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 方法（不可变借用）</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>width <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>height
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">fn</span> <span class="token function">resize</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">,</span> width<span class="token punctuation">:</span> u32<span class="token punctuation">,</span> height<span class="token punctuation">:</span> u32<span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 方法（可变借用）</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>width <span class="token operator">=</span> width<span class="token punctuation">;</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>height <span class="token operator">=</span> height<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">fn</span> <span class="token function">into_tuple</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token punctuation">(</span>u32<span class="token punctuation">,</span> u32<span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 方法（获取所有权）</span>
+        <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>width<span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>height<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> rect <span class="token operator">=</span> Rectangle<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Area: {}"</span><span class="token punctuation">,</span> rect<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    rect<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Resized Rectangle: {:?}"</span><span class="token punctuation">,</span> rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> dimensions <span class="token operator">=</span> rect<span class="token punctuation">.</span><span class="token function">into_tuple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// `rect` 被消费</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Dimensions: {:?}"</span><span class="token punctuation">,</span> dimensions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a><strong>8. 总结</strong></h2><table>
+<thead>
+<tr>
+<th>重点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方法定义</td>
+<td>方法必须定义在 <code>impl</code> 代码块中</td>
+</tr>
+<tr>
+<td><code>&amp;self</code></td>
+<td><strong>不可变借用</strong>，用于 <strong>只读访问</strong></td>
+</tr>
+<tr>
+<td><code>&amp;mut self</code></td>
+<td><strong>可变借用</strong>，用于 <strong>修改实例</strong></td>
+</tr>
+<tr>
+<td><code>self</code></td>
+<td><strong>获取所有权</strong>，调用后实例被消费</td>
+</tr>
+<tr>
+<td>关联函数</td>
+<td><strong>没有 <code>self</code></strong>，通常用作 <strong>构造函数</strong></td>
+</tr>
+<tr>
+<td>自动引用</td>
+<td>Rust 自动添加 <code>&amp;self</code> 或 <code>&amp;mut self</code></td>
+</tr>
+<tr>
+<td>多个 <code>impl</code></td>
+<td>允许多个 <code>impl</code> 代码块，使代码更清晰</td>
+</tr>
+</tbody></table>
+<p>Rust 的方法语法提供了<strong>清晰的所有权管理、可读性强的 API 设计</strong>，在实际开发中非常重要。🚀</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/02/21/Rust%E4%B8%AD%E7%9A%84%E6%9E%9A%E4%B8%BE(Eunm)/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/15.png" class="responsive-img" alt="Rust 中的枚举(Enum)">
+                            
+                            <span class="card-title">Rust 中的枚举(Enum)</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                枚举是 Rust 中非常强大的功能，它允许我们将多个可能的值组合在一起，并且可以关联数据，甚至可以定义具有多种变体的枚举类型。以下是本节内容的详细总结：
+
+1. 什么是枚举（Enum）？枚举（enum）允许我们定义一个数据类型，它可以是一组
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/02/21/Rust%20%E7%BB%93%E6%9E%84%E4%BD%93%E7%A4%BA%E4%BE%8B/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/6.png" class="responsive-img" alt="Rust结构体示例及Debug trait调试">
+                            
+                            <span class="card-title">Rust结构体示例及Debug trait调试</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一个使用结构体的示例程序为了理解何时会需要使用结构体，让我们编写一个计算长方形面积的程序。我们会从单独的变量开始，接着重构程序直到使用结构体替代他们为止。  
+1. 结构体的基本使用示例程序的目标是计算一个矩形的面积。最初，直接使用 单独的
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

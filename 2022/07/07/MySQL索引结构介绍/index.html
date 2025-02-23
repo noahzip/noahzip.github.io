@@ -276,19 +276,478 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">MySQL索引结构介绍</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2022-07-07
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2022-07-07
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        4.7k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        16 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="MySQL索引结构介绍"><a href="#MySQL索引结构介绍" class="headerlink" title="MySQL索引结构介绍"></a>MySQL索引结构介绍</h1><p>在介绍索引之前，我们先思考⼀下如果没有索引的时候，要查找会有什么问题？</p>
+<ul>
+<li><strong>如果是根据主键ID查找</strong>：<ul>
+<li>⾸先是多个数据⻚，这个时候可以根据每个数据⻚的Infimum指向的最⼩记录，可以判断当前ID跟这⼀⻚的最⼩ID之间的关系；然后遍历数据⻚的双向链表，这样可以定位到在哪个数据⻚；</li>
+<li>然后根据数据⻚中的slot，可以使⽤⼆分法定位到是在哪个分组；</li>
+<li>然后再在这个分组⾥⾯遍历单向链表，直到找到（或未找到）具体的数据⾏；</li>
+</ul>
+</li>
+<li><strong>如果是⾮主键ID查找</strong>：<ul>
+<li>⾮主键ID，⼜没有索引，（这⾥有个重点，数据⻚是只按照主键ID的⼤⼩排序的），那就只有挨着挨着从第⼀个数据⻚的Infimum开始遍历单向链表；</li>
+<li>第⼀个数据⻚中没有，再通过双向链表去遍历第⼆个数据⻚，再次遍历单向链表；</li>
+<li>这样⼀直挨着挨着的遍历，直到找到（或未找到）具体的数据⾏；</li>
+</ul>
+</li>
+</ul>
+<p>问题在于，如果你的表中有上千万条数据，不管是根据主键ID查找还是⾮主键ID查找，速度都是⾮常⾮常慢的，因为要遍历所有所有的数据⻚；所以，此时就引⼊了索引这个数据结构；</p>
+<h2 id="1-B-树索引"><a href="#1-B-树索引" class="headerlink" title="1. B+ 树索引"></a><strong>1</strong>. B+ 树索引</h2><p><strong>⼀般⽽⾔，动态查找树主要有</strong>：</p>
+<ul>
+<li><strong>⼆叉查找树</strong>：⾸先是⼀棵⼆叉树（节点中只能存储⼀个元素，且任意节点只能有两个⼦节点），然后左⼦节点的值⽐根节点⼩，右⼦节点的值⽐根节点⼤；</li>
+<li><strong>平衡⼆叉查找树</strong>：在满⾜⼆叉查找树的基础之上，树中任何⼀个节点的⾼度差不超过1，也就是平衡的；</li>
+<li><strong>红⿊树</strong>：也是⼀个⼆叉树，是⼀种不严格的平衡⼆叉查找树；</li>
+<li><strong>多路查找树（B树、B+树</strong>）：多路的意思，就不是⼆叉树了，⽽是多叉树了；⼀个节点可以有多个⼦节点（称为树的阶），⼀个节点中可以存储多个元素；</li>
+</ul>
+<h3 id="1-1-为什么要使⽤多路查找树"><a href="#1-1-为什么要使⽤多路查找树" class="headerlink" title="1.1 为什么要使⽤多路查找树"></a><strong>1</strong>.<strong>1</strong> 为什么要使⽤多路查找树</h3><p>那我们回到索引这个场景上来思考，为什么需要多路查找树呢？</p>
+<ul>
+<li>如果我们给⼀亿个数据构建⼆叉查找树索引，那索引中会包含⼤约1亿个节点，每个节点假设占⽤16个字节，那就需要⼤约1GB的内存空间。给⼀张表建⽴索引，我们需要1GB的内存空间。如果我们要给10张表建⽴索引，那对内存的需求是⽆法满⾜的；</li>
+<li>这种时候⼀般的解决办法就是：<strong>时间换空间</strong>；也就是把索引存储在硬盘中，⽽⾮内存中；<ul>
+<li>但是我们都知道，硬盘是⼀个⾮常慢速的存储设备，通常内存的访问速度是纳秒级别的，⽽磁盘访问的速度是毫秒级别的。读取同样⼤⼩的数据，从磁盘中读取花费的时间，是从内存中读取所花费时间的上万倍，甚⾄⼏⼗万倍；</li>
+<li>这种将索引存储在磁盘中的⽅法，尽管减少了内存消耗，但是在读取磁盘的时候，查询效率会相应降低很多很多；</li>
+</ul>
+</li>
+<li>索引存储在磁盘中时，对于每个节点的访问，都会对应⼀次次磁盘IO操作；那也就是说，树的⾼度就等于磁盘IO的次数；那肯定是树越⾼，磁盘IO次数越多，查找速度越慢；</li>
+<li>如果这个时候使⽤的是⼆叉树，⼀个节点只能有两个⼦节点，当节点数量很多时，那是不是就会对应到树的⾼度⾮常⾼，也就导致了磁盘IO次数⾮常多了；</li>
+</ul>
+<p>所以，我们需要降低树的⾼度，怎么降低呢？</p>
+<p>就是使⽤多叉树了，每个节点中可以存储多个元素，每个节点的⼦节点数也可以是多个，那⾃然就降低树的⾼度了；示例：</p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729162916609.png" alt="多路查找树"></p>
+<ul>
+<li>16个数据构成的⼆叉树中，树的⾼度是4，查找⼀个元素最多就需要4次磁盘IO； </li>
+<li>16个数据构成的多叉树中，树的⾼度变成了3，那查找⼀个元素最多就只需要3次磁盘IO； </li>
+<li>当这是⼀个m叉树（⽐如树的阶即m是100），那存储⼀亿个数据，树的⾼度也只是3，也最多只需要3次磁盘IO；</li>
+</ul>
+<p>这也就是我们为什么要使⽤多路查找树（多叉树）作为索引的原因；</p>
+<h3 id="1-2-B树-与-B-树"><a href="#1-2-B树-与-B-树" class="headerlink" title="1.2 B树 与 B+树"></a><strong>1</strong>.<strong>2</strong> B树 与 B+树</h3><p>这⾥来说⼀下 B树 与 B+树 各⾃的特性： </p>
+<h4 id="B树：是⼀种平衡的多路查找树；⼀棵m阶的B树："><a href="#B树：是⼀种平衡的多路查找树；⼀棵m阶的B树：" class="headerlink" title="B树：是⼀种平衡的多路查找树；⼀棵m阶的B树："></a><strong>B树：是⼀种平衡的多路查找树；⼀棵m阶的B树：</strong></h4><ul>
+<li><p>如果根节点不是叶⼦节点，则⾄少有两颗⼦树；（特殊情况为：根节点就是叶⼦节点，那整棵树就只要⼀个根节点）</p>
+</li>
+<li><p>树中每个节点最多含有m个孩⼦（⼦树），和m-1个元素；除了根节点和叶⼦节点外（中间节点），每个节点⾄少有ceil(m/2)个孩⼦；（ceil为取上限）</p>
+</li>
+<li><p>⾮叶⼦节点中会存储元素（指向记录的指针）；⾮叶⼦节点中出现过的元素，不会再在叶⼦节点中出现；</p>
+<p>示例：</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729163243362.png" alt="B树"></p>
+<h4 id="B-树：是基于B树的⼀种变形树，也是⼀种多路查找树；⼀棵m阶的B-树："><a href="#B-树：是基于B树的⼀种变形树，也是⼀种多路查找树；⼀棵m阶的B-树：" class="headerlink" title="B+树：是基于B树的⼀种变形树，也是⼀种多路查找树；⼀棵m阶的B+树："></a>B+树：是基于B树的⼀种变形树，也是⼀种多路查找树；⼀棵m阶的B+树：</h4><ul>
+<li><p>树中每个节点最多含有m个孩⼦（⼦树），和m个元素；⾮叶⼦节点（中间节点）只存储索引，不存储真正的数据；</p>
+</li>
+<li><p>⾮叶⼦节点中的元素值，都是⼦树中的最⼤（或最⼩）值；</p>
+</li>
+<li><p>叶⼦节点中，有整个树的所有节点的元素信息；（会跟⾮叶⼦节点中的元素重复）</p>
+</li>
+<li><p>为所有的叶⼦节点，都添加了⼀个指针进⾏连接；</p>
+</li>
+<li><p>阶数越⼤，树的⾼度越低，磁盘IO次数越少；</p>
+<ul>
+<li>所以中间节点不存储数据，可以存储更多的元素作为索引，降低树的⾼度；</li>
+</ul>
+<p>示例：</p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729163507113.png" alt="B+树"></p>
+</li>
+</ul>
+<h3 id="1-3-MySQL-为什么要使⽤-B-树-作为索引"><a href="#1-3-MySQL-为什么要使⽤-B-树-作为索引" class="headerlink" title="1.3 MySQL 为什么要使⽤ B+树 作为索引"></a><strong>1</strong>.<strong>3</strong> MySQL 为什么要使⽤ B+树 作为索引</h3><p><strong>⼀个数据结构，要⽤来作为索引的话，需要从两个⽅⾯进⾏考虑：查询效率和存储空间；并且MySQL还需要⽀持范围查询；</strong></p>
+<p>那我们来对⽐⼀下各种数据结构作为索引的表现：</p>
+<ul>
+<li><p><strong>Hash表</strong>：</p>
+<ul>
+<li>查询效率为O(1)，但是不⽀持范围查询；</li>
+</ul>
+</li>
+<li><p><strong>⼆叉搜索树</strong>：</p>
+<ul>
+<li>查询效率为O(n)，但是也不⽀持范围查询；</li>
+<li>并且每个节点只能存储⼀个元素，会导致树的⾼度很⾼，磁盘IO次数很多；</li>
+</ul>
+</li>
+<li><p><strong>跳表</strong>：</p>
+<ul>
+<li>查询效率为O(log），也能⽀持范围查询；</li>
+<li>但是跳表中每个节点只能存储⼀个元素，也会导致跳表的层⾼⾮常⾼，磁盘IO次数很多；</li>
+</ul>
+</li>
+<li><p><strong>B树</strong>：</p>
+<ul>
+<li>查询效率为O(log），元素按照顺序存储，能⽀持范围查询；</li>
+<li>B树中每个节点可以存储多个元素，但是⾮叶⼦节点中存储了元素本身，就会导致在索引⻚中不能存放很多的索引节点，也会导致树的⾼度增加，磁盘IO次数很多；</li>
+</ul>
+</li>
+<li><p><strong>B+树</strong>：</p>
+<ul>
+<li>查询效率为O(log），元素按照顺序存储，能⽀持范围查询；</li>
+<li>中间节点不存储元素，只存储索引项；因此⼀个节点中可以存放很多的索引元素，就可以⼤⼤降低树的⾼度，减少磁盘IO，提升索引效率；</li>
+</ul>
+</li>
+</ul>
+<p>因此，MySQL选择了使⽤B+树作为索引的数据结构；</p>
+<h2 id="2-MySQL索引"><a href="#2-MySQL索引" class="headerlink" title="2. MySQL索引"></a><strong>2</strong>. MySQL索引</h2><h3 id="2-1-索引的数据格式"><a href="#2-1-索引的数据格式" class="headerlink" title="2.1 索引的数据格式"></a><strong>2</strong>.<strong>1</strong> 索引的数据格式</h3><p>假设⼀个表中有 3个字段：id、age、name；再往这个表中插⼊3条数据（id 分别为 1，3，5），此时的数据⻚简略显示为： </p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729165609899.png" alt="image"></p>
+<ul>
+<li>注意看上⾯的 record_type：2 表示最⼩记录、3表示最⼤记录、0表示普通记录</li>
+<li>数据⻚中的数据⾏都⽤单向链表连接起来了（这⾥省略了 slot）</li>
+</ul>
+<p>并且我们假设，⼀个数据⻚中最多存储3条数据，那我们再次插⼊三条数据（id 分别为 4， 7，8）时，这个数据⻚中就不够放了，所以需要再分裂出⼀个数据⻚： </p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729170008495.png" alt="image"></p>
+<ul>
+<li>此时，由于新插⼊数据中，id=4⽐前⼀个数据⻚中的id=5更⼩，⽽我们的数据⻚中的数据⾏是按照id从⼩到⼤排列的；</li>
+<li>所以需要把id=4的数据⾏移到第⼀个数据⻚，把id=5的数据⾏移到第⼆个数据⻚；</li>
+<li>也就是说，这⾥需要调整两个数据⻚中这两⾏记录的物理位置，⽽这个调整物理位置的操作，是⽐较耗时的，会降低MySQL的性能；<ul>
+<li>这也就是，为什么MySQL的主键ID，建议是单调递增的；只要是单调递增（不⼀定连续⾃增），那它每次新插⼊的记录都会在后⾯的数据⻚，不⽤去调整；</li>
+<li>⽽如果是uuid之类的，⾮递增的主键ID，有可能你第100个数据⻚中的记录，要跟第10个数据⻚中的记录调换位置，并且还有可能你的每次插⼊操作都需要去调换位置；那这个时候对MySQL的性能是不是就影响很⼤；</li>
+<li>你所以MySQL的主键ID最好是单调递增的，就是因为这⾥的调换位置的原因；上⾯的这个操作，也叫做⻚分裂；</li>
+</ul>
+</li>
+</ul>
+<p>这⾥可能会有⼀个疑问，为什么分裂出来的新数据⻚号是16，⽽不是连续的11呢？</p>
+<p>其实这⾥不⽤是连续的，因为还会有索引⻚的分裂（下⾯会讲到）；使⽤的这些数据⻚在磁盘上也不是相邻的，只需要维护上⼀⻚和下⼀⻚的编号的指针来建⽴链表关系即可；</p>
+<p>我们说过，数据⻚和数据⻚之间，是通过双向链表连接的；前⾯也说了，要查找⼀条数据，是通过遍历双向链表挨着挨着进⾏查找的；但是，如果数据有⼏百万，甚⾄⼏千万条，那这个时候是不是就会有⾮常多的数据⻚？（你就算⼀个数据⻚存100条数据，不也得有⼏⼗万个数据⻚）</p>
+<p>这个时候，再通过遍历双向链表来进⾏查找，那速度就很慢了，肯定是不能接受的；所以，为了优化这种查找，就使⽤了索引；⾄于怎么实现这个索引的，我们⼀点⼀点的来分析；⾸先，对于多个数据⻚，先为它们建⽴⽬录项，每个⻚都对应了⼀个⽬录项，每个⽬录项包括两个部分：</p>
+<ul>
+<li><strong>key</strong>：表示这个数据⻚中所有记录⾏的最⼩值（也就是主键ID最⼩值）；</li>
+<li><strong>page_no</strong>：表示这个数据⻚⻚号；</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729171053253.png" alt="页目录项"></p>
+<p>那这些⼀条⼀条的⽬录项，怎么存储或者说怎么组织数据结构呢？</p>
+<p>其实粗略看起来，它跟数据⾏⾮常相似，只是数据⾏存储的是主键ID+各个字段，那这个⽬录项存储的是最⼩ID+数据⻚号，其实基本⼀样了；</p>
+<p>那我们不就可以也使⽤数据⻚来存储这些⽬录项，存储这种的数据⻚就可以叫做<strong>⽬录项记录⻚</strong>：</p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729171746101.png" alt="⽬录项记录⻚"></p>
+<p>那这样怎么区分普通的记录⾏和⽬录项呢？、</p>
+<ul>
+<li>我们前⾯讲过，记录⾏的数据头中，有⼀个字段叫做<strong>record_type</strong>，它有4种取值：<ul>
+<li>0：普通记录⾏；</li>
+<li>1：⾮叶⼦节点的数据⻚的⽬录项的记录；</li>
+<li>2：最⼩记录；</li>
+<li>3：最⼤记录；</li>
+</ul>
+</li>
+</ul>
+<p>这⾥的1，就表示了这个⽬录项记录也中的⽬录项记录，也就跟普通的⽤户记录（数据⾏）区分开了；</p>
+<p>随着表中数据越来越多，那数据⻚就会越来越多，数据⻚上层的⽬录项记录⻚中的⽬录项也就越来越多；当达到⼀个临界值时，那这个⽬录项记录⻚是不是就要分裂出来⼀个新的⽬录项记录⻚，也就是跟数据⻚的分裂⼀样；多个⽬录项记录⻚之间也是通过双向链表来连接的；</p>
+<p>那随着⽬录项记录⻚越来越多时，进⾏⼀个查找是不是也得双向链表中很多的节点？那这个时候怎么办？</p>
+<p>对这些⽬录项记录⻚，在上层再建立⼀个⽬录项记录⻚，⾥⾯存储的⾃然就是：</p>
+<ul>
+<li>⽬录项记录⻚中的所有⽬录项的最⼩id；</li>
+<li>⽬录项记录⻚的编号；</li>
+</ul>
+<p>示例：</p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729174056649.png" alt="⽬录项记录⻚"></p>
+<p>ps:B+树的插⼊分裂等，会导致⻚号不连续；</p>
+<p>在数据⻚上⾯的⽬录项记录⻚就是索引⻚，它⾥⾯存储的⽬录项记录就是索引项；</p>
+<p>再回过头来看，这种数据⻚+索引⻚来组织出来的索引数据结构，就是⼀棵B+树；我们对照索引和B+树的特性来⼀起看看：</p>
+<ul>
+<li>数据⻚是叶⼦节点，叶⼦节点中存储了所有的元素信息；也就是有所有的数据⾏的所有字段信息；</li>
+<li>索引⻚是⾮叶⼦节点，⾮叶⼦节点（中间节点）中只存储了⽬录项（⾥⾯只包含最⼩id和⻚号，其实是⼀个指向数据⻚的指针），⽽没有存储其他信息；<ul>
+<li>⾮叶⼦节点中存储的内容更少，那⼀个索引⻚中能够存储的⽬录项就会更多，这样也就降低了这棵树的⾼度了；</li>
+</ul>
+</li>
+<li>所有的数据⻚和索引⻚，都是通过双向链表进⾏连接的</li>
+</ul>
+<p><strong>在MySQL中，对于每个表都会默认对主键ID按照B+树这种数据结构来创建⼀个索引树（也就是索引）；索引树中的叶⼦节点是包含了所有数据⾏信息的数据⻚，⽽⾮叶⼦节点是存储⽬录项记录的索引⻚；</strong></p>
+<p>这⾥再多介绍⼀点，<strong>⼀个索引从最初是怎么来形成这棵B+树的</strong>：</p>
+<ul>
+<li>创建B+树索引时，会为这个索引创建⼀个根节点的⻚；最初表中没有数据的时候，每个B+树索引对于的根节点⻚中既没有⽤户记录，也没有⽬录项记录；</li>
+<li>接着执⾏⼀些插⼊语句，往这个表中插⼊⽤户记录时，会先存⼊这个根节点；</li>
+<li>在根节点中的可⽤空间⽤完时，再插⼊⽤户记录，此时会将根节点中的所有记录复制到⼀个新⻚；</li>
+<li>然后再对这个新⻚执⾏⻚分裂，得到第⼆个新⻚；并将新插⼊的记录分配到第⼀个或者第⼆个新⻚中；</li>
+<li>此时根节点就⾃动升级为存储⽬录项的⽬录项记录⻚（也就是索引⻚），那也就需要将第⼀个新⻚和第⼆个新⻚对应的⽬录项都插⼊到这个根节点中；</li>
+<li>后续的节点分裂，就是⼀直分裂分裂，并往根节点中插⼊⽬录项；直到作为索引⻚的根节点再次插满了，就再次执⾏记录复制，这个根节点继续往上提，成为记录索引⻚的⽬录项的上层索引⻚；</li>
+</ul>
+<h3 id="2-2-索引的查询流程"><a href="#2-2-索引的查询流程" class="headerlink" title="2.2 索引的查询流程"></a><strong>2</strong>.<strong>2</strong> 索引的查询流程</h3><p>基于索引，根据主键查询数据流程：（假设查找id=450的记录）</p>
+<ul>
+<li><p>从最顶层的⻚63开始查找，前⾯讲过，数据⻚中的⻚⽬录中有slot，所以可以通过slot来进⾏⼆分查找；○⻚63中的第⼆条⽬录项的数据范围为[321,1005)左开右闭的空间，所以我们要查找的id=450的记录肯定就在这个⽬录项指向的⻚中；（也就是⻚87）</p>
+</li>
+<li><p>再在⻚87中继续查找，同样是通过⼆分查找，找到了第⼀条⽬录项的数据范围为[321,555)，所以要查找的的记录⾏在它指向的⻚中；（⻚58）</p>
+</li>
+<li><p>同样，在⻚58中也是通过⻚⽬录中的slot的⼆分查找，找到对应的slot，再在这个slot中遍历多个数据⾏组成的单向链表，直到找到（或未找到）id=450的记录⾏；</p>
+</li>
+</ul>
+<p>那如果我们是查找id&gt;450的记录呢？⼤家可以先想⼀下，联系到B+树的特性；</p>
+<ul>
+<li><p>因为数据⻚中的记录⾏是从⼩到⼤且⽤单向链表连接起来的，那是不是直接往后⾯依次查找就⾏了；</p>
+</li>
+<li><p>并且数据⻚也是通过双向链表连接的，同样也是往后⾯依次查找就⾏了；</p>
+</li>
+</ul>
+<p>总结⼀下：</p>
+<ul>
+<li>其实就是将存放所有信息的数据⻚作为B+树的叶⼦节点，并且⽤双向链表来连接；</li>
+<li>再将存放⽬录项记录的⽬录项记录⻚作为B+树的⾮叶⼦节点，同样使⽤双向链表来连接，⾥⾯的内容只有：<ul>
+<li>⽬录项指向的数据⻚的最⼩Id；</li>
+<li>⽬录项指向的数据⻚的指针；</li>
+</ul>
+</li>
+<li>⽬录项记录⻚中没有其他内容，所以这样的⼀个⻚，可以存放⾮常多的⽬录项，也就使得这棵B+树的⾼度变矮了；</li>
+</ul>
+<h3 id="2-3-索引的缺点"><a href="#2-3-索引的缺点" class="headerlink" title="2.3 索引的缺点"></a><strong>2</strong>.<strong>3</strong> 索引的缺点</h3><p>上⾯我们讲了这么多索引的内容，也基本上都是<strong>索引的优点：⽤来提升查询速度</strong>；</p>
+<p>那索引的作⽤这么⼤，为什么对于普通索引还需要我们⾃⼰去⼿动创建，为什么InnoDB不为表的每个字段都创建⼀个索引呢？</p>
+<ul>
+<li>存储空间：每创建⼀个索引，都会去创建⼀棵B+树，每⼀个B+树的节点都是⼀个数据⻚/索引⻚，默认⼤⼩是16KB；当⼀个表中数据量很⼤时，这颗树还是很占⽤存储空间的；</li>
+<li>维护索引的开销：因为索引中要维护数据⻚、记录⾏等的排序关系；当你每执⾏⼀条增、删、改等语句时，都可能会涉及到索引中要去调整索引中多个数据⻚之间的排序关系，这是很浪费性能的；</li>
+<li><strong>所以索引不是越多越好的，当然也不能为表中每个字段都创建⼀个索引；</strong></li>
+</ul>
+<h3 id="2-4-索引的存储⾏数"><a href="#2-4-索引的存储⾏数" class="headerlink" title="2.4 索引的存储⾏数"></a><strong>2</strong>.<strong>4</strong> 索引的存储⾏数</h3><p>最后，以⼀个⾯试题来结尾吧，其实也不算⼀个⾯试题，我觉得我们本身也需要去掌握的这个东⻄；</p>
+<p>Q：MySQL InnoDB存储的表，在性能允许的情况下，⼀个表中最多存储多少⾏数据⽐较合理？</p>
+<p>A：⼀般来说，B+树中三层的⾼度对于MySQL的查询性能表现最好；并且规定最下⾯的⼀层（存⽤户记录的数据⻚那层）为第0层；</p>
+<ul>
+<li>我们知道，不管是数据⻚还是索引⻚，⼤⼩都是16kb；12</li>
+<li>我们粗略⼀点计算：对于索引⻚⽽⾔，它⾥⾯的⼀个⽬录项主要有两个内容：id占⽤8个字节、指向数据⻚的指针占⽤6个字节，⼀共占⽤⼤概15个字节；</li>
+<li>那我们从上到下来看：○对于第2层：就只有⼀个索引⻚，⾥⾯会有：16384/15≈1092个索引节点；也就是会指向1092个索引⻚；<ul>
+<li>对于第1层：会有1092个索引⻚，同样对于每个索引⻚，它⾥⾯也有1092个索引节点；那就会指向1092*1092≈1192464个数据⻚；</li>
+<li>对于第0层：第0层是数据⻚，⾥⾯存放的具体的记录⾏了（就有很多的字段等内容），那我们也粗略⼀点计算，⼀个记录⾏⼤概占⽤0.5kb，则16kb的数据⻚中就可以存储30条左右的记录⾏；</li>
+<li>则这⼀层⼀共可以存储：1192464*30=35773920≈35000000⾏；</li>
+</ul>
+</li>
+</ul>
+<p><strong>也就是说，对于⼀个InnoDB的表，⼤概的、粗略的、计算来看，可以存储3500w⾏左右的记录；</strong></p>
+<ul>
+<li><strong>如果表中字段很多，或者每个字段存的内容很多，那就可能减少到2000w⾏左右记录；</strong></li>
+<li><strong>如果表中字段⽐较少，或者每个字段存的内容⽐较少，那就可能增加到4000w⾏左右记录；</strong></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2022/07/08/MySQL%E7%B4%A2%E5%BC%95%E5%BA%94%E2%BD%A4%E4%BB%8B%E7%BB%8D/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="MySQL索引应⽤介绍">
+                            
+                            <span class="card-title">MySQL索引应⽤介绍</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                MySQL索引应⽤介绍1. 索引分类MyIsam 存储引擎中索引的存储格式
+在MyIsam中，也是通过B+树作为索引的数据结构，但是跟InnoDB不同的是，MyIsam的索引⽂件和数据⽂件是分开的，使⽤.MYI来表示索引⽂件，使⽤.MYD来
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-08
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2022/07/05/MySQL%E8%A1%A8%E7%A9%BA%E9%97%B4%E3%80%81%E6%95%B0%E6%8D%AE%E2%BB%9A%E3%80%81%E6%95%B0%E6%8D%AE%E2%BE%8F%E7%9A%84%E7%89%A9%E7%90%86%E5%AD%98%E5%82%A8/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/15.png" class="responsive-img" alt="MySQL中表空间、数据⻚、数据⾏的物理存储">
+                            
+                            <span class="card-title">MySQL中表空间、数据⻚、数据⾏的物理存储</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                MySQL中表空间、数据⻚、数据⾏的物理存储1. MySQL 各数据所在⽬录MySQL的配置⽂件都是 /etc/my.cnf
+[root@localhost mysql]# cat /etc/my.cnf
+# For advice on h
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

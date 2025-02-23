@@ -274,19 +274,303 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/25.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Rust 数据类型</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-02-20
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-02-20
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        881
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，意味着在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。</p>
+<h2 id="2-基本数据类型"><a href="#2-基本数据类型" class="headerlink" title="2. 基本数据类型"></a>2. 基本数据类型</h2><p>Rust 的基本数据类型可以分为标量类型和复合类型。</p>
+<h3 id="2-1-标量类型"><a href="#2-1-标量类型" class="headerlink" title="2.1 标量类型"></a>2.1 标量类型</h3><p>标量类型表示单一值。Rust 提供了以下三种标量类型：</p>
+<ul>
+<li><p><strong>整型（Integer）</strong><br>整型用于表示没有小数部分的数字，分为有符号和无符号整数。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> x<span class="token punctuation">:</span> i32 <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 有符号整型，默认类型为 i32</span>
+<span class="token keyword">let</span> y<span class="token punctuation">:</span> u8 <span class="token operator">=</span> <span class="token number">255</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 无符号整型</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Rust 的整型包括：</p>
+<ul>
+<li><code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>（有符号整型）</li>
+<li><code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>（无符号整型）</li>
+<li><code>isize</code> 和 <code>usize</code> 根据目标平台的架构而定</li>
+</ul>
+</li>
+<li><p><strong>浮点型（Floating-point）</strong><br>浮点数用于表示有小数部分的数字，Rust 提供了两种浮点类型：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> x<span class="token punctuation">:</span> f32 <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 单精度浮点数</span>
+<span class="token keyword">let</span> y<span class="token punctuation">:</span> f64 <span class="token operator">=</span> <span class="token number">3.1415926535</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 双精度浮点数，默认类型是 f64</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>布尔型（Boolean）</strong><br>布尔类型用于表示 <code>true</code> 或 <code>false</code> 两个值。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> t <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> f<span class="token punctuation">:</span> bool <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>字符型（Character）</strong><br>Rust 使用 Unicode 字符表示字符，因此字符类型（<code>char</code>）表示一个字符（如字母、符号或 emoji）。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> c<span class="token punctuation">:</span> char <span class="token operator">=</span> <span class="token string">'z'</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> heart_eyed_cat<span class="token punctuation">:</span> char <span class="token operator">=</span> <span class="token string">'😻'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="2-2-复合类型"><a href="#2-2-复合类型" class="headerlink" title="2.2 复合类型"></a>2.2 复合类型</h3><p>复合类型是可以将多个值组合在一起的类型。Rust 有两种复合类型：</p>
+<ul>
+<li><p><strong>元组（Tuple）</strong><br>元组是将多个值组合在一起，可以是不同类型的值。元组使用括号 <code>()</code> 来表示。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> tup<span class="token punctuation">:</span> <span class="token punctuation">(</span>i32<span class="token punctuation">,</span> f64<span class="token punctuation">,</span> char<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">,</span> <span class="token number">6.4</span><span class="token punctuation">,</span> <span class="token string">'y'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">)</span> <span class="token operator">=</span> tup<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 解构元组</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>数组（Array）</strong><br>数组是相同类型元素的集合，数组的大小在编译时必须确定。数组使用方括号 <code>[]</code> 来表示。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 数组的类型为 [i32; 5]</span>
+<span class="token keyword">let</span> first <span class="token operator">=</span> a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">// 访问数组的第一个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="3-类型别名"><a href="#3-类型别名" class="headerlink" title="3. 类型别名"></a>3. 类型别名</h2><p>Rust 允许创建类型别名。类型别名并不会创建新的类型，它只是给现有类型起一个别名。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">type</span> Kilometers <span class="token operator">=</span> i32<span class="token punctuation">;</span>
+<span class="token keyword">let</span> x<span class="token punctuation">:</span> Kilometers <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="4-强制类型转换"><a href="#4-强制类型转换" class="headerlink" title="4. 强制类型转换"></a>4. 强制类型转换</h2><p>Rust 不支持隐式类型转换，但它提供了显式类型转换。你可以使用 <code>as</code> 关键字来进行转换。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> y<span class="token punctuation">:</span> f64 <span class="token operator">=</span> x <span class="token keyword">as</span> f64<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 将整数转换为浮点数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="5-类型推导"><a href="#5-类型推导" class="headerlink" title="5. 类型推导"></a>5. 类型推导</h2><p>Rust 支持类型推导，意味着 Rust 编译器会根据上下文推导出变量的类型。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// Rust 推导 x 为 i32 类型</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>但是，并不是所有情况下 Rust 都能推导出类型，特别是当你没有给出足够信息时，你可能需要显式指定类型。</p>
+<h2 id="6-小结"><a href="#6-小结" class="headerlink" title="6. 小结"></a>6. 小结</h2><ul>
+<li>Rust 中的基本数据类型包括标量类型（如整型、浮点型、布尔型、字符型）和复合类型（如元组和数组）。</li>
+<li>通过类型推导，Rust 可以自动推断变量的类型，但你也可以显式地指定类型。</li>
+<li>类型别名允许给现有类型定义一个新的名称。</li>
+<li>Rust 不支持隐式类型转换，而是要求显式地进行类型转换。</li>
+</ul>
+<p>了解并掌握 Rust 的数据类型是写出高效且安全代码的基础。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/02/20/Rust%E5%87%BD%E6%95%B0%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.png" class="responsive-img" alt="Rust 函数如何工作">
+                            
+                            <span class="card-title">Rust 函数如何工作</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 引言在 Rust 中，函数是程序的基本构建块之一，允许我们封装一段代码，使其能够多次调用。Rust 提供了多种不同形式的函数，包括带参数和返回值的函数。理解函数的工作方式是编写 Rust 程序的基础。
+2. 定义函数Rust 中的函数
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/02/20/Rust%E5%8F%98%E9%87%8F%E5%92%8C%E5%8F%AF%E5%8F%98%E6%80%A7/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Rust变量和可变性">
+                            
+                            <span class="card-title">Rust变量和可变性</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 引言在本节中，我们将介绍 Rust 中的变量和如何使用它们。Rust 对于变量的默认处理方式是不可变的，但它也提供了在需要时声明可变变量的方法。
+2. 变量的默认不可变性Rust 中的变量默认是不可变的。也就是说，声明一个变量后，我们
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

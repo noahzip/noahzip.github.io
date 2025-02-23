@@ -274,19 +274,308 @@ Access to XMLHttpRequest at &#39;http://localhost:9001/eduvideo/uploadAliyunVide
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">关于element 文件上传出现跨域问题</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-03-03
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-03-03
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        590
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        2 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>控制台报错：</p>
+<pre><code>Access to XMLHttpRequest at 'http://localhost:9001/eduvideo/uploadAliyunVideo' from origin 'http://localhost:9528' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Failed to load resource: net::ERR_FAILED</code></pre><h3 id="问题排查："><a href="#问题排查：" class="headerlink" title="问题排查："></a>问题排查：</h3><h3 id="1-检查后端代码："><a href="#1-检查后端代码：" class="headerlink" title="1.检查后端代码："></a>1.检查后端代码：</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//可以发现已标注跨域注解@CrossOrigin</span>
+<span class="token annotation punctuation">@CrossOrigin</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/eduvideo"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">VideoController</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    VideoService videoService<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//上传视频到阿里云</span>
+    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"uploadAliyunVideo"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> R <span class="token function">uploadAliyunVideo</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        String videoId <span class="token operator">=</span> videoService<span class="token punctuation">.</span><span class="token function">uploadAliyunVideo</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> R<span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token string">"items"</span><span class="token punctuation">,</span>videoId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-使用swagger文档测试结果正常，那么问题一定在前台"><a href="#2-使用swagger文档测试结果正常，那么问题一定在前台" class="headerlink" title="2.使用swagger文档测试结果正常，那么问题一定在前台"></a>2.使用swagger文档测试结果正常，那么问题一定在前台</h3><h3 id="3-检查前台代码"><a href="#3-检查前台代码" class="headerlink" title="3.检查前台代码"></a>3.检查前台代码</h3><pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-item</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>上传视频<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-upload</span>
+  <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>upload-demo<span class="token punctuation">"</span></span>
+  <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>http://localhost:9001/eduvideo/uploadAliyunVideo<span class="token punctuation">'</span></span>
+  <span class="token attr-name">:on-success</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>handleVodUploadSuccess<span class="token punctuation">"</span></span>
+   <span class="token attr-name">:on-exceed</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>handleUploadExceed<span class="token punctuation">"</span></span>
+  <span class="token attr-name">:file-list</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fileList<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>small<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>上传视频<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>content<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>最大支持1G，<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+支持3GP、ASF、AVI、DAT、DV、FLV、F4V、<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+GIF、M2T、M4V、MJ2、MJPEG、MKV、MOV、MP4、<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+MPE、MPG、MPEG、MTS、OGG、QT、RM、RMVB、<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+SWF、TS、VOB、WMV、WEBM 等视频格式上传<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>el-icon-question<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-upload</span><span class="token punctuation">></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-1"><a href="#3-1" class="headerlink" title="*3.1"></a>*3.1</h4><pre><code>首先该段代码复制于element官方文档只修改了action属性
+应该不会是代码本身的问题
+那么只能是人为写错路径造成的吗？但为什么不是404？</code></pre><h4 id="3-2"><a href="#3-2" class="headerlink" title="*3.2"></a>*3.2</h4><pre><code>通过百度、谷歌搜索国内外论坛相关问题，基本上所有的回答都牛头不对马嘴。在国外某论坛看到一个猜想：
+        会不会是element本身禁止跨域请求？</code></pre><h4 id="3-3-通过文档定义到配置文件-修改代理配置项"><a href="#3-3-通过文档定义到配置文件-修改代理配置项" class="headerlink" title="*3.3 通过文档定义到配置文件 修改代理配置项"></a>*3.3 通过文档定义到配置文件 修改代理配置项</h4><p>入口：config ====&gt; index.js</p>
+<pre class="line-numbers language-html"><code class="language-html">    //target 对应要代理的路径
+ proxyTable: {
+  '/api': {
+    target: 'http://localhost:9001/eduvideo/uploadAliyunVideo',
+    changeOrigin: true,
+    pathRewrite: {
+      '^/api': ''
+    }
+  },
+},<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-4-修改接口调用-固定写法"><a href="#3-4-修改接口调用-固定写法" class="headerlink" title="*3.4 修改接口调用 固定写法"></a>*3.4 修改接口调用 固定写法</h4><pre><code> action='/api'</code></pre><h4 id="3-5-重启前端项目-进行测试"><a href="#3-5-重启前端项目-进行测试" class="headerlink" title="*3.5 重启前端项目 进行测试"></a>*3.5 重启前端项目 进行测试</h4><pre><code>//之前的跨域报错消失了
+//出现了一个新的报错
+element-ui.common.js:25924 POST http://localhost:9528/api 413 (Request Entity Too Large)</code></pre><h4 id="3-6-报错定位为服务器端问题"><a href="#3-6-报错定位为服务器端问题" class="headerlink" title="*3.6 报错定位为服务器端问题"></a>*3.6 报错定位为服务器端问题</h4><h3 id="413报错原因："><a href="#413报错原因：" class="headerlink" title="413报错原因："></a>413报错原因：</h3><pre><code>由于是多模块项目使用nginx进行了代理
+而nginx文件上传默认最大值为1024*1024字节 也就是1MB</code></pre><h4 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h4><pre><code>修改nginx配置文件 在 http 内添加
+    http {
+        ...
+        client_max_body_size 1024m;
+        ...
+    }</code></pre><h3 id="至此问题解决！"><a href="#至此问题解决！" class="headerlink" title="至此问题解决！"></a>至此问题解决！</h3><p>​         </p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/03/04/SpringCloud%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83Eureka/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/24.png" class="responsive-img" alt="SpringCloud 注册中心:Eureka">
+                            
+                            <span class="card-title">SpringCloud 注册中心:Eureka</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.环境搭建1. 服务中心注册1.1 服务端导入依赖&lt;!-- 注册服务 --&gt;
+&lt;dependency&gt;
+ &lt;groupId&gt;org.springframework.cloud&lt;/groupId&g
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-04
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/02/21/Mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.png" class="responsive-img" alt="Mybatis逆向工程使用方法">
+                            
+                            <span class="card-title">Mybatis逆向工程使用方法</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.pom导入mybatis代码构造器坐标依赖&lt;dependency>
+   &lt;groupId>org.mybatis.generator&lt;/groupId>
+   &lt;artifactId>mybatis-gener
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-02-21
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

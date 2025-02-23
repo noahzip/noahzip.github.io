@@ -274,19 +274,368 @@ Propagation propaga">
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">事务总结</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-03-18
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-03-18
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.1k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        4 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。"><a href="#1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。" class="headerlink" title="1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。"></a>1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。</h2><h2 id="2、事务的传播行为"><a href="#2、事务的传播行为" class="headerlink" title="2、事务的传播行为"></a>2、事务的传播行为</h2><p>propagation:当前方法的事务是否要和别人公用一个事务,以及如何传播下去（里面的方法如果用事务，是否和他公用一个事务）</p>
+<pre><code>Propagation propagation() default Propagation.REQUIRED;
+
+REQUIRED:(必须):
+    Support a current transaction, create a new one if none exists.
+    如果以前有事务，就和之前的事务公用一个事务，没有就创建一个事务；
+REQUIRES_NEW（总是用新的事务）:
+    Create a new transaction, and suspend the current transaction if one exists.
+    创建一个新的事务，如果以前有事务，暂停前面的事务。
+
+SUPPORTS（支持）:
+    Support a current transaction, execute non-transactionally if none exists.
+    之前有事务，就以事务的方式运行，没有事务也可以；
+
+MANDATORY（强制）:没事务就报错
+    Support a current transaction, throw an exception if none exists
+           一定要有事务，如果没事务就报错
+
+NOT_SUPPORTED（不支持）:
+    Execute non-transactionally, suspend the current transaction if one exists
+    不支持在事务内运行，如果已经有事务了，就挂起当前存在的事务
+
+NEVER（从不使用）:
+     Execute non-transactionally, throw an exception if a transaction exists.
+    不支持在事务内运行，如果已经有事务了，抛异常
+
+NESTED:
+    Execute within a nested transaction if a current transaction exists,
+    开启一个子事务（MySQL不支持），需要支持还原点功能的数据库才行；</code></pre><p>举例：<br>    一家人带着老王去旅游，开自己的车还是坐老王的车</p>
+<pre class="line-numbers language-java"><code class="language-java">    Required：坐老王车
+    Requires_new：一定得开车，开新的
+    SUPPORTS：用车，有车就用，没车走路；
+    MANDATORY：用车，没车就骂街。。。
+    NOT_SUPPORTED：不支持用车。有车放那不用
+    NEVER：从不用车，有车抛异常  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>实际事务：</p>
+<pre class="line-numbers language-java"><code class="language-java">Requires_new
+ 外事务<span class="token punctuation">{</span>
+     A（）；Required<span class="token punctuation">;</span> A
+
+     B（）<span class="token punctuation">;</span>Requires_new B
+
+    <span class="token keyword">try</span><span class="token punctuation">{</span>
+         <span class="token function">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>Required<span class="token punctuation">;</span> C
+    <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span>Exception e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//c出异常？</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">D</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>Requires_new<span class="token punctuation">;</span> D
+
+    <span class="token comment" spellcheck="true">//给数据库存 --外事务</span>
+    <span class="token comment" spellcheck="true">// int i = 10/0;</span>
+ <span class="token punctuation">}</span>
+
+场景<span class="token number">1</span>：
+    A方法出现了异常；由于异常机制导致代码停止，下面无法执行，数据库什么都没有
+场景<span class="token number">2</span>：
+    C方法出现异常；A回滚，B成功，C回滚，D无法执行，外无法执行
+场景<span class="token number">3</span>：
+    外成了后，<span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token operator">/</span><span class="token number">0</span><span class="token punctuation">;</span> B<span class="token punctuation">,</span>D成功。A<span class="token punctuation">,</span>C<span class="token punctuation">,</span>外都执行了但是必须回滚
+场景<span class="token number">4</span>：
+    D炸；抛异常。外事务感知到异常。A<span class="token punctuation">,</span>C回滚，外执行不到，D自己回滚，B成功
+场景<span class="token number">5</span>：
+    C用<span class="token keyword">try</span><span class="token operator">-</span><span class="token keyword">catch</span>执行；C出了异常回滚，由于异常被捕获，外事务没有感知异常。A<span class="token punctuation">,</span>B<span class="token punctuation">,</span>D都成，C自己回滚
+
+总结：
+    传播行为过程中，只要Requires_new被执行过就一定成功，不管后面出不出问题。异常机制还是一样的，出现异常代码以后不执行。
+Required只要感觉到异常就一定回滚。和外事务是什么传播行为无关。
+
+传播行为总是来定义，当一个事务存在的时候，他内部的事务该怎么执行。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="事务Spring中是怎么做的？"><a href="#事务Spring中是怎么做的？" class="headerlink" title="事务Spring中是怎么做的？"></a>事务Spring中是怎么做的？</h2><p>aop代理</p>
+<pre class="line-numbers language-java"><code class="language-java">hahaServiceProxy<span class="token punctuation">.</span><span class="token function">saveBaseInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    A<span class="token punctuation">{</span>
+        <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//1,2,3</span>
+        <span class="token function">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//4,5,6</span>
+        <span class="token function">D</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//7,8,9</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+自己类调用自己类里面的方法，就是一个复制粘贴，无法加上事务。
+
+对象<span class="token punctuation">.</span>方法<span class="token punctuation">(</span><span class="token punctuation">)</span>才能加上事务。
+A<span class="token punctuation">{</span>
+    <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        hahaService<span class="token punctuation">.</span><span class="token function">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        hahaService<span class="token punctuation">.</span><span class="token function">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        hahaService<span class="token punctuation">.</span><span class="token function">D</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+事务的问题：
+    Service自己调用自己的方法，无法加上真正的自己内部调整的各个事务
+    解决：
+        <span class="token comment" spellcheck="true">//获取代理对象</span>
+          xxxImpl proxy <span class="token operator">=</span> <span class="token punctuation">(</span>xxxImpl<span class="token punctuation">)</span> AopContext<span class="token punctuation">.</span><span class="token function">currentProxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//用代理对象调用方法</span>
+          proxy<span class="token punctuation">.</span><span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="隔离级别："><a href="#隔离级别：" class="headerlink" title="隔离级别："></a>隔离级别：</h2><p>解决读写加锁问题的（数据底层的方案）。MYSQL默认可重复读（快照）    </p>
+<ul>
+<li>读未提交</li>
+<li>读已提交</li>
+<li>可重复读</li>
+<li>串行化</li>
+</ul>
+<h2 id="异常回滚策略"><a href="#异常回滚策略" class="headerlink" title="异常回滚策略"></a>异常回滚策略</h2><p>异常：</p>
+<ul>
+<li>运行时异常（不受检查异常）<br>ArithmeticException ……</li>
+<li>编译时异常（受检异常）<br>FileNotFound</li>
+</ul>
+<h3 id="运行的异常默认是一定回滚"><a href="#运行的异常默认是一定回滚" class="headerlink" title="运行的异常默认是一定回滚"></a>运行的异常默认是一定回滚</h3><h3 id="编译时异常默认是不回滚的；"><a href="#编译时异常默认是不回滚的；" class="headerlink" title="编译时异常默认是不回滚的；"></a>编译时异常默认是不回滚的；</h3><h3 id="rollbackFor：指定哪些异常一定回滚的。"><a href="#rollbackFor：指定哪些异常一定回滚的。" class="headerlink" title="rollbackFor：指定哪些异常一定回滚的。"></a>rollbackFor：指定哪些异常一定回滚的。</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//所有异常都回滚</span>
+<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> Propagation<span class="token punctuation">.</span>REQUIRES_NEW<span class="token punctuation">,</span>rollbackFor <span class="token operator">=</span> <span class="token punctuation">{</span>Exception<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">xxx</span><span class="token punctuation">(</span>Param param<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/04/21/%E5%AE%9E%E7%8E%B0RBTree%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/28.png" class="responsive-img" alt="实现RBTree核心方法">
+                            
+                            <span class="card-title">实现RBTree核心方法</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1、自定义RbTreepublic class RbTree&lt;K extends Comparable&lt;K>, V> {
+    private static final boolean RED = true;
+    priv
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-04-21
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                    数据结构
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/03/18/%E9%98%BF%E9%87%8C%E4%BA%91%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/3.png" class="responsive-img" alt="阿里云文件上传">
+                            
+                            <span class="card-title">阿里云文件上传</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                导入依赖&lt;!-- 阿里云OSS -->
+&lt;dependency>
+   &lt;groupId>com.aliyun.oss&lt;/groupId>
+   &lt;artifactId>aliyun-sdk-oss&lt;/a
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

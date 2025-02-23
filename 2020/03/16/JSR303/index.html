@@ -275,19 +275,311 @@
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">JSR303</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
+                                    经验&bug
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2020-03-16
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2020-03-16
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        391
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        1 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="SpringMVC支持使用-【JSR303】-方式进行校验"><a href="#SpringMVC支持使用-【JSR303】-方式进行校验" class="headerlink" title="SpringMVC支持使用 【JSR303】 方式进行校验"></a>SpringMVC支持使用 【JSR303】 方式进行校验</h2><h2 id="springboot默认导第三方的校验框架hibernate-validator"><a href="#springboot默认导第三方的校验框架hibernate-validator" class="headerlink" title="springboot默认导第三方的校验框架hibernate-validator"></a>springboot默认导第三方的校验框架hibernate-validator</h2><h2 id="使用JSR303的三大步："><a href="#使用JSR303的三大步：" class="headerlink" title="使用JSR303的三大步："></a>使用JSR303的三大步：</h2><ul>
+<li><h2 id="1、给需要校验数据的javaBean上标注校验注解："><a href="#1、给需要校验数据的javaBean上标注校验注解：" class="headerlink" title="1、给需要校验数据的javaBean上标注校验注解："></a>1、给需要校验数据的javaBean上标注校验注解：</h2>能使用的校验注解:<ul>
+<li>1)、Hibernate   org.hibernate.validator.constraints 里面的所有 <ul>
+<li>2)、JSR303规范规定的都可；javax.validation.constraints</li>
+</ul>
+</li>
+<li>3)、正则表达式 @Pattern(regexp = “”) </li>
+</ul>
+</li>
+</ul>
+<pre><code>```java
+    @Length(min = 4,max = 8,message = "用户名长度必须4-8位")
+    private String username;
+
+    @NotEmpty
+    private String password;
+
+    @Null  //必须为空
+    private String nickName;
+
+    @Pattern(regexp = "")//正则
+    private String note;</code></pre><pre><code>
+ * ## 2、告诉SpringBoot，这个需要校验；@Valid
+ * 
+           springmvc进入方法之前，确定参数值的时候就会进行校验，如果校验出错，直接返回错误，不执行controller代码
+
+ * ## 3、如何感知校验成功还是失败；
+
+   * 1）.只给开启了校验的javaBean参数后面，紧跟一个BindingResult对象,就可以获取到校验结果;
+   * 2).只要有BindingResult，即使**校验错了方法也会执行**。我们需要手动处理
+
+
+
+
+```java
+public Object register(@Valid @RequestBody UmsAdminParam umsAdminParam, BindingResult result) {
+    int errorCount = result.getErrorCount();
+    if(errorCount&gt;0){  //校验失败
+        List&lt;FieldError&gt; fieldErrors = result.getFieldErrors();
+        fieldErrors.forEach((fieldError)-&gt;{
+            String field = fieldError.getField();
+            log.debug("出错的属性：{}，传来的值是：{}，校验出错。出错的提示消息：{}",
+                    field,fieldError.getRejectedValue(),fieldError.getDefaultMessage());
+        });
+        return new CommonResult().validateFailed(result);
+    }else {
+        //TODO 完成注册功能
+    }
+    log.debug("需要注册的用户详情：{}",umsAdminParam);
+    return new CommonResult().success("");
+}             </code></pre><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2020/03/16/%E6%95%B4%E5%90%88%E5%88%87%E9%9D%A2%E3%80%81JSR%E3%80%81%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/20.png" class="responsive-img" alt="整合切面、JSR、异常处理">
+                            
+                            <span class="card-title">整合切面、JSR、异常处理</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.切面编写
+1)导入切面场景
+ ```xml  
+      org.springframework.boot
+      spring-boot-starter-aop
+
+  ```
+
+2) 编写切面
+  1、标注@Aspect
+  2
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-16
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
+                                    总结
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2020/03/13/MybatisPlus%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="MybatisPlus逆向工程">
+                            
+                            <span class="card-title">MybatisPlus逆向工程</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.导入依赖&lt;!-- 逆向工程依赖 -->
+&lt;dependencies>
+    &lt;!-- mybatisPlus -->
+    &lt;dependency>
+        &lt;groupId>com.baomi
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-13
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 

@@ -277,19 +277,319 @@ s">
 </header>
 
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Guess Number</h1>
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                            
+                        </div>
+                    
                 </div>
             </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-02-20
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-02-20
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        593
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        2 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="1-项目结构与初始化"><a href="#1-项目结构与初始化" class="headerlink" title="1. 项目结构与初始化"></a>1. <strong>项目结构与初始化</strong></h3><ul>
+<li>创建新项目：通过 <code>cargo new guessing_game</code> 命令创建一个名为 <code>guessing_game</code> 的 Rust 项目。</li>
+<li>项目包含的文件：<ul>
+<li><code>Cargo.toml</code>：项目的元数据文件，包含项目的配置信息。</li>
+<li><code>src/main.rs</code>：主程序代码文件，包含游戏逻辑。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-基本功能实现"><a href="#2-基本功能实现" class="headerlink" title="2. 基本功能实现"></a>2. <strong>基本功能实现</strong></h3><ul>
+<li><strong>导入标准库</strong>：使用 <code>std::io</code> 来处理输入输出，使用 <code>rand</code> 库来生成随机数。</li>
+<li><strong>生成随机数</strong>：通过 <code>rand::Rng</code> 生成一个 1 到 100 的随机数，作为秘密数字。</li>
+<li><strong>循环猜测</strong>：使用 <code>loop</code> 创建一个无限循环，不断提示用户输入并根据输入与随机数进行比较。</li>
+<li><strong>输入读取</strong>：使用 <code>io::stdin().read_line(&amp;mut guess)</code> 获取用户输入，存储到 <code>guess</code> 变量中。</li>
+<li><strong>输入解析</strong>：将用户输入的字符串转换为 <code>u32</code> 类型，处理错误输入。</li>
+</ul>
+<h3 id="3-猜测的比较与反馈"><a href="#3-猜测的比较与反馈" class="headerlink" title="3. 猜测的比较与反馈"></a>3. <strong>猜测的比较与反馈</strong></h3><ul>
+<li><p>使用 <code>match</code> 来比较用户的输入与随机数：</p>
+<ul>
+<li><code>Ordering::Less</code>：猜的数字太小，输出 “Too small”。</li>
+<li><code>Ordering::Greater</code>：猜的数字太大，输出 “Too big”。</li>
+<li><code>Ordering::Equal</code>：猜对了，输出 “You win!” 并结束游戏。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-错误处理与优化"><a href="#4-错误处理与优化" class="headerlink" title="4. 错误处理与优化"></a>4. <strong>错误处理与优化</strong></h3><ul>
+<li><p><strong>处理无效输入</strong>：如果用户输入的不是数字，程序会提示并继续请求输入。</p>
+</li>
+<li><p><strong>优化输入验证</strong>：确保用户输入的值是有效的数字，若无效则跳过本次循环，继续请求有效输入。</p>
+</li>
+</ul>
+<h3 id="5-完整代码示例"><a href="#5-完整代码示例" class="headerlink" title="5. 完整代码示例"></a>5. <strong>完整代码示例</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">{</span>cmp<span class="token punctuation">:</span><span class="token punctuation">:</span>Ordering<span class="token punctuation">,</span> io<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> rand<span class="token punctuation">:</span><span class="token punctuation">:</span>Rng<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello, world! This is my Rust application!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 生成一个 1 到 100 的随机数作为猜谜的正确答案</span>
+    <span class="token keyword">let</span> secret_number<span class="token punctuation">:</span>u32 <span class="token operator">=</span> rand<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">thread_rng</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">gen_range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">loop</span> <span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">// 初始化一个字符串，用于存储用户的输入</span>
+        <span class="token keyword">let</span> <span class="token keyword">mut</span> guess <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Please input a number!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 读取用户输入的数字</span>
+        io<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">stdin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">read_line</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> guess<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token string">"Read Error!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 尝试将输入的内容转换为数字（u32类型），如果失败则跳过本次循环</span>
+        <span class="token keyword">let</span> guess<span class="token punctuation">:</span>u32 <span class="token operator">=</span> <span class="token keyword">match</span> guess<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Ok</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> num<span class="token punctuation">,</span>
+            <span class="token function">Err</span><span class="token punctuation">(</span>_<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+                <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Input a number!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"u guess number: {}"</span><span class="token punctuation">,</span>guess<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+         <span class="token comment" spellcheck="true">// 与秘密数字进行比较</span>
+        <span class="token keyword">match</span> guess<span class="token punctuation">.</span><span class="token function">cmp</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>secret_number<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Ordering<span class="token punctuation">:</span><span class="token punctuation">:</span>Less <span class="token operator">=</span><span class="token operator">></span> <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"To small"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Ordering<span class="token punctuation">:</span><span class="token punctuation">:</span>Greater <span class="token operator">=</span><span class="token operator">></span> <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"To big"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Ordering<span class="token punctuation">:</span><span class="token punctuation">:</span>Equal <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"U win!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token comment" spellcheck="true">// 猜对了，退出循环</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+        <div class="social-share" data-sites="wechat,qq,weibo,twitter,facebook,linkedin"
+             data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+        <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/02/20/Rust%E5%8F%98%E9%87%8F%E5%92%8C%E5%8F%AF%E5%8F%98%E6%80%A7/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Rust变量和可变性">
+                            
+                            <span class="card-title">Rust变量和可变性</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 引言在本节中，我们将介绍 Rust 中的变量和如何使用它们。Rust 对于变量的默认处理方式是不可变的，但它也提供了在需要时声明可变变量的方法。
+2. 变量的默认不可变性Rust 中的变量默认是不可变的。也就是说，声明一个变量后，我们
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/02/20/Hello,Cargo/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Hello, Cargo!">
+                            
+                            <span class="card-title">Hello, Cargo!</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 简介Cargo 是 Rust 的构建系统和包管理器。大多数 Rustacean 们使用 Cargo 来管理他们的 Rust 项目，因为它可以为你处理很多任务，比如构建代码、下载依赖库，以及编译这些库。（我们把代码所需要的库叫做依赖 d
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
 </div>
+
+<!-- 优化：将 copyright 复制事件和代码功能脚本延迟加载 -->
+
+
+<!-- 延迟加载代码块功能脚本 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js" defer></script>
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js" defer></script>
+
+
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js" defer></script>
+
+
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+
 
 
 
