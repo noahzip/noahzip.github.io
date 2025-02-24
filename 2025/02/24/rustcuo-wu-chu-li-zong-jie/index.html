@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Rust错误处理, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="keywords" content="Rust中的错误处理, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
     <meta name="description" content="Rust 提供了两种主要的错误处理方式：
 
 不可恢复错误（Unrecoverable Errors）：使用 panic! 宏。
@@ -19,7 +19,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>Rust错误处理 | 未见初墨</title>
+    <title>Rust中的错误处理 | 未见初墨</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Rust错误处理</h1>
+                    <h1 class="description center-align post-title">Rust中的错误处理</h1>
                 </div>
             </div>
         </div>
@@ -389,21 +389,21 @@
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2025-02-22
+                        2025-02-24
                     </div>
                 
 
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2025-02-22
+                        2025-02-24
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        984
+                        1k
                     </div>
                 
 
@@ -427,94 +427,121 @@
 </ol>
 <p>错误处理在 Rust 中至关重要，既可以提升代码的健壮性，又能提高可读性和维护性。本章将详细介绍 Rust 的错误处理机制，并给出相应的示例。</p>
 <hr>
-<h2 id="9-1-不可恢复错误-panic"><a href="#9-1-不可恢复错误-panic" class="headerlink" title="9.1 不可恢复错误 (panic!)"></a>9.1 不可恢复错误 (<code>panic!</code>)</h2><p>当程序遇到严重错误无法继续运行时，Rust 提供 <code>panic!</code> 宏来立即终止程序，并打印错误消息和回溯信息。</p>
-<h3 id="1-panic-的基本使用"><a href="#1-panic-的基本使用" class="headerlink" title="1. panic! 的基本使用"></a><strong>1. <code>panic!</code> 的基本使用</strong></h3><p><code>panic!</code> 会导致程序崩溃，并输出错误信息。</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">panic!</span><span class="token punctuation">(</span><span class="token string">"发生了一个不可恢复的错误！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>运行该程序时，输出类似：</p>
-<pre class="line-numbers language-bash"><code class="language-bash">thread <span class="token string">'main'</span> panicked at <span class="token string">'发生了一个不可恢复的错误！'</span>, src/main.rs:2:5
-note: run with <span class="token variable"><span class="token variable">`</span>RUST_BACKTRACE<span class="token operator">=</span>1<span class="token variable">`</span></span> environment variable to display a backtrace<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="2-数组索引越界导致-panic"><a href="#2-数组索引越界导致-panic" class="headerlink" title="2. 数组索引越界导致 panic!"></a><strong>2. 数组索引越界导致 <code>panic!</code></strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<h2 id="1-不可恢复错误-panic"><a href="#1-不可恢复错误-panic" class="headerlink" title="1. 不可恢复错误 (panic!)"></a>1. 不可恢复错误 (<code>panic!</code>)</h2><p>当程序遇到严重错误无法继续运行时，Rust 提供 <code>panic!</code> 宏来立即终止程序，并打印错误消息和回溯信息。</p>
+<h3 id="1-1-panic-的基本使用"><a href="#1-1-panic-的基本使用" class="headerlink" title="1.1 panic! 的基本使用"></a><strong>1.1 <code>panic!</code> 的基本使用</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">panic_demo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> v <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> v<span class="token punctuation">[</span><span class="token number">99</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 数组索引越界，触发 panic</span>
+    v<span class="token punctuation">[</span><span class="token number">99</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 访问越界，导致 panic</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>运行该程序时，输出类似：</p>
-<pre class="line-numbers language-bash"><code class="language-bash">thread <span class="token string">'main'</span> panicked at src\main.rs:2:21:
-index out of bounds: the len is 3 but the index is 99
-note: run with <span class="token variable"><span class="token variable">`</span>RUST_BACKTRACE<span class="token operator">=</span>1<span class="token variable">`</span></span> environment variable to display a backtrace<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>这类 <code>panic!</code> 发生在运行时，主要是由于数组访问越界、空指针解引用等原因。</p>
-<h3 id="3-使用-RUST-BACKTRACE-获取回溯信息"><a href="#3-使用-RUST-BACKTRACE-获取回溯信息" class="headerlink" title="3. 使用 RUST_BACKTRACE 获取回溯信息"></a><strong>3. 使用 <code>RUST_BACKTRACE</code> 获取回溯信息</strong></h3><p>可以使用环境变量 <code>RUST_BACKTRACE=1</code> 来查看 <code>panic!</code> 的详细回溯信息。</p>
-<pre class="line-numbers language-sh"><code class="language-sh">RUST_BACKTRACE=1 cargo run<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="4-panic-的典型应用场景"><a href="#4-panic-的典型应用场景" class="headerlink" title="4. panic! 的典型应用场景"></a><strong>4. <code>panic!</code> 的典型应用场景</strong></h3><ul>
+<p>运行时会崩溃，并输出：</p>
+<pre><code>thread 'main' panicked at 'index out of bounds: the len is 3 but the index is 99'</code></pre><h3 id="1-2-panic-的典型应用场景"><a href="#1-2-panic-的典型应用场景" class="headerlink" title="1.2 panic! 的典型应用场景"></a><strong>1.2 <code>panic!</code> 的典型应用场景</strong></h3><ul>
 <li><strong>代码进入非法状态</strong>（如数组索引超出范围）。</li>
 <li><strong>不希望程序继续运行</strong>，如关键文件缺失、系统错误等。</li>
 <li><strong>用于开发调试</strong>，以便尽早发现错误（如 <code>unreachable!()</code> ）。</li>
 </ul>
 <hr>
-<h2 id="9-2-可恢复错误-Result-lt-T-E-gt"><a href="#9-2-可恢复错误-Result-lt-T-E-gt" class="headerlink" title="9.2 可恢复错误 (Result<T, E>)"></a>9.2 可恢复错误 (<code>Result&lt;T, E&gt;</code>)</h2><p>对于可以处理的错误，Rust 提供了 <code>Result&lt;T, E&gt;</code> 枚举：</p>
+<h2 id="2-可恢复错误-Result-lt-T-E-gt"><a href="#2-可恢复错误-Result-lt-T-E-gt" class="headerlink" title="2. 可恢复错误 (Result<T, E>)"></a>2. 可恢复错误 (<code>Result&lt;T, E&gt;</code>)</h2><p>对于可以处理的错误，Rust 提供了 <code>Result&lt;T, E&gt;</code> 枚举：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">enum</span> Result<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> E<span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token function">Ok</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 成功，返回 T</span>
     <span class="token function">Err</span><span class="token punctuation">(</span>E<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 失败，返回错误信息 E</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="1-使用-match-处理-Result"><a href="#1-使用-match-处理-Result" class="headerlink" title="1. 使用 match 处理 Result"></a><strong>1. 使用 <code>match</code> 处理 <code>Result</code></strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">:</span><span class="token punctuation">:</span>File<span class="token punctuation">;</span>
-<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>io<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token punctuation">;</span>
+<h3 id="2-1-使用-match-处理-Result"><a href="#2-1-使用-match-处理-Result" class="headerlink" title="2.1 使用 match 处理 Result"></a><strong>2.1 使用 <code>match</code> 处理 <code>Result</code></strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">:</span><span class="token punctuation">:</span>File<span class="token punctuation">;</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>io<span class="token punctuation">:</span><span class="token punctuation">:</span>ErrorKind<span class="token punctuation">;</span>
 
-<span class="token keyword">fn</span> <span class="token function">read_file</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>File<span class="token punctuation">,</span> Error<span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">match</span> f <span class="token punctuation">{</span>
-        <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token keyword">fn</span> <span class="token function">result_demo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> f <span class="token operator">=</span> <span class="token keyword">match</span> f <span class="token punctuation">{</span>
+        <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> file<span class="token punctuation">,</span>
+        <span class="token function">Err</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">match</span> err<span class="token punctuation">.</span><span class="token function">kind</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ErrorKind<span class="token punctuation">:</span><span class="token punctuation">:</span>NotFound <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">match</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token string">"a.txt"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">Ok</span><span class="token punctuation">(</span>fc<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> fc<span class="token punctuation">,</span>
+                <span class="token function">Err</span><span class="token punctuation">(</span>err1<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">panic!</span><span class="token punctuation">(</span><span class="token string">"Failed to create a.txt {:?}"</span><span class="token punctuation">,</span> err1<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            other_error <span class="token operator">=</span><span class="token operator">></span> <span class="token function">panic!</span><span class="token punctuation">(</span><span class="token string">"Failed to open the file {:?}"</span><span class="token punctuation">,</span> other_error<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><code>File::open("a.txt")</code> 可能成功，也可能失败。</li>
+<li>使用 <code>match</code> 处理 <code>Ok</code> 和 <code>Err</code>，如果文件不存在则尝试创建。</li>
+<li>若创建失败，则使用 <code>panic!</code> 终止程序。</li>
+</ul>
+<h3 id="2-2-使用-unwrap-or-else-简化-match"><a href="#2-2-使用-unwrap-or-else-简化-match" class="headerlink" title="2.2 使用 unwrap_or_else 简化 match"></a><strong>2.2 使用 <code>unwrap_or_else</code> 简化 <code>match</code></strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>io<span class="token punctuation">:</span><span class="token punctuation">:</span>Read<span class="token punctuation">;</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">result_demo_optimize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap_or_else</span><span class="token punctuation">(</span><span class="token closure-params"><span class="token punctuation">|</span>error<span class="token punctuation">|</span></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> error<span class="token punctuation">.</span><span class="token function">kind</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> ErrorKind<span class="token punctuation">:</span><span class="token punctuation">:</span>NotFound <span class="token punctuation">{</span>
+            File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token string">"a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap_or_else</span><span class="token punctuation">(</span><span class="token closure-params"><span class="token punctuation">|</span>error<span class="token punctuation">|</span></span> <span class="token punctuation">{</span>
+                <span class="token function">panic!</span><span class="token punctuation">(</span><span class="token string">"Failed to create file {:?}"</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">panic!</span><span class="token punctuation">(</span><span class="token string">"Failed to open file {:?}"</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><code>unwrap_or_else</code> 允许更简洁地处理错误。</li>
+<li>避免了多层 <code>match</code> 嵌套，提高可读性。</li>
+</ul>
+<hr>
+<h2 id="3-传播错误（Error-Propagation）"><a href="#3-传播错误（Error-Propagation）" class="headerlink" title="3. 传播错误（Error Propagation）"></a>3. 传播错误（Error Propagation）</h2><p>在函数中使用 <code>Result&lt;T, E&gt;</code> 返回错误，并将错误传递给调用者。</p>
+<h3 id="3-1-使用-match-传播错误"><a href="#3-1-使用-match-传播错误" class="headerlink" title="3.1 使用 match 传播错误"></a><strong>3.1 使用 <code>match</code> 传播错误</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">propagating_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> io<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> f <span class="token operator">=</span> <span class="token keyword">match</span> f <span class="token punctuation">{</span>
+        <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> file<span class="token punctuation">,</span>
+        <span class="token function">Err</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">return</span> <span class="token function">Err</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">match</span> f<span class="token punctuation">.</span><span class="token function">read_to_string</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Ok</span><span class="token punctuation">(</span>_<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">Ok</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>解析：</strong></p>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li><code>File::open("hello.txt")</code> 可能成功，也可能失败。</li>
-<li>使用 <code>match</code> 处理 <code>Ok</code> 和 <code>Err</code>，如果失败则返回 <code>Err(e)</code>。</li>
+<li>如果 <code>File::open("a.txt")</code> 失败，则返回 <code>Err</code>。</li>
+<li>否则读取文件内容并返回 <code>String</code>。</li>
 </ul>
-<h3 id="2-使用-运算符简化错误处理"><a href="#2-使用-运算符简化错误处理" class="headerlink" title="2. 使用 ? 运算符简化错误处理"></a><strong>2. 使用 <code>?</code> 运算符简化错误处理</strong></h3><p><code>?</code> 可以自动传播错误，使代码更简洁。</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">read_file</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>File<span class="token punctuation">,</span> Error<span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span>?<span class="token punctuation">;</span>
-    <span class="token function">Ok</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>等价于：</strong></p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">read_file</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>File<span class="token punctuation">,</span> Error<span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">match</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">,</span>
-        <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">return</span> <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="3-Result-处理-read-to-string-示例"><a href="#3-Result-处理-read-to-string-示例" class="headerlink" title="3. Result 处理 read_to_string 示例"></a><strong>3. <code>Result</code> 处理 <code>read_to_string</code> 示例</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">:</span><span class="token punctuation">:</span>File<span class="token punctuation">;</span>
-<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>io<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token keyword">self</span><span class="token punctuation">,</span> Read<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fn</span> <span class="token function">read_username_from_file</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> io<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span>?<span class="token punctuation">;</span>
+<h3 id="3-2-使用-运算符优化传播错误"><a href="#3-2-使用-运算符优化传播错误" class="headerlink" title="3.2 使用 ? 运算符优化传播错误"></a><strong>3.2 使用 <code>?</code> 运算符优化传播错误</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">propagating_error_opmitize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> io<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"b.txt"</span><span class="token punctuation">)</span>?<span class="token punctuation">;</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     f<span class="token punctuation">.</span><span class="token function">read_to_string</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">)</span>?<span class="token punctuation">;</span>
     <span class="token function">Ok</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li><code>?</code> 使代码更简洁，自动传播错误。</li>
-<li>如果 <code>File::open</code> 或 <code>read_to_string</code> 失败，<code>?</code> 会将 <code>Err(e)</code> 直接返回。</li>
+<li><code>?</code> 语法简化了错误处理，自动传播 <code>Err(e)</code>。</li>
+</ul>
+<h3 id="3-3-进一步优化"><a href="#3-3-进一步优化" class="headerlink" title="3.3 进一步优化"></a><strong>3.3 进一步优化</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">propagating_error_opmitize_2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> io<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"b.txt"</span><span class="token punctuation">)</span>?<span class="token punctuation">.</span><span class="token function">read_to_string</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">)</span>?<span class="token punctuation">;</span>
+    <span class="token function">Ok</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>进一步减少了变量声明，使代码更简洁。</li>
+</ul>
+<h3 id="3-4-使用-fs-read-to-string-直接读取文件"><a href="#3-4-使用-fs-read-to-string-直接读取文件" class="headerlink" title="3.4 使用 fs::read_to_string 直接读取文件"></a><strong>3.4 使用 <code>fs::read_to_string</code> 直接读取文件</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">propagating_error_opmitize_3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> io<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">></span> <span class="token punctuation">{</span>
+    fs<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">read_to_string</span><span class="token punctuation">(</span><span class="token string">"a.txt"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><code>fs::read_to_string</code> 是最简洁的方式，直接返回 <code>Result&lt;String, io::Error&gt;</code>。</li>
 </ul>
 <hr>
-<h2 id="9-3-选择-panic-还是-Result？"><a href="#9-3-选择-panic-还是-Result？" class="headerlink" title="9.3 选择 panic! 还是 Result？"></a>9.3 选择 <code>panic!</code> 还是 <code>Result</code>？</h2><h3 id="1-什么时候使用-panic"><a href="#1-什么时候使用-panic" class="headerlink" title="1. 什么时候使用 panic!"></a><strong>1. 什么时候使用 <code>panic!</code></strong></h3><ul>
+<h2 id="4-选择-panic-还是-Result？"><a href="#4-选择-panic-还是-Result？" class="headerlink" title="4. 选择 panic! 还是 Result？"></a>4. 选择 <code>panic!</code> 还是 <code>Result</code>？</h2><h3 id="4-1-什么时候使用-panic"><a href="#4-1-什么时候使用-panic" class="headerlink" title="4.1 什么时候使用 panic!"></a><strong>4.1 什么时候使用 <code>panic!</code></strong></h3><ul>
 <li><strong>代码进入非法状态</strong>（如索引越界）。</li>
 <li><strong>程序无法继续运行</strong>，如关键数据丢失。</li>
 <li><strong>开发过程中暴露 bug</strong>（如 <code>unreachable!()</code> ）。</li>
 </ul>
-<h3 id="2-什么时候使用-Result-lt-T-E-gt"><a href="#2-什么时候使用-Result-lt-T-E-gt" class="headerlink" title="2. 什么时候使用 Result<T, E>"></a><strong>2. 什么时候使用 <code>Result&lt;T, E&gt;</code></strong></h3><ul>
+<h3 id="4-2-什么时候使用-Result-lt-T-E-gt"><a href="#4-2-什么时候使用-Result-lt-T-E-gt" class="headerlink" title="4.2 什么时候使用 Result<T, E>"></a><strong>4.2 什么时候使用 <code>Result&lt;T, E&gt;</code></strong></h3><ul>
 <li><strong>错误是可恢复的</strong>，如文件未找到、网络请求失败。</li>
 <li><strong>希望调用者决定如何处理错误</strong>。</li>
 <li><strong>构建健壮的 API</strong>，避免 <code>panic!</code> 影响整个程序。</li>
 </ul>
-<h3 id="3-expect-提供更明确的错误信息"><a href="#3-expect-提供更明确的错误信息" class="headerlink" title="3. expect() 提供更明确的错误信息"></a><strong>3. <code>expect()</code> 提供更明确的错误信息</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">:</span><span class="token punctuation">:</span>File<span class="token punctuation">;</span>
-
-<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<h3 id="4-3-expect-提供更明确的错误信息"><a href="#4-3-expect-提供更明确的错误信息" class="headerlink" title="4.3 expect() 提供更明确的错误信息"></a><strong>4.3 <code>expect()</code> 提供更明确的错误信息</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token string">"无法打开文件 hello.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><code>expect()</code> 与 <code>unwrap()</code> 类似，但 <code>expect()</code> 允许提供更具体的错误信息。</p>
-<h3 id="4-综述"><a href="#4-综述" class="headerlink" title="4. 综述"></a><strong>4. 综述</strong></h3><ul>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-4-综述"><a href="#4-4-综述" class="headerlink" title="4.4 综述"></a><strong>4.4 综述</strong></h3><ul>
 <li><code>panic!</code> 适用于 <strong>严重错误</strong>，代码无法继续执行。</li>
 <li><code>Result</code> 适用于 <strong>可恢复错误</strong>，让调用者决定处理方式。</li>
 <li><code>?</code> 语法简化了 <code>Result</code> 传播，使代码更简洁可读。</li>
@@ -522,9 +549,6 @@ note: run with <span class="token variable"><span class="token variable">`</span
 <hr>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><ul>
 <li><a href="https://rustwiki.org/zh-CN/book/ch09-00-error-handling.html">Rust 官方文档 - 错误处理</a></li>
-<li><a href="https://rustwiki.org/zh-CN/book/ch09-01-unrecoverable-errors-with-panic.html">不可恢复错误 (<code>panic!</code>)</a></li>
-<li><a href="https://rustwiki.org/zh-CN/book/ch09-02-recoverable-errors-with-result.html">可恢复错误 (<code>Result</code>)</a></li>
-<li><a href="https://rustwiki.org/zh-CN/book/ch09-03-to-panic-or-not-to-panic.html">选择 <code>panic!</code> 还是 <code>Result</code></a></li>
 </ul>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -597,26 +621,25 @@ note: run with <span class="token variable"><span class="token variable">`</span
                 <div class="article-badge left-badge text-color">
                     <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2025/02/22/rustji-he-lian-xi-ti/">
+                    <a href="/2025/02/24/rustzhong-de-fan-xing/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Rust集合练习题">
+                                <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Rust中的泛型">
                             
-                            <span class="card-title">Rust集合练习题</span>
+                            <span class="card-title">Rust中的泛型</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                 Rust 集合的练习题，涵盖了常见的数据结构如 Vec 和 HashMap 的应用，帮助加深对 Rust 的理解。
-1. 计算给定整数序列的平均数（mean）、中位数（mid）和众数（mode）以下是计算平均数、中位数和众数的代码实现：
-
+                                Rust 允许我们使用泛型Generics为函数签名或结构体等项创建定义，这样它们就可以用于多种不同的具体数据类型。让我们看看如何使用泛型定义函数、结构体、枚举和方法，然后我们将讨论泛型如何影响代码性能。
+在函数定义中使用泛型下面展示了两个
                             
                         </div>
                         <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-24
                         </span>
                             <span class="publish-author">
                                 
@@ -640,20 +663,21 @@ note: run with <span class="token variable"><span class="token variable">`</span
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2025/02/22/rustzhong-de-ha-xi-ying-she-hash-map-/">
+                    <a href="/2025/02/22/rustji-he-lian-xi-ti/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Rust中的哈希映射(Hash Map)">
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Rust集合练习题">
                             
-                            <span class="card-title">Rust中的哈希映射(Hash Map)</span>
+                            <span class="card-title">Rust集合练习题</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                哈希映射是一个存储键值对（key-value pairs）的集合。每个键是唯一的，通过键可以快速访问对应的值。Rust 提供了标准库中的 HashMap 类型来实现哈希映射。
-1. 导入 std::collections::HashMap在
+                                 Rust 集合的练习题，涵盖了常见的数据结构如 Vec 和 HashMap 的应用，帮助加深对 Rust 的理解。
+1. 计算给定整数序列的平均数（mean）、中位数（mid）和众数（mode）以下是计算平均数、中位数和众数的代码实现：
+
                             
                         </div>
                         <div class="publish-info">
@@ -824,7 +848,7 @@ note: run with <span class="token variable"><span class="token variable">`</span
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">174.7k</span>&nbsp;字
+                            class="white-color">182.7k</span>&nbsp;字
                 
                 
                 <script>
