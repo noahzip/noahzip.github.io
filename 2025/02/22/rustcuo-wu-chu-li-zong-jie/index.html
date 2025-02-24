@@ -4,18 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="整合切面、JSR、异常处理, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="1.切面编写
-1)导入切面场景
- ```xml  
-      org.springframework.boot
-      spring-boot-starter-aop
+    <meta name="keywords" content="Rust错误处理, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Rust 提供了两种主要的错误处理方式：
 
-  ```
+不可恢复错误（Unrecoverable Errors）：使用 panic! 宏。
+可恢复错误（Recoverable Errors）：使用 Result&amp;lt;T, E&amp;gt; 类型。
 
-2) 编写切面
-  1、标注@Aspect
-  2">
+错误处">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -24,7 +19,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>整合切面、JSR、异常处理 | 未见初墨</title>
+    <title>Rust错误处理 | 未见初墨</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -252,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">整合切面、JSR、异常处理</h1>
+                    <h1 class="description center-align post-title">Rust错误处理</h1>
                 </div>
             </div>
         </div>
@@ -381,8 +376,8 @@
                         <div class="post-cate">
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                                <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
-                                    总结
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                             
                         </div>
@@ -394,21 +389,21 @@
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2020-03-16
+                        2025-02-22
                     </div>
                 
 
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2020-03-16
+                        2025-02-22
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        856
+                        984
                     </div>
                 
 
@@ -425,108 +420,113 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-切面编写"><a href="#1-切面编写" class="headerlink" title="1.切面编写"></a>1.切面编写</h2><ul>
-<li><p>1)导入切面场景</p>
-<pre><code> ```xml</code></pre>  <dependency>
-      <groupid>org.springframework.boot</groupid>
-      <artifactid>spring-boot-starter-aop</artifactid>
-</dependency>
-  ```
-</li>
-<li><p>2) 编写切面<br></p>
-<p>  1、标注@Aspect<br></p>
-<p>  2、编写切入点表达式<br></p>
-<p>  3、使用通知：</p>
-<pre><code>  前置通知：方法执行之前触发
-  后置通知：方法执行之后触发
-  返回通知：方法正常返回之后触发
-  异常通知：方法出现异常触发
-  环绕通知：以上4合1</code></pre></li>
-<li><p>3) 执行流程</p>
-<pre><code>  正常执行：   前置通知==&gt;返回通知==&gt;后置通知
-  异常执行：   前置通知==&gt;异常通知==&gt;后置通知</code></pre></li>
+                <p>Rust 提供了两种主要的错误处理方式：</p>
+<ol>
+<li><strong>不可恢复错误（Unrecoverable Errors）</strong>：使用 <code>panic!</code> 宏。</li>
+<li><strong>可恢复错误（Recoverable Errors）</strong>：使用 <code>Result&lt;T, E&gt;</code> 类型。</li>
+</ol>
+<p>错误处理在 Rust 中至关重要，既可以提升代码的健壮性，又能提高可读性和维护性。本章将详细介绍 Rust 的错误处理机制，并给出相应的示例。</p>
+<hr>
+<h2 id="9-1-不可恢复错误-panic"><a href="#9-1-不可恢复错误-panic" class="headerlink" title="9.1 不可恢复错误 (panic!)"></a>9.1 不可恢复错误 (<code>panic!</code>)</h2><p>当程序遇到严重错误无法继续运行时，Rust 提供 <code>panic!</code> 宏来立即终止程序，并打印错误消息和回溯信息。</p>
+<h3 id="1-panic-的基本使用"><a href="#1-panic-的基本使用" class="headerlink" title="1. panic! 的基本使用"></a><strong>1. <code>panic!</code> 的基本使用</strong></h3><p><code>panic!</code> 会导致程序崩溃，并输出错误信息。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">panic!</span><span class="token punctuation">(</span><span class="token string">"发生了一个不可恢复的错误！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行该程序时，输出类似：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">thread <span class="token string">'main'</span> panicked at <span class="token string">'发生了一个不可恢复的错误！'</span>, src/main.rs:2:5
+note: run with <span class="token variable"><span class="token variable">`</span>RUST_BACKTRACE<span class="token operator">=</span>1<span class="token variable">`</span></span> environment variable to display a backtrace<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="2-数组索引越界导致-panic"><a href="#2-数组索引越界导致-panic" class="headerlink" title="2. 数组索引越界导致 panic!"></a><strong>2. 数组索引越界导致 <code>panic!</code></strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> v <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> v<span class="token punctuation">[</span><span class="token number">99</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 数组索引越界，触发 panic</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行该程序时，输出类似：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">thread <span class="token string">'main'</span> panicked at src\main.rs:2:21:
+index out of bounds: the len is 3 but the index is 99
+note: run with <span class="token variable"><span class="token variable">`</span>RUST_BACKTRACE<span class="token operator">=</span>1<span class="token variable">`</span></span> environment variable to display a backtrace<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这类 <code>panic!</code> 发生在运行时，主要是由于数组访问越界、空指针解引用等原因。</p>
+<h3 id="3-使用-RUST-BACKTRACE-获取回溯信息"><a href="#3-使用-RUST-BACKTRACE-获取回溯信息" class="headerlink" title="3. 使用 RUST_BACKTRACE 获取回溯信息"></a><strong>3. 使用 <code>RUST_BACKTRACE</code> 获取回溯信息</strong></h3><p>可以使用环境变量 <code>RUST_BACKTRACE=1</code> 来查看 <code>panic!</code> 的详细回溯信息。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">RUST_BACKTRACE=1 cargo run<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="4-panic-的典型应用场景"><a href="#4-panic-的典型应用场景" class="headerlink" title="4. panic! 的典型应用场景"></a><strong>4. <code>panic!</code> 的典型应用场景</strong></h3><ul>
+<li><strong>代码进入非法状态</strong>（如数组索引超出范围）。</li>
+<li><strong>不希望程序继续运行</strong>，如关键文件缺失、系统错误等。</li>
+<li><strong>用于开发调试</strong>，以便尽早发现错误（如 <code>unreachable!()</code> ）。</li>
 </ul>
-<h2 id="2-编写异常处理器"><a href="#2-编写异常处理器" class="headerlink" title="2.编写异常处理器"></a>2.编写异常处理器</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
- * 统一处理异常信息
- */</span>
-<span class="token annotation punctuation">@Slf4j</span>
-<span class="token annotation punctuation">@RestControllerAdvice</span> <span class="token comment" spellcheck="true">//当前类是一个异常处理类 并返回json数据</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GlobalExceptionHandler</span> <span class="token punctuation">{</span>
+<hr>
+<h2 id="9-2-可恢复错误-Result-lt-T-E-gt"><a href="#9-2-可恢复错误-Result-lt-T-E-gt" class="headerlink" title="9.2 可恢复错误 (Result<T, E>)"></a>9.2 可恢复错误 (<code>Result&lt;T, E&gt;</code>)</h2><p>对于可以处理的错误，Rust 提供了 <code>Result&lt;T, E&gt;</code> 枚举：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">enum</span> Result<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> E<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token function">Ok</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 成功，返回 T</span>
+    <span class="token function">Err</span><span class="token punctuation">(</span>E<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 失败，返回错误信息 E</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="1-使用-match-处理-Result"><a href="#1-使用-match-处理-Result" class="headerlink" title="1. 使用 match 处理 Result"></a><strong>1. 使用 <code>match</code> 处理 <code>Result</code></strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">:</span><span class="token punctuation">:</span>File<span class="token punctuation">;</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>io<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token punctuation">;</span>
 
-    <span class="token comment" spellcheck="true">/**
-     * 处理数学异常
-     * @param exception
-     * @return
-     */</span>
-    <span class="token annotation punctuation">@ExceptionHandler</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token punctuation">{</span>ArithmeticException<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> Object <span class="token function">handlerArithmeticException</span><span class="token punctuation">(</span>Exception exception<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"系统全局异常感知，信息：{}"</span><span class="token punctuation">,</span>exception<span class="token punctuation">.</span><span class="token function">getStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">CommonResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">validateFailed</span><span class="token punctuation">(</span><span class="token string">"数学计算出现错误！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">fn</span> <span class="token function">read_file</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>File<span class="token punctuation">,</span> Error<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">match</span> f <span class="token punctuation">{</span>
+        <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">/**
-     * 处理空指针异常
-     * @param exception
-     * @return
-     */</span>
-    <span class="token annotation punctuation">@ExceptionHandler</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token punctuation">{</span>NullPointerException<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> Object <span class="token function">handlerNullPointerException</span><span class="token punctuation">(</span>Exception exception<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"系统全局异常感知，信息：{}"</span><span class="token punctuation">,</span>exception<span class="token punctuation">.</span><span class="token function">getStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">CommonResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">validateFailed</span><span class="token punctuation">(</span><span class="token string">"空指针了！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>解析：</strong></p>
+<ul>
+<li><code>File::open("hello.txt")</code> 可能成功，也可能失败。</li>
+<li>使用 <code>match</code> 处理 <code>Ok</code> 和 <code>Err</code>，如果失败则返回 <code>Err(e)</code>。</li>
+</ul>
+<h3 id="2-使用-运算符简化错误处理"><a href="#2-使用-运算符简化错误处理" class="headerlink" title="2. 使用 ? 运算符简化错误处理"></a><strong>2. 使用 <code>?</code> 运算符简化错误处理</strong></h3><p><code>?</code> 可以自动传播错误，使代码更简洁。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">read_file</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>File<span class="token punctuation">,</span> Error<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span>?<span class="token punctuation">;</span>
+    <span class="token function">Ok</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>等价于：</strong></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">read_file</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>File<span class="token punctuation">,</span> Error<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">match</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">Ok</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">return</span> <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="3-整合JSR303和异常处理器-切记务必抛出异常"><a href="#3-整合JSR303和异常处理器-切记务必抛出异常" class="headerlink" title="3.整合JSR303和异常处理器 切记务必抛出异常"></a>3.整合JSR303和异常处理器 切记<strong>务必抛出异常</strong></h2><pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Aspect</span> <span class="token comment" spellcheck="true">//标注切面类</span>
-<span class="token annotation punctuation">@Component</span> 
-<span class="token annotation punctuation">@Slf4j</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DataVaildAspect</span> <span class="token punctuation">{</span>
-                <span class="token comment" spellcheck="true">//com.saber.gmall.admin下任意修饰符任意类的任意参数的任意方法</span>
-    <span class="token annotation punctuation">@Around</span><span class="token punctuation">(</span><span class="token string">"execution(* com.saber.gmall.admin..*Controller.*(..))"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> Object <span class="token function">vaildAround</span><span class="token punctuation">(</span>ProceedingJoinPoint point<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-Result-处理-read-to-string-示例"><a href="#3-Result-处理-read-to-string-示例" class="headerlink" title="3. Result 处理 read_to_string 示例"></a><strong>3. <code>Result</code> 处理 <code>read_to_string</code> 示例</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">:</span><span class="token punctuation">:</span>File<span class="token punctuation">;</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>io<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token keyword">self</span><span class="token punctuation">,</span> Read<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-        log<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"校验切面介入工作。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        log<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"JSR303校验开始。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//方法返回的结果</span>
-        Object proceed <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            Object<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token operator">=</span> point<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span>Object arg <span class="token operator">:</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>arg <span class="token keyword">instanceof</span> <span class="token class-name">BindingResult</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//判断是否包含BandingResult</span>
-                    BindingResult r <span class="token operator">=</span> <span class="token punctuation">(</span>BindingResult<span class="token punctuation">)</span> arg<span class="token punctuation">;</span>
-                    <span class="token keyword">int</span> errorCount <span class="token operator">=</span> r<span class="token punctuation">.</span><span class="token function">getErrorCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//取得BandingResult的错误条数</span>
-                    <span class="token keyword">if</span><span class="token punctuation">(</span>errorCount<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                        log<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"JSR303校验失败。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">CommonResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">validateFailed</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-            log<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"JSR303校验成功。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//System.out.println("前置通知");</span>
-            <span class="token comment" spellcheck="true">//相等于反射的 method.invoke()</span>
-            proceed <span class="token operator">=</span> point<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span>point<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            log<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"校验切面放行目标方法。。。{}"</span><span class="token punctuation">,</span>proceed<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//System.out.println("返回通知");</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> throwable<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">//System.out.println("异常通知");</span>
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>throwable<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//一定要抛出异常 否则不会进入异常处理类</span>
-        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">//System.out.println("后置通知");</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> proceed<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<span class="token keyword">fn</span> <span class="token function">read_username_from_file</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> io<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span>?<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    f<span class="token punctuation">.</span><span class="token function">read_to_string</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">)</span>?<span class="token punctuation">;</span>
+    <span class="token function">Ok</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><code>?</code> 使代码更简洁，自动传播错误。</li>
+<li>如果 <code>File::open</code> 或 <code>read_to_string</code> 失败，<code>?</code> 会将 <code>Err(e)</code> 直接返回。</li>
+</ul>
+<hr>
+<h2 id="9-3-选择-panic-还是-Result？"><a href="#9-3-选择-panic-还是-Result？" class="headerlink" title="9.3 选择 panic! 还是 Result？"></a>9.3 选择 <code>panic!</code> 还是 <code>Result</code>？</h2><h3 id="1-什么时候使用-panic"><a href="#1-什么时候使用-panic" class="headerlink" title="1. 什么时候使用 panic!"></a><strong>1. 什么时候使用 <code>panic!</code></strong></h3><ul>
+<li><strong>代码进入非法状态</strong>（如索引越界）。</li>
+<li><strong>程序无法继续运行</strong>，如关键数据丢失。</li>
+<li><strong>开发过程中暴露 bug</strong>（如 <code>unreachable!()</code> ）。</li>
+</ul>
+<h3 id="2-什么时候使用-Result-lt-T-E-gt"><a href="#2-什么时候使用-Result-lt-T-E-gt" class="headerlink" title="2. 什么时候使用 Result<T, E>"></a><strong>2. 什么时候使用 <code>Result&lt;T, E&gt;</code></strong></h3><ul>
+<li><strong>错误是可恢复的</strong>，如文件未找到、网络请求失败。</li>
+<li><strong>希望调用者决定如何处理错误</strong>。</li>
+<li><strong>构建健壮的 API</strong>，避免 <code>panic!</code> 影响整个程序。</li>
+</ul>
+<h3 id="3-expect-提供更明确的错误信息"><a href="#3-expect-提供更明确的错误信息" class="headerlink" title="3. expect() 提供更明确的错误信息"></a><strong>3. <code>expect()</code> 提供更明确的错误信息</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">:</span><span class="token punctuation">:</span>File<span class="token punctuation">;</span>
 
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//在controller里制造除0异常</span>
-<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">/</span><span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h3><pre><code>2020-03-16 19:42:07.024 DEBUG 16040 --- [nio-8081-exec-5] c.saber.gmall.admin.aop.DataVaildAspect  : 校验切面介入工作。。。
-2020-03-16 19:42:07.024 DEBUG 16040 --- [nio-8081-exec-5] c.saber.gmall.admin.aop.DataVaildAspect  : JSR303校验开始。。。
-2020-03-16 19:42:07.024 DEBUG 16040 --- [nio-8081-exec-5] c.saber.gmall.admin.aop.DataVaildAspect  : JSR303校验成功。。。
-2020-03-16 19:42:07.024 DEBUG 16040 --- [nio-8081-exec-5] c.s.g.a.u.controller.UmsAdminController  : 需要注册的用户详情：UmsAdminParam(username=saber, password=saber, icon=string, email=string@qq.com, nickName=null, note=string)
-2020-03-16 19:42:07.025 DEBUG 16040 --- [nio-8081-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.saber.gmall.admin.aop.GlobalExceptionHandler# handlerArithmeticException(Exception)
-2020-03-16 19:42:07.025 ERROR 16040 --- [nio-8081-exec-5] c.s.g.admin.aop.GlobalExceptionHandler   : 系统全局异常感知，信息：com.saber.gmall.admin.aop.DataVaildAspect.vaildAround(DataVaildAspect.java:68)
-2020-03-16 19:42:07.025 DEBUG 16040 --- [nio-8081-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-2020-03-16 19:42:07.025 DEBUG 16040 --- [nio-8081-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Writing [{"code":404,"message":"数学计算出现错误！"}]
-2020-03-16 19:42:07.026 DEBUG 16040 --- [nio-8081-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.RuntimeException: java.lang.ArithmeticException: / by zero]
-2020-03-16 19:42:07.026 DEBUG 16040 --- [nio-8081-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK</code></pre><script>
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> f <span class="token operator">=</span> File<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"hello.txt"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token string">"无法打开文件 hello.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>expect()</code> 与 <code>unwrap()</code> 类似，但 <code>expect()</code> 允许提供更具体的错误信息。</p>
+<h3 id="4-综述"><a href="#4-综述" class="headerlink" title="4. 综述"></a><strong>4. 综述</strong></h3><ul>
+<li><code>panic!</code> 适用于 <strong>严重错误</strong>，代码无法继续执行。</li>
+<li><code>Result</code> 适用于 <strong>可恢复错误</strong>，让调用者决定处理方式。</li>
+<li><code>?</code> 语法简化了 <code>Result</code> 传播，使代码更简洁可读。</li>
+</ul>
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><ul>
+<li><a href="https://rustwiki.org/zh-CN/book/ch09-00-error-handling.html">Rust 官方文档 - 错误处理</a></li>
+<li><a href="https://rustwiki.org/zh-CN/book/ch09-01-unrecoverable-errors-with-panic.html">不可恢复错误 (<code>panic!</code>)</a></li>
+<li><a href="https://rustwiki.org/zh-CN/book/ch09-02-recoverable-errors-with-result.html">可恢复错误 (<code>Result</code>)</a></li>
+<li><a href="https://rustwiki.org/zh-CN/book/ch09-03-to-panic-or-not-to-panic.html">选择 <code>panic!</code> 还是 <code>Result</code></a></li>
+</ul>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -597,34 +597,33 @@
                 <div class="article-badge left-badge text-color">
                     <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2020/03/17/feng-zhuang-san-ji-cai-dan/">
+                    <a href="/2025/02/22/rustji-he-lian-xi-ti/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/24.png" class="responsive-img" alt="封装三级菜单">
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Rust集合练习题">
                             
-                            <span class="card-title">封装三级菜单</span>
+                            <span class="card-title">Rust集合练习题</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                适用于浅层级菜单，优点在于只需查询一次数据库。实体类（也是最基本的底层分类菜单）@Data
-public class PmsProductCategory implements Serializable {
+                                 Rust 集合的练习题，涵盖了常见的数据结构如 Vec 和 HashMap 的应用，帮助加深对 Rust 的理解。
+1. 计算给定整数序列的平均数（mean）、中位数（mid）和众数（mode）以下是计算平均数、中位数和众数的代码实现：
 
-    private sta
                             
                         </div>
                         <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-17
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                         </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
-                                    经验&bug
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
@@ -641,33 +640,32 @@ public class PmsProductCategory implements Serializable {
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2020/03/16/jsr303/">
+                    <a href="/2025/02/22/rustzhong-de-ha-xi-ying-she-hash-map-/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="JSR303">
+                                <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Rust中的哈希映射(Hash Map)">
                             
-                            <span class="card-title">JSR303</span>
+                            <span class="card-title">Rust中的哈希映射(Hash Map)</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                SpringMVC支持使用 【JSR303】 方式进行校验springboot默认导第三方的校验框架hibernate-validator使用JSR303的三大步：
-1、给需要校验数据的javaBean上标注校验注解：能使用的校验注解:
-1
+                                哈希映射是一个存储键值对（key-value pairs）的集合。每个键是唯一的，通过键可以快速访问对应的值。Rust 提供了标准库中的 HashMap 类型来实现哈希映射。
+1. 导入 std::collections::HashMap在
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-16
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/%E7%BB%8F%E9%AA%8C-bug/" class="post-category">
-                                    经验&bug
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
