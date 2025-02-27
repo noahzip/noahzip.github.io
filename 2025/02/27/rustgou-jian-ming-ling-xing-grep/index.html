@@ -7,9 +7,8 @@
     <meta name="keywords" content="Rust构建命令行grep, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
     <meta name="description" content="创建一个命令行工具，能够读取指定文件并搜索用户输入的字符串。我们将结合文件I/O、命令行参数、错误处理、环境变量等知识，实现一个高效、健壮的命令行工具。
 代码实现lib.rs 代码
-// lib.rs
 use std::fs;
-use st">
+use std::error::">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -402,14 +401,14 @@ use st">
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        855
+                        1.2k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        5 分
                     </div>
                 
 
@@ -421,74 +420,144 @@ use st">
             <div id="articleContent">
                 <p>创建一个命令行工具，能够读取指定文件并搜索用户输入的字符串。我们将结合文件I/O、命令行参数、错误处理、环境变量等知识，实现一个高效、健壮的命令行工具。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p><code>lib.rs</code> 代码</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// lib.rs</span>
-<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">;</span>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">;</span>
 <span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>error<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token punctuation">;</span>
 <span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>env<span class="token punctuation">;</span>
 
-<span class="token comment" spellcheck="true">// 配置结构体，用于存储程序的配置参数</span>
+<span class="token comment" spellcheck="true">// Config 结构体存储了程序需要的配置信息</span>
 <span class="token keyword">pub</span> <span class="token keyword">struct</span> Config <span class="token punctuation">{</span>
-    <span class="token keyword">pub</span> search_str<span class="token punctuation">:</span> String<span class="token punctuation">,</span>      <span class="token comment" spellcheck="true">// 搜索的字符串</span>
-    <span class="token keyword">pub</span> file_name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>       <span class="token comment" spellcheck="true">// 目标文件名</span>
-    <span class="token keyword">pub</span> case_insensitive<span class="token punctuation">:</span> bool<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 是否进行不区分大小写的搜索</span>
+    <span class="token keyword">pub</span> search_str<span class="token punctuation">:</span> String<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 搜索的字符串</span>
+    <span class="token keyword">pub</span> file_name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">// 要搜索的文件名</span>
+    <span class="token keyword">pub</span> case_insensitive<span class="token punctuation">:</span> bool<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 是否忽略大小写</span>
 <span class="token punctuation">}</span>
 
+<span class="token comment" spellcheck="true">// Config 的实现部分</span>
 <span class="token keyword">impl</span> Config <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 新建一个 Config 对象，解析命令行参数</span>
-    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> <span class="token operator">&amp;</span>Vec<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>Config<span class="token punctuation">,</span> <span class="token operator">&amp;</span>'<span class="token keyword">static</span> str<span class="token operator">></span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> config<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">3</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token function">Err</span><span class="token punctuation">(</span><span class="token string">"Not enough arguments"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 检查参数的合法性，确保用户输入了文件名和搜索字符串。</span>
-        <span class="token punctuation">}</span>
-        <span class="token comment" spellcheck="true">// 从命令行参数中获取搜索字符串和文件名，并设置大小写不敏感标志</span>
+    <span class="token comment" spellcheck="true">// 创建一个新的 Config 实例，从命令行参数中获取配置</span>
+    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span><span class="token keyword">mut</span> args<span class="token punctuation">:</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>env<span class="token punctuation">:</span><span class="token punctuation">:</span>Args<span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>Config<span class="token punctuation">,</span> <span class="token operator">&amp;</span>'<span class="token keyword">static</span> str<span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 跳过第一个参数，即程序的路径</span>
+        args<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 获取搜索字符串，如果没有提供，返回错误</span>
+        <span class="token keyword">let</span> _search_str <span class="token operator">=</span> <span class="token keyword">match</span> args<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Some</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> arg<span class="token punctuation">,</span>
+            None <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">return</span> <span class="token function">Err</span><span class="token punctuation">(</span><span class="token string">"Don't get a search string"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 没有提供搜索字符串</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 获取文件名，如果没有提供，返回错误</span>
+        <span class="token keyword">let</span> _file_name <span class="token operator">=</span> <span class="token keyword">match</span> args<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Some</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> arg<span class="token punctuation">,</span>
+            None <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">return</span> <span class="token function">Err</span><span class="token punctuation">(</span><span class="token string">"Don't get a file name"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 没有提供文件名</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 创建 Config 实例，并读取环境变量 "RIPGREP_CASE_INSENSITIVE" 判断是否忽略大小写</span>
         <span class="token function">Ok</span><span class="token punctuation">(</span>Config <span class="token punctuation">{</span>
-            search_str<span class="token punctuation">:</span> config<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            file_name<span class="token punctuation">:</span> config<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            case_insensitive<span class="token punctuation">:</span> env<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">var</span><span class="token punctuation">(</span><span class="token string">"RIPGREP_CASE_INSENSITIVE"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap_or_default</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 环境变量控制大小写敏感</span>
+            search_str<span class="token punctuation">:</span> _search_str<span class="token punctuation">,</span>
+            file_name<span class="token punctuation">:</span> _file_name<span class="token punctuation">,</span>
+            case_insensitive<span class="token punctuation">:</span> env<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">var</span><span class="token punctuation">(</span><span class="token string">"RIPGREP_CASE_INSENSITIVE"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">unwrap_or_default</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 如果环境变量存在并且等于 "1"，则设置为 true</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment" spellcheck="true">// 运行程序，执行文件读取与搜索操作</span>
+<span class="token comment" spellcheck="true">// 运行程序，执行文件内容的搜索操作</span>
 <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">run</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> Config<span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Box<span class="token operator">&lt;</span>dyn Error<span class="token operator">>></span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> content <span class="token operator">=</span> fs<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">read_to_string</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>config<span class="token punctuation">.</span>file_name<span class="token punctuation">)</span>?<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 读取文件内容</span>
+    <span class="token comment" spellcheck="true">// 读取文件内容</span>
+    <span class="token keyword">let</span> content <span class="token operator">=</span> fs<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">read_to_string</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>config<span class="token punctuation">.</span>file_name<span class="token punctuation">)</span>?<span class="token punctuation">;</span>
     <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token keyword">if</span> config<span class="token punctuation">.</span>case_insensitive <span class="token punctuation">{</span>
         <span class="token function">search_case_insensitive</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>search_str<span class="token punctuation">,</span> <span class="token operator">&amp;</span>content<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 不区分大小写的搜索</span>
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
         <span class="token function">search</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>search_str<span class="token punctuation">,</span> <span class="token operator">&amp;</span>content<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 区分大小写的搜索</span>
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
+    <span class="token comment" spellcheck="true">// 打印搜索结果</span>
     <span class="token keyword">for</span> line <span class="token keyword">in</span> result <span class="token punctuation">{</span>
-        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> line<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 输出匹配的行</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> line<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
+
     <span class="token function">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment" spellcheck="true">// 大小写敏感搜索函数</span>
+<span class="token comment" spellcheck="true">// 区分大小写的搜索函数，返回匹配行的引用</span>
 <span class="token keyword">pub</span> <span class="token keyword">fn</span> search<span class="token operator">&lt;</span><span class="token string">'a>(search_str: String, content: &amp;'</span>a String<span class="token punctuation">)</span> <span class="token punctuation">-></span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> result<span class="token punctuation">:</span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token operator">=</span> Vec<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> line <span class="token keyword">in</span> content<span class="token punctuation">.</span><span class="token function">lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> line<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>search_str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 如果找到匹配的行，添加到结果中</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    result
+    <span class="token comment" spellcheck="true">// 使用迭代器和闭包优化搜索操作</span>
+    content
+        <span class="token punctuation">.</span><span class="token function">lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 将内容按行分割</span>
+        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token operator">|</span>line<span class="token operator">|</span> line<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>search_str<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 过滤出包含搜索字符串的行</span>
+        <span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 收集结果并返回</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment" spellcheck="true">// 大小写不敏感搜索函数</span>
-<span class="token keyword">pub</span> <span class="token keyword">fn</span> search_case_insensitive<span class="token operator">&lt;</span><span class="token string">'a>(search_str: String, content: &amp;'</span>a String<span class="token punctuation">)</span> <span class="token punctuation">-></span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> result<span class="token punctuation">:</span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token operator">=</span> Vec<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> line <span class="token keyword">in</span> content<span class="token punctuation">.</span><span class="token function">lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> line<span class="token punctuation">.</span><span class="token function">to_lowercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>search_str<span class="token punctuation">.</span><span class="token function">to_lowercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 转为小写后进行匹配</span>
-        <span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 不区分大小写的搜索函数，返回匹配行的引用</span>
+<span class="token keyword">pub</span> <span class="token keyword">fn</span> search_case_insensitive<span class="token operator">&lt;</span><span class="token string">'a>(search_str: String, content: &amp;'</span>a str<span class="token punctuation">)</span> <span class="token punctuation">-></span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token punctuation">{</span>
+    content
+        <span class="token punctuation">.</span><span class="token function">lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token operator">|</span>line<span class="token operator">|</span> line<span class="token punctuation">.</span><span class="token function">to_lowercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>search_str<span class="token punctuation">.</span><span class="token function">to_lowercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 不区分大小写的过滤</span>
+        <span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 测试模块</span>
+<span class="token attribute attr-name">#[cfg(test)]</span>
+<span class="token keyword">mod</span> tests <span class="token punctuation">{</span>
+    <span class="token keyword">use</span> <span class="token keyword">super</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">*</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 导入外部模块</span>
+
+    <span class="token comment" spellcheck="true">// 测试区分大小写的搜索函数</span>
+    <span class="token attribute attr-name">#[test]</span>
+    <span class="token keyword">fn</span> <span class="token function">test_search</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> search_str <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"safe"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 设置搜索字符串</span>
+        <span class="token keyword">let</span> content <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span>"\
+Rust<span class="token punctuation">:</span>
+safe<span class="token punctuation">,</span> fast<span class="token punctuation">,</span> productive<span class="token punctuation">.</span>
+Pick three<span class="token punctuation">.</span>"<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 设置测试内容</span>
+
+        <span class="token comment" spellcheck="true">// 调用 search 函数并验证返回值</span>
+        <span class="token function">assert_eq!</span><span class="token punctuation">(</span><span class="token function">vec!</span><span class="token punctuation">[</span><span class="token string">"safe, fast, productive."</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function">search</span><span class="token punctuation">(</span>search_str<span class="token punctuation">,</span> <span class="token operator">&amp;</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    result
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    <span class="token comment" spellcheck="true">// 测试不区分大小写的搜索函数</span>
+    <span class="token attribute attr-name">#[test]</span>
+    <span class="token keyword">fn</span> <span class="token function">test_search_case_insensitive</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> search_str <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"rUst"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 设置搜索字符串</span>
+        <span class="token keyword">let</span> content <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span>"\
+Rust<span class="token punctuation">:</span>
+safe<span class="token punctuation">,</span> fast<span class="token punctuation">,</span> productive<span class="token punctuation">.</span>
+Pick three<span class="token punctuation">.</span>"<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 设置测试内容</span>
+
+        <span class="token comment" spellcheck="true">// 调用 search_case_insensitive 函数并验证返回值</span>
+        <span class="token function">assert_eq!</span><span class="token punctuation">(</span><span class="token function">vec!</span><span class="token punctuation">[</span><span class="token string">"Rust:"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function">search_case_insensitive</span><span class="token punctuation">(</span>search_str<span class="token punctuation">,</span> <span class="token operator">&amp;</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li><strong><code>Config</code> 结构体</strong>：用于存储命令行参数和配置，支持搜索字符串、文件名和大小写不敏感标志。</li>
-<li><strong><code>Config::new</code></strong>：从命令行参数创建配置，解析文件名、搜索字符串，并通过环境变量控制是否进行大小写不敏感的搜索。</li>
-<li><strong><code>run</code> 函数</strong>：读取文件内容，并根据配置选择合适的搜索函数（大小写敏感或不敏感）。</li>
-<li><strong><code>search</code> 和 <code>search_case_insensitive</code></strong>：分别实现大小写敏感和不敏感的字符串搜索，返回匹配行的引用。</li>
+<li><p><strong>Config 结构体</strong>：</p>
+<ul>
+<li>用于存储程序的配置，包括搜索的字符串、文件名和是否忽略大小写的标志。</li>
+</ul>
+<p><strong>Config::new 方法</strong>：</p>
+<ul>
+<li>从命令行参数中读取配置，并返回一个 <code>Config</code> 实例。</li>
+<li>如果没有提供必要的命令行参数，会返回错误。</li>
+<li><code>RIPGREP_CASE_INSENSITIVE</code> 环境变量用于决定是否进行不区分大小写的搜索。</li>
+</ul>
+<p><strong>run 函数</strong>：</p>
+<ul>
+<li>读取指定文件的内容并进行搜索。</li>
+<li>根据 <code>case_insensitive</code> 字段的值选择执行区分大小写或不区分大小写的搜索。</li>
+</ul>
+<p><strong>search 函数</strong>：</p>
+<ul>
+<li>该函数接受搜索字符串和文件内容，并返回一个包含匹配行的向量。</li>
+<li>使用 <code>lines</code> 方法将内容按行拆分，然后通过 <code>filter</code> 过滤出包含搜索字符串的行。</li>
+</ul>
+<p><strong>search_case_insensitive 函数</strong>：</p>
+<ul>
+<li>该函数与 <code>search</code> 类似，但会将搜索字符串和文件内容都转换为小写，以实现不区分大小写的搜索。</li>
+</ul>
+<p><strong>测试模块</strong>：</p>
+<ul>
+<li>使用 <code>#[cfg(test)]</code> 标记模块，表示它是测试代码。</li>
+<li>包含两个测试函数：<code>test_search</code> 和 <code>test_search_case_insensitive</code>，分别用于测试区分大小写和不区分大小写的搜索功能。</li>
+</ul>
+</li>
 </ul>
 <p><code>main.rs</code> 代码</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// main.rs</span>
@@ -497,28 +566,26 @@ use st">
 <span class="token keyword">use</span> ripgrep<span class="token punctuation">:</span><span class="token punctuation">:</span>Config<span class="token punctuation">;</span>
 
 <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> args<span class="token punctuation">:</span> Vec<span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token operator">=</span> env<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 获取命令行参数</span>
-    <span class="token keyword">let</span> config<span class="token punctuation">:</span> Config <span class="token operator">=</span> Config<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>args<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap_or_else</span><span class="token punctuation">(</span><span class="token closure-params"><span class="token punctuation">|</span>err<span class="token punctuation">|</span></span> <span class="token punctuation">{</span>
-        <span class="token function">eprintln!</span><span class="token punctuation">(</span><span class="token string">"Problem parsing config: {}"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        process<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 如果解析失败，打印错误并退出</span>
+    <span class="token keyword">let</span> config<span class="token punctuation">:</span>Config <span class="token operator">=</span> Config<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>env<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap_or_else</span><span class="token punctuation">(</span><span class="token closure-params"><span class="token punctuation">|</span>err<span class="token punctuation">|</span></span><span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Problem parsing config: {}"</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        process<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"search_str is: {}"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>config<span class="token punctuation">.</span>search_str<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 打印搜索字符串</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"file_name is: {}"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>config<span class="token punctuation">.</span>file_name<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 打印文件名</span>
 
     <span class="token keyword">if</span> <span class="token keyword">let</span> <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span> ripgrep<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">run</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">eprintln!</span><span class="token punctuation">(</span><span class="token string">"Application Error: {}"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 运行时错误处理</span>
+        <span class="token function">eprintln!</span><span class="token punctuation">(</span><span class="token string">"Application Error: {}"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>  
         process<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 错误时退出</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><strong>命令行参数</strong>：通过 <code>env::args()</code> 获取命令行输入的参数。</li>
 <li><strong>错误处理</strong>：通过 <code>unwrap_or_else</code> 来处理配置解析中的错误，若出现错误则输出提示并退出程序。</li>
 <li><strong>运行搜索</strong>：调用 <code>ripgrep::run()</code> 执行文件搜索任务。</li>
 </ul>
-<pre><code>http://localhost:4000/medias/featureimages/24.jpg
-http://localhost:4000/medias/featureimages/24.png</code></pre><script>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -817,7 +884,7 @@ http://localhost:4000/medias/featureimages/24.png</code></pre><script>
             
                 
                     &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">192.8k</span>&nbsp;字
+                            class="white-color">195k</span>&nbsp;字
                 
                 
                 <script>
