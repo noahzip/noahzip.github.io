@@ -4,11 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="阿里云文件上传, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="导入依赖&amp;lt;!-- 阿里云OSS --&gt;
-&amp;lt;dependency&gt;
-   &amp;lt;groupId&gt;com.aliyun.oss&amp;lt;/groupId&gt;
-   &amp;lt;artifactId&gt;aliyun-sdk-oss&amp;lt;/a">
+    <meta name="keywords" content="Rust构建命令行grep, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="创建一个命令行工具，能够读取指定文件并搜索用户输入的字符串。我们将结合文件I/O、命令行参数、错误处理、环境变量等知识，实现一个高效、健壮的命令行工具。
+代码实现lib.rs 代码
+// lib.rs
+use std::fs;
+use st">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>阿里云文件上传 | 未见初墨</title>
+    <title>Rust构建命令行grep | 未见初墨</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -245,12 +246,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">阿里云文件上传</h1>
+                    <h1 class="description center-align post-title">Rust构建命令行grep</h1>
                 </div>
             </div>
         </div>
@@ -374,8 +375,8 @@
                         <div class="post-cate">
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                                <a href="/categories/Java/" class="post-category">
-                                    Java
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                             
                         </div>
@@ -387,28 +388,28 @@
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2020-03-18
+                        2025-02-27
                     </div>
                 
 
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2020-03-18
+                        2025-02-27
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        510
+                        841
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        3 分
                     </div>
                 
 
@@ -418,109 +419,105 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h2><pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- 阿里云OSS --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun.oss<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-sdk-oss<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.5.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="配置阿里云"><a href="#配置阿里云" class="headerlink" title="配置阿里云"></a>配置阿里云</h2><pre class="line-numbers language-properties"><code class="language-properties"><span class="token attr-name">aliyun.oss.endpoint</span><span class="token punctuation">=</span><span class="token attr-value">oss-cn-beijing.aliyuncs.com</span>
-<span class="token attr-name">aliyun.oss.accessKeyId</span><span class="token punctuation">=</span><span class="token attr-value">xxxxxxxxx</span>
-<span class="token attr-name">aliyun.oss.accessKeySecret</span><span class="token punctuation">=</span><span class="token attr-value">xxxxxxxxx</span>
-<span class="token attr-name">aliyun.oss.bucketName</span><span class="token punctuation">=</span><span class="token attr-value">xxxxxxxxx</span>
-<span class="token attr-name">aliyun.oss.policy.expire</span><span class="token punctuation">=</span><span class="token attr-value">300</span>
-<span class="token attr-name">aliyun.oss.maxSize</span><span class="token punctuation">=</span><span class="token attr-value">10</span>
-<span class="token attr-name">aliyun.oss.dir.prefix</span><span class="token punctuation">=</span><span class="token attr-value">gmall/images/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="阿里云esc控制台开启跨域支持"><a href="#阿里云esc控制台开启跨域支持" class="headerlink" title="阿里云esc控制台开启跨域支持"></a>阿里云esc控制台开启跨域支持</h2><h2 id="前端点击文件上传请求后台-调用Controller"><a href="#前端点击文件上传请求后台-调用Controller" class="headerlink" title="前端点击文件上传请求后台 调用Controller"></a>前端点击文件上传请求后台 调用Controller</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//指定跨域来源 禁止非www.baidu.com来源访问</span>
-<span class="token comment" spellcheck="true">//@CrossOrigin(origins = "www.baidu.com")</span>
-<span class="token annotation punctuation">@CrossOrigin</span>
-<span class="token annotation punctuation">@Controller</span>
-<span class="token annotation punctuation">@Api</span><span class="token punctuation">(</span>tags <span class="token operator">=</span> <span class="token string">"OssController"</span><span class="token punctuation">,</span>description <span class="token operator">=</span> <span class="token string">"Oss管理"</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/aliyun/oss"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssController</span> <span class="token punctuation">{</span>
-    <span class="token annotation punctuation">@Autowired</span>
-    <span class="token keyword">private</span> OssCompent ossComponent<span class="token punctuation">;</span>
+                <p>创建一个命令行工具，能够读取指定文件并搜索用户输入的字符串。我们将结合文件I/O、命令行参数、错误处理、环境变量等知识，实现一个高效、健壮的命令行工具。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p><code>lib.rs</code> 代码</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// lib.rs</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fs<span class="token punctuation">;</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>error<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token punctuation">;</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>env<span class="token punctuation">;</span>
 
-    <span class="token annotation punctuation">@ApiOperation</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"oss上传签名生成"</span><span class="token punctuation">)</span>
-    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"/policy"</span><span class="token punctuation">)</span>
-    <span class="token annotation punctuation">@ResponseBody</span>
-    <span class="token keyword">public</span> Object <span class="token function">policy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        OssPolicyResult policy <span class="token operator">=</span> ossComponent<span class="token punctuation">.</span><span class="token function">policy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">CommonResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>policy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-java"><code class="language-java">
-<span class="token comment" spellcheck="true">/**
- * 给前端返回一个阿里云文件上传的签证
- */</span>
-<span class="token annotation punctuation">@Slf4j</span>
-<span class="token annotation punctuation">@Service</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssCompent</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.policy.expire}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> ALIYUN_OSS_EXPIRE<span class="token punctuation">;</span>
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.maxSize}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> ALIYUN_OSS_MAX_SIZE<span class="token punctuation">;</span>
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.bucketName}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String ALIYUN_OSS_BUCKET_NAME<span class="token punctuation">;</span>
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.endpoint}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String ALIYUN_OSS_ENDPOINT<span class="token punctuation">;</span>
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.dir.prefix}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String ALIYUN_OSS_DIR_PREFIX<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.accessKeyId}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String ALIYUN_OSS_KEY<span class="token punctuation">;</span>
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.accessKeySecret}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String ALIYUN_OSS_SECRET_KEY<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Autowired</span>
-    <span class="token keyword">private</span> OSSClient ossClient<span class="token punctuation">;</span>
-
-   <span class="token comment" spellcheck="true">/**
-
-    * 签名生成
-      */</span>
-    <span class="token keyword">public</span> OssPolicyResult <span class="token function">policy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        OssPolicyResult result <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OssPolicyResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 存储目录</span>
-        SimpleDateFormat sdf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyyMMdd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        String dir <span class="token operator">=</span> ALIYUN_OSS_DIR_PREFIX<span class="token operator">+</span>sdf<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 签名有效期</span>
-        <span class="token keyword">long</span> expireEndTime <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> ALIYUN_OSS_EXPIRE <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">;</span>
-        Date expiration <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>expireEndTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 文件大小</span>
-        <span class="token keyword">long</span> maxSize <span class="token operator">=</span> ALIYUN_OSS_MAX_SIZE <span class="token operator">*</span> <span class="token number">1024</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 提交节点</span>
-        String action <span class="token operator">=</span> <span class="token string">"http://"</span> <span class="token operator">+</span> ALIYUN_OSS_BUCKET_NAME <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> ALIYUN_OSS_ENDPOINT<span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            PolicyConditions policyConds <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PolicyConditions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            policyConds<span class="token punctuation">.</span><span class="token function">addConditionItem</span><span class="token punctuation">(</span>PolicyConditions<span class="token punctuation">.</span>COND_CONTENT_LENGTH_RANGE<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> maxSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            policyConds<span class="token punctuation">.</span><span class="token function">addConditionItem</span><span class="token punctuation">(</span>MatchMode<span class="token punctuation">.</span>StartWith<span class="token punctuation">,</span> PolicyConditions<span class="token punctuation">.</span>COND_KEY<span class="token punctuation">,</span> dir<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            String postPolicy <span class="token operator">=</span> ossClient<span class="token punctuation">.</span><span class="token function">generatePostPolicy</span><span class="token punctuation">(</span>expiration<span class="token punctuation">,</span> policyConds<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> binaryData <span class="token operator">=</span> postPolicy<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            String policy <span class="token operator">=</span> BinaryUtil<span class="token punctuation">.</span><span class="token function">toBase64String</span><span class="token punctuation">(</span>binaryData<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            String signature <span class="token operator">=</span> ossClient<span class="token punctuation">.</span><span class="token function">calculatePostSignature</span><span class="token punctuation">(</span>postPolicy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">// 返回结果</span>
-        result<span class="token punctuation">.</span><span class="token function">setAccessKeyId</span><span class="token punctuation">(</span>ossClient<span class="token punctuation">.</span><span class="token function">getCredentialsProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getCredentials</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAccessKeyId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            result<span class="token punctuation">.</span><span class="token function">setPolicy</span><span class="token punctuation">(</span>policy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            result<span class="token punctuation">.</span><span class="token function">setSignature</span><span class="token punctuation">(</span>signature<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            result<span class="token punctuation">.</span><span class="token function">setDir</span><span class="token punctuation">(</span>dir<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            result<span class="token punctuation">.</span><span class="token function">setHost</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"签名生成失败"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 配置结构体，用于存储程序的配置参数</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> Config <span class="token punctuation">{</span>
+    <span class="token keyword">pub</span> search_str<span class="token punctuation">:</span> String<span class="token punctuation">,</span>      <span class="token comment" spellcheck="true">// 搜索的字符串</span>
+    <span class="token keyword">pub</span> file_name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>       <span class="token comment" spellcheck="true">// 目标文件名</span>
+    <span class="token keyword">pub</span> case_insensitive<span class="token punctuation">:</span> bool<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 是否进行不区分大小写的搜索</span>
 <span class="token punctuation">}</span>
 
-<span class="token annotation punctuation">@Bean</span>
-<span class="token keyword">public</span> OSSClient <span class="token function">ossClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">impl</span> Config <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 新建一个 Config 对象，解析命令行参数</span>
+    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> <span class="token operator">&amp;</span>Vec<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span>Config<span class="token punctuation">,</span> <span class="token operator">&amp;</span>'<span class="token keyword">static</span> str<span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> config<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">3</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">Err</span><span class="token punctuation">(</span><span class="token string">"Not enough arguments"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 检查参数的合法性，确保用户输入了文件名和搜索字符串。</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 从命令行参数中获取搜索字符串和文件名，并设置大小写不敏感标志</span>
+        <span class="token function">Ok</span><span class="token punctuation">(</span>Config <span class="token punctuation">{</span>
+            search_str<span class="token punctuation">:</span> config<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            file_name<span class="token punctuation">:</span> config<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            case_insensitive<span class="token punctuation">:</span> env<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">var</span><span class="token punctuation">(</span><span class="token string">"RIPGREP_CASE_INSENSITIVE"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap_or_default</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 环境变量控制大小写敏感</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-    <span class="token comment" spellcheck="true">//public OSSClient(String endpoint, String accessKeyId, String secretAccessKey)</span>
-    OSSClient ossClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OSSClient</span><span class="token punctuation">(</span>ALIYUN_OSS_ENDPOINT<span class="token punctuation">,</span> ALIYUN_OSS_KEY<span class="token punctuation">,</span> ALIYUN_OSS_SECRET_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> ossClient<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="前端拿到签名上传文件"><a href="#前端拿到签名上传文件" class="headerlink" title="前端拿到签名上传文件"></a>前端拿到签名上传文件</h2><h2 id="思考：这么做好处在哪儿？"><a href="#思考：这么做好处在哪儿？" class="headerlink" title="思考：这么做好处在哪儿？"></a>思考：这么做好处在哪儿？</h2><h3 id="1-文件上传全交给前端，减少了后端并发量"><a href="#1-文件上传全交给前端，减少了后端并发量" class="headerlink" title="1.文件上传全交给前端，减少了后端并发量"></a>1.文件上传全交给前端，减少了后端并发量</h3><h3 id="2-生成的签证只能使用一次，提升了安全性"><a href="#2-生成的签证只能使用一次，提升了安全性" class="headerlink" title="2.生成的签证只能使用一次，提升了安全性"></a>2.生成的签证只能使用一次，提升了安全性</h3><script>
+<span class="token comment" spellcheck="true">// 运行程序，执行文件读取与搜索操作</span>
+<span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">run</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> Config<span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Box<span class="token operator">&lt;</span>dyn Error<span class="token operator">>></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> content <span class="token operator">=</span> fs<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">read_to_string</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>config<span class="token punctuation">.</span>file_name<span class="token punctuation">)</span>?<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 读取文件内容</span>
+    <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token keyword">if</span> config<span class="token punctuation">.</span>case_insensitive <span class="token punctuation">{</span>
+        <span class="token function">search_case_insensitive</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>search_str<span class="token punctuation">,</span> <span class="token operator">&amp;</span>content<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 不区分大小写的搜索</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">search</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>search_str<span class="token punctuation">,</span> <span class="token operator">&amp;</span>content<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 区分大小写的搜索</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> result <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> line<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 输出匹配的行</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 大小写敏感搜索函数</span>
+<span class="token keyword">pub</span> <span class="token keyword">fn</span> search<span class="token operator">&lt;</span><span class="token string">'a>(search_str: String, content: &amp;'</span>a String<span class="token punctuation">)</span> <span class="token punctuation">-></span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> result<span class="token punctuation">:</span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token operator">=</span> Vec<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> content<span class="token punctuation">.</span><span class="token function">lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> line<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>search_str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 如果找到匹配的行，添加到结果中</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    result
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 大小写不敏感搜索函数</span>
+<span class="token keyword">pub</span> <span class="token keyword">fn</span> search_case_insensitive<span class="token operator">&lt;</span><span class="token string">'a>(search_str: String, content: &amp;'</span>a String<span class="token punctuation">)</span> <span class="token punctuation">-></span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> result<span class="token punctuation">:</span> Vec<span class="token operator">&lt;</span><span class="token operator">&amp;</span>'a str<span class="token operator">></span> <span class="token operator">=</span> Vec<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> content<span class="token punctuation">.</span><span class="token function">lines</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> line<span class="token punctuation">.</span><span class="token function">to_lowercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>search_str<span class="token punctuation">.</span><span class="token function">to_lowercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 转为小写后进行匹配</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    result
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong><code>Config</code> 结构体</strong>：用于存储命令行参数和配置，支持搜索字符串、文件名和大小写不敏感标志。</li>
+<li><strong><code>Config::new</code></strong>：从命令行参数创建配置，解析文件名、搜索字符串，并通过环境变量控制是否进行大小写不敏感的搜索。</li>
+<li><strong><code>run</code> 函数</strong>：读取文件内容，并根据配置选择合适的搜索函数（大小写敏感或不敏感）。</li>
+<li><strong><code>search</code> 和 <code>search_case_insensitive</code></strong>：分别实现大小写敏感和不敏感的字符串搜索，返回匹配行的引用。</li>
+</ul>
+<p><code>main.rs</code> 代码</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// main.rs</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>env<span class="token punctuation">;</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>process<span class="token punctuation">;</span>
+<span class="token keyword">use</span> ripgrep<span class="token punctuation">:</span><span class="token punctuation">:</span>Config<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> args<span class="token punctuation">:</span> Vec<span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token operator">=</span> env<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 获取命令行参数</span>
+    <span class="token keyword">let</span> config<span class="token punctuation">:</span> Config <span class="token operator">=</span> Config<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>args<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap_or_else</span><span class="token punctuation">(</span><span class="token closure-params"><span class="token punctuation">|</span>err<span class="token punctuation">|</span></span> <span class="token punctuation">{</span>
+        <span class="token function">eprintln!</span><span class="token punctuation">(</span><span class="token string">"Problem parsing config: {}"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        process<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 如果解析失败，打印错误并退出</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"search_str is: {}"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>config<span class="token punctuation">.</span>search_str<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 打印搜索字符串</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"file_name is: {}"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>config<span class="token punctuation">.</span>file_name<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 打印文件名</span>
+
+    <span class="token keyword">if</span> <span class="token keyword">let</span> <span class="token function">Err</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span> ripgrep<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">run</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">eprintln!</span><span class="token punctuation">(</span><span class="token string">"Application Error: {}"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 运行时错误处理</span>
+        process<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 错误时退出</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>命令行参数</strong>：通过 <code>env::args()</code> 获取命令行输入的参数。</li>
+<li><strong>错误处理</strong>：通过 <code>unwrap_or_else</code> 来处理配置解析中的错误，若出现错误则输出提示并退出程序。</li>
+<li><strong>运行搜索</strong>：调用 <code>ripgrep::run()</code> 执行文件搜索任务。</li>
+</ul>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -587,42 +584,47 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-            <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
                 <div class="article-badge left-badge text-color">
-                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+                </div>
                 <div class="card">
-                    <a href="/2020/03/18/shi-wu-zong-jie/">
+                    <a href="/2025/02/27/rustgou-jian-ming-ling-xing-grep/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/22.png" class="responsive-img" alt="事务总结">
+                                <img src="/medias/featureimages/1.png" class="responsive-img" alt="Rust构建命令行grep">
                             
-                            <span class="card-title">事务总结</span>
+                            <span class="card-title">Rust构建命令行grep</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1、哪些东西是一定要回滚的、哪些即使出错了不必要回滚的。2、事务的传播行为propagation:当前方法的事务是否要和别人公用一个事务,以及如何传播下去（里面的方法如果用事务，是否和他公用一个事务）
-Propagation propaga
+                                创建一个命令行工具，能够读取指定文件并搜索用户输入的字符串。我们将结合文件I/O、命令行参数、错误处理、环境变量等知识，实现一个高效、健壮的命令行工具。
+代码实现lib.rs 代码
+// lib.rs
+use std::fs;
+use st
                             
                         </div>
                         <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-27
+                            </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/%E6%80%BB%E7%BB%93/" class="post-category">
-                                    总结
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
                             </span>
                         </div>
                     </div>
+
                     
                 </div>
             </div>
@@ -633,34 +635,35 @@ Propagation propaga
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2020/03/17/wu-xian-ji-cai-dan/">
+                    <a href="/2025/02/26/rustzhong-de-ce-shi/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="无限级菜单">
+                                <img src="/medias/featureimages/9.png" class="responsive-img" alt="Rust中的测试">
                             
-                            <span class="card-title">无限级菜单</span>
+                            <span class="card-title">Rust中的测试</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                MybatisPlus 递归实现无限级菜单1.实体类@Data
-public class PmsProductCategory implements Serializable {
+                                Rust 提供了内置的测试框架，允许开发者编写和运行测试来确保代码的正确性。
+1.如何编写测试Rust 中的测试函数是用来验证非测试代码是否按照期望的方式运行的。测试函数体通常执行如下三种操作：
 
-    private static final long
+设置任何所需的数据或状态
+运行需要测试的代
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-17
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-26
                             </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/Java/" class="post-category">
-                                    Java
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
