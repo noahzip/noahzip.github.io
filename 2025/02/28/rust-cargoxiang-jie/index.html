@@ -4,12 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java 应用与 MySQL 的交互, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="1. MySQL驱动 数据库连接池作为一个 Java工程师，不知道你有没有关注过一个问题，Java程序是如何与MySQL数据库进行交互的？
+    <meta name="keywords" content="Rust Cargo 详解, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="1 .Cargo 及其发布配置Cargo 允许使用不同的 发布配置（Release Profiles） 来优化编译和运行。Rust 默认有两个主要的配置：
 
-MySQL驱动
-
-应该大部分人都知道，我们首先需要配置一个 MySQL驱动，那MySQL驱动到底是">
+dev：cargo build，适用于开发，优化较少，编译速度快。
+release">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@ MySQL驱动
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>Java 应用与 MySQL 的交互 | 未见初墨</title>
+    <title>Rust Cargo 详解 | 未见初墨</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -246,12 +245,12 @@ MySQL驱动
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java 应用与 MySQL 的交互</h1>
+                    <h1 class="description center-align post-title">Rust Cargo 详解</h1>
                 </div>
             </div>
         </div>
@@ -375,8 +374,8 @@ MySQL驱动
                         <div class="post-cate">
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                                <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                             
                         </div>
@@ -388,28 +387,28 @@ MySQL驱动
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2022-06-29
+                        2025-02-28
                     </div>
                 
 
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2022-06-29
+                        2025-02-28
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.9k
+                        970
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        7 分
+                        4 分
                     </div>
                 
 
@@ -419,78 +418,126 @@ MySQL驱动
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1-MySQL驱动-数据库连接池"><a href="#1-MySQL驱动-数据库连接池" class="headerlink" title="1. MySQL驱动 数据库连接池"></a>1. MySQL驱动 数据库连接池</h1><p>作为一个 Java工程师，不知道你有没有关注过一个问题，Java程序是如何与MySQL数据库进行交互的？</p>
+                <h2 id="1-Cargo-及其发布配置"><a href="#1-Cargo-及其发布配置" class="headerlink" title="1 .Cargo 及其发布配置"></a>1 .Cargo 及其发布配置</h2><p>Cargo 允许使用不同的 <strong>发布配置（Release Profiles）</strong> 来优化编译和运行。Rust 默认有两个主要的配置：</p>
+<ul>
+<li><strong>dev</strong>：<code>cargo build</code>，适用于开发，优化较少，编译速度快。</li>
+<li><strong>release</strong>：<code>cargo build --release</code>，适用于发布，优化程度高，编译时间较长。</li>
+</ul>
+<p>示例：</p>
+<pre class="line-numbers language-toml"><code class="language-toml">[profile.dev]
+debug = true
+
+[profile.release]
+opt-level = 3 //这个配置的值从 0 到 3。越高的优化级别需要更多的时间编译<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在 <code>Cargo.toml</code> 中，我们可以自定义不同的配置，如 <code>opt-level</code>（优化级别），<code>debug</code>（调试信息）等。</p>
+<hr>
+<h2 id="2-cargo-编写文档"><a href="#2-cargo-编写文档" class="headerlink" title="2.cargo 编写文档"></a>2.cargo 编写文档</h2><p>这里，我们提供了一个 <code>add_one</code> 函数工作的描述，接着开始了一个标题为 <code>Examples</code> 的部分，和展示如何使用 <code>add_one</code> 函数的代码。</p>
+<p><code>main.rs</code></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment" spellcheck="true">/// Adds one to the number given.</span>
+<span class="token comment" spellcheck="true">///</span>
+<span class="token comment" spellcheck="true">/// # Examples</span>
+<span class="token comment" spellcheck="true">///</span>
+<span class="token comment" spellcheck="true">/// ```</span>
+<span class="token comment" spellcheck="true">/// let arg = 5;</span>
+<span class="token comment" spellcheck="true">/// let answer = my_crate::add_one(arg);</span>
+<span class="token comment" spellcheck="true">///</span>
+<span class="token comment" spellcheck="true">/// assert_eq!(6, answer);</span>
+<span class="token comment" spellcheck="true">/// ```</span>
+<span class="token keyword">fn</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span>u32<span class="token punctuation">,</span> y<span class="token punctuation">:</span>u32<span class="token punctuation">)</span> <span class="token punctuation">-></span> u32<span class="token punctuation">{</span>
+    x<span class="token operator">+</span>y
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="cargo-doc："><a href="#cargo-doc：" class="headerlink" title="cargo doc："></a><code>cargo doc</code>：</h3><p>​    生成这个文档注释的 HTML 文档。这个命令运行由 Rust 分发的工具 <code>rustdoc</code> 并将生成的 HTML 文档放入 <em>target/doc</em> 目录。`</p>
+<h3 id="cargo-doc-open-："><a href="#cargo-doc-open-：" class="headerlink" title="cargo doc --open ："></a><code>cargo doc --open</code> ：</h3><p>构建当前 crate 文档（同时还有所有 crate 依赖的文档）的 HTML 并在浏览器中打开。</p>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/2025/0228223523(ms)/d60100ef9a528fc247dd45f226f7c642.png" alt="Cargo生成的文档"></p>
+<h3 id="常用（文档注释）"><a href="#常用（文档注释）" class="headerlink" title="常用（文档注释）"></a>常用（文档注释）</h3><ul>
+<li><strong>Panics</strong>：描述可能会 <code>panic!</code> 的情况。</li>
+<li><strong>Errors</strong>：描述可能的错误及其触发条件。</li>
+<li><strong>Safety</strong>：针对 <code>unsafe</code> 代码，描述调用者需要确保的条件。</li>
+</ul>
+<h2 id="3-发布到-Crates-io"><a href="#3-发布到-Crates-io" class="headerlink" title="3. 发布到 Crates.io"></a>3. 发布到 Crates.io</h2><p>Rust 生态的核心之一是 <code>crates.io</code>，它允许开发者发布和共享 Rust 库。</p>
+<h3 id="发布步骤："><a href="#发布步骤：" class="headerlink" title="发布步骤："></a>发布步骤：</h3><ol>
+<li>确保 <code>Cargo.toml</code> 配置正确，包括 <code>name</code>、<code>version</code>、<code>authors</code> 和 <code>description</code>。</li>
+<li>运行 <code>cargo login &lt;TOKEN&gt;</code> 进行身份验证（需要在 crates.io 注册并获取 API Token）。</li>
+<li>运行 <code>cargo publish</code> 发布包。</li>
+</ol>
+<p>示例 <code>Cargo.toml</code>:</p>
+<pre class="line-numbers language-toml"><code class="language-toml">[package]
+name = "my_crate"
+version = "0.1.0"
+authors = ["Your Name <your_email@example.com>"]
+description = "A simple crate"
+license = "MIT"
+repository = "https://github.com/your_repo"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>注意</strong>：</p>
+<ul>
+<li><code>Cargo.lock</code> 不会随库一同发布，只适用于二进制项目。</li>
+<li><code>README.md</code> 可用于 <code>crates.io</code> 页面展示。</li>
+</ul>
+<hr>
+<h2 id="4-Cargo-工作空间"><a href="#4-Cargo-工作空间" class="headerlink" title="4. Cargo 工作空间"></a>4. Cargo 工作空间</h2><p>Cargo <strong>工作空间（Workspaces）</strong> 用于管理多个相关的 Crate，减少重复编译。</p>
+<h3 id="创建工作空间"><a href="#创建工作空间" class="headerlink" title="创建工作空间"></a>创建工作空间</h3><ol>
+<li>新建目录并创建 <code>Cargo.toml</code>。</li>
+</ol>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> my_workspace <span class="token operator">&amp;&amp;</span> <span class="token function">cd</span> my_workspace<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ol>
-<li><h3 id="MySQL驱动"><a href="#MySQL驱动" class="headerlink" title="MySQL驱动"></a><strong>MySQL驱动</strong></h3></li>
+<li>在 <code>Cargo.toml</code> 中定义工作空间成员：</li>
 </ol>
-<p>应该大部分人都知道，我们首先需要配置一个 MySQL驱动，那MySQL驱动到底是个什么东西？<br>通俗一点解释，MySQL驱动 就是用来跟MySQL服务端进行通信，也就是创建网络连接，然后往服务器发送请求，执行SQL语句 等访问数据库的操作；</p>
-<p>一般在项目中也就是这样一个maven依赖：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>mysql-connector-java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>8.0.22<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ol start="2">
-<li><h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a><strong>数据库连接池</strong></h3></li>
-</ol>
-<p>对于我们的Java系统，肯定不可能只跟MySQL创建一个连接的，如果只有一个的话，那就得单线程串行执行SQL语句了；</p>
-<p>所以需要和MySQL服务端创建多个连接，但是每次创建和销毁一个数据库连接都是非常耗时的操作，那肯定就不能频繁的去创建和销毁了；</p>
-<p>这种情况下，就引入了池化思想，也就是数据库连接池；在一个池子中维持多个数据库连接，让不同的线程需要执行SQL语句的时候，先去获取到一个连接，执行完成之后又将这个连接给放回池内；</p>
-<p>常见的数据库连接池有：<strong>DBCP、C3P0、阿里的 Druid</strong> 这些；</p>
-<p>这些池化的思想，在我们系统开发中很多地方都会遇到；如 线程池、内存池、HTTP连接池 等等……<br>可以扩展一下<strong>池化思想的一般作用</strong>：</p>
-<ul>
-<li><strong>资源复用</strong>：池中对象得到复用，避免了频繁的创建、释放带来的性能开销，减少内存碎片等；</li>
-<li><strong>更快的响应速度</strong>：在要使用到对象时，直接从池中获取即可，不用在要用时才去等待创建；</li>
-<li><strong>统一的对象管理</strong>：可以防止内存泄露，实现线程安全等；</li>
-</ul>
-<p>一般来说，我们的系统是部署在Tomcat中的，或者现在的springboot内置的 Tomcat，一个Tomcat服务器中是有多个线程的（Tomcat8默认为200个线程），也就是说这些线程是可以同时接收多个请求，然后并发的处理的；</p>
-<p>那把这些过程串联起来就是：</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170146290.png" alt="image-20220629170146290"></p>
+<pre class="line-numbers language-toml"><code class="language-toml">[workspace]
+
+members = [
+    "adder",
+    "add-one"
+]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
-<li>部署在 Tomcat 中的Java应用，会通过数据库连接池创建一定数量的数据库连接；</li>
-<li>Tomcat 中也会有多个线程，可以同时接收用户的请求；</li>
-<li>当有多个用户并发请求时，由Tomcat中的线程来处理这些请求；<br>在要执行 SQL语句时，从 数据库连接池 中获取到跟 MySQL服务端的数据库连接，然后通过 MySQL驱动来向MySQL服务端发送请求，再由MySQL服务端来执行SQL语句；<h1 id="2-MySQL-架构设计"><a href="#2-MySQL-架构设计" class="headerlink" title="2. MySQL 架构设计"></a>2. MySQL 架构设计</h1>上面说到通过 MySQL 驱动来发起请求由MySQL服务端执行 SQL 语句，那 MySQL 服务端是怎么执行的呢？</li>
+<li>运行 <code>cargo new</code> 创建成员 Crate。</li>
 </ol>
-<p>对于 MySQL服务端，其实也会维护一个连接池（连接管理器），用来管理多个客户端跟这个服务端创建的所有连接；<br>我们平常使用命令行来操作，来跟 MySQL服务端创建一个MySQL连接，一般也就是：</p>
-<pre class="line-numbers language-bash"><code class="language-bash">mysql -h<span class="token variable">$ip</span> -P<span class="token variable">$port</span> -u<span class="token variable">$user</span> -p<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>执行之后，MySQL的连接管理器就会去验证你的账户密码和权限等；如果验证通过，就可以通过命令行来执行MySQL命令了；<br>这个客户端的连接，MySQL服务端会维护一定的时间长度（默认是8小时），也就是说如果你8小时客户端没有操作，连接管理器会自动将这个连接给断开（不然也是白白浪费资源维护这个连接，也就是要维护执行过程中使用到内存之类的资源）；</p>
-<p>当MySQL服务端接收到一个 SQL请求之后，也就是说从一个网络连接中接收到网络请求；那这个时候肯定就需要有一个线程来从网络连接中读取和解析请求；<br>也就是得到一个 SQL语句，转交给SQL接口去执行，完成底层数据的增删改查；</p>
-<p>为了执行SQL语句，MySQL的 Server层，设计了如下的 组件：</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170240075.png" alt="image-20220629170240075"></p>
-<p>以这条 SQL 语句为例，解释一下：</p>
-<pre><code>select id, name, age from user where id = 1;</code></pre><ul>
-<li><h4 id="解析器：对-SQL-语句做解析，也就是要让MySQL知道你这条-SQL语句，是要做什么；"><a href="#解析器：对-SQL-语句做解析，也就是要让MySQL知道你这条-SQL语句，是要做什么；" class="headerlink" title="解析器：对 SQL 语句做解析，也就是要让MySQL知道你这条 SQL语句，是要做什么；"></a>解析器：对 SQL 语句做解析，也就是要让MySQL知道你这条 SQL语句，是要做什么；</h4><ul>
-<li><p><strong>词法解析</strong>：识别出 SQL语句里面的字符串分别是什么，代表什么；比如这里就是： </p>
-<ul>
-<li>select 表示这是一个查询语句；</li>
-<li>user 表示 从user表中进行查询；</li>
-<li>id = 1 表示查询 id为1 这行数据；</li>
-<li>id、name、age 表示要从这行数据中提取这三个字段；</li>
-</ul>
-</li>
-<li><p><strong>语法分析</strong>：根据词法分析的结果，再判断你输入的这个 SQL 是否满足 MySQL的语法； </p>
-</li>
-<li><p>也就是你在执行 sql 语句的时候，正常报出来的错误这些；</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token operator">></span> 1064 - You have an error <span class="token keyword">in</span> your SQL syntax<span class="token punctuation">;</span> check the manual that corresponds to your MySQL server version <span class="token keyword">for</span> the right syntax to use near <span class="token string">'limit 10'</span> at line 1
-<span class="token operator">></span> 时间: 0.009s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>一般这个报错，都会提示你出现错误的位置，一般就关注 <code>use near...</code></p>
-</li>
-</ul>
-</li>
-<li><p><strong>优化器</strong>：当你的SQL语句中有多个索引，或者多个表关联查询时；优化器会决定使用哪个索引，或者决定各个表的连接顺序；也就是说优化器会决定一条 SQL 按照一个什么的步骤和顺序，去执行哪些操作；例如：</p>
-<pre class="line-numbers language-MySQL"><code class="language-MySQL">select * from t1 join t2 where t1.c=10 and t2.d=20;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-</ul>
-<p>​    既可以先从表 t1 里面取出 c=10 的记录的 ID 值，再根据 ID 值关联到表 t2，再判断 t2 里面 d 的值是否等于 20；<br>​    也可以先从表 t2 里面取出 d=20 的记录的 ID 值，再根据 ID 值关联到 t1，再判断 t1 里面 c 的值是否等于 10；<br>​    这两种方式的执行结果是一样的，但是可能执行的效率会不同，所以优化器会根据执行成本来选择使用哪个方案；</p>
-<ul>
-<li><strong>执行器</strong>：当通过优化器决定了怎么执行这条 SQL 时，就可以开始执行语句了； <ul>
-<li>在执行之前，判断当前用户对于这个表是否有执行权限；如果有权限，才会打开这个表继续执行后面的操作；</li>
-<li>具体的执行，是通过执行引擎来实现的；也就是每个表在定义时，就指定了特定的执行引擎，然后 MySQL的Server 去调用具体执行引擎的接口，来执行这条 SQL语句；</li>
-<li>这里的执行引擎，一般默认就是 InnoDB，当然还有一些 MyIsam、Memory之类的；（这里就有一个面试题，InnoDB 和 MyIsam 的区别是什么，下去背一下就行了）；<br>对于不同引擎，他们的底层实现的存储结构或者存储方式这些都是不一样的；</li>
-</ul>
-</li>
-</ul>
-<p>也就是通过这些组件的配合，以这样一些流程来完成 执行一条 SQL 语句；</p>
+<pre><code>cargo new adder
+cargo new add-one --lib</code></pre><h3 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h3><p>在 <code>adder/Cargo.toml</code> 中添加 <code>add-one</code> 依赖：</p>
+<pre class="line-numbers language-toml"><code class="language-toml">[dependencies]
+add-one = { path = "../add-one" }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="共享-target-目录"><a href="#共享-target-目录" class="headerlink" title="共享 target 目录"></a>共享 <code>target</code> 目录</h3><p>所有 Crate 共享 <code>target/</code>，避免重复编译。</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo build
+cargo run -p adder<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="依赖外部-Crate"><a href="#依赖外部-Crate" class="headerlink" title="依赖外部 Crate"></a>依赖外部 Crate</h3><p>如 <code>add-one</code> 需要 <code>rand</code>，则在 <code>add-one/Cargo.toml</code> 中添加：</p>
+<pre class="line-numbers language-toml"><code class="language-toml">[dependencies]
+rand = "0.5.5"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><pre class="line-numbers language-bash"><code class="language-bash">cargo <span class="token function">test</span>
+cargo <span class="token function">test</span> -p add-one<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>工作空间允许单独测试特定 Crate。</p>
+<hr>
+<h2 id="5-安装二进制包"><a href="#5-安装二进制包" class="headerlink" title="5.安装二进制包"></a>5.安装二进制包</h2><p>Cargo 允许安装 <code>crates.io</code> 上的二进制可执行文件。</p>
+<p>示例：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cargo install ripgrep<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="本地安装二进制"><a href="#本地安装二进制" class="headerlink" title="本地安装二进制"></a>本地安装二进制</h3><p>如果你有一个二进制项目，你可以使用 <code>cargo install --path .</code> 进行本地安装。</p>
+<p>示例：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cargo install --path .<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>已安装的二进制文件默认存放在 <code>~/.cargo/bin/</code> 目录下。</p>
+<hr>
+<h2 id="6-扩展-Cargo"><a href="#6-扩展-Cargo" class="headerlink" title="6 .扩展 Cargo"></a>6 .扩展 Cargo</h2><p>Cargo 允许使用 <strong>自定义命令</strong> 来扩展其功能。</p>
+<h3 id="自定义-Cargo-子命令"><a href="#自定义-Cargo-子命令" class="headerlink" title="自定义 Cargo 子命令"></a>自定义 Cargo 子命令</h3><p>Rust 允许创建 <code>cargo-xxx</code> 形式的可执行文件，它们会被 Cargo 识别为 <code>cargo xxx</code> 命令。</p>
+<p>示例：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cargo new cargo-greet --bin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在 <code>src/main.rs</code> 中实现：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello from cargo-greet!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>构建并安装：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cargo install --path .<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后你可以运行：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cargo greet<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><strong>Cargo 的发布配置</strong>：使用 <code>dev</code> 和 <code>release</code> 进行不同优化。</li>
+<li><strong>发布到 crates.io</strong>：使用 <code>cargo publish</code> 共享你的库。</li>
+<li><strong>工作空间</strong>：管理多个相关的包，提高项目组织性。</li>
+<li><strong>安装二进制</strong>：使用 <code>cargo install</code> 安装 Rust 工具。</li>
+<li><strong>扩展 Cargo</strong>：编写 <code>cargo-xxx</code> 命令来扩展 Cargo。</li>
+</ol>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -558,41 +605,46 @@ MySQL驱动
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-            <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
                 <div class="article-badge left-badge text-color">
-                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+                </div>
                 <div class="card">
-                    <a href="/2022/06/29/buffer-pool-ji-crudcao-zuo-de-dong-tai-guo-cheng/">
+                    <a href="/2025/02/28/rust-cargoxiang-jie/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="buffer pool 及CRUD动态过程">
+                                <img src="/medias/featureimages/1.png" class="responsive-img" alt="Rust Cargo 详解">
                             
-                            <span class="card-title">buffer pool 及CRUD动态过程</span>
+                            <span class="card-title">Rust Cargo 详解</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1. buffer pool 介绍InnoDB存储引擎使用了 buffer pool 内存缓冲区来提升性能 ，buffer pool 是一块内存区域，是基于内存的一个组件，也是我们必须要搞清楚的核心组件，它里面缓存了磁盘的 数据页 上真实的
+                                1 .Cargo 及其发布配置Cargo 允许使用不同的 发布配置（Release Profiles） 来优化编译和运行。Rust 默认有两个主要的配置：
+
+dev：cargo build，适用于开发，优化较少，编译速度快。
+release
                             
                         </div>
                         <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2022-06-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-28
+                            </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
                             </span>
                         </div>
                     </div>
+
                     
                 </div>
             </div>
@@ -603,32 +655,31 @@ MySQL驱动
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2022/06/29/sheng-chan-huan-jing-de-shu-ju-ku-gui-hua/">
+                    <a href="/2025/02/27/rustzhong-de-die-dai-qi/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="生产环境的数据库规划">
+                                <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Rust中的迭代器">
                             
-                            <span class="card-title">生产环境的数据库规划</span>
+                            <span class="card-title">Rust中的迭代器</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                生产环境的数据库规划1.1 生产环境的数据库服务器配置一般来说，对于我们这种Java开发者，可能并不会去关心MySQL的服务器配置什么的，大点的公司基本都是DBA给出或者运维给出的；
-但是我认为对于MySQL这种组件，我们不能局限于使用，还
+                                1. 迭代器概述Rust 中的迭代器是一个实现了 Iterator trait 的对象。迭代器通过 next 方法返回集合的元素，并且每次迭代返回的是一个 Option 类型的值（即 Some(item) 或 None）。next 方法会持
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-06-29
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-27
                             </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                                     
-                                        <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                     
                                 
