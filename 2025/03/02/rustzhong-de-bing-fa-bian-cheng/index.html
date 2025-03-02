@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Rust中的并发编程, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="1 线程（Threads）在大部分现代操作系统中，已执行程序的代码在一个 进程（process）中运行，操作系统则负责管理多个进程。在程序内部，也可以拥有多个同时运行的独立部分。运行这些独立部分的功能被称为 线程（threads）。
-将程序">
+    <meta name="description" content="1 .线程（Threads）在大部分现代操作系统中，已执行程序的代码在一个 进程（process）中运行，操作系统则负责管理多个进程。在程序内部，也可以拥有多个同时运行的独立部分。运行这些独立部分的功能被称为 线程（threads）。
+将程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -416,7 +416,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-线程（Threads）"><a href="#1-线程（Threads）" class="headerlink" title="1 线程（Threads）"></a>1 线程（Threads）</h2><p>在大部分现代操作系统中，已执行程序的代码在一个 <code>进程（process）</code>中运行，操作系统则负责管理多个进程。在程序内部，也可以拥有多个同时运行的独立部分。运行这些独立部分的功能被称为 <code>线程（threads）</code>。</p>
+                <h2 id="1-线程（Threads）"><a href="#1-线程（Threads）" class="headerlink" title="1 .线程（Threads）"></a>1 .线程（Threads）</h2><p>在大部分现代操作系统中，已执行程序的代码在一个 <code>进程（process）</code>中运行，操作系统则负责管理多个进程。在程序内部，也可以拥有多个同时运行的独立部分。运行这些独立部分的功能被称为 <code>线程（threads）</code>。</p>
 <p>将程序中的计算拆分进多个线程可以改善性能，因为程序可以同时进行多个任务，不过这也会增加复杂性。因为线程是同时运行的，所以无法预先保证不同线程中的代码的执行顺序。这会导致诸如此类的问题：</p>
 <ul>
 <li><code>竞争状态（Race conditions）</code>，多个线程以不一致的顺序访问数据或资源</li>
@@ -500,7 +500,7 @@ hi number 4 from the main thread!<span aria-hidden="true" class="line-numbers-ro
     handle<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>使用 <code>move</code> 关键字强制获取它使用的值的所有权</p>
-<h2 id="2-消息传递（Message-Passing）"><a href="#2-消息传递（Message-Passing）" class="headerlink" title="2 消息传递（Message Passing）"></a>2 消息传递（Message Passing）</h2><p>一个日益流行的确保安全并发的方式是 <code>消息传递（message passing）</code>，这里线程或 actor 通过发送包含数据的消息来相互沟通。这个思想来源于 <a href="https://golang.org/doc/effective_go.html">Go 编程语言文档中</a> 的口号：“不要通过共享内存来通讯；而是通过通讯来共享内存。”（“Do not communicate by sharing memory; instead, share memory by communicating.”）</p>
+<h2 id="2-消息传递（Message-Passing）"><a href="#2-消息传递（Message-Passing）" class="headerlink" title="2. 消息传递（Message Passing）"></a>2. 消息传递（Message Passing）</h2><p>一个日益流行的确保安全并发的方式是 <code>消息传递（message passing）</code>，这里线程或 actor 通过发送包含数据的消息来相互沟通。这个思想来源于 <a href="https://golang.org/doc/effective_go.html">Go 编程语言文档中</a> 的口号：“不要通过共享内存来通讯；而是通过通讯来共享内存。”（“Do not communicate by sharing memory; instead, share memory by communicating.”）</p>
 <p>Rust 提供了 <code>通道（channels）</code> 进行线程间通信，遵循 “通过消息传递而非共享状态” 原则。你可以将其想象为一个水流的通道，比如河流或小溪。如果你将诸如橡皮鸭或小船之类的东西放入其中，它们会顺流而下到达下游。</p>
 <p>编程中的通道有两部分组成，一个发送者（transmitter）和一个接收者（receiver）。发送者位于上游位置，在这里可以将橡皮鸭放入河中，接收者则位于下游，橡皮鸭最终会漂流至此。代码中的一部分调用发送者的方法以及希望发送的数据，另一部分则检查接收端收到的消息。当发送者或接收者任一被丢弃时可以认为通道被 <code>关闭（closed）</code>了。</p>
 <h3 id="1-创建通道"><a href="#1-创建通道" class="headerlink" title="1. 创建通道"></a>1. 创建通道</h3><p>这里使用 <code>mpsc::channel</code> 函数创建一个新的通道；<code>mpsc</code> 是 <strong>多个生产者，单个消费者</strong>（<em>multiple producer, single consumer</em>）的缩写。简而言之，Rust 标准库实现通道的方式意味着一个通道可以有多个产生值的 <strong>发送</strong>（<em>sending</em>）端，但只能有一个消费这些值的 <strong>接收</strong>（<em>receiving</em>）端。</p>
@@ -581,7 +581,7 @@ for
 the
 u
 Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="3-共享状态（Shared-State）"><a href="#3-共享状态（Shared-State）" class="headerlink" title="3 共享状态（Shared State）"></a>3 共享状态（Shared State）</h2><p>虽然消息传递是一个很好的处理并发的方式，但并不是唯一一个</p>
+<h2 id="3-共享状态（Shared-State）"><a href="#3-共享状态（Shared-State）" class="headerlink" title="3 .共享状态（Shared State）"></a>3 .共享状态（Shared State）</h2><p>虽然消息传递是一个很好的处理并发的方式，但并不是唯一一个</p>
 <p>在某种程度上，任何编程语言中的通道都类似于单所有权，因为一旦将一个值传送到通道中，将无法再使用这个值。共享内存类似于多所有权：多个线程可以同时访问相同的内存位置。然而这会增加额外的复杂性，因为需要以某种方式管理这些不同的所有者。</p>
 <p>Rust 的类型系统和所有权规则极大的协助了正确地管理这些所有权。作为一个例子，让我们看看互斥器，一个更为常见的共享内存并发原语。</p>
 <h3 id="1-互斥器"><a href="#1-互斥器" class="headerlink" title="1.互斥器"></a>1.互斥器</h3><p><code>互斥器（mutex）</code>是 <em>mutual exclusion</em> 的缩写，也就是说，<strong>任意时刻，其只允许一个线程访问某些数据</strong>。为了访问互斥器中的数据，线程首先需要通过获取互斥器的 <strong>锁</strong>（<em>lock</em>）来表明其希望访问数据。锁是一个作为互斥器一部分的数据结构，它记录谁有数据的排他访问权。因此，我们描述互斥器为通过锁系统 <strong>保护</strong>（<em>guarding</em>）其数据。</p>
@@ -657,7 +657,7 @@ Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <li><code>Arc&lt;Mutex&lt;T&gt;&gt;</code> 原子引用计数，适合多线程共享。</li>
 <li><code>Arc::clone(&amp;counter)</code> 克隆 <code>Arc</code>，增加引用计数，引用全释放时内存才清理</li>
 </ul>
-<h2 id="4-Sync-和-Send-特征"><a href="#4-Sync-和-Send-特征" class="headerlink" title="4 Sync 和 Send 特征"></a>4 <code>Sync</code> 和 <code>Send</code> 特征</h2><h3 id="1-Send：跨线程传输"><a href="#1-Send：跨线程传输" class="headerlink" title="1. Send：跨线程传输"></a>1. <code>Send</code>：跨线程传输</h3><p><strong>默认情况下，Rust 允许线程安全的类型实现 <code>Send</code>，但 <code>Rc&lt;T&gt;</code> 不是 <code>Send</code>。</strong></p>
+<h2 id="4-Sync-和-Send-特征"><a href="#4-Sync-和-Send-特征" class="headerlink" title="4 .Sync 和 Send 特征"></a>4 .Sync 和 Send 特征</h2><h3 id="1-Send：跨线程传输"><a href="#1-Send：跨线程传输" class="headerlink" title="1. Send：跨线程传输"></a>1. <code>Send</code>：跨线程传输</h3><p><strong>默认情况下，Rust 允许线程安全的类型实现 <code>Send</code>，但 <code>Rc&lt;T&gt;</code> 不是 <code>Send</code>。</strong></p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>rc<span class="token punctuation">:</span><span class="token punctuation">:</span>Rc<span class="token punctuation">;</span>
 <span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>thread<span class="token punctuation">;</span>
 
@@ -762,31 +762,29 @@ Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article col s12 m6" data-aos="fade-up">
                 <div class="article-badge left-badge text-color">
-                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-                </div>
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2025/03/02/rustzhong-de-bing-fa-bian-cheng/">
+                    <a href="/2025/03/02/rustzhong-de-mian-xiang-dui-xiang/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/8.png" class="responsive-img" alt="Rust中的并发编程">
+                                <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Rust中的面向对象编程特性">
                             
-                            <span class="card-title">Rust中的并发编程</span>
+                            <span class="card-title">Rust中的面向对象编程特性</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1 线程（Threads）在大部分现代操作系统中，已执行程序的代码在一个 进程（process）中运行，操作系统则负责管理多个进程。在程序内部，也可以拥有多个同时运行的独立部分。运行这些独立部分的功能被称为 线程（threads）。
-将程序
+                                本章探讨了Rust如何实现面向对象编程（OOP）的特性，尽管Rust并非传统OOP语言。它介绍了OOP的核心概念（如封装、多态、继承），并展示了Rust通过结构体、枚举、trait和模式实现类似功能。本章包括定义OOP特征、使用trait对
                             
                         </div>
                         <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-02
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-02
+                        </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -799,7 +797,6 @@ Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
                             </span>
                         </div>
                     </div>
-
                     
                 </div>
             </div>
@@ -990,6 +987,11 @@ Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
             
             <br>
             
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">215.6k</span>&nbsp;字
+             
             
 
         </div>
