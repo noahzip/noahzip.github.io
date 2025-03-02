@@ -309,29 +309,11 @@
                         </a>
                     
                         
-                        <a href="/categories/%E7%AE%97%E6%B3%95/" title="算法: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                          style="background-color: #D5F5E3;">算法
-                        <span class="tag-length">2</span>
-                    </span>
-                        </a>
-                    
-                        
                         <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结: 17">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #E8F8F5;">总结
+                          style="background-color: #D5F5E3;">总结
                         <span class="tag-length">17</span>
-                    </span>
-                        </a>
-                    
-                        
-                        <a href="/categories/MySQL/" title="MySQL: 13">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                          style="background-color: #FEF9E7;">MySQL
-                        <span class="tag-length">13</span>
                     </span>
                         </a>
                     
@@ -339,17 +321,26 @@
                         <a href="/categories/Rust/" title="Rust: 34">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
-                          style="background-color: #F8F9F9;">Rust
+                          style="background-color: #E8F8F5;">Rust
                         <span class="tag-length">34</span>
                     </span>
                         </a>
                     
                         
-                        <a href="/categories/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" title="算法入门: 2">
+                        <a href="/categories/%E7%AE%97%E6%B3%95/" title="算法: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #82E0AA;">算法入门
+                          style="background-color: #FEF9E7;">算法
                         <span class="tag-length">2</span>
+                    </span>
+                        </a>
+                    
+                        
+                        <a href="/categories/MySQL/" title="MySQL: 13">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                          style="background-color: #F8F9F9;">MySQL
+                        <span class="tag-length">13</span>
                     </span>
                         </a>
                     
@@ -357,8 +348,17 @@
                         <a href="/categories/Java/" title="Java: 9">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #D7BDE2;">Java
+                          style="background-color: #82E0AA;">Java
                         <span class="tag-length">9</span>
+                    </span>
+                        </a>
+                    
+                        
+                        <a href="/categories/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" title="算法入门: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                          style="background-color: #D7BDE2;">算法入门
+                        <span class="tag-length">2</span>
                     </span>
                         </a>
                     
@@ -935,7 +935,7 @@ fn main() {
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
             <br>
-			 <!-- <span id="sitetime">载入运行时间...</span> -->
+			 <span id="sitetime">载入运行时间...</span>
             
             
             
@@ -947,6 +947,52 @@ fn main() {
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
 						class="white-color">215.6k</span>&nbsp;字
              
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
             
 
         </div>
