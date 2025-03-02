@@ -291,6 +291,46 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
+                        <a href="/2022/07/13/mysqlsuo-yin-zhi-ji-hua-yu-sqlyou-hua/">
+                            <div class="card-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="MySQL索引执⾏计划与SQL优化">
+                                
+                                <span class="card-title">MySQL索引执⾏计划与SQL优化</span>
+                            </div>
+                        </a>
+
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    MySQL索引执⾏计划与SQL优化1. MySQL多表join的实现⽅式1.1基本概念：
+驱动表与被驱动表：在多表join查询时，先从⼀个表中查询出来⼀批数据，再根据这批数据去另外⼀个表中进⾏关联查询或者筛选，那第⼀个表就是驱动表，第⼆个表
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-13
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
                         <a href="/2022/07/08/mysqlsuo-yin-ying-jie-shao/">
                             <div class="card-image">
                                 
@@ -734,44 +774,6 @@ https://github.
                     </div>
                 </div>
             
-                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                    <div class="card">
-                        <a href="/2020/11/04/ti-wen-de-zhi-hui/">
-                            <div class="card-image">
-                                
-                                    
-                                    <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="提问的智慧">
-                                
-                                <span class="card-title">提问的智慧</span>
-                            </div>
-                        </a>
-
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    提问的智慧
-How To Ask Questions The Smart Way
-Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
-本指南英文版版权为 Eric S. Raymond
-                                
-                            </div>
-                            <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-11-04
-                            </span>
-                                <span class="publish-author">
-                                    
-                                        <i class="fa fa-user fa-fw"></i>
-                                        xinyichen
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
-            
         </div>
     </article>
 
@@ -813,62 +815,13 @@ Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
             <br>
-            <span id="sitetime">载入运行时间...</span>
+			 <!-- <span id="sitetime">载入运行时间...</span> -->
             
             
             
             
             <br>
             
-            
-                
-                    &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">206.1k</span>&nbsp;字
-                
-                
-                <script>
-                    function siteTime() {
-                        var seconds = 1000;
-                        var minutes = seconds * 60;
-                        var hours = minutes * 60;
-                        var days = hours * 24;
-                        var years = days * 365;
-                        var today = new Date();
-                        var startYear = "2022";
-                        var startMonth = "5";
-                        var startDate = "26";
-                        var startHour = "21";
-                        var startMinute = "10";
-                        var startSecond = "0";
-                        var todayYear = today.getFullYear();
-                        var todayMonth = today.getMonth() + 1;
-                        var todayDate = today.getDate();
-                        var todayHour = today.getHours();
-                        var todayMinute = today.getMinutes();
-                        var todaySecond = today.getSeconds();
-                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                        var diff = t2 - t1;
-                        var diffYears = Math.floor(diff / years);
-                        var diffDays = Math.floor((diff / days) - diffYears * 365);
-                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                            minutes);
-                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
-                            diffMinutes * minutes) / seconds);
-                        if (startYear == todayYear) {
-                            document.getElementById("year").innerHTML = todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
-                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                        } else {
-                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
-                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                        }
-                    }
-
-                    setInterval(siteTime, 1000);
-                </script>
             
 
         </div>

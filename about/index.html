@@ -293,7 +293,7 @@
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
     <div class="statis">
-        <span class="count"><a href="/">95</a></span>
+        <span class="count"><a href="/">96</a></span>
         <span class="name">文章</span>
     </div>
 
@@ -318,7 +318,7 @@
                                 <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
                                     
     <div class="statis">
-        <span class="count"><a href="/">95</a></span>
+        <span class="count"><a href="/">96</a></span>
         <span class="name">文章</span>
     </div>
 
@@ -445,7 +445,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,0,31,1],
+                data: [0,0,0,0,0,0,0,0,0,0,0,31,2],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a', '#3ecf8e', '#82d3f4'],
@@ -487,7 +487,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"LeetCode","value":2},{"name":"经验&bug","value":10},{"name":"MySQL","value":13},{"name":"总结","value":17},{"name":"算法","value":2},{"name":"Rust","value":32},{"name":"Java","value":9},{"name":"算法入门","value":2},{"name":"前端","value":1},{"name":"flutter","value":1},{"name":"数据结构","value":6},{"name":"架构","value":1},{"name":"面试","value":1}],
+                data: [{"name":"LeetCode","value":2},{"name":"经验&bug","value":10},{"name":"总结","value":17},{"name":"MySQL","value":13},{"name":"Rust","value":33},{"name":"算法","value":2},{"name":"Java","value":9},{"name":"算法入门","value":2},{"name":"前端","value":1},{"name":"flutter","value":1},{"name":"数据结构","value":6},{"name":"架构","value":1},{"name":"面试","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -569,62 +569,13 @@
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
             <br>
-            <span id="sitetime">载入运行时间...</span>
+			 <!-- <span id="sitetime">载入运行时间...</span> -->
             
             
             
             
             <br>
             
-            
-                
-                    &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">206.1k</span>&nbsp;字
-                
-                
-                <script>
-                    function siteTime() {
-                        var seconds = 1000;
-                        var minutes = seconds * 60;
-                        var hours = minutes * 60;
-                        var days = hours * 24;
-                        var years = days * 365;
-                        var today = new Date();
-                        var startYear = "2022";
-                        var startMonth = "5";
-                        var startDate = "26";
-                        var startHour = "21";
-                        var startMinute = "10";
-                        var startSecond = "0";
-                        var todayYear = today.getFullYear();
-                        var todayMonth = today.getMonth() + 1;
-                        var todayDate = today.getDate();
-                        var todayHour = today.getHours();
-                        var todayMinute = today.getMinutes();
-                        var todaySecond = today.getSeconds();
-                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                        var diff = t2 - t1;
-                        var diffYears = Math.floor(diff / years);
-                        var diffDays = Math.floor((diff / days) - diffYears * 365);
-                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                            minutes);
-                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
-                            diffMinutes * minutes) / seconds);
-                        if (startYear == todayYear) {
-                            document.getElementById("year").innerHTML = todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
-                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                        } else {
-                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
-                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                        }
-                    }
-
-                    setInterval(siteTime, 1000);
-                </script>
             
 
         </div>

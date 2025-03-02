@@ -309,20 +309,29 @@
                         </a>
                     
                         
+                        <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结: 17">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                          style="background-color: #D5F5E3;">总结
+                        <span class="tag-length">17</span>
+                    </span>
+                        </a>
+                    
+                        
                         <a href="/categories/MySQL/" title="MySQL: 13">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #D5F5E3;">MySQL
+                          style="background-color: #E8F8F5;">MySQL
                         <span class="tag-length">13</span>
                     </span>
                         </a>
                     
                         
-                        <a href="/categories/%E6%80%BB%E7%BB%93/" title="总结: 17">
+                        <a href="/categories/Rust/" title="Rust: 33">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                          style="background-color: #E8F8F5;">总结
-                        <span class="tag-length">17</span>
+                             chip-active "
+                          style="background-color: #FEF9E7;">Rust
+                        <span class="tag-length">33</span>
                     </span>
                         </a>
                     
@@ -330,17 +339,8 @@
                         <a href="/categories/%E7%AE%97%E6%B3%95/" title="算法: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                          style="background-color: #FEF9E7;">算法
+                          style="background-color: #F8F9F9;">算法
                         <span class="tag-length">2</span>
-                    </span>
-                        </a>
-                    
-                        
-                        <a href="/categories/Rust/" title="Rust: 32">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                          style="background-color: #F8F9F9;">Rust
-                        <span class="tag-length">32</span>
                     </span>
                         </a>
                     
@@ -417,6 +417,45 @@
 
     <article id="articles" class="container articles">
         <div class="row tags-posts">
+            
+                <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <a href="/2025/02/21/rustzhong-de-suo-you-quan-ownership/">
+                            <div class="card-image tag-image">
+                                
+                                    
+                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Rust中的所有权Ownership">
+                                
+                                <span class="card-title">Rust中的所有权Ownership</span>
+                            </div>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    Rust 的所有权（Ownership）系统是其内存管理的核心之一，它避免了垃圾回收（GC）机制而确保了内存的安全管理。通过所有权系统，Rust 在编译时就能保证内存使用的安全性，避免了程序运行时的内存管理问题。
+1. 所有权的基本规则Ru
+                                
+                            </div>
+                            <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                            </span>
+                                <span class="publish-author">
+                                    
+                                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                        
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                        
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
             
                 <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
@@ -778,62 +817,13 @@ Windows 安装页面
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
             <br>
-            <span id="sitetime">载入运行时间...</span>
+			 <!-- <span id="sitetime">载入运行时间...</span> -->
             
             
             
             
             <br>
             
-            
-                
-                    &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-                            class="white-color">206.1k</span>&nbsp;字
-                
-                
-                <script>
-                    function siteTime() {
-                        var seconds = 1000;
-                        var minutes = seconds * 60;
-                        var hours = minutes * 60;
-                        var days = hours * 24;
-                        var years = days * 365;
-                        var today = new Date();
-                        var startYear = "2022";
-                        var startMonth = "5";
-                        var startDate = "26";
-                        var startHour = "21";
-                        var startMinute = "10";
-                        var startSecond = "0";
-                        var todayYear = today.getFullYear();
-                        var todayMonth = today.getMonth() + 1;
-                        var todayDate = today.getDate();
-                        var todayHour = today.getHours();
-                        var todayMinute = today.getMinutes();
-                        var todaySecond = today.getSeconds();
-                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                        var diff = t2 - t1;
-                        var diffYears = Math.floor(diff / years);
-                        var diffDays = Math.floor((diff / days) - diffYears * 365);
-                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                            minutes);
-                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
-                            diffMinutes * minutes) / seconds);
-                        if (startYear == todayYear) {
-                            document.getElementById("year").innerHTML = todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
-                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                        } else {
-                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
-                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                        }
-                    }
-
-                    setInterval(siteTime, 1000);
-                </script>
             
 
         </div>
