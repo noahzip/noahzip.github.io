@@ -398,14 +398,14 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        6k
+                        5.4k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        24 分
+                        21 分
                     </div>
                 
 
@@ -738,13 +738,17 @@ Drawing a select box (100x20) with 2 options<span aria-hidden="true" class="line
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-<pre><code>- **定义**：编译器在编译时通过单态化（monomorphization）生成具体类型的代码，知道调用哪个方法。
-- **适用场景**：
-  - 需要高性能，无需存储多个不同类型的对象。
-  - 适用于算法实现，如 `Iterator` 相关操作。
-  - 代码生成少量不同类型的实例，不会导致过多的二进制代码膨胀。
-- **优点**：无运行时开销，可内联优化。
-- **缺点**：只能处理单一类型，缺乏灵活性。</code></pre><hr>
+<ul>
+<li><strong>定义</strong>：编译器在编译时通过单态化（monomorphization）生成具体类型的代码，知道调用哪个方法。</li>
+<li><strong>适用场景</strong>：<ul>
+<li>需要高性能，无需存储多个不同类型的对象。</li>
+<li>适用于算法实现，如 <code>Iterator</code> 相关操作。</li>
+<li>代码生成少量不同类型的实例，不会导致过多的二进制代码膨胀。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：无运行时开销，可内联优化。</li>
+<li><strong>缺点</strong>：只能处理单一类型，缺乏灵活性。</li>
+</ul>
 <h3 id="4-trait对象的要求与限制"><a href="#4-trait对象的要求与限制" class="headerlink" title="4. trait对象的要求与限制"></a>4. trait对象的要求与限制</h3><p>对象安全（Object Safety）：</p>
 <ul>
 <li><p>定义：只有对象安全的trait才能作为trait对象（dyn Trait）。</p>
@@ -783,31 +787,7 @@ Drawing a select box (100x20) with 2 options<span aria-hidden="true" class="line
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">trait</span> Draw <span class="token punctuation">{</span>
     <span class="token keyword">fn</span> <span class="token function">draw</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 无 Self 或泛型，对象安全</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><ul>
-<li><p>状态模式</p>
-<p>：</p>
-<ul>
-<li>定义：允许对象在内部状态变化时改变行为。</li>
-<li>Rust实现：通过结构体和trait定义状态，使用状态转换替代条件分支。</li>
-</ul>
-</li>
-<li><p>封装</p>
-<p>：</p>
-<ul>
-<li>将状态和行为封装在单独的类型中，隐藏实现细节。</li>
-</ul>
-</li>
-<li><p>多态限制</p>
-<p>：</p>
-<ul>
-<li>Rust无继承，状态模式通过trait和结构体模拟。</li>
-</ul>
-</li>
-<li><p><strong>示例场景</strong>：一个博客文章系统，包含草稿、待审和已发布状态。</p>
-</li>
-</ul>
-<h3 id="示例代码与注释"><a href="#示例代码与注释" class="headerlink" title="示例代码与注释"></a>示例代码与注释</h3><h4 id="初始版本（未使用状态模式）"><a href="#初始版本（未使用状态模式）" class="headerlink" title="初始版本（未使用状态模式）"></a>初始版本（未使用状态模式）</h4><pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 定义博客文章结构体，包含内容和状态 pub struct Post {    state: Option&lt;Box&lt;dyn State>>, // 动态分发的状态，使用 trait 对象    content: String,              // 文章内容 } impl Post {    // 创建新文章，初始为空草稿状态    pub fn new() -> Post {        Post {            state: Some(Box::new(Draft {})),            content: String::new(),        }    }     // 添加文本，只有草稿状态允许    pub fn add_text(&amp;mut self, text: &amp;str) {        self.content.push_str(text);    }     // 返回内容，需检查状态    pub fn content(&amp;self) -> &amp;str {        "" // 初始为空，需状态控制    }     // 请求审核，将草稿转为待审    pub fn request_review(&amp;mut self) {        if let Some(s) = self.state.take() {            self.state = Some(s.request_review());        }    }     // 批准发布，将待审转为已发布    pub fn approve(&amp;mut self) {        if let Some(s) = self.state.take() {            self.state = Some(s.approve());        }    } } // 定义状态 trait，描述状态行为 trait State {    fn request_review(self: Box&lt;Self>) -> Box&lt;dyn State>;    fn approve(self: Box&lt;Self>) -> Box&lt;dyn State>;    fn content&lt;'a>(&amp;self, _post: &amp;'a Post) -> &amp;'a str {        "" // 默认返回空字符串    } } // 草稿状态 struct Draft {} impl State for Draft {    // 草稿请求审核，转为待审状态    fn request_review(self: Box&lt;Self>) -> Box&lt;dyn State> {        Box::new(PendingReview {})    }     // 草稿不能直接批准，无效转换    fn approve(self: Box&lt;Self>) -> Box&lt;dyn State> {        self // 返回自身，无效操作    } } // 待审状态 struct PendingReview {} impl State for PendingReview {    // 待审状态再次请求审核，无变化    fn request_review(self: Box&lt;Self>) -> Box&lt;dyn State> {        self // 返回自身，无效操作    }     // 待审批准，转为已发布状态    fn approve(self: Box&lt;Self>) -> Box&lt;dyn State> {        Box::new(Published {})    } } // 已发布状态 struct Published {} impl State for Published {    // 已发布状态请求审核，无变化    fn request_review(self: Box&lt;Self>) -> Box&lt;dyn State> {        self // 返回自身，无效操作    }     // 已发布状态再次批准，无变化    fn approve(self: Box&lt;Self>) -> Box&lt;dyn State> {        self // 返回自身，无效操作    }     // 已发布状态返回文章内容    fn content&lt;'a>(&amp;self, post: &amp;'a Post) -> &amp;'a str {        &amp;post.content // 返回实际内容    } }</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="3-使用trait对象实现面向对象设计模式"><a href="#3-使用trait对象实现面向对象设计模式" class="headerlink" title="3 使用trait对象实现面向对象设计模式"></a>3 使用trait对象实现面向对象设计模式</h2><p><strong>状态模式</strong>（<em>state pattern</em>）是一个面向对象设计模式。该模式的关键在于一个值有某些内部状态，体现为一系列的 <strong>状态对象</strong>，同时值的行为随着其内部状态而改变。状态对象共享功能：当然，在 Rust 中使用结构体和 trait 而不是对象和继承。每一个状态对象负责其自身的行为，以及该状态何时应当转移至另一个状态。持有一个状态对象的值对于不同状态的行为以及何时状态转移毫不知情。</p>
+<h2 id="3-使用trait对象实现面向对象设计模式"><a href="#3-使用trait对象实现面向对象设计模式" class="headerlink" title="3.使用trait对象实现面向对象设计模式"></a>3.使用trait对象实现面向对象设计模式</h2><p><strong>状态模式</strong>（<em>state pattern</em>）是一个面向对象设计模式。该模式的关键在于一个值有某些内部状态，体现为一系列的 <strong>状态对象</strong>，同时值的行为随着其内部状态而改变。状态对象共享功能：当然，在 Rust 中使用结构体和 trait 而不是对象和继承。每一个状态对象负责其自身的行为，以及该状态何时应当转移至另一个状态。持有一个状态对象的值对于不同状态的行为以及何时状态转移毫不知情。</p>
 <p>为了探索这个概念，我们将实现一个增量式的发布博文的工作流。这个博客的最终功能看起来像这样：</p>
 <ol>
 <li>博文从空白的草案开始。</li>
@@ -1348,7 +1328,7 @@ Drawing a select box (100x20) with 2 options<span aria-hidden="true" class="line
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">215.6k</span>&nbsp;字
+						class="white-color">215k</span>&nbsp;字
              
             
 
