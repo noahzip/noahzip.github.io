@@ -1,0 +1,1041 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Rust高级特征之高级类型, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Rust 的类型系统有一些我们曾经提到但没有讨论过的功能。首先我们从一个关于为什么 newtype 与类型一样有用的更宽泛的讨论开始。接着会转向类型别名（type aliases），一个类似于 newtype 但有着稍微不同的语义的功能。我">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>Rust高级特征之高级类型 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/about" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-user-circle-o"></i>
+                    
+                    <span>关于</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Rust高级特征之高级类型</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-03
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-03
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.3k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Rust 的类型系统有一些我们曾经提到但没有讨论过的功能。首先我们从一个关于为什么 newtype 与类型一样有用的更宽泛的讨论开始。接着会转向类型别名（type aliases），一个类似于 newtype 但有着稍微不同的语义的功能。我们还会讨论 <code>!</code> 类型和动态大小类型。</p>
+<h2 id="1-newtype-模式"><a href="#1-newtype-模式" class="headerlink" title="1. newtype 模式"></a>1. newtype 模式</h2><h3 id="1-1-介绍"><a href="#1-1-介绍" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h3><p><code>newtype</code> 模式用于在外部类型上实现外部 <code>trait</code>。由于 <strong>孤儿规则 (orphan rule)</strong> 限制，我们只能在<strong>当前 crate</strong> 本地定义的类型上实现 <code>trait</code>，或者在<strong>当前 crate</strong> 本地定义的 <code>trait</code> 上实现外部类型。</p>
+<p>但 <code>newtype</code> 模式提供了一种解决方案，即：</p>
+<ul>
+<li><strong>创建一个封装外部类型的新结构体</strong>（通常是元组结构体）。</li>
+<li><strong>在这个新类型上实现所需的 <code>trait</code></strong>。</li>
+</ul>
+<h3 id="1-2-示例：在-Vec-lt-String-gt-上实现-Display"><a href="#1-2-示例：在-Vec-lt-String-gt-上实现-Display" class="headerlink" title="1.2 示例：在 Vec<String> 上实现 Display"></a>1.2 示例：在 <code>Vec&lt;String&gt;</code> 上实现 <code>Display</code></h3><p><strong>问题</strong>：</p>
+<ul>
+<li><code>Display</code> 是标准库 <code>std::fmt</code> 中的 <code>trait</code>。</li>
+<li><code>Vec&lt;T&gt;</code> 也是标准库类型。</li>
+<li><strong>孤儿规则</strong> 不允许我们直接为 <code>Vec&lt;T&gt;</code> 实现 <code>Display</code>。</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li><strong>创建一个 <code>Wrapper</code> 结构体</strong>，它内部存储 <code>Vec&lt;String&gt;</code>。</li>
+<li><strong>在 <code>Wrapper</code> 上实现 <code>Display</code></strong>，并代理 <code>Vec&lt;String&gt;</code> 的功能。</li>
+</ul>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 引入标准库中的 fmt 模块，用于格式化相关的 trait</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>fmt<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 定义一个名为 Wrapper 的元组结构体，包装一个 Vec&lt;String></span>
+<span class="token keyword">struct</span> <span class="token function">Wrapper</span><span class="token punctuation">(</span>Vec<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 为 Wrapper 类型实现 Display trait，用于自定义格式化输出</span>
+<span class="token keyword">impl</span> fmt<span class="token punctuation">:</span><span class="token punctuation">:</span>Display <span class="token keyword">for</span> Wrapper <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// fmt 方法定义了如何将 Wrapper 格式化为字符串</span>
+    <span class="token comment" spellcheck="true">// &amp;self 是当前实例的引用，f 是格式化器</span>
+    <span class="token keyword">fn</span> <span class="token function">fmt</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">,</span> f<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> fmt<span class="token punctuation">:</span><span class="token punctuation">:</span>Formatter<span class="token punctuation">)</span> <span class="token punctuation">-></span> fmt<span class="token punctuation">:</span><span class="token punctuation">:</span>Result <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 使用 write! 宏将 Vec&lt;String> 的内容连接并格式化为 "[元素1,元素2,...]" 的形式</span>
+        <span class="token comment" spellcheck="true">// self.0 访问元组结构体的第一个字段（Vec&lt;String>）</span>
+        <span class="token comment" spellcheck="true">// join(",") 将向量中的字符串用逗号连接</span>
+        <span class="token function">write!</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> <span class="token string">"[{}]"</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 主函数，程序的入口</span>
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> w <span class="token operator">=</span> <span class="token function">Wrapper</span><span class="token punctuation">(</span><span class="token function">vec!</span><span class="token punctuation">[</span>String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"Wrapper"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// {w} 调用 Display trait 的实现</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"w = {w}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//w =[Hello,Wrapper]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>解析</strong>：</p>
+<ul>
+<li><code>Wrapper</code> 结构体只是 <code>Vec&lt;String&gt;</code> 的简单封装。</li>
+<li>在 <code>fmt::Display</code> 实现中，<code>self.0.join(", ")</code> 访问 <code>Vec&lt;String&gt;</code> 的值，并用 <code>,</code> 连接字符串。</li>
+<li><code>write!</code> 宏用于格式化输出。</li>
+</ul>
+<h3 id="1-3-newtype-模式的优缺点"><a href="#1-3-newtype-模式的优缺点" class="headerlink" title="1.3 newtype 模式的优缺点"></a>1.3 <code>newtype</code> 模式的优缺点</h3><p>✅ <strong>优点</strong>：</p>
+<ul>
+<li><strong>可以为外部类型实现外部 <code>trait</code></strong>，绕开孤儿规则。</li>
+<li><strong>零运行时开销</strong>，<code>Wrapper</code> 在编译时会被优化掉。</li>
+<li><strong>可提供额外的类型安全</strong>（比如封装 <code>u64</code> 作为 <code>UserId</code>，防止误用）。</li>
+</ul>
+<p>⚠️ <strong>缺点</strong>：</p>
+<ul>
+<li><code>Wrapper</code> 结构体默认<strong>不会继承 <code>Vec&lt;T&gt;</code> 的方法</strong>。</li>
+<li>必须<strong>手动实现</strong> <code>Vec&lt;T&gt;</code> 的所有方法，或者使用 <code>Deref</code> 进行透明代理（见下文）。</li>
+</ul>
+<hr>
+<h2 id="2-Deref-trait-代理方法"><a href="#2-Deref-trait-代理方法" class="headerlink" title="2. Deref trait 代理方法"></a>2. <code>Deref</code> trait 代理方法</h2><h3 id="2-1-Deref-的作用"><a href="#2-1-Deref-的作用" class="headerlink" title="2.1 Deref 的作用"></a>2.1 <code>Deref</code> 的作用</h3><p>如果 <code>Wrapper</code> 需要<strong>继承 <code>Vec&lt;T&gt;</code> 的所有方法</strong>，可以实现 <code>Deref</code>，让 <code>Wrapper</code> <strong>自动解引用</strong>为 <code>Vec&lt;T&gt;</code>。</p>
+<h3 id="2-2-示例：实现-Deref-代理-Vec-lt-T-gt"><a href="#2-2-示例：实现-Deref-代理-Vec-lt-T-gt" class="headerlink" title="2.2 示例：实现 Deref 代理 Vec<T>"></a>2.2 示例：实现 <code>Deref</code> 代理 <code>Vec&lt;T&gt;</code></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>ops<span class="token punctuation">:</span><span class="token punctuation">:</span>Deref<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token function">Wrapper</span><span class="token punctuation">(</span>Vec<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">impl</span> Deref <span class="token keyword">for</span> Wrapper <span class="token punctuation">{</span>
+    <span class="token keyword">type</span> Target <span class="token operator">=</span> Vec<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 让 Wrapper 解引用为 Vec&lt;String></span>
+
+    <span class="token keyword">fn</span> <span class="token function">deref</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token operator">&amp;</span>Self<span class="token punctuation">:</span><span class="token punctuation">:</span>Target <span class="token punctuation">{</span>
+        <span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token number">0</span> <span class="token comment" spellcheck="true">// 返回内部 Vec&lt;String> 的引用</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> w <span class="token operator">=</span> <span class="token function">Wrapper</span><span class="token punctuation">(</span><span class="token function">vec!</span><span class="token punctuation">[</span>String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 由于实现了 Deref，Wrapper 可以直接调用 Vec&lt;String> 的方法</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"First element: {}"</span><span class="token punctuation">,</span> w<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 访问 Vec&lt;String> 的第一个元素</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>解析</strong>：</p>
+<ul>
+<li><code>impl Deref for Wrapper</code> 让 <code>Wrapper</code> <strong>像 <code>Vec&lt;String&gt;</code> 一样使用</strong>。</li>
+<li><code>type Target = Vec&lt;String&gt;</code> 指定<strong>解引用的目标类型</strong>。</li>
+<li><code>deref</code> 方法返回 <code>&amp;self.0</code>，这样 <code>Wrapper</code> <strong>自动解引用为 <code>Vec&lt;String&gt;</code></strong>。</li>
+<li>之后，<code>Wrapper</code> 可以直接使用 <code>Vec&lt;T&gt;</code> 的方法，如 <code>w[0]</code>。</li>
+</ul>
+<hr>
+<h2 id="3-类型别名（Type-Alias）"><a href="#3-类型别名（Type-Alias）" class="headerlink" title="3. 类型别名（Type Alias）"></a>3. 类型别名（Type Alias）</h2><h3 id="3-1-作用"><a href="#3-1-作用" class="headerlink" title="3.1 作用"></a>3.1 作用</h3><ul>
+<li><strong>给已有类型定义新的名字</strong>，提升可读性。</li>
+<li><strong>简化复杂类型</strong>，特别是涉及泛型时。</li>
+</ul>
+<h3 id="3-2-示例：简化-Box-lt-dyn-Fn-i32-gt-i32-gt"><a href="#3-2-示例：简化-Box-lt-dyn-Fn-i32-gt-i32-gt" class="headerlink" title="3.2 示例：简化 Box<dyn Fn(i32) -> i32>"></a>3.2 示例：简化 <code>Box&lt;dyn Fn(i32) -&gt; i32&gt;</code></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 定义类型别名 Thunk，表示一个动态分发的闭包 trait 对象</span>
+<span class="token keyword">type</span> Thunk <span class="token operator">=</span> Box<span class="token operator">&lt;</span>dyn <span class="token function">Fn</span><span class="token punctuation">(</span>i32<span class="token punctuation">)</span> <span class="token punctuation">-></span> i32<span class="token operator">></span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Thunk 是类型别名，代表一个闭包 trait 对象</span>
+<span class="token keyword">fn</span> <span class="token function">takes_long_type</span><span class="token punctuation">(</span>f<span class="token punctuation">:</span> Thunk<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 调用闭包 f，传入参数 10，并打印结果</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Result: {}"</span><span class="token punctuation">,</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment" spellcheck="true">// 该函数构造并返回一个闭包，作为 Thunk 类型返回</span>
+<span class="token keyword">fn</span> <span class="token function">returns_long_type</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Thunk <span class="token punctuation">{</span>
+    Box<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token operator">|</span>x<span class="token operator">|</span> x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> 
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> f<span class="token punctuation">:</span> Thunk <span class="token operator">=</span> Box<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token operator">|</span>x<span class="token operator">|</span> x <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 调用 takes_long_type 函数，传入闭包 f</span>
+    <span class="token comment" spellcheck="true">// f 在函数中被调用，计算 10 * 2 并打印结果</span>
+    <span class="token function">takes_long_type</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>解析</strong>：</p>
+<ul>
+<li><code>type Thunk = Box&lt;dyn Fn(i32) -&gt; i32&gt;;</code> 定义别名，简化闭包类型。</li>
+<li><code>takes_long_type(f: Thunk)</code> 直接使用 <code>Thunk</code>，提升可读性。</li>
+<li><code>returns_long_type()</code> 返回 <code>Thunk</code>，避免 <code>Box&lt;dyn Fn(i32) -&gt; i32&gt;</code> 过长。</li>
+</ul>
+<p>✅ <strong>优势</strong>：</p>
+<ul>
+<li>提高代码可读性，减少冗长类型。</li>
+<li>避免多次重复 <code>Box&lt;dyn Fn(i32) -&gt; i32&gt;</code>。</li>
+</ul>
+<p>⚠️ <strong>注意</strong>：</p>
+<ul>
+<li>类型别名不会创建新的类型，<code>Thunk</code> 仍然是 <code>Box&lt;dyn Fn(i32) -&gt; i32&gt;</code>。</li>
+</ul>
+<hr>
+<h2 id="4-类型（Never-Type）"><a href="#4-类型（Never-Type）" class="headerlink" title="4. !  类型（Never Type）"></a>4. !  类型（Never Type）</h2><p>Rust 有一个特殊的类型，名为 !，在类型理论术语中被称为<code>空类型（empty type）</code>，因为它没有任何值。我们更喜欢称它为<code>never type</code>，用于 <code>panic!()</code>、<code>loop {}</code>,它在函数永不返回时充当返回类型的占位符。以下是一个例子：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">never_returns</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token operator">!</span> <span class="token punctuation">{</span>
+    <span class="token function">panic!</span><span class="token punctuation">(</span><span class="token string">"This function will never return!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这段代码的含义是：函数 bar 永不返回。返回 never 类型的函数被称为<code>发散函数（diverging functions）</code>。我们无法创建类型 ! 的值，因此 bar 永远不可能返回。</p>
+<ul>
+<li><code>fn never_returns() -&gt; !</code> 表示该函数<strong>不会返回</strong>。</li>
+<li><code>panic!()</code> 直接导致程序终止。</li>
+</ul>
+<p><strong>应用场景</strong>：</p>
+<ul>
+<li><strong>死循环</strong>：<code>loop {}</code>。</li>
+<li><strong>错误处理</strong>：<code>panic!()</code>、<code>unreachable!()</code>。</li>
+</ul>
+<hr>
+<h2 id="5-动态大小类型和-Sized-trait"><a href="#5-动态大小类型和-Sized-trait" class="headerlink" title="5. 动态大小类型和 Sized trait"></a>5. 动态大小类型和 Sized trait</h2><p>Rust 需要知道有关类型的某些细节，例如为特定类型的值需要分配多少空间。这便是起初留下的一个类型系统中令人迷惑的角落：即 <code>动态大小类型（*dynamically sized types）</code>。这有时被称为 <code>DST</code>或 <code>unsized types</code>，这些类型允许我们处理只有在运行时才知道大小的类型。</p>
+<p><code>str</code> 是一个 <code>DST</code>,直到运行时我们都不知道字符串有多长。因为直到运行时都不能知道其大小，也就意味着不能创建 <code>str</code> 类型的变量，也不能获取 <code>str</code> 类型的参数。考虑一下这些代码，它们不能工作：</p>
+<pre class="line-numbers language-rust"><code class="language-rust">    <span class="token keyword">let</span> s1<span class="token punctuation">:</span> str <span class="token operator">=</span> <span class="token string">"Hello there!"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ^^ doesn't have a size known at compile-time</span>
+    <span class="token keyword">let</span> s2<span class="token punctuation">:</span> str <span class="token operator">=</span> <span class="token string">"How's it going?"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ^^ doesn't have a size known at compile-time</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Rust 需要知道应该为特定类型的值分配多少内存，同时所有同一类型的值必须使用相同数量的内存。如果允许编写这样的代码，也就意味着这两个 <code>str</code> 需要占用完全相同大小的空间，不过它们有着不同的长度。这也就是为什么不可能创建一个存放动态大小类型的变量的原因。</p>
+<p>那么该怎么办呢？你已经知道了这种问题的答案：<code>s1</code> 和 <code>s2</code> 的类型是 <code>&amp;str</code> 而不是 <code>str</code>。</p>
+<p>slice 数据结构仅仅储存了开始位置和 slice 的长度。所以虽然 <code>&amp;T</code> 是一个储存了 <code>T</code> 所在的内存位置的单个值，</p>
+<p><code>&amp;str</code> 则是 <strong>两个</strong> 值：<code>str</code> 的地址和其长度。这样，<code>&amp;str</code> 就有了一个在编译时可以知道的大小：它是 <code>usize</code> 长度的两倍。也就是说，我们总是知道 <code>&amp;str</code> 的大小，而无论其引用的字符串是多长。这里是 Rust 中动态大小类型的常规用法：它们有一些额外的元信息来储存动态信息的大小。</p>
+<p>这引出了<strong>动态大小类型的黄金规则：必须将动态大小类型的值置于某种指针之后</strong>。</p>
+<p>为了处理<code>DST</code>，Rust 提供了 <code>Sized</code> trait 来决定一个类型的大小是否在编译时可知。这个 trait 自动为编译器在编译时就知道大小的类型实现。另外，Rust 隐式的为每一个泛型函数增加了 <code>Sized</code> bound。也就是说，对于如下泛型函数定义：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> generic<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">(</span>t<span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// --snip--</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>实际上被当作如下处理：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> generic<span class="token operator">&lt;</span>T<span class="token punctuation">:</span> Sized<span class="token operator">></span><span class="token punctuation">(</span>t<span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// --snip--</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>泛型函数默认只能用于在编译时已知大小的类型。然而可以使用如下特殊语法来放宽这个限制：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> generic<span class="token operator">&lt;</span>T<span class="token punctuation">:</span> ?Sized<span class="token operator">></span><span class="token punctuation">(</span>t<span class="token punctuation">:</span> <span class="token operator">&amp;</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// --snip--</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><code>?Sized</code> 上的 trait bound 意味着 “<code>T</code> 可能是也可能不是 <code>Sized</code>” 同时这个注解会覆盖泛型类型必须在编译时拥有固定大小的默认规则。这种意义的 <code>?Trait</code> 语法只能用于 <code>Sized</code> ，而不能用于任何其他 trait。</p>
+<p>另外注意我们将 <code>t</code> 参数的类型从 <code>T</code> 变为了 <code>&amp;T</code>：因为其类型可能不是 <code>Sized</code> 的，所以需要将其置于某种指针之后。在这个例子中选择了引用。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/03/rustgao-ji-te-zheng-zhi-han-shu-yu-bi-bao/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/15.png" class="responsive-img" alt="Rust高级特征之高级函数与闭包">
+                            
+                            <span class="card-title">Rust高级特征之高级函数与闭包</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                本部分将探索一些有关函数和闭包的高级功能，这包括函数指针以及返回值闭包。
+1.函数指针我们讨论过了如何向函数传递闭包；也可以向函数传递常规函数！这个技术在我们希望传递已经定义的函数而不是重新定义闭包作为参数时很有用。函数满足类型 fn（小写
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-03
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/03/rustgao-ji-te-zheng-zhi-gao-ji-trait/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/26.png" class="responsive-img" alt="Rust高级特征之高级trait">
+                            
+                            <span class="card-title">Rust高级特征之高级trait</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                本节总结了 Rust 程序设计语言中关于高级 trait 的内容，涵盖关联类型、默认泛型参数、完全限定语法、超 trait 和 Newtype 模式等特性。
+1.在 Trait 定义中使用关联类型指定占位符类型关联类型（associated
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-03
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">238.3k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>MySQL索引应⽤介绍 | 未见初墨</title>
+    <title>MySQL索引应⽤介绍 | Sparks Fly</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -35,7 +35,7 @@
         
     </style>
     <script src="/libs/jquery/jquery.min.js"></script>
-<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="未见初墨" type="application/atom+xml">
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -50,7 +50,7 @@
                     
                         <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">未见初墨</span>
+                    <span class="logo-span">Sparks Fly</span>
                 </a>
             </div>
             
@@ -173,7 +173,7 @@
             <img src="/medias/avatars/avatar.png"
                  class="logo-img circle responsive-img">
         
-        <div class="logo-name">未见初墨</div>
+        <div class="logo-name">Sparks Fly</div>
         <div class="logo-desc">
             
                 Never really desperate, only the lost of the soul.
@@ -418,14 +418,14 @@
             <div id="articleContent">
                 <h1 id="MySQL索引应⽤介绍"><a href="#MySQL索引应⽤介绍" class="headerlink" title="MySQL索引应⽤介绍"></a>MySQL索引应⽤介绍</h1><h2 id="1-索引分类"><a href="#1-索引分类" class="headerlink" title="1. 索引分类"></a><strong>1</strong>. 索引分类</h2><p>MyIsam 存储引擎中索引的存储格式</p>
 <p>在MyIsam中，也是通过B+树作为索引的数据结构，但是跟InnoDB不同的是，MyIsam的索引⽂件和数据⽂件是分开的，使⽤.MYI来表示索引⽂件，使⽤.MYD来表示数据⽂件，那主键索引的结构为:</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730094842925.png" alt="image"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730094842925.png" alt="image"></p>
 <p>可以看到，MyIsam索引的中间节点的组织⽅式，跟InnoDB相同，也是只存储指向的数据⻚的指针和指向的数据⻚中的最⼩id；但是叶⼦节点就不同了：</p>
 <ul>
 <li>InnoDB的索引树中叶⼦节点中，存储了记录⾏的所有的数据信息，也就是有所有数据；</li>
 <li>MyIsam的索引树中叶⼦节点中，只存储了指向的数据⽂件中的指针位置，需要到数据⽂件中去找到具体的记录⾏的数据信息；</li>
 </ul>
 <p>既然主键索引的叶⼦节点中是指针指向的数据⽂件中的具体的数据信息，那⾮主键索引肯定也就没有区别了，也是通过叶⼦节点来指向数据⽂件：</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730095023895.png" alt="image"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730095023895.png" alt="image"></p>
 <p>根据InnoDB和MyIsam 这两种存储⽅式，就可以总结出索引的第⼀种分类了； </p>
 <h3 id="1-1聚簇索引与⾮聚簇索引"><a href="#1-1聚簇索引与⾮聚簇索引" class="headerlink" title="1.1聚簇索引与⾮聚簇索引"></a><strong>1</strong>.1聚簇索引与⾮聚簇索引</h3><ul>
 <li><strong>聚簇索引</strong>：数据和索引结构是存放在⼀起的；<ul>
@@ -449,7 +449,7 @@
 </ul>
 </li>
 <li><p><strong>普通索引（⼆级索引</strong>）：在InnoDB中，对于⾮主键，也就是其他字段，⽤户⾃⼰创建的索引，都叫做普通索引；假设以name列来创建⼀个索引，它的特征是：</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730104537700.png" alt="二级索引"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730104537700.png" alt="二级索引"></p>
 </li>
 </ul>
 <ul>
@@ -469,7 +469,7 @@
 <ul>
 <li><strong>联合索引（也是普通索引</strong>）：给多个列创建索引；假设以 name+age 列创建⼀个索引，特征是（这⾥只画图了索引⻚）</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730103606339.png" alt="联合索引"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730103606339.png" alt="联合索引"></p>
 <p>索引⻚中的记录⾏信息为：name+age，当然还有个指向数据⻚的指针漏掉了；</p>
 <ul>
 <li>数据⻚中同样没有完整的记录⾏的所有数据信息，⽽是name+age+主键ID；</li>
@@ -555,7 +555,7 @@ select * from user_account where money > 1000 and money < 100000; <span aria-hid
 </ul>
 </li>
 <li><p><strong>索引列不能参与计算、嵌套函数、编码转换</strong>：因为索引是对于列的原值创建的B+树，如果你的查询条件中的值做了什么转换（计算、函数、编码等转换），那肯定就没法去到根据原值创建的B+树上进⾏树搜索了；</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730110150993.png" alt="索引列不能参与计算、嵌套函数、编码转换"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730110150993.png" alt="索引列不能参与计算、嵌套函数、编码转换"></p>
 <ul>
 <li>这个是对于t_modified字段创建的索引;<ul>
 <li>如果查询条件为where t_modified=’2018-7-1’，InnoDB就会按照绿⾊箭头的路线，快速定位到t_modified=’2018-7-1’的地⽅；</li>
@@ -585,7 +585,7 @@ select * from user where name like '张%' and age=10<span aria-hidden="true" cla
 <li><p>也就是说从联合索引中取出的数据只判断name字段（不管age字段），满⾜name字段的就拿去回表了，获取所有的信息之后，再在server层进⾏筛选；</p>
 </li>
 <li><p>在MySQL5.6之前都是这样筛选的；</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730110759890.png" alt="索引下推1"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730110759890.png" alt="索引下推1"></p>
 </li>
 </ul>
 </li>
@@ -596,7 +596,7 @@ select * from user where name like '张%' and age=10<span aria-hidden="true" cla
 <li><p>然后再将这些筛选过滤之后的满⾜条件的数据，进⾏回表；</p>
 </li>
 <li><p>显⽽易⻅，这种⽅式回表的记录数会⽐第⼀种少很多很多，所以是⼀种优化；</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730110944197.png" alt="索引下推2"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220730110944197.png" alt="索引下推2"></p>
 </li>
 </ul>
 </li>
@@ -992,7 +992,7 @@ select * from user where name like '张%' and age=10<span aria-hidden="true" cla
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">215k</span>&nbsp;字
+						class="white-color">238.3k</span>&nbsp;字
              
             
 
@@ -1144,5 +1144,10 @@ select * from user where name like '张%' and age=10<span aria-hidden="true" cla
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-</body>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>

@@ -1,0 +1,1065 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Rust高级特征之宏, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="宏（Macro）指的是 Rust 中一系列的功能：使用 macro_rules! 的 声明（Declarative）宏，和三种 过程（Procedural）宏：
+
+自定义 #[derive] 宏在结构体和枚举上指定通过 derive 属性添">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>Rust高级特征之宏 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/about" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-user-circle-o"></i>
+                    
+                    <span>关于</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Rust高级特征之宏</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-03
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-03
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.1k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        11 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><code>宏（Macro）</code>指的是 Rust 中一系列的功能：使用 <code>macro_rules!</code> 的 <strong>声明</strong>（<em>Declarative</em>）宏，和三种 <strong>过程</strong>（<em>Procedural</em>）宏：</p>
+<ul>
+<li>自定义 <code>#[derive]</code> 宏在结构体和枚举上指定通过 <code>derive</code> 属性添加的代码</li>
+<li>类属性（Attribute-like）宏定义可用于任意项的自定义属性</li>
+<li>类函数宏看起来像函数不过作用于作为参数传递的 token</li>
+</ul>
+<p>我们会依次讨论每一种宏，不过首要的是，为什么已经有了函数还需要宏呢？</p>
+<h2 id="1-宏和函数的区别"><a href="#1-宏和函数的区别" class="headerlink" title="1.宏和函数的区别"></a>1.宏和函数的区别</h2><p>从根本上来说，宏是一种为写其他代码而写代码的方式，即所谓的<code>元编程（metaprogramming）</code>。所有的这些宏以 <strong>展开</strong> 的方式来生成比你所手写出的更多的代码。</p>
+<p>元编程对于减少大量编写和维护的代码是非常有用的，它也扮演了函数扮演的角色。但宏有一些函数所没有的附加能力。</p>
+<p><strong>他们之间主要有如下区别：</strong></p>
+<ol>
+<li><strong>目的和作用</strong>：<ul>
+<li>宏用于生成代码，减少手动编写和维护的工作，属于元编程的一部分。</li>
+<li>函数用于执行特定的操作，关注实际的逻辑处理。</li>
+</ul>
+</li>
+<li><strong>参数和展开</strong>：<ul>
+<li>函数的参数数量和类型必须提前声明，且在运行时调用。</li>
+<li>宏在编译时展开，支持不同数量的参数，并且可以在编译时实现如 trait 的功能。</li>
+</ul>
+</li>
+<li><strong>复杂性与可维护性</strong>：<ul>
+<li>宏的定义较为复杂，因为它需要编写生成代码的代码，且较难理解和维护。</li>
+<li>函数定义相对简洁明了，更容易理解和使用。</li>
+</ul>
+</li>
+<li><strong>调用顺序</strong>：<ul>
+<li>宏在调用之前必须定义或引入作用域。</li>
+<li>函数可以在任何地方定义和调用，调用顺序不受限制。</li>
+</ul>
+</li>
+</ol>
+<p>宏提供了更大的灵活性和能力，但也带来了复杂性，因此需要小心使用。</p>
+<h2 id="2-使用声明宏用于通用元编程"><a href="#2-使用声明宏用于通用元编程" class="headerlink" title="2.使用声明宏用于通用元编程"></a>2.使用声明宏用于通用元编程</h2><p>Rust 最常用的宏形式是<code>声明宏（declarative macros）</code>。它们有时也被称为 <code>macros by example</code>、<code>macro_rules!宏</code> 或者就是 <code>macros</code></p>
+<p>声明宏允许我们编写一些类似 Rust <code>match</code> 表达式的代码。<code>match</code> 表达式是控制结构，其接收一个表达式，与表达式的结果进行模式匹配，然后根据模式匹配执行相关代码。宏也将一个值和包含相关代码的模式进行比较；此种情况下，该值是传递给宏的 Rust 源代码字面值，模式用于和前面提到的源代码字面值进行比较，每个模式的相关代码会替换传递给宏的代码。所有这一切都发生于编译时。</p>
+<p>可以使用 <code>macro_rules!</code> 来定义宏。让我们通过查看 <code>vec!</code> 宏定义来探索如何使用 <code>macro_rules!</code> 结构。下面的宏用三个整数创建一个 vector：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> v<span class="token punctuation">:</span> Vec<span class="token operator">&lt;</span>u32<span class="token operator">></span> <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>也可以使用 <code>vec!</code> 宏来构造两个整数的 vector 或五个字符串 slice 的 vector。但却无法使用函数做相同的事情，因为我们无法预先知道参数值的数量和类型。</p>
+<p>下面的代码展示了一个 <code>vec!</code> 稍微简化的定义。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// #[macro_export] 表示此宏将被导出，允许在其他模块或 crate 中使用</span>
+<span class="token attribute attr-name">#[macro_export]</span> 
+<span class="token macro-rules function">macro_rules!</span> vec <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// macro_rules! 定义一个声明式宏 vec 宏名为 vec</span>
+
+    <span class="token punctuation">(</span> $<span class="token punctuation">(</span> $x<span class="token punctuation">:</span>expr <span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">*</span> <span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//  $( $x:expr ),* ) 表示接受零个或多个表达式，用逗号分隔 $x:expr 表示每个参数是一个表达式，,* 表示重复零次或多次</span>
+        <span class="token punctuation">{</span><span class="token comment" spellcheck="true">// 宏展开为以下代码块</span>
+            <span class="token keyword">let</span> <span class="token keyword">mut</span> temp_vec <span class="token operator">=</span> Vec<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 创建一个新的空的 Vec，类型由推导决定</span>
+            $<span class="token punctuation">(</span> <span class="token comment" spellcheck="true">// 以下部分会被重复展开，次数取决于输入的表达式数量</span>
+                temp_vec<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>$x<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 将每个表达式 $x 的值推入 temp_vec</span>
+            <span class="token punctuation">)</span><span class="token operator">*</span>
+            temp_vec
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一个 <code>vec!</code> 宏定义的简化版本</p>
+<blockquote>
+<p>注意：标准库中实际定义的 <code>vec!</code> 包括预分配适当量的内存的代码。这部分为代码优化，为了让示例简化，此处并没有包含在内。</p>
+</blockquote>
+<p><code>#[macro_export]</code> 注解表明只要导入了定义这个宏的 crate，该宏就应该是可用的。如果没有该注解，这个宏不能被引入作用域。</p>
+<p>接着使用 <code>macro_rules!</code> 和宏名称开始宏定义，且所定义的宏并 <strong>不带</strong> 感叹号。名字后跟大括号表示宏定义体，在该例中宏名称是 <code>vec</code> 。</p>
+<p><code>vec!</code> 宏的结构和 <code>match</code> 表达式的结构类似。此处有一个分支模式 <code>( $( $x:expr ),* )</code> ，后跟 <code>=&gt;</code> 以及和模式相关的代码块。如果模式匹配，该相关代码块将被执行。这里这个宏只有一个模式，那就只有一个有效匹配方向，其他任何模式方向（译者注：不匹配这个模式）都会导致错误。更复杂的宏会有多个分支模式。</p>
+<p>首先，一对括号包含了整个模式。我们使用<code>$</code>在宏系统中声明一个变量来包含匹配该模式的 Rust 代码。<code>$</code>符号明确表明这是一个宏变量而不是普通 Rust 变量。之后是一对括号，其捕获了符合括号内模式的值用以在替代代码中使用。<code>$()</code> 内则是 <code>$x:expr</code> ，其匹配 Rust 的任意表达式，并将该表达式命名为 <code>$x</code>。</p>
+<p><code>$()</code> 之后的逗号说明一个可有可无的逗号分隔符可以出现在 <code>$()</code> 所匹配的代码之后。紧随逗号之后的 <code>*</code> 说明该模式匹配零个或更多个 <code>*</code> 之前的任何模式。</p>
+<p>当以 <code>vec![1, 2, 3];</code> 调用宏时，<code>$x</code> 模式与三个表达式 <code>1</code>、<code>2</code> 和 <code>3</code> 进行了三次匹配。</p>
+<p>现在让我们来看看与此分支模式相关联的代码块中的模式：匹配到模式中的<code>$()</code>的每一部分，都会在（<code>=&gt;</code>右侧）<code>$()*</code> 里生成<code>temp_vec.push($x)</code>，生成零次还是多次取决于模式匹配到多少次。<code>$x</code> 由每个与之相匹配的表达式所替换。当以 <code>vec![1, 2, 3];</code> 调用该宏时，替换该宏调用所生成的代码会是下面这样：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> temp_vec <span class="token operator">=</span> Vec<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    temp_vec<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    temp_vec<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    temp_vec<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    temp_vec
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们已经定义了一个宏，其可以接收任意数量和类型的参数，同时可以生成能够创建包含指定元素的 vector 的代码。</p>
+<h2 id="3-过程宏"><a href="#3-过程宏" class="headerlink" title="3.过程宏"></a>3.过程宏</h2><p>第二种形式的宏被称为 <code>过程宏（procedural macros）</code>，因为它们更像函数（一种过程类型）。过程宏接收 Rust 代码作为输入，在这些代码上进行操作，然后产生另一些代码作为输出，而非像声明式宏那样匹配对应模式然后以另一部分代码替换当前代码。有<strong>三种类型的过程宏</strong>（<code>自定义派生（derive）</code>，<code>类属性</code>和<code>类函数</code>），不过它们的工作方式都类似。</p>
+<p>创建过程宏时，其定义必须驻留在它们自己的具有特殊 crate 类型的 crate 中。这么做出于复杂的技术原因，将来我们希望能够消除这些限制。下面的代码展示了如何定义过程宏，其中 <code>some_attribute</code> 是一个使用特定宏变体的占位符。</p>
+<p>文件名：src/lib.rs</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> proc_macro<span class="token punctuation">;</span>
+
+<span class="token attribute attr-name">#[some_attribute]</span>
+<span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">some_name</span><span class="token punctuation">(</span>input<span class="token punctuation">:</span> TokenStream<span class="token punctuation">)</span> <span class="token punctuation">-></span> TokenStream <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>定义过程宏的函数接收一个 TokenStream 作为输入并生成 TokenStream 作为输出。<code>TokenStream</code> 是定义于<code>proc_macro</code> crate 里代表一系列 token 的类型，Rust 默认携带了<code>proc_macro</code> crate。这就是宏的核心：宏所处理的源代码组成了输入 <code>TokenStream</code>，宏生成的代码是输出 <code>TokenStream</code>。函数上还有一个属性；这个属性指明了我们创建的过程宏的类型。在同一 crate 中可以有多种的过程宏。</p>
+<p>让我们看看不同种类的程序宏。我们将从一个自定义的派生宏开始，然后解释使其他形式不同的小差异。</p>
+<p><strong>如何编写自定义 derive 宏</strong></p>
+<p>创建一个自定义 Derive 宏，使得用户可以通过 #[derive(HelloMacro)] 注解为类型自动实现 HelloMacro trait，调用 hello_macro() 时输出 Hello, Macro! My name is <typename>。</typename></p>
+<p><strong>项目结构</strong></p>
+<ul>
+<li><strong>hello_macro</strong>: 定义 HelloMacro trait 的库 crate。</li>
+<li><strong>hello_macro_derive</strong>: 实现过程宏的 crate。</li>
+<li><strong>macros</strong>: 使用宏的主程序（文档中提到 pancakes，但代码中是 macros/src，这里假设为 macros）。</li>
+</ul>
+<h3 id="1-创建两个库-crate"><a href="#1-创建两个库-crate" class="headerlink" title="1.创建两个库 crate"></a>1.创建两个库 crate</h3><pre class="line-numbers language-shell"><code class="language-shell">$ cargo new hello_macro --lib
+$ cargo new hello_macro_derive --lib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>生成如下的文件结构</p>
+<pre><code>parent_directory/
+├── hello_macro/
+│   ├── Cargo.toml
+│   └── src/
+│       └── lib.rs
+├── hello_macro_derive/
+│   ├── Cargo.toml
+│   └── src/
+│       └── lib.rs
+├── pancakes/
+│   ├── Cargo.toml
+│   └── src/
+│       └── main.rs</code></pre><h3 id="2-定义HelloMacro-trait"><a href="#2-定义HelloMacro-trait" class="headerlink" title="2.定义HelloMacro trait"></a>2.定义HelloMacro trait</h3><p><code>hello-macro/src/lib.rs</code></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 定义公共 trait HelloMacro，提供 hello_macro 方法的接口</span>
+<span class="token keyword">pub</span> <span class="token keyword">trait</span> HelloMacro <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 关联函数，具体实现由过程宏生成</span>
+    <span class="token comment" spellcheck="true">// 无参数，静态方法形式调用</span>
+    <span class="token keyword">fn</span> <span class="token function">hello_macro</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-配置主项目依赖"><a href="#3-配置主项目依赖" class="headerlink" title="3.配置主项目依赖"></a>3.配置主项目依赖</h3><p><code>src/Cargo.toml</code></p>
+<pre class="line-numbers language-toml"><code class="language-toml">[package]
+name = "macros"         # 项目名称
+version = "0.1.0"      # 版本号
+edition = "2021"       # Rust 版本
+
+[dependencies]
+hello_macro = { path = "./hello_macro" }          # 依赖 hello_macro 库
+hello_macro_derive = { path = "./hello_macro_derive" }  # 依赖过程宏 crate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-配置hello-macro-derive依赖"><a href="#4-配置hello-macro-derive依赖" class="headerlink" title="4.配置hello_macro_derive依赖"></a>4.<strong>配置hello_macro_derive依赖</strong></h3><p><code>hello_macro_derive/Cargo.toml</code></p>
+<pre class="line-numbers language-toml"><code class="language-toml">[package]
+name = "hello_macro_derive"  # 过程宏 crate 名称
+version = "0.1.0"           # 版本号
+edition = "2021"            # Rust 版本
+
+[lib]
+proc-macro = true           # 指定为过程宏 crate，必须项
+
+[dependencies]
+syn = "2.0"                 # 用于解析 Rust 代码为 AST
+quote = "1.0"               # 用于生成 Rust 代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="5-实现过程宏-crate-逻辑"><a href="#5-实现过程宏-crate-逻辑" class="headerlink" title="5.实现过程宏 crate 逻辑"></a>5.实现过程宏 crate 逻辑</h3><p><code>hello_macro_derive/src/lib.rs</code></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> proc_macro<span class="token punctuation">:</span><span class="token punctuation">:</span>TokenStream<span class="token punctuation">;</span>
+<span class="token keyword">use</span> quote<span class="token punctuation">:</span><span class="token punctuation">:</span>quote<span class="token punctuation">;</span>
+<span class="token keyword">use</span> syn<span class="token punctuation">;</span>
+
+<span class="token attribute attr-name">#[proc_macro_derive(HelloMacro)]</span>
+<span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">hello_macro_derive</span><span class="token punctuation">(</span>input<span class="token punctuation">:</span> TokenStream<span class="token punctuation">)</span> <span class="token punctuation">-></span> TokenStream<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> ast <span class="token operator">=</span> syn<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">parse</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">impl_hello_macro</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ast<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">impl_hello_macro</span><span class="token punctuation">(</span>ast<span class="token punctuation">:</span> <span class="token operator">&amp;</span>syn<span class="token punctuation">:</span><span class="token punctuation">:</span>DeriveInput<span class="token punctuation">)</span> <span class="token punctuation">-></span> TokenStream<span class="token punctuation">{</span>
+    <span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token operator">&amp;</span>ast<span class="token punctuation">.</span>ident<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> gen <span class="token operator">=</span> <span class="token macro-rules function">quote!</span><span class="token punctuation">{</span>
+        <span class="token keyword">impl</span> HelloMacro <span class="token keyword">for</span> #name<span class="token punctuation">{</span>
+            <span class="token keyword">fn</span> <span class="token function">hello_macro</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello, Macro! My name is pancakes"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    gen<span class="token punctuation">.</span><span class="token function">into</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="6-测试宏"><a href="#6-测试宏" class="headerlink" title="6.测试宏"></a>6.测试宏</h3><p><code>src/main.rs</code></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 引入 HelloMacro trait</span>
+<span class="token keyword">use</span> hello_macro<span class="token punctuation">:</span><span class="token punctuation">:</span>HelloMacro<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 引入过程宏（通常与 trait 同名）</span>
+<span class="token keyword">use</span> hello_macro_derive<span class="token punctuation">:</span><span class="token punctuation">:</span>HelloMacro<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 使用 #[derive] 注解为 Pancakes 自动实现 HelloMacro trait</span>
+<span class="token attribute attr-name">#[derive(HelloMacro)]</span>
+<span class="token keyword">struct</span> <span class="token function">Pancakes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+<span class="token comment" spellcheck="true">// 主函数，程序入口</span>
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 调用生成的 hello_macro 方法</span>
+    Pancakes<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">hello_macro</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出: Hello, Macro! My name is Pancakes</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后执行 <code>cargo run</code>：其应该打印 <code>Hello, Macro! My name is Pancakes!</code>。其包含了该过程宏中 <code>HelloMacro</code> trait 的实现，而无需 <code>pancakes</code> crate 实现它；<code>#[derive(HelloMacro)]</code> 增加了该 trait 实现。</p>
+<p>接下来，让我们探索一下其他类型的过程宏与自定义派生宏有何区别。</p>
+<h2 id="4-类属性宏"><a href="#4-类属性宏" class="headerlink" title="4.类属性宏"></a>4.类属性宏</h2><p>类属性宏与自定义派生宏相似，不同的是 <code>derive</code> 属性生成代码，它们（类属性宏）能让你创建新的属性。它们也更为灵活；<code>derive</code> 只能用于结构体和枚举；属性还可以用于其它的项，比如函数。作为一个使用类属性宏的例子，可以创建一个名为 <code>route</code> 的属性用于注解 web 应用程序框架（web application framework）的函数：</p>
+<pre class="line-numbers language-rust"><code class="language-rust">#<span class="token punctuation">[</span><span class="token function">route</span><span class="token punctuation">(</span>GET<span class="token punctuation">,</span> <span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">fn</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>#[route]</code> 属性将由框架本身定义为一个过程宏。其宏定义的函数签名看起来像这样：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[proc_macro_attribute]</span>
+<span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">route</span><span class="token punctuation">(</span>attr<span class="token punctuation">:</span> TokenStream<span class="token punctuation">,</span> item<span class="token punctuation">:</span> TokenStream<span class="token punctuation">)</span> <span class="token punctuation">-></span> TokenStream <span class="token punctuation">{</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>这里有两个 <code>TokenStream</code> 类型的参数；第一个用于属性内容本身，也就是 <code>GET, "/"</code> 部分。第二个是属性所标记的项：在本例中，是 <code>fn index() {}</code> 和剩下的函数体。</p>
+<p>除此之外，类属性宏与自定义派生宏工作方式一致：创建 <code>proc-macro</code> crate 类型的 crate 并实现希望生成代码的函数！</p>
+<h2 id="5-类函数宏"><a href="#5-类函数宏" class="headerlink" title="5.类函数宏"></a>5.类函数宏</h2><p>类函数（Function-like）宏的定义看起来像函数调用的宏。类似于 <code>macro_rules!</code>，它们比函数更灵活；例如，可以接受未知数量的参数。然而 <code>macro_rules!</code> 宏只能使用<code>!</code>声明，列如我们熟悉的<code>vec![]</code>。类函数宏获取 <code>TokenStream</code> 参数，其定义使用 Rust 代码操纵 <code>TokenStream</code>，就像另两种过程宏一样。一个类函数宏例子是可以像这样被调用的 <code>sql!</code> 宏：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> sql <span class="token operator">=</span> <span class="token function">sql!</span><span class="token punctuation">(</span>SELECT <span class="token operator">*</span> FROM posts WHERE id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个宏会解析其中的 SQL 语句并检查其是否是句法正确的，这是比 <code>macro_rules!</code> 可以做到的更为复杂的处理。<code>sql!</code> 宏应该被定义为如此：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[proc_macro]</span>
+<span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">sql</span><span class="token punctuation">(</span>input<span class="token punctuation">:</span> TokenStream<span class="token punctuation">)</span> <span class="token punctuation">-></span> TokenStream <span class="token punctuation">{</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>这类似于自定义派生宏的签名：获取括号中的 token，并返回希望生成的代码。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+                </div>
+                <div class="card">
+                    <a href="/2025/03/03/rustgao-ji-te-zheng-zhi-hong/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Rust高级特征之宏">
+                            
+                            <span class="card-title">Rust高级特征之宏</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                宏（Macro）指的是 Rust 中一系列的功能：使用 macro_rules! 的 声明（Declarative）宏，和三种 过程（Procedural）宏：
+
+自定义 #[derive] 宏在结构体和枚举上指定通过 derive 属性添
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-03
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/03/rustgao-ji-te-zheng-zhi-han-shu-yu-bi-bao/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/15.png" class="responsive-img" alt="Rust高级特征之高级函数与闭包">
+                            
+                            <span class="card-title">Rust高级特征之高级函数与闭包</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                本部分将探索一些有关函数和闭包的高级功能，这包括函数指针以及返回值闭包。
+1.函数指针我们讨论过了如何向函数传递闭包；也可以向函数传递常规函数！这个技术在我们希望传递已经定义的函数而不是重新定义闭包作为参数时很有用。函数满足类型 fn（小写
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-03
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">238.3k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

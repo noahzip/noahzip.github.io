@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>buffer pool 及CRUD动态过程 | 未见初墨</title>
+    <title>buffer pool 及CRUD动态过程 | Sparks Fly</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -34,7 +34,7 @@
         
     </style>
     <script src="/libs/jquery/jquery.min.js"></script>
-<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="未见初墨" type="application/atom+xml">
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -49,7 +49,7 @@
                     
                         <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">未见初墨</span>
+                    <span class="logo-span">Sparks Fly</span>
                 </a>
             </div>
             
@@ -172,7 +172,7 @@
             <img src="/medias/avatars/avatar.png"
                  class="logo-img circle responsive-img">
         
-        <div class="logo-name">未见初墨</div>
+        <div class="logo-name">Sparks Fly</div>
         <div class="logo-desc">
             
                 Never really desperate, only the lost of the soul.
@@ -428,7 +428,7 @@
 <li><p>但是这些数据行，并不是直接一行一行的放在 buffer pool 中的，而是被抽象和组织 成了 数据页 的概念；它是把很多行数据放在一个数据页里，以数据页为单位来存储，磁盘文件中有多个数据页；</p>
 </li>
 <li><p>默认情况下，数据页 的大小是 16KB，其中包含了 很多元数据 和 实际的数据行；</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629172102305.png" alt="image-20220629172102305"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629172102305.png" alt="image-20220629172102305"></p>
 </li>
 </ul>
 </li>
@@ -438,7 +438,7 @@
 </li>
 </ul>
 <h2 id="2-2-初始化-buffer-pool"><a href="#2-2-初始化-buffer-pool" class="headerlink" title="2.2 初始化 buffer pool"></a>2.2 初始化 buffer pool</h2><p>在 MySQL 启动的时候，会按照 buffer pool 的参数（innodb_buffer_pool_size）的大小，申请一块内存区域；<br>申请好之后，会按照 16KB 的缓存页大小 + 800byte 左右的元数据结构大小，在 buffer pool 中划分出一个个的缓存页以及对于的元数据；其中所有元数据在前面一起，缓存页在后面；</p>
-<p>大概结构为：<br><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629173156202.png" alt="image-20220629173156202"></p>
+<p>大概结构为：<br><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629173156202.png" alt="image-20220629173156202"></p>
 <p>最初的缓存页都是空的，当MySQL运行起来之后，对数据执行 增删改查，就会执行以下一系列操作：</p>
 <ul>
 <li>数据页加载到缓存页；</li>
@@ -449,7 +449,7 @@
 <h4 id="下面就来看看这些动态演变的过程："><a href="#下面就来看看这些动态演变的过程：" class="headerlink" title="下面就来看看这些动态演变的过程："></a>下面就来看看这些动态演变的过程：</h4><p>当进行CRUD操作时，需要把数据页加载到缓存页中，此时就需要知道哪些缓存页是空的，</p>
 <p><strong>怎么知道哪些缓存页是空的</strong>？</p>
 <p>MySQL为此设计了一个Free链表，本质是一个双向链表，每个节点都是一个缓存页的元数据</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629190034660.png" alt="image-20220629190034660"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629190034660.png" alt="image-20220629190034660"></p>
 <p>使用free链表将所有空闲缓存页的元数据连接起来，free_next 和free_pre是元数据的两个属性，使用一个基础节点来连接头尾节点，并记录有多少个空闲节点；</p>
 <p>所以当需要加载一个数据页到Buffer Pool时，（1）首先从free链表中获取一个元数据节点，（2）再找到对应的空闲缓存页，就可以将数据加载到缓存页中了，（3）最后再把元数据从free链表中删除。</p>
 <p><strong>那么在加载数据页时怎么知道缓存页中是否缓存过了呢？</strong></p>
@@ -478,13 +478,13 @@
 <p>缓存页中的数据仅用于查询，操作结束时缓存页与数据页中的数据一致；当进行其它操作时，缓存页与数据页中的数据不一致，这些缓存页我们称之为脏页，而只有脏页才需要写回磁盘中；</p>
 <p><strong>那么如何确定哪些缓存页是脏页呢？</strong></p>
 <p>MySQL为此设计了一个flush链表，本质上也是一个双向链表，每个节点都是一个缓存页的元数据</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629190942529.png" alt="image-20220629190942529"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629190942529.png" alt="image-20220629190942529"></p>
 <p>同样，flush_next与flush_pre都是元数据中的两个属性；flush链表最初是空的，当缓存页被更新时，就把缓存页对应的元数据加入到flush链表，此时当前缓存页就被标识为脏页；</p>
 <p>随着服务的不断运行，大量的数据页被加载到Buffer pool中，free链表节点越来越少，那么总有一个时候没有空闲缓存页</p>
 <p>（如果一个查询语句要加载的数据页很多，那么淘汰的脏页也就越多（需要先刷脏再加载），会导致查询的响应变慢（MySQL抖动））</p>
 <p><strong>那么这个时候该淘汰哪些缓存页呢？</strong></p>
 <p>MySQL采用LRU算法，并为此设计了一个LRU链表，本质上还是一个双向链表，每个节点都是一个缓存页的元数据</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629193346633.png" alt="image-20220629193346633"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629193346633.png" alt="image-20220629193346633"></p>
 <p>lru_next与lru_pre都是元数据中的两个属性</p>
 <p>当一个数据页被加载到Buffer Pool时，会将缓存页对应的元数据放到lru链表的头部；当某个缓存页被访问时，也将该缓存页对应的元数据放到lru链表的头部；这样最近频繁使用的缓存页都在链表头部，长时间未使用的缓存页在链表尾部，当需要淘汰一个缓存页时，直接淘汰了尾部节点对应的数据页即可。</p>
 <p><strong>简单LRU链表的隐患</strong></p>
@@ -501,7 +501,7 @@
 <p>这两种情况都会导致大量的数据页被加载到Buffer Pool中，并且会放到lru链表的头部，这些数据可能被访问一次之后再也不被访问了；</p>
 <p>而以前的热点数据被挤到lru链表的尾部，可能会被直接淘汰，后续被访问时又需要将这部分数据从磁盘加载进来，减少了效率，并且双向链表的频繁移动也会造成不必要的资源浪费。</p>
 <p>因此MySQL没有采用简单的LRU算法实现LRU链表，而是采用冷热数据分离的方式。LRU链表会被分为两个部分，热数据部分（young区域）和冷数据部分（old区域）。每个部分所占的比例可以通过innodb_old_blocks_pct参数来指定，默认为37，意思是冷数据占比3:7</p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629200713945.png" alt="image-20220629200713945"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629200713945.png" alt="image-20220629200713945"></p>
 <p><strong>基于冷热数据区分离的LRU链表</strong></p>
 <p><strong>工作原理</strong>：</p>
 <ul>
@@ -540,7 +540,7 @@
 <li><p>Buffer Pool是由多个chunk组成的，chunk由innodb_buffer_pool_chunk_size控制，默认为128m，例如上面2GB大小的Buffer Pool是由16个128m的chunk组成</p>
 </li>
 <li><p>每个chunk都包含了各自的缓存页和元数据，但是它们<strong>共享一套free链表、flush链表、LRU链表</strong></p>
-<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629205555393.png" alt="image-20220629205555393"></p>
+<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629205555393.png" alt="image-20220629205555393"></p>
 </li>
 <li><p>当要调整Buffer Pool大小时，例如将2GB的Buffer Pool调整为4GB，只需申请一系列的chunk分配给Buffer Pool即可</p>
 </li>
@@ -846,7 +846,7 @@ MySQL驱动
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">215k</span>&nbsp;字
+						class="white-color">238.3k</span>&nbsp;字
              
             
 
@@ -998,5 +998,10 @@ MySQL驱动
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-</body>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>
