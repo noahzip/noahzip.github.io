@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://github.com/NoahChen1994/2025/03/04/rustgou-jian-webserver/</loc>
+    <lastmod>2025-03-04</lastmod>
+  </url>
+  <url>
     <loc>https://github.com/NoahChen1994/2025/03/03/rustgao-ji-te-zheng-zhi-hong/</loc>
     <lastmod>2025-03-03</lastmod>
   </url>
@@ -117,11 +121,11 @@
     <lastmod>2025-02-21</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NoahChen1994/2025/02/21/rust-he-yin-yong-de-shi-yong-chang-jing/</loc>
+    <loc>https://github.com/NoahChen1994/2025/02/21/rustzhong-yin-yong-de-shi-yong-chang-jing/</loc>
     <lastmod>2025-02-21</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NoahChen1994/2025/02/21/rustyin-yong-yu-jie-yong-references-and-borrowing/</loc>
+    <loc>https://github.com/NoahChen1994/2025/02/21/rustyin-yong-yu-jie-yong/</loc>
     <lastmod>2025-02-21</lastmod>
   </url>
   <url>

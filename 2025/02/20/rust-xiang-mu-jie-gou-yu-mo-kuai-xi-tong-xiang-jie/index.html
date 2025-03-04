@@ -410,15 +410,14 @@ src/main.rs：用来定义可执行程序的文件。
 <li><strong><code>lib.rs</code></strong>：定义库的内容，可以包括你需要的函数、结构体、实现等。即使你的项目最终是可执行程序，<code>lib.rs</code> 也可以作为该程序的业务逻辑部分。</li>
 </ul>
 <h2 id="5-如何在模块系统中引用它"><a href="#5-如何在模块系统中引用它" class="headerlink" title="5. 如何在模块系统中引用它"></a>5. 如何在模块系统中引用它</h2><p>在你的 <code>main.rs</code> 中，你可以通过 <code>use ripgrep::run;</code> 来引用 <code>lib.rs</code> 中定义的 <code>run</code> 函数。这里的 <code>ripgrep</code> 就是 <strong>项目名</strong>，并且在 Rust 中，如果项目使用的是 <code>lib.rs</code>，模块系统会自动把它当作项目的根模块。因此，<code>ripgrep::run</code> 其实是引用了 <code>src/lib.rs</code> 中的内容。</p>
-<h3 id="示例代码："><a href="#示例代码：" class="headerlink" title="示例代码："></a>示例代码：</h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// lib.rs</span>
-<span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">run</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> Config<span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Box<span class="token operator">&lt;</span>dyn std<span class="token punctuation">:</span><span class="token punctuation">:</span>error<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">>></span> <span class="token punctuation">{</span>
+<p><code>lib.rs</code></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">run</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> Config<span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Box<span class="token operator">&lt;</span>dyn std<span class="token punctuation">:</span><span class="token punctuation">:</span>error<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">>></span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// lib.rs 中的 run 函数</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Running with: {}"</span><span class="token punctuation">,</span> config<span class="token punctuation">.</span>search_str<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">// main.rs</span>
-<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>env<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>main.rs</code></p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>env<span class="token punctuation">;</span>
 <span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>process<span class="token punctuation">;</span>
 <span class="token keyword">use</span> ripgrep<span class="token punctuation">:</span><span class="token punctuation">:</span>Config<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 引用 ripgrep::Config</span>
 
@@ -437,12 +436,12 @@ src/main.rs：用来定义可执行程序的文件。
         <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Application Error: {}"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
         process<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="6-为什么叫-lib-rs-作为库的文件名而不叫-ripgrep-rs"><a href="#6-为什么叫-lib-rs-作为库的文件名而不叫-ripgrep-rs" class="headerlink" title="6. 为什么叫 lib.rs 作为库的文件名而不叫 ripgrep.rs"></a>6. 为什么叫 <code>lib.rs</code> 作为库的文件名而不叫 <code>ripgrep.rs</code></h2><ul>
 <li><strong>Rust 的约定：</strong> <code>lib.rs</code> 是官方约定的名称，用来表示库代码。无论你项目叫什么名字，它的核心库文件仍然会被命名为 <code>lib.rs</code>。这有助于代码的可维护性和一致性。</li>
 <li><strong>模块路径：</strong> 你可以将 <code>lib.rs</code> 看作是项目的“根模块”，所有定义在 <code>lib.rs</code> 中的内容可以通过 <code>use</code> 引入到 <code>main.rs</code> 中，或者其他模块中。这样，<code>lib.rs</code> 作为库文件的名字，是符合 Rust 生态中对项目结构的统一要求的。</li>
 </ul>
-<h2 id="7-use-ripgrep-Config-的作用"><a href="#7-use-ripgrep-Config-的作用" class="headerlink" title="7. use ripgrep::Config; 的作用"></a>7. <code>use ripgrep::Config;</code> 的作用</h2><p><code>use ripgrep::Config;</code> 这一行的作用仅仅是 <strong>引入 <code>ripgrep</code> 模块中的 <code>Config</code> 结构体</strong>，它并不会显式地引入整个 <code>lib.rs</code> 文件。实际上，Rust 会根据项目结构自动加载和识别模块，因此 <code>lib.rs</code> 文件是默认引入的，而你不需要手动通过 <code>mod</code> 语句进行引入。</p>
+<h2 id="7-use-ripgrep-Config-的作用"><a href="#7-use-ripgrep-Config-的作用" class="headerlink" title="7. use ripgrep::Config 的作用"></a>7. <code>use ripgrep::Config</code> 的作用</h2><p><code>use ripgrep::Config;</code> 这一行的作用仅仅是 <strong>引入 <code>ripgrep</code> 模块中的 <code>Config</code> 结构体</strong>，它并不会显式地引入整个 <code>lib.rs</code> 文件。实际上，Rust 会根据项目结构自动加载和识别模块，因此 <code>lib.rs</code> 文件是默认引入的，而你不需要手动通过 <code>mod</code> 语句进行引入。</p>
 <p>这一行的作用是：</p>
 <ul>
 <li><strong>引入 <code>ripgrep</code> 模块中的 <code>Config</code> 结构体</strong>，使得你在 <code>main.rs</code> 中能够直接使用 <code>Config</code>，而不需要每次都写完整的路径。</li>
@@ -583,8 +582,8 @@ Cargo<span class="token number">.</span>toml<span aria-hidden="true" class="line
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1. 引言Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，意味着在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。
-2. 基本数据类型Rust 的基本数据类型可以分为标量类型
+                                1. 引言Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。
+2. 基本数据类型Rust 的基本数据类型可以分为标量类型和复合
                             
                         </div>
                         <div class="publish-info">
@@ -797,7 +796,7 @@ Cargo<span class="token number">.</span>toml<span aria-hidden="true" class="line
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

@@ -447,9 +447,10 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="6-如何理解函数入参值传递和引用传递？"><a href="#6-如何理解函数入参值传递和引用传递？" class="headerlink" title="6.如何理解函数入参值传递和引用传递？"></a>6.如何理解函数入参值传递和引用传递？</h2><p>在 Rust 中，<code>fn print_length(s: &amp;str)</code> 和 <code>fn print_length(s: String)</code> 都是定义函数时对参数类型的不同选择，它们的区别在于如何处理传入的字符串（即它们如何处理内存和所有权）。</p>
 <p>让我们分别详细理解这两种写法：</p>
-<h3 id="6-1-fn-print-length-s-amp-str-——-使用引用类型"><a href="#6-1-fn-print-length-s-amp-str-——-使用引用类型" class="headerlink" title="6.1. fn print_length(s: &amp;str) {} —— 使用引用类型"></a>6.1. <code>fn print_length(s: &amp;str) {}</code> —— 使用<strong>引用</strong>类型</h3><pre><code>fn print_length(s: &amp;str) {
-    println!("Length: {}", s.len());
-}</code></pre><ul>
+<h3 id="6-1-使用引用类型"><a href="#6-1-使用引用类型" class="headerlink" title="6.1.  使用引用类型"></a>6.1.  使用<strong>引用</strong>类型</h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">print_length</span><span class="token punctuation">(</span>s<span class="token punctuation">:</span> <span class="token operator">&amp;</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Length: {}"</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
 <li><code>&amp;str</code> 是一个字符串切片的引用，代表对一个已经存在的字符串的借用，而不是获取字符串的所有权。</li>
 <li><strong>引用</strong>意味着我们不需要将 <code>s</code> 的数据从原来的位置复制过来。它只是对外部数据的一个“借用”。</li>
 <li>这种方式 <strong>不会获取所有权</strong>，所以在函数执行结束后，原始的数据仍然有效，调用者不需要担心数据的生命周期问题。</li>
@@ -459,7 +460,7 @@
 <li>适用于你不需要修改传入的字符串，并且不需要拥有它的所有权时。</li>
 <li>如果你只需要读取字符串的内容（比如计算长度），而不关心它的生命周期管理，使用 <code>&amp;str</code> 是更好的选择。</li>
 </ul>
-<h3 id="6-22-fn-print-length-s-String-——-使用拥有所有权的-String"><a href="#6-22-fn-print-length-s-String-——-使用拥有所有权的-String" class="headerlink" title="6.22. fn print_length(s: String) {} —— 使用拥有所有权的 String"></a>6.22. <code>fn print_length(s: String) {}</code> —— 使用<strong>拥有所有权</strong>的 <code>String</code></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">print_length</span><span class="token punctuation">(</span>s<span class="token punctuation">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<h3 id="6-22-使用拥有所有权的-String"><a href="#6-22-使用拥有所有权的-String" class="headerlink" title="6.22. 使用拥有所有权的 String"></a>6.22. 使用<strong>拥有所有权</strong>的 String</h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">print_length</span><span class="token punctuation">(</span>s<span class="token punctuation">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Length: {}"</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
@@ -663,8 +664,8 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1. 引言Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，意味着在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。
-2. 基本数据类型Rust 的基本数据类型可以分为标量类型
+                                1. 引言Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。
+2. 基本数据类型Rust 的基本数据类型可以分为标量类型和复合
                             
                         </div>
                         <div class="publish-info">
@@ -835,7 +836,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

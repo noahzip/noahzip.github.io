@@ -366,7 +366,7 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        945
+                        953
                     </div>
                 
 
@@ -457,7 +457,7 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Rust 也提供了非常灵活的范围类型，可以轻松创建一个循环的范围。</p>
 <p><strong>示例：</strong></p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">for</span> number <span class="token keyword">in</span> <span class="token number">1</span><span class="token punctuation">..</span><span class="token number">4</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 注意这个范围是半开区间</span>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">for</span> number <span class="token keyword">in</span> <span class="token number">1</span><span class="token punctuation">..</span><span class="token number">4</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 注意这个范围是半开区间，number取值范围为[1,4)</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Number: {}"</span><span class="token punctuation">,</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h2 id="5-match-表达式"><a href="#5-match-表达式" class="headerlink" title="5. match 表达式"></a>5. <code>match</code> 表达式</h2><p><code>match</code> 表达式是 Rust 中非常强大和灵活的控制流结构，用来进行模式匹配。它类似于其他语言中的 <code>switch</code> 语句，但更加复杂和强大。</p>
@@ -566,8 +566,8 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Rust 的所有权（Ownership）系统是其内存管理的核心之一，它避免了垃圾回收（GC）机制而确保了内存的安全管理。通过所有权系统，Rust 在编译时就能保证内存使用的安全性，避免了程序运行时的内存管理问题。
-1. 所有权的基本规则Ru
+                                Rust 的所有权（Ownership）系统是其内存管理的核心之一，它没有垃圾回收（GC）机制，通过所有权系统，Rust 在编译时就能保证内存使用的安全性，避免了程序运行时的内存管理问题。
+1. 所有权的基本规则Rust 的所有权系统依赖于
                             
                         </div>
                         <div class="publish-info">
@@ -780,7 +780,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

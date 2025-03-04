@@ -366,14 +366,14 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        3.5k
+                        4.1k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        13 分
+                        16 分
                     </div>
                 
 
@@ -624,19 +624,37 @@ Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <li><code>Arc&lt;Mutex&lt;T&gt;&gt;</code> 原子引用计数，适合多线程共享。</li>
 <li><code>Arc::clone(&amp;counter)</code> 克隆 <code>Arc</code>，增加引用计数，引用全释放时内存才清理</li>
 </ul>
-<h2 id="4-Sync-和-Send-特征"><a href="#4-Sync-和-Send-特征" class="headerlink" title="4 .Sync 和 Send 特征"></a>4 .Sync 和 Send 特征</h2><h3 id="1-Send：跨线程传输"><a href="#1-Send：跨线程传输" class="headerlink" title="1. Send：跨线程传输"></a>1. <code>Send</code>：跨线程传输</h3><p><strong>默认情况下，Rust 允许线程安全的类型实现 <code>Send</code>，但 <code>Rc&lt;T&gt;</code> 不是 <code>Send</code>。</strong></p>
+<h2 id="4-Sync-和-Send-特征"><a href="#4-Sync-和-Send-特征" class="headerlink" title="4. Sync 和 Send 特征"></a>4. <code>Sync</code> 和 <code>Send</code> 特征</h2><p>在 Rust 中，<code>Send</code> 和 <code>Sync</code> 是 <strong>标记（marker）特征</strong>，用于表示 <strong>线程安全的类型</strong>。它们的定义如下：</p>
+<h3 id="1-Send（允许跨线程传递所有权）"><a href="#1-Send（允许跨线程传递所有权）" class="headerlink" title="1. Send（允许跨线程传递所有权）"></a><strong>1. Send（允许跨线程传递所有权）</strong></h3><pre class="line-numbers language-rust"><code class="language-rust">#<span class="token punctuation">[</span>lang <span class="token operator">=</span> <span class="token string">"send"</span><span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">unsafe</span> auto <span class="token keyword">trait</span> Send <span class="token punctuation">{</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>含义</strong>：<code>Send</code> 表示该类型的所有权可以安全地在线程间移动（通过 <code>thread::spawn()</code> 传递）。</li>
+<li><strong>默认实现</strong>：Rust <strong>自动</strong>为大多数类型实现 <code>Send</code>，除非它们包含了非 <code>Send</code> 类型。</li>
+</ul>
+<h4 id="常见-Send-类型："><a href="#常见-Send-类型：" class="headerlink" title="常见 Send 类型："></a><strong>常见 <code>Send</code> 类型：</strong></h4><ul>
+<li><strong>基础类型</strong>（<code>i32</code>、<code>f64</code>、<code>char</code>、<code>bool</code>）。</li>
+<li><strong><code>Box&lt;T&gt;</code>、<code>Vec&lt;T&gt;</code></strong>（只要 <code>T</code> 也是 <code>Send</code>）。</li>
+<li><strong><code>Arc&lt;T&gt;</code></strong>（<strong>不是 <code>Rc&lt;T&gt;</code></strong>，因为 <code>Rc&lt;T&gt;</code> 不是 <code>Send</code>）。</li>
+<li><strong><code>Mutex&lt;T&gt;</code></strong>（只要 <code>T</code> 也是 <code>Send</code>）。</li>
+</ul>
+<h4 id="非-Send-类型（无法安全跨线程传递）："><a href="#非-Send-类型（无法安全跨线程传递）：" class="headerlink" title="非 Send 类型（无法安全跨线程传递）："></a><strong>非 <code>Send</code> 类型（无法安全跨线程传递）：</strong></h4><ul>
+<li><code>Rc&lt;T&gt;</code>（不是 <code>Send</code>，因为 <code>Rc</code> 的引用计数不是原子操作）。</li>
+<li><code>*const T</code> / <code>*mut T</code>（裸指针可能导致数据竞争）。</li>
+<li><code>RefCell&lt;T&gt;</code>（<code>RefCell</code> 运行时借用检查，不适用于多线程）。</li>
+</ul>
+<p>默认情况下，Rust 允许线程安全的类型实现 <code>Send</code>，但 <code>Rc&lt;T&gt;</code> <strong>不是</strong> <code>Send</code>，因此不能在线程间传递：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>rc<span class="token punctuation">:</span><span class="token punctuation">:</span>Rc<span class="token punctuation">;</span>
 <span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>thread<span class="token punctuation">;</span>
 
 <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> rc <span class="token operator">=</span> Rc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
     thread<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">spawn</span><span class="token punctuation">(</span><span class="token keyword">move</span> <span class="token closure-params"><span class="token punctuation">|</span><span class="token punctuation">|</span></span> <span class="token punctuation">{</span>
         <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"值: {}"</span><span class="token punctuation">,</span> rc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 编译错误：`Rc` 不能跨线程传递</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>解决方案</strong>：使用 <code>Arc&lt;T&gt;</code>。</p>
-<h3 id="2-Sync：线程安全的共享引用"><a href="#2-Sync：线程安全的共享引用" class="headerlink" title="2. Sync：线程安全的共享引用"></a>2. <code>Sync</code>：线程安全的共享引用</h3><p><strong>如果 <code>T</code> 是 <code>Sync</code>，则 <code>&amp;T</code> 可以安全地在线程间共享。</strong></p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>sync<span class="token punctuation">:</span><span class="token punctuation">:</span>Arc<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ❌ 编译错误：`Rc&lt;T>` 不能跨线程传递</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>原因</strong>：<br><code>Rc&lt;T&gt;</code> 依赖引用计数（<code>ref count</code>），但它不是线程安全的。如果多个线程同时修改 <code>Rc&lt;T&gt;</code> 的引用计数，可能导致 <strong>数据竞争</strong>。</p>
+<h4 id="解决方案：使用-Arc-lt-T-gt-（原子引用计数）"><a href="#解决方案：使用-Arc-lt-T-gt-（原子引用计数）" class="headerlink" title="解决方案：使用 Arc<T>（原子引用计数）"></a><strong>解决方案：使用 <code>Arc&lt;T&gt;</code>（原子引用计数）</strong></h4><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>sync<span class="token punctuation">:</span><span class="token punctuation">:</span>Arc<span class="token punctuation">;</span>
 <span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>thread<span class="token punctuation">;</span>
 
 <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -647,21 +665,73 @@ Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
         <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"线程读取值: {}"</span><span class="token punctuation">,</span> data1<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>关键点</strong>：</p>
-<ul>
-<li><code>Send</code> 允许跨线程传递。</li>
-<li><code>Sync</code> 允许多线程共享。</li>
-<li><code>Arc&lt;T&gt;</code> 适用于并发情况。</li>
-</ul>
+<p>✅ <code>Arc&lt;T&gt;</code> 通过原子操作确保线程安全，因此可以安全地在多个线程之间共享。</p>
 <hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>本章介绍了 Rust 的并发编程，包括：</p>
-<ol>
-<li><strong>线程 (<code>std::thread</code>)</strong>: <code>spawn</code> 创建线程, <code>join</code> 等待线程完成。</li>
-<li><strong>消息传递 (<code>mpsc::channel</code>)</strong>: <code>send/recv</code> 用于线程间通信。</li>
-<li><strong>共享状态 (<code>Arc&lt;Mutex&lt;T&gt;&gt;</code>)</strong>: 共享数据需使用 <code>Mutex</code> 保护。</li>
-<li><strong><code>Sync</code> 和 <code>Send</code></strong>: <code>Send</code> 允许跨线程传递，<code>Sync</code> 允许共享。</li>
-</ol>
-<p>Rust 通过所有权、借用和 <code>Sync</code>/<code>Send</code> 特征，实现了安全且高效的并发编程。</p>
+<h3 id="2-Sync（允许多线程共享-amp-T）"><a href="#2-Sync（允许多线程共享-amp-T）" class="headerlink" title="2. Sync（允许多线程共享 &amp;T）"></a><strong>2. Sync（允许多线程共享 <code>&amp;T</code>）</strong></h3><pre class="line-numbers language-rust"><code class="language-rust">#<span class="token punctuation">[</span>lang <span class="token operator">=</span> <span class="token string">"sync"</span><span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">unsafe</span> auto <span class="token keyword">trait</span> Sync <span class="token punctuation">{</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>含义</strong>：如果 <code>T: Sync</code>，则 <code>&amp;T</code> 可以安全地被多个线程共享，即 <code>&amp;T</code> 的多个 <strong>不可变引用</strong> 可以在不同线程中使用。</li>
+<li><strong>默认实现</strong>：Rust <strong>自动</strong>为大多数类型实现 <code>Sync</code>，除非它们内部包含了非 <code>Sync</code> 类型。</li>
+</ul>
+<h4 id="常见-Sync-类型："><a href="#常见-Sync-类型：" class="headerlink" title="常见 Sync 类型："></a><strong>常见 <code>Sync</code> 类型：</strong></h4><ul>
+<li><strong>基础类型</strong>（<code>i32</code>、<code>f64</code>、<code>char</code>）。</li>
+<li><strong><code>&amp;T</code> 只要 <code>T</code> 也是 <code>Sync</code></strong>。</li>
+<li><strong><code>Arc&lt;T&gt;</code></strong>（只要 <code>T</code> 也是 <code>Sync</code>）。</li>
+<li><strong><code>Mutex&lt;T&gt;</code>、<code>RwLock&lt;T&gt;</code></strong>（用于保证内部数据的并发访问安全）。</li>
+</ul>
+<h4 id="非-Sync-类型（无法多线程共享-amp-T）："><a href="#非-Sync-类型（无法多线程共享-amp-T）：" class="headerlink" title="非 Sync 类型（无法多线程共享 &amp;T）："></a><strong>非 <code>Sync</code> 类型（无法多线程共享 <code>&amp;T</code>）：</strong></h4><ul>
+<li><code>Rc&lt;T&gt;</code>（不是 <code>Sync</code>，因为它的引用计数不是原子操作）。</li>
+<li><code>Cell&lt;T&gt;</code> / <code>RefCell&lt;T&gt;</code>（不是 <code>Sync</code>，因为它们是 <code>!Send</code> 且允许运行时可变借用）。</li>
+<li><code>Mutex&lt;T&gt;</code> 不是 <code>Sync</code> <strong>如果 <code>T</code> 不是 <code>Send</code></strong>，因为锁的所有权不能安全地在多个线程间共享。</li>
+</ul>
+<p>如果 <code>T</code> 是 <code>Sync</code>，则 <code>&amp;T</code>（不可变引用）可以在线程间安全共享。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>sync<span class="token punctuation">:</span><span class="token punctuation">:</span>Arc<span class="token punctuation">;</span>
+<span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>thread<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> data <span class="token operator">=</span> Arc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> data1 <span class="token operator">=</span> Arc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> handle <span class="token operator">=</span> thread<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">spawn</span><span class="token punctuation">(</span><span class="token keyword">move</span> <span class="token closure-params"><span class="token punctuation">|</span><span class="token punctuation">|</span></span> <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"线程读取值: {}"</span><span class="token punctuation">,</span> data1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    handle<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这个示例中，<code>Arc&lt;T&gt;</code> 允许多个线程共享数据，并且保证安全。</p>
+<hr>
+<h3 id="3-Send-与-Sync-的区别"><a href="#3-Send-与-Sync-的区别" class="headerlink" title="3. Send 与 Sync 的区别"></a><strong>3. Send 与 Sync 的区别</strong></h3><table>
+<thead>
+<tr>
+<th>特征</th>
+<th>作用</th>
+<th>适用于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Send</code></td>
+<td>允许数据的 <strong>所有权</strong> 在线程间移动</td>
+<td>适用于 <strong>跨线程传递</strong> 数据</td>
+</tr>
+<tr>
+<td><code>Sync</code></td>
+<td>允许数据的 <strong>引用</strong> 在线程间共享</td>
+<td>适用于 <strong>多线程共享</strong> 不可变数据</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>原则</strong>：</p>
+<ul>
+<li><strong>大多数 Rust 类型默认是 <code>Send</code> 和 <code>Sync</code></strong>，除了 <code>Rc&lt;T&gt;</code>（因为它不是线程安全的）。</li>
+<li><strong>如果一个类型包含 <code>Rc&lt;T&gt;</code>，那么它也不是 <code>Send</code></strong>，但如果改用 <code>Arc&lt;T&gt;</code>，就可以变成 <code>Send</code>。</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a><strong>4. 总结</strong></h3><ul>
+<li><strong><code>Send</code></strong>：数据可以在线程间 <strong>传递</strong>（如 <code>Arc&lt;T&gt;</code>）。</li>
+<li><strong><code>Sync</code></strong>：数据的 <strong>引用</strong> 可以安全地在多个线程共享。</li>
+<li><strong><code>Rc&lt;T&gt;</code> 不是 <code>Send</code></strong>，但 <code>Arc&lt;T&gt;</code> 是 <code>Send + Sync</code>，适用于并发情况。</li>
+</ul>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -786,7 +856,7 @@ Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                指针 （pointer）是一个包含内存地址的变量的通用概念。这个地址引用，或 “指向”（points at）一些其他数据。Rust 中最常见的指针是第四章介绍的 引用（reference）。引用以 &amp; 符号为标志并借用了它们所指向的
+                                指针 （pointer）是一个包含内存地址的变量的通用概念。这个地址引用 “指向”（points at）一些其他数据。Rust 中最常见的指针是引用（reference）。引用以 &amp; 符号为标志并借用了它们所指向的值。除了引用数据没
                             
                         </div>
                         <div class="publish-info">
@@ -957,7 +1027,7 @@ Rustacean<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

@@ -365,14 +365,14 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.3k
+                        2.6k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        9 分
+                        10 分
                     </div>
                 
 
@@ -527,29 +527,58 @@
 <li><strong>错误处理</strong>：<code>panic!()</code>、<code>unreachable!()</code>。</li>
 </ul>
 <hr>
-<h2 id="5-动态大小类型和-Sized-trait"><a href="#5-动态大小类型和-Sized-trait" class="headerlink" title="5. 动态大小类型和 Sized trait"></a>5. 动态大小类型和 Sized trait</h2><p>Rust 需要知道有关类型的某些细节，例如为特定类型的值需要分配多少空间。这便是起初留下的一个类型系统中令人迷惑的角落：即 <code>动态大小类型（*dynamically sized types）</code>。这有时被称为 <code>DST</code>或 <code>unsized types</code>，这些类型允许我们处理只有在运行时才知道大小的类型。</p>
-<p><code>str</code> 是一个 <code>DST</code>,直到运行时我们都不知道字符串有多长。因为直到运行时都不能知道其大小，也就意味着不能创建 <code>str</code> 类型的变量，也不能获取 <code>str</code> 类型的参数。考虑一下这些代码，它们不能工作：</p>
-<pre class="line-numbers language-rust"><code class="language-rust">    <span class="token keyword">let</span> s1<span class="token punctuation">:</span> str <span class="token operator">=</span> <span class="token string">"Hello there!"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ^^ doesn't have a size known at compile-time</span>
-    <span class="token keyword">let</span> s2<span class="token punctuation">:</span> str <span class="token operator">=</span> <span class="token string">"How's it going?"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ^^ doesn't have a size known at compile-time</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>Rust 需要知道应该为特定类型的值分配多少内存，同时所有同一类型的值必须使用相同数量的内存。如果允许编写这样的代码，也就意味着这两个 <code>str</code> 需要占用完全相同大小的空间，不过它们有着不同的长度。这也就是为什么不可能创建一个存放动态大小类型的变量的原因。</p>
-<p>那么该怎么办呢？你已经知道了这种问题的答案：<code>s1</code> 和 <code>s2</code> 的类型是 <code>&amp;str</code> 而不是 <code>str</code>。</p>
-<p>slice 数据结构仅仅储存了开始位置和 slice 的长度。所以虽然 <code>&amp;T</code> 是一个储存了 <code>T</code> 所在的内存位置的单个值，</p>
-<p><code>&amp;str</code> 则是 <strong>两个</strong> 值：<code>str</code> 的地址和其长度。这样，<code>&amp;str</code> 就有了一个在编译时可以知道的大小：它是 <code>usize</code> 长度的两倍。也就是说，我们总是知道 <code>&amp;str</code> 的大小，而无论其引用的字符串是多长。这里是 Rust 中动态大小类型的常规用法：它们有一些额外的元信息来储存动态信息的大小。</p>
-<p>这引出了<strong>动态大小类型的黄金规则：必须将动态大小类型的值置于某种指针之后</strong>。</p>
-<p>为了处理<code>DST</code>，Rust 提供了 <code>Sized</code> trait 来决定一个类型的大小是否在编译时可知。这个 trait 自动为编译器在编译时就知道大小的类型实现。另外，Rust 隐式的为每一个泛型函数增加了 <code>Sized</code> bound。也就是说，对于如下泛型函数定义：</p>
+<h2 id="5-动态大小类型和-Sized-trait"><a href="#5-动态大小类型和-Sized-trait" class="headerlink" title="5. 动态大小类型和 Sized trait"></a>5. 动态大小类型和 Sized trait</h2><p>Rust 需要知道有关类型的某些细节，例如为特定类型的值分配多少空间。这便是 Rust 类型系统中的一个特殊概念：<strong>动态大小类型（Dynamically Sized Types，DST）</strong>。这种类型也有时被称为 <code>unsized types</code>，它允许我们处理只有在运行时才知道大小的类型。</p>
+<h3 id="1-动态大小类型"><a href="#1-动态大小类型" class="headerlink" title="1.动态大小类型"></a>1.动态大小类型</h3><p><code>str</code> 就是一个典型的动态大小类型（DST）。在编译时，Rust 并不知道字符串的长度，只有在运行时才能知道。因此，不能像 <code>let s1: str = "Hello there!"</code> 这样声明一个变量，因为编译时无法确定 <code>str</code> 的大小。</p>
+<p>考虑以下代码，它会导致编译错误：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> s1<span class="token punctuation">:</span> str <span class="token operator">=</span> <span class="token string">"Hello there!"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 编译错误，str 类型的大小在编译时无法确定</span>
+<span class="token keyword">let</span> s2<span class="token punctuation">:</span> str <span class="token operator">=</span> <span class="token string">"How's it going?"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 编译错误，str 类型的大小在编译时无法确定</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>这是因为 <code>str</code> 是动态大小的类型，直到运行时才知道它的实际大小。因此，我们不能创建 <code>str</code> 类型的变量，也不能将其作为函数参数。</p>
+<h3 id="2-amp-str-类型的解决方案"><a href="#2-amp-str-类型的解决方案" class="headerlink" title="2.&amp;str 类型的解决方案"></a>2.<code>&amp;str</code> 类型的解决方案</h3><p>为了解决这个问题，我们使用 <code>&amp;str</code> 类型。</p>
+<p><code>&amp;str</code> 是一个引用类型，它存储着字符串的地址以及它的长度。由于 <code>&amp;str</code> 包含了两个部分：一个是指向字符串数据的指针（地址），另一个是 <code>usize</code> 类型的长度信息，这样它的大小在编译时就变得可知了。<code>&amp;str</code> 的大小始终是两个 <code>usize</code> 的大小，即固定的，这样就能保证编译器在编译时知道它的大小。</p>
+<p>因此，代码可以改为以下形式：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> s1<span class="token punctuation">:</span> <span class="token operator">&amp;</span>str <span class="token operator">=</span> <span class="token string">"Hello there!"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 正确，&amp;str 引用类型的大小在编译时已知</span>
+<span class="token keyword">let</span> s2<span class="token punctuation">:</span> <span class="token operator">&amp;</span>str <span class="token operator">=</span> <span class="token string">"How's it going?"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 正确，&amp;str 引用类型的大小在编译时已知</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="3-动态大小类型的黄金规则"><a href="#3-动态大小类型的黄金规则" class="headerlink" title="3.动态大小类型的黄金规则"></a>3.动态大小类型的黄金规则</h3><p><strong>动态大小类型的黄金规则</strong>：必须将动态大小类型的值放置在某种指针后面。也就是说，不能直接使用 <code>str</code> 类型变量，而应使用 <code>&amp;str</code> 类型，这样才会有一个明确的指针和长度信息。</p>
+<h3 id="Sized-trait"><a href="#Sized-trait" class="headerlink" title="Sized trait"></a><code>Sized</code> trait</h3><p>为了处理动态大小类型（DST），Rust 提供了 <code>Sized</code> trait 来确定一个类型的大小是否在编译时是已知的。<code>Sized</code> trait 自动为编译器在编译时已知大小的类型实现。实际上，Rust 对每个泛型函数隐式地添加了 <code>Sized</code> 限定符，这意味着泛型函数默认只允许大小已知的类型。</p>
+<p>考虑以下泛型函数定义：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> generic<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">(</span>t<span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// --snip--</span>
+    <span class="token comment" spellcheck="true">// 泛型函数，不能使用动态大小类型（DST）</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>实际上被当作如下处理：</p>
+<p>Rust 会将其视为以下形式：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> generic<span class="token operator">&lt;</span>T<span class="token punctuation">:</span> Sized<span class="token operator">></span><span class="token punctuation">(</span>t<span class="token punctuation">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// --snip--</span>
+    <span class="token comment" spellcheck="true">// 泛型函数，必须是已知大小的类型</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>泛型函数默认只能用于在编译时已知大小的类型。然而可以使用如下特殊语法来放宽这个限制：</p>
+<p>这意味着 <code>generic</code> 函数只能接收编译时已知大小的类型。然而，您可以通过 <code>?Sized</code> 来放宽这一限制，使函数能够处理动态大小类型（DST）。</p>
+<h3 id="4-放宽-Sized-限制"><a href="#4-放宽-Sized-限制" class="headerlink" title="4.放宽 Sized 限制"></a>4.放宽 <code>Sized</code> 限制</h3><p>如果我们希望泛型函数能够接受动态大小类型（DST），可以使用如下语法来放宽 <code>Sized</code> 的默认限制：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> generic<span class="token operator">&lt;</span>T<span class="token punctuation">:</span> ?Sized<span class="token operator">></span><span class="token punctuation">(</span>t<span class="token punctuation">:</span> <span class="token operator">&amp;</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// --snip--</span>
+    <span class="token comment" spellcheck="true">// 允许 t 是动态大小类型（DST）</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><code>?Sized</code> 上的 trait bound 意味着 “<code>T</code> 可能是也可能不是 <code>Sized</code>” 同时这个注解会覆盖泛型类型必须在编译时拥有固定大小的默认规则。这种意义的 <code>?Trait</code> 语法只能用于 <code>Sized</code> ，而不能用于任何其他 trait。</p>
-<p>另外注意我们将 <code>t</code> 参数的类型从 <code>T</code> 变为了 <code>&amp;T</code>：因为其类型可能不是 <code>Sized</code> 的，所以需要将其置于某种指针之后。在这个例子中选择了引用。</p>
+<p>在这个例子中，<code>T: ?Sized</code> 表示 <code>T</code> 可能是动态大小类型（DST），也可能是一个常规类型。<code>?Sized</code> 会覆盖泛型类型在编译时必须具有固定大小的默认规则。需要注意的是，<code>?Sized</code> 只能用于 <code>Sized</code> trait，而不能用于任何其他的 trait。</p>
+<h3 id="5-示例代码"><a href="#5-示例代码" class="headerlink" title="5.示例代码"></a>5.示例代码</h3><p>以下是一个完整的示例，演示了如何使用 <code>?Sized</code> 和动态大小类型（DST）：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 一个使用动态大小类型的结构体</span>
+<span class="token keyword">struct</span> MyStruct <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 定义一个泛型函数，该函数可以接受动态大小类型（DST）</span>
+<span class="token keyword">fn</span> print_name<span class="token operator">&lt;</span>T<span class="token punctuation">:</span> ?Sized<span class="token operator">></span><span class="token punctuation">(</span>t<span class="token punctuation">:</span> <span class="token operator">&amp;</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 我们知道 t 是一个指向动态大小类型（DST）的引用</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Name: {:?}"</span><span class="token punctuation">,</span> t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string">"Alice"</span><span class="token punctuation">.</span><span class="token function">to_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> my_struct <span class="token operator">=</span> MyStruct <span class="token punctuation">{</span> name <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 传递引用，允许传递动态大小类型（DST）</span>
+    <span class="token function">print_name</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>my_struct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><strong>动态大小类型（DST）</strong>：类型的大小在编译时不可知，只能在运行时确定。例如，<code>str</code> 就是一个 DST 类型。</li>
+<li><strong><code>&amp;str</code></strong>：是 <code>str</code> 类型的引用，可以在编译时确定其大小。</li>
+<li><strong><code>Sized</code> trait</strong>：用于确定类型的大小是否在编译时已知。默认情况下，泛型函数只能用于已知大小的类型。</li>
+<li><strong><code>?Sized</code></strong>：用于放宽 <code>Sized</code> 限定，允许接受动态大小类型（DST）。</li>
+</ul>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -847,7 +876,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

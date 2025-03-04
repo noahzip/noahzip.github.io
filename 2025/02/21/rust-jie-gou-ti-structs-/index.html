@@ -400,7 +400,6 @@
 <li><code>sign_in_count</code>: 记录登录次数，类型为 <code>u64</code></li>
 <li><code>active</code>: 记录用户是否活跃，类型为 <code>bool</code></li>
 </ul>
-<hr>
 <h2 id="2-结构体的实例化"><a href="#2-结构体的实例化" class="headerlink" title="2. 结构体的实例化"></a><strong>2. 结构体的实例化</strong></h2><p>定义结构体后，可以创建其实例：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> user1 <span class="token operator">=</span> User <span class="token punctuation">{</span>
@@ -415,7 +414,6 @@
 <ul>
 <li>这里 <code>user1</code> 是 <code>User</code> 类型的实例，其中 <code>username</code> 和 <code>email</code> 需要用 <code>String::from()</code> 进行字符串的创建，因为 <code>String</code> 是 <code>heap</code> 分配的数据类型。</li>
 </ul>
-<hr>
 <h2 id="3-访问和修改结构体字段"><a href="#3-访问和修改结构体字段" class="headerlink" title="3. 访问和修改结构体字段"></a><strong>3. 访问和修改结构体字段</strong></h2><h3 id="访问字段"><a href="#访问字段" class="headerlink" title="访问字段"></a><strong>访问字段</strong></h3><p>结构体字段可以通过 <code>.</code> 访问：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"User email: {}"</span><span class="token punctuation">,</span> user1<span class="token punctuation">.</span>email<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="修改字段"><a href="#修改字段" class="headerlink" title="修改字段"></a><strong>修改字段</strong></h3><p>如果 <code>user1</code> 不是 <code>mut</code>，它的字段无法修改。因此，修改结构体实例的字段需要先声明 <code>mut</code>：</p>
@@ -435,7 +433,6 @@
 <li>由于 <code>String</code> 具有所有权（ownership），如果 <code>user1.email</code> 被修改，原来的值会被释放。</li>
 <li>但 <strong>结构体本身的字段不是独立的变量</strong>，因此不能只让单个字段是 <code>mut</code>，整个结构体都必须是 <code>mut</code>。</li>
 </ul>
-<hr>
 <h2 id="4-结构体简化初始化"><a href="#4-结构体简化初始化" class="headerlink" title="4. 结构体简化初始化"></a><strong>4. 结构体简化初始化</strong></h2><h3 id="使用字段初始化简写（Field-Init-Shorthand）"><a href="#使用字段初始化简写（Field-Init-Shorthand）" class="headerlink" title="使用字段初始化简写（Field Init Shorthand）"></a><strong>使用字段初始化简写（Field Init Shorthand）</strong></h3><p>如果变量名和字段名相同，可以省略重复部分：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">build_user</span><span class="token punctuation">(</span>username<span class="token punctuation">:</span> String<span class="token punctuation">,</span> email<span class="token punctuation">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">-></span> User <span class="token punctuation">{</span>
     User <span class="token punctuation">{</span>
@@ -469,7 +466,6 @@
 <li><strong>注意</strong>：<code>user1</code> 被部分转移（move），因为 <code>String</code> 类型的 <code>username</code> 被 <code>user2</code> 复用，<code>user1</code> 无法再使用 <code>username</code>。</li>
 <li><strong>如果 <code>User</code> 的字段是 <code>Copy</code> 类型（如 <code>u32</code>、<code>bool</code>），则 <code>user1</code> 仍然可以使用</strong>。</li>
 </ul>
-<hr>
 <h2 id="5-元组结构体（Tuple-Structs）"><a href="#5-元组结构体（Tuple-Structs）" class="headerlink" title="5. 元组结构体（Tuple Structs）"></a><strong>5. 元组结构体（Tuple Structs）</strong></h2><p>Rust 允许定义没有字段名称的结构体，称为 <strong>元组结构体</strong>：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> <span class="token function">Color</span><span class="token punctuation">(</span>i32<span class="token punctuation">,</span> i32<span class="token punctuation">,</span> i32<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">struct</span> <span class="token function">Point</span><span class="token punctuation">(</span>i32<span class="token punctuation">,</span> i32<span class="token punctuation">,</span> i32<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -493,7 +489,6 @@
 <span class="token keyword">struct</span> <span class="token function">Coordinates</span><span class="token punctuation">(</span>f64<span class="token punctuation">,</span> f64<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 </ul>
-<hr>
 <h2 id="6-类单元结构体（Unit-like-Structs）"><a href="#6-类单元结构体（Unit-like-Structs）" class="headerlink" title="6. 类单元结构体（Unit-like Structs）"></a><strong>6. 类单元结构体（Unit-like Structs）</strong></h2><p>如果一个结构体 <strong>没有任何字段</strong>，它类似于 <strong>空元组 <code>()</code></strong>：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> AlwaysEqual<span class="token punctuation">;</span>
 
@@ -503,7 +498,6 @@
 <ul>
 <li>这种 <strong>“类单元结构体”</strong> 常用于 <strong>实现 trait</strong>，但不存储任何数据。</li>
 </ul>
-<hr>
 <h2 id="7-结构体的所有权"><a href="#7-结构体的所有权" class="headerlink" title="7. 结构体的所有权"></a><strong>7. 结构体的所有权</strong></h2><p>结构体的字段可以是任何类型，包括 <code>String</code> 这样的 <strong>堆上分配</strong> 数据类型。因此，在 <code>struct</code> 设计时，需要考虑所有权问题：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> User <span class="token punctuation">{</span>
     username<span class="token punctuation">:</span> String<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// String 是堆上的数据</span>
@@ -539,7 +533,6 @@
 </ul>
 </li>
 </ul>
-<hr>
 <h2 id="8-结构体-vs-元组-vs-枚举"><a href="#8-结构体-vs-元组-vs-枚举" class="headerlink" title="8. 结构体 vs 元组 vs 枚举"></a><strong>8. 结构体 vs 元组 vs 枚举</strong></h2><table>
 <thead>
 <tr>
@@ -580,7 +573,6 @@
 <td>❌</td>
 </tr>
 </tbody></table>
-<hr>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><ul>
 <li><code>struct</code> 用于封装相关数据，提高代码的可读性和结构化。</li>
 <li>结构体可以 <strong>使用 <code>..</code> 语法更新字段</strong>，但要注意所有权问题。</li>
@@ -588,7 +580,6 @@
 <li><strong>类单元结构体</strong> 主要用于 <strong>实现 trait</strong>，而不存储数据。</li>
 <li>设计结构体时需要 <strong>考虑所有权和生命周期</strong>，避免 <code>move</code> 导致的问题。</li>
 </ul>
-<hr>
 <p>Rust 结构体提供了一种强大而灵活的数据组织方式，使得代码更加清晰、可维护。后续可以结合 <strong>方法（methods）</strong> 和 <strong>trait</strong> 进一步扩展结构体的功能。🚀</p>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -715,8 +706,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                切片是 Rust 中一种非常重要的概念，它提供了一种引用数据部分的方式，而不需要复制数据本身。切片允许你操作集合（如数组、String）的一部分数据，保持对原始数据的引用。我们来详细总结这一小节。
-1. 切片的基本概念在 Rust 中，切片
+                                切片是 Rust 中的一个重要概念，它提供了一种引用数据部分的方式，而无需复制数据本身。切片允许你对集合（如数组、Vec、String）的一部分进行操作，同时保持对原始数据的引用。
+
+1. 切片的基本概念在 Rust 中，切片（slice）
                             
                         </div>
                         <div class="publish-info">
@@ -887,7 +879,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Rust &amp;和引用使用场景, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="keywords" content="Rust中引用的使用场景, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
     <meta name="description" content="在 Rust 中，&amp;amp; 是一个非常重要的符号，主要用于创建 引用（borrow）。引用允许你借用某个值的所有权，而不需要把值本身传递到函数中。&amp;amp; 和 &amp;amp;mut 都是用来获取引用的方式，但有一些细微的区别和使用场景。理解">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>Rust &amp;和引用使用场景 | Sparks Fly</title>
+    <title>Rust中引用的使用场景 | Sparks Fly</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -214,7 +214,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Rust &amp;和引用使用场景</h1>
+                    <h1 class="description center-align post-title">Rust中引用的使用场景</h1>
                 </div>
             </div>
         </div>
@@ -365,14 +365,14 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.5k
+                        2.1k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        5 分
+                        8 分
                     </div>
                 
 
@@ -383,11 +383,11 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>在 Rust 中，<code>&amp;</code> 是一个非常重要的符号，主要用于创建 <strong>引用</strong>（<strong>borrow</strong>）。引用允许你借用某个值的所有权，而不需要把值本身传递到函数中。<code>&amp;</code> 和 <code>&amp;mut</code> 都是用来获取引用的方式，但有一些细微的区别和使用场景。理解它们的不同之处对于编写高效、安全的 Rust 程序至关重要。</p>
-<h2 id="1-amp-和引用"><a href="#1-amp-和引用" class="headerlink" title="1. &amp; 和引用"></a>1. <strong><code>&amp;</code> 和引用</strong></h2><ul>
+<h2 id="1-创建引用"><a href="#1-创建引用" class="headerlink" title="1. 创建引用"></a>1. <strong>创建引用</strong></h2><ul>
 <li><strong><code>&amp;</code></strong> 创建的是一个 <strong>不可变引用</strong>（immutable reference），意味着你可以借用数据，但不能修改它。</li>
 <li><strong><code>&amp;mut</code></strong> 创建的是一个 <strong>可变引用</strong>（mutable reference），意味着你可以借用数据并修改它。</li>
 </ul>
-<h3 id="amp-不可变引用"><a href="#amp-不可变引用" class="headerlink" title="&amp; - 不可变引用"></a><strong><code>&amp;</code> - 不可变引用</strong></h3><p>当你在 Rust 中使用 <code>&amp;</code> 时，你是在创建一个指向数据的 <strong>不可变引用</strong>。这意味着你可以读取数据，但无法修改它。不可变引用是 Rust 中默认的引用方式。</p>
+<h3 id="创建不可变引用"><a href="#创建不可变引用" class="headerlink" title="创建不可变引用"></a><strong>创建不可变引用</strong></h3><p>当你在 Rust 中使用 <code>&amp;</code> 时，你是在创建一个指向数据的 <strong>不可变引用</strong>。这意味着你可以读取数据，但无法修改它。不可变引用是 Rust 中默认的引用方式。</p>
 <p><strong>例子：</strong></p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
@@ -401,7 +401,7 @@
 <li>不可变引用 <strong>不允许修改数据</strong>。</li>
 <li>引用的数据在引用有效时必须是有效的，不能引用已经销毁或被移动的值。</li>
 </ul>
-<h4 id="什么时候使用-amp-："><a href="#什么时候使用-amp-：" class="headerlink" title="什么时候使用 &amp;："></a><strong>什么时候使用 <code>&amp;</code></strong>：</h4><ul>
+<h4 id="不可变应用的使用场景："><a href="#不可变应用的使用场景：" class="headerlink" title="不可变应用的使用场景："></a><strong>不可变应用的使用场景：</strong></h4><ul>
 <li><p>当你不需要修改数据，只需要读取数据时，可以使用不可变引用。</p>
 </li>
 <li><p>当你希望传递数据给函数，但不希望转移数据所有权时，使用不可变引用。比如：</p>
@@ -414,14 +414,13 @@
     <span class="token function">print_length</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 传递不可变引用</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>切片（</p>
-<pre><code>&amp;[T]</code></pre><p>）也是通过不可变引用的方式实现的。比如：</p>
+<li><p><strong>切片（&amp;[T]）</strong>也是通过不可变引用的方式实现的。比如：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> slice <span class="token operator">=</span> <span class="token operator">&amp;</span>arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 创建数组的切片</span>
 <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{:?}"</span><span class="token punctuation">,</span> slice<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出: [2, 3]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-<h3 id="amp-mut-可变引用"><a href="#amp-mut-可变引用" class="headerlink" title="&amp;mut - 可变引用"></a><strong><code>&amp;mut</code> - 可变引用</strong></h3><p>当你使用 <code>&amp;mut</code> 时，你是在创建一个 <strong>可变引用</strong>。这意味着你可以对引用的数据进行修改。每次只有 <strong>一个可变引用</strong> 可以存在，因此 Rust 在编译时会保证数据的不可变性和可变性互不干扰。</p>
+<h3 id="创建可变引用"><a href="#创建可变引用" class="headerlink" title="创建可变引用"></a><strong>创建可变引用</strong></h3><p>当你使用 <code>&amp;mut</code> 时，你是在创建一个 <strong>可变引用</strong>。这意味着你可以对引用的数据进行修改。每次只有 <strong>一个可变引用</strong> 可以存在，因此 Rust 在编译时会保证数据的不可变性和可变性互不干扰。</p>
 <p><strong>例子：</strong></p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
@@ -436,7 +435,7 @@
 <li>可变引用 <strong>允许修改数据</strong>。</li>
 <li>在一个作用域中，你不能同时有 <strong>可变引用</strong> 和 <strong>不可变引用</strong> 指向同一个数据（这会导致编译错误），从而避免了数据竞争的问题。</li>
 </ul>
-<h4 id="什么时候使用-amp-mut："><a href="#什么时候使用-amp-mut：" class="headerlink" title="什么时候使用 &amp;mut："></a><strong>什么时候使用 <code>&amp;mut</code></strong>：</h4><ul>
+<h4 id="使用可变引用的场景："><a href="#使用可变引用的场景：" class="headerlink" title="使用可变引用的场景："></a><strong>使用可变引用的场景：</strong></h4><ul>
 <li><p>当你需要修改数据时，可以使用可变引用。例如：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">increment</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> i32<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token operator">*</span>x <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
@@ -449,8 +448,7 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>当你需要修改 <strong>集合中的元素</strong> 或 <strong>对象的状态</strong> 时，使用可变引用。</p>
-<p>例如：</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">add_to_vector</span><span class="token punctuation">(</span>v<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> Vec<span class="token operator">&lt;</span>i32<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">add_to_vector</span><span class="token punctuation">(</span>v<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> Vec<span class="token operator">&lt;</span>i32<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//操作目标向量中的元素</span>
     v<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
@@ -463,22 +461,90 @@
 <li><p>在 <strong>内部可变性模式</strong>（例如 <code>RefCell</code>）中，<code>&amp;mut</code> 是必需的，尤其当你使用不可变类型（如 <code>&amp;T</code>）进行修改时。</p>
 </li>
 </ul>
-<h2 id="2-什么时候不加-amp"><a href="#2-什么时候不加-amp" class="headerlink" title="2. 什么时候不加 &amp;"></a>2. <strong>什么时候不加 <code>&amp;</code></strong></h2><p>并不是所有情况都需要 <code>&amp;</code>。有时你直接传递数据本身而不是引用：</p>
-<ul>
-<li><p><strong>传递拥有所有权的数据</strong>：当你希望把数据的所有权转移给函数时，不需要加 <code>&amp;</code>。这将导致所有权的转移（即 <strong>move</strong>）。</p>
-<p>例如：</p>
+<h2 id="2-函数签名与引用"><a href="#2-函数签名与引用" class="headerlink" title="2. 函数签名与引用"></a>2. <strong>函数签名与引用</strong></h2><p>在 Rust 中，函数参数既可以传递值，也可以传递引用。选择哪种方式取决于所有权、性能和是否需要修改数据。</p>
+<h3 id="2-1-函数签名使用引用的情况"><a href="#2-1-函数签名使用引用的情况" class="headerlink" title="2.1 函数签名使用引用的情况"></a>2.1 <strong>函数签名使用引用的情况</strong></h3><p>在以下场景，建议使用 <strong>不可变引用 <code>&amp;T</code></strong> 或 <strong>可变引用 <code>&amp;mut T</code></strong>：</p>
+<h4 id="1-避免所有权转移（-amp-T）"><a href="#1-避免所有权转移（-amp-T）" class="headerlink" title="1. 避免所有权转移（&amp;T）"></a>1. <strong>避免所有权转移（&amp;T）</strong></h4><p>如果函数 <strong>只需要读取数据</strong> 而不修改它，使用 <strong>不可变引用</strong> <code>&amp;T</code> 可以 <strong>避免所有权转移</strong>，提高性能。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">print_length</span><span class="token punctuation">(</span>s<span class="token punctuation">:</span> <span class="token operator">&amp;</span>String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"长度: {}"</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 这里 s 只是借用，并不会销毁原始数据</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">print_length</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 传递引用</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"字符串仍然有效: {}"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ✅ s 仍然可用</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-避免大数据复制（-amp-T）"><a href="#2-避免大数据复制（-amp-T）" class="headerlink" title="2. 避免大数据复制（&amp;T）"></a>2. <strong>避免大数据复制（&amp;T）</strong></h4><p>当数据较大（如 <code>String</code>、<code>Vec&lt;T&gt;</code> 等），复制的开销较高，使用 <strong>不可变引用</strong> <code>&amp;T</code> 可以避免拷贝整个数据，提高效率。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">sum_vec</span><span class="token punctuation">(</span>v<span class="token punctuation">:</span> <span class="token operator">&amp;</span>Vec<span class="token operator">&lt;</span>i32<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">-></span> i32 <span class="token punctuation">{</span>
+    v<span class="token punctuation">.</span><span class="token function">iter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> numbers <span class="token operator">=</span> <span class="token function">vec!</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token function">sum_vec</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>numbers<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 传递引用，避免拷贝整个 Vec</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"总和: {}"</span><span class="token punctuation">,</span> sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-允许修改但不转移所有权（-amp-mut-T）"><a href="#3-允许修改但不转移所有权（-amp-mut-T）" class="headerlink" title="3. 允许修改但不转移所有权（&amp;mut T）"></a>3. <strong>允许修改但不转移所有权（&amp;mut T）</strong></h4><p>如果函数需要 <strong>修改数据</strong>，但仍然让调用者 <strong>保留所有权</strong>，则使用 <strong>可变引用</strong> <code>&amp;mut T</code>。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">to_uppercase</span><span class="token punctuation">(</span>s<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    s<span class="token punctuation">.</span><span class="token function">make_ascii_uppercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">to_uppercase</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 传递可变引用</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"修改后的字符串: {}"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ✅ s 被修改</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h3 id="2-2-函数签名不使用引用的情况"><a href="#2-2-函数签名不使用引用的情况" class="headerlink" title="2.2 函数签名不使用引用的情况"></a>2.2 <strong>函数签名不使用引用的情况</strong></h3><p>并不是所有情况都需要 <code>&amp;</code>，在以下情况建议直接传递 <strong>值</strong> 而不是引用：</p>
+<h4 id="1-传递拥有所有权的数据（move）"><a href="#1-传递拥有所有权的数据（move）" class="headerlink" title="1. 传递拥有所有权的数据（move）"></a>1. <strong>传递拥有所有权的数据（move）</strong></h4><p>当你希望 <strong>将数据的所有权转移给函数</strong>，可以 <strong>直接传递值</strong>，这会导致变量 <strong>在调用后变为无效</strong>。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">take_ownership</span><span class="token punctuation">(</span>s<span class="token punctuation">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// s 在此处被销毁</span>
 
 <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">take_ownership</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 所有权转移，s 不再有效</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p><strong>传递值而非引用</strong>：如果你在函数中直接需要使用某个值，而不是它的引用，可以传递值本身。</p>
-</li>
-</ul>
+    <span class="token comment" spellcheck="true">// println!("{}", s); // ❌ 这里会报错，s 的所有权已被转移</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-传递值而非引用（Copy）"><a href="#2-传递值而非引用（Copy）" class="headerlink" title="2. 传递值而非引用（Copy）"></a>2. <strong>传递值而非引用（Copy）</strong></h4><p>对于 <strong>实现了 <code>Copy</code> 特征的数据类型</strong>（如整数、浮点数、布尔值等），直接传递值不会涉及所有权的转移，而是 <strong>进行值的复制</strong>。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">add_one</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-></span> i32 <span class="token punctuation">{</span>
+    x <span class="token operator">+</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> num <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> new_num <span class="token operator">=</span> <span class="token function">add_one</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 直接传递值，num 仍然可用</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"num: {}, new_num: {}"</span><span class="token punctuation">,</span> num<span class="token punctuation">,</span> new_num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h3 id="2-3-总结"><a href="#2-3-总结" class="headerlink" title="2.3 总结"></a>2.3 <strong>总结</strong></h3><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>适用场景</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>传递所有权</strong></td>
+<td>让函数获取数据的控制权</td>
+<td><code>fn take_ownership(s: String)</code></td>
+</tr>
+<tr>
+<td><strong>传递值</strong></td>
+<td><code>Copy</code> 类型数据（整数、浮点数等）</td>
+<td><code>fn add_one(x: i32) -&gt; i32</code></td>
+</tr>
+<tr>
+<td><strong>传递不可变引用 <code>&amp;T</code></strong></td>
+<td>仅读取数据，避免复制</td>
+<td><code>fn print_length(s: &amp;String)</code></td>
+</tr>
+<tr>
+<td><strong>传递可变引用 <code>&amp;mut T</code></strong></td>
+<td>需要修改数据但不转移所有权</td>
+<td><code>fn to_uppercase(s: &amp;mut String)</code></td>
+</tr>
+</tbody></table>
 <h2 id="3-amp-的一些细节"><a href="#3-amp-的一些细节" class="headerlink" title="3. &amp; 的一些细节"></a>3. <strong><code>&amp;</code> 的一些细节</strong></h2><ul>
 <li><p><strong>切片与引用</strong>：数组、字符串、向量等类型的部分数据（如切片）也是通过引用来处理的，通常使用 <code>&amp;</code> 来创建切片。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -588,8 +654,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                切片是 Rust 中一种非常重要的概念，它提供了一种引用数据部分的方式，而不需要复制数据本身。切片允许你操作集合（如数组、String）的一部分数据，保持对原始数据的引用。我们来详细总结这一小节。
-1. 切片的基本概念在 Rust 中，切片
+                                切片是 Rust 中的一个重要概念，它提供了一种引用数据部分的方式，而无需复制数据本身。切片允许你对集合（如数组、Vec、String）的一部分进行操作，同时保持对原始数据的引用。
+
+1. 切片的基本概念在 Rust 中，切片（slice）
                             
                         </div>
                         <div class="publish-info">
@@ -618,20 +685,20 @@
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2025/02/21/rustyin-yong-yu-jie-yong-references-and-borrowing/">
+                    <a href="/2025/02/21/rustyin-yong-yu-jie-yong/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/10.png" class="responsive-img" alt="Rust中的引用与借用（References and Borrowing）">
+                                <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Rust中的引用与借用">
                             
-                            <span class="card-title">Rust中的引用与借用（References and Borrowing）</span>
+                            <span class="card-title">Rust中的引用与借用</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                在 Rust 中，借用（Borrowing） 允许你在不转移所有权的情况下使用数据。这一节详细讨论了如何通过引用（References）来借用数据以及相关的规则，确保内存安全和避免数据竞争。
-1. 什么是引用（References）？引用是
+                                前面我们讨论了：在 Rust 中，借用（Borrowing） 允许你在不转移所有权的情况下使用数据。这一节详细讨论了如何通过引用（References）来借用数据以及相关的规则，确保内存安全和避免数据竞争。
+1. 什么是引用（Referen
                             
                         </div>
                         <div class="publish-info">
@@ -802,7 +869,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

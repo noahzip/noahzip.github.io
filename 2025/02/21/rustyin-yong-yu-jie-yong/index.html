@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Rust中的引用与借用（References and Borrowing）, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="在 Rust 中，借用（Borrowing） 允许你在不转移所有权的情况下使用数据。这一节详细讨论了如何通过引用（References）来借用数据以及相关的规则，确保内存安全和避免数据竞争。
-1. 什么是引用（References）？引用是">
+    <meta name="keywords" content="Rust中的引用与借用, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="前面我们讨论了：在 Rust 中，借用（Borrowing） 允许你在不转移所有权的情况下使用数据。这一节详细讨论了如何通过引用（References）来借用数据以及相关的规则，确保内存安全和避免数据竞争。
+1. 什么是引用（Referen">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>Rust中的引用与借用（References and Borrowing） | Sparks Fly</title>
+    <title>Rust中的引用与借用 | Sparks Fly</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -210,12 +210,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/24.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Rust中的引用与借用（References and Borrowing）</h1>
+                    <h1 class="description center-align post-title">Rust中的引用与借用</h1>
                 </div>
             </div>
         </div>
@@ -366,7 +366,7 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.9k
+                        1.8k
                     </div>
                 
 
@@ -383,39 +383,51 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在 Rust 中，<strong>借用（Borrowing）</strong> 允许你在不转移所有权的情况下使用数据。这一节详细讨论了如何通过引用（References）来借用数据以及相关的规则，确保内存安全和避免数据竞争。</p>
+                <p>前面我们讨论了：在 Rust 中，<code>借用（Borrowing）</code> 允许你在不转移所有权的情况下使用数据。这一节详细讨论了如何通过<code>引用（References）</code>来借用数据以及相关的规则，确保内存安全和避免数据竞争。</p>
 <h2 id="1-什么是引用（References）？"><a href="#1-什么是引用（References）？" class="headerlink" title="1. 什么是引用（References）？"></a><strong>1. 什么是引用（References）？</strong></h2><p>引用是指向数据的指针。Rust 提供了两种类型的引用：</p>
 <ul>
-<li><strong>不可变引用（Immutable references）</strong>：允许你读取数据，但不能修改它。</li>
-<li><strong>可变引用（Mutable references）</strong>：允许你修改数据。</li>
+<li><code>不可变引用（Immutable references）</code>：允许你读取数据，但不能修改它。</li>
+<li><code>可变引用（Mutable references）</code>：允许你修改数据。</li>
 </ul>
 <p>引用使得多个函数或变量可以共享数据，而不需要拥有数据的所有权。</p>
-<h2 id="2-引用的基本规则"><a href="#2-引用的基本规则" class="headerlink" title="2. 引用的基本规则"></a><strong>2. 引用的基本规则</strong></h2><h3 id="（1）不可变引用"><a href="#（1）不可变引用" class="headerlink" title="（1）不可变引用"></a><strong>（1）不可变引用</strong></h3><ul>
-<li><strong>不可变引用</strong>允许你读取数据，但不允许修改数据。</li>
+<h2 id="2-引用的基本规则"><a href="#2-引用的基本规则" class="headerlink" title="2. 引用的基本规则"></a><strong>2. 引用的基本规则</strong></h2><h3 id="1-不可变引用"><a href="#1-不可变引用" class="headerlink" title="1.不可变引用"></a><strong>1.不可变引用</strong></h3><ul>
+<li><strong>不可变引用</strong>： 只允许读取数据，不允许修改数据。</li>
 <li><strong>多个不可变引用</strong>：你可以在同一时间拥有多个不可变引用。</li>
 </ul>
 <p><strong>不可变引用的语法：</strong></p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> r1 <span class="token operator">=</span> <span class="token operator">&amp;</span>s<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 不可变借用</span>
 <span class="token keyword">let</span> r2 <span class="token operator">=</span> <span class="token operator">&amp;</span>s<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 另一个不可变借用</span>
-<span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r1<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 使用不可变引用</span>
-<span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 使用另一个不可变引用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r1<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 使用不可变引用 hello</span>
+<span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 使用另一个不可变引用 hello</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>你可以同时拥有多个不可变引用（<code>r1</code> 和 <code>r2</code>）来读取同一个数据。</li>
 </ul>
-<h3 id="（2）可变引用"><a href="#（2）可变引用" class="headerlink" title="（2）可变引用"></a><strong>（2）可变引用</strong></h3><ul>
-<li><strong>可变引用</strong>允许你修改数据，但在同一时间只能拥有<strong>一个</strong>可变引用。</li>
+<h3 id="2-可变引用"><a href="#2-可变引用" class="headerlink" title="2.可变引用"></a><strong>2.可变引用</strong></h3><ul>
+<li><strong>可变引用</strong>：允许修改数据，但在同一时间只能拥有<strong>一个</strong>可变引用。</li>
 <li>Rust 的设计保证了可变引用期间，数据不会同时被其他代码访问，从而避免了数据竞争的问题。</li>
 </ul>
 <p><strong>可变引用的语法：</strong></p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> r1 <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 可变借用</span>
 r1<span class="token punctuation">.</span><span class="token function">push_str</span><span class="token punctuation">(</span><span class="token string">", world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 修改数据</span>
-<span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r1<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 输出修改后的数据</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r1<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 输出修改后的数据 hello, world</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li>在上述代码中，<code>r1</code> 是 <code>s</code> 的可变引用，可以修改 <code>s</code> 的内容。</li>
+<li><p>在上述代码中，<code>r1</code> 是 <code>s</code> 的可变引用，可以修改 <code>s</code> 的内容。</p>
+</li>
+<li><p>错误示例：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> r1 <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 可变引用</span>
+    <span class="token comment" spellcheck="true">// let r2 = &amp;s;    // 错误：不能同时拥有不可变和可变引用</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>在一个可变引用存在的情况下，无法同时拥有不可变引用</li>
 </ul>
-<h3 id="（3）不可变引用与可变引用不能共存"><a href="#（3）不可变引用与可变引用不能共存" class="headerlink" title="（3）不可变引用与可变引用不能共存"></a><strong>（3）不可变引用与可变引用不能共存</strong></h3><ul>
+</li>
+</ul>
+<h3 id="3-不可变引用与可变引用不能共存"><a href="#3-不可变引用与可变引用不能共存" class="headerlink" title="3.不可变引用与可变引用不能共存"></a><strong>3.不可变引用与可变引用不能共存</strong></h3><ul>
 <li><strong>不可变引用和可变引用不能同时存在</strong>，即一个数据要么只能被不可变借用，要么只能被可变借用。</li>
 <li>如果你已经有一个可变引用，不能同时创建不可变引用，反之亦然。</li>
 </ul>
@@ -442,36 +454,7 @@ r1<span class="token punctuation">.</span><span class="token function">push_str<
 <li><strong>引用的生命周期</strong>：引用的生命周期与原数据的生命周期是相互关联的。Rust 会确保引用不会在原数据被销毁后仍然存在，从而避免了悬空引用（dangling references）。</li>
 <li><strong>切片类型</strong>：引用本质上是一个指向内存的指针，Rust 中的切片（<code>&amp;str</code> 或 <code>&amp;[T]</code>）是引用类型，用于表示对一部分数据的引用。</li>
 </ul>
-<hr>
-<h2 id="5-举例："><a href="#5-举例：" class="headerlink" title="5. 举例："></a><strong>5. 举例：</strong></h2><h3 id="不可变引用"><a href="#不可变引用" class="headerlink" title="不可变引用"></a><strong>不可变引用</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> r1 <span class="token operator">=</span> <span class="token operator">&amp;</span>s<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 不可变引用</span>
-    <span class="token keyword">let</span> r2 <span class="token operator">=</span> <span class="token operator">&amp;</span>s<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 另一个不可变引用</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r1<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 使用 r1 输出</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 使用 r2 输出</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>你可以拥有多个不可变引用来读取数据，但不能修改数据。</li>
-</ul>
-<h3 id="可变引用"><a href="#可变引用" class="headerlink" title="可变引用"></a><strong>可变引用</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> r1 <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 可变引用</span>
-    r1<span class="token punctuation">.</span><span class="token function">push_str</span><span class="token punctuation">(</span><span class="token string">", world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 修改数据</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r1<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 输出修改后的数据</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>只有一个可变引用可以存在，且它可以修改数据。</li>
-</ul>
-<h3 id="错误示例：同时拥有不可变和可变引用"><a href="#错误示例：同时拥有不可变和可变引用" class="headerlink" title="错误示例：同时拥有不可变和可变引用"></a><strong>错误示例：同时拥有不可变和可变引用</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> <span class="token keyword">mut</span> s <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> r1 <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> s<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 可变引用</span>
-    <span class="token comment" spellcheck="true">// let r2 = &amp;s;    // 错误：不能同时拥有不可变和可变引用</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> r1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>在一个可变引用存在的情况下，无法同时拥有不可变引用。</li>
-</ul>
-<h3 id="所有权代码总结"><a href="#所有权代码总结" class="headerlink" title="所有权代码总结"></a>所有权代码总结</h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<h2 id="5-所有权代码总结"><a href="#5-所有权代码总结" class="headerlink" title="5.所有权代码总结"></a>5.所有权代码总结</h2><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//scope();</span>
 
@@ -612,13 +595,13 @@ r1<span class="token punctuation">.</span><span class="token function">push_str<
                 <div class="article-badge left-badge text-color">
                     <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2025/02/21/rust-he-yin-yong-de-shi-yong-chang-jing/">
+                    <a href="/2025/02/21/rustzhong-yin-yong-de-shi-yong-chang-jing/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Rust &和引用使用场景">
+                                <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Rust中引用的使用场景">
                             
-                            <span class="card-title">Rust &和引用使用场景</span>
+                            <span class="card-title">Rust中引用的使用场景</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
@@ -665,8 +648,8 @@ r1<span class="token punctuation">.</span><span class="token function">push_str<
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Rust 的所有权（Ownership）系统是其内存管理的核心之一，它避免了垃圾回收（GC）机制而确保了内存的安全管理。通过所有权系统，Rust 在编译时就能保证内存使用的安全性，避免了程序运行时的内存管理问题。
-1. 所有权的基本规则Ru
+                                Rust 的所有权（Ownership）系统是其内存管理的核心之一，它没有垃圾回收（GC）机制，通过所有权系统，Rust 在编译时就能保证内存使用的安全性，避免了程序运行时的内存管理问题。
+1. 所有权的基本规则Rust 的所有权系统依赖于
                             
                         </div>
                         <div class="publish-info">
@@ -837,7 +820,7 @@ r1<span class="token punctuation">.</span><span class="token function">push_str<
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

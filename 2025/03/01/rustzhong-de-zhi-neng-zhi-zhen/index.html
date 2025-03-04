@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Rust中的智能指针, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="指针 （pointer）是一个包含内存地址的变量的通用概念。这个地址引用，或 “指向”（points at）一些其他数据。Rust 中最常见的指针是第四章介绍的 引用（reference）。引用以 &amp;amp; 符号为标志并借用了它们所指向的">
+    <meta name="description" content="指针 （pointer）是一个包含内存地址的变量的通用概念。这个地址引用 “指向”（points at）一些其他数据。Rust 中最常见的指针是引用（reference）。引用以 &amp;amp; 符号为标志并借用了它们所指向的值。除了引用数据没">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -365,14 +365,14 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        10.2k
+                        9.9k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        42 分
+                        41 分
                     </div>
                 
 
@@ -382,7 +382,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>指针</strong> （<em>pointer</em>）是一个包含内存地址的变量的通用概念。这个地址引用，或 “指向”（points at）一些其他数据。Rust 中最常见的指针是第四章介绍的 <strong>引用</strong>（<em>reference</em>）。引用以 <code>&amp;</code> 符号为标志并借用了它们所指向的值。除了引用数据没有任何其他特殊功能，也没有额外开销。</p>
+                <p><strong>指针</strong> （<em>pointer</em>）是一个包含内存地址的变量的通用概念。这个地址引用 “指向”（points at）一些其他数据。Rust 中最常见的指针是<strong>引用（<em>reference</em>）</strong>。引用以 <code>&amp;</code> 符号为标志并借用了它们所指向的值。除了引用数据没有任何其他特殊功能，也没有额外开销。</p>
 <p>另一方面，<strong>智能指针</strong>（<em>smart pointers</em>）是一类<strong>数据结构</strong>，它们的表现类似指针，但是也拥有额外的元数据和功能。智能指针的概念并不为 Rust 所独有；其起源于 C++ 并存在于其他语言中。Rust 标准库中定义了多种不同的智能指针，它们提供了多于引用的额外功能。为了探索其基本概念，我们来看看一些智能指针的例子，这包括 <strong>引用计数</strong> （<em>reference counting</em>）智能指针类型。</p>
 <p>智能指针通常使用结构体实现。智能指针不同于结构体的地方在于其实现了 <code>Deref</code> 和 <code>Drop</code> trait。<code>Deref</code> trait 允许智能指针结构体实例表现的像引用一样，这样就可以编写既用于引用、又用于智能指针的代码。<code>Drop</code> trait 允许我们自定义当智能指针离开作用域时运行的代码。本章会讨论这些 trait 以及为什么对于智能指针来说它们很重要。</p>
 <p>另外我们会涉及 <strong>内部可变性</strong>（<em>interior mutability</em>）模式，这是不可变类型暴露出改变其内部值的 API。我们也会讨论 <strong>引用循环</strong>（<em>reference cycles</em>）会如何泄漏内存，以及如何避免。</p>
@@ -405,8 +405,8 @@
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"a = {}"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里定义了变量 <code>b</code>，其值是一个指向被分配在堆上的值 <code>5</code> 的 <code>Box</code>。这个程序会打印出 <code>b = 5</code>；在这个例子中，我们可以像数据是储存在栈上的那样访问 box 中的数据。正如任何拥有数据所有权的值那样，当像 <code>b</code> 这样的 box 在 <code>main</code> 的末尾离开作用域时，它将被释放。这个释放过程作用于 box 本身（位于栈上）和它所指向的数据（位于堆上）。</p>
-<p><code>let a = Box::new(5);</code> ：<code>5</code> 被 <strong>存储在堆（heap）上</strong>，而 <code>x</code> 本身是一个 <code>Box&lt;i32&gt;</code> 变量，它存储在栈上，并指向堆上的 <code>5</code>，并有额外的指针开销。</p>
-<p><code>let b = 5;</code>5<code>被 **存储在栈（stack）上**，</code>y<code>直接存储</code>i32` 值，访问速度更快，适用于简单标量值。</p>
+<p><code>let a = Box::new(5);</code> ：<code>5</code> 被 <strong>存储在堆（heap）上</strong>，而 <code>a</code> 本身是一个 <code>Box&lt;i32&gt;</code> 变量，它存储在栈上指向堆上的 <code>5</code>，有额外的指针开销。</p>
+<p><code>let b = 5</code>; <code>5</code> 被 <strong>存储在栈（stack）上</strong>，<code>b</code> 直接存储 <code>i32</code> 值，访问速度更快，适用于简单标量值。</p>
 <h3 id="2-Box允许创建递归类型"><a href="#2-Box允许创建递归类型" class="headerlink" title="2.Box允许创建递归类型"></a>2.Box允许创建递归类型</h3><p><strong>递归类型（<em>recursive type</em>）</strong>的值可以拥有另一个同类型的值作为其自身的一部分。但是这会产生一个问题，因为 Rust 需要在编译时知道类型占用多少空间。递归类型的值嵌套理论上可以无限地进行下去，所以 Rust 不知道递归类型需要多少空间。因为 box 有一个已知的大小，所以通过在循环类型定义中插入 box，就可以创建递归类型了。</p>
 <p><code>src/lib.rs</code></p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">enum</span> List <span class="token punctuation">{</span>
@@ -427,7 +427,7 @@
 <li>代码构造了一个 <code>1 -&gt; 2 -&gt; 3 -&gt; Nil</code> 的链表结构。</li>
 </ul>
 <h2 id="2-Deref-trait"><a href="#2-Deref-trait" class="headerlink" title="2 .Deref  trait"></a>2 .Deref  trait</h2><p>实现 <code>Deref</code> trait 允许我们重载 <strong>解引用运算符</strong>（<em>dereference operator</em>）<code>*</code>（不要与乘法运算符或通配符相混淆）。通过这种方式实现 <code>Deref</code> trait 的智能指针可以被当作常规引用来对待，可以编写操作引用的代码并用于智能指针。下面让我们来看看它具体有哪些作用：</p>
-<h3 id="1-追踪指针的值"><a href="#1-追踪指针的值" class="headerlink" title="1.追踪指针的值"></a>1.追踪指针的值</h3><p><strong>常规引用是一个指针类型</strong>，一种理解指针的方式是将其看成指向储存在其他某处值的箭头。在示例 15-6 中，创建了一个 <code>i32</code> 值的引用，接着使用<code>解引用运算符(*)</code>来跟踪所引用的值：</p>
+<h3 id="1-追踪指针的值"><a href="#1-追踪指针的值" class="headerlink" title="1.追踪指针的值"></a>1.追踪指针的值</h3><p><strong>常规引用是一个指针类型</strong>，一种理解指针的方式是将其看成指向储存在其他某处值的箭头。在下方的示例代码中，创建了一个 <code>i32</code> 值的引用，接着使用<code>解引用运算符(*)</code>来跟踪所引用的值：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">de_refrence</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token operator">&amp;</span>x<span class="token punctuation">;</span>
@@ -438,7 +438,7 @@
 <p><strong>像引用一样使用 <code>Box</code></strong></p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">de_refrence</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token operator">&amp;</span>x<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> y <span class="token operator">=</span> Box<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//智能指针</span>
     <span class="token function">assert_eq!</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">assert_eq!</span><span class="token punctuation">(</span><span class="token operator">*</span>y<span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//使用解引用运算符来跟踪 i32 值的引用</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -467,7 +467,7 @@
     <span class="token function">refrence_box_diff</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>尝试编译得到的错误提示是<code>error[E0614]: type</code>MyBox&lt;{integer}&gt;<code>cannot be dereferenced</code>:<code>MyBox&lt;T&gt;</code> 类型不能解引用，因为我们尚未在该类型实现这个功能。为了启用 <code>*</code> 运算符的解引用功能，需要实现 <code>Deref</code> trait。</p>
+<p>尝试编译得到的错误提示是<code>error[E0614]: type MyBox&lt;{integer}&gt; cannot be dereferenced:MyBox&lt;T&gt;</code> 类型不能解引用，因为我们尚未在该类型实现这个功能。为了启用 <code>*</code> 运算符的解引用功能，需要实现 <code>Deref</code> trait。</p>
 <h3 id="3-通过实现-Deref-trait-将某类型像引用一样处理"><a href="#3-通过实现-Deref-trait-将某类型像引用一样处理" class="headerlink" title="3.通过实现 Deref trait 将某类型像引用一样处理"></a>3.通过实现 <code>Deref</code> trait 将某类型像引用一样处理</h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>ops<span class="token punctuation">:</span><span class="token punctuation">:</span>Deref<span class="token punctuation">;</span>
 <span class="token keyword">struct</span> MyBox<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">{</span>
     value<span class="token punctuation">:</span>T
@@ -481,6 +481,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
+<span class="token comment" spellcheck="true">// Deref trait</span>
 <span class="token keyword">impl</span><span class="token operator">&lt;</span>T<span class="token operator">></span> Deref <span class="token keyword">for</span> MyBox<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token keyword">type</span> Target <span class="token operator">=</span> T<span class="token punctuation">;</span>
 
@@ -497,12 +498,11 @@
 
 <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token function">refrence_box_diff</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>type Target = T;</code> 语法定义了用于此 trait 的关联类型。</p>
 <p><code>deref</code> 方法体中写入了 <code>&amp;self.value</code>，这样 <code>deref</code> 返回了我希望通过 <code>*</code> 运算符访问的值的引用</p>
 <p>没有有 <code>Deref</code> trait 的话，编译器只会解引用 <code>&amp;</code> 引用类型。<code>deref</code> 方法向编译器提供了获取任何实现了 <code>Deref</code> trait 的类型的值，并且调用这个类型的 <code>deref</code> 方法来获取一个它知道如何解引用的 <code>&amp;</code> 引用的能力。</p>
-<p> <code>*y</code> 时，Rust 事实上在底层运行了如下代码： </p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token operator">*</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span><span class="token function">deref</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>执行 <code>*y</code> 时，Rust 事实上在底层运行了如下代码： <code>*(y.deref())</code></p>
 <p>Rust 将 <code>*</code> 运算符替换为先调用 <code>deref</code> 方法再进行普通解引用的操作，如此我们便不用担心是否还需手动调用 <code>deref</code> 方法了。Rust 的这个特性可以让我们写出行为一致的代码，无论是面对的是常规引用还是实现了 <code>Deref</code> 的类型。</p>
 <p><code>deref</code> 方法返回值的引用，以及 <code>*(y.deref())</code> 括号外边的普通解引用仍为必须的原因在于所有权。如果 <code>deref</code> 方法直接返回值而不是值的引用，其值（的所有权）将被移出 <code>self</code>。在这里以及大部分使用解引用运算符的情况下我们并不希望获取 <code>MyBox&lt;T&gt;</code> 内部值的所有权。</p>
 <h3 id="4-Deref-强制转换（deref-coercions）"><a href="#4-Deref-强制转换（deref-coercions）" class="headerlink" title="4.Deref 强制转换（deref coercions）"></a><strong>4.Deref 强制转换</strong>（<em>deref coercions</em>）</h3><p>将实现了 <code>Deref</code> trait 的类型的引用转换为另一种类型的引用。例如，可以将 <code>&amp;String</code> 转换为 <code>&amp;str</code>，因为 <code>String</code> 实现了 <code>Deref</code> trait 因此可以返回 <code>&amp;str</code>。</p>
@@ -521,6 +521,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
+<span class="token comment" spellcheck="true">// Deref trait</span>
 <span class="token keyword">impl</span><span class="token operator">&lt;</span>T<span class="token operator">></span> Deref <span class="token keyword">for</span> MyBox<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token keyword">type</span> Target <span class="token operator">=</span> T<span class="token punctuation">;</span>
 
@@ -532,22 +533,36 @@
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello, {name}!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//simple_case();</span>
-    <span class="token comment" spellcheck="true">// refrence_box_diff();</span>
     <span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"bob"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//可以使用字符串 slice 作为参数调用 hello函数</span>
+
     <span class="token keyword">let</span> m <span class="token operator">=</span> MyBox<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"bob"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">hello1</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//用 MyBox&lt;String> 类型值的引用调用 hello函数</span>
+    <span class="token function">hello</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//用 MyBox&lt;String> 类型值的引用调用 hello函数</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这里使用 <code>&amp;m</code> 调用 <code>hello</code> 函数，其为 <code>MyBox&lt;String&gt;</code> 值的引用。因为在 <code>MyBox&lt;T&gt;</code> 上实现了 <code>Deref</code> trait，Rust 可以通过 <code>deref</code> 调用将 <code>&amp;MyBox&lt;String&gt;</code> 变为 <code>&amp;String</code>。标准库中提供了 <code>String</code> 上的 <code>Deref</code> 实现，其会返回字符串 slice，这可以在 <code>Deref</code> 的 API 文档中看到。Rust 再次调用 <code>deref</code> 将 <code>&amp;String</code> 变为 <code>&amp;str</code>，这就符合 <code>hello</code> 函数的定义了。</p>
+<p>这里使用 <code>&amp;m</code> 调用 <code>hello</code> 函数，其为 <code>MyBox&lt;String&gt;</code> 值的引用。因为在 <code>MyBox&lt;T&gt;</code> 上实现了 <code>Deref</code> trait，Rust 可以通过 <code>deref</code> 调用将 <code>&amp;MyBox&lt;String&gt;</code> 变为 <code>&amp;String</code>（标准库中提供了 <code>String</code> 上的 <code>Deref</code> 实现，其会返回字符串 slice，这可以在 <code>Deref</code> 的 API 文档中看到）。Rust 再次调用 <code>deref</code> 将 <code>&amp;String</code> 变为 <code>&amp;str</code>，这就符合 <code>hello</code> 函数的定义了。</p>
 <p>如果 Rust 没有实现 Deref 强制转换，为了使用 <code>&amp;MyBox&lt;String&gt;</code> 类型的值调用 <code>hello</code>，则不得用下面的代码来实现了：</p>
 <p><code>src/main.rs</code></p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>ops<span class="token punctuation">:</span><span class="token punctuation">:</span>Deref<span class="token punctuation">;</span>
+<span class="token keyword">struct</span> MyBox<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">{</span>
+    value<span class="token punctuation">:</span>T
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> MyBox<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span>T<span class="token punctuation">)</span> <span class="token punctuation">-></span> MyBox<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">{</span>
+        MyBox<span class="token punctuation">{</span>
+            value<span class="token punctuation">:</span>x
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">fn</span> <span class="token function">hello</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token operator">&amp;</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello, {name}!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> m <span class="token operator">=</span> MyBox<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"Rust"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">hello</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token operator">*</span>m<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">..</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>(*m)</code> 将 <code>MyBox&lt;String&gt;</code> 解引用为 <code>String</code>。接着 <code>&amp;</code> 和 <code>[..]</code> 获取了整个 <code>String</code> 的字符串 slice 来匹配 <code>hello</code> 的签名。没有 Deref 强制转换所有这些符号混在一起将更难以读写和理解。Deref 强制转换使得 Rust 自动的帮我们处理这些转换。</p>
 <p>当所涉及到的类型定义了 <code>Deref</code> trait，Rust 会分析这些类型并使用任意多次 <code>Deref::deref</code> 调用以获得匹配参数的类型。这些解析都发生在编译时，所以利用 Deref 强制转换并没有运行时损耗！</p>
-<h3 id="5-Deref-强制转换如何与可变性交互"><a href="#5-Deref-强制转换如何与可变性交互" class="headerlink" title="5.Deref 强制转换如何与可变性交互"></a>5.Deref 强制转换如何与可变性交互</h3><p>类似于如何使用 <code>Deref</code> trait 重载不可变引用的 <code>*</code> 运算符，Rust 提供了 <code>DerefMut</code> trait 用于重载可变引用的 <code>*</code> 运算符。</p>
+<h3 id="5-Deref-强制转换"><a href="#5-Deref-强制转换" class="headerlink" title="5.Deref 强制转换"></a>5.Deref 强制转换</h3><p>类似于如何使用 <code>Deref</code> trait 重载不可变引用的 <code>*</code> 运算符，Rust 提供了 <code>DerefMut</code> trait 用于重载可变引用的 <code>*</code> 运算符。</p>
 <p>Rust 在发现类型和 trait 实现满足三种情况时会进行 Deref 强制转换：</p>
 <ul>
 <li>当 <code>T: Deref&lt;Target=U&gt;</code> 时从 <code>&amp;T</code> 到 <code>&amp;U</code>。</li>
@@ -556,35 +571,37 @@
 </ul>
 <p>头两个情况除了第二种实现了可变性之外是相同的：第一种情况表明如果有一个 &amp;T，而 T 实现了返回 U 类型的 Deref，则可以直接得到 &amp;U。第二种情况表明对于可变引用也有着相同的行为。 </p>
 <p>第三个情况有些微妙：Rust 也会将可变引用强转为不可变引用。但是反之是 <strong>不可能</strong> 的：不可变引用永远也不能强转为可变引用。因为根据借用规则，如果有一个可变引用，其必须是这些数据的唯一引用（否则程序将无法编译）。将一个可变引用转换为不可变引用永远也不会打破借用规则。</p>
-<h2 id="3-Drop-trait"><a href="#3-Drop-trait" class="headerlink" title="3 .Drop  trait"></a>3 .Drop  trait</h2><p>允许我们在值要离开作用域时执行一些代码。可以为任何类型提供 <code>Drop</code> trait 的实现，同时所指定的代码被用于释放类似于文件或网络连接的资源。</p>
-<p>例如，当 <code>Box&lt;T&gt;</code> 被丢弃时会释放 box 指向的堆空间。</p>
-<p>指定在值离开作用域时应该执行的代码的方式是实现 <code>Drop</code> trait。<code>Drop</code> trait 要求实现一个叫做 <code>drop</code> 的方法，它获取一个 <code>self</code> 的可变引用。</p>
+<h2 id="3-Drop-trait"><a href="#3-Drop-trait" class="headerlink" title="3 .Drop  trait"></a>3 .Drop  trait</h2><p>实现<code>Drop  trait</code>允许我们在值要离开作用域时执行一些代码，例如当 <code>Box&lt;T&gt;</code> 被丢弃时会释放 box 指向的堆空间。</p>
+<p><code>Drop</code> trait 要求实现一个叫做 <code>drop</code> 的方法，它获取一个 <code>self</code> 的可变引用。</p>
 <p>下面的代码展示了当其实例离开作用域时，打印出 <code>Dropping CustomPointer with data: {}</code> ，这会演示 Rust 何时运行 <code>drop</code> 函数：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> CustomPointer<span class="token punctuation">{</span>
     data<span class="token punctuation">:</span>String
 <span class="token punctuation">}</span>
 
-<span class="token keyword">impl</span> Drop <span class="token keyword">for</span> CustomPointer<span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">//实现 Drop trait </span>
+<span class="token keyword">impl</span>  Drop <span class="token keyword">for</span> CustomPointer<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//实现drop方法</span>
     <span class="token keyword">fn</span> <span class="token function">drop</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//Drop trait 包含在 prelude 中，所以无需导入它。</span>
         <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Dropping CustomPointer with data: {}"</span><span class="token punctuation">,</span><span class="token keyword">self</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">let</span> pointer1 <span class="token operator">=</span> CustomPointer<span class="token punctuation">{</span>data<span class="token punctuation">:</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"my data1"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> data1 <span class="token operator">=</span> CustomPointer<span class="token punctuation">{</span>data<span class="token punctuation">:</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"my data1"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token punctuation">{</span>
-        <span class="token keyword">let</span> pointer2 <span class="token operator">=</span> CustomPointer<span class="token punctuation">{</span>data<span class="token punctuation">:</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"my data2"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">let</span> pointer3 <span class="token operator">=</span> CustomPointer<span class="token punctuation">{</span>data<span class="token punctuation">:</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"my data3"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> data2 <span class="token operator">=</span> CustomPointer<span class="token punctuation">{</span>data<span class="token punctuation">:</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"my data2"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token comment" spellcheck="true">//data2离开作用域会被先行删除</span>
+    <span class="token keyword">let</span> data3 <span class="token operator">=</span> CustomPointer<span class="token punctuation">{</span>data<span class="token punctuation">:</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"my data3"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"CustomPointer has been Created!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果：</p>
 <pre class="line-numbers language-bash"><code class="language-bash">Dropping CustomPointer with data: my data2
 CustomPointer has been Created<span class="token operator">!</span>
 Dropping CustomPointer with data: my data3
 Dropping CustomPointer with data: my data1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当实例离开作用域 Rust 会自动调用 <code>drop</code>，并调用我们指定的代码，这个例子的作用是给了我们一个 drop 方法如何工作的可视化指导。</p>
-<h3 id="通过-std-mem-drop-提早丢弃值"><a href="#通过-std-mem-drop-提早丢弃值" class="headerlink" title="通过 std::mem::drop 提早丢弃值"></a>通过 <code>std::mem::drop</code> 提早丢弃值</h3><p>不幸的是，我们并不能直截了当的禁用 <code>drop</code> 这个功能。通常也不需要禁用 <code>drop</code> ；整个 <code>Drop</code> trait 存在的意义在于其是自动处理的。然而，有时你可能需要提早清理某个值。一个例子是当使用智能指针管理锁时；你可能希望强制运行 <code>drop</code> 方法来释放锁以便作用域中的其他代码可以获取锁。Rust 并不允许我们主动调用 <code>Drop</code> trait 的 <code>drop</code> 方法。</p>
+<h3 id="通过-std-mem-drop-提早丢弃值"><a href="#通过-std-mem-drop-提早丢弃值" class="headerlink" title="通过 std::mem::drop 提早丢弃值"></a>通过 <code>std::mem::drop</code> 提早丢弃值</h3><p>不幸的是，我们并不能直截了当的禁用 <code>drop</code> 这个功能。通常也不需要禁用 <code>drop</code> ；整个 <code>Drop</code> trait 存在的意义在于其是自动处理的。然而，有时你可能需要提早清理某个值。</p>
+<p>一个例子是当使用智能指针管理锁时；你可能希望强制运行 <code>drop</code> 方法来释放锁以便作用域中的其他代码可以获取锁。Rust 并不允许我们主动调用 <code>Drop</code> trait 的 <code>drop</code> 方法。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">test_drop_pre</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">let</span> pointer1 <span class="token operator">=</span> CustomPointer<span class="token punctuation">{</span>data<span class="token punctuation">:</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"my data1"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
     pointer1<span class="token punctuation">.</span><span class="token function">drop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//explicit destructor calls not allowed</span>
@@ -592,7 +609,8 @@ Dropping CustomPointer with data: my data1<span aria-hidden="true" class="line-n
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Prepare drop pointer1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出</p>
-<pre><code>//explicit destructor calls not allowed</code></pre><p>Rust 不允许我们显式调用 <code>drop</code> 因为 Rust 仍然会在 <code>main</code> 的结尾对值自动调用 <code>drop</code>，这会导致一个 <em>double free</em> 错误，因为 Rust 会尝试清理相同的值两次。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">//explicit destructor calls not allowed<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Rust 不允许我们显式调用 <code>drop</code> ,因为 Rust 会在 <code>main</code> 的结尾对值自动调用 <code>drop</code>，这会导致一个 <em>double free</em> 错误，因为 Rust 会尝试清理相同的值两次。</p>
 <p>当我们希望在作用域结束之前就强制释放变量的话，我们应该使用的是由标准库提供的 <code>std::mem::drop</code>。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> CustomPointer<span class="token punctuation">{</span>
     data<span class="token punctuation">:</span>String
@@ -613,13 +631,15 @@ Dropping CustomPointer with data: my data1<span aria-hidden="true" class="line-n
     <span class="token function">test_drop_pre</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出</p>
-<pre><code>Dropping CustomPointer with data: my data1
+<pre class="line-numbers language-shell"><code class="language-shell">Dropping CustomPointer with data: my data1
 Prepare drop pointer1
-Dropping CustomPointer with data: my data2</code></pre><p><code>Drop</code> trait 实现中指定的代码可以用于许多方面，来使得清理变得方便和安全：比如可以用其创建我们自己的内存分配器！通过 <code>Drop</code> trait 和 Rust 所有权系统，你无需担心之后的代码清理，Rust 会自动考虑这些问题。</p>
+Dropping CustomPointer with data: my data2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><code>Drop</code> trait 实现中指定的代码可以用于许多方面，来使得清理变得方便和安全：比如可以用其创建我们自己的内存分配器！通过 <code>Drop</code> trait 和 Rust 所有权系，你无需担心之后的代码清理，Rust 会自动考虑这些问题。</p>
 <p>我们也无需担心意外的清理掉仍在使用的值，这会造成编译器错误：所有权系统确保引用总是有效的，也会确保 <code>drop</code> 只会在值不再被使用时被调用一次。</p>
-<h2 id="4-Rc-引用计数智能指针"><a href="#4-Rc-引用计数智能指针" class="headerlink" title="4 .Rc: 引用计数智能指针"></a>4 .Rc<t>: 引用计数智能指针</t></h2><p>大部分情况下所有权是非常明确的：可以准确地知道哪个变量拥有某个值。然而，有些情况单个值可能会有多个所有者。例如，在图数据结构中，多个边可能指向相同的节点，而这个节点从概念上讲为所有指向它的边所拥有。节点在没有任何边指向它从而没有任何所有者之前，都不应该被清理掉。</p>
+<h2 id="4-Rc-lt-T-gt-引用计数智能指针"><a href="#4-Rc-lt-T-gt-引用计数智能指针" class="headerlink" title="4 .Rc<T>: 引用计数智能指针"></a>4 .<code>Rc&lt;T&gt;</code>: 引用计数智能指针</h2><p>大部分情况下所有权是非常明确的：可以准确地知道哪个变量拥有某个值。然而，有些情况单个值可能会有多个所有者。</p>
+<p>例如，在图数据结构中，多个边可能指向相同的节点，而这个节点从概念上讲为所有指向它的边所拥有。节点在没有任何边指向它从而没有任何所有者之前，都不应该被清理掉。</p>
 <p>为了启用多所有权需要显式地使用 Rust 类型 <code>Rc&lt;T&gt;</code>，其为 <strong>引用计数</strong>（<em>reference counting</em>）的缩写。引用计数意味着记录一个值的引用数量来知晓这个值是否仍在被使用。如果某个值有零个引用，就代表没有任何有效引用并可以被清理。</p>
-<h4 id="Rc-适用于共享所有权"><a href="#Rc-适用于共享所有权" class="headerlink" title="Rc 适用于共享所有权"></a>Rc<t> 适用于共享所有权</t></h4><p>Rc<t>用于当我们希望在堆上分配一些内存供程序的多个部分读取，而且无法在编译时确定程序的哪一部分会最后结束使用它的时候。如果确实知道哪部分是最后一个结束使用的话，就可以令其成为数据的所有者，正常的所有权规则就可以在编译时生效。</t></p>
+<h4 id="Rc-lt-T-gt-适用于共享所有权"><a href="#Rc-lt-T-gt-适用于共享所有权" class="headerlink" title="Rc<T>适用于共享所有权"></a><code>Rc&lt;T&gt;</code>适用于共享所有权</h4><p><code>Rc&lt;T&gt;</code>用于当多个部分需要共享堆上的数据，但无法确定谁最后使用时。如果确实知道哪部分是最后一个结束使用的话，就可以令其成为数据的所有者，正常的所有权规则就可以在编译时生效。</p>
 <ul>
 <li>适用于<strong>单线程环境</strong>。</li>
 </ul>
@@ -653,7 +673,13 @@ error[E0382]: use of moved value: `a`
 For more information about this error, try `rustc --explain E0382`.
 error: could not compile `cons-list` (bin "cons-list") due to 1 previous error<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>Cons</code> 成员拥有其储存的数据，所以当创建 <code>b</code> 列表时，<code>a</code> 被移动进了 <code>b</code> 这样 <code>b</code> 就拥有了 <code>a</code>。接着当再次尝试使用 <code>a</code> 创建 <code>c</code> 时，这不被允许，因为 <code>a</code> 的所有权已经被移动。</p>
-<p>我们修改 <code>List</code> 的定义为使用 <code>Rc&lt;T&gt;</code> 代替 <code>Box&lt;T&gt;</code>。现在每一个 <code>Cons</code> 变量都包含一个值和一个指向 <code>List</code> 的 <code>Rc&lt;T&gt;</code>。当创建 <code>b</code> 时，不同于获取 <code>a</code> 的所有权，这里会克隆 <code>a</code> 所包含的 <code>Rc&lt;List&gt;</code>，这会将引用计数从 1 增加到 2 并允许 <code>a</code> 和 <code>b</code> 共享 <code>Rc&lt;List&gt;</code> 中数据的所有权。创建 <code>c</code> 时也会克隆 <code>a</code>，这会将引用计数从 2 增加为 3。每次调用 <code>Rc::clone</code>，<code>Rc&lt;List&gt;</code> 中数据的引用计数都会增加，直到有零个引用之前其数据都不会被清理。</p>
+<p>我们修改 <code>List</code> 的定义为使用 <code>Rc&lt;T&gt;</code> 代替 <code>Box&lt;T&gt;</code>。现在每一个 <code>Cons</code> 变量都包含一个值和一个指向 <code>List</code> 的 <code>Rc&lt;T&gt;</code>。</p>
+<ul>
+<li><p>当创建 <code>b</code> 时，不同于获取 <code>a</code> 的所有权，这里会克隆 <code>a</code> 所包含的 <code>Rc&lt;List&gt;</code>，这会将引用计数从 1 增加到 2 并允许 <code>a</code> 和 <code>b</code> 共享 <code>Rc&lt;List&gt;</code> 中数据的所有权。</p>
+</li>
+<li><p>创建 <code>c</code> 时也会克隆 <code>a</code>，这会将引用计数从 2 增加为 3。每次调用 <code>Rc::clone</code>，<code>Rc&lt;List&gt;</code> 中数据的引用计数都会增加，直到有零个引用之前其数据都不会被清理。</p>
+</li>
+</ul>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> <span class="token keyword">crate</span><span class="token punctuation">:</span><span class="token punctuation">:</span>List<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">{</span>Cons<span class="token punctuation">,</span> Nil<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>rc<span class="token punctuation">:</span><span class="token punctuation">:</span>Rc<span class="token punctuation">;</span>
 <span class="token keyword">enum</span> List <span class="token punctuation">{</span>
@@ -665,8 +691,7 @@ error: could not compile `cons-list` (bin "cons-list") due to 1 previous error<s
     <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token function">Cons</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> Rc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token function">Cons</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> Rc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>也可以调用 <code>a.clone()</code> 而不是 <code>Rc::clone(&amp;a)</code>，不过在这里 Rust 的习惯是使用 <code>Rc::clone</code>。</p>
-<p><code>Rc::clone</code> 的实现并不像大部分类型的 <code>clone</code> 实现那样对所有数据进行深拷贝,它只会增加引用计数，这并不会花费多少时间。深拷贝可能会花费很长时间。通过使用 <code>Rc::clone</code> 进行引用计数，可以明显的区别深拷贝类的克隆和增加引用计数类的克隆。当查找代码中的性能问题时，只需考虑深拷贝类的克隆而无需考虑 <code>Rc::clone</code> 调用。</p>
+<p>也可以调用 <code>a.clone()</code> 而不是 <code>Rc::clone(&amp;a)</code>，不过在这里 Rust 的习惯是使用 <code>Rc::clone</code>。这是因为<code>Rc::clone</code> 的实现并不像大部分类型的 <code>clone</code> 实现那样对所有数据进行深拷贝,它只会增加引用计数，这并不会花费多少时间。</p>
 <h4 id="克隆-Rc-会增加引用计数"><a href="#克隆-Rc-会增加引用计数" class="headerlink" title="克隆 Rc 会增加引用计数"></a>克隆 <code>Rc</code> 会增加引用计数</h4><p>以便将列表 <code>c</code> 置于内部作用域中，这样就可以观察当 <code>c</code> 离开作用域时引用计数如何变化。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">let</span> a <span class="token operator">=</span> Rc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token function">Cons</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> Rc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token function">Cons</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> Rc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>Nil<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -679,28 +704,82 @@ error: could not compile `cons-list` (bin "cons-list") due to 1 previous error<s
     <span class="token punctuation">}</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"count after c goes out of scope: {}"</span><span class="token punctuation">,</span>Rc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">strong_count</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//count after c goes out of scope: 2</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>我们能够看到 <code>a</code> 中 <code>Rc&lt;List&gt;</code> 的初始引用计数为 1，接着每次调用 <code>clone</code>，计数会增加 1。当 <code>c</code> 离开作用域时，计数减 1。不必像调用 <code>Rc::clone</code> 增加引用计数那样调用一个函数来减少计数；<code>Drop</code> trait 的实现当 <code>Rc&lt;T&gt;</code> 值离开作用域时自动减少引用计数。</p>
-<h2 id="5-RefCell和内部可变性模式"><a href="#5-RefCell和内部可变性模式" class="headerlink" title="5.RefCell和内部可变性模式"></a>5.RefCell和内部可变性模式</h2><p><strong>内部可变性</strong>（<em>Interior mutability</em>）是 Rust 中的一个设计模式，它允许你即使在有不可变引用时也可以改变数据，这通常是借用规则所不允许的。为了改变数据，该模式在数据结构中使用 <code>unsafe</code> 代码来模糊 Rust 通常的可变性和借用规则。</p>
-<h3 id="1-通过-RefCell-在运行时检查借用规则"><a href="#1-通过-RefCell-在运行时检查借用规则" class="headerlink" title="1.通过 RefCell 在运行时检查借用规则"></a>1.通过 <code>RefCell</code> 在运行时检查借用规则</h3><p>不同于 <code>Rc&lt;T&gt;</code>，<code>RefCell&lt;T&gt;</code> 代表其数据的唯一的所有权。那么是什么让 <code>RefCell&lt;T&gt;</code> 不同于像 <code>Box&lt;T&gt;</code> 这样的类型呢？回忆前面所学的借用规则：</p>
-<ol>
-<li>在任意给定时刻，只能拥有一个可变引用或任意数量的不可变引用 <strong>之一</strong>（而不是两者）。</li>
-<li>引用必须总是有效的。</li>
-</ol>
-<p>对于引用和 <code>Box&lt;T&gt;</code>，借用规则的不可变性作用于编译时。对于 <code>RefCell&lt;T&gt;</code>，这些不可变性作用于 <strong>运行时</strong>。对于引用，如果违反这些规则，会得到一个编译错误。而对于 <code>RefCell&lt;T&gt;</code>，如果违反这些规则程序会 panic 并退出。</p>
-<p>使用 <code>Box&lt;T&gt;</code>，<code>Rc&lt;T&gt;</code> 或 <code>RefCell&lt;T&gt;</code> 的理由：</p>
 <ul>
-<li><code>Rc&lt;T&gt;</code> 允许相同数据有多个所有者；<code>Box&lt;T&gt;</code> 和 <code>RefCell&lt;T&gt;</code> 有单一所有者。</li>
-<li><code>Box&lt;T&gt;</code> 允许在编译时执行不可变或可变借用检查；<code>Rc&lt;T&gt;</code>仅允许在编译时执行不可变借用检查；<code>RefCell&lt;T&gt;</code> 允许在运行时执行不可变或可变借用检查。</li>
-<li>因为 <code>RefCell&lt;T&gt;</code> 允许在运行时执行可变借用检查，所以我们可以在即便 <code>RefCell&lt;T&gt;</code> 自身是不可变的情况下修改其内部的值。</li>
+<li>我们能够看到 <code>a</code> 中 <code>Rc&lt;List&gt;</code> 的初始引用计数为 1，接着每次调用 <code>clone</code>，计数会增加 1。</li>
+<li>当 <code>c</code> 离开作用域时，计数减 1。不必像调用 <code>Rc::clone</code> 增加引用计数那样调用一个函数来减少计数；<code>Drop</code> trait 的实现使得 <code>Rc&lt;T&gt;</code> 的值离开作用域时自动减少引用计数。</li>
+</ul>
+<h2 id="5-RefCell-lt-T-gt-与内部可变性模式"><a href="#5-RefCell-lt-T-gt-与内部可变性模式" class="headerlink" title="5. RefCell<T> 与内部可变性模式"></a><strong>5. <code>RefCell&lt;T&gt;</code> 与内部可变性模式</strong></h2><p><strong>内部可变性（Interior Mutability）</strong> 是 Rust 提供的一种设计模式，它允许在<strong>不可变引用</strong>的情况下修改数据。通常，Rust 的借用规则不允许这种操作，而 <strong><code>RefCell&lt;T&gt;</code> 通过运行时检查借用规则</strong> 来实现这一特性。</p>
+<h3 id="1-RefCell-lt-T-gt-与借用规则"><a href="#1-RefCell-lt-T-gt-与借用规则" class="headerlink" title="1. RefCell<T> 与借用规则"></a><strong>1. <code>RefCell&lt;T&gt;</code> 与借用规则</strong></h3><p>在 Rust 中，借用规则如下：</p>
+<ul>
+<li><strong>在任意时刻</strong>，只能有<strong>一个可变引用</strong> 或 <strong>多个不可变引用</strong>，但不能同时存在两者。</li>
+<li><strong>引用必须始终有效</strong>。</li>
+</ul>
+<p><strong>区别：</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>借用检查</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>引用（&amp; / &amp;mut）</strong></td>
+<td><strong>编译时</strong></td>
+<td>静态借用检查，最安全</td>
+</tr>
+<tr>
+<td><strong><code>Box&lt;T&gt;</code></strong></td>
+<td><strong>编译时</strong></td>
+<td>拥有数据的唯一所有权</td>
+</tr>
+<tr>
+<td><strong><code>Rc&lt;T&gt;</code></strong></td>
+<td><strong>编译时</strong>（仅不可变）</td>
+<td>允许多个所有者，共享不可变数据</td>
+</tr>
+<tr>
+<td><strong><code>RefCell&lt;T&gt;</code></strong></td>
+<td><strong>运行时</strong></td>
+<td>允许在不可变环境中修改数据</td>
+</tr>
+</tbody></table>
+<p><strong>⚠️ 注意：</strong></p>
+<ul>
+<li>违反借用规则时，普通引用会<strong>导致编译错误</strong>，而 <code>RefCell&lt;T&gt;</code> 会在<strong>运行时报 panic</strong>。</li>
+<li><code>RefCell&lt;T&gt;</code> <strong>适用于单线程</strong>，如果在多线程环境中需要内部可变性，应使用 <code>Mutex&lt;T&gt;</code> 或 <code>RwLock&lt;T&gt;</code>。</li>
 </ul>
 <h3 id="2-内部可变性：不可变值的可变借用"><a href="#2-内部可变性：不可变值的可变借用" class="headerlink" title="2.内部可变性：不可变值的可变借用"></a>2.内部可变性：不可变值的可变借用</h3><p>借用规则的一个推论是当有一个不可变值时，不能可变地借用它。例如，如下代码不能编译：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token keyword">mut</span> x<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//^^^^^^ cannot borrow as mutable</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>然而，特定情况下，令一个值在其方法内部能够修改自身，而在其他代码中仍视为不可变，是很有用的。值方法外部的代码就不能修改其值了。<code>RefCell&lt;T&gt;</code> 是一个获得内部可变性的方法。<code>RefCell&lt;T&gt;</code> 并没有完全绕开借用规则，编译器中的借用检查器允许内部可变性并相应地在运行时检查借用规则。如果违反了这些规则，会出现 panic 而不是编译错误。</p>
+<p>特定情况下，令一个值在其方法内部能够修改自身，而在其他代码中仍视为不可变，是很有用的。RefCell<t>` 是一个获得内部可变性的方法。它并没有完全绕开借用规则，编译器中的借用检查器允许内部可变性并相应地在运行时检查借用规则。</t></p>
 <p>让我们通过一个实际的例子来探索何处可以使用 <code>RefCell&lt;T&gt;</code> 来修改不可变值并看看为何这么做是有意义的。</p>
-<h3 id="3-内部可变性的用例：mock-对象"><a href="#3-内部可变性的用例：mock-对象" class="headerlink" title="3.内部可变性的用例：mock 对象"></a>3.内部可变性的用例：mock 对象</h3><p>有时在测试中程序员会用某个类型替换另一个类型，以便观察特定的行为并断言它是被正确实现的。这个占位符类型被称为 <strong>测试替身</strong>(<em>test double</em>)。就像电影制作中的替身演员 (<em>stunt double</em>) 一样，替代演员完成高难度的场景。测试替身在运行测试时替代某个类型。<strong>mock 对象</strong> 是特定类型的测试替身，它们记录测试过程中发生了什么以便可以断言操作是正确的。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>cell<span class="token punctuation">:</span><span class="token punctuation">:</span>RefCell<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> Counter <span class="token punctuation">{</span>
+    value<span class="token punctuation">:</span> RefCell<span class="token operator">&lt;</span>i32<span class="token operator">></span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Counter <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">increment</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">*</span><span class="token keyword">self</span><span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">borrow_mut</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 在不可变引用下修改数据</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">fn</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> i32 <span class="token punctuation">{</span>
+        <span class="token operator">*</span><span class="token keyword">self</span><span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">borrow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> counter <span class="token operator">=</span> Counter <span class="token punctuation">{</span> value<span class="token punctuation">:</span> RefCell<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    counter<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Counter: {}"</span><span class="token punctuation">,</span> counter<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出: Counter: 1</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>✅ <code>Counter</code> 结构体的 <code>self</code> <strong>是不可变的</strong>，但 <code>RefCell&lt;T&gt;</code> 允许在 <code>increment()</code> 方法中修改 <code>value</code>。</p>
+<h3 id="3-RefCell-lt-T-gt-的典型应用：Mock-对象"><a href="#3-RefCell-lt-T-gt-的典型应用：Mock-对象" class="headerlink" title="3. RefCell<T> 的典型应用：Mock 对象"></a><strong>3. <code>RefCell&lt;T&gt;</code> 的典型应用：Mock 对象</strong></h3><p>在测试场景中，我们可能会用某个类型替换另一个类型，以便观察特定的行为并断言它是被正确实现的。这个占位符类型被称为 <strong>测试替身</strong>(<em>test double</em>)。它被用于在运行测试时替代某个类型。</p>
+<p><strong>mock 对象</strong> 是特定类型的测试替身，它们记录测试过程中发生了什么以便可以断言操作是正确的。</p>
 <p>如下是一个我们想要测试的场景：我们在编写一个记录某个值与最大值的差距的库，并根据当前值与最大值的差距来发送消息。例如，这个库可以用于记录用户所允许的 API 调用数量限额。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 定义一个 MsgSender trait，指定任何实现该 trait 的类型都必须具备发送消息的能力</span>
 <span class="token comment" spellcheck="true">// trait 是 Rust 中的接口，定义了一组方法签名</span>
@@ -1366,7 +1445,7 @@ release
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

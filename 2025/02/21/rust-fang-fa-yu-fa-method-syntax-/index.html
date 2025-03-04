@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Rust 方法语法(Method Syntax), 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
     <meta name="description" content="Rust 提供了一种 方法（method） 语法，让我们可以将行为与结构体（struct）、枚举（enum）或 trait 关联起来。这一节介绍了 如何定义和调用方法、self 的作用、方法 vs 关联函数的区别 等内容。
-
-1. 方法的定">
+1. 方法的定义">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -367,14 +366,14 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.2k
+                        1.6k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        5 分
+                        7 分
                     </div>
                 
 
@@ -385,7 +384,6 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>Rust 提供了一种 <strong>方法（method）</strong> 语法，让我们可以将行为与结构体（struct）、枚举（enum）或 trait 关联起来。这一节介绍了 <strong>如何定义和调用方法、<code>self</code> 的作用、方法 vs 关联函数的区别</strong> 等内容。</p>
-<hr>
 <h2 id="1-方法的定义"><a href="#1-方法的定义" class="headerlink" title="1. 方法的定义"></a><strong>1. 方法的定义</strong></h2><p>方法与普通函数类似，但<strong>它们必须在 <code>impl</code> 代码块中定义，并且第一个参数通常是 <code>self</code></strong>，代表该方法作用于的实例：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Rectangle <span class="token punctuation">{</span>
     width<span class="token punctuation">:</span> u32<span class="token punctuation">,</span>
@@ -407,7 +405,6 @@
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"The area of the rectangle is {} square pixels."</span><span class="token punctuation">,</span> rect<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>✅ <code>rect.area()</code> 直接调用方法，而不是 <code>area(&amp;rect)</code>，更符合直觉。</p>
-<hr>
 <h2 id="2-self-参数解析"><a href="#2-self-参数解析" class="headerlink" title="2. self 参数解析"></a><strong>2. <code>self</code> 参数解析</strong></h2><p><code>self</code> 参数在 <code>impl</code> 代码块的方法中，表示该方法作用于的实例：</p>
 <table>
 <thead>
@@ -433,7 +430,7 @@
 <td>方法调用后，实例被移动</td>
 </tr>
 </tbody></table>
-<h3 id="1-amp-self（不可变借用）"><a href="#1-amp-self（不可变借用）" class="headerlink" title="(1) &amp;self（不可变借用）"></a><strong>(1) <code>&amp;self</code>（不可变借用）</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">impl</span> Rectangle <span class="token punctuation">{</span>
+<h3 id="1-amp-self（不可变借用）"><a href="#1-amp-self（不可变借用）" class="headerlink" title="1. &amp;self（不可变借用）"></a><strong>1. <code>&amp;self</code>（不可变借用）</strong></h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">impl</span> Rectangle <span class="token punctuation">{</span>
     <span class="token keyword">fn</span> <span class="token function">area</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> u32 <span class="token punctuation">{</span>  
         <span class="token keyword">self</span><span class="token punctuation">.</span>width <span class="token operator">*</span> <span class="token keyword">self</span><span class="token punctuation">.</span>height
     <span class="token punctuation">}</span>
@@ -443,8 +440,7 @@
 <li><code>self</code> 等价于 <code>&amp;self: Rectangle</code>。</li>
 </ul>
 <p>✅ <strong>适用于只访问数据，而不修改数据的方法</strong>。</p>
-<hr>
-<h3 id="2-amp-mut-self（可变借用）"><a href="#2-amp-mut-self（可变借用）" class="headerlink" title="(2) &amp;mut self（可变借用）"></a><strong>(2) <code>&amp;mut self</code>（可变借用）</strong></h3><p>如果方法需要修改结构体字段，必须使用 <code>&amp;mut self</code>：</p>
+<h3 id="2-amp-mut-self（可变借用）"><a href="#2-amp-mut-self（可变借用）" class="headerlink" title="2. &amp;mut self（可变借用）"></a><strong>2. <code>&amp;mut self</code>（可变借用）</strong></h3><p>如果方法需要修改结构体字段，必须使用 <code>&amp;mut self</code>：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Counter <span class="token punctuation">{</span>
     value<span class="token punctuation">:</span> u32<span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
@@ -461,8 +457,7 @@
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Counter value: {}"</span><span class="token punctuation">,</span> counter<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>✅ <code>&amp;mut self</code> 允许修改 <code>value</code>，但<strong>调用方法的实例 <code>counter</code> 必须是 <code>mut</code></strong>，否则会报错。</p>
-<hr>
-<h3 id="3-self（获取所有权）"><a href="#3-self（获取所有权）" class="headerlink" title="(3) self（获取所有权）"></a><strong>(3) <code>self</code>（获取所有权）</strong></h3><p>有时候，方法需要 <strong>消耗（consume）结构体</strong>，即方法调用后该实例不再可用：</p>
+<h3 id="3-self（获取所有权）"><a href="#3-self（获取所有权）" class="headerlink" title="3. self（获取所有权）"></a><strong>3. <code>self</code>（获取所有权）</strong></h3><p>有时候，方法需要 <strong>消耗（consume）结构体</strong>，即方法调用后该实例不再可用：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Person <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
@@ -479,7 +474,6 @@
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Name: {}"</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>✅ <code>self</code> 代表整个实例所有权的转移，<code>p</code> 在 <code>into_name()</code> 调用后不再有效。</p>
-<hr>
 <h2 id="3-关联函数（Associated-Functions）"><a href="#3-关联函数（Associated-Functions）" class="headerlink" title="3. 关联函数（Associated Functions）"></a><strong>3. 关联函数（Associated Functions）</strong></h2><p>方法<strong>不一定需要 <code>self</code></strong> 作为参数，例如 <code>new()</code> 用于创建实例：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">impl</span> Rectangle <span class="token punctuation">{</span>
     <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>width<span class="token punctuation">:</span> u32<span class="token punctuation">,</span> height<span class="token punctuation">:</span> u32<span class="token punctuation">)</span> <span class="token punctuation">-></span> Self <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// Self 代表结构体类型</span>
@@ -492,8 +486,8 @@
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Rectangle: {} x {}"</span><span class="token punctuation">,</span> rect<span class="token punctuation">.</span>width<span class="token punctuation">,</span> rect<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>✅ 关联函数 <strong>通常作为构造函数</strong>，用来返回 <code>Self</code> 类型的实例。</p>
-<hr>
-<h2 id="4-方法调用的自动引用与解引用"><a href="#4-方法调用的自动引用与解引用" class="headerlink" title="4. 方法调用的自动引用与解引用"></a><strong>4. 方法调用的自动引用与解引用</strong></h2><p>Rust <strong>自动为方法调用添加 <code>&amp;</code> 或 <code>&amp;mut</code></strong>：</p>
+<h2 id="4-方法调用的自动引用与解引用"><a href="#4-方法调用的自动引用与解引用" class="headerlink" title="4. 方法调用的自动引用与解引用"></a><strong>4. 方法调用的自动引用与解引用</strong></h2><p>在 Rust 中，方法调用时<strong>可以自动添加 <code>&amp;</code> 或 <code>&amp;mut</code>，也可以自动解引用 <code>*</code></strong>，让代码更加简洁直观。</p>
+<h3 id="1-自动引用（Auto-Referencing）"><a href="#1-自动引用（Auto-Referencing）" class="headerlink" title="1 .自动引用（Auto Referencing）"></a><strong>1 .自动引用（Auto Referencing）</strong></h3><p>Rust 允许在<strong>拥有所有权的对象</strong>上直接调用方法，而不需要手动添加 <code>&amp;</code>。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Circle <span class="token punctuation">{</span>
     radius<span class="token punctuation">:</span> f64<span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
@@ -510,7 +504,79 @@
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Area: {}"</span><span class="token punctuation">,</span> circle<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 自动添加 &amp;circle</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>✅ <code>circle.area()</code> <strong>自动传递 <code>&amp;circle</code></strong>，所以 <code>area(&amp;self)</code> 方法可以正常调用。</p>
-<hr>
+<p>如果没有自动引用特性，每次调用都需要手动添加 <code>&amp;</code>：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Area: {}"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>circle<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 需要手动添加 `&amp;`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="2-自动解引用（Auto-Dereferencing）"><a href="#2-自动解引用（Auto-Dereferencing）" class="headerlink" title="2 .自动解引用（Auto Dereferencing）"></a><strong>2 .自动解引用（Auto Dereferencing）</strong></h3><p>当方法接收 <code>&amp;self</code> 时，Rust <strong>会自动解引用</strong> <code>Box&lt;T&gt;</code>、<code>Rc&lt;T&gt;</code>、<code>Arc&lt;T&gt;</code> 等智能指针，让方法调用更简洁。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>rc<span class="token punctuation">:</span><span class="token punctuation">:</span>Rc<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> Foo <span class="token punctuation">{</span>
+    value<span class="token punctuation">:</span> i32<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Foo <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">get_value</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> i32 <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>value
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> foo <span class="token operator">=</span> Box<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>Foo <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token number">42</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> shared_foo <span class="token operator">=</span> Rc<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>Foo <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token number">100</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> foo<span class="token punctuation">.</span><span class="token function">get_value</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// ✅ 自动解引用: (*foo).get_value()</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> shared_foo<span class="token punctuation">.</span><span class="token function">get_value</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ✅ 自动解引用: (*shared_foo).get_value()</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Rust <strong>自动将 <code>foo.get_value()</code> 解析为 <code>(*foo).get_value()</code></strong>，避免手动解引用。</p>
+<h3 id="3-自动引用-amp-解引用的规则"><a href="#3-自动引用-amp-解引用的规则" class="headerlink" title="3 .自动引用 &amp; 解引用的规则"></a><strong>3 .自动引用 &amp; 解引用的规则</strong></h3><ul>
+<li><strong>如果方法需要 <code>&amp;self</code>，Rust 自动添加 <code>&amp;</code>。</strong></li>
+<li><strong>如果方法需要 <code>&amp;mut self</code>，Rust 自动添加 <code>&amp;mut</code>。</strong></li>
+<li><strong>如果 <code>self</code> 是 <code>Box&lt;T&gt;</code>、<code>Rc&lt;T&gt;</code>、<code>Arc&lt;T&gt;</code>，Rust 自动解引用。</strong></li>
+</ul>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Example <span class="token punctuation">{</span>
+    value<span class="token punctuation">:</span> i32<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">impl</span> Example <span class="token punctuation">{</span>
+    <span class="token keyword">fn</span> <span class="token function">print_value</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">fn</span> <span class="token function">modify_value</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> <span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>value <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">fn</span> <span class="token function">consume</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Consumed: {}"</span><span class="token punctuation">,</span> <span class="token keyword">self</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> ex <span class="token operator">=</span> Example <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token number">10</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    ex<span class="token punctuation">.</span><span class="token function">print_value</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// ✅ 自动加 &amp;ex</span>
+    ex<span class="token punctuation">.</span><span class="token function">modify_value</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// ✅ 自动加 &amp;mut ex</span>
+    ex<span class="token punctuation">.</span><span class="token function">consume</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// ✅ 直接传递所有权</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-结论"><a href="#4-结论" class="headerlink" title="4 .结论"></a><strong>4 .结论</strong></h3><table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>作用</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>自动引用</strong></td>
+<td>Rust 自动为方法调用添加 <code>&amp;</code> 或 <code>&amp;mut</code></td>
+<td><code>circle.area()</code> → <code>(&amp;circle).area()</code></td>
+</tr>
+<tr>
+<td><strong>自动解引用</strong></td>
+<td>Rust 自动解引用智能指针</td>
+<td><code>foo.get_value()</code> → <code>(*foo).get_value()</code></td>
+</tr>
+</tbody></table>
+<p>Rust 的 <strong>自动引用 &amp; 自动解引用</strong> 让方法调用更简洁，避免手动 <code>&amp;</code> 和 <code>*</code>，提高代码可读性和开发效率。</p>
 <h2 id="5-多个-impl-代码块"><a href="#5-多个-impl-代码块" class="headerlink" title="5. 多个 impl 代码块"></a><strong>5. 多个 <code>impl</code> 代码块</strong></h2><p>一个结构体可以有多个 <code>impl</code> 代码块：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">struct</span> Point <span class="token punctuation">{</span>
     x<span class="token punctuation">:</span> i32<span class="token punctuation">,</span>
@@ -534,7 +600,6 @@
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Distance: {}"</span><span class="token punctuation">,</span> p<span class="token punctuation">.</span><span class="token function">distance_from_origin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>✅ Rust 允许多个 <code>impl</code>，使代码更清晰，避免 <code>impl</code> 代码块过长。</p>
-<hr>
 <h2 id="6-方法-vs-关联函数"><a href="#6-方法-vs-关联函数" class="headerlink" title="6. 方法 vs 关联函数"></a><strong>6. 方法 vs 关联函数</strong></h2><table>
 <thead>
 <tr>
@@ -577,7 +642,6 @@
     <span class="token keyword">let</span> u <span class="token operator">=</span> User<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"Bob"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 关联函数调用</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> u<span class="token punctuation">.</span><span class="token function">get_name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 方法调用</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<hr>
 <h2 id="7-代码总结"><a href="#7-代码总结" class="headerlink" title="7. 代码总结"></a><strong>7. 代码总结</strong></h2><pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[derive(Debug)]</span>
 <span class="token keyword">struct</span> Rectangle <span class="token punctuation">{</span>
     width<span class="token punctuation">:</span> u32<span class="token punctuation">,</span>
@@ -613,7 +677,6 @@
     <span class="token keyword">let</span> dimensions <span class="token operator">=</span> rect<span class="token punctuation">.</span><span class="token function">into_tuple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// `rect` 被消费</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Dimensions: {:?}"</span><span class="token punctuation">,</span> dimensions<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<hr>
 <h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a><strong>8. 总结</strong></h2><table>
 <thead>
 <tr>
@@ -949,7 +1012,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

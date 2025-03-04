@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Rus中的数据类型, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="1. 引言Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，意味着在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。
-2. 基本数据类型Rust 的基本数据类型可以分为标量类型">
+    <meta name="description" content="1. 引言Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。
+2. 基本数据类型Rust 的基本数据类型可以分为标量类型和复合">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -366,7 +366,7 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        881
+                        909
                     </div>
                 
 
@@ -383,18 +383,60 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，意味着在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。</p>
-<h2 id="2-基本数据类型"><a href="#2-基本数据类型" class="headerlink" title="2. 基本数据类型"></a>2. 基本数据类型</h2><p>Rust 的基本数据类型可以分为标量类型和复合类型。</p>
-<h3 id="2-1-标量类型"><a href="#2-1-标量类型" class="headerlink" title="2.1 标量类型"></a>2.1 标量类型</h3><p>标量类型表示单一值。Rust 提供了以下三种标量类型：</p>
+                <h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>Rust 提供了多种数据类型，用来处理不同类型的数据。<strong>Rust 是静态类型语言</strong>，在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。</p>
+<h2 id="2-基本数据类型"><a href="#2-基本数据类型" class="headerlink" title="2. 基本数据类型"></a>2. 基本数据类型</h2><p>Rust 的基本数据类型可以分为<code>标量类型</code>和<code>复合类型</code>。</p>
+<h3 id="2-1-标量类型"><a href="#2-1-标量类型" class="headerlink" title="2.1 标量类型"></a>2.1 标量类型</h3><p><strong>标量类型表示单一值</strong>。Rust 提供了以下四种标量类型：</p>
 <ul>
 <li><p><strong>整型（Integer）</strong><br>整型用于表示没有小数部分的数字，分为有符号和无符号整数。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> x<span class="token punctuation">:</span> i32 <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 有符号整型，默认类型为 i32</span>
 <span class="token keyword">let</span> y<span class="token punctuation">:</span> u8 <span class="token operator">=</span> <span class="token number">255</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 无符号整型</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>Rust 的整型包括：</p>
 <ul>
-<li><code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>（有符号整型）</li>
-<li><code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>（无符号整型）</li>
-<li><code>isize</code> 和 <code>usize</code> 根据目标平台的架构而定</li>
+<li><p><code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>（有符号整型）</p>
+</li>
+<li><p><code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>（无符号整型）</p>
+</li>
+<li><p><code>isize</code> 和 <code>usize</code> 根据目标平台的架构而定</p>
+<table>
+<thead>
+<tr>
+<th>有符号</th>
+<th>无符号</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>i8</code></td>
+<td><code>u8</code></td>
+<td>8-bit</td>
+</tr>
+<tr>
+<td><code>i16</code></td>
+<td><code>u16</code></td>
+<td>16-bit</td>
+</tr>
+<tr>
+<td><code>i32</code></td>
+<td><code>u32</code></td>
+<td>32-bit</td>
+</tr>
+<tr>
+<td><code>i64</code></td>
+<td><code>u64</code></td>
+<td>64-bit</td>
+</tr>
+<tr>
+<td><code>i128</code></td>
+<td><code>u128</code></td>
+<td>128-bit</td>
+</tr>
+<tr>
+<td><code>isize</code></td>
+<td><code>usize</code></td>
+<td>arch</td>
+</tr>
+</tbody></table>
+</li>
 </ul>
 </li>
 <li><p><strong>浮点型（Floating-point）</strong><br>浮点数用于表示有小数部分的数字，Rust 提供了两种浮点类型：</p>
@@ -738,7 +780,7 @@ src/main.rs：用来定义可执行程序的文件。
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

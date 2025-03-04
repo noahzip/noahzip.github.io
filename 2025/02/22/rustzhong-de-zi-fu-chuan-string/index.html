@@ -370,7 +370,7 @@ Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.3k
+                        1.4k
                     </div>
                 
 
@@ -409,7 +409,40 @@ Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// 输出：Hello, world!</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>String</code> 提供了多种方法，例如 <code>push_str</code> 和 <code>push</code>，使得我们可以动态地添加内容。</p>
-<p><code>String</code> 提供了多种方法，例如 <code>push_str</code> 和 <code>push</code>，使得我们可以动态地添加内容。</p>
+<h3 id="String-和-amp-str的区别："><a href="#String-和-amp-str的区别：" class="headerlink" title="String 和 &amp;str的区别："></a><code>String</code> 和 <code>&amp;str</code>的区别：</h3><table>
+<thead>
+<tr>
+<th></th>
+<th><code>String</code></th>
+<th><code>&amp;str</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>存储位置</strong></td>
+<td>堆（Heap）</td>
+<td>栈（Stack）或静态数据段</td>
+</tr>
+<tr>
+<td><strong>可变性</strong></td>
+<td>可变</td>
+<td>不可变</td>
+</tr>
+<tr>
+<td><strong>所有权</strong></td>
+<td>拥有数据</td>
+<td>仅引用数据</td>
+</tr>
+<tr>
+<td><strong>使用场景</strong></td>
+<td>需要修改字符串、动态增长</td>
+<td>只读取字符串，避免不必要的拷贝</td>
+</tr>
+<tr>
+<td><strong>示例</strong></td>
+<td><code>let mut s = String::from("Hello");</code></td>
+<td><code>let s: &amp;str = "Hello";</code></td>
+</tr>
+</tbody></table>
 <h2 id="常见的字符串操作"><a href="#常见的字符串操作" class="headerlink" title="常见的字符串操作"></a>常见的字符串操作</h2><h3 id="创建字符串"><a href="#创建字符串" class="headerlink" title="创建字符串"></a>创建字符串</h3><p>你可以通过 <code>String::new()</code> 创建一个空的 <code>String</code>，或者通过 <code>to_string()</code> 从字符串字面量创建。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 使用 to_string() 创建字符串</span>
@@ -810,7 +843,7 @@ fn main() {
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

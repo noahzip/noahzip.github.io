@@ -366,14 +366,14 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        4.5k
+                        4.6k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        18 分
+                        19 分
                     </div>
                 
 
@@ -621,7 +621,16 @@
 This is your captain speaking.
 Up!</code></pre><p>✅ <strong>调用 Human 实现的方法时，直接调用 <code>person.fly()</code>。</strong><br>✅ <strong>调用 <code>trait</code> 实现的方法时，需要在方法前加上 <code>TraitName::method(&amp;instance)</code> 以明确指定 <code>trait</code>。</strong></p>
 <hr>
-<h3 id="2-关联函数（无-self-参数）需要完全限定语法"><a href="#2-关联函数（无-self-参数）需要完全限定语法" class="headerlink" title="2. 关联函数（无 self 参数）需要完全限定语法"></a>2. 关联函数（无 <code>self</code> 参数）需要完全限定语法</h3><ul>
+<h3 id="2-关联函数（无-self-参数）需要完全限定语法"><a href="#2-关联函数（无-self-参数）需要完全限定语法" class="headerlink" title="2. 关联函数（无 self 参数）需要完全限定语法"></a>2. 关联函数（无 <code>self</code> 参数）需要完全限定语法</h3><blockquote>
+<p><strong>关联函数（Associated Functions）</strong>: </p>
+<ul>
+<li>关联函数是与类型相关联的函数，而不是与实例相关联。</li>
+<li>它们通过 <code>impl</code> 块定义，但并不依赖于实例的状态。</li>
+<li>关联函数通常用作构造函数或工具函数，它们通过 <code>::</code> 调用，而不是通过实例调用。</li>
+</ul>
+<p>典型的就是<code>new 函数</code></p>
+</blockquote>
+<ul>
 <li><strong>方法（带 <code>self</code>）</strong>：Rust 能够根据 <code>self</code> 推导 <code>trait</code> 实现，无需额外指定 <code>trait</code>。</li>
 <li><strong>关联函数（无 <code>self</code>）</strong>：Rust 无法自动推导 <code>trait</code>，<strong>必须使用完全限定语法</strong>。</li>
 </ul>
@@ -1151,7 +1160,7 @@ note: required by a bound in `OutlinePrint`
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 

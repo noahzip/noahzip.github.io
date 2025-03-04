@@ -438,9 +438,9 @@ running 0 tests
 <p>cargo 编译并运行了测试。在 Compiling、Finished 和 Running 这几行之后，可以看到 running 1 test 这一行。下一行显示了生成的测试函数的名称，它是<code>it_works</code>，以及测试的运行结果<code>ok</code>。接着可以看到全体测试运行结果的摘要：<code>test result: ok.</code> 意味着所有测试都通过了。<code>1 passed; 0 failed</code> 表示通过或失败的测试数量。</p>
 <h3 id="2-使用-assert-宏来检查结果"><a href="#2-使用-assert-宏来检查结果" class="headerlink" title="2. 使用 assert! 宏来检查结果"></a>2. 使用 <code>assert!</code> 宏来检查结果</h3><p>Rust 提供了一些常用的断言宏来帮助测试：</p>
 <ul>
-<li><code>assert!(condition,"a 和 b 应该相等")</code> 断言condition为 <code>true</code>,当断言失败输出<code>a 和 b 应该相等</code>。</li>
-<li><code>assert_eq!(v1,v2)</code> 断言两个值相等。</li>
-<li><code>assert_ne!(v1,v2)</code> 断言两个值不相等。</li>
+<li><code>assert!(condition,"msg")</code> 断言condition为 <code>true</code>，当断言失败输出<code>msg</code>。</li>
+<li><code>assert_eq!(v1,v2,"msg")</code> 断言两个值相等，当断言失败输出<code>msg</code>。</li>
+<li><code>assert_ne!(v1,v2,"msg)</code> 断言两个值不相等，当断言失败输出<code>msg</code>。</li>
 </ul>
 <p>示例：</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[cfg(test)]</span>
@@ -642,8 +642,7 @@ Run <span class="token variable"><span class="token variable">`</span>cargo <spa
 <p>可以使用 <code>--test-threads</code> 指定执行测试的线程数量</p>
 <pre class="line-numbers language-bash"><code class="language-bash"> cargo <span class="token function">test</span> -- --test-threads<span class="token operator">=</span>1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这里将测试线程设置为 <code>1</code>，告诉程序不要使用任何并行机制。这也会比并行运行花费更多时间，不过在有共享的状态时，测试就不会潜在的相互干扰了。</p>
-<p>3.显示函数的输出</p>
-<p>默认情况下，当测试通过时，Rust 的测试库会截获打印到标准输出的所有内容。比如在测试中调用了 <code>println!</code> 而测试通过了，我们将不会在终端看到 <code>println!</code> 的输出：只会看到说明测试通过的提示行。如果测试失败了，则会看到所有标准输出和其他错误信息。</p>
+<h3 id="3-显示函数的输出"><a href="#3-显示函数的输出" class="headerlink" title="3.显示函数的输出"></a>3.显示函数的输出</h3><p>默认情况下，当测试通过时，Rust 的测试库会截获打印到标准输出的所有内容。比如在测试中调用了 <code>println!</code> 而测试通过了，我们将不会在终端看到 <code>println!</code> 的输出：只会看到说明测试通过的提示行。如果测试失败了，则会看到所有标准输出和其他错误信息。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">prints_and_returns_10</span><span class="token punctuation">(</span>a<span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-></span> i32 <span class="token punctuation">{</span>
     <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"I got the value {}"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//测试成功执行时不会输出</span>
     <span class="token number">10</span>
@@ -666,7 +665,8 @@ Run <span class="token variable"><span class="token variable">`</span>cargo <spa
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    <code>println!("I got the value {}", a);</code> 测试成功执行时不会输出</p>
-<pre><code>$ cargo test -- --show-output</code></pre><p>使用 <code>--show-output</code> 参数运行：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">$ cargo test -- --show-output<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使用 <code>--show-output</code> 参数运行：</p>
 <pre class="line-numbers language-bash"><code class="language-bash">   Compiling silly-function v0.1.0 <span class="token punctuation">(</span>file:///projects/silly-function<span class="token punctuation">)</span>
     Finished <span class="token function">test</span> <span class="token punctuation">[</span>unoptimized + debuginfo<span class="token punctuation">]</span> target<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">in</span> 0.60s
      Running unittests <span class="token punctuation">(</span>target/debug/deps/silly_function-160869f38cff9166<span class="token punctuation">)</span>
@@ -701,7 +701,7 @@ failures:
 
 error: <span class="token function">test</span> failed, to rerun pass <span class="token string">'--lib'</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="3-运行指定的测试函数"><a href="#3-运行指定的测试函数" class="headerlink" title="3.运行指定的测试函数"></a>3.运行指定的测试函数</h3><p>有时运行整个测试集会耗费很长时间。如果你负责特定位置的代码，你可能会希望只运行与这些代码相关的测试。你可以向 <code>cargo test &lt;name&gt;</code> 传递所希望运行的测试名称的参数来选择运行哪些测试。</p>
+<h3 id="4-运行指定的测试函数"><a href="#4-运行指定的测试函数" class="headerlink" title="4.运行指定的测试函数"></a>4.运行指定的测试函数</h3><p>有时运行整个测试集会耗费很长时间。如果你负责特定位置的代码，你可能会希望只运行与这些代码相关的测试。你可以向 <code>cargo test &lt;name&gt;</code> 传递所希望运行的测试名称的参数来选择运行哪些测试。</p>
 <pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">add_two</span><span class="token punctuation">(</span>a<span class="token punctuation">:</span> i32<span class="token punctuation">)</span> <span class="token punctuation">-></span> i32 <span class="token punctuation">{</span>
     a <span class="token operator">+</span> <span class="token number">2</span>
 <span class="token punctuation">}</span>
@@ -746,7 +746,7 @@ running 2 tests
 
 <span class="token function">test</span> result: ok. 2 passed<span class="token punctuation">;</span> 0 failed<span class="token punctuation">;</span> 0 ignored<span class="token punctuation">;</span> 0 measured<span class="token punctuation">;</span> 1 filtered out<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这运行了所有名字中带有 <code>add</code> 的测试，也过滤掉了名为 <code>one_hundred</code> 的测试。同时注意测试所在的模块也是测试名称的一部分，所以可以通过模块名来运行一个模块中的所有测试。</p>
-<h3 id="4-忽略某些测试"><a href="#4-忽略某些测试" class="headerlink" title="4.忽略某些测试"></a>4.忽略某些测试</h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[test]</span>
+<h3 id="5-忽略某些测试"><a href="#5-忽略某些测试" class="headerlink" title="5.忽略某些测试"></a>5.忽略某些测试</h3><pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[test]</span>
 <span class="token keyword">fn</span> <span class="token function">it_works</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">assert_eq!</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -1244,7 +1244,7 @@ use std::error::
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">238.3k</span>&nbsp;字
+						class="white-color">242.9k</span>&nbsp;字
              
             
 
