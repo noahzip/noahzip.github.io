@@ -1,0 +1,1150 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的区块, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="区块是指一批交易的组合，并且包含链中上一个区块的哈希。 这将区块连接在一起（成为一个链），因为哈希是从区块数据中加密得出的。 这可以防止欺诈，因为以前的任何区块中的任何改变都会使后续所有区块无效，而且所有哈希都会改变，所有运行区块链的人都会">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的区块 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的区块</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-05
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-05
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.3k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        7 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>区块是指一批交易的组合，并且包含链中上一个区块的哈希。 这将区块连接在一起（成为一个链），因为哈希是从区块数据中加密得出的。 这可以防止欺诈，因为以前的任何区块中的任何改变都会使后续所有区块无效，而且所有哈希都会改变，所有运行区块链的人都会注意到。</p>
+<h2 id="为什么要有区块？"><a href="#为什么要有区块？" class="headerlink" title="为什么要有区块？"></a>为什么要有区块？</h2><p>为了确保以太坊网络上的所有参与者保持同步状态并就交易的确切历史达成共识，我们将交易分为多个区块。 这意味着同时有数十个（甚至数百个）交易被提交、达成一致并同步。</p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/blocks/tx-block.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Fblocks%2Ftx-block.png&amp;w=1920&amp;q=75" alt="区块中的交易导致状态变化的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p>通过间隔提交，所有网络参与者有足够时间达成共识：即使交易请求每秒发生数十次，但以太坊上的区块仅仅大约每十二秒创建并提交一次。</p>
+<h2 id="区块如何工作"><a href="#区块如何工作" class="headerlink" title="区块如何工作"></a>区块如何工作</h2><p>为了保存交易历史，区块被严格排序（创建的每个新区块都包含一个其父块的引用），区块内的交易也严格排序。 除极少数情况外，在任何特定时间，网络上的所有参与者都同意区块的确切数目和历史， 并且正在努力将当前的活动交易请求分批到下一个区块。</p>
+<p>随机选择的验证者在网络上构建完区块后，该区块将传播到整个网络；所有节点都将该区块添加至其区块链的末尾，然后挑选新的验证者来创建下一个区块。 目前，确切的区块构建过程和提交/共识过程由以太坊的“权益证明”协议规定。</p>
+<h2 id="权益证明协议"><a href="#权益证明协议" class="headerlink" title="权益证明协议"></a>权益证明协议</h2><p>权益证明是指：</p>
+<ul>
+<li>验证节点必须向存款合约中质押 32 个以太币，作为抵押品防止发生不良行为。 这有助于保护网络，因为如果发生不诚实活动且可以证实，部分甚至全部质押金额将被销毁。</li>
+<li>在每个时隙（12 秒的时间间隔）中，会随机选择一个验证者作为区块提议者。 他们将交易打包并执行，然后确定一个新的“状态”。 他们将这些信息包装到一个区块中并传送给其他验证者。</li>
+<li>其他获悉新区块的验证者再次执行区块中包含的交易，确定他们同意对全局状态提出的修改。 假设该区块是有效的，验证者就将该区块添加进各自的数据库。</li>
+<li>如果验证者获悉在同一时隙内有两个冲突区块，他们会使用自己的分叉选择算法选择获得最多质押以太币支持的那一个区块。</li>
+</ul>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">有关权益证明的更多信息</a></p>
+<h2 id="区块包含什么？"><a href="#区块包含什么？" class="headerlink" title="区块包含什么？"></a>区块包含什么？</h2><p>一个区块中包含很多信息。 区块的最高层包含以下字段：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>时隙</code></td>
+<td align="left">区块所属的时隙</td>
+</tr>
+<tr>
+<td align="left"><code>proposer_index</code></td>
+<td align="left">提出区块的验证者的 ID</td>
+</tr>
+<tr>
+<td align="left"><code>parent_root</code></td>
+<td align="left">上一个区块的哈希</td>
+</tr>
+<tr>
+<td align="left"><code>state_root</code></td>
+<td align="left">状态对象的根哈希</td>
+</tr>
+<tr>
+<td align="left"><code>正文</code></td>
+<td align="left">包含多个字段的对象，定义如下</td>
+</tr>
+</tbody></table>
+<p>区块的 <code>body</code> 包含一些自有字段：</p>
+<table>
+<thead>
+<tr>
+<th align="left">栏目</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>randao_reveal</code></td>
+<td align="left">用于选择下一个区块提议者的值</td>
+</tr>
+<tr>
+<td align="left"><code>eth1_data</code></td>
+<td align="left">关于存款合约的信息</td>
+</tr>
+<tr>
+<td align="left"><code>涂鸦</code></td>
+<td align="left">用于标记区块的任意数据</td>
+</tr>
+<tr>
+<td align="left"><code>proposer_slashings</code></td>
+<td align="left">将要惩罚的验证者列表</td>
+</tr>
+<tr>
+<td align="left"><code>attester_slashings</code></td>
+<td align="left">将要受到惩没的证明者列表</td>
+</tr>
+<tr>
+<td align="left"><code>认证</code></td>
+<td align="left">支持当前区块的认证列表</td>
+</tr>
+<tr>
+<td align="left"><code>存款</code></td>
+<td align="left">存款合约新增存款的列表</td>
+</tr>
+<tr>
+<td align="left"><code>voluntary_exits</code></td>
+<td align="left">退出网络的验证者列表</td>
+</tr>
+<tr>
+<td align="left"><code>sync_aggregate</code></td>
+<td align="left">用于服务轻客户端的验证者子集</td>
+</tr>
+<tr>
+<td align="left"><code>execution_payload</code></td>
+<td align="left">从执行客户端传送来的交易</td>
+</tr>
+</tbody></table>
+<p><code>attestations</code> 字段包含区块中所有认证的列表。 认证有自己的数据类型，其中包含多条数据。 每个认证包含：</p>
+<table>
+<thead>
+<tr>
+<th align="left">栏目</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>aggregation_bits</code></td>
+<td align="left">参与此认证的验证者列表</td>
+</tr>
+<tr>
+<td align="left"><code>数据</code></td>
+<td align="left">具有多个子字段的容器</td>
+</tr>
+<tr>
+<td align="left"><code>签名</code></td>
+<td align="left">所有证明验证者的聚合签名</td>
+</tr>
+</tbody></table>
+<p><code>attestation</code> 中的 <code>data</code> 字段包含以下内容：</p>
+<table>
+<thead>
+<tr>
+<th align="left">栏目</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>时隙</code></td>
+<td align="left">认证所涉及的时隙</td>
+</tr>
+<tr>
+<td align="left"><code>索引</code></td>
+<td align="left">证明验证者的索引</td>
+</tr>
+<tr>
+<td align="left"><code>beacon_block_root</code></td>
+<td align="left">包含此对象的信标区块的根哈希</td>
+</tr>
+<tr>
+<td align="left"><code>来源</code></td>
+<td align="left">最后一个合理的检查点</td>
+</tr>
+<tr>
+<td align="left"><code>target</code></td>
+<td align="left">最新的时段边界区块</td>
+</tr>
+</tbody></table>
+<p>执行 <code>execution_payload</code> 中的交易会更新全局状态。 所有客户端重新执行 <code>execution_payload</code> 中的交易，以确保新状态与新区块 <code>state_root</code> 字段中的状态相符。 这就是客户端如何判断新区块是否有效且可以安全添加到其区块链的方式。 <code>execution payload</code> 本身是一个包含多个字段的对象。 还有一个 <code>execution_payload_header</code>，包含有关执行数据的重要摘要信息。 这些数据结构如下组织：</p>
+<p><code>execution_payload_header</code> 包含以下字段：</p>
+<table>
+<thead>
+<tr>
+<th align="left">领域</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>父_哈希值</code></td>
+<td align="left">父块的哈希值</td>
+</tr>
+<tr>
+<td align="left"><code>fee_recipient</code></td>
+<td align="left">向其支付交易费的帐户地址</td>
+</tr>
+<tr>
+<td align="left"><code>state_root</code></td>
+<td align="left">应用此区块中的更改后，全局状态的根哈希</td>
+</tr>
+<tr>
+<td align="left"><code>receipts_root</code></td>
+<td align="left">交易收据树的哈希</td>
+</tr>
+<tr>
+<td align="left"><code>logs_bloom</code></td>
+<td align="left">包含事件日志的数据结构</td>
+</tr>
+<tr>
+<td align="left"><code>prev_randao</code></td>
+<td align="left">在随机选择验证者时使用的值</td>
+</tr>
+<tr>
+<td align="left"><code>block_number</code></td>
+<td align="left">当前区块的编号</td>
+</tr>
+<tr>
+<td align="left"><code>gas_limit</code></td>
+<td align="left">此区块允许的最大燃料量</td>
+</tr>
+<tr>
+<td align="left"><code>gas_used</code></td>
+<td align="left">此区块中使用的实际燃料量</td>
+</tr>
+<tr>
+<td align="left"><code>时间戳</code></td>
+<td align="left">区块时间</td>
+</tr>
+<tr>
+<td align="left"><code>extra_data</code></td>
+<td align="left">作为原始字节的任意附加数据</td>
+</tr>
+<tr>
+<td align="left"><code>base_fee_per_gas</code></td>
+<td align="left">基础费值</td>
+</tr>
+<tr>
+<td align="left"><code>block_hash</code></td>
+<td align="left">执行区块的哈希</td>
+</tr>
+<tr>
+<td align="left"><code>transactions_root</code></td>
+<td align="left">有效载荷中交易的根哈希</td>
+</tr>
+<tr>
+<td align="left"><code>withdrawal_root</code></td>
+<td align="left">有效负载中提款的根哈希</td>
+</tr>
+</tbody></table>
+<p><code>execution_payload</code> 本身包含以下字段（请注意这与 header 相同，只是它包含的不是交易的根哈希，而是实际的交易列表和提款信息列表）：</p>
+<table>
+<thead>
+<tr>
+<th align="left">栏目</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>父_哈希值</code></td>
+<td align="left">父块的哈希值</td>
+</tr>
+<tr>
+<td align="left"><code>fee_recipient</code></td>
+<td align="left">支付交易费用的帐户地址</td>
+</tr>
+<tr>
+<td align="left"><code>state_root</code></td>
+<td align="left">应用此区块中的更改后，全局的根哈希值</td>
+</tr>
+<tr>
+<td align="left"><code>receipts_root</code></td>
+<td align="left">交易收据的哈希值</td>
+</tr>
+<tr>
+<td align="left"><code>logs_bloom</code></td>
+<td align="left">包含事件日志的数据结构</td>
+</tr>
+<tr>
+<td align="left"><code>prev_randao</code></td>
+<td align="left">在随机验证者选择中使用的值</td>
+</tr>
+<tr>
+<td align="left"><code>block_number</code></td>
+<td align="left">当前区块的编号</td>
+</tr>
+<tr>
+<td align="left"><code>gas_limit</code></td>
+<td align="left">此区块允许的最大的燃料量</td>
+</tr>
+<tr>
+<td align="left"><code>gas_used</code></td>
+<td align="left">此区块中使用的燃料实际量</td>
+</tr>
+<tr>
+<td align="left"><code>时间戳</code></td>
+<td align="left">区块时间</td>
+</tr>
+<tr>
+<td align="left"><code>extra_data</code></td>
+<td align="left">作为原始字节任意附加数据</td>
+</tr>
+<tr>
+<td align="left"><code>base_fee_per_gas</code></td>
+<td align="left">基本费用值</td>
+</tr>
+<tr>
+<td align="left"><code>block_hash</code></td>
+<td align="left">执行区块的哈希值</td>
+</tr>
+<tr>
+<td align="left"><code>交易</code></td>
+<td align="left">要执行交易的列表</td>
+</tr>
+<tr>
+<td align="left"><code>提款</code></td>
+<td align="left">提款对象列表</td>
+</tr>
+</tbody></table>
+<p><code>Withdrawals</code> 列表包含了 <code>withdrawal</code> 对象，结构如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>地址</code></td>
+<td align="left">提款帐户地址</td>
+</tr>
+<tr>
+<td align="left"><code>amount</code></td>
+<td align="left">提款金额</td>
+</tr>
+<tr>
+<td align="left"><code>索引</code></td>
+<td align="left">提款索引值</td>
+</tr>
+<tr>
+<td align="left"><code>validatorIndex</code></td>
+<td align="left">验证者索引值</td>
+</tr>
+</tbody></table>
+<h2 id="区块时间"><a href="#区块时间" class="headerlink" title="区块时间"></a>区块时间</h2><p>区块时间是指两个区块之间的时间间隔。 在以太坊中，时间划分为每 12 秒一个单位，称为“时隙”。 在每个时隙内，选择一个单独的验证者提议区块。 假设所有验证者都在线且完全正常运行，则每个时隙内都会有一个区块产生，意味着区块时间是 12 秒。 但是，偶尔验证者在被要求提议区块时不在线，导致有时候一些时隙是空的。</p>
+<p>这种实现与基于工作量证明的系统不同。在工作量证明系统中，区块时间是带有概率性的，并由协议的目标挖矿难度调节。 以太坊的<a href="https://etherscan.io/chart/blocktime">平均区块时间(opens in a new tab)</a>是一个很好的例子，根据不变的新的 12 秒区块时间，可以清楚地推断出从工作量证明到权益证明的过渡。</p>
+<h2 id="区块大小"><a href="#区块大小" class="headerlink" title="区块大小"></a>区块大小</h2><p>最后一条重要提示是，区块本身的大小是有界限的。 每个区块的目标大小为 1500 万单位燃料，但区块的大小将根据网络需求而增加或减少，直至达到 3000 万单位燃料的区块限制（目标区块大小的 2 倍）。 区块的燃料限制可以相对于上一个区块的燃料限制上调或下调 1/1024 的比例。 因此，验证者可以通过共识来改变区块的燃料限制。 区块中所有交易消耗的总燃料量必须低于区块的燃料限制。 这很重要，因为它可以确保区块不能任意扩大。 如果区块可以任意扩大，由于空间和速度方面的要求，性能较差的全节点将逐渐无法跟上网络。 区块越大，在下一个时隙中及时处理它们需要的算力就越强大。 这是一种集中化的因素，可以通过限制区块大小来抵制。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/05/ethyi-tai-fang-xu-ni-ji/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.png" class="responsive-img" alt="ETH以太坊虚拟机 (EVM)">
+                            
+                            <span class="card-title">ETH以太坊虚拟机 (EVM)</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以太坊虚拟机 (EVM) 是一个去中心化虚拟环境，它在所有以太坊节点上一种安全一致地方式执行代码。 节点运行以太坊虚拟机，以执行智能合约，利用“燃料”度量执行操作所需的计算工作，从而确保高效的资源分配和网络安全性。
+从账本到状态机通常使用“
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/05/ethzhong-de-jiao-yi/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="ETH中的交易">
+                            
+                            <span class="card-title">ETH中的交易</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                交易是由帐户发出，带密码学签名的指令。 帐户将发起交易以更新以太坊网络的状态。 最简单的交易是将 ETH 从一个帐户转到另一个帐户。
+前提条件为了帮助你更好地理解这个页面，我们建议先阅读帐户和我们的以太坊简介。
+什么是交易？以太坊交易是指由
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">285.3k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

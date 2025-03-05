@@ -1,0 +1,980 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的燃料和费用, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Gas 对以太坊网络至关重要。 正是这种燃料使它能够运行，正如车辆需要汽油一样。
+什么是燃料？燃料是指在以太坊网络上执行特定操作所需的计算工作量。
+由于每笔以太坊交易都需要使用计算资源来执行，因此必须为这些资源付费，以确保以太坊不容易受到垃">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的燃料和费用 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/24.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的燃料和费用</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-05
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-05
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.6k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Gas 对以太坊网络至关重要。 正是这种燃料使它能够运行，正如车辆需要汽油一样。</p>
+<h2 id="什么是燃料？"><a href="#什么是燃料？" class="headerlink" title="什么是燃料？"></a>什么是燃料？</h2><p>燃料是指在以太坊网络上执行特定操作所需的计算工作量。</p>
+<p>由于每笔以太坊交易都需要使用计算资源来执行，因此必须为这些资源付费，以确保以太坊不容易受到垃圾信息的攻击，并且不会陷入无限的计算循环。 计算费用以燃料费的形式支付。</p>
+<p>燃料费是<strong>用于执行某些操作的燃料数量，乘以每单位燃料的成本</strong>。 无论交易成功与否，都要支付燃料费。</p>
+<p><a href="https://ethereum.org/content/developers/docs/gas/gas.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fgas%2Fgas.png&amp;w=1920&amp;q=75" alt="显示以太坊虚拟机操作所需燃料的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p>燃料费必须用以太坊的本币支付，即以太币 (ETH)。 燃料通常以 gwei 计价，gwei 是以太币的一种计量单位。 一个 gwei 等于一个以太币的十亿分之一（0.000000001 个以太币，或 10-9 个以太币）。</p>
+<p>比如，你可以说你的燃料费是 1 gwei，而不说 0.000000001 个以太币。</p>
+<p>“Gwei” 是 “giga-wei” 的缩写，意思是 “十亿个 wei”。 一个 gwei 等于十亿个 wei。 Wei 本身（以 <a href="https://www.investopedia.com/terms/b/bmoney.asp">b-money(opens in a new tab)</a> 的发明者 <a href="https://wikipedia.org/wiki/Wei_Dai">Wei Dai(opens in a new tab)</a> 的名字命名）是以太币的最小单位。</p>
+<h2 id="如何计算燃料费？"><a href="#如何计算燃料费？" class="headerlink" title="如何计算燃料费？"></a>如何计算燃料费？</h2><p>当提交交易时，你可以设置你愿意支付的燃料数量。 通过提供一定数量的燃料，你出价将你的交易添加到下一个区块中。 如果你提供的燃料太少，验证者就不太可能选择添加你的交易，这意味着你的交易可能会延迟执行或不会被执行。 如果提供太多，你可能浪费一些以太币。 那么，怎么知道你应该支付多少燃料费呢？</p>
+<p>你支付的总燃料费分为两部分：<code>base fee</code> 和 <code>priority fee</code>（小费）。</p>
+<p><code>Base fee</code> 由协议设定——你必须至少支付这些金额，然后你的交易才会被视为有效。 <code>Priority fee</code> 是基础费以外的小费，它可以吸引验证者选择将你的交易添加到下一个区块。</p>
+<p>只支付 <code>base fee</code> 的交易从技术上讲是有效的，但不太可能被添加到区块，因为它没有激励验证者优先选择它而不是其他交易。 “合适的” <code>priority</code> 费由发送交易时的网络使用情况决定——如果有大量需求，那么你可能不得不将你的 <code>priority</code> 费设置得更高；但当需求较少时，你也可以减少该费用。</p>
+<p>例如，假设 Jordan 要向 Taylor 支付 1 个以太币。 一笔以太币转账需要 21,000 单位的燃料，基础费是10 gwei。 Jordan 支付了 2 gwei 作为小费。</p>
+<p>总费用等于：</p>
+<pre><code>使用的燃料单位数 *（基础费 + 优先费）</code></pre><p>其中 <code>base fee</code> 由协议设置，<code>priority fee</code> 是用户设置的支付给验证者的小费。</p>
+<p>即 <code>21,000 * (10 + 2) = 252,000 gwei</code>（0.000252 个以太币）。</p>
+<p>当 Jordan 转账时，将从 Jordan 帐户中扣除 1.000252 个以太币。 Taylor 的帐户增加 1.0000 个以太币。 验证者收到价值 0.000042 个以太币的小费。 0.00021 个以太币的 <code>base fee</code> 被销毁。</p>
+<h3 id="基础费"><a href="#基础费" class="headerlink" title="基础费"></a>基础费</h3><p>每个区块都有一个基础费作为底价。 要想有资格添加到区块中，燃料费出价必须至少等于基础费。 基础费独立于当前区块计算，是由当前区块之前的区块决定的，这使得用户更容易预测交易费。 在创建区块时，它的<strong>基础费将被“销毁”</strong>并退出流通。</p>
+<p>基础费由一个公式计算得出，该公式将上一个区块的大小（所有交易中使用的燃料数量）与目标大小进行比较。 如果超过目标区块大小，每个区块的基础费将最多增加 12.5%。 这种指数级增长使得区块大小无限期保持高位在经济上不可行。</p>
+<table>
+<thead>
+<tr>
+<th>区块编号</th>
+<th align="right">已包含燃料</th>
+<th align="right">费用增加</th>
+<th align="right">当前基本费用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="right">15M</td>
+<td align="right">0%</td>
+<td align="right">100 gwei</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="right">30M</td>
+<td align="right">0%</td>
+<td align="right">100 gwei</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">112.5 gwei</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">126.6 gwei</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">142.4 gwei</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">160.2 gwei</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">180.2 gwei</td>
+</tr>
+<tr>
+<td>8</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">202.7 gwei</td>
+</tr>
+</tbody></table>
+<p>根据以上表格，要在 9 号区块创建交易，钱包会让用户明确知晓：要将交易添加到下一个区块的<strong>最高基础费</strong>等于 <code>current base fee * 112.5%</code> 或 <code>202.7 gwei * 112.5% = 228.1 gwei</code>。</p>
+<p>还请注意，考虑到完整区块前的基础费增加速度很快，我们不大可能看到它长时间处于峰值状态。</p>
+<table>
+<thead>
+<tr>
+<th>区块编号</th>
+<th align="right">已包含燃料</th>
+<th align="right">费用增加</th>
+<th align="right">当前基本费用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>30</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">2705.6 gwei</td>
+</tr>
+<tr>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">12.5%</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>50</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">28531.3 gwei</td>
+</tr>
+<tr>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">12.5%</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>100</td>
+<td align="right">30M</td>
+<td align="right">12.5%</td>
+<td align="right">10302608.6 gwei</td>
+</tr>
+</tbody></table>
+<h3 id="优先费（小费）"><a href="#优先费（小费）" class="headerlink" title="优先费（小费）"></a>优先费（小费）</h3><p>优先费（小费）激励验证者将交易添加到区块中。 如果没有小费，验证者会发现开采空区块在经济上可行，因为它们会获得相同的区块奖励。 小额小费是对验证者将交易添加到区块的最小激励。 在相同区块中，对于要优先于其他交易执行的交易，可以添加更高的小费来尝试使出价高于竞争性交易。</p>
+<h3 id="最高费用"><a href="#最高费用" class="headerlink" title="最高费用"></a>最高费用</h3><p>要在网络上执行交易，用户可以为他们愿意支付的交易执行费用指定最高限额。 此可选参数称为 <code>maxFeePerGas</code>。 为了执行交易，最高费用必须超过基础费和小费的总和。 交易完成后，会将最高费用与基础费和小费总和之间的差额退还给交易发送人。</p>
+<h3 id="区块大小"><a href="#区块大小" class="headerlink" title="区块大小"></a>区块大小</h3><p>每个区块的目标大小为 1500 万单位燃料，但区块的大小将根据网络需求增减，最大不得超过 3000 万单位燃料的区块大小上限（目标区块大小的 2 倍）。 协议通过 <code>tâtonnement</code> 过程使均衡区块大小平均达到 1,500 万单位燃料。 这意味着如果区块大小超出目标区块大小，协议将增加下一个区块的基础费。 同样，如果区块大小小于目标区块大小，协议将减少基础费。 基础费的调整金额与当前区块大小和目标区块大小的差距成比例。 <a href="https://ethereum.org/zh/developers/docs/blocks/">关于区块的更多信息</a>。</p>
+<h3 id="实践中的燃料费计算"><a href="#实践中的燃料费计算" class="headerlink" title="实践中的燃料费计算"></a>实践中的燃料费计算</h3><p>你可以明确说明自己愿意支付多少交易执行费。 然而，大多数钱包提供商会自动设置推荐的交易费（基础费 + 推荐的优先费）来降低用户操作的复杂程度。</p>
+<h2 id="为什么存在燃料费？"><a href="#为什么存在燃料费？" class="headerlink" title="为什么存在燃料费？"></a>为什么存在燃料费？</h2><p>简而言之，燃料费有助于确保以太坊网络的安全。 在网络上执行的每次计算都需要收费，这样可以防止不良行为者给网络带来垃圾信息。 为了防止代码中出现无意或恶意的无限循环或其他计算浪费，要求每笔交易对可以采用的代码执行计算步骤设置一个限制。 基本计算单位是“燃料”。</p>
+<p>尽管交易中包含费用限制，但交易中未使用的所有燃料将退还给用户（即退还 <code>max fee - (base fee + tip)</code>）。</p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/gas-tx.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Fgas-tx.png&amp;w=1920&amp;q=75" alt="未使用燃料退还示意图"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<h2 id="什么是燃料限额？"><a href="#什么是燃料限额？" class="headerlink" title="什么是燃料限额？"></a>什么是燃料限额？</h2><p>燃料限额是指你愿意在交易中消耗的最大燃料数量。 涉及<a href="https://ethereum.org/zh/developers/docs/smart-contracts/">智能合约</a>的更复杂交易需要进行更多的计算工作，因此相比简单的支付，它们需要更高的燃料限额。 标准以太币转账要求燃料限额为 21,000 单位燃料。</p>
+<p>例如，如果你对简单的以太币转账设置 50,000 单位燃料限额，以太坊虚拟机将消耗 21,000 单位，你将收到剩余的 29,000 单位。 然而，如果你设置的燃料太少，比如说，对于简单的以太币转账，设置燃料限额为 20,000 单位，以太坊虚拟机将消耗 20,000 单位燃料并尝试执行交易，但最后不会完成。 然后，以太坊虚拟机回滚所有变化，但由于验证者已经完成了价值 20k 单位燃料的工作，这些燃料就被消耗了。</p>
+<h2 id="为什么燃料费会变得如此高？"><a href="#为什么燃料费会变得如此高？" class="headerlink" title="为什么燃料费会变得如此高？"></a>为什么燃料费会变得如此高？</h2><p>燃料费高是由于以太坊广受欢迎。 如果需求量太大，用户必须提供更高的小费，力争使出价高于其他用户的交易。 小费越高，交易进入下一个区块的可能性就越大。 此外，更复杂的智能合约应用可能会执行许多操作来支持其功能，使它们消耗大量的燃料。</p>
+<h2 id="减少燃料成本的举措"><a href="#减少燃料成本的举措" class="headerlink" title="减少燃料成本的举措"></a>减少燃料成本的举措</h2><p>以太坊<a href="https://ethereum.org/zh/roadmap/">可扩展性升级</a>最终应该可以解决部分燃料费问题，并让以太坊平台有能力每秒处理数千笔交易，从而实现全面扩容。</p>
+<p>二层网络扩容是一项主要举措，可大大优化燃料成本、用户体验和可扩展性。 <a href="https://ethereum.org/zh/developers/docs/scaling/#layer-2-scaling">关于二层网络扩容的更多信息</a>。</p>
+<h2 id="监控燃料费"><a href="#监控燃料费" class="headerlink" title="监控燃料费"></a>监控燃料费</h2><p>如果想要监控燃料价格，用较少的费用发送以太币，你可以使用多种不同的工具，例如：</p>
+<ul>
+<li><a href="https://etherscan.io/gastracker">Etherscan 区块浏览器(opens in a new tab)</a><em>交易燃料价格估算器。</em></li>
+<li><a href="https://www.ethgastracker.com/">ETH Gas Tracker(opens in a new tab)</a> <em>监控与追踪以太坊和二层网络燃料价格，降低交易费用并节省开支</em></li>
+<li><a href="https://chrome.google.com/webstore/detail/blocknative-eth-gas-estim/ablbagjepecncofimgjmdpnhnfjiecfm">Blocknative ETH Gas Estimator(opens in a new tab)</a> <em>支持类型 0 传统交易和类型 2 EIP-1559 交易的燃料估算 Chrome 插件。</em></li>
+<li><a href="https://www.cryptoneur.xyz/gas-fees-calculator">Cryptoneur Gas Fees Calculator(opens in a new tab)</a> <em>按照你的当地货币计算主网、Arbitrum 和 Polygon 上进行的各类交易的燃料费。</em></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/05/ethzhong-de-jie-dian-he-ke-hu-duan/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="ETH中的节点和客户端简介">
+                            
+                            <span class="card-title">ETH中的节点和客户端简介</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以太坊是一个由计算机组成的分布式网络，这些计算机运行可验证区块和交易数据的软件，称为节点。 该软件必须在你的计算机上运行，才能将其转化为以太坊节点。 一个节点由两个独立的软件（名为“客户端”）构成。
+什么是节点和客户端？“节点”是指任何以太
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/05/ethyi-tai-fang-xu-ni-ji/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.png" class="responsive-img" alt="ETH以太坊虚拟机 (EVM)">
+                            
+                            <span class="card-title">ETH以太坊虚拟机 (EVM)</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以太坊虚拟机 (EVM) 是一个去中心化虚拟环境，它在所有以太坊节点上一种安全一致地方式执行代码。 节点运行以太坊虚拟机，以执行智能合约，利用“燃料”度量执行操作所需的计算工作，从而确保高效的资源分配和网络安全性。
+从账本到状态机通常使用“
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">285.3k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

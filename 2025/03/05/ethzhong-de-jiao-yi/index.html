@@ -1,0 +1,953 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的交易, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="交易是由帐户发出，带密码学签名的指令。 帐户将发起交易以更新以太坊网络的状态。 最简单的交易是将 ETH 从一个帐户转到另一个帐户。
+前提条件为了帮助你更好地理解这个页面，我们建议先阅读帐户和我们的以太坊简介。
+什么是交易？以太坊交易是指由">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的交易 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的交易</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-05
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-05
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.8k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        6 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>交易是由帐户发出，带密码学签名的指令。 帐户将发起交易以更新以太坊网络的状态。 最简单的交易是将 ETH 从一个帐户转到另一个帐户。</p>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>为了帮助你更好地理解这个页面，我们建议先阅读<a href="https://ethereum.org/zh/developers/docs/accounts/">帐户</a>和我们的<a href="https://ethereum.org/zh/developers/docs/intro-to-ethereum/">以太坊简介</a>。</p>
+<h2 id="什么是交易？"><a href="#什么是交易？" class="headerlink" title="什么是交易？"></a>什么是交易？</h2><p>以太坊交易是指由外部持有帐户发起的行动，换句话说，是指由人管理而不是智能合约管理的帐户。 例如，如果 Bob 发送 Alice 1 ETH，则 Bob 的帐户必须减少 1 ETH，而 Alice 的帐户必须增加 1 ETH。 交易会造成状态的改变。</p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/tx.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Ftx.png&amp;w=1920&amp;q=75" alt="显示交易导致状态更改的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p>改变 EVM 状态的交易需要广播到整个网络。 任何节点都可以广播在以太坊虚拟机上执行交易的请求；此后，验证者将执行交易并将由此产生的状态变化传播到网络的其他部分。</p>
+<p>交易需要付费并且必须包含在一个有效区块中。 为了使本概述更加简洁，我们将另行介绍燃料费和验证。</p>
+<p>所提交的交易包括下列信息：</p>
+<ul>
+<li><code>from</code> - 发送者的地址，该地址将签署交易。 这将是一个外部帐户，因为合约帐户不能发送交易。</li>
+<li><code>to</code> — 接收地址（如果是外部帐户，交易将传输值。 如果是合约帐户，交易将执行合约代码）</li>
+<li><code>signature</code> – 发送者的标识符。 当发送者的私钥签署交易并确保发送者已授权此交易时，生成此签名。</li>
+<li><code>nonce</code> - 一个有序递增的计数器，表示来自帐户的交易数量</li>
+<li><code>value</code> – 发送者向接收者转移的以太币数量（面值为 WEI，1 个以太币 = 1e+18wei）</li>
+<li><code>input data</code> – 可包括任意数据的可选字段</li>
+<li><code>gasLimit</code> – 交易可以消耗的最大数量的燃料单位。 <a href="https://ethereum.org/zh/developers/docs/evm/opcodes/">以太坊虚拟机</a>指定每个计算步骤所需的燃料单位</li>
+<li><code>maxPriorityFeePerGas</code> - 作为小费提供给验证者的已消耗燃料的最高价格</li>
+<li><code>maxFeePerGas</code> - 愿意为交易支付的每单位燃料的最高费用（包括 <code>baseFeePerGas</code> 和 <code>maxPriorityFeePerGas</code>）</li>
+</ul>
+<p>燃料是指验证者处理交易所需的计算。 用户必须为此计算支付费用。 <code>gasLimit</code> 和 <code>maxPriorityFeePerGas</code> 决定支付给验证者的最高交易费。 <a href="https://ethereum.org/zh/developers/docs/gas/">关于燃料的更多信息</a>。</p>
+<p>交易对象看起来像这样：</p>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  from<span class="token operator">:</span> <span class="token string">"0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8"</span><span class="token punctuation">,</span>
+  to<span class="token operator">:</span> <span class="token string">"0xac03bb73b6a9e108530aff4df5077c2b3d481e5a"</span><span class="token punctuation">,</span>
+  gasLimit<span class="token operator">:</span> <span class="token string">"21000"</span><span class="token punctuation">,</span>
+  maxFeePerGas<span class="token operator">:</span> <span class="token string">"300"</span>
+  maxPriorityFeePerGas<span class="token operator">:</span> <span class="token string">"10"</span>
+  nonce<span class="token operator">:</span> <span class="token string">"0"</span><span class="token punctuation">,</span>
+  value<span class="token operator">:</span> <span class="token string">"10000000000"</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但交易对象需要使用发送者的私钥签名。 这证明交易只可能来自发送者，而不是欺诈。</p>
+<p>Geth 这样的以太坊客户端将处理此签名过程。</p>
+<p>示例 <a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/">JSON-RPC</a> 调用：</p>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">"jsonrpc"</span><span class="token operator">:</span> <span class="token string">"2.0"</span><span class="token punctuation">,</span>
+  <span class="token property">"method"</span><span class="token operator">:</span> <span class="token string">"account_signTransaction"</span><span class="token punctuation">,</span>
+  <span class="token property">"params"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"from"</span><span class="token operator">:</span> <span class="token string">"0x1923f626bb8dc025849e00f99c25fe2b2f7fb0db"</span><span class="token punctuation">,</span>
+      <span class="token property">"gas"</span><span class="token operator">:</span> <span class="token string">"0x55555"</span><span class="token punctuation">,</span>
+      <span class="token property">"maxFeePerGas"</span><span class="token operator">:</span> <span class="token string">"0x1234"</span><span class="token punctuation">,</span>
+      <span class="token property">"maxPriorityFeePerGas"</span><span class="token operator">:</span> <span class="token string">"0x1234"</span><span class="token punctuation">,</span>
+      <span class="token property">"input"</span><span class="token operator">:</span> <span class="token string">"0xabcd"</span><span class="token punctuation">,</span>
+      <span class="token property">"nonce"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+      <span class="token property">"to"</span><span class="token operator">:</span> <span class="token string">"0x07a565b7ed7d7a678680a4c162885bedbb695fe0"</span><span class="token punctuation">,</span>
+      <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"0x1234"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>示例响应：</p>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"jsonrpc"</span><span class="token operator">:</span> <span class="token string">"2.0"</span><span class="token punctuation">,</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">"result"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"raw"</span><span class="token operator">:</span> <span class="token string">"0xf88380018203339407a565b7ed7d7a678680a4c162885bedbb695fe080a44401a6e4000000000000000000000000000000000000000000000000000000000000001226a0223a7c9bcf5531c99be5ea7082183816eb20cfe0bbc322e97cc5c7f71ab8b20ea02aadee6b34b45bb15bc42d9c09de4a6754e7000908da72d48cc7704971491663"</span><span class="token punctuation">,</span>
+    <span class="token property">"tx"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"nonce"</span><span class="token operator">:</span> <span class="token string">"0x0"</span><span class="token punctuation">,</span>
+      <span class="token property">"maxFeePerGas"</span><span class="token operator">:</span> <span class="token string">"0x1234"</span><span class="token punctuation">,</span>
+      <span class="token property">"maxPriorityFeePerGas"</span><span class="token operator">:</span> <span class="token string">"0x1234"</span><span class="token punctuation">,</span>
+      <span class="token property">"gas"</span><span class="token operator">:</span> <span class="token string">"0x55555"</span><span class="token punctuation">,</span>
+      <span class="token property">"to"</span><span class="token operator">:</span> <span class="token string">"0x07a565b7ed7d7a678680a4c162885bedbb695fe0"</span><span class="token punctuation">,</span>
+      <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"0x1234"</span><span class="token punctuation">,</span>
+      <span class="token property">"input"</span><span class="token operator">:</span> <span class="token string">"0xabcd"</span><span class="token punctuation">,</span>
+      <span class="token property">"v"</span><span class="token operator">:</span> <span class="token string">"0x26"</span><span class="token punctuation">,</span>
+      <span class="token property">"r"</span><span class="token operator">:</span> <span class="token string">"0x223a7c9bcf5531c99be5ea7082183816eb20cfe0bbc322e97cc5c7f71ab8b20e"</span><span class="token punctuation">,</span>
+      <span class="token property">"s"</span><span class="token operator">:</span> <span class="token string">"0x2aadee6b34b45bb15bc42d9c09de4a6754e7000908da72d48cc7704971491663"</span><span class="token punctuation">,</span>
+      <span class="token property">"hash"</span><span class="token operator">:</span> <span class="token string">"0xeba2df809e7a612a0a0d444ccfa5c839624bdc00dd29e3340d46df3870f8a30e"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><code>raw</code> 是采用<a href="https://ethereum.org/zh/developers/docs/data-structures-and-encoding/rlp/">递归长度前缀 (RLP) </a>编码形式的签名交易</li>
+<li><code>tx</code> 是已签名交易的 JSON 形式。</li>
+</ul>
+<p>如有签名哈希，可通过加密技术证明交易来自发送者并提交网络。</p>
+<h3 id="data字段"><a href="#data字段" class="headerlink" title="data字段"></a><code>data</code>字段</h3><p>绝大多数交易都是从外部所有的帐户访问合约。 大多数合约用 Solidity 语言编写，并根据应用程序二进制接口 (ABI) 解释其<code>data</code>字段。</p>
+<p>前四个字节使用函数名称和参数的哈希指定要调用的函数。 有时可以使用<a href="https://www.4byte.directory/signatures/">本数据库(opens in a new tab)</a>根据选择器识别函数。</p>
+<p>调用数据的其余部分是参数，<a href="https://docs.soliditylang.org/en/latest/abi-spec.html#formal-specification-of-the-encoding">按照应用程序二进制接口规范中的规定进行编码(opens in a new tab)</a>。</p>
+<p>例如，我们来看一下<a href="https://etherscan.io/tx/0xd0dcbe007569fcfa1902dae0ab8b4e078efe42e231786312289b1eee5590f6a1">这笔交易(opens in a new tab)</a>。 使用 <strong>Click to see More（单击查看更多）</strong>查看调用数据。</p>
+<p>函数选择器是 <code>0xa9059cbb</code>。 有几个<a href="https://www.4byte.directory/signatures/?bytes4_signature=0xa9059cbb">具有此签名的已知函数(opens in a new tab)</a>。 本例中<a href="https://etherscan.io/address/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48#code">合约源代码(opens in a new tab)</a>已经上传到 Etherscan，所以我们知道该函数是 <code>transfer(address, uint256)</code>。</p>
+<p>其余数据如下：</p>
+<pre><code>10000000000000000000000004f6742badb049791cd9a37ea913f2bac38d01279
+2000000000000000000000000000000000000000000000000000000003b0559f4</code></pre><p>根据应用程序二进制接口规范，整型值（例如地址，它是 20 字节整型）在应用程序二进制接口中显示为 32 字节的字，前面用零填充。 所以我们知道 <code>to</code> 地址是 <a href="https://etherscan.io/address/0x4f6742badb049791cd9a37ea913f2bac38d01279"><code>4f6742badb049791cd9a37ea913f2bac38d01279</code>(opens in a new tab)</a>。 <code>value</code> 是 0x3b0559f4 = 990206452。</p>
+<h2 id="交易类型"><a href="#交易类型" class="headerlink" title="交易类型"></a>交易类型</h2><p>以太坊有几种不同类型的交易：</p>
+<ul>
+<li>常规交易：从一个帐户到另一个帐户的交易。</li>
+<li>合约部署交易：没有“to”地址的交易，数据字段用于合约代码。</li>
+<li>执行合约：与已部署的智能合约进行交互的交易。 在这种情况下，“to”地址是智能合约地址。</li>
+</ul>
+<h3 id="关于燃料"><a href="#关于燃料" class="headerlink" title="关于燃料"></a>关于燃料</h3><p>如上所述，执行交易需要耗费<a href="https://ethereum.org/zh/developers/docs/gas/">燃料</a>。 简单的转账交易需要 21000 单位燃料。</p>
+<p>因此，如果 Bob 要在 <code>baseFeePerGas</code> 为 190 Gwei 且 <code>maxPriorityFeePerGas</code> 为 10 Gwei 时给 Alice 发送一个以太币，Bob 需要支付以下费用：</p>
+<pre><code>(190 + 10) * 21000 = 4,200,000 gwei
+--或--
+0.0042 ETH</code></pre><p>Bob 的帐户将会扣除 <strong>1.0042 个以太币</strong>（1 个以太币给 Alice，0.0042 个以太币作为燃料费用）</p>
+<p>Alice 的帐户将会增加 <strong>+1.0 ETH</strong></p>
+<p>基础费将会燃烧 <strong>-0.00399 ETH</strong></p>
+<p>验证者获得 <strong>0.000210 个以太币</strong>的小费</p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/gas-tx.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Fgas-tx.png&amp;w=1920&amp;q=75" alt="未使用燃料退还示意图"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p>任何未用于交易的燃料都会退还给用户帐户。</p>
+<h3 id="智能合约交互"><a href="#智能合约交互" class="headerlink" title="智能合约交互"></a>智能合约交互</h3><p>任何涉及智能合约的交易都需要燃料。</p>
+<p>智能合约还可以包含被称为 <a href="https://docs.soliditylang.org/en/latest/contracts.html#view-functions"><code>view</code>(opens in a new tab)</a> 或 <a href="https://docs.soliditylang.org/en/latest/contracts.html#pure-functions"><code>pure</code>(opens in a new tab)</a> 的函数，这不会改变合约的状态。 像这样，从外部帐户调用这些函数不需要任何燃料。 这种情况下的 RPC 底层调用为 <a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/#eth_call"><code>eth_call</code></a>。</p>
+<p>不同于使用 <code>eth_call</code> 进行访问，<code>view</code> 或 <code>pure</code> 函数通常也在内部（即从合约自身或其他合约）调用并消耗燃料。</p>
+<h2 id="交易生命周期"><a href="#交易生命周期" class="headerlink" title="交易生命周期"></a>交易生命周期</h2><p>交易提交后，就会发生以下情况：</p>
+<ol>
+<li>以加密方式生成的交易哈希： <code>0x97d99bc7729211111a21b12c933c949d4f31684f1d6954ff477d0477538ff017</code></li>
+<li>然后，该交易被广播到网络，并添加到由所有其他待处理的网络交易组成的交易池中。</li>
+<li>验证者必须选择你的交易并将它包含在一个区块中，以便验证交易并认为它“成功”。</li>
+<li>随着时间的流逝，包含你的交易的区块将升级成“合理”状态，然后变成“最后确定”状态。 通过这些升级，可以进一步确定 你的交易已经成功并将无法更改。 区块一旦“最终确定”，只能通过耗费数十亿美元 的网络级攻击来更改。</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/05/ethzhong-de-qu-kuai/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/16.png" class="responsive-img" alt="ETH中的区块">
+                            
+                            <span class="card-title">ETH中的区块</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                区块是指一批交易的组合，并且包含链中上一个区块的哈希。 这将区块连接在一起（成为一个链），因为哈希是从区块数据中加密得出的。 这可以防止欺诈，因为以前的任何区块中的任何改变都会使后续所有区块无效，而且所有哈希都会改变，所有运行区块链的人都会
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/05/ethzhang-hu/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="ETH账户">
+                            
+                            <span class="card-title">ETH账户</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一个以太坊帐户是一个具有以太币 (ETH) 余额的实体，可以在以太坊上发送交易。 帐户可以由用户控制，也可以作为智能合约部署。
+帐户类型以太坊有两种帐户类型：
+
+外部所有的帐户 (EOA) – 由任何拥有私钥的人控制
+合约帐户 – 部署到网
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">285.3k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
