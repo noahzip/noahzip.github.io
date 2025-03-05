@@ -1,0 +1,1341 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="EHT以太坊白皮书, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="1. 引言中本聪于2009年推出的比特币被视为货币和资金领域的革命性变革，它是首个数字资产，具有以下特点：无实物或内在价值支撑，无中心化发行或控制机构。然而，比特币实验的核心不仅是货币本身，更在于其底层的区块链技术，这一分布式共识工具正日益">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>EHT以太坊白皮书 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">EHT以太坊白皮书</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-05
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-05
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        16k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        55 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>中本聪于2009年推出的比特币被视为货币和资金领域的革命性变革，它是首个数字资产，具有以下特点：无实物或内在价值支撑，无中心化发行或控制机构。然而，比特币实验的核心不仅是货币本身，更在于其底层的区块链技术，这一分布式共识工具正日益受到关注。</p>
+<p>区块链的应用超出了货币，包括“彩色币”（自定义货币和金融工具）、“智能资产”（物理设备所有权）、“域名币”（非同质化资产如域名），以及更复杂的“智能合约”（实现任意规则的代码）和“去中心化自治组织”（DAO）。</p>
+<p>以太坊则进一步提出，通过内置图灵完备编程语言的区块链，用户可创建支持任意状态转换的合约，轻松实现上述系统及其他未想象的应用，仅需几行代码即可编码逻辑。</p>
+<p><code>以太坊（Ethereum）</code>是一个开源的去中心化平台，支持智能合约和去中心化应用（DApps）。其目标是提供一个通用的区块链框架，使得任何人都可以创建去中心化的应用，而无需依赖传统的信任模式。</p>
+<h2 id="2-历史与背景"><a href="#2-历史与背景" class="headerlink" title="2. 历史与背景"></a>2. 历史与背景</h2><p>比特币引入了去中心化的数字货币概念，但其脚本语言受限，无法支持复杂的智能合约。比特币的脚本语言“缺乏图灵完备性、值不可变、缺乏状态等”，因此需要一个新的平台来支持更复杂的应用。</p>
+<p>去中心化数字货币及财产登记等概念已有数十年历史，以下为关键发展脉络：</p>
+<h3 id="1-早期尝试"><a href="#1-早期尝试" class="headerlink" title="1.早期尝试"></a>1.早期尝试</h3><ol>
+<li>1980-1990年代：匿名电子现金协议，主要依赖于称为<code>Chaumian 盲签名</code>的密码学原语，提供了一种具有高度隐私性的货币，但这些协议基本上未能获得关注，因为它们依赖于中心化中介<ul>
+<li><strong>特点</strong>：基于<code>Chaumian盲签名</code>，提供高隐私性货币。</li>
+<li><strong>局限</strong>：依赖中心化中介，未获广泛关注。</li>
+</ul>
+</li>
+<li>1998年：戴伟的b-money<ul>
+<li><strong>创新</strong>：首次提出通过计算难题创造货币及去中心化共识。</li>
+<li><strong>不足</strong>：缺乏具体实现细节。</li>
+</ul>
+</li>
+<li>2005年：Hal Finney引入了<code>可重复使用的工作量证明(opens in a new tab)</code>这一概念<ul>
+<li><strong>进展</strong>：结合b-money与Adam Back的哈希现金，提出加密货币概念。</li>
+<li><strong>缺陷</strong>：依赖可信计算后端，未完全去中心化。</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-比特币的突破"><a href="#2-比特币的突破" class="headerlink" title="2.比特币的突破"></a>2.比特币的突破</h3><ul>
+<li>2009年：中本聪推出比特币<ul>
+<li><strong>实现</strong>：结合公钥密码学管理所有权与共识算法，首次实现真正去中心化货币。</li>
+<li><strong>核心机制</strong>：工作量证明（PoW）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-工作量证明（Proof-of-Work-PoW）"><a href="#3-工作量证明（Proof-of-Work-PoW）" class="headerlink" title="3.工作量证明（Proof of Work, PoW）"></a>3.工作量证明（Proof of Work, PoW）</h3><ul>
+<li><p>提供供了一种简单且比较有效的共识算法，让网络中的节点能够全体对比特币账本状态的一组规范更新达成一致</p>
+</li>
+<li><p>算力作为经济壁垒，取代正式注册限制，提供了一种允许自由进入共识过程的机制，解决了决定谁来影响共识的政治问题，同时防止了女巫攻击</p>
+<blockquote>
+<p><strong>女巫攻击（Sybil Attack）</strong></p>
+<p>女巫攻击是一种网络攻击方式，指攻击者在系统中创建大量伪造身份（或节点），以控制网络、影响共识或破坏系统的正常运行。</p>
+<p><strong>来源：</strong></p>
+<p>​    名称来源于1973年的书籍《Sybil》，讲述一个患有多重人格障碍的女性，象征攻击者通过“多个身份”操控系统。</p>
+<p>背景：</p>
+<p>​    在去中心化系统（如比特币、以太坊等区块链网络）中，女巫攻击是潜在威胁，因为这些系统依赖分布式节点的协作来达成共识。</p>
+<p><strong>攻击机制</strong></p>
+<ul>
+<li><strong>核心手段</strong>：攻击者通过伪造大量身份，假装为多个独立参与者，从而：</li>
+<li><strong>影响投票或决策</strong>：例如，在共识过程中占据多数“声音”。</li>
+<li><strong>破坏网络信任</strong>：通过伪造数据或行为误导其他节点。</li>
+<li><strong>消耗资源</strong>：大量虚假节点可能增加网络负担。</li>
+<li>示例：<br>在一个P2P网络中，攻击者创建100个虚假节点，控制50%以上的“投票权”，从而篡改交易记录。</li>
+</ul>
+<p><strong>在比特币中的体现与防范</strong></p>
+<p>问题：比特币白皮书中提到，共识依赖<code>工作量证明（PoW）</code>，若无防范，攻击者可能通过大量伪造节点干扰网络。</p>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li><p><strong>经济壁垒</strong>：<code>PoW</code>要求算力参与共识，创建大量虚假身份需要投入真实计算资源。</p>
+</li>
+<li><p><strong>算力权重</strong>：节点的影响力与算力成正比，而非节点数量，文中指出：“单个节点的权重与该节点的算力成正比。”</p>
+</li>
+<li><p><strong>效果</strong>：即使攻击者创建无数节点，若无足够算力，仍无法控制网络。</p>
+</li>
+</ul>
+<p><strong>在其他系统中的变种</strong></p>
+<ul>
+<li><code>权益证明（PoS）</code>：攻击者可能通过伪造多个账户持有少量代币，但需大量资金积累权重。</li>
+<li><code>非区块链场景</code>：如社交网络中，创建大量假账号操纵舆论。</li>
+</ul>
+<p>女巫攻击暴露了去中心化系统在身份验证上的挑战。比特币通过<code>PoW</code>将参与成本与资源挂钩，有效缓解这一威胁，成为区块链设计的重要创新。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="3-状态转换系统"><a href="#3-状态转换系统" class="headerlink" title="3.状态转换系统"></a>3.状态转换系统</h2><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305130801729.png" alt="状态转换系统"></p>
+<p>从技术角度讲，诸如比特币等<strong>加密货币账本可视作一种状态转换系统</strong>，该系统有一个“状态”，由全部现存比特币的所有权状态和一个“状态转换函数”组成，状态转换函数以状态和交易为输入并输出新状态作为结果</p>
+<pre><code>APPLY(S,TX) -&gt; S' or ERROR</code></pre><p>例如，在标准的银行系统中，状态就是一个资产负债表，一笔交易是一个从A帐户向B帐户转账$X的请求，状态转换函数将从A帐户中减去$X，向B帐户增加$X。 如果A帐户的余额在第一步中小于$X，状态转换函数就会返回错误提示。 所以，可以如此定义：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token function">APPLY</span><span class="token punctuation">(</span><span class="token punctuation">{</span> Alice<span class="token punctuation">:</span> $<span class="token number">50</span><span class="token punctuation">,</span> Bob<span class="token punctuation">:</span> $<span class="token number">50</span> <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token string">"send $20 from Alice to Bob"</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">{</span> Alice<span class="token punctuation">:</span> $<span class="token number">30</span><span class="token punctuation">,</span> Bob<span class="token punctuation">:</span> $<span class="token number">70</span> <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>比特币中的“状态”是指所有已铸造但尚未使用的货币（技术上称为“未使用的交易输出”或 UTXO）的集合</strong>，每个 UTXO 都有面额和所有者（由一个 20 字节的地址定义，本质上是一个加密公钥 ）。 </p>
+<p>一个交易包括一个或多个输入以及一个或多个输出，每个输入都包含对现有 UTXO 的引用以及所有者地址相关的私钥创建的加密签名；每个输出都包含一个要添加到状态中的新 UTXO。</p>
+<p><strong>状态转换函数</strong> <code>APPLY(S,TX) -&gt; S'</code> 的定义大体如下：</p>
+<ol>
+<li>对于TX中的每个输入：<ul>
+<li>如果引用的 <code>UTXO</code> 不在 <code>S</code> 范围内，则返回错误。 防止交易发送者花费不存在的比特币</li>
+<li>如果提供的签名与 UTXO 的所有者不符合，则返回错误。 防止交易发送者花费其他人的比特币</li>
+</ul>
+</li>
+<li>如果所有输入 <code>UTXO</code> 面值总额小于所有输出 <code>UTXO</code> 面值总额，则返回错误。确保价值守恒</li>
+<li>在移除所有输入 <code>UTXO</code> 且添加所有输出 <code>UTXO</code> 后，返回 <code>S</code>。</li>
+</ol>
+<p>假设Alice想给Bob发送11.7 BTC。 首先，Alice将寻找她拥有的一组总数至少为11.7 BTC的可用UTXO。 事实上，Alice不太可能正好有11.7 BTC；假设她能得到的最小数额是6+4+2=12。 所以，她可以创建一笔有三个输入和两个输出的交易。 第一个输出为11.7 BTC，所有者是Bob的地址，第二个输出为剩下的0.3 BTC找零，所有者是Alice自己。</p>
+<h2 id="4-区块与挖矿"><a href="#4-区块与挖矿" class="headerlink" title="4.区块与挖矿"></a>4.区块与挖矿</h2><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305132724811.png" alt="区块"></p>
+<h3 id="1-区块"><a href="#1-区块" class="headerlink" title="1.区块"></a>1.区块</h3><p>如果我们拥有可信任的中心化服务机构，状态转换系统可以很容易地实现；可以简单地将上述功能准确编码，使用中心化服务器的硬盘来记录状态。 </p>
+<p>然而，我们想把比特币构建成去中心化货币系统，为了确保每个人都同意交易的顺序，我们需要将状态转换系统与一个共识系统结合起来。 </p>
+<p>比特币的去中心化共识进程要求网络中的节点不断尝试将交易打包成“区块”。 网络计划大约每十分钟产生一个区块，每个区块包含一个时间戳、一个随机数、一个对上一个区块的引用（即哈希）和上一区块生成以来发生的所有交易列表。 随着时间推移就创建出了一个持续增长的区块链，它不断地更新，从而能够代表比特币账本的最新状态。</p>
+<p><strong>区块生成</strong></p>
+<ul>
+<li><p><strong>频率</strong>：约每10分钟生成一个区块。</p>
+</li>
+<li><p><strong>内容</strong>：包括时间戳、随机数、前一区块哈希及交易列表。</p>
+</li>
+<li><p><strong>状态计算</strong>：状态未直接编码在区块中，需从创世状态依次应用每笔交易计算得出。</p>
+</li>
+</ul>
+<p><strong>区块有效性校验算法</strong></p>
+<ol>
+<li>检查该区块引用的上一个区块是否存在且有效。</li>
+<li>检查该区块的时间戳是否大于上一个区块的时间戳并且在将来 2 小时以内</li>
+<li>检查区块上的工作量证明是否有效。</li>
+<li>令前一个区块末尾的态为 <code>S[0]</code>。</li>
+<li>假设 <code>TX</code> 是该区块的交易列表，其中包含 <code>n</code> 个交易。 对于 <code>0...n-1</code> 中的所有 <code>i</code>，如果有任何应用程序返回错误，退出并返回 false，请设置 <code>S[i+1] = APPLY(S[i],TX[i])</code>。</li>
+<li>返回 true，并将 <code>S[n]</code> 登记为该区块末尾的状态。</li>
+</ol>
+<ul>
+<li><strong>交易顺序</strong>：若区块内交易B依赖A的UTXO，A须在B前，否则区块无效。</li>
+</ul>
+<p><strong>工作量证明（PoW）校验算法</strong></p>
+<p><strong>对每个区块进行两次SHA256哈希处理</strong>，得到一个256位的数值，该数值必须<code>小于</code>不断动态调整的目标数值，本文写作时目标数值大约是<code>2^187</code>。</p>
+<p>工作量证明的目的是使创建区块有算力困难，从而阻止女巫攻击者恶意重新生成区块链。 因为SHA256是完全不可预测的伪随机函数，创建有效区块的唯一方法就是简单地不断试错，不断地增加随机数的数值，查看新的哈希数是否小于目标值。</p>
+<h3 id="2-比特币中的挖矿机制"><a href="#2-比特币中的挖矿机制" class="headerlink" title="2.比特币中的挖矿机制"></a>2.比特币中的挖矿机制</h3><p>当前的目标数值是<code>2^187</code>，网络必须平均尝试<code>2^69</code>次才能生成有效的区块。一般而言，比特币网络每隔2016个区块重新设定目标数值，从而保证网络中的节点平均每十分钟生成一个区块。 为了对矿工的计算工作进行激励，每一个成功生成区块的矿工有权在区块中包含一笔凭空发给他们自己12.5 BTC的交易。 另外，如果交易的输入额大于输出，差额部分就作为“交易费”付给矿工。 ，这也是比特币发行的唯一机制，创世状态中并没有比特币。</p>
+<p><strong>工作原理</strong></p>
+<ul>
+<li>哈希计算：<ul>
+<li>矿工对区块数据（包括前一区块哈希、交易列表、时间戳和随机数nonce）进行双重SHA256哈希运算。</li>
+<li>结果是一个256位的数值。</li>
+</ul>
+</li>
+<li>条件：<ul>
+<li>该哈希值必须小于一个动态调整的<strong>目标值</strong>（target）。</li>
+<li>目标值越小，满足条件的难度越大。</li>
+</ul>
+</li>
+<li>随机尝试：<ul>
+<li>SHA256是伪随机函数，无法预测结果。</li>
+<li>矿工通过不断调整nonce值进行试错，直到找到符合条件的哈希。</li>
+</ul>
+</li>
+</ul>
+<p><strong>矿工激励</strong></p>
+<ul>
+<li><strong>区块奖励</strong>：成功生成区块的矿工获12.5 BTC（凭空发行）。</li>
+<li><strong>交易费</strong>：交易输入大于输出的差额归矿工。</li>
+<li><strong>发行方式</strong>：比特币仅通过挖矿发行，创世状态无币。</li>
+</ul>
+<p><strong>挖矿目的与攻击防御</strong></p>
+<p><strong>1.挖矿的作用</strong></p>
+<ul>
+<li><strong>保护交易顺序</strong>：通过算力竞争防止恶意篡改，确保共识安全。</li>
+</ul>
+<p><strong>2. 攻击场景（51%攻击）</strong></p>
+<p>下面描述了所谓的“双重支付攻击”（Double-Spending Attack），其核心目的是通过操控交易顺序来欺骗网络确认不合法的交易，进而让攻击者能够重复使用相同的比特币。</p>
+<p><strong>攻击策略：</strong></p>
+<ol>
+<li>向商家发送 100 个比特币以换取某种产品（最好是快速交付的数字商品）</li>
+<li>等待商品交付</li>
+<li>创建另一笔交易，将这 100 个比特币发送给自己</li>
+<li>试图让网络相信他对自己的交易是先发生的。</li>
+</ol>
+<p><strong>下面是详细的过程分解：</strong></p>
+<ol>
+<li><p><strong>攻击者初始交易</strong>：攻击者向商家发送 100 个比特币以换取某种数字商品。假设商家快速交付商品，在这时攻击者完成了交易并收到商品。</p>
+</li>
+<li><p><strong>创建双重支付交易</strong>：攻击者在收到商品后，创建一个新的交易，将同样的 100 个比特币转回给自己。这时，攻击者实际上试图通过修改交易的顺序，让第二笔交易成为“优先交易”，即让网络认为这笔交易发生在第一笔交易之前。</p>
+</li>
+<li><p><strong>正常交易被矿工确认</strong>：当第一个交易（发送 100 个比特币给商家）发生后，矿工会将这笔交易包含在一个区块中，假设这个区块是编号为 270000的区块。随着区块被挖掘并形成后续区块，交易会被逐渐确认。大约 1 小时后，区块 270000 会有 5 个后续区块（270001 到 270005），这些区块间接地确认了这笔交易，商家认为收到了合法付款。</p>
+</li>
+<li><p><strong>分叉攻击（重写区块链）</strong>：为了执行攻击，攻击者创建另一笔交易，将 100 个比特币转回给自己。为了让这笔交易被确认，攻击者必须让网络接受第二笔交易，并且认为它是“先发生的”交易。为此，攻击者需要执行<strong>区块链分叉</strong>：</p>
+<ol>
+<li><p>攻击者通过选择第 269 个区块作为父区块，重新挖掘第 270 个区块，并在其中插入新的交易（即将 100 个比特币发送给自己）。</p>
+</li>
+<li><p>由于区块链是通过哈希链接的，新生成的第 270 个区块会有一个不同的哈希，因此它与原来的区块链（包含商家的交易）会完全分离，变成一个独立的链。</p>
+</li>
+</ol>
+</li>
+<li><p><strong>网络分叉与最长链规则</strong>：根据比特币的规则，在区块链发生分叉时，网络会选择<strong>最长的链</strong>作为有效链。攻击者的分叉链目前只有他自己在挖矿，因此攻击者必须要拥有<strong>51% 的算力</strong>，才能追赶并超过其他矿工挖掘的区块。</p>
+<ol>
+<li>如果攻击者拥有足够的算力（即超过全网其他矿工的算力），他就能不断挖掘出新区块，并且快速将自己的分叉链长度超过原链。</li>
+<li>当攻击者的链变得比原链更长时，网络会将攻击者的新链视为合法链，而原链上的交易（即支付给商家的交易）将被丢弃。这样，商家的交易就被撤销，攻击者成功地“撤回”了之前的支付，并且重新获得了 100 个比特币。</li>
+</ol>
+</li>
+<li><p><strong>攻击成功</strong>：通过这个过程，攻击者成功地通过分叉操控了交易的顺序，完成了“双重支付”，即既得到了商品，又保留了比特币。</p>
+</li>
+</ol>
+<h2 id="5-默克尔树与比特币简化支付确认（SPV）"><a href="#5-默克尔树与比特币简化支付确认（SPV）" class="headerlink" title="5.默克尔树与比特币简化支付确认（SPV）"></a>5.<strong>默克尔树与比特币简化支付确认（SPV）</strong></h2><h3 id="1-默克尔树"><a href="#1-默克尔树" class="headerlink" title="1.默克尔树"></a><strong>1.默克尔树</strong></h3><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305143501480.png" alt="默克尔树"></p>
+<ul>
+<li>默克尔树是比特币区块的核心数据结构，它帮助在区块链中有效地存储和验证交易数据。</li>
+<li>区块头包含区块的元数据，如时间戳、上一个区块的哈希、以及默克尔树根的哈希。默克尔树根是通过哈希算法构建的，它代表了区块内所有交易数据的整体哈希值。</li>
+<li>默克尔树是一个二叉树结构，由叶节点、中间节点和根节点组成。每个叶节点代表一笔交易，每个中间节点是其子节点的哈希，最终的根节点是所有交易数据的哈希聚合。</li>
+<li>默克尔树的主要优势是它可以让节点只下载区块头和部分相关的树节点，从而验证区块的有效性，无需下载所有交易数据。若有任何恶意修改区块数据，这些修改会迅速通过哈希链传播，导致区块哈希改变，从而使恶意区块被识别为无效。</li>
+</ul>
+<h3 id="2-比特币简化支付确认（SPV）"><a href="#2-比特币简化支付确认（SPV）" class="headerlink" title="2.比特币简化支付确认（SPV）"></a><strong>2.比特币简化支付确认（SPV）</strong></h3><ul>
+<li><code>SPV（Simplified Payment Verification）协议</code><strong>允许</strong><code>轻节点（light nodes）</code>存在，它们不需要存储完整的区块数据，只需存储区块头并下载与其交易相关的默克尔树分支。</li>
+<li>通过验证工作量证明和相关的默克尔树分支，轻节点就能确认交易的有效性和比特币账户的余额。</li>
+<li>SPV协议使得轻节点能有效地验证比特币网络中的交易，而无需占用大量存储空间，因此更适合于移动设备等资源受限的环境。</li>
+</ul>
+<h3 id="3-比特币的扩展性"><a href="#3-比特币的扩展性" class="headerlink" title="3.比特币的扩展性"></a><strong>3.比特币的扩展性</strong></h3><ul>
+<li>由于比特币的区块数据存储采用了层次化的结构（区块头和默克尔树），它具有较高的扩展性。随着比特币网络的增长，传统的全节点会因为存储需求的增加而变得不适合于资源有限的设备。</li>
+<li>SPV协议为这种情况提供了解决方案，使得节点能够在不需要完整数据的情况下，仍然能够安全地验证交易，避免了存储负担。</li>
+</ul>
+<h2 id="6-以太坊概述"><a href="#6-以太坊概述" class="headerlink" title="6. 以太坊概述"></a>6. 以太坊概述</h2><p><strong>以太坊的核心是其智能合约和去中心化应用生态系统</strong>。白皮书定义以太坊为“下一代智能合约和去中心化应用平台”，提供了一种通用的区块链架构，允许开发者部署任意逻辑的智能合约。</p>
+<h3 id="1-账户模型"><a href="#1-账户模型" class="headerlink" title="1.账户模型"></a>1.账户模型</h3><p>在以太坊中，状态由称为“帐户”的对象组成，而每个帐户都有一个 20 字节的地址，状态转换是指帐户之间价值和信息的直接转移。以太坊采用 <strong>账户（Account）</strong> 作为其基本单位，分为两种：</p>
+<ul>
+<li><strong>外部账户（EOA，Externally Owned Account）</strong>: 由私钥控制，可以发送交易。</li>
+<li><strong>合约账户（Contract Account）</strong>: 由智能合约代码控制，仅在接收到交易时执行。</li>
+</ul>
+<p>账户存储在全局状态中，每个账户都包含：</p>
+<ul>
+<li><strong>Nonce</strong>：用于防止重放攻击。</li>
+<li><strong>余额</strong>（以太币，ETH 计价）。</li>
+<li><strong>合约代码（如果有的话）</strong>。</li>
+<li><strong>存储（Storage）</strong>：智能合约的存储空间。</li>
+</ul>
+<h3 id="3-交易与消息"><a href="#3-交易与消息" class="headerlink" title="3.交易与消息"></a>3.交易与消息</h3><p><strong>交易：</strong>在以太坊中，术语“交易”用来指代已签名的数据包，数据包存储着将要从外部帐户发送的消息。 交易包含：</p>
+<ul>
+<li>消息接收者</li>
+<li>用于识别发送者身份的签名</li>
+<li>从发送者转账到接收者的以太币金额</li>
+<li>一个可选数据字段</li>
+<li><code>STARTGAS</code> 值，表示允许交易运行的最大计算步骤数</li>
+<li><code>GASPRICE</code> 值，表示发送者每个计算步骤支付的费用</li>
+</ul>
+<p>此外，以太坊的“消息”类似于交易，但不会被直接存储在区块链上，而是用于智能合约之间的通信。</p>
+<p><strong>消息：</strong>合约能够向其他合约发送“消息”。 消息是从未序列化的虚拟对象，只存在于以太坊执行环境中。 消息包含：</p>
+<ul>
+<li>消息发送者（隐含的）</li>
+<li>消息接收者</li>
+<li>随消息一起转账的以太币金额</li>
+<li>一个可选数据字段</li>
+<li><code>STARTGAS</code> 值</li>
+</ul>
+<p>本质上消息类似于交易，只是消息是由合约而非外部参与者产生的。 当前正在运行代码的合约执行 <code>CALL</code> 操作码时会产生一条消息，该操作码就是用于产生并执行消息。 像交易一样，信息导致接收者帐户运行其代码。 因此，合约之间可以建立关系，方式完全与外部参与者之间建立关系相同。</p>
+<h3 id="3-Gas-机制"><a href="#3-Gas-机制" class="headerlink" title="3.Gas 机制"></a>3.Gas 机制</h3><p>以太坊的 Gas 机制用于衡量计算资源的消耗，防止恶意用户滥用网络资源。</p>
+<ul>
+<li>每个操作（例如存储数据、计算哈希）都需要消耗一定的 Gas。</li>
+<li>交易发起者必须提供足够的 Gas 费用。</li>
+<li>矿工会优先处理 Gas 费用较高的交易。</li>
+<li>未使用的 Gas 将退还给交易发起者。</li>
+</ul>
+<p>Gas 费用计算公式：</p>
+<pre><code>交易费用 = Gas 使用量 × Gas 价格</code></pre><h2 id="7-以太坊架构"><a href="#7-以太坊架构" class="headerlink" title="7. 以太坊架构"></a>7. 以太坊架构</h2><h3 id="1-以太坊状态转换函数"><a href="#1-以太坊状态转换函数" class="headerlink" title="1.以太坊状态转换函数"></a>1.以太坊状态转换函数</h3><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305144805699.png" alt="以太坊状态转换"></p>
+<p>以太坊状态转换函数 <code>APPLY(S,TX) -&gt; S'</code> 可如下定义：</p>
+<ol>
+<li><p>检查交易格式是否正确（即具有正确数量的值）、签名是否有效以及 Nonce 值是否与发送者帐户中的 Nonce 值匹配。 若否，则返回错误。</p>
+</li>
+<li><p>通过 <code>STARTGAS * GASPRICE</code> 计算出交易费，并从签名中确定发送地址。 从发送者的帐户余额中减去费用，并增加发送者的 nonce 值。 如果帐户余额不足，则返回错误。</p>
+</li>
+<li><p>初始化 <code>GAS = STARTGAS</code>，并根据交易中的字节数量为每个字节扣除相应数量的燃料。</p>
+</li>
+<li><p>将交易数值从发送者帐户转移至接收帐户。 如果接收帐户尚不存在，则创建此帐户。 如果接收帐户是合约，运行该合约的代码，直到代码运行结束或燃料耗尽。</p>
+</li>
+<li><p>如果由于发送者资金不足或者代码运行耗尽了燃料，而导致转账失败，则回滚除支付费用之外的所有状态变化，并将费用支付给矿工帐户。</p>
+</li>
+<li><p>否则，将所有剩余燃料的费用退还发送者，并把为所消耗燃料而支付的费用发送给矿工。</p>
+<p>例如，假设合约的代码如下：</p>
+<pre class="line-numbers language-py"><code class="language-py">if !self.storage[calldataload(0)]:
+  self.storage[calldataload(0)] = calldataload(32)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>注意，合约代码实际上是用低级以太坊虚拟机代码编写的；为了清晰起见，此示例是用我们的一种高级语言 Serpent 编写的，它可以编译为以太坊虚拟机代码。 假设合约的存储一开始是空的，发送了一个价值为 10 个以太币的交易，消耗 2000 份燃料，燃料价格为 0.001 个以太币，并且数据包含 64 个字节，字节 0-31 代表数字 <code>2</code>，字节 32-63 代表字符串 <code>CHARLIE</code>。 在这种情况下，状态转换函数的执行过程如下：</p>
+<ol>
+<li>检查交易是否有效、格式是否正确。</li>
+<li>检查交易发送者是否至少有 2000 * 0.001 = 2 个以太币。 若有，则从发送者帐户中扣除 2 个以太币。</li>
+<li>初始化燃料 = 2000 份，假设交易长度为 170 个字节，每字节费用 5 份燃料，减去 850 份燃料，剩下 1150 份燃料。</li>
+<li>从发送者帐户再减去 10 个以太币并增加到合约帐户。</li>
+<li>运行代码。 在本例中，运行比较简单：代码检查是否使用合约的索引 <code>2</code> 处的存储，若未使用，则通知；若使用，代码将索引 <code>2</code> 处的存储设置为值 <code>CHARLIE</code>。 假设该运行花费了 187 份燃料，所以余下的燃料数量是 1150 - 187 = 963 份燃料。</li>
+<li>向发送者帐户增加 963 * 0.001 = 0.963 个以太币，同时返回产生的状态。</li>
+</ol>
+<p>如果交易的接收一端没有合约，那么总交易费就等于提供的 <code>GASPRICE</code> 乘以交易的字节长度，并且和随交易发送的数据无关。</p>
+<p>注意，消息在回滚方面与交易相同：如果消息执行耗尽燃料，那么该消息的执行以及该执行触发的所有其他执行都会回滚，但父执行不需要回滚。 这意味着合约调用另一份合约是“安全的”，就好像 A 使用 G 份燃料调用 B，那么可以保证 A 的执行最多损耗 G 份燃料。 最后请注意，有一个创建合约的操作码 <code>CREATE</code>；它的执行机制通常类似于 <code>CALL</code>，不同之处在于执行的输出决定了新创建合约的代码。</p>
+</li>
+</ol>
+<h3 id="2-以太坊虚拟机代码"><a href="#2-以太坊虚拟机代码" class="headerlink" title="2.以太坊虚拟机代码"></a>2.以太坊虚拟机代码</h3><p>以太坊合约中的代码用一种基于堆栈的低级字节码语言编写，被称为“以太坊虚拟机代码”或“EVM 代码”。 该代码由一系列字节组成，每个字节代表一种操作。 通常，代码执行是一个无限循环，即重复执行当前程序计数器（从零开始）处的操作，然后将程序计数器增加一，直到代码执行完毕或出现错误，或者检测到 <code>STOP</code> 或 <code>RETURN</code> 指令。 操作可以访问三种数据存储空间：</p>
+<ul>
+<li><strong>堆栈</strong>，一种后进先出容器，值可以在其中入栈和出栈</li>
+<li><strong>内存</strong>，一种可无限扩展的字节数组</li>
+<li>合约的长期<strong>存储</strong>，一个键/值存储。 与堆栈和内存会在计算结束后重置不同，存储将长期持续存在。</li>
+</ul>
+<p>当以太坊虚拟机运行时，其完整计算状态可以由元组 <code>(block_state, transaction, message, code, memory, stack, pc, gas)</code> 来定义，其中 <code>block_state</code> 是包含所有帐户的全局状态并包括余额和存储。 在每一轮执行开始时，可以通过调用 <code>code</code> 的第 <code>pc</code> 个字节（或者如果 <code>pc &gt;= len(code)</code>，则调用 0）来找到当前指令，并且每条指令在元组影响方式方面都有自己的定义。 例如，<code>ADD</code> 将两个项目出栈并将它们的和入栈，将 <code>gas</code> 减少 1 并将 <code>pc</code> 增加 1，<code>SSTORE</code> 将顶部的两个项目出栈并将第二个项目插入到合约存储中第一个项目指定的索引处。 尽管有很多通过 JIT 编译来优化以太坊虚拟机执行的方法，但只需几百行代码就可以完成以太坊的基本实现。</p>
+<h3 id="3-以太坊虚拟机（EVM）"><a href="#3-以太坊虚拟机（EVM）" class="headerlink" title="3. 以太坊虚拟机（EVM）"></a>3. 以太坊虚拟机（EVM）</h3><p>以太坊虚拟机（Ethereum Virtual Machine，EVM）是以太坊网络中负责执行智能合约的计算环境。每个以太坊节点都运行一个 EVM 来验证和执行智能合约，保证交易的正确性和网络的安全性。EVM 的设计支持图灵完备的计算，这使得以太坊能够执行几乎任何类型的智能合约。</p>
+<p><strong>1. EVM 架构特点</strong></p>
+<ul>
+<li><strong>图灵完备性</strong>：EVM 能够执行任何计算任务，前提是拥有足够的资源（如 gas）。图灵完备性意味着开发者可以用 EVM 编写复杂的应用逻辑，包括条件判断、循环和各种数据结构。</li>
+<li><strong>沙盒环境</strong>：EVM 在独立的执行环境中运行，每个智能合约的执行都与其他合约隔离。这种设计防止了合约直接访问外部系统和数据，确保合约的执行不受到外部因素的干扰，提高了安全性。</li>
+<li><strong>栈式架构</strong>：EVM 采用基于栈的执行模型，所有操作都通过栈进行，操作数从栈中出栈并处理，结果再入栈。每个操作最多涉及 1024 层栈深度，这决定了合约执行的限制和成本。</li>
+</ul>
+<p><strong>2. EVM 的状态和操作</strong></p>
+<p>EVM 执行合约时，其完整的计算状态由以下元组定义：</p>
+<pre><code>(block_state, transaction, message, code, memory, stack, pc, gas)</code></pre><ul>
+<li><code>block_state</code>：包含所有账户的全局状态，包括余额和存储。</li>
+<li><code>transaction</code>：当前交易的详细信息。</li>
+<li><code>message</code>：合约调用中的消息内容。</li>
+<li><code>code</code>：当前执行的合约字节码。</li>
+<li><code>memory</code>：合约运行时使用的临时内存，类似于计算机的 RAM。</li>
+<li><code>stack</code>：用于存储操作数和结果的栈结构。</li>
+<li><code>pc</code>：程序计数器，指示当前正在执行的代码位置。</li>
+<li><code>gas</code>：剩余的燃料，限制每个操作的计算资源消耗。</li>
+</ul>
+<p><strong>3. EVM 执行过程</strong></p>
+<p>EVM 的执行过程通过一个无限循环实现。在每一轮执行时，EVM 根据程序计数器（<code>pc</code>）指向的字节码执行相应的操作，并根据操作的结果更新栈、内存和存储。每个操作都消耗一定的 gas，gas 是执行智能合约所需的计算资源单位。</p>
+<ul>
+<li><strong>操作栈（stack）</strong>：操作数从栈中出栈，计算结果再入栈。EVM 的操作通过栈实现计算，并对栈进行管理。</li>
+<li><strong>内存（memory）</strong>：内存用于存储临时数据，在每次合约执行结束后会被清空。内存的大小可以动态扩展，但对 gas 的消耗是基于扩展大小的。</li>
+<li><strong>存储（storage）</strong>：EVM 中的存储是永久的，保存合约的状态数据。每个合约都有自己的存储，可以通过键值对方式进行读写。</li>
+</ul>
+<p><strong>4. EVM 操作指令</strong></p>
+<p>EVM 包含多种操作指令，常见的包括：</p>
+<ul>
+<li><code>ADD</code>：从栈中取出两个数并相加，结果重新入栈。</li>
+<li><code>SSTORE</code>：将栈顶的两个项出栈，将第二项存入合约存储中指定的地址。</li>
+<li><code>CALL</code>：调用其他合约或外部函数，执行并返回结果。</li>
+<li><code>RETURN</code>：返回数据并终止合约执行。</li>
+</ul>
+<p>每个操作指令的执行都会消耗一定的 gas，因此 gas 是以太坊网络中执行智能合约的成本衡量单位。为了防止无穷循环或过度消耗资源，EVM 为每个操作设定了燃料消耗限制。</p>
+<p><strong>5. EVM 的优化与挑战</strong></p>
+<p>EVM 由于其图灵完备性和灵活性，能够支持多种复杂的智能合约，但它的执行速度相对较慢，尤其在合约执行时消耗大量<code>gas</code>的情况下。此外，EVM 的资源消耗问题也是开发者需要考虑的重要因素，如何在保证安全的同时优化合约代码、减少 gas 消耗，是开发者在编写智能合约时的关键挑战之一。</p>
+<p>通过引入不同的优化技术，如 <code>JIT（即时编译）</code>和其他虚拟机优化，EVM 的执行效率有所提升，但其核心设计理念和执行模型依然是基于计算资源消耗来保证安全与去中心化的。</p>
+<h3 id="4-以太坊区块链"><a href="#4-以太坊区块链" class="headerlink" title="4.以太坊区块链"></a>4.以太坊区块链</h3><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305150630125.png" alt="以太坊区块链"></p>
+<p>以太坊区块链与比特币区块链在架构上有显著差异。与比特币不同，<strong>以太坊的区块不仅包含交易列表，还包含最新的状态副本</strong>。此外，区块中还存储了区块编号、难度等值。</p>
+<p><strong>以太坊的基本区块验证流程：</strong></p>
+<ol>
+<li><strong>验证前区块有效性：</strong> 检查前一个区块是否存在且有效。</li>
+<li><strong>时间戳检查：</strong> 检查当前区块的时间戳是否大于前区块，并且不超过15分钟。</li>
+<li><strong>难度与交易验证：</strong> 确认区块中的难度、交易根、叔根和燃料限制等是否有效。</li>
+<li><strong>工作量证明验证：</strong> 检查区块的工作量证明（PoW）是否有效。</li>
+<li>状态转换：<ul>
+<li>初始状态为前一区块的末尾状态。</li>
+<li>对区块中的每一笔交易进行应用状态转换，直到达到<code>GASLIMIT</code>限制。</li>
+</ul>
+</li>
+<li><strong>最终状态验证：</strong> 计算最终状态的默克尔树根并与区块头中的状态根进行比较。如果匹配，则该区块有效。</li>
+</ol>
+<p><strong>帕特里夏树与效率优化</strong></p>
+<p>虽然以太坊的区块验证看似复杂，需要存储每个区块的全部状态，但它使用了<strong>帕特里夏树</strong>（一种优化的默克尔树）来存储状态。这种结构在每次新区块添加时只需修改树的一小部分，从而节省了大量存储空间。相比比特币，这种策略能够节省5-20倍的空间。<strong>智能合约执行过程</strong>也是状态转换的一部分，由所有节点执行并验证，以确保网络一致性。</p>
+<p>综上，尽管以太坊的区块链验证和挖矿机制看似复杂，但通过优化存储结构和未来向PoS转型，它在性能、效率和安全性上都有望提升，并且节省了大量存储空间。</p>
+<h3 id="5-以太坊的挖矿机制"><a href="#5-以太坊的挖矿机制" class="headerlink" title="5.以太坊的挖矿机制"></a>5.以太坊的挖矿机制</h3><p>与比特币的<strong>PoW（工作量证明）</strong>不同，虽然以太坊的共识机制在过去也使用了工作量证明（PoW），但以太坊计划在未来转向<strong>PoS（权益证明）</strong>，即通过持有以太币（ETH）来参与区块验证和生成。以下是以太坊当前的挖矿机制：</p>
+<ol>
+<li><strong>工作量证明（PoW）</strong>：矿工通过解决复杂的数学问题（如SHA256哈希计算）来竞争生成新区块。挖矿过程是基于哈希计算，矿工不断调整<code>nonce</code>值，直到找到符合目标值的哈希值。这一过程消耗大量计算资源和电力，矿工会因挖到新区块而获得以太币奖励。</li>
+<li><strong>区块奖励与交易费用</strong>：<ul>
+<li>矿工通过生成新区块获得区块奖励，并且交易中多余的部分（差额）作为交易费支付给矿工。</li>
+<li>以太坊的奖励机制与比特币类似，矿工获得新区块的奖励以及所有在该区块中的交易费。</li>
+</ul>
+</li>
+<li><strong>矿工激励与攻击防御</strong>：<ul>
+<li><strong>矿工激励：</strong> 矿工通过验证交易、生成新区块以及将交易包含在区块中，从而获得以太币奖励。这为网络的维护提供了动力。</li>
+<li><strong>防御机制：</strong> 在<strong>51%攻击</strong>的场景下，如果某一矿工或矿池控制超过50%的算力，他们可能会伪造交易或者撤回已经确认的交易。不过，<strong>以太坊的PoS转型计划</strong>预期将显著增强网络的安全性和去中心化程度。</li>
+</ul>
+</li>
+</ol>
+<h2 id="8-以太坊的应用场景"><a href="#8-以太坊的应用场景" class="headerlink" title="8. 以太坊的应用场景"></a>8. 以太坊的应用场景</h2><p>主要应用可分为以下几类：</p>
+<ol>
+<li><strong>金融应用</strong>：包括子货币、金融衍生品、对冲合约、储蓄钱包、遗嘱等，通过智能合约提供更加有效的资金管理方式。</li>
+<li><strong>半金融应用</strong>：虽然涉及资金，但功能也涵盖非金融领域。例如，针对解决计算难题的自动执行赏金。</li>
+<li><strong>去中心化治理</strong>：一些应用不涉及金融事务，例如在线投票和去中心化治理，这有助于实现更加去中心化的决策和管理。</li>
+</ol>
+<h3 id="代币系统"><a href="#代币系统" class="headerlink" title="代币系统"></a>代币系统</h3><p>区块链上的代币系统非常灵活，可以代表从资产到激励积分的各种不同类型的经济单位。在以太坊中，通过智能合约来实现代币系统，交易可以通过定义规则来控制，简单的代码可以使代币在不同账户之间流动。</p>
+<h3 id="金融衍生品和价值稳定的货币"><a href="#金融衍生品和价值稳定的货币" class="headerlink" title="金融衍生品和价值稳定的货币"></a>金融衍生品和价值稳定的货币</h3><p>金融衍生品如对冲合约可以通过智能合约来实现，依赖于外部数据源来获取资产的价格，从而计算出风险并执行支付。这为解决加密货币的波动性提供了可行的方式。</p>
+<h3 id="去中心化身份和信誉系统"><a href="#去中心化身份和信誉系统" class="headerlink" title="去中心化身份和信誉系统"></a>去中心化身份和信誉系统</h3><p>通过区块链技术实现身份验证和信誉管理。例如，通过简单的合约注册和验证域名或电子邮件等身份信息，增加系统的去中心化和防篡改特性。</p>
+<h3 id="去中心化文件存储"><a href="#去中心化文件存储" class="headerlink" title="去中心化文件存储"></a>去中心化文件存储</h3><p>基于以太坊的智能合约，可以实现去中心化的文件存储系统。用户将数据拆分并加密，然后利用区块链技术分散存储在多个节点上，降低成本同时确保数据安全。</p>
+<h3 id="去中心化自治组织（DAO）"><a href="#去中心化自治组织（DAO）" class="headerlink" title="去中心化自治组织（DAO）"></a>去中心化自治组织（DAO）</h3><p>去中心化自治组织（DAO）利用智能合约和投票机制来进行决策。成员通过投票来决定资金的分配和组织的运营规则，避免了单一实体的控制。</p>
+<h3 id="更多应用"><a href="#更多应用" class="headerlink" title="更多应用"></a>更多应用</h3><ul>
+<li><strong>储蓄钱包</strong>：可以实现资金的存取限制，如每天只能提取1%的资金，提供安全保障。</li>
+<li><strong>作物保险</strong>：基于天气数据的金融衍生品，为农民提供自然灾害保险。</li>
+<li><strong>去中心化数据馈送</strong>：通过多方数据输入形成一个去中心化的数据源，可以用于预测市场等应用。</li>
+<li><strong>智能多重签名托管</strong>：通过多重签名技术，提供灵活的资金控制方式，避免单方控制资金。</li>
+<li><strong>云计算市场</strong>：利用以太坊虚拟机技术建立一个去中心化的计算平台，支持用户通过参与计算赚取报酬。</li>
+<li><strong>点对点赌博和预测市场</strong>：通过智能合约和预言机技术实现去中心化的赌博和预测市场，降低作弊和费用。</li>
+</ul>
+<h2 id="9-改进版-GHOST-协议的实现"><a href="#9-改进版-GHOST-协议的实现" class="headerlink" title="9.改进版 GHOST 协议的实现"></a>9.改进版 GHOST 协议的实现</h2><p>“贪婪最重可观察子树”(GHOST) 协议是由 Yonatan Sompolinsky 和 Aviv Zohar 在 <a href="https://eprint.iacr.org/2013/881.pdf">2013 年 12 月(opens in a new tab)</a>首次提出的一项创新。 提出 GHOST 的动机是，具有快速确认时间的区块链目前由于过时率高而安全性降低 — 因为区块需要一定的时间才能通过网络传播，</p>
+<p>如果矿工 A 开采了一个区块，然后矿工 B 碰巧在矿工 A 的区块传播到 B 之前开采了另一个区块，那么矿工 B 的区块最终会被作废，不会增加网络安全。 此外，还有一个中心化问题：如果矿工 A 是一个拥有 30% 算力的矿池，而 B 拥有 10% 算力，那么 A 将面临 70% 的时间生产陈腐区块的风险（因为在其他 30% 的时间 A 产生了最后一个区块，所以会立即获得挖矿数据），而 B 将面临 90% 的时间生产陈腐区块的风险。 </p>
+<p>因此，如果区块间隔短到足以使过时率较高，则 A 将仅仅凭借其规模而显着提高效率。 结合这两种影响，快速产生区块的区块链很可能造就一个拥有足够高比例网络算力的矿池，从而对挖矿过程拥有事实上的控制。</p>
+<p>正如 Sompolinsky 和 Zohar 所描述的，GHOST 通过在计算哪条链“最长”时包含陈腐区块来解决第一个问题 - 网络安全降低；</p>
+<p>也就是说，在计算哪个区块具有最大的总工作量证明支持它时，不仅区块的父块和更远的祖先，而且该区块祖先（在以太坊行话中称为“叔块”）的陈腐子代也都被添加到计算中。 </p>
+<p>为了解决第二个问题 - 中心化偏差，我们跳出了 Sompolinsky 和 Zohar 描述的协议范畴，并且还为陈腐区块提供区块奖励：陈腐区块获得其基础奖励的 87.5%，而包含陈腐区块的侄块获得剩余的 12.5%。 不过，交易费不奖励给叔块。</p>
+<p>以太坊实现了一个简化版的 GHOST 协议，它仅仅深入七个层级。 具体而言，它的定义如下：</p>
+<ul>
+<li>一个区块必须指定一个父块，并且必须指定零个或多个叔块</li>
+<li>包含在区块 B 中的叔块必须具有以下属性：<ul>
+<li>它必须是区块 B 的第 k 代祖先的直系子代，其中 <code>2 &lt;= k &lt;= 7</code>。</li>
+<li>它不能是 B 的祖先</li>
+<li>叔块必须是有效的区块头，但不需要是之前验证过的甚至是有效的区块</li>
+<li>叔块必须不同于前面区块中包含的所有叔块，并且不同于同一区块中包含的所有其他叔块（非双重包含）</li>
+</ul>
+</li>
+<li>对于区块 B 中的每个叔块 U，区块 B 的矿工获得额外 3.125% 的铸币奖励，而叔块 U 的矿工获得 93.75% 的标准铸币奖励。</li>
+</ul>
+<p>这种限制版的 GHOST 协议，最多只能包含 7 代叔块，采用它有两个原因。 首先，无限制 GHOST 协议让计算给定区块的哪些叔块有效时过于复杂。 其次，无限制 GHOST 协议采用了以太坊中使用的补偿，取消了促使矿工在主链而不是公共攻击者的链上挖矿的激励措施。</p>
+<h2 id="10-费用"><a href="#10-费用" class="headerlink" title="10.费用"></a>10.费用</h2><p>由于发布到区块链中的每笔交易都会给网络带来下载和验证成本，因此需要一些监管机制（通常涉及交易费）以防滥用。 </p>
+<p>比特币中使用的默认方法是收取完全自愿性质的费用，依靠矿工充当守门人并设置动态最低费用。 这种方法在比特币社区中非常受欢迎，特别是因为它是“基于市场的”，允许由矿工和交易发送者之间的供需决定价格。 </p>
+<p>然而，这种思路的问题在于：交易处理并不符合市场规律。</p>
+<p>尽管将交易处理解释为矿工向发送者提供的服务直观上很有吸引力，但实际上矿工收录的每笔交易都需要由网络中的每个节点处理，因此绝大部分交易处理成本由第三方承担，而不是由决定是否收录交易的矿工承担。 因此，公地悲剧的问题很可能发生。</p>
+<p>然而结果却是，基于市场机制中的这个缺陷，在给出一个不准确的特定简化假设时，会神奇地自我抵消。 论证如下。 假设：</p>
+<ol>
+<li>交易导致 <code>k</code> 个操作，将提供奖励 <code>kR</code> 给收录它的任何矿工，其中 <code>R</code> 由发送者设置，<code>k</code> 和 <code>R</code> 事先（大体上）对矿工可见。</li>
+<li>操作在任何节点的处理成本均为 <code>C</code>（即所有节点效率相同）</li>
+<li>有 <code>N</code> 个挖矿节点，每个节点的处理能力完全相同（即为总处理能力的 <code>1/N</code>）</li>
+<li>没有不挖矿的完整节点。</li>
+</ol>
+<p>如果预期奖励大于成本，矿工将愿意处理交易。 因此，预期奖励是 <code>kR/N</code>，因为矿工有 <code>1/N</code> 几率处理下一个区块，而矿工的处理成本仅仅是 <code>kC</code>。 所以，当 <code>kR/N &gt; kC</code> 或者 <code>R &gt; NC</code> 时，矿工将会收录交易。 请注意，<code>R</code> 是发送者提供的每个操作的费用，因此是发送者从交易中获得的收益的下限，<code>NC</code> 是整个网络共同处理一个操作的成本。 因此，矿工有动力仅收录那些总实际收益超过成本的交易。</p>
+<p>然而，现实中这些假设会存在几个重要偏差：</p>
+<ol>
+<li>与其他验证节点相比，矿工处理交易的成本确实更高，因为额外的验证时间会延迟区块传播，因而增加区块变陈腐的几率。</li>
+<li>确实存在不挖矿的完整节点。</li>
+<li>实际中挖矿能力的分配最终可能极端不平等。</li>
+<li>热衷于破坏网络的投机者、政敌和疯子确实存在，他们可以巧妙地设置合约，使得他们的成本远低于其他验证节点支付的成本。</li>
+</ol>
+<p>(1) 让矿工趋向于收录更少的交易，并且 (2) 增加 <code>NC</code>；因此，这两种作用会相互抵消 一部分 。<a href="https://github.com/ethereum/wiki/issues/447#issuecomment-316972260">如何抵消？(opens in a new tab)</a> (3) 和 (4) 是主要问题，为了解决它们，我们简单地制订了一个 浮动上限：没有区块能够包含比 <code>BLK_LIMIT_FACTOR</code> 乘以长期指数移动平均值更多的操作数。 具体如下：</p>
+<pre class="line-numbers language-js"><code class="language-js">blk<span class="token punctuation">.</span>oplimit <span class="token operator">=</span> <span class="token function">floor</span><span class="token punctuation">(</span><span class="token punctuation">(</span>blk<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>oplimit <span class="token operator">*</span> <span class="token punctuation">(</span>EMAFACTOR <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+<span class="token function">floor</span><span class="token punctuation">(</span>parent<span class="token punctuation">.</span>opcount <span class="token operator">*</span> BLK_LIMIT_FACTOR<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> EMA_FACTOR<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>BLK_LIMIT_FACTOR</code> 和 <code>EMA_FACTOR</code> 是常量，暂时设置为 65536 和 1.5，但可能会在进一步分析后更改。</p>
+<p>还有一个因素会抑制比特币中的大区块大小：大区块将需要更长时间来传播，因此变陈腐的概率更高。 在以太坊中，燃料消耗量高的区块也可能需要更长的传播时间，因为它们的物理大小更大，而且因为它们需要更长时间来处理交易状态转换以进行验证。 这种延迟抑制因素在比特币中是一个重要的考虑因素，但在以太坊中由于 GHOST 协议而较少考虑；因此，依靠受监管的区块限制可提供更稳定的基线。</p>
+<h2 id="11-计算和图灵完备"><a href="#11-计算和图灵完备" class="headerlink" title="11.计算和图灵完备"></a>11.计算和图灵完备</h2><p>重要的一点是，以太坊虚拟机是图灵完备的；这意味着以太坊虚拟机代码可以对任何设想可执行的计算进行编码，包括无限循环。</p>
+<p> 以太坊虚拟机代码以两种方式实现循环。 </p>
+<ul>
+<li>首先，使用一个 <code>JUMP</code> 指令，允许程序跳回至代码中的前一个位置，还使用一个 <code>JUMPI</code> 指令进行条件跳转，允许诸如 <code>while x &lt; 27: x = x * 2</code> 之类的语句。 </li>
+<li>其次，合约可以调用其他合约，有可能通过递归进行循环。 </li>
+<li>这很自然地导致了一个问题：恶意用户能够通过迫使矿工和完整节点进入无限循环而不得不关机吗？ 这个问题的出现源于计算机科学中的一个难题，称为停机问题：在一般情况下，没有办法知道一个特定的程序是否会停止运行。</li>
+</ul>
+<p>正如状态转换部分所述，我们的解决方案要求交易设置一个允许执行的最大计算步骤数，如果超过执行时间，计算就会被回滚，但仍要支付费用。 消息的工作原理相同。 为显示我们解决方案背后的动机，请看下面的示例：</p>
+<ul>
+<li>攻击者创建一个运行无限循环的合约，然后向矿工发送激活该循环的交易。 矿工将处理该交易，运行无限循环直到燃料耗尽。 即使执行耗尽了燃料并中途停止，交易仍然有效，矿工仍然向攻击者索取每个计算步骤的费用。</li>
+<li>攻击者创建一个非常长的无限循环，目的是迫使矿工持续计算很长时间，以至于计算结束时，将有更多区块产生出来，这样矿工就不可能通过收录该交易来索取费用。 然而，攻击者需要为 <code>STARTGAS</code> 提交一个值，限制执行可以进行的计算步骤数，因此矿工将提前知道该计算将进行相当多的步骤数。</li>
+<li>攻击者看到一个合约，其中的代码形式为 <code>send(A,contract.storage[A]); contract.storage[A] = 0</code>，然后发送一个交易，但燃料只够运行第一步而不足以运行第二步（即进行提款但不让余额减少）。 合约作者无需担心防卫此类攻击，因为如果执行中途停止，更改会被回滚。</li>
+<li>金融合约使用九个专有数据馈送的中位数，以便最大限度降低风险。 攻击者接管其中一个数据馈送，该数据馈送设计为可通过去中心化自治组织部分描述的变量-地址-调用机制修改，并将其转换为运行无限循环，从而强制任何从金融合约索取资金的尝试都因燃料耗尽而中止。 然而，金融合约可以为消息设置一个燃料限制，防止这个问题发生。</li>
+</ul>
+<p><strong>图灵完备的替代方案</strong>是图灵不完备，其中 <code>JUMP</code> 和 <code>JUMPI</code> 不存在，并且在任何给定时间每个合约只允许有一个副本存在于调用堆栈内。 </p>
+<p>在这样的系统里，上述收费系统和关于我们解决方案效果的不确定性可能都是不需要的，因为执行一个合约的成本将被它的大小决定。 </p>
+<p>此外，图灵不完备甚至不是一个很大的限制；在我们内部构想的所有合约示例中，到目前为止只有一个需要循环，甚至那个循环也可以通过将一行代码重复 26 次来消除。</p>
+<p> 考虑到图灵完备带来的严重影响和有限的益处，为什么不简单地使用一种图灵不完备语言呢？ 然而，在现实中，图灵不完备还远远不能有效地解决问题。 要想知道原因，请思考以下合约：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">C0: call(C1); call(C1);
+C1: call(C2); call(C2);
+C2: call(C3); call(C3);
+...
+C49: call(C50); call(C50);
+C50: (run one step of a program and record the change in storage)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在，向 A 发送一笔交易。这样，在 51 笔交易中，我们有一个合约需要进行多达 250 个计算步骤。 </p>
+<p>矿工可以尝试提前检测这种逻辑炸弹，方法是为每个合约维护一个值，指定合约可以进行的最大计算步骤数，然后对递归调用其他合约的合约进行计算，但是这需要矿工禁止创建其他合约的合约（因为上面 26 个合约的创建和执行可以很容易地汇集到一个单独合约内）。 </p>
+<p>另一个问题是，消息的地址字段是一个变量，所以在一般情况下，甚至不可能提前知道某个合约将调用哪些其他合约。 于是，最终我们有了一个惊人的结论：图灵完备的管理惊人地容易，而在缺乏同样的控制时图灵不完备的管理惊人地困难，那为什么不直接让协议图灵完备呢？</p>
+<h2 id="12-货币和发行"><a href="#12-货币和发行" class="headerlink" title="12.货币和发行"></a>12.货币和发行</h2><p>以太坊网络包括自己的内置货币以太币，以太币扮演双重角色：提供一个主要流动资金层，实现各种数字资产之间的高效交易；更重要的是，提供一种支付交易费的机制。 为了方便起见并避免将来出现争议（参考比特币当前的 mBTC、uBTC、satoshi 争论），不同面值的名称将提前设置如下：</p>
+<ul>
+<li>1: wei</li>
+<li>1012：Szabo</li>
+<li>1015：finney</li>
+<li>1018：ETH</li>
+</ul>
+<p>这应该被视为“美元”和“美分”或“BTC”和“satoshi”概念的扩展版本。 在不久的将来，我们期望“ETH”用于普通交易，“finney”用于微型交易，“szabo”和“wei”可以在围绕费用和协议实现的技术讨论中使用；其余的面额可能会在以后变得有用，但目前不应包含在客户端中。</p>
+<p>发行模型如下：</p>
+<ul>
+<li>以太币将以货币销售的形式发行，价格为一个比特币可购买 1000-2000 个以太币，这种机制旨在为以太坊组织筹资和支付开发费用，且已被其他平台（如 Mastercoin 和 NXT）成功应用。 早期的购买者将从较大的折扣中获益。 发售所得的比特币将全部用来支付开发者的薪资和奖金，并用来投资以太坊和加密货币生态系统中的各种营利和非营利项目。</li>
+<li>0.099倍的发售总量（60102216 个以太币）将分配给以太坊组织，以补偿早期贡献者，并用以太币计价的方式支付创世块诞生前的开销。</li>
+<li>0.099 倍的发售总量将作为长期储备金保留。</li>
+<li>发售后，将永久性地每年为矿工分配 0.26 倍的发售总量。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>分组</th>
+<th>启动时</th>
+<th>一年后</th>
+<th>5 年后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>货币单位</td>
+<td>1.198X</td>
+<td>1.458X</td>
+<td>2.498X</td>
+</tr>
+<tr>
+<td>购买者</td>
+<td>83.5%</td>
+<td>68.6%</td>
+<td>40.0%</td>
+</tr>
+<tr>
+<td>已支用的预售准备金</td>
+<td>8.26%</td>
+<td>6.79%</td>
+<td>3.96%</td>
+</tr>
+<tr>
+<td>已使用的售后准备金</td>
+<td>8.26%</td>
+<td>6.79%</td>
+<td>3.96%</td>
+</tr>
+<tr>
+<td>矿工</td>
+<td>0%</td>
+<td>17.8%</td>
+<td>52.0%</td>
+</tr>
+</tbody></table>
+<h4 id="长期供应增长率（百分比）"><a href="#长期供应增长率（百分比）" class="headerlink" title="长期供应增长率（百分比）"></a>长期供应增长率（百分比）</h4><p><a href="https://ethereum.org/content/whitepaper/ethereum-inflation.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fwhitepaper%2Fethereum-inflation.png&amp;w=1920&amp;q=75" alt="以太坊通货膨胀"></a></p>
+<p><em>尽管采用了线性发行方式，然而和比特币一样，以太币的长期供应增长率也趋于零。</em></p>
+<p>上述模型提供了两个主要选项：(1) 捐赠池的存在和规模，以及 (2) 永久增长的线性供应的存在，而比特币采用了限制供应的方法。 捐赠池存在的理由如下。 如果捐赠池不存在，并且线性发行量减少到总发售量的 0.217 倍以实现相同的通货膨胀率，那么以太币总量将减少 16.5％，而每个单位的价值将增加 19.8％。 因此为了均衡，将会多发售 19.8% 的以太币，所以每个单位的价值将再次与以前完全一样。 之后，该组织还将拥有 1.198 倍的比特币，可以考虑将其分成两部分：原有的比特币和增加的 0.198 倍比特币。 因此，这种情况<em>完全等同于</em>捐赠，但有一个重要区别：该组织仅持有比特币，因而没有动力支持以太币单位的价值。</p>
+<p>永久性线性供应增长模型降低了有些人认为比特币财富过度集中的风险，并为生活在当前和未来的人提供了获取货币单位的公平机会，同时又保留了让人获取并持有以太币的强效激励措施，因为长期来看，用百分比表示的“供应增长率”将趋于零。 我们还推测，由于加密货币总是会因为不小心、死亡等原因而丢失，而加密货币的损失可以被模拟为每年总供应量的百分比，因此流通中的货币总供应量实际上最终会稳定在一个等于每年发行量除以损失率的数值上（例如，在损失率为 1% 时，一旦供应量达到 26 倍，那么每年将有 0.26 倍被开采，0.26 倍丢失，形成一个平衡点）。</p>
+<p>注意，未来以太坊可能过渡到权益证明模型以确保安全，将每年发行量降低到 0 至 0.05 倍之间。 如果以太坊组织失去资助或出于任何其他原因而消失，我们将开放一个“社区合约”：任何人都有权创建未来的以太坊候选版本，唯一的条件是太币数量必须最多为 <code>60102216 * (1.198 + 0.26 * n)</code> 个，其中 <code>n</code> 是创世块产生后的年数。 创建者可以自由地通过众筹或其他方式，分配权益证明驱动的供应增加与最大允许供应增加之间的部分或全部差额，以支付开发费用。 不符合社区合约的候选版本升级可能被合理地分叉为兼容版本。</p>
+<h2 id="13-挖矿中心化"><a href="#13-挖矿中心化" class="headerlink" title="13.挖矿中心化"></a>13.挖矿中心化</h2><p>比特币挖矿算法的原理是，让矿工一次又一次地对区块头稍作修改的版本进行数百万次 SHA256 计算，直到最终某个节点所产生版本的哈希小于目标值（目前大约为 2192）。 然而，这种挖矿算法容易遭受两种形式的中心化攻击。 第一种，挖矿生态系统已经被 ASIC（专用集成电路）所支配，这些计算机芯片专门为特定的比特币挖矿任务而设计，因此效率提高了数千倍。 这意味着比特币挖矿不再是一种高度去中心化和平等的事业，需要巨额资本才能有效参与。 第二种，大部分比特币矿工事实上不在本地完成区块验证；而是依赖中心化矿池提供区块头。 这个问题可以说更糟：截至撰写本文时，排名前三的矿池间接控制了比特币网络中大约 50% 的处理能力，尽管当矿池或联盟试图进行 51％ 攻击时，矿工可以转换到其他矿池这一事实缓解了该问题。</p>
+<p>以太坊现在的目的是使用一种挖掘算法，要求矿工从状态中获取随机数据，从区块链的最后 N 个区块中计算一些随机选择的交易，并返回结果的哈希值。 这有两个重要好处。 首先，以太坊合约可以包含任何类型的计算，因此以太坊 ASIC 本质上是用于一般计算的 ASIC，即更好的 CPU。 其次，挖矿需要访问整个区块链，这迫使矿工存储整个区块链并至少能够验证每笔交易。 这样就消除了对中心化矿池的需求；虽然矿池仍然可以起到平衡奖励分配随机性的合法作用，但没有中心化控制的点对点矿池同样也可以很好地发挥此功能。</p>
+<p>该模型未经测试，在将合约执行作为挖矿算法使用时，在避免某些巧妙优化的过程中可能会遇到困难。 然而，这种算法有一个值得注意的特点，任何人都可以通过将专用于抑制某些 ASIC 的大量合约引入区块链中，在“井里下毒”。 由于存在经济激励，ASIC 制造商会使用这种方法互相攻击。 因此，我们正在开发的解决方案最终是一种适应性人为经济解决方案，而不是纯粹的技术解决方案。</p>
+<h2 id="14-可扩展性"><a href="#14-可扩展性" class="headerlink" title="14.可扩展性"></a>14.可扩展性</h2><p>可扩展性问题是以太坊常被关注的一个方面。 像比特币一样，以太坊也有缺陷，即网络中的每个节点都需要处理每笔交易。 使用比特币，当前区块链的大小约为 15 GB，每小时增长约 1 MB。 如果比特币网络像 Visa 一样每秒处理 2000 笔交易，它将每三秒增长 1 MB（每小时 1 GB，每年 8 TB）。 以太坊可能也会经历相似甚至更糟的增长模式，因为以太坊区块链之上还有很多应用，不像比特币区块链上只有货币，但以太坊完整节点只需存储状态而不是完整的区块链历史，这一事实让情况得到了改善。</p>
+<p>大区块链的问题是中心化风险。 如果区块链大小增加到 100 TB，可能的情况是只有极少数大型企业能运行完整节点，而所有普通用户将使用轻 SPV 节点。 在这种情况下，可能会出现这样的担忧：完整节点合伙欺诈牟利（例如更改区块奖励，给他们自己比特币等）。 轻节点无法立即检测到这一点。 当然，可能至少存在一个诚实的完整节点，几个小时之后有关诈骗的信息会通过 Reddit 这样的渠道泄露，但这时已为时过晚：将由普通用户相互组织协作将指定区块列入黑名单，这种大规模的、很可能不切实际的协作在规模上无异于发动一次成功的 51% 攻击。 就比特币而言，目前这是一个问题，但<a href="https://web.archive.org/web/20140623061815/http://sourceforge.net/p/bitcoin/mailman/message/31709140/"> Peter Todd 建议(opens in a new tab)</a>对区块链进行修改，以缓解这一问题。</p>
+<p>在短期内，以太坊将使用两种其他策略来应对这个问题。 首先，因为基于区块链的挖矿算法，至少每个矿工都会被强制成为一个完整节点，为完整节点的数量创建了一个下限。 其次，更重要的是，处理完每笔交易后，我们会把一个中间状态树根收录到区块链中。 即使区块验证是中心化的，只要存在一个诚实的验证节点，就可以通过验证协议规避中心化问题。 如果矿工发布了无效区块，该区块必定是格式错误，或者是状态 <code>S[n]</code> 不正确。 由于已知 <code>S[0]</code> 是正确的，因此必然存在第一个不正确的状态 <code>S[i]</code>，但状态 <code>S[i-1]</code> 是正确的。 验证节点将提供索引 <code>i</code> 以及“无效证明”，该证明包括处理 <code>APPLY(S[i-1],TX[i]) -&gt; S[i]</code> 所需的帕特里夏树节点的子集。 节点将能够使用这些节点来运行该部分计算，并查看生成的 <code>S[i]</code> 与提供的 <code>S[i]</code> 是否不匹配。</p>
+<p>另一种更复杂的攻击涉及恶意矿工发布不完整的区块，因此甚至不存在完整信息，致使无法确定区块是否有效。 解决方案是质询-应答协议：验证节点对目标交易索引发起“质疑”，接受到质疑信息的轻节点会对相应的区块取消信任，直到另外的节点（无论是矿工还是另一个验证者）提供一个帕特里夏树节点子集作为有效性证明。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>以太坊协议最初被设想为加密货币的升级版本，通过高度通用的编程语言提供高级功能，如区块链托管、提款限制、金融合约、博彩市场等。 以太坊协议不会直接“支持”任何应用，但图灵完备编程语言的存在意味着，理论上可以为任何交易类型或应用创建任意合约。 然而，关于以太坊更有趣的方面是，以太坊协议远远超出了货币的范畴。 围绕去中心化文件存储、去中心化计算和去中心化预测市场的协议以及许多其他这类概念，有可能大大提高计算行业的效率，并首次通过添加经济层来大力促进其他点对点协议的发展。 最后，还有大量与金钱完全无关的应用程序。</p>
+<p>以太坊协议实现的任意状态转换函数的概念提供了一个具有独特潜力的平台；而不是一种专门针对数据存储、赌博或金融领域内一系列特定应用的封闭式单用途协议，以太坊在设计上是开放式的，我们相信在今后几年中它非常适合作为大量金融和非金融协议的基础层。</p>
+<hr>
+<p><strong>参考资料</strong><br><a href="https://ethereum.org/zh/whitepaper/">以太坊官网白皮书</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+                </div>
+                <div class="card">
+                    <a href="/2025/03/05/ethyi-tai-fang-bai-pi-shu/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="EHT以太坊白皮书">
+                            
+                            <span class="card-title">EHT以太坊白皮书</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 引言中本聪于2009年推出的比特币被视为货币和资金领域的革命性变革，它是首个数字资产，具有以下特点：无实物或内在价值支撑，无中心化发行或控制机构。然而，比特币实验的核心不仅是货币本身，更在于其底层的区块链技术，这一分布式共识工具正日益
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/04/rustgou-jian-webserver/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/16.png" class="responsive-img" alt="Rust构建webserver">
+                            
+                            <span class="card-title">Rust构建webserver</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                本章节展示了如何使用Rust标准库中的功能实现一个简单的Web服务器，包括监听客户端请求、读取请求数据并返回HTTP响应。我们将分析两种实现：单线程服务器和多线程服务器。代码分为两部分：单线程版本直接处理请求，多线程版本使用线程池提高并发性
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-04
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/Rust/" class="post-category">
+                                    Rust
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">258.9k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

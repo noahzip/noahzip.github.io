@@ -771,6 +771,13 @@
     
   </url>
   
+  <url>
+    <loc>{{ post.permalink | uriencode }}</loc>
+    
+    <lastmod>{{ post.updated | formatDate }}</lastmod>
+    
+  </url>
+  
 
   <url>
     <loc>{{ config.url | uriencode }}</loc>
@@ -781,6 +788,13 @@
 
   
 
+  
+  <url>
+    <loc>{{ cat.permalink | uriencode }}</loc>
+    <lastmod>{{ sNow | formatDate }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
   <url>
     <loc>{{ cat.permalink | uriencode }}</loc>
