@@ -366,14 +366,14 @@
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        6.8k
+                        10.1k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        24 分
+                        35 分
                     </div>
                 
 
@@ -731,6 +731,94 @@
 <p><a href="https://github.com/ethereum/consensus-specs/blob/dev/sync/optimistic.md">关于乐观同步的更多信息(opens in a new tab)</a></p>
 <h4 id="检查点同步"><a href="#检查点同步" class="headerlink" title="检查点同步"></a>检查点同步</h4><p>检查点同步也称为“弱主观性同步”，在同步信标节点时可提供卓越的用户体验。 它基于<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/weak-subjectivity/">弱主观性</a>假设，因而能够从最近的弱主观性检查点而不是从创世块同步信标链。 检查点同步可大幅加快初始同步速度，其信任假设与从创世块同步时类似。</p>
 <p>在实践中，这意味着你的节点会连接到远程服务，以下载最近的最终确定状态并从该点继续验证数据。 提供数据的第三方会受到信任，因此要谨慎选择。</p>
+<h2 id="节点架构"><a href="#节点架构" class="headerlink" title="节点架构"></a>节点架构</h2><p>当以太坊使用<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/">工作量证明</a>时，执行客户端足以运行以太坊全节点。 然而，在实施<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/">权益证明</a>以后，执行客户端需要与另一种名为<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#consensus-clients">“共识客户端”</a>的软件搭配使用。</p>
+<p>以下图表显示了两种以太坊客户端之间的关系。 这两种客户端与其各自的点对点（对等）网络连接。 分离对等网络是有必要的，因为执行客户端通过它们的对等网络广播交易，确保它们能够管理自己的本地交易池，同时共识客户端通过它们的对等网络广播区块，保证共识和链增长。</p>
+<p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/node-architecture/node-architecture-text-background.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Fnode-architecture%2Fnode-architecture-text-background.png&amp;w=1920&amp;q=75" alt="img"></a></p>
+<p>要使这种双客户端结构发挥作用，共识客户端必须能够将大量交易传递给执行客户端。 在本地执行交易是客户端验证交易未违反任何以太坊规则的方式，并确保提议的以太坊状态更新是正确的。 同样，当节点被选为区块生产者时，共识客户端必须能够从 Geth 请求各种交易，以便将它们添加到新的区块，并通过执行它们来更新全局状态。 本地远程过程调用连接使用<a href="https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md">引擎应用程序接口(opens in a new tab)</a>处理这种跨客户端通信。</p>
+<h2 id="执行客户端的作用是什么？"><a href="#执行客户端的作用是什么？" class="headerlink" title="执行客户端的作用是什么？"></a>执行客户端的作用是什么？</h2><p>执行客户端负责交易处理、交易广播、状态管理和支持以太坊虚拟机（<a href="https://ethereum.org/zh/developers/docs/evm/">以太坊虚拟机</a>）。 然而，它<strong>不</strong>负责区块构建、区块广播或处理共识逻辑。 这些都是共识客户端的责任。</p>
+<p>执行客户端会创建执行有效负载——交易列表、更新状态树和其他与执行相关的数据。 共识客户端在每个区块中添加执行有效负载。 执行客户端还要在新的区块中重新执行交易，以确保其有效性。 执行交易在执行客户端的嵌入式计算机中完成，这些计算机被称为<a href="https://ethereum.org/zh/developers/docs/evm/">以太坊虚拟机 (EVM)</a>。</p>
+<p>执行客户端还通过<a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/">远程过程调用方法</a>提供用户界面，让用户可以查询以太坊区块链、提交交易和部署智能合约。 远程过程调用通常由 <a href="https://docs.web3js.org/">Web3js(opens in a new tab)</a>、<a href="https://web3py.readthedocs.io/en/v5/">Web3py(opens in a new tab)</a> 这样的库处理，或者由浏览器钱包等用户界面处理。</p>
+<p>简而言之，执行客户端是：</p>
+<ul>
+<li>以太坊的用户网关</li>
+<li>托管以太坊虚拟机、以太坊状态和交易池的地方。</li>
+</ul>
+<h2 id="共识客户端的作用是什么？"><a href="#共识客户端的作用是什么？" class="headerlink" title="共识客户端的作用是什么？"></a>共识客户端的作用是什么？</h2><p>共识客户端处理使节点与以太坊网络保持同步的全部逻辑。 这包括从对等节点接收区块并运行分叉选择算法，从而确保节点始终遵循累积证明最多的链（由验证者有效余额加权计算而得）。 与执行客户端相似，共识客户端拥有自己的对等网络并通过该网络共享区块和认证。</p>
+<p>共识客户端不参与对区块的证明或提议——这是由验证者完成的，而验证者是共识客户端的一种可选附加组件。 没有验证者的共识客户端只会追踪链头，使节点保持同步。 因此，用户可以使用其执行客户端与以太坊进行交易，并确信它们在正确的链上。</p>
+<h2 id="验证者"><a href="#验证者" class="headerlink" title="验证者"></a>验证者</h2><p>节点运营商可以在存款合约中存入 32 个以太币来为其共识客户端添加一个验证者。 验证者客户端与共识客户端捆绑在一起，并且可随时添加到节点中。 验证者会处理认证和区块提议。 它们使节点能够累积奖励或因为惩罚而丢失以太币。 运行验证者软件还使节点有资格被选中来提议一个新区块。</p>
+<p><a href="https://ethereum.org/zh/staking/">关于质押的更多信息</a>。</p>
+<h2 id="节点组件比较"><a href="#节点组件比较" class="headerlink" title="节点组件比较"></a>节点组件比较</h2><table>
+<thead>
+<tr>
+<th>执行客户端</th>
+<th>共识客户端</th>
+<th>验证者</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>通过其对等网络广播交易</td>
+<td>通过其对等网络广播区块和认证</td>
+<td>提议区块</td>
+</tr>
+<tr>
+<td>执行/重新执行交易</td>
+<td>运行分叉选择算法</td>
+<td>累积奖励/惩罚</td>
+</tr>
+<tr>
+<td>验证传入的状态更改</td>
+<td>追踪链头</td>
+<td>认证</td>
+</tr>
+<tr>
+<td>管理状态和收据树</td>
+<td>管理信标状态（包含共识和执行信息）</td>
+<td>需要质押 32 个以太币</td>
+</tr>
+<tr>
+<td>创建执行有效负载</td>
+<td>跟踪 RanDAO 中累积的随机性</td>
+<td>可被罚没</td>
+</tr>
+<tr>
+<td>公开 JSON-RPC 应用程序接口以便与以太坊交互</td>
+<td>追踪合理化和最终确定</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>以太坊节点的行为是由其运行的客户端软件控制的。 有一些生产级的以太坊客户端，每个都是由不同的团队用不同的语言开发和维护。 这些客户端都是按照共同规范建立的，确保客户端相互之间无缝通信，具有相同的功能并提供一致的用户体验。 然而，目前各节点的客户端分布并不均匀，不足以发挥这种网络防御措施的全部潜力。 理想情况下，用户在各个客户端之间大致平均分布，以便在网络上最大程度地实现客户端多样性。</p>
+<h2 id="为什么会有多种客户端？"><a href="#为什么会有多种客户端？" class="headerlink" title="为什么会有多种客户端？"></a>为什么会有多种客户端？</h2><p>存在多种独立开发和维护的客户端，是因为客户端多样性使网络在面对攻击和漏洞时恢复能力更强。 多种客户端是以太坊独有的优势，而其他区块链依赖于单一客户端的无误性。 然而，仅仅拥有多种可用的客户端是不够的，这些客户端必须被社区采用，并且全部活跃节点必须相对均匀地分布在它们之间。</p>
+<h2 id="为什么客户端多样性很重要？"><a href="#为什么客户端多样性很重要？" class="headerlink" title="为什么客户端多样性很重要？"></a>为什么客户端多样性很重要？</h2><p>拥有许多独立开发和维护的客户端对于去中心化网络的健康至关重要。 让我们来探究其中的原因。</p>
+<h3 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h3><p>当代表少数以太坊节点时，一种客户端中的漏洞对网络的风险较小。 由于许多客户端的节点分布大致均匀，大多数客户端出现同一问题的可能性很小，因此网络更加稳健。</p>
+<h3 id="抵御攻击"><a href="#抵御攻击" class="headerlink" title="抵御攻击"></a>抵御攻击</h3><p>客户端多样性还提供了抵御攻击的能力。 例如，要<a href="https://twitter.com/vdWijden/status/1437712249926393858">欺骗特定客户端(opens in a new tab)</a>让其接受链的某条分支，这种攻击不太可能成功，因为不大可能以相同方式利用其他客户端，并且规范链未损坏。 客户端多样性程度低增加了主要客户端受到黑客攻击的风险。 已经证实，客户端多样性是抵御网络受到恶意攻击的重要防御手段，例如，由于攻击者能够欺骗主要客户端 (Geth) 对每个区块执行数万次慢速磁盘输入/输出操作，2016 年的上海拒绝服务攻击得以实施。 由于有其他客户端在线且没有同样的漏洞，因此以太坊能够抵抗那次攻击并继续运行，同时修复了 Geth 中的漏洞。</p>
+<h3 id="权益证明的最终确定性"><a href="#权益证明的最终确定性" class="headerlink" title="权益证明的最终确定性"></a>权益证明的最终确定性</h3><p>超过 33% 的以太坊节点的共识客户端中有一个漏洞，它可能会阻止共识层的最终确定，这意味着用户无法相信交易不会在某些时候被回滚或更改。 对于许多建立在以太坊之上的应用程序，尤其是去中心化金融，这将是一个很大的问题。</p>
+<p>更糟糕的是，当拥有三分之二多数节点的客户端出现严重漏洞，可能会导致链<a href="https://www.symphonious.net/2021/09/23/what-happens-if-beacon-chain-consensus-fails/">错误地分叉并最终确定(opens in a new tab)</a>，让大量验证者困陷在无效链上。 如果这些验证者想重新加入正确的链，他们将面临罚没或缓慢而昂贵的自愿退出和重新激活过程。 罚没的轻重随过错节点数量而异，三分之二的大多数将受到最严重的惩罚（32 个以太币）。</p>
+<p>尽管这些情况不太可能发生，但为了降低这类风险，以太坊生态系统可以使客户端均衡分布在活跃节点上。 理想情况下，任何共识客户端任何时候都不会达到总节点数的 33%。</p>
+<h3 id="共担责任"><a href="#共担责任" class="headerlink" title="共担责任"></a>共担责任</h3><p>采用主流客户端也需要人力成本。 这给小型开发团队带来了过多的压力和责任。 客户端多样性程度越低，维护主流客户端的开发者的责任负担就越大。 将这一责任分摊到多个团队，既有利于以太坊节点网络的健康，也有益于相关人员的健康。</p>
+<h2 id="客户端多样性现状"><a href="#客户端多样性现状" class="headerlink" title="客户端多样性现状"></a>客户端多样性现状</h2><p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/client-diversity/client-diversity.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Fclient-diversity%2Fclient-diversity.png&amp;w=1920&amp;q=75" alt="显示客户端多样性的饼状图"></a><em>图表数据来自 <a href="https://ethernodes.org/">ethernodes.org(opens in a new tab)</a> 和 <a href="https://clientdiversity.org/">clientdiversity.org(opens in a new tab)</a></em></p>
+<p>上面的两个饼图显示了执行层和共识层客户端多样性现状的快照（在 2022 年 1 月撰写本文时）。 在执行层，<a href="https://geth.ethereum.org/">Geth(opens in a new tab)</a> 占据绝对主导地位，<a href="https://openethereum.github.io/">Open Ethereum (opens in a new tab)</a> 以极大的差距位居第二，<a href="https://github.com/ledgerwatch/erigon">Erigon(opens in a new tab)</a> 和 <a href="https://nethermind.io/">Nethermind(opens in a new tab)</a> 分别占据第三和第四，其他客户端加起来占网络的比例不到 1%。 共识层最常用的客户端 <a href="https://prysmaticlabs.com/#projects">Prysm(opens in a new tab)</a> 不像 Geth 那样占据绝对主导地位，但仍占有网络的 60% 以上。 <a href="https://lighthouse.sigmaprime.io/">Lighthouse(opens in a new tab)</a> 和 <a href="https://consensys.net/knowledge-base/ethereum-2/teku/">Teku(opens in a new tab)</a> 分别占据约 20% 和约 14%，其他客户端很少使用。</p>
+<p>2022 年 1 月 23 日，从 <a href="https://ethernodes.org/">Ethernodes(opens in a new tab)</a> 获得执行层数据。 共识客户端的数据来自 <a href="https://github.com/sigp/blockprint">Michael Sproul(opens in a new tab)</a>。 共识客户端数据更难获取，因为共识层客户端并不总是具有可以用来识别它们的明确痕迹。 这些数据是使用分类算法生成的，该算法有时会混淆一些非主流客户端（点击<a href="https://twitter.com/sproulM_/status/1440512518242197516">此处(opens in a new tab)</a>了解更多详细信息）。 在上图中，这些含糊的分类使用了“/”符号进行处理（例如 Nimbus/Teku）。 尽管如此，很明显大部分网络都在运行 Prysm。 这些数据是一组固定区块的快照（在本例中为时隙 2048001 与 2164916 之间的信标区块），Prysm 的主导地位曾经一度更高，超过 68%。 尽管只是快照，但上图中的数值可以让你清晰地了解客户端多样性现状的全局。</p>
+<p>现在，可以在 <a href="https://clientdiversity.org/">clientdiversity.org(opens in a new tab)</a> 查阅最新的共识层客户端多样性数据。</p>
+<h2 id="执行层"><a href="#执行层" class="headerlink" title="执行层"></a>执行层</h2><p>迄今为止，围绕客户端多样性进行的对话主要集中在共识层。 然而，执行客户端 <a href="https://geth.ethereum.org/">Geth(opens in a new tab)</a> 目前约占所有节点的 85%。 这一百分比是有问题的，原因与共识客户端一样。 例如，Geth 中影响交易处理或造成执行负载的漏洞，可能导致共识客户端最终确定有问题或有漏洞的交易。 因此，如果执行客户端分布更均匀，以太坊会更健康。理想情况是所有客户端占据的网络都不超过 33%。</p>
+<h2 id="使用非主流客户端"><a href="#使用非主流客户端" class="headerlink" title="使用非主流客户端"></a>使用非主流客户端</h2><p>解决客户端多样性问题不仅需要个人用户选择非主流客户端，还需要矿池/验证者池以及主要去中心应用程序和交易所等机构改用客户端。 然而，所有用户都可以尽一份力量，纠正目前的失衡状况并且实现所有可用以太坊软件的使用正常化。 合并后，所有节点运营商都需要运行执行客户端和共识客户端。 选择下面建议的客户端组合将有助于提高客户端多样性。</p>
+<h3 id="执行客户端-1"><a href="#执行客户端-1" class="headerlink" title="执行客户端"></a>执行客户端</h3><p><a href="https://www.hyperledger.org/use/besu">Besu(opens in a new tab)</a></p>
+<p><a href="https://downloads.nethermind.io/">Nethermind(opens in a new tab)</a></p>
+<p><a href="https://github.com/ledgerwatch/erigon">Erigon(opens in a new tab)</a></p>
+<p><a href="https://geth.ethereum.org/">Go-Ethereum(opens in a new tab)</a></p>
+<h3 id="共识客户端-1"><a href="#共识客户端-1" class="headerlink" title="共识客户端"></a>共识客户端</h3><p><a href="https://nimbus.team/">Nimbus(opens in a new tab)</a></p>
+<p><a href="https://github.com/sigp/lighthouse">Lighthouse(opens in a new tab)</a></p>
+<p><a href="https://consensys.net/knowledge-base/ethereum-2/teku/">Teku(opens in a new tab)</a></p>
+<p><a href="https://github.com/ChainSafe/lodestar">Lodestar(opens in a new tab)</a></p>
+<p><a href="https://docs.prylabs.network/docs/getting-started">Prysm(opens in a new tab)</a></p>
+<p>技术用户可以为非主流客户端编写更多教程和相关文档，并鼓励他们运营节点的对等体从主流客户端迁离，帮助加快这一进程。 <a href="https://clientdiversity.org/">clientdiversity.org(opens in a new tab)</a> 提供了改用非主流共识客户端的指南。</p>
+<h2 id="客户端多样性仪表板"><a href="#客户端多样性仪表板" class="headerlink" title="客户端多样性仪表板"></a>客户端多样性仪表板</h2><p>一些仪表板提供了执行层和共识层客户端多样性实时统计数据。</p>
+<p><strong>共识层：</strong></p>
+<ul>
+<li><a href="https://www.rated.network/">Rated.network(opens in a new tab)</a></li>
+<li><a href="https://clientdiversity.org/">clientdiversity.org(opens in a new tab)</a> <strong>执行层：</strong></li>
+<li><a href="https://supermajority.info//">supermajority.info(opens in a new tab)</a></li>
+<li>[Ethernodes(opens in a new tab)](</li>
+</ul>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -798,31 +886,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article col s12 m6" data-aos="fade-up">
                 <div class="article-badge left-badge text-color">
-                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-                </div>
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2025/03/05/ethzhong-de-jie-dian-he-ke-hu-duan/">
+                    <a href="/2025/03/06/ethqi-dong-zi-ji-de-yi-tai-fang-jie-dian/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="ETH中的节点和客户端简介">
+                                <img src="/medias/featureimages/9.png" class="responsive-img" alt="ETH启动自己的以太坊节点">
                             
-                            <span class="card-title">ETH中的节点和客户端简介</span>
+                            <span class="card-title">ETH启动自己的以太坊节点</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                以太坊是一个由计算机组成的分布式网络，这些计算机运行可验证区块和交易数据的软件，称为节点。 该软件必须在你的计算机上运行，才能将其转化为以太坊节点。 一个节点由两个独立的软件（名为“客户端”）构成。
-什么是节点和客户端？“节点”是指任何以太
+                                运行你自己的节点为你提供各种好处，打开新的可能性，并为支持生态系统提供帮助。 这个页面将引导你启动自己的节点，并参与验证以太坊交易。
+注意，在合并之后，运行以太坊节点需要两种客户端，即执行层 (EL) 客户端和共识层 (CL) 客户端。 本
                             
                         </div>
                         <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                        </span>
                             <span class="publish-author">
                                 
                                     <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -835,7 +922,6 @@
                             </span>
                         </div>
                     </div>
-
                     
                 </div>
             </div>
@@ -1031,7 +1117,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">285.3k</span>&nbsp;字
+						class="white-color">383.6k</span>&nbsp;字
              
             
 

@@ -1,0 +1,1140 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中权益证明POS, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="GASPERasper 是友好的最终确定性工具 Gasper (Casper-FFG) 和 LMD-GHOST 分叉选择算法的组合。 它们组成了一种共识机制，使采用权益证明的以太坊保持安全。 Casper 是一种能将特定区块更新为“最终确定">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中权益证明POS | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中权益证明POS</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        25.5k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        87 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="GASPER"><a href="#GASPER" class="headerlink" title="GASPER"></a>GASPER</h2><p>asper 是友好的最终确定性工具 Gasper (Casper-FFG) 和 LMD-GHOST 分叉选择算法的组合。 它们组成了一种共识机制，使采用权益证明的以太坊保持安全。 Casper 是一种能将特定区块更新为“最终确定”状态的机制，使网络的新加入者确信他们正在同步规范链。 当区块链出现多个分叉时，分叉选择算法使用累计投票来确保节点可以轻松选择正确的分叉。</p>
+<p><strong>请注意</strong>，Casper-FFG 的初始定义已稍作更新，以纳入 Gasper。 撰写此页面时，我们考量的是更新后的版本。</p>
+<h3 id="GASPER-的作用"><a href="#GASPER-的作用" class="headerlink" title="GASPER 的作用"></a>GASPER 的作用</h3><p>Gasper 在权益证明区块链中具有最重要的地位——节点提供以太币作为安全保证金，但如果他们在提议或验证区块链时过于懒惰或不诚实，保证金就会被销毁。 Gasper 是一种定义验证者如何受到奖惩的机制，决定要接受和拒绝哪个区块，以及将区块建在哪个区块链分叉上。</p>
+<h3 id="什么是最终确定性？"><a href="#什么是最终确定性？" class="headerlink" title="什么是最终确定性？"></a>什么是最终确定性？</h3><p>“最终确定性”是某些区块的属性，意味着除非出现严重的共识失败，且攻击者至少销毁了总质押以太币的 1/3，否则这些区块将不能回滚。 最终确定的区块可以解读为区块链是确定无疑了的。 区块必须完成“两步走”升级程序才能最终确定下来。</p>
+<ol>
+<li>区块必须获得总质押以太币 2/3 的投票，才能纳入规范链。 此条件可将区块升级至“合理”状态。 合理的区块不大可能回滚，但满足某些条件时也可以回滚。</li>
+<li>当一个合理区块上有另一个区块被合理化，那前者就被升级为“最终确定”状态。 确定一个区块就是承诺将该区块纳入规范链。 除非攻击者销毁数百万以太币（几十亿美元），否则该区块不会回滚。</li>
+</ol>
+<p>并非每个时隙都会发生这种区块升级。 相反，只有时段边界的区块才能是“合理”和“最终确定”状态。 这些区块一般被称为“检查点”。 升级涉及成对的检查点。 两个连续的检查点之间必须存在”绝对多数链接🔗”（即：总质押以太币中有 2/3 投票认为检查点 B 是检查点 A 的正确衍生物），才能将存在时间更长的检查点升级为“最终确定”，而较新的区块则升级为“合理”。</p>
+<p>由于最终确定需要三分之二同意某个区块是规范的，因此除非能满足以下条件，否则攻击者不可能另外创建一条最终确定链：</p>
+<ol>
+<li>拥有或控制总质押以太币的 2/3。</li>
+<li>至少销毁总质押以太币的 1/3。</li>
+</ol>
+<p>之所以要满足第一个条件，是因为要最终确定一条链，需要质押以太币 2/3 的投票。 而第二个条件是因为，如果总质押的 2/3 对两个分叉表示支持，那么必然有 1/3 对两个分叉均进行了投票。 双重投票是会触发最大惩罚的罚没条件，总质押的 1/3 会被销毁。 截至 2022 年 5 月，此条件需要攻击者销毁价值约 100 亿美元的以太币。 Gasper 中用来合理化和最终确定区块的算法是<a href="https://arxiv.org/pdf/1710.09437.pdf">友好的最终确定性工具 Casper (Casper-FFG)(opens in a new tab)</a> 的微调版。</p>
+<h4 id="激励和罚没"><a href="#激励和罚没" class="headerlink" title="激励和罚没"></a>激励和罚没</h4><p>验证者将因诚实地提议和验证区块而获得奖励。 奖励将以发放以太币的形式提供，这些以太币将加入他们的质押额。 另一方面，缺席和调用时未能响应的验证者将会错过这些奖励，有时还会损失一小部分现有质押额。 然而，离线的处罚较小，在大多数情况下，仅仅是错失奖励的机会成本。 但是，有些验证者的操作很难无意为之，并且常为恶意行为，例如，为同一时隙提议多个区块、为同一时隙验证多个区块或者与以前的检查点投票背道而驰。 这些都是要接受更严厉惩罚的“可罚没”行为，罚没结果是验证者的部分质押额遭到销毁，以及验证者被移出验证者网络。 整个过程需要 36 天。 第一天，进行最高 1 个以太币的初次惩罚。 随后，被罚没验证者的以太币将在退出期一点点耗尽，但到第 18 天，他们会收到一个“相关性惩罚”，即当更多的验证者都在大致相同的时间受罚时，惩罚将更重。 最大的惩罚是全部质押。 这些奖励和惩罚为激励诚实的验证者和挫伤网络攻击而立。</p>
+<h4 id="怠惰惩罚"><a href="#怠惰惩罚" class="headerlink" title="怠惰惩罚"></a>怠惰惩罚</h4><p>除了安全性，Gasper 还提供“合理的活性”。 条件是只要有三分之二的质押以太币遵守协议地诚实投票，不论是否发生其他任何活动（比如攻击、延迟问题或罚没），区块链都将被最终确定。 换言之，要阻止区块链被最终确定，必须以某种方式破坏总质押以太币的 1/3。 在 Gasper 中，有另一条防线防止活性失败，即“怠惰惩罚”。 如果链未能在四个时段内最终确定，便会激活此机制。 对于未能积极证明主链的验证者，其质押货币将逐渐耗尽，直到主链重新获得总质押 2/3 的投票，以确保活性失败只是暂时的。</p>
+<h4 id="分叉选择"><a href="#分叉选择" class="headerlink" title="分叉选择"></a>分叉选择</h4><p>Casper-FFG 的原始定义包含一个分叉选择算法，该算法规定：<code>follow the chain containing the justified checkpoint that has the greatest height</code>，其中高度被定义为与创世区块之间的最大距离。 在 Gasper 中，原来的分叉选择规则被弃用，转而采用一种更复杂的算法，即 LMD-GHOST。 请务必了解，在正常情况下，分叉选择规则是不必要的 - 每个时隙都有一个区块提议者，并有诚实的验证者证明此区块。 只有在网络异步性较大或不诚实的区块提议者模棱两可的情况下，才需要分叉选择算法。 然而，当这些情况确实出现时，分叉选择算法是确保正确链的关键防御。</p>
+<p>LMD-GHOST 代表“最新消息驱动的最贪婪、最重的观测子树（Latest Message-Driven Greedy Heaviest Observed Sub-Tree）”。 该术语充满行话，用来定义一种算法：选择具有最大证明累积权重的分叉作为规范分叉（最贪婪、最重的子树）；如果从验证者那里收到多条消息，则只考虑最新的那个（最新消息驱动）。 在将最重的区块添加到规范链之前，每位验证者都会使用这个规则来评估每个区块。</p>
+<h2 id="弱主观性"><a href="#弱主观性" class="headerlink" title="弱主观性"></a>弱主观性</h2><p>区块链的主观性是指对社会信息的依赖，以就当前状态达成一致。 根据从网络上其他对等点收集到的信息，会有多个有效分叉供选择。 与主观性相对的是客观性，后者指只有一个可能有效的链，必须应用编码规则才能使所有节点达成一致。 还有第三种状态，称为弱主观性， 是指检索完社会信息的一些初始来源后，可以取得客观进展的区块链。</p>
+<h3 id="弱主观性解决了哪些问题？"><a href="#弱主观性解决了哪些问题？" class="headerlink" title="弱主观性解决了哪些问题？"></a>弱主观性解决了哪些问题？</h3><p>主观性是权益证明区块链所固有的，因为从多个分叉中选择正确的链是通过计算历史投票来完成的。 这使区块链暴露在多个攻击途径下，包括以下类型的长期攻击：很早就参与了区块链的节点维护一个替代分叉，并会在稍后因自己的利益释放此分叉。 另外，如果 33% 的验证者取出他们的质押物，但仍继续证明和生产区块，他们可能会生成一个与规范链相冲突的替代分叉。 新的节点或已经离线很长时间的节点可能不知道这些攻击验证者已经取出了他们的资金，所以攻击者可能会诱骗他们跟随不正确的链。 以太坊可以通过施加限制来解决这些攻击途径，因为这些限制可将机制的主观方面（也就是信任假设）降至最低。</p>
+<h3 id="弱主观性检查点"><a href="#弱主观性检查点" class="headerlink" title="弱主观性检查点"></a>弱主观性检查点</h3><p>在权益证明版以太坊中，弱主观性的实现要用到“弱主观性检查点”， 即网络上所有节点都同意加入规范链的状态根。 它们的作用与创世区块的”普遍事实”相同，只是它们不在区块链的创世块位置上。 分叉选择算法相信该检查点中确定的区块链状态是正确的，并且独立和客观地验证了从该点开始的区块链。 检查点起到了”回滚限制”的作用，因为位于弱主观性检查点之前的区块不能改变。 如此，只需将远程分叉作为机制设计的一部分界定为无效，就能破坏远程攻击。 确保弱主观性检查点之间相隔的距离小于验证者提款期，这样便可保证分叉链的验证者在提取质押前至少被罚没一些阈值量，且新验证者不能被已经提取质押的验证者骗到错误的分叉上。</p>
+<h3 id="弱主观性检查点和最终确定区块的区别"><a href="#弱主观性检查点和最终确定区块的区别" class="headerlink" title="弱主观性检查点和最终确定区块的区别"></a>弱主观性检查点和最终确定区块的区别</h3><p>以太坊节点对最终确定区块和弱主观性检查点的处理方式不同。 如果一个节点意识到有两个相互竞争的最终确定区块，它就会在这两个区块之间纠结，因为它没有办法自动识别哪个是规范分叉。 这是共识失败的表现。 相反，节点只会拒绝任何与其弱主观性检查点有冲突的区块。 从节点的角度来看，弱主观性检查点代表了一个绝对的真理，即不能被其对等点的新信息所破坏。</p>
+<h3 id="多弱为弱？"><a href="#多弱为弱？" class="headerlink" title="多弱为弱？"></a>多弱为弱？</h3><p>以太坊权益证明的主观方面要求从可信的同步来源获得最新状态（弱主观性检查点）。 得到坏的弱主观性检查点的风险非常低，因为它们可以通过对照多个独立的公开来源（如区块浏览器或多个节点）进行检查。 然而，运行任何软件应用程序总是需要一定程度的信任，例如，相信软件开发人员开发的是诚实的软件。</p>
+<p>一个弱主观性检查点甚至可以成为客户端软件的一部分。 可以说，攻击者可以破坏软件中的检查点，就可以同样容易地破坏软件本身。 在这个问题上没有真正的加密经济路线，但在以太坊中，不可信开发者的影响得到了最小化，因为有多个独立的客户端团队，每个团队都在用不同的语言构建同等的软件，他们都是维护诚信链的既得利益者。 区块浏览器也可以提供弱主观性检查点，或者提供一种方法，将从其他地方获得的检查点与其他来源进行交叉对比。</p>
+<p>最终，可以从其他节点请求检查点；也许另一个运行完整节点的以太坊用户可以提供一个检查点，然后验证者可以根据区块浏览器的数据进行验证。 总的来说，信任弱主观性检查点的提供者和信任客户端开发人员可视为同样的问题， 即所需的整体信任度很低。 需要注意的是，这些考虑只有在大多数验证者密谋生成另一个区块链分叉这种不太可能的情况下才变得重要。 在任何其他情况下，只有一条以太坊链可以选择。</p>
+<h2 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h2><p>验证者需要在每个时段创建、签名和广播认证。 本页面概述了这些认证是什么样的，以及他们是如何被处理和如何在共识客户端交流的。</p>
+<h3 id="什么是认证？"><a href="#什么是认证？" class="headerlink" title="什么是认证？"></a>什么是认证？</h3><p>每个时段（6.4 分钟）验证者都会向网络提议一个认证。 这个认证是针对时段中的一个特定时隙。 认证的目的是投票赞成验证者对于链的看法，特别是最近的合理区块和当前时段的第一个区块（被称为<code>来源</code>和<code>目标</code>检查点）。 所有参与的验证者的信息都会合并，使得网络可以达成关于区块链状态的共识。</p>
+<p>认证包含以下组成部分：</p>
+<ul>
+<li><code>aggregation_bits</code>：验证者的位列表，其位置映射到委员会中的验证者索引；(0/1) 数值表示验证者是否签名了<code>数据</code>（即，他们是否活跃和同意区块提议者）</li>
+<li><code>data</code>：与认证相关的细节，如下方的定义</li>
+<li><code>signature</code>：聚合了个人验证者签名的 BLS 签名</li>
+</ul>
+<p>证明验证者的第一项任务是创建 <code>data</code>。 <code>data</code> 包含以下信息：</p>
+<ul>
+<li><code>slot</code>：认证指向的时隙号</li>
+<li><code>index</code>：一个数字，用来识别在给定的时隙中，验证者所属的委员会</li>
+<li><code>beacon_block_root</code>：验证者在链头看到的区块的根哈希（应用分叉选择算法的结果）</li>
+<li><code>source</code>：最终确定性投票的一部分，表示验证者认为的最新的合理区块</li>
+<li><code>target</code>：最终确定性投票的一部分，表示验证者认为的当前时段的第一个区块</li>
+</ul>
+<p>一旦 <code>data</code> 构造完成，验证者就可以将 <code>aggregation_bits</code> 中对应于他们自己的验证者索引的位从 0 翻转到 1，以表明他们已经参与。</p>
+<p>最终，验证者签名认证并且在网络进行广播。</p>
+<h4 id="聚合的认证"><a href="#聚合的认证" class="headerlink" title="聚合的认证"></a>聚合的认证</h4><p>对于验证者来说，在网络传递此数据需要大量的开销。 因此，在更加广泛地广播前，个人验证者的认证会在子网内进行聚合。 这包括聚合签名，以便广播的认证包含共识 <code>data</code> 和一个签名，后者结合了所有同意 <code>data</code> 的验证者的签名。 这可以使用 <code>aggregation_bits</code> 来检查，因为它提供了委员会中每个验证者的索引（其 ID 在 <code>data</code> 中提供），可用于查询个人签名。</p>
+<p>在每个时段，每个子网中会有 16 个验证者被选为<code>聚合者</code>。 聚合者收集所有在广播网络听到的，与他们自己的 <code>data</code> 相同的所有认证。 每一个匹配认证的发送者被记录在 <code>aggregation_bits</code> 中。 然后聚合者将聚合的认证广播到更广泛的网络上。</p>
+<p>当一个验证者被选为区块提议者时，他们打包从子网到新区块最新时隙的聚合认证。</p>
+<h4 id="认证纳入生命周期"><a href="#认证纳入生命周期" class="headerlink" title="认证纳入生命周期"></a>认证纳入生命周期</h4><ol>
+<li>生成</li>
+<li>传播</li>
+<li>聚合</li>
+<li>传播</li>
+<li>纳入</li>
+</ol>
+<p>认证的生命周期在下面的示意图中概述：</p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/consensus-mechanisms/pos/attestations/attestation_schematic.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Fconsensus-mechanisms%2Fpos%2Fattestations%2Fattestation_schematic.png&amp;w=1920&amp;q=75" alt="认证生命周期"></a></p>
+<h2 id="权益证明机制下的奖励和惩罚"><a href="#权益证明机制下的奖励和惩罚" class="headerlink" title="权益证明机制下的奖励和惩罚"></a>权益证明机制下的奖励和惩罚</h2><p>以太坊使用其原生加密货币以太币 (ETH) 来保证其安全。 希望参与验证区块和识别链头的节点运营商，在以太坊上的<a href="https://ethereum.org/zh/staking/deposit-contract/">存款合约</a>中存入以太币。 他们运行验证者软件检查从点对点网络接收到的新区块的有效性，以及应用分叉选择算法来识别链头，然后收到用以太币支付的报酬。</p>
+<p>对于验证者来说有两个主要角色：1) 检查新区块并且“证明”它们是否有效，2) 当从整个验证者池子被随机选中时，提议新的区块。 如果验证者无法完成其中任何一项的任务，将错过以太币的支付。 验证者有时也需要负责签名聚合以及参与同步委员会。</p>
+<p>还有些操作很难无意为之，并且标志着一些恶意的意图，例如，为同一时隙提议多个区块和为同一时隙验证多个区块。 这些是“可被罚没的”行为，将导致验证者被移出网络之前有一些以太币（高达 1 ETH）被销毁，这个过程需要 36 天。 被罚没验证者的以太币将在退出期一点点耗尽，但到第 18 天，他们会收到一个“相关性惩罚”，即当更多的验证者都在大致相同的时间受罚时，惩罚将更重。 共识机制的激励结构会奖励诚实者和惩罚不良行为者。</p>
+<p>所有的奖励和惩罚都在每个时段实施一次。</p>
+<h3 id="奖励和惩罚"><a href="#奖励和惩罚" class="headerlink" title="奖励和惩罚"></a>奖励和惩罚</h3><h4 id="奖励"><a href="#奖励" class="headerlink" title="奖励"></a>奖励</h4><p>当验证者作出与大多数其他验证者一致的投票时，当验证者提议区块时，以及当验证者参与同步委员会时，他们会受到奖励。 每个时段奖励的数额是从 <code>base_reward</code> 计算的。 这是计算其他奖励的基本单位。 <code>base_reward</code> 代表了在每个时段的最佳条件下每个验证者的平均奖励。 这是根据验证者的有效余额以及活跃验证者的总数计算的，如下所示：</p>
+<pre><code>1base_reward = effective_balance * (base_reward_factor / (base_rewards_per_epoch * sqrt(sum(active_balance))))</code></pre><p>其中，<code>base_reward_factor</code> 是 64，<code>base_rewards_per_epoch</code> 是 4，<code>sum(active balance)</code> 是所有活跃验证者的质押以太币总数。</p>
+<p>这意味着基础奖励与验证者的有效余额成正比，与网络中的验证者数量成反比。 验证者越多，整体发行量越大（如 <code>sqrt(N)</code>），但每个验证者的 <code>base_reward</code> 越小（如<code>1/sqrt(N)</code>）。 这些因素影响质押节点的年化利率。 在 <a href="https://notes.ethereum.org/@vbuterin/rkhCgQteN?type=view#Base-rewards">Vitalik 的笔记(opens in a new tab)</a>阅读这方面的原理。</p>
+<p>总奖励由五个部分之和组成，每个部分都有一个权重，决定每个部分在总奖励中的比重。 这些部分是：</p>
+<pre><code>11. 来源投票：验证者给正确的来源检查点进行了及时投票
+22. 目标投票：验证者给正确的目标检查点进行了及时投票
+33. 头部投票：验证者给正确的头部区块进行了及时投票
+44. 同步委员会奖励：验证者参与了同步委员会
+55. 提议者奖励：验证者在正确的时隙提议了区块</code></pre><p>每个部分的权重如下所示：</p>
+<pre><code>1TIMELY_SOURCE_WEIGHT    uint64(14)
+2TIMELY_TARGET_WEIGHT    uint64(26)
+3TIMELY_HEAD_WEIGHT  uint64(14)
+4SYNC_REWARD_WEIGHT  uint64(2)
+5PROPOSER_WEIGHT uint64(8)</code></pre><p>这些权重加起来等于 64。 奖励的计算方法是适用权重的总和除以 64。 如果验证者及时给来源、目标和头部投票，提议一个区块以及参与同步委员会，他们就能获取 <code>64/64 * base_reward == base_reward</code>。 然而，验证者通常不是区块提议者，所以它们的最大奖励是 <code>64-8 /64 * base_reward == 7/8 * base_reward</code>。 既不是区块提议者，也不参与同步委员会的验证者能收到 <code>64-8-2 / 64 * base_reward == 6.75/8 * base_reward</code>。</p>
+<p>还增加一个额外奖励来激励快速认证。 这就是 <code>inclusion_delay_reward</code>。 这个值等于 <code>base_reward</code> 乘以 <code>1/delay</code>，其中 <code>delay</code> 是分隔区块提议和认证的时隙数。 例如，如果在区块提议的一个时隙内提交认证，那么认证者将获得 <code>base_reward * 1/1 == base_reward</code>。 如果认证在下一个时隙到达，认证者将收到 <code>base_reward * 1/2</code>，以此类推。</p>
+<p>包含在区块中的<strong>每一个有效认证</strong>都能让区块提议者获得 <code>8 / 64 * base_reward</code>，所以奖励的实际值与证明验证者的数量成比例。 通过在所提议区块中包含其他验证者的不良行为证据，区块提议者也能增加奖励。 这些奖励是鼓励验证者诚实的“胡萝卜”。 一个包含罚没的区块提议者将被奖励 <code>slashed_validators_effective_balance / 512</code>。</p>
+<h4 id="惩罚"><a href="#惩罚" class="headerlink" title="惩罚"></a>惩罚</h4><p>到目前为止，我们已经考虑了行为良好的验证者，但对于那些没有及时作出头部、来源和目标投票或者投票非常慢的验证者呢？</p>
+<p>错失目标和来源投票的惩罚等于认证者提交这些投票时获取到的奖励。 这意味着没有奖励会添加到他们的余额中，反而会从余额中移除同等价值。 错失头部投票没有惩罚（即，头部投票只有奖励，没有惩罚）。 也没有与 <code>inclusion_delay</code> 值相关的惩罚 - 只是不会把奖励添加到验证者余额。 区块提议失败也没有惩罚。</p>
+<p>在<a href="https://github.com/ethereum/consensus-specs/blob/dev/specs/altair/beacon-chain.md">共识规范(opens in a new tab)</a>中阅读更多关于奖励和惩罚的内容。 Bellatrix 升级调整了奖励和惩罚 - 观看 Danny Ryan 和 Vitalik 在<a href="https://www.youtube.com/watch?v=iaAEGs1DMgQ">“以太坊改进提案解读”视频(opens in a new tab)</a>中对此的讨论。</p>
+<h3 id="罚没"><a href="#罚没" class="headerlink" title="罚没"></a>罚没</h3><p>罚没是一种更加严重的行为，将导致验证者被强制移出网络并且他们质押的以太币会损失。 有三种方式会让验证者被罚没，所有这些都相当于不诚实地提议或认证区块：</p>
+<ul>
+<li>在同一时隙提议或签名两个不同的区块</li>
+<li>认证一个“包围”另一个区块的区块（有效地更改历史）</li>
+<li>通过证明同一个区块的两名候选人进行“双重投票”</li>
+</ul>
+<p>如果这些行为被检测到，验证者就会被罚没。 这意味着 1/32 的质押以太币（最多是 1 个以太币）将被立即销毁，然后一个为期36天的移除期开始。 在移除期内，验证者的质押将逐渐流失。 在中间点（第 18 天），会有一个额外的惩罚，其幅度与罚没事件之前 36 天内所有被罚没验证者的质押以太币总数成比例。 这意味着被罚没的验证者越多，罚没的幅度就会增加。 最大的罚没幅度是所有罚没验证者的全部有效余额（即，如果有很多的验证者被罚没，那么他们将失去全部的质押）。 另一方面，一次单独的罚没事件只会销毁一小部分的验证者质押。 这个与罚没验证者的数量成比例的中间点惩罚被称为“相关性惩罚”。</p>
+<h3 id="怠惰惩罚-1"><a href="#怠惰惩罚-1" class="headerlink" title="怠惰惩罚"></a>怠惰惩罚</h3><p>如果共识层超过四个时段都还没有最终确定，则会激活称为“怠惰惩罚”的紧急协议。 怠惰惩罚的最终目的是给该链恢复最终确定性创建必要条件。 正如上文所解释的那样，最终确定性需要 2/3 多数的总质押以太币来同意来源和目标检查点。 如果超过 1/3 验证者总数的验证者离线或者提交正确认证失败，那么就不可能有超过 2/3 的绝对多数来最终确定检查点。 怠惰惩罚会让非活跃验证者的质押逐渐流失，直到他们控制的总质押少于 1/3，这就允许了其余的活跃验证者可以最终确定该链。 不管非活跃验证者的池子有多大，其余的活跃验证者最终都会控制超过 2/3 的质押。 质押损失对于非活跃验证者尽快重新激活有着强大的激励！ 在 Medalla 测试网曾遇到过一个怠惰惩罚的场景，少于 66% 的活跃验证者能够在当前区块链头部达成共识。 怠惰惩罚被激活，最终重新获得最终确定性！</p>
+<p>共识机制的奖励、惩罚和罚没的设计，可鼓励个人验证者做出正确行为。 然而，从这些设计选择中催生了一个这样一个系统：它强烈激励在多个客户端平均分配验证者，并应强烈抑制单一客户端的主导地位。</p>
+<h2 id="以太坊权益证明的攻击与防御"><a href="#以太坊权益证明的攻击与防御" class="headerlink" title="以太坊权益证明的攻击与防御"></a>以太坊权益证明的攻击与防御</h2><h3 id="攻击者想要什么？"><a href="#攻击者想要什么？" class="headerlink" title="攻击者想要什么？"></a>攻击者想要什么？</h3><p>一个常见的误解是成功的攻击者可以产生新的以太币或者从任意帐户中耗尽以太币。 这些都是不可能的，因为所有的交易都由网络上的所有执行客户端来执行。 它们必须满足有效性的基本条件（例如，使用发送人私钥签名交易，发送人有足够的余额，等等），否则它们会被恢复原状。 攻击者实际上可能会针对三类结果：重组、双重最终确定性或最终确定性延迟。</p>
+<p><strong>“重组”</strong>是把区块重新调整成新的顺序，也许还会在规范链中增加或减少一些区块。 恶意重组可能会确保特定区块被包含或者被排除，从而允许通过前台运行和后台运行的交易（矿工可提取价值）进行双重支出或价值提取。 重组也能用来阻止某些交易被包含在规范链 - 审查的一种形式。 重组的最极端形式是“最终确定性逆转”，它会移除或代替之前已被最终确定的区块。 这只有在超过 ⅓ 的质押以太币总量被攻击者销毁时才可能 - 这种保证被称为“经济最终确定性” - 稍后会详细介绍。</p>
+<p><strong>双重最终确定性</strong>是一种不太可能但是会很严重的情况，两个分叉能够同时最终确定，在链中造成永久性分裂。 对于愿意冒 34% 的质押以太币总量风险的攻击者来说，这在理论上是可行的。 社区将被迫在链下进行协调，达成应该遵循哪一条链的共识，这需要社交层的力量。</p>
+<p><strong>最终确定性延迟</strong>攻击会阻止网络达到最终确定链的部分的必要条件。 如果没有最终确定性，那就很难信任构造在以太坊上的金融应用。 最终确定性延迟攻击的目的可能只是破坏以太坊而不是直接获利，除非攻击者有一些战略性空头头寸。</p>
+<p>对社交层的攻击可能旨在破坏公众对以太坊的信任、让以太币贬值、减少使用或者削弱以太坊社区，以便让带外协作更加困难。</p>
+<p>在确定了敌人为什么攻击以太坊后，接下来的部分看看他们是<em>如何</em>做的。</p>
+<h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><h4 id="0-层网络攻击"><a href="#0-层网络攻击" class="headerlink" title="0 层网络攻击"></a>0 层网络攻击</h4><p>首先，没有积极参与以太坊（通过运行客户端软件）的个人可以针对社交层（0 层网络）进行攻击。 0 层网络是以太坊构建的基础，因此它代表了潜在的攻击面，其后果会波及堆栈的其余部分。 包括这些例子：</p>
+<ul>
+<li>一个混淆视听的活动可以削弱社区对以太坊路线图、开发者团队、应用等的信任。 这会减少愿意参与保护网络安全的人数，降低去中心化和加密经济安全的程度。</li>
+<li>针对开发者社区的攻击和/或恐吓。 这会导致开发者自愿退出，并减缓以太坊的进展。</li>
+<li>过度监管也被认为是一种针对 0 层网络的攻击，因为它能够快速的抑制参与和使用。</li>
+<li>知识丰富但怀有恶意的行为者渗透到开发者社区，其目的是通过避重就轻的讨论、延迟关键决策、制造垃圾邮件等来减缓进展。</li>
+<li>贿赂以太坊生态系统的重要人物，以此来影响决策过程。</li>
+</ul>
+<p>在很多情况下，攻击者只需要一点资金或者技术诀窍，就能让这些攻击变得特别危险。 一个 0 层网络攻击造成的影响可能是一个加密经济攻击的数倍。 例如，如果恶意的多数质押拥有者实现了审查或最终确定性逆转，那么破坏社会层可能会使带外协调社区响应变得更加困难。</p>
+<p>对 0 层网络攻击的防御可能不是那么简单，但是可以确立一些基本原则。 其中一个是保持关于以太坊公共信息的整体高信噪比，由社区中的诚实成员创建，并且通过博客、discord 服务器、注释规范、书籍、播客和 Youtube 来进行传播。 在 ethereum.org，我们竭力保持信息的准确，并且把信息尽可能的翻译成更多的语言。 使用高质量信息和模因来填充空间是一种对误导信息的有效防御。</p>
+<p>另一个对抗社交层攻击的重要措施是有一个清晰的使命宣言和治理协议。 以太坊将自己定位为智能合约一层网络中的去中心化和安全冠军，同时也高度重视可扩展性和可持续性。 无论以太坊社区出现什么分歧，这些核心原则都不会受到损害。 根据这些核心原则对叙述进行评估，以及在 EIP（以太坊改进提案）进展中通过连续多轮评审对其进行检查，有助于社区区分良好行为者与不良行为者，并且限制恶意行为者影响以太坊未来方向的范围。</p>
+<p>最后，以太坊社区保持开放并欢迎所有参与者至关重要。 有门槛和排外性的社区特别容易遭受社交层攻击，因为很容易建立“我们和他们”的说法。 部落主义和有毒的极简主义会伤害社区和削弱 0 层网络安全性。 在网络安全有既得利益的以太坊人应该审视他们在网上和现实中的行为，把自己看作对以太坊 0 层网络安全的直接贡献者。</p>
+<h4 id="攻击协议"><a href="#攻击协议" class="headerlink" title="攻击协议"></a>攻击协议</h4><p>所有人都能运行以太坊客户端软件。 为了把验证者添加到客户端，用户需要在存款合约质押 32 个以太币。 验证者允许用户通过提议和证明新区块，活跃参与以太坊网络的安全建设。 验证者现在可以发声来影响区块链的未来内容 - 他们可以表现诚实并通过奖励来增加他们的以太币储备，他们也可以冒着风险尝试操纵这个过程来给他们自己谋利。 其中一个发动攻击的方式是积累大部分的总质押并且通过它投票反对诚实的验证者。 攻击者控制的质押比例越大，他们的投票就越有力，特别是在我们稍后将探讨的某些经济里程碑。 然而，大部分攻击者并不能积累足够的以太币来启动这样的攻击，因此，他们使用一些微妙的技术操纵大部分的诚实者来实现这种攻击。</p>
+<p>从根本上说，所有小额质押攻击都是两种验证者不当行为的细微变种：活跃不足（无法证明/提议或行动缓慢）或过度活跃（在一个时隙多次提议/证明）。 在最普通的形式中，这些行为能被分叉选择算法和激励层轻松处理，但是也存在其他一些更聪明的方法让系统做出对攻击者有利的反应。</p>
+<h4 id="使用少量以太币攻击"><a href="#使用少量以太币攻击" class="headerlink" title="使用少量以太币攻击"></a>使用少量以太币攻击</h4><h5 id="重组"><a href="#重组" class="headerlink" title="重组"></a>重组</h5><p>有不少论文说明了如何仅使用少量的总质押以太币，达到重组和最终确定性延迟的以太坊攻击。 这些攻击通常依赖于攻击者向其他验证者隐瞒信息，然后以微妙的方式和/或适当的时机释放它。 它们的目的通常是替换规范链中的一些诚实的区块。 <a href="https://arxiv.org/pdf/2102.02247.pdf">Neuder et al 2020(opens in a new tab)</a> 展示了发动攻击的验证者如何为一个特定的时隙 <code>n+1</code> 创建和证明一个区块 (<code>B</code>)，但不让它向网络上的其他节点传播。 反之，它们会保留已被证明的区块，直到下一个时隙 <code>n+2</code>。 诚实的验证者为时隙 <code>n+2</code> 提议一个区块 (<code>C</code>)。 几乎同时，攻击者释放它们所扣留的区块 (<code>B</code>) 及其认证，然后使用它们的投票在时隙 <code>n+2</code> 证明 <code>B</code> 是链的头部，有效否认诚实区块 <code>C</code> 的存在。 当诚实区块 <code>D</code> 被释放时，分叉选择算法认为构建在 <code>B</code> 之上的 <code>D</code> 重于构建在 <code>C</code> 上的 <code>D</code>。 因此，攻击者可以在时隙 <code>n+2</code> 使用事前重组的单区块从规范链移除诚实区块 <code>C</code>。 <a href="https://www.youtube.com/watch?v=6vzXwwk12ZE">攻击者拥有 34%(opens in a new tab)</a> 的质押将很可能在这次攻击中成功，如<a href="https://notes.ethereum.org/plgVdz-ORe-fGjK06BZ_3A#Fork-choice-by-block-slot-pair">这篇笔记(opens in a new tab)</a>所解释。 不过，从理论上讲，这种攻击可以用更少的质押进行。 <a href="https://arxiv.org/pdf/2102.02247.pdf">Neuder et al 2020(opens in a new tab)</a> 描述这次攻击使用了 30% 的质押，但后续展示了 <a href="https://arxiv.org/pdf/2009.04987.pdf">2% 总质押(opens in a new tab)</a>的可行性。我们将在下一部分研究 <a href="https://arxiv.org/abs/2110.10086#">单一验证者(opens in a new tab)</a>使用平衡技术。</p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/consensus-mechanisms/pos/attack-and-defense/reorg-schematic.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Fconsensus-mechanisms%2Fpos%2Fattack-and-defense%2Freorg-schematic.png&amp;w=1920&amp;q=75" alt="事前重组"></a></p>
+<p>上面描述的单区块重组攻击的概念图（改编自 <a href="https://notes.ethereum.org/plgVdz-ORe-fGjK06BZ_3A#Fork-choice-by-block-slot-pair）">https://notes.ethereum.org/plgVdz-ORe-fGjK06BZ_3A#Fork-choice-by-block-slot-pair）(opens in a new tab)</a></p>
+<p>更加复杂的攻击可以将诚实验证者分成不同的组，不同的组对于链头部有不同的看法。 这被称为<strong>平衡攻击</strong>。 攻击者等待提议区块的机会，当机会到来时他们会摸棱两可并且提议两个区块。 他们会把这两个区块分别发送给各一半的诚实验证者。 分叉选择算法将会检测到摸棱两可的情况，然后区块提议者会被罚没以及从网络移除，但是这两个区块仍然存在，并且各一半的验证者会证明各自的分叉。 与此同时，剩余的恶意验证者会暂缓他们的认证。 然后，在分叉选择算法执行时，有选择性地将利于一个或另一个分叉的认证释放给足够多的验证者，从而让累积的认证权重向一个或另一个分叉倾斜。 这可以无限期地持续下去，攻击验证者在两个分叉上保持了验证者的平均分配。 由于这两个分叉都不能吸引 2/3 的绝对多数，网络不会最终确定。</p>
+<p><strong>弹跳攻击</strong>类似。 投票同样被攻击验证者扣留。 但他们没有释放投票来保持两个分叉的平均分配，而是在适当的时候使用他们的投票来证明在分叉 A 和分叉 B 之间变换的检查点的合理性。两个分叉之间的合理性翻转阻止了有成对的合理来源和目标检查点在任一链的最终确定，从而让最终确定性进程停止。</p>
+<p>弹跳攻击和平衡攻击都依赖于攻击者对网络的消息时机有良好的控制，而这是不可能的。 不过，有一些防御措施被加入到协议中，其形式是给快速信息提供额外的权重，而非慢速信息。 这被称为<a href="https://github.com/ethereum/consensus-specs/pull/2730">提议者权重增强(opens in a new tab)</a>。 为了应对弹跳攻击，对分叉选择算法进行了更新，这样最新被证明的检查点只能在<a href="https://ethresear.ch/t/prevention-of-bouncing-attack-on-ffg/6114">每个时段的前 1/3 时隙(opens in a new tab)</a>期间切换到另一条链。 这个条件阻止了攻击者保存投票以便后续实施 - 分叉选择算法只忠于它在前 1/3 时段选择的检查点，在这个时间内大部分诚实的验证者已经完成了投票。</p>
+<p>这些措施结合在一起形成了这样一种场景：诚实的区块提议者在时隙开始时快速发送他们的区块，然后约有 1/3 时隙（4秒）的时间段，新区块可能导致分叉选择算法切换到另一条链。 在同一截止时间后，与较早到达的验证者相比，来自较慢验证者的认证会被降低权重。 这极大地支持了快速提议者和验证者决定链的头部，同时大大减少了平衡或弹跳攻击成功的可能性。</p>
+<p>值得注意的是，被单独增强的提议者只能防御“廉价的重组”，即那些有少量质押的攻击者实施的攻击。 实际上，提议者增强本身可以被较大数量质押拥有者所利用。 <a href="https://ethresear.ch/t/change-fork-choice-rule-to-mitigate-balancing-and-reorging-attacks/11127">这个帖子(opens in a new tab)</a>的作者描述了攻击者如何利用 7% 质押有策略地实施他们的投票，欺骗诚实验证者在他们的分支上进行构建，从而重组出一个诚实的区块。 这种攻击需要非常理想的延迟条件设计，这不太可能。 攻击者的胜算仍然很低，更多的质押意味着冒更多的资本风险和更强力的经济抑制因素。</p>
+<p><a href="https://ethresear.ch/t/balancing-attack-lmd-edition/11853">专门针对“最新消息驱动”规则的平衡攻击(opens in a new tab)</a>也被提出，尽管有提议者增强，它仍被认为是可行的。 攻击者设置两个互相竞争的链，摸棱两可地提出他们的区块提议并把每个区块都传播给对应的一半网络，以及在分叉之间设置精确的平衡。 然后串通验证者来摸棱两可地投票并掌握好时机，让一半的网络先接收分叉 <code>A</code> 的投票，另一半的网络先接收 <code>B</code> 的投票。 因为“最新消息驱动”规则会丢弃第二个认证，只为每个验证者保留第一个，一半的网络看到给 <code>A</code> 的投票，看不到给 <code>B</code> 的投票，另一半网络看到给 <code>B</code> 的投票，看不到给 <code>A</code> 的投票。 作者描述了“最新消息驱动”规则给了对手“非凡的力量”来发动平衡攻击。</p>
+<p>通过<a href="https://github.com/ethereum/consensus-specs/pull/2845">更新分叉选择算法(opens in a new tab)</a>，“最新消息驱动”攻击向量已变得不可行，因为更新后的分叉选择算法会完全丢弃模棱两可的验证者。 分叉选择算法让摸棱两可的验证者对于未来的影响非常有限。 这阻止了上述的平衡攻击，同时保持抵抗雪崩攻击的弹性。</p>
+<p>另一类攻击，称为<a href="https://ethresear.ch/t/avalanche-attack-on-proof-of-stake-ghost/11854/3"><strong>雪崩攻击</strong>(opens in a new tab)</a>，它在一篇 <a href="https://arxiv.org/pdf/2203.01315.pdf">2022 年 3 月的论文(opens in a new tab)</a>中有所描述。 为了发动雪崩攻击，攻击者需要控制几个连续的区块提议者。 在每个区块提议的时隙，攻击者扣留他们的区块，把他们收集起来，直到诚实链达到与扣留区块相等的子树权重。 然后，扣留的区块会被释放，以便他们最大程度地摸棱两可。 作者认为提议者增强 - 对平衡攻击和弹跳攻击的主要防御方法 - 不能对抗某些雪崩攻击的变种。 然而，作者只论证了在高度理想的以太坊分叉选择算法版本（他们使用幽灵协议，但不是最新消息驱动）中进行攻击。</p>
+<p>LMD-GHOST 分叉选择算法的“最新消息驱动”部分减轻了雪崩攻击。 LMD 的意思是“最新消息驱动”，它是指一个由每个验证者保存的表格，表格包含从其他验证者收到的最新消息。 如果表格中已经存在从某个验证者接收到的消息，那么来自该验证者的新消息的时隙需要比表格中已有消息的时隙更晚，该字段才会更新。 实际上，这意味着在每个时隙中，第一条被接收到的消息会被接受，其余任何摸棱两可的消息会被忽略。 换言之，共识客户端不对模棱两可进行计数 - 他们使用从每个验证者发出的第一个到达的消息，模棱两可的则会被丢弃，以防止雪崩攻击。</p>
+<p>未来还有几个潜在的分叉选择规则升级，它们能增加由提议者增强提供的安全性。 其中一个是<a href="https://ethresear.ch/t/view-merge-as-a-replacement-for-proposer-boost/13739">视图合并(opens in a new tab)</a>：在时隙开始前，证明者冻结它们的分叉选择视图 <code>n</code> 秒，然后提议者会帮助它们同步网络中链的视图。 另一个潜在的升级是<a href="https://notes.ethereum.org/@vbuterin/single_slot_finality">单时隙最终确定性(opens in a new tab)</a>，它通过在一个时隙后最终确定链，来抵抗基于消息时机的攻击。</p>
+<h5 id="最终确定性延迟"><a href="#最终确定性延迟" class="headerlink" title="最终确定性延迟"></a>最终确定性延迟</h5><p>在<a href="https://econcs.pku.edu.cn/wine2020/wine2020/Workshop/GTiB20_paper_8.pdf">同一篇论文(opens in a new tab)</a>，首次描述了低成本单区块重组攻击，也描述了最终确定性延迟（也被称为“活性失败”）攻击，它依赖于攻击者成为时段边界的区块提议者。 这非常重要，因为这些时段边界区块会成为检查点，Casper 友好确定工具使用这些检查点来最终确定链的部分。 攻击者扣留他们的区块，直到足够多的诚实验证者使用它们友好确定工具投票来支持上一个时段边界区块作为当前最终确定的目标。 然后，他们就会释放扣留的区块。 他们证明他们的区块，并且其余诚实验证者也用不同的目标检查点创建分叉。 如果他们准确把握时机，他们就会阻止最终确定性，因为这将没有 2/3 的绝对多数来证明任何一个分叉。 质押越小，就要越精准地把握时机，因为攻击者直接控制的认证会越少，并且攻击者能够控制提出特定时段边界区块的验证者的胜算就越低。</p>
+<h5 id="长程攻击"><a href="#长程攻击" class="headerlink" title="长程攻击"></a>长程攻击</h5><p>还有一种针对权益证明区块链的攻击。在这种攻击中，参与创世区块的验证者会维护一条独立的、与诚实分叉同时存在的分叉，并且最终说服诚实的验证者在很久之后的某个合适的时间切换到该链。 这类型的攻击在以太坊不可能发生，因为最终确定性小工具保证所有的验证者在固定间隙（“检查点”）同意诚实链的状态。 这种简单机制抵制了长程攻击者，因为以太坊客户端不会重组最终确定的区块。 加入网络的新节点会寻找一个被信任的最近状态哈希（一个<a href="https://blog.ethereum.org/2014/11/25/proof-stake-learned-love-weak-subjectivity/">主观性弱(opens in a new tab)</a>的“检查点”），并将其作为一个伪创世块，在这基础上进行构建。 由此，在新节点开始给它自己验证信息之前，创建了一个进入网络的“信任网关”。</p>
+<h5 id="拒绝服务"><a href="#拒绝服务" class="headerlink" title="拒绝服务"></a>拒绝服务</h5><p>以太坊权益证明机制在每个时隙从所有验证者中挑选出一个验证者成为区块提议者。 这可以通过一个公开的函数来计算，对手有可能在提议者提出区块前一小段时间，提前识别出下一个区块提议者。 然后，攻击者可以向区块提议者发送垃圾邮件，阻止他们与其他节点交换信息。 对于网络上其余的人来说，相当于区块提议者离线，并且时隙会变空。 这相当于一种对于特定验证者的审查，阻止他们向区块链添加信息。 实现单一秘密领导者选举 (SSLE) 或者非单一秘密领导者选举能减少拒绝服务攻击的风险，因为只有区块提议者知道自己被选中，而选举结果是无法提前获知的。 但这还没有实现，只是<a href="https://ethresear.ch/t/secret-non-single-leader-election/11789">研发(opens in a new tab)</a>的活跃领域。</p>
+<p>所有这些都指向一个事实，那就是使用少数质押成功攻击以太坊非常困难。 这里所描述的可行攻击需要一个理想的分叉选择算法、不可能的网络条件，或者攻击向量已经被客户端软件小补丁修复。 当然，这不排除存在零日攻击的可能性，不过这也证明了少数质押攻击者要有效实施攻击，需要有非常高的技术能力、共识层知识以及运气。 从攻击者的角度来看，他们最好的选择可能是尽可能多地积累以太币，然后带着更大比例的总质押回来。</p>
+<h4 id="使用超过或等于总质押-33-的攻击者"><a href="#使用超过或等于总质押-33-的攻击者" class="headerlink" title="使用超过或等于总质押 33% 的攻击者"></a>使用超过或等于总质押 33% 的攻击者</h4><p>如果攻击者有更多质押以太币来投票，以及有更多验证者在每个时隙被选中提议区块，上述提到的所有攻击就更容易成功。 因此，一个恶意验证者的目标是控制尽可能多的质押以太币。</p>
+<p>对于攻击者来说，33% 的质押以太币是一个基准，因为一旦超过这个数量，他们无需精确控制其他验证者行为就能阻止链最终确定。 他们可以一起消失。 如果 1/3 或更多的质押以太币恶意地证明或无法证明，那么就不存在 2/3 的绝对多数，链也无法最终确定。 对此的防御方法是怠惰惩罚。 怠惰惩罚识别那些无法证明或与大多数证明不一致的验证者。 这些无证明验证者的质押以太币将逐渐流失，直到他们集体所代表的数量少于 1/3 的总数，这样链才能再次最终确定。</p>
+<p>怠惰惩罚的目的是让链可以再次最终确定。 不管怎样，攻击者也会失去一部分的质押以太币。 代表 33% 总质押以太币的验证者如果持续不活跃，将付出昂贵的代价，即使没有被罚没。</p>
+<p>假设以太坊网络是异步的（即，在消息发送和接收之间存在延迟），控制 34% 总质押的攻击者就可以引起双重最终确定性。 因为当攻击者被选为区块提议者时，他们就可以模棱两可，然后联合他们所有的验证者进行双重投票。 这造成了一个区块链分叉存在的情况，每个分叉都有 34% 的质押以太币给它投票。 每个分叉只需要剩余验证者 50% 的投票，两个分叉就可以得到绝对多数所支持，在这种情况下，两条链都能最终确定（因为 34% 攻击验证者 + 剩余的 66% 的一半 = 每个分叉 67%）。 互相竞争的区块将被约 50% 的诚实验证者接收，因此为了让攻击可行，攻击者需要在一定程度上控制消息在网络传播的时机，以便他们可以将一半的诚实验证者推到每条链上。 攻击者必须销毁他们的全部质押（以目前验证者数量来说，是约 1000 万以太币的 34%）以便达到这种双重最终确定性，因为 34% 的验证者将同时进行双重投票 - 有着最大的相关性惩罚的罚没罪行。 对这种攻击的防御方法是攻击者将承担 34% 的总质押以太币被销毁的巨大成本。 从这种攻击中恢复需要以太坊社区在“带外”进行协调，选择同意哪一个分叉，然后忽略其他分叉。</p>
+<h4 id="使用约-50-总质押的攻击者"><a href="#使用约-50-总质押的攻击者" class="headerlink" title="使用约 50% 总质押的攻击者"></a>使用约 50% 总质押的攻击者</h4><p>拥有 50% 质押以太币的恶意验证者团队理论上可以将链分成两个相同大小的分叉，然后使用他们全部 50% 质押投出与诚实验证者团体相反的投票，以此来维持两个分叉以及阻止最终确定性。 对两个分叉的怠惰惩罚将导致两条链都会最终确定。 在这种情况下，唯一的方法就是使用社交层进行恢复。</p>
+<p>对于一个敌对的验证者团体来说，不太可能可以持续精确控制 50% 的总质押，因为诚实验证者的数量是流动变化的，网络也会发生延迟等等 - 巨大的攻击成本以及低成功率对于理性攻击者来说是一种强力的抑制因素，尤其是用于获取<em>超过</em> 50% 的小额额外投资可以释放非常强大的力量时。</p>
+<p>如果攻击者拥有超过 50% 的总质押，就可以支配分叉选择算法。 这时，攻击者可以使用大多数投票来证明，而且有足够的控制权力进行短期重组，而无需欺骗诚实验证者。 诚实的验证者会效仿，因为他们的分叉选择算法也会把攻击者支持的链视为最重的，因此链可以最终确定。 这使得攻击者可以审查某些交易，以有利于他们的方式进行短距重组以及重新排序区块来提取最大的矿工可提取价值。 对此的防御手段是让攻击者付出大多数质押的巨大成本（目前略低于 190 亿美元），这会让攻击者面临风险，因为社交层可能会介入并采纳诚实的少数分支，让攻击者的质押大幅度贬值。</p>
+<h4 id="使用超过或等于-66-总质押的攻击者"><a href="#使用超过或等于-66-总质押的攻击者" class="headerlink" title="使用超过或等于 66% 总质押的攻击者"></a>使用超过或等于 66% 总质押的攻击者</h4><p>拥有 66% 或更多总质押以太币的攻击者，可以在无需胁迫任何诚实验证者的情况下最终确定他们所支持的链。 攻击者只需要给他们所支持的分叉进行投票并最终确定它，因为他们有绝对多数的不诚实投票。 作为绝对多数的质押拥有者，攻击者始终可以控制最终确定的区块的内容，拥有着支出、回退和再次支出、审查某些交易以及随意重组链的能力。 通过购买额外的以太币来控制 66% 而非 51%，攻击者实际上购买了事后重组和最终确定性逆转的能力（即改变过去并控制未来）。 唯一实际可操作的防御方法是攻击者需要付出 66% 总质押以太币的高昂成本，然后选择回退到社交层来协调采纳替代的分支。 我们将在下一部分详细探讨这一点。</p>
+<h3 id="人：最后的防线"><a href="#人：最后的防线" class="headerlink" title="人：最后的防线"></a>人：最后的防线</h3><p>如果不诚实的验证者设法最终确定他们所支持的链版本，以太坊社区将陷入困境。 规范链将在其历史记录中包含不诚实部分，同时诚实的验证者可能会因证明另一条（诚实）链而被惩罚。 注意，最终确定的但不正确的链也可能是大多数客户端的漏洞引起的。 最后，最终的回退需要依赖于社交层 - 0 层网络 - 来解决。</p>
+<p>以太坊权益证明共识的其中一个优势是存在<a href="https://youtu.be/1m12zgJ42dI?t=1712">一系列的防御策略(opens in a new tab)</a>，在面对攻击的时候社区可以实施这些策略。 最起码的响应是在不实施任何惩罚的情况下强制攻击者的验证者离开网络。 为了重新进入网络，攻击者需要加入到一个激活队列，确保验证者组逐步增加。 例如，添加足够的验证者让质押的以太币翻倍需要约 200 天，攻击者要再一次尝试 51% 攻击，需要提前 200 天收买诚实的验证者。 但是，社区也可以决定更严厉地惩罚攻击者，方法是撤销以往的奖励或者销毁一定比例的（高达 100%）质押资本。</p>
+<p>不管攻击者受到什么惩罚，社区都必须一起确认不诚实链实际上是否无效，尽管它被以太坊客户端的分叉选择算法所支持。社区应该在诚实的链上构建。 诚实的验证者可以集体同意在被社区认可的以太坊区块链分叉上进行构建，例如，该分叉可能在攻击开始之前就已经从规范链上分叉出来，或者攻击者的验证者被强行移除。 诚实的验证者受到激励来构建这条链，因为他们可以避免因无法证明（或无法正确地证明）攻击者的链而受到惩罚。 建立在以太坊上的交易所、入口和应用可能更愿意位于诚实链上，并且跟随诚实验证者的诚实区块链。</p>
+<p>但是，这是一个重大的治理挑战。 有些用户和验证者会在切换回诚实链时无可避免地产生损失，因为攻击后被验证的区块中的交易可能会回滚，从而扰乱应用层。这很容易破坏一些相信“代码就是法律”的用户的道德原则。 交易所和应用很可能已经把脱链行为和现在可能要回滚的链上交易关联起来，并开始一连串的撤回和修订，很难公平地进行取舍，特别是如果不义之财混杂在其中，存入了去中心化金融或其他衍生品，会对诚实用户产生二次影响。 毫无疑问，那些因为精明或机缘巧合已经从不诚实链获利的一些用户甚至机构，可能会反对分叉以此保护他们的利益。 目前已经有呼吁要求社区对大于 51% 攻击的响应进行演练，以便可以快速执行合理的协调缓解措施。 Vitalik 发起一些有用的讨论，在 ethresear.ch 上：<a href="https://ethresear.ch/t/timeliness-detectors-and-51-attack-recovery-in-blockchains/6925">这里(opens in a new tab)</a>和<a href="https://ethresear.ch/t/responding-to-51-attacks-in-casper-ffg/6363">这里(opens in a new tab)</a>，以及在 Twitter 上：<a href="https://twitter.com/skylar_eth/status/1551798684727508992?s=20&amp;t=oHZ1xv8QZdOgAXhxZKtHEw">这里(opens in a new tab)</a>。 协调的社会响应的目的应该是非常有针对性和具体地惩罚攻击者并尽量减少对其他用户的影响。</p>
+<p>治理已经是一个复杂的话题。 管理 0 层网络紧急响应通过不诚实行为确定下来的链，对于以太坊社区来说毋庸置疑是一个挑战，但在以太坊历史上<a href="https://ethereum.org/zh/history/#dao-fork-summary">已经发生过</a> <a href="https://ethereum.org/zh/history/#tangerine-whistle">2 次</a>。</p>
+<p>尽管如此，在现实世界的最后回滚中，还是有一些令人相当满意的东西。 最后，即使在我们之上有着如此惊人的技术堆栈，但如果最坏的情况发生了，现实中的人们也必将协调出一条属于他们的出路。</p>
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>本节探讨了攻击者试图利用以太坊权益证明共识协议的一些方法。 随着总质押以太币比例不断增加，探讨了攻击者可能造成的重组和最终确定性延迟。 总的来说，更富裕的攻击者成功的几率更大，因为他们的质押将变成有力的投票，从而影响未来区块的内容。 在一定阈值的质押以太币数量下，攻击者的力量会上升：</p>
+<p>33%：最终确定性延迟</p>
+<p>34%：最终确定性延迟、双重最终确定性</p>
+<p>51%：最终确定性延迟、双重最终确定性、审查、控制区块链的未来</p>
+<p>66%：最终确定性延迟、双重最终确定性、审查、控制区块链的未来以及过去</p>
+<p>还有一系列更加复杂的运用少量质押以太币发起的攻击，但是需要非常有经验的攻击者良好地控制消息在诚实验证者之间的传播时机，以便让形势对攻击者有利。</p>
+<p>总的来说，尽管存在这些潜在的攻击向量，但是攻击成功的概率非常低，低于在工作量证明机制下实施的同类攻击。 这是因为攻击者需要冒着巨大的质押以太币成本风险，以便利用他们的投票力量压倒诚实的验证者。 内置的“恩威并济”激励层可以防止大多数的恶意行为，尤其是对于拥有少量质押的攻击者。 更微妙的弹跳和平衡攻击也不太可能成功，因为在现实的网络条件下，很难良好地控制消息向特定验证者传递，如果发现了已知的弹跳、平衡和雪崩攻击向量，客户端团队也能通过补丁快速修复。</p>
+<p>34%、51% 或者 66% 攻击可能需要带外的社会协调来解决。 虽然对于社区来说是痛苦的，但是社区的带外响应能力对于攻击者来说是一种强大的抑制力量。 以太坊的社交层是最终的后盾 - 从技术性取得成功的攻击仍然会被社区同意采用诚实链所瓦解。 攻击者和以太坊社区之间存在一场竞赛 - 花费在 66% 攻击上的数十亿美元可能会被成功的社交协调所抹除，从而给攻击者留下沉重的包袱，因为它们质押的以太币将在被以太坊社区忽略的不诚实链上无法流动。 最终为攻击者带来利益的可能性非常低，这足以成为一种有效的威慑。 这就是为什么投资于维持有共同价值观和凝聚力的社交层如此重要。</p>
+<h2 id="权益证明以太坊中的密钥"><a href="#权益证明以太坊中的密钥" class="headerlink" title="权益证明以太坊中的密钥"></a>权益证明以太坊中的密钥</h2><p>坊使用公钥-私钥加密法来保护用户资产的安全。 公钥被用作以太坊地址的基础 — 即，它对公众是可见的，并被用来当作唯一标识符。 私钥（或密钥）只能被帐户拥有者获取。 私钥用于‘签名’交易和数据，以便密码学能证明拥有者批准一个特定私钥的某些行为。</p>
+<p>以太坊的密钥使用 <a href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography">椭圆曲线加密法(opens in a new tab)</a> 生成。</p>
+<p>然而，在以太坊从<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/">工作量证明</a>转换到<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">权益证明</a>的时候，一种新类型的密钥被加入到以太坊。 原来的密钥仍然像之前那样工作—基于椭圆曲线的密钥确保帐户安全没有变化。 然而，通过质押以太币和运行验证者来参与权益证明时，用户需要一种新类型的密钥。 这一需求是由于扩容挑战带来的，信息需要在大量验证者之间传递，这些信息需要一种密码学方法来方便汇总，以减少网络达成共识所需的沟通数量。</p>
+<p>这种新型密钥采用<a href="https://wikipedia.org/wiki/BLS_digital_signature"> <strong>Boneh-Lynn-Shacham (BLS)</strong> 签名方案(opens in a new tab)</a>。 BLS 能够对签名进行高效聚合，同时允许对聚合的单个验证者密钥进行逆向工程，它对于管理验证者之间的行动非常理想。</p>
+<h3 id="两种类型的验证者密钥"><a href="#两种类型的验证者密钥" class="headerlink" title="两种类型的验证者密钥"></a>两种类型的验证者密钥</h3><p>在转换到权益证明之前，以太坊用户只有一个基于椭圆曲线的私钥来访问他们的资金。 随着权益证明的引入，那些希望成为单独质押人的用户也需要一个<strong>验证者密钥</strong>和一个<strong>提款密钥</strong>。</p>
+<h4 id="验证者密钥"><a href="#验证者密钥" class="headerlink" title="验证者密钥"></a>验证者密钥</h4><p>验证者的签名密钥由两个元素组成：</p>
+<ul>
+<li>验证者<strong>私</strong>钥</li>
+<li>验证者<strong>公</strong>钥</li>
+</ul>
+<p>验证者私钥的目的是签名链上操作，如区块提议和认证。 因此，这些密钥必须存放在热钱包中。</p>
+<p>这种灵活性的优势是可以快速地把验证者的签名密钥从一台设备转移到另一台，然而，如果密钥丢失或者被盗，盗窃者可以通过这些方式<strong>恶意地行动</strong>：</p>
+<ul>
+<li>通过以下方式罚没验证者：<ul>
+<li>作为一个提议者，在同一时隙签名两个不同的信标区块</li>
+<li>作为一个证明人，签名“包围”另一份认证的认证</li>
+<li>作为一个证明人，签名两个具有相同目标的不同证明</li>
+</ul>
+</li>
+<li>促使自愿退出，从而停止验证者质押，并授权提款密钥拥有者获取以太币余额。</li>
+</ul>
+<p>当用户把以太币存入到质押存款合约时，<strong>验证者公钥</strong>会被包含在交易数据中。 这被称为<em>存款数据</em>，它让以太坊可以识别验证者。</p>
+<h4 id="提款凭证"><a href="#提款凭证" class="headerlink" title="提款凭证"></a>提款凭证</h4><p>每个验证者都有一个被称为<em>提款凭证</em>的属性。 此 32 字节字段的开头要么是 <code>0x00</code>，表示 BLS 提款凭证，要么是 <code>0x01</code>，表示指向执行地址的凭证。</p>
+<p>具有 <code>0x00</code> BLS 密钥的验证者必须更新这些凭证，使其指向执行地址，以便激活从质押进行超额余额支付或全额提款。 这可以通过在初始密钥生成期间在存款数据中提供执行地址，<em>或者</em>通过稍后使用提款密钥签署并广播 <code>BLSToExecutionChange</code> 信息来实现。</p>
+<h4 id="提款密钥"><a href="#提款密钥" class="headerlink" title="提款密钥"></a>提款密钥</h4><p>更新提款凭证需要更新提款密钥以指向执行地址（如果在初始存款期间没有设置的话）。 这将使超额余额支付得以开始处理，并且还将允许用户全额提取其质押的以太币。</p>
+<p>和验证者密钥一样，提款密钥也由两个部分组成：</p>
+<ul>
+<li>提款<strong>私</strong>钥</li>
+<li>提款<strong>公</strong>钥</li>
+</ul>
+<p>在将提款凭证更新为 <code>0x01</code> 类型之前丢失此密钥，意味着失去对验证者余额的访问权限。 验证者仍然可以对认证和区块进行签名，因为这些操作只需要验证者的私钥，但如果提款密钥丢失，那就几乎没有任何奖励。</p>
+<p>把验证者密钥和以太坊帐户密钥分开，可以让一个用户运行多个验证者。</p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/consensus-mechanisms/pos/keys/validator-key-schematic.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Fconsensus-mechanisms%2Fpos%2Fkeys%2Fvalidator-key-schematic.png&amp;w=1920&amp;q=75" alt="验证者密钥示意图"></a></p>
+<h3 id="从助记词派生密钥"><a href="#从助记词派生密钥" class="headerlink" title="从助记词派生密钥"></a>从助记词派生密钥</h3><p>如果每次质押 32 个以太币都需要一套新的 2 个完全独立的密钥，那么密钥管理将很快变得难以操作，特别是对于运行多个验证者的用户来说。 相反，多个验证者密钥可以从一个共同的密钥进行派生，并且存储这个密钥就能允许访问多个验证者密钥。</p>
+<p>当<a href="https://ethereum.stackexchange.com/questions/19055/what-is-the-difference-between-m-44-60-0-0-and-m-44-60-0">用户访问(opens in a new tab)</a>自己的钱包时，<a href="https://en.bitcoinwiki.org/wiki/Mnemonic_phrase">助记符(opens in a new tab)</a>和路径是用户经常遇到的突出特征。 助记符是一连串的词语，作为私钥的初始种子。 当与其他数据结合时，助记符生成一个被称为‘主密钥’的哈希。 这可以被视为一棵树的根部。 根部的分支可以使用层次路径来派生，从而子节点可以作为其父节点的哈希和它们在树中的索引的组合而存在。 阅读 <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP-32(opens in a new tab)</a> 和 <a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">BIP-19(opens in a new tab)</a> 基于助记词的密钥生成标准。</p>
+<p>这些路径有以下结构，对于和硬件钱包打过交道的用户来说应该比较熟悉：</p>
+<pre><code>1m/44'/60'/0'/0`</code></pre><p>路径中的斜线将私钥的组成部分分开，如下所示：</p>
+<pre><code>1master_key / purpose / coin_type / account / change / address_index</code></pre><p>这个逻辑可以使用户把尽可能多的验证者绑定到一个<strong>助记词</strong>，因为虽然树的根部是共同的，但在分支上却可以产生差异化。 用户可以从助记词<strong>派生任意数量的密钥</strong>。</p>
+<pre><code>1      [m / 0]
+2     /
+3    /
+4[m] - [m / 1]
+5    \
+6     \
+7      [m / 2]</code></pre><p>每个分支都用一个 <code>/</code> 来分割，因此 <code>m/2</code> 意味着由主密钥开始，接着是分支 2。 在下面的示意图中，一个助记词用来存储三个提款密钥，每个密钥都有两个相关的验证者。</p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/consensus-mechanisms/pos/keys/multiple-keys.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Fconsensus-mechanisms%2Fpos%2Fkeys%2Fmultiple-keys.png&amp;w=1920&amp;q=75" alt="验证者密钥逻辑"></a></p>
+<h2 id="权益证明与工作量证明"><a href="#权益证明与工作量证明" class="headerlink" title="权益证明与工作量证明"></a>权益证明与工作量证明</h2><p>以太坊启动之时，权益证明机制仍需要进行大量的研究和开发，才能依靠它保护以太坊的安全。 工作量证明是一种较为简单的机制，已经在比特币中得到验证，这意味着核心开发者可以立即实现它以启动以太坊。 在此之后，权益证明机制又经过了 8 年研发，才达到可以实现的阶段。</p>
+<p>本页解释了以太坊从工作量证明向权益证明过渡的依据以及相关权衡考虑。</p>
+<h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><p>以太坊的研究人员认为权益证明机制比工作量证明机制更安全。 然而，权益证明机制直到最近才在真正的以太坊主网上实现，并且不如工作量证明机制那样久经考验。 以下部分将讨论权益证明的安全模型相对于工作量证明的优缺点。</p>
+<h4 id="攻击成本"><a href="#攻击成本" class="headerlink" title="攻击成本"></a>攻击成本</h4><p>在权益证明机制中，验证者需要在智能合约中托管（质押）至少 32 个以太币。 以太坊可以通过销毁质押的以太币来惩罚不当行为的验证者。 为了达成共识，至少要有总质押数 66%的以太币投票支持一组特定的区块。 被至少 66% 的质押以太币投票支持的区块成为“最终确定”区块，这意味着它们不能被移除或重组。</p>
+<p>攻击网络可能意味着阻止区块链最终确定，或者确保规范链中出现特定的区块组织结构，从而以某种方式使攻击者受益。 这需要攻击者改变达成诚信共识的途径，要么通过积累大量以太币并直接进行投票，要么诱使诚实的验证者按特定方式投票。 除了欺骗诚实验证者的复杂低概率攻击之外，攻击以太坊的成本是攻击者必须积累足够的质押以对他们有利的方式影响共识的成本。</p>
+<p>攻击的最低成本至少为总质押数的 33%。 持有至少达到总质押数 33% 的攻击者可以通过离线来导致最终确定延迟。 这对网络来说是一个相对较小的问题，因为有一种称为“怠惰惩罚”的机制，可以罚没离线验证者的质押，直到多数在线验证者的质押达到总质押数的 66% 并且能够再次确定区块链。 理论上，攻击者可以通过在被要求成为区块生产者时创建两个区块而不是一个，并利用其所有的验证者进行双重投票，从而使用略微超过 33% 的总质押数来形成双重最终确定性。 每个分叉只需要剩余诚实验证者中的 50% 先查看每个区块，因此如果攻击者能够恰到好处地控制消息的时机，他们可能能够最终确定这两条分叉。 这种攻击成功的可能性很低，但如果攻击者能够导致双重最终确定性，以太坊社区将不得不决定跟随其中一条分叉，这种情况下，攻击者的验证者将必然在另一个分叉上遭到罚没。</p>
+<p>如果拥有总质押数的 33%以上，攻击者有机会对以太坊网络产生轻微（最终确定性延迟）或更严重（双重最终确定性）的影响。 网络上质押了超过 14,000,000 个以太币，而且代表性的价格为每个以太币 1000 美元，那么进行这些攻击的最低成本为 <code>1000 x 14,000,000 x 0.33 = $4,620,000,000</code>。 攻击者会由于受到罚没而损失这一大笔钱，并且可能被网络驱逐。 要再次发起攻击，攻击者必须（再次）积累超过 33% 的质押数并（再次）销毁。 每次尝试攻击网络将耗费超过 46 亿美元（每个以太币的价格为 1000 美元，总共质押了 1400 万个以太币）。 在攻击者受到罚没时，他们也会被从网络中驱逐，而且他们必须加入激活队列才能重新加入网络。 这意味着重复攻击的频次不仅受到攻击者积攒超过 33% 的总质押数快慢的限制，还受到将其所有验证者加入网络所需的时间的限制。 每次进行攻击时，攻击者将变得更穷，而其他社区成员则由于产生的供应冲击变得更富。</p>
+<p>其他攻击需要的以太币要多得多，如 51% 攻击或使用超过 66% 的总质押数进行的最终确定性逆转，它们对攻击者来说代价更高。</p>
+<p>对比工作量证明。 在工作量证明以太坊上，发起攻击的成本是持续拥有超过 50% 的总网络算力的成本。 这相当于硬件和足够算力的运行成本，以持续地超越其他矿工来计算工作量证明解决方案。 以太坊主要是使用图形处理器 (GPU) 进行挖矿，而不是应用型专用集成电路 (ASIC)，这降低了成本（尽管如果以太坊继续采用工作量证明机制，ASIC 挖矿可能会变得更受欢迎）。 要攻击工作量证明以太坊网络，攻击者必须购买大量硬件设备，并支付电费来运行这些设备。然而，总成本仍然比累积足够以太币以发起攻击的成本低。 工作量证明机制下，51% 攻击的成本比权益证明机制下大约低 <a href="https://youtu.be/1m12zgJ42dI?t=1562">20 倍(opens in a new tab)</a>。 如果检测到攻击，并且区块链进行硬分叉以消除攻击者的更改，那么攻击者可以反复使用相同的硬件攻击新的分叉。</p>
+<h4 id="复杂性"><a href="#复杂性" class="headerlink" title="复杂性"></a>复杂性</h4><p>权益证明比工作量证明复杂得多。 这一点可能成为支持工作量证明的理由，因为在较简单的协议中意外引入漏洞或不想要的影响会更加困难。 然而，这种复杂性已经被多年的研究和开发、模拟和测试网实现所克服。 权益证明协议已由五个独立团队在执行层和共识层使用五种编程语言独立实现，提供了抵御客户端漏洞的复原力。</p>
+<p>为了安全地开发和测试权益证明共识逻辑，在以太坊主网实现权益证明的两年前，信标链就已经启动。 信标链作为一个测试权益证明的沙盒环境，因为信标链是一条在线区块链，它现实了权益证明共识逻辑但并未涉及真实的以太坊交易，而是只针对自身达成共识。 在信标链在足够长的时间内保持稳定和无漏洞的状态后，它就与以太坊主网进行了“合并”。 所有这些都有助于克服权益证明的复杂性，使得发生意外后果和客户端漏洞的风险极低。</p>
+<h4 id="攻击面"><a href="#攻击面" class="headerlink" title="攻击面"></a>攻击面</h4><p>权益证明比工作量证明复杂，这意味着需要处理更多潜在的攻击途径。 与单个对等网络连接客户端不同，权益证明中存在两个对等网络，分别实现不同的协议。 在每个时隙内预先选择一个特定的验证者提议一个区块，可能会导致拒绝服务攻击，其中大量的网络流量会使该特定验证者下线。</p>
+<p>还有一些方法可以让攻击者精心安排他们的区块或认证的发布时间，以便诚实网络中有一定部分接收到这些信息，影响他们以特定方式投票。 最后一点，攻击者可以简单地积攒足够多的以太币进行质押，并主导共识机制。 所有这些<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/attack-and-defense/">攻击途径都有相应的防御措施</a>，但在工作量证明机制中并不存在这些需要防御的攻击途径。</p>
+<h3 id="去中心化"><a href="#去中心化" class="headerlink" title="去中心化"></a>去中心化</h3><p>权益证明比工作量证明更加去中心化，这是因为挖矿硬件的装备竞争往往会迫使个人和小型组织退出。 虽然从技术上讲，任何人都可以使用普通硬件开始挖矿，但相比机构化的挖矿操作，他们获得任何奖励的可能性几乎微乎其微。 而在权益证明中，质押的成本和质押的回报率对于每个人来说都是相同的。 目前运行一个验证者需要质押 32 个以太币。</p>
+<p>另一方面，流动性质押衍生品的发明引发了中心化的担忧，因为一些大型提供商管理着大量质押的以太币。 这个问题确实存在并且需要尽快纠正，但实际情况可能和表面看起来略有不同。 中心化的质押服务提供商并不一定对验证者进行中心化控制，通常这只是一种创建中心化以太币池的方式，让许多独立的节点运营者能够进行质押，而不需要每个参与者都持有 32 个以太币。</p>
+<p>对于以太坊来说，最好的选择是让验证者在家用计算机本地运行，最大程度地实现去中心化。 这就是为什么以太坊拒绝提高运行节点/验证者的硬件要求。</p>
+<h3 id="可持续性"><a href="#可持续性" class="headerlink" title="可持续性"></a>可持续性</h3><p>权益证明是一种保护区块链的低碳方式。 在工作量证明机制下，矿工们会争夺开采区块的权利。 当矿工能够更快地执行计算时，他们的成功几率会更高，从而刺激他们对硬件和能源消耗的投资。 在以太坊过渡到权益证明之前，就已经发现了这一点。 在向权益证明机制过渡之前，以太坊的能源消耗约为 78 太瓦时/年，相当于一个小国家的能源消耗量。 然而，过渡到权益证明后，能源消耗减少了约 99.98%。 权益证明使以太坊成为一个节能、低碳平台。</p>
+<p><a href="https://ethereum.org/zh/energy-consumption/">更多关于以太坊能源消耗的信息</a></p>
+<h3 id="发行"><a href="#发行" class="headerlink" title="发行"></a>发行</h3><p>权益证明以太坊在支付其安全性时发行的代币数量比工作量证明以太坊少得多，因为验证者无需支付高昂的电力费用。 因此，以太币可以降低通货膨胀率，甚至在大量以太币被销毁时，以太币会出现通缩。 通货膨胀水平更低意味着以太坊的安全成本比工作量证明机制下更低。</p>
+<h2 id="提出区块"><a href="#提出区块" class="headerlink" title="提出区块"></a>提出区块</h2><p>区块是区块链的基本单位。 区块是在节点之间传递、达成共识并添加到每个节点数据库中的离散的信息单元。 本页解释它们是如何产生的。</p>
+<h3 id="谁产生区块？"><a href="#谁产生区块？" class="headerlink" title="谁产生区块？"></a>谁产生区块？</h3><p>验证者帐户提议区块。 验证者帐户由节点运营商管理，节点运营商运行验证者软件作为其执行和共识客户端的一部分，并且已经向存款合约中存入了至少 32 个以太币。 然而，每个验证者只是偶尔负责提议一个区块。 以太坊以时隙和时段来度量时间。 每个时隙是 12 秒，32 个时隙（6.4 分钟）组成一个时段。 每个时隙都是在以太坊上添加一个新区块的机会。</p>
+<h4 id="随机选择"><a href="#随机选择" class="headerlink" title="随机选择"></a>随机选择</h4><p>在每个时隙以伪随机的方式选择一个验证者来提议区块。 在区块链中没有真正的随机性，因为如果每个节点生成真正的随机数，它们就无法达成共识。 相反，目的是使验证者的选择过程不可预测。 以太坊使用一种叫做 RANDAO 的算法来实现随机性，它将来自区块提议者的一个哈希与一个随每个区块更新的种子混合起来。 这个值用于在所有验证者中选择一个特定的验证者。 验证者的选择提前两个时段固定，这是为了防范某些类型的种子操纵。</p>
+<p>虽然验证者在每个时隙中都会向 RANDAO 添加内容，但全局 RANDAO 值仅在每个时段更新一次。 为了计算下一个区块提议者的索引，RANDAO 值在每个时隙与时隙号混合，以给出唯一的值。 单独验证者被选中的概率并不是简单的 <code>1/N</code>（其中 <code>N</code> = 活跃验证者的总数）。 相反，它是按照每个验证者的有效以太币余额进行加权的。 最大有效余额为 32 个以太币（这意味着 <code>balance &lt; 32 ETH</code> 会产生低于 <code>balance == 32 ETH</code> 的权重，而 <code>balance &gt; 32 ETH</code> 不会产生高于 <code>balance == 32 ETH</code> 的权重）。</p>
+<p>每个时隙中只选择一个区块提议者。 在正常情况下，单个区块生产者会在他们专属的时隙中创建并发布单个区块。 为同一个时隙创建两个区块是一种可罚没的行为，通常被称为“模棱两可”。</p>
+<h3 id="区块是如何创建的？"><a href="#区块是如何创建的？" class="headerlink" title="区块是如何创建的？"></a>区块是如何创建的？</h3><p>区块提议者预计会广播一个已签名的信标链区块，该区块建立在根据他们自己在本地运行的分叉选择算法所看到的最近链头之上。 分叉选择算法会应用上一个时隙留下的任何排队认证，然后在其历史记录中查找具有最大累积认证权重的区块。 该区块便是由提议者创建的新区块的父区块。</p>
+<p>区块提议者通过从其自己的本地数据库和链视图中收集数据来创建区块。 区块的内容如下代码片段所示：</p>
+<pre class="line-numbers language-rust"><code class="language-rust">1class <span class="token function">BeaconBlockBody</span><span class="token punctuation">(</span>Container<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token number">2</span>    randao_reveal<span class="token punctuation">:</span> BLSSignature
+<span class="token number">3</span>    eth1_data<span class="token punctuation">:</span> Eth1Data
+<span class="token number">4</span>    graffiti<span class="token punctuation">:</span> Bytes32
+<span class="token number">5</span>    proposer_slashings<span class="token punctuation">:</span> List<span class="token punctuation">[</span>ProposerSlashing<span class="token punctuation">,</span> MAX_PROPOSER_SLASHINGS<span class="token punctuation">]</span>
+<span class="token number">6</span>    attester_slashings<span class="token punctuation">:</span> List<span class="token punctuation">[</span>AttesterSlashing<span class="token punctuation">,</span> MAX_ATTESTER_SLASHINGS<span class="token punctuation">]</span>
+<span class="token number">7</span>    attestations<span class="token punctuation">:</span> List<span class="token punctuation">[</span>Attestation<span class="token punctuation">,</span> MAX_ATTESTATIONS<span class="token punctuation">]</span>
+<span class="token number">8</span>    deposits<span class="token punctuation">:</span> List<span class="token punctuation">[</span>Deposit<span class="token punctuation">,</span> MAX_DEPOSITS<span class="token punctuation">]</span>
+<span class="token number">9</span>    voluntary_exits<span class="token punctuation">:</span> List<span class="token punctuation">[</span>SignedVoluntaryExit<span class="token punctuation">,</span> MAX_VOLUNTARY_EXITS<span class="token punctuation">]</span>
+<span class="token number">10</span>    sync_aggregate<span class="token punctuation">:</span> SyncAggregate
+<span class="token number">11</span>    execution_payload<span class="token punctuation">:</span> ExecutionPayload
+
+显示全部<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>randao_reveal</code> 字段取一个可验证的随机值，该值是区块提议者通过签署当前的时段编号创建的。 <code>eth1_data</code> 是就区块提议者对存款合约的看法进行的投票，包括存款默克尔树的根和使新存款能够被验证的总存款数。 <code>graffiti</code> 是一个可选字段，可以用来在区块中添加一条消息。 <code>proposer_slashings</code> 和 <code>attester_slashings</code> 字段包含了某些验证者根据区块提议者对链的看法已经犯下可罚没行为的证据。 <code>deposits</code> 是区块提议者所知道的新验证者存款的列表，<code>voluntary_exits</code> 是区块提议者从共识层广播网络上监听到的希望退出的验证者的列表。 <code>sync_aggregate</code> 是一个向量，显示哪些验证者之前被分配到一个同步委员会（服务于轻量客户端数据的验证者子集）并参与了数据签名。</p>
+<p><code>execution_payload</code> 使得关于交易的信息可以在执行和共识客户端之间传递。 <code>execution_payload</code> 是一个被嵌套在信标链区块内部的执行数据区块。 <code>execution_payload</code> 中的字段反映了以太坊黄皮书中概述的区块结构，只不过其中没有叔块，并且 <code>prev_randao</code> 取代了 <code>difficulty</code>。 执行客户端可以访问它在自己的广播网络上监听到的本地交易池。 这些交易在本地执行，以生成一个被称为“后状态”的更新的状态树。 这些交易被包括在 <code>execution_payload</code> 中名为 <code>transactions</code> 的列表中，后状态则在 <code>state-root</code> 字段中提供。</p>
+<p>所有这些数据都被收集在一个信标链区块中，经过签名并广播给区块提议者的对等者，再由他们传播给他们的对等者，以此类推。</p>
+<p>阅读更多关于<a href="https://ethereum.org/zh/developers/docs/blocks/">区块剖析</a>的内容。</p>
+<h3 id="区块发生了什么？"><a href="#区块发生了什么？" class="headerlink" title="区块发生了什么？"></a>区块发生了什么？</h3><p>区块被添加到区块提议者的本地数据库，并通过共识层广播网络广播给对等者。 当一个验证者接收到区块时，它会验证其中的数据，包括检查区块是否有正确的父区块、是否对应正确的时隙、提议者索引是否符合预期、RANDAO 揭示是否有效以及提议者是否被罚没。 <code>execution_payload</code> 被解包，验证者的执行客户端重新执行列表中的交易，以检查所提议的状态变化。 假设区块通过了所有这些检查，每个验证者将区块添加到自己的规范链中。 然后，在下一个时隙中重新开始这个过程。</p>
+<h3 id="区块奖励"><a href="#区块奖励" class="headerlink" title="区块奖励"></a>区块奖励</h3><p>区块提议者会收到他们工作的报酬。 有一个 <code>base_reward</code>，它是根据活跃验证者的数量和他们的有效余额来计算的。 然后，区块提议者会收到区块中包含的每个有效认证的 <code>base_reward</code> 的一部分；认证区块的验证者越多，区块提议者获得的奖励就越高。 还有一个奖励是报告应该被罚没的验证者，数额等于每个被罚没的验证者的 <code>1/512 * effective balance</code>。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/rewards-and-penalties/">关于奖励和惩罚的更多信息</a></p>
+<h2 id="权益证明常见问题"><a href="#权益证明常见问题" class="headerlink" title="权益证明常见问题"></a>权益证明常见问题</h2><h3 id="权益证明是什么？"><a href="#权益证明是什么？" class="headerlink" title="权益证明是什么？"></a>权益证明是什么？</h3><p>权益证明是一种算法类别，通过确保攻击者因欺诈行为而损失有价值的资产，可以为区块链提供安全性。 权益证明系统需要一组验证者提供一些资产，如果验证者从事某些被证明为欺诈的行为，则可以销毁这些资产。 以太坊使用权益证明机制来保护区块链的安全性。</p>
+<h3 id="权益证明与工作量证明相比有何不同？"><a href="#权益证明与工作量证明相比有何不同？" class="headerlink" title="权益证明与工作量证明相比有何不同？"></a>权益证明与工作量证明相比有何不同？</h3><p>权益证明和工作量证明都是从经济上抑制恶意行为者的机制，以防止其向网络发送垃圾或进行欺诈行为。 在两种情况下，积极参与共识的节点都会“向网络中”投入某些资产，如果他们行为不当，便会失去这些资产。</p>
+<p>在工作量证明中，这种资产是能源。 节点，也称为矿工，会运行一个算法，目的是比任何其他节点更快地计算出一个值。 最快的节点有权向链中提议一个区块。 要更改链的历史记录或主导区块提议，矿工必须拥有足够的算力，以便它们始终赢得比赛。 由于代价高昂且执行难度极大，这一过程保护了区块链免受攻击。 使用工作量证明挖矿所需的能源是矿工支付的现实世界资产。</p>
+<p>权益证明要求节点（称为验证者）向智能合约明确提交一种加密资产。 如果验证者行为不当，这种加密货币可以被销毁，因为他们是将自己的资产直接质押到链中而不是通过能量消耗的方式间接质押。</p>
+<p>工作量证明需要在挖矿过程中消耗大量的电力，因此能耗要高得多。 而权益证明只需要非常少量的能量 - 以太坊验证者甚至可以在树莓派等低功耗设备上运行。 以太坊的权益证明机制被认为比工作量证明机制更安全，因为攻击的代价更高，并且给攻击者造成的后果更严重。</p>
+<p>工作量证明与权益证明是一个有争议的话题。 <a href="https://vitalik.eth.limo/general/2017/12/31/pos_faq.html#what-are-the-benefits-of-proof-of-stake-as-opposed-to-proof-of-work">Vitalik Buterin 的博客(opens in a new tab)</a>以及 Justin Drake 和 Lyn Alden 间的辩论很好地总结了各方论点。</p>
+<h3 id="权益证明的能效高吗？"><a href="#权益证明的能效高吗？" class="headerlink" title="权益证明的能效高吗？"></a>权益证明的能效高吗？</h3><p>由此可见， 权益证明网络上的节点能耗很低。 一项第三方研究得出的结论是，整个基于权益证明的以太坊网络每年消耗约 0.0026 亿千瓦时的电量，仅相当于美国博彩行业电力消耗量的 1/13000 左右。</p>
+<p><a href="https://ethereum.org/zh/energy-consumption/">关于以太坊能源消耗的更多信息</a>。</p>
+<h3 id="权益证明安全吗？"><a href="#权益证明安全吗？" class="headerlink" title="权益证明安全吗？"></a>权益证明安全吗？</h3><p>以太坊的权益证明是非常安全的。 这种机制经过了八年的研究、开发和严格测试，才得以投入使用。 安全保证有别于使用工作量证明的区块链。 在权益证明机制中，可以主动惩罚（“罚没”）恶意验证者并将其从验证者组中驱逐出去，这将导致其损失大量的以太币。 而在工作量证明中，攻击者在拥有足够哈希能力的情况下可以不断重复攻击。 与工作量证明以太坊相比，对权益证明以太坊发起同等攻击的成本也更高。 要影响链的活性，至少需要网络上已质押以太币总数的 33%（除非进行极为复杂、成功概率极低的攻击）。 要控制未来区块的内容，至少需要已质押以太币总量的 51%，而要重写历史记录，则需要超过质押总量的 66%。 以太坊协议将在 33% 或 51% 攻击场景中销毁这些资产，并通过社会共识来应对 66% 攻击场景。</p>
+<ul>
+<li><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/attack-and-defense/">关于保护以太坊权益证明机制免受攻击的更多信息</a></li>
+<li><a href="https://medium.com/@VitalikButerin/a-proof-of-stake-design-philosophy-506585978d51">关于权益证明设计的更多信息(opens in a new tab)</a></li>
+</ul>
+<h3 id="权益证明机制降低了以太坊的费用吗？"><a href="#权益证明机制降低了以太坊的费用吗？" class="headerlink" title="权益证明机制降低了以太坊的费用吗？"></a>权益证明机制降低了以太坊的费用吗？</h3><p>否。 发送交易的成本（燃料费）由动态费用市场决定，随着网络需求的增加而增加。 共识机制对此没有直接影响。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/gas/">关于燃料的更多信息</a>。</p>
+<h3 id="什么是节点、客户端和验证者？"><a href="#什么是节点、客户端和验证者？" class="headerlink" title="什么是节点、客户端和验证者？"></a>什么是节点、客户端和验证者？</h3><p>节点是连接到以太坊网络的计算机。 客户端是在计算机上运行，将其转化为节点的软件。 有两种类型的客户端：执行客户端和共识客户端。 两种客户端都是创建节点所需的。 验证者是共识客户端一个可选的附加功能，使节点能够参与权益证明共识。 这意味着当被选中时创建和提议区块，以及认证其在网络上监听到的区块。 要运行验证者，节点运营商必须在存款合约中存入 32 个以太币。</p>
+<ul>
+<li><a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/">关于节点和客户端的更多信息</a></li>
+<li><a href="https://ethereum.org/zh/staking/">关于质押的更多信息</a></li>
+</ul>
+<h3 id="“权益证明”是一个新的概念吗？"><a href="#“权益证明”是一个新的概念吗？" class="headerlink" title="“权益证明”是一个新的概念吗？"></a>“权益证明”是一个新的概念吗？</h3><p>否。 早在 2011 年，BitcoinTalkk 论坛上有一位用户就<a href="https://bitcointalk.org/index.php?topic=27787.0">提出了将权益证明作为比特币的升级形态的想法(opens in a new tab)</a>。 11 年后，才准备好在以太坊主网上实施。 一些其他的区块链比以太坊更早实施了权益证明，但不是以太坊的特定机制（称为 Gasper）。</p>
+<h3 id="以太坊的权益证明有什么特别之处？"><a href="#以太坊的权益证明有什么特别之处？" class="headerlink" title="以太坊的权益证明有什么特别之处？"></a>以太坊的权益证明有什么特别之处？</h3><p>以太坊的权益证明机制在其设计上是独一无二的。 它不是第一个设计和实施的权益证明机制，但它是最完善的。 该权益证明机制被称为“Casper”。 Casper 定义了如何选择验证者来提议区块、如何及何时进行认证、如何计数认证、给予验证者的奖励和惩罚、罚没条件、故障转移机制（如“怠惰惩罚”），以及“最终确定性”的条件。 最终确定性是指一个区块被认为是规范链的永久部分的条件，即它必须得到网络上已质押的以太币总量至少 66% 的投票。 研究人员专门为以太坊开发了 Casper，以太坊是第一个也是唯一一个实现了它的区块链。</p>
+<p>除了 Casper，以太坊的权益证明还使用了一种叫做 LMD-GHOST 的分叉选择算法。 这是在出现两个区块存在于同一个时隙的情况下所需的。 这会创建区块链的两个分叉。 LMD-GHOST 选择具有最大认证“权重”的分叉。 权重是指按验证者有效余额加权后的认证数量。 LMD-GHOST 是以太坊独有的。</p>
+<p>Casper 和 LMD_GHOST 的组合被称为 Gasper。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/gasper/">关于 Gasper 的更多信息</a></p>
+<h3 id="什么是罚没？"><a href="#什么是罚没？" class="headerlink" title="什么是罚没？"></a>什么是罚没？</h3><p>罚没是指销毁验证者的部分质押额并将验证者从网络中逐出的行为。 罚没中损失的以太币数量随着被罚没的验证者数量而变化 - 这意味着串通的验证者会受到比个人更严厉的惩罚。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/rewards-and-penalties/#slashing">关于罚没的更多信息</a></p>
+<h3 id="为什么成为验证者需要质押-32-个以太币？"><a href="#为什么成为验证者需要质押-32-个以太币？" class="headerlink" title="为什么成为验证者需要质押 32 个以太币？"></a>为什么成为验证者需要质押 32 个以太币？</h3><p>验证者必须质押以太币，这样他们就有了当行为不当时便会损失的东西。 之所以要质押 32 个以太币，是为了让节点能够在适度的硬件上运行。 如果每个验证者的最少以太币数量更低，那么验证者的数量，继而每个时隙必须处理的消息数量就会增加，而这意味着需要更强大的硬件来运行节点。</p>
+<h3 id="验证者是如何被选中的？"><a href="#验证者是如何被选中的？" class="headerlink" title="验证者是如何被选中的？"></a>验证者是如何被选中的？</h3><p>每个时隙都会以伪随机的方式选择一个验证者来提议区块，使用的算法被称为 RANDAO，它将区块提议者的哈希与一个随每个区块更新的种子混合在一起。 这个值用于在所有验证者中选择一个特定的验证者。 验证者的选择会提前两个时段固定。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/block-proposal/">关于如何选择验证者的更多信息</a></p>
+<h3 id="什么是权益粉碎攻击？"><a href="#什么是权益粉碎攻击？" class="headerlink" title="什么是权益粉碎攻击？"></a>什么是权益粉碎攻击？</h3><p>权益粉碎攻击是针对权益证明网络的攻击类别，这种情况下，攻击者试图将验证者选择算法偏向于选择他们自己的验证者。 对 RANDAO 发起权益粉碎攻击需要已质押的以太币总数的约一半。</p>
+<p><a href="https://eth2book.info/altair/part2/building_blocks/randomness/#randao-biasability">关于权益粉碎攻击的更多信息(opens in a new tab)</a></p>
+<h3 id="什么是社交罚没？"><a href="#什么是社交罚没？" class="headerlink" title="什么是社交罚没？"></a>什么是社交罚没？</h3><p>社交罚没是指社区协调区块链的分叉以应对攻击的能力。 它使社区能够从攻击者最终化不诚实的链中恢复过来。 它也可以用于对抗审查攻击。</p>
+<ul>
+<li><a href="https://ercwl.medium.com/the-case-for-social-slashing-59277ff4d9c7">关于社交罚没的更多信息(opens in a new tab)</a></li>
+<li><a href="https://vitalik.eth.limo/general/2017/12/31/pos_faq.html#what-is-proof-of-stake">Vitalik Buterin 关于社交罚没的观点(opens in a new tab)</a></li>
+</ul>
+<h3 id="我会受到罚没吗？"><a href="#我会受到罚没吗？" class="headerlink" title="我会受到罚没吗？"></a>我会受到罚没吗？</h3><p>作为验证者，除非你故意从事恶意行为，否则不会受到罚没。 罚没机制只会在极其特定的情况下实施，比如验证者在同一时隙提议多个区块或者在其认证中出现自相矛盾等行为，这类情况很少会在正常操作中意外发生。</p>
+<p><a href="https://eth2book.info/altair/part2/incentives/slashing">关于罚没条件的更多信息(opens in a new tab)</a></p>
+<h3 id="什么是无利害关系问题？"><a href="#什么是无利害关系问题？" class="headerlink" title="什么是无利害关系问题？"></a>什么是无利害关系问题？</h3><p>无利害关系问题是一些权益证明机制中的一个概念性问题，其中只有奖励而没有惩罚。 如果没有任何利害关系，那么一个务实的验证者同样愿意验证任何甚至多个区块链分叉，因为这将增加他们的奖励。 以太坊通过使用最终确定性条件和罚没机制来确保只有一个规范链，以解决此问题。</p>
+<p><a href="https://vitalik.eth.limo/general/2017/12/31/pos_faq.html#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed">关于无利害关系问题的更多信息(opens in a new tab)</a></p>
+<h3 id="什么是分叉选择算法？"><a href="#什么是分叉选择算法？" class="headerlink" title="什么是分叉选择算法？"></a>什么是分叉选择算法？</h3><p>分叉选择算法实施规则，确定哪条链是规范链。 在最优条件下，没有必要使用分叉选择规则，因为每个时隙只有一个区块提议者和一个可供选择的区块。 但是，偶尔会出现同一个时隙内有多个区块或者由于晚到的信息导致链头附近的区块组织方式存在多个选择的情况。 在这些情况下，所有客户端都必须以相同的方式执行一些规则，确保它们都选择正确的区块序列。 分叉选择算法的代码中体现了这些规则。</p>
+<p>以太坊的分叉选择算法被称为 LMD-GHOST。 它会选择具有最大认证权重的分叉，也就是得到了最多质押以太币投票的分叉。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/gasper/#fork-choice">关于 LMD-GHOST 的更多信息</a></p>
+<h3 id="什么是权益证明中的最终确定性？"><a href="#什么是权益证明中的最终确定性？" class="headerlink" title="什么是权益证明中的最终确定性？"></a>什么是权益证明中的最终确定性？</h3><p>权益证明中的最终确定性是指保证给定的区块是规范链的永久部分，并且只有在出现共识失败的情况下才会被回滚，这时攻击者将会销毁已质押以太币总数的 33%。 这是“加密经济”的最终确定性，而不是与工作量证明区块链相关的“概率最终确定性”。 在概率最终确定性中，区块没有明确的确定/非确定状态——只不过随着时间的推移，区块从链上被删除的可能性越来越小，用户将自行决定他们什么时候有足够的信心认为区块是“安全的”。 而在加密经济的最终确定性下，成对的检查点区块必须获得已质押以太币 66% 以上的选票。 如果满足这个条件，这两个检查点之间的区块将被明确“最终确定”。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/#finality">关于最终确定性的更多信息</a></p>
+<h3 id="什么是“弱主观性”？"><a href="#什么是“弱主观性”？" class="headerlink" title="什么是“弱主观性”？"></a>什么是“弱主观性”？</h3><p>弱主观性是权益证明网络的一个特点，其中社交信息用于确认区块链的当前状态。 新节点或长时间离线后重新加入网络的节点可以获得最新的状态，以便节点能够立即查看它们是否位于正确的链上。 这些状态被称为“弱主观性检查点”，它们可以从其他带外节点运营者处获取，也可以从区块链浏览器或多个公共端点获取。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/weak-subjectivity/">关于弱主观性的更多信息</a></p>
+<h3 id="权益证明能抗审查吗？"><a href="#权益证明能抗审查吗？" class="headerlink" title="权益证明能抗审查吗？"></a>权益证明能抗审查吗？</h3><p>抗审查性当前很难证明。 然而，与工作量证明不同，权益证明提供了协调罚没以处罚审查验证者的选择。 该协议即将修改为将区块构建者与区块提议者分开，并实施构建者必须在每个区块中包括的交易列表。 此提案被称为“提议者-构建者分离”，有助于防止验证者审查交易。</p>
+<p><a href="https://notes.ethereum.org/@fradamt/H1TsYRfJc#Original-basic-scheme">关于“提议者-构建者分离”的更多信息(opens in a new tab)</a></p>
+<h3 id="以太坊的权益证明系统会受到-51-攻击吗？"><a href="#以太坊的权益证明系统会受到-51-攻击吗？" class="headerlink" title="以太坊的权益证明系统会受到 51% 攻击吗？"></a>以太坊的权益证明系统会受到 51% 攻击吗？</h3><p>由此可见， 权益证明和工作量证明一样，容易受到 51% 攻击。 攻击者不需要掌控 51% 的网络算力，而是需要掌控已质押以太币总数的 51%。 如果攻击者累积了总质押量的 51％，则能够控制分叉选择算法。 这使得攻击者能够审查某些交易，进行短程重组，以及通过以有利于他们的方式重新排序区块来提取矿工可提取价值。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/attack-and-defense/">关于权益证明攻击的更多信息</a></p>
+<h3 id="什么是社交协调，为什么需要它？"><a href="#什么是社交协调，为什么需要它？" class="headerlink" title="什么是社交协调，为什么需要它？"></a>什么是社交协调，为什么需要它？</h3><p>社交协调是以太坊的最后一道防线，它可以使一个由于遭到攻击而最终化了不诚实区块的区块链恢复到诚实状态。 在这种情况下，以太坊社区将不得不进行“带外”社交协调并同意使用诚实的少数分支，同时罚没攻击者的验证者。 这需要应用程序和交易所也认可诚实的分叉。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/attack-and-defense/#people-the-last-line-of-defense">了解关于社交协调的更多信息</a></p>
+<h3 id="在权益证明中，富人会变得更富有吗？"><a href="#在权益证明中，富人会变得更富有吗？" class="headerlink" title="在权益证明中，富人会变得更富有吗？"></a>在权益证明中，富人会变得更富有吗？</h3><p>将越多的以太币用于抵押，一个人就能运行越多的验证者，也能获得更多的奖励。 奖励与抵押的以太币数量成线性比例，每个人获得相同百分比的回报。 工作量证明比权益证明更能让富人富裕起来，因为大规模购买硬件的富裕矿工将受益于规模经济，这意味着财富和奖励之间的关系是非线性的。</p>
+<h3 id="权益证明是否比工作量证明更中心化？"><a href="#权益证明是否比工作量证明更中心化？" class="headerlink" title="权益证明是否比工作量证明更中心化？"></a>权益证明是否比工作量证明更中心化？</h3><p>不，由于采矿成本增加、价格高昂迫使个人和小公司退出等原因，工作量证明更倾向于集中化。 目前权益证明存在的问题是流动性质押衍生品的影响。 这些是代表某些提供者所质押的以太币的代币，任何人都可以在二级市场上交换，而无需实际解除以太币的质押。 流动性质押衍生品允许用户质押的以太币数量少于 32 个，但也会产生中心化风险，即少数几个大型组织最终可能控制大部分的质押份额。 这就是为什么<a href="https://ethereum.org/zh/staking/solo/">单独质押</a>成为以太坊的最佳选择。</p>
+<p><a href="https://notes.ethereum.org/@djrtwo/risks-of-lsd">关于流动性质押衍生品中的权益中心化的更多信息(opens in a new tab)</a></p>
+<h3 id="为什么我只能质押以太币？"><a href="#为什么我只能质押以太币？" class="headerlink" title="为什么我只能质押以太币？"></a>为什么我只能质押以太币？</h3><p>ETH 是以太坊的原生货币。 为计算有效余额以用于加权投票和确保安全性，必须有一种单一的货币来计量所有权益。 以太币本身是以太坊的一个基本组成部分，而不是一个智能合约。 如果加入其他货币，将会显著增加质押的复杂性并降低其安全性。</p>
+<h3 id="以太坊是唯一使用权益证明的区块链吗？"><a href="#以太坊是唯一使用权益证明的区块链吗？" class="headerlink" title="以太坊是唯一使用权益证明的区块链吗？"></a>以太坊是唯一使用权益证明的区块链吗？</h3><p>不，现在有多种使用权益证明的区块链。 但是没有一个和以太坊完全相同；以太坊的权益证明机制是独一无二的。</p>
+<h3 id="什么是合并？"><a href="#什么是合并？" class="headerlink" title="什么是合并？"></a>什么是合并？</h3><p>合并是指以太坊关闭其基于工作量证明的共识机制并开启其基于权益证明的共识机制的时刻。 合并发生在 2022 年 9 月 15 日。</p>
+<p><a href="https://ethereum.org/zh/roadmap/merge/">关于合并的更多信息</a></p>
+<h3 id="什么是活性和安全性？"><a href="#什么是活性和安全性？" class="headerlink" title="什么是活性和安全性？"></a>什么是活性和安全性？</h3><p>活性和安全性是区块链的两个基本安全问题。 活性是指最终链的可用性。 如果链停止最终化或用户无法轻松访问它，这些都是活性失败。 极高的访问成本也可能被认为是一种活性失败。 安全性是指攻击链，即最终化彼此冲突的检查点的难度有多大。</p>
+<p><a href="https://arxiv.org/pdf/1710.09437.pdf">阅读关于 Casper 论文的更多信息(opens in a new tab)</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-gong-zuo-liang-zheng-ming-pow/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="ETH中工作量证明POW">
+                            
+                            <span class="card-title">ETH中工作量证明POW</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                工作量证明 (POW)以太坊网络最初采用一种称为工作量证明 (PoW) 的共识机制。 这种机制允许以太坊网络的节点就以太坊区块链上记录的所有信息的状态达成共识，并防止某些产生经济影响的攻击。 然而，以太坊在 2022 年终结了工作量证明并开
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-wang-luo/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/8.png" class="responsive-img" alt="ETH中的网络">
+                            
+                            <span class="card-title">ETH中的网络</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以太坊网络是一组使用以太坊协议进行通信的互联计算机。 以太坊只有一个主网，但可以创建符合相同协议规则的独立网络用于测试和开发。 有许多独立的“网络”遵循该协议，但彼此之间没有交互。 你甚至可以在自己的计算机上本地启动一个以太坊网络，以测试你
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">383.6k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

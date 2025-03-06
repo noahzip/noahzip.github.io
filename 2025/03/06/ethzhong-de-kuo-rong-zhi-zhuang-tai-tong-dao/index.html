@@ -1,0 +1,1101 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的扩容之状态通道, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="状态通道（State Channels）是以太坊链下扩展的重要解决方案，允许参与者在链下安全、高效地进行交易，仅需在以太坊主网（Ethereum Mainnet）上执行两次链上操作：开启和关闭通道。本文详细探讨状态通道的原理、实现、应用场景">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的扩容之状态通道 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的扩容之状态通道</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.7k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        10 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>状态通道（State Channels）是以太坊链下扩展的重要解决方案，允许参与者在链下安全、高效地进行交易，仅需在以太坊主网（Ethereum Mainnet）上执行两次链上操作：开启和关闭通道。本文详细探讨状态通道的原理、实现、应用场景及其优缺点，基于截至2025年2月12日的最新信息（原作者：@wackerow）。通过约5000字的篇幅，我们将全面解析这一技术及其在区块链扩展性中的地位。 —</p>
+<h2 id="1-背景与动机"><a href="#1-背景与动机" class="headerlink" title="1. 背景与动机"></a>1. 背景与动机</h2><h3 id="1-1-以太坊扩展性挑战"><a href="#1-1-以太坊扩展性挑战" class="headerlink" title="1.1 以太坊扩展性挑战"></a>1.1 以太坊扩展性挑战</h3><p>以太坊作为公共区块链，因其分布式架构面临扩展性瓶颈。所有节点需执行每笔链上交易并达成共识，导致交易吞吐量受限于硬件性能（约15-30 TPS）。为保持去中心化，区块大小和出块时间受到严格限制。然而，随着DeFi、NFT和DApp的普及，网络拥堵和高Gas费用成为用户痛点。 传统的Layer 1优化（如分片）需多年研发，而Layer 2方案（如Rollups、状态通道）提供即时解决方案。状态通道通过将交易移至链下，极大提升吞吐量并降低成本，同时保留主网的安全性。 </p>
+<h3 id="1-2-状态通道的起源"><a href="#1-2-状态通道的起源" class="headerlink" title="1.2 状态通道的起源"></a>1.2 状态通道的起源</h3><p>状态通道的概念源于比特币的支付通道（如闪电网络），旨在解决小额支付的高费用问题。以太坊将其扩展为通用状态通道，支持复杂智能合约逻辑。2015年，Jeff Coleman首次提出状态通道概念，随后成为以太坊早期扩展方案之一。 — </p>
+<h2 id="2-什么是状态通道？"><a href="#2-什么是状态通道？" class="headerlink" title="2. 什么是状态通道？"></a>2. 什么是状态通道？</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>状态通道是一种点对点协议，允许两方（或多方）在链下执行任意次数的交易，仅将最终结果提交至区块链。它通过密码学证明链下交易的合法性，并依赖多重签名（Multisig）智能合约确保资金安全。 </p>
+<h3 id="2-2-核心特性"><a href="#2-2-核心特性" class="headerlink" title="2.2 核心特性"></a>2.2 核心特性</h3><ul>
+<li><strong>链下执行</strong>：交易无需广播至主网，减少网络负载。 </li>
+<li><strong>高吞吐量</strong>：理论上无上限，取决于参与者设备性能。 </li>
+<li><strong>低成本</strong>：仅开启和关闭通道需支付Gas费。 </li>
+<li><strong>主网依赖</strong>：最终结算和争议解决依赖以太坊共识。 </li>
+</ul>
+<h3 id="2-3-类型"><a href="#2-3-类型" class="headerlink" title="2.3 类型"></a>2.3 类型</h3><ul>
+<li><p><strong>支付通道</strong>：专注于资金转移，如ETH或代币支付。 </p>
+</li>
+<li><ul>
+<li><strong>状态通道</strong>：支持通用状态更新，如智能合约变量变化。 —</li>
+</ul>
+<h2 id="3-工作原理"><a href="#3-工作原理" class="headerlink" title="3. 工作原理"></a>3. 工作原理</h2></li>
+</ul>
+<p>态通道的运作分为三个阶段：开启、使用和关闭。以下详细分解每个阶段。 </p>
+<h3 id="3-1-开启通道"><a href="#3-1-开启通道" class="headerlink" title="3.1 开启通道"></a>3.1 开启通道</h3><ul>
+<li><p><strong>步骤</strong>：  </p>
+</li>
+<li><p><strong>部署合约</strong>：参与者在主网上部署多重签名智能合约。 </p>
+<ol>
+<li><strong>资金锁定</strong>：各方存入ETH或其他代币作为保证金和交易限额。  </li>
+<li><strong>初始状态</strong>：共同签名初始状态（余额、变量等），作为通道的“创世状态”。 -</li>
+</ol>
+</li>
+<li><p><strong>作用</strong>： </p>
+<ul>
+<li>锁定资金充当“虚拟账本”，支持链下交易。  </li>
+<li>保证金防止恶意行为，若违规可被罚没。 - </li>
+</ul>
+<ol>
+<li><strong>示例</strong>：  Alice和Bob各存入10 ETH，初始状态为 <code>{Alice: 10, Bob: 10}</code>。</li>
+</ol>
+<h3 id="3-2-使用通道"><a href="#3-2-使用通道" class="headerlink" title="3.2 使用通道"></a>3.2 使用通道</h3></li>
+<li><p><strong>交易流程</strong>：  </p>
+<ol>
+<li><strong>发起交易</strong>：一方提出状态更新（如“Alice支付Bob 2 ETH”）。 </li>
+<li><strong>签名确认</strong>：所有参与者签名同意新状态。 </li>
+<li><strong>状态更新</strong>：新状态生效，记录为 <code>{Alice: 8, Bob: 12}</code>。 </li>
+</ol>
+</li>
+<li><p><strong>交易结构</strong>： </p>
+<ul>
+<li><code>nonce</code>：唯一标识，防重放攻击，标记交易顺序。  </li>
+<li><code>old_state</code>：旧状态哈希。  - <code>new_state</code>：新状态哈希。 </li>
+<li><ul>
+<li><code>transaction</code>：触发状态变更的具体操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>特点</strong>：  </p>
+<ul>
+<li>交易无需链上广播，速度快、无Gas费。  </li>
+<li>状态更新仅需参与者共识，与主网无关。 </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-关闭通道"><a href="#3-3-关闭通道" class="headerlink" title="3.3 关闭通道"></a>3.3 关闭通道</h3><ul>
+<li><strong>正常关闭（乐观情况）</strong>： <ul>
+<li>双方提交最终状态（如 <code>{Alice: 5, Bob: 15}</code>）至合约。  </li>
+<li>合约验证签名后分配资金，通道关闭。</li>
+</ul>
+</li>
+<li><strong>争议关闭（悲观情况）</strong>：  <ul>
+<li><strong>单方退出</strong>：一方提交最新状态，触发挑战窗口（如7天）。 </li>
+<li><strong>挑战机制</strong>：他方可提交更新的状态反驳。  </li>
+<li><strong>结果</strong>：合约以最新有效状态结算。 </li>
+<li><strong>欺诈证明</strong>：  - 若提交旧状态（如 <code>{Alice: 8, Bob: 12}</code>），诚实方可提交最新状态（如 <code>{Alice: 5, Bob: 15}</code>）证明欺诈。  </li>
+<li>合约罚没恶意方保证金。 </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-虚拟通道"><a href="#3-4-虚拟通道" class="headerlink" title="3.4 虚拟通道"></a>3.4 虚拟通道</h3><p><strong>定义</strong>：基于链上账本通道（Ledger Channels）构建，无需每次链上开启。 </p>
+<p><strong>机制</strong>：  </p>
+<ul>
+<li>中介者（如账本通道拥有者）支持多对用户间的虚拟通道。  </li>
+<li>状态更新和争议解决可在链下完成。 </li>
+</ul>
+<p><strong>优势</strong>：减少链上操作，进一步降低成本。  </p>
+<h2 id="4-技术细节"><a href="#4-技术细节" class="headerlink" title="4. 技术细节"></a>4. 技术细节</h2><h3 id="4-1-多重签名合约"><a href="#4-1-多重签名合约" class="headerlink" title="4.1 多重签名合约"></a>4.1 多重签名合约</h3><p> <strong>作用</strong>：  </p>
+<ul>
+<li>管理锁定资金。 </li>
+<li>验证状态更新签名。  </li>
+<li>处理争议仲裁。 </li>
+</ul>
+<p><strong>代码示例（Solidity简化版）</strong>： </p>
+<pre class="line-numbers language-solidity"><code class="language-solidity">contract StateChannel {
+    address[] public participants;
+    mapping(address => uint) public balances;
+    bytes32 public latestStateHash;
+    uint public nonce;
+
+    function openChannel(address[] memory _participants, uint[] memory _deposits) public payable {
+        require(msg.value == sum(_deposits), "Invalid deposit");
+        participants = _participants;
+        for (uint i = 0; i < _participants.length; i++) {
+            balances[_participants[i]] = _deposits[i];
+        }
+    }
+
+    function closeChannel(bytes32 stateHash, uint _nonce, bytes[] memory signatures) public {
+        require(_nonce > nonce, "Invalid nonce");
+        require(verifySignatures(stateHash, signatures), "Invalid signatures");
+        latestStateHash = stateHash;
+        nonce = _nonce;
+        // 分配资金逻辑
+    }
+
+    function verifySignatures(bytes32 stateHash, bytes[] memory signatures) internal view returns (bool) {
+        // 验证所有参与者签名
+        return true; // 简化示例
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>说明</strong>：合约记录状态哈希和nonce，确保更新顺序和合法性。</li>
+</ul>
+<h3 id="4-2-密码学保障"><a href="#4-2-密码学保障" class="headerlink" title="4.2 密码学保障"></a>4.2 密码学保障</h3><ul>
+<li><strong>签名</strong>：使用ECDSA或BLS签名，确保状态更新不可伪造。</li>
+<li><strong>Nonce</strong>：防止重放攻击，保证交易唯一性。</li>
+<li><strong>欺诈证明</strong>：最新状态覆盖旧状态，依赖时间戳和签名验证。</li>
+</ul>
+<h3 id="4-3-与主网交互"><a href="#4-3-与主网交互" class="headerlink" title="4.3 与主网交互"></a>4.3 与主网交互</h3><ul>
+<li><strong>活性</strong>：通道依赖主网合约运行。</li>
+<li><strong>安全性</strong>：主网仲裁争议，提供最终确定性。</li>
+<li><strong>对比Sidechain</strong>：状态通道更依赖主网，安全性更高。</li>
+</ul>
+<hr>
+<h2 id="5-应用场景"><a href="#5-应用场景" class="headerlink" title="5. 应用场景"></a>5. 应用场景</h2><h3 id="5-1-支付"><a href="#5-1-支付" class="headerlink" title="5.1 支付"></a>5.1 支付</h3><ul>
+<li><strong>场景</strong>：频繁ETH转账、代币存款。</li>
+<li><strong>案例</strong>：Alice和Bob通过支付通道每日交易10次，仅需开闭通道两次，节省90% Gas费。</li>
+<li>优势：<ul>
+<li>高吞吐量：不受主网15 TPS限制。</li>
+<li>隐私性：交易细节不公开。</li>
+<li>即时性：无需等待区块确认。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-2-微交易"><a href="#5-2-微交易" class="headerlink" title="5.2 微交易"></a>5.2 微交易</h3><ul>
+<li><strong>场景</strong>：ISP按流量计费、内容创作者按浏览付费。</li>
+<li><strong>案例</strong>：用户每分钟支付0.001 ETH给ISP，链下累计至1 ETH后结算。</li>
+<li><strong>优势</strong>：无Gas费支持小额支付，降低商家成本。</li>
+</ul>
+<h3 id="5-3-去中心化应用（DApp）"><a href="#5-3-去中心化应用（DApp）" class="headerlink" title="5.3 去中心化应用（DApp）"></a>5.3 去中心化应用（DApp）</h3><ul>
+<li><strong>场景</strong>：双人游戏（如象棋）、NFT交易。</li>
+<li><strong>案例</strong>：Alice和Bob玩链下象棋，合约根据胜负分配10 ETH。</li>
+<li>优势：<ul>
+<li>无需信任：合约控制资金。</li>
+<li>高效：链下执行复杂逻辑。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-4-原子转账"><a href="#5-4-原子转账" class="headerlink" title="5.4 原子转账"></a>5.4 原子转账</h3><ul>
+<li><strong>场景</strong>：跨通道支付。</li>
+<li><strong>机制</strong>：通过虚拟通道和HTLC（如Alice→中介→Bob），确保支付原子性。</li>
+<li><strong>案例</strong>：Alice支付Bob 5 ETH，经中介路由，条件满足即释放。</li>
+</ul>
+<hr>
+<h2 id="6-优势与局限"><a href="#6-优势与局限" class="headerlink" title="6. 优势与局限"></a>6. 优势与局限</h2><h3 id="6-1-优势"><a href="#6-1-优势" class="headerlink" title="6.1 优势"></a>6.1 优势</h3><ul>
+<li><strong>高吞吐量</strong>：链下交易无上限，适合高频场景。</li>
+<li><strong>低成本</strong>：仅开闭通道需Gas费，均摊成本低。</li>
+<li><strong>隐私性</strong>：交易数据不公开，保护用户隐私。</li>
+<li><strong>即时性</strong>：链下确认速度快，无需等待10-20秒出块。</li>
+<li><strong>灵活性</strong>：支持支付和通用状态逻辑。</li>
+</ul>
+<h3 id="6-2-局限"><a href="#6-2-局限" class="headerlink" title="6.2 局限"></a>6.2 局限</h3><ul>
+<li>在线假设：<ul>
+<li>参与者需在线监控争议，否则可能被恶意方利用旧状态窃取资金。</li>
+<li>解决：引入“瞭望塔”（Watchtowers）代为监控，但增加成本。</li>
+</ul>
+</li>
+<li>数据可用性：<ul>
+<li>丢失最新状态可能导致无法反驳欺诈。</li>
+<li>对比主网：以太坊节点天然保障数据可用性。</li>
+</ul>
+</li>
+<li>流动性问题：<ul>
+<li>资金锁定降低灵活性，需预存足够ETH。</li>
+<li>解决：虚拟通道通过中介减少锁定需求。</li>
+</ul>
+</li>
+<li>悲观攻击（Griefing Attacks）：<ul>
+<li>恶意方反复提交旧状态，迫使诚实方支付高昂Gas费反驳。</li>
+<li>缓解：优化挑战窗口设计。</li>
+</ul>
+</li>
+<li>固定参与者：<ul>
+<li>通道人数固定，动态调整需额外链上操作。</li>
+<li>限制：不适合开放式应用。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="7-与其他Layer-2方案对比"><a href="#7-与其他Layer-2方案对比" class="headerlink" title="7. 与其他Layer 2方案对比"></a>7. 与其他Layer 2方案对比</h2><h3 id="7-1-Rollups"><a href="#7-1-Rollups" class="headerlink" title="7.1 Rollups"></a>7.1 Rollups</h3><ul>
+<li><strong>相似点</strong>：均为Layer 2方案，减少主网负载。</li>
+<li>差异：<ul>
+<li><strong>Rollups</strong>：批量提交交易数据至主网，支持通用DApp，数据可用性强。</li>
+<li><strong>状态通道</strong>：仅提交最终状态，适合固定参与者，吞吐量更高但灵活性低。</li>
+</ul>
+</li>
+<li><strong>适用性</strong>：Rollups更适合开放式应用，状态通道适合高频双人交互。</li>
+</ul>
+<h3 id="7-2-Plasma"><a href="#7-2-Plasma" class="headerlink" title="7.2 Plasma"></a>7.2 Plasma</h3><ul>
+<li>对比：<ul>
+<li><strong>Plasma</strong>：链下计算，定期提交状态承诺，退出需挑战期。</li>
+<li><strong>状态通道</strong>：无需定期承诺，关闭更简单，但需在线。</li>
+</ul>
+</li>
+<li><strong>优劣</strong>：Plasma支持更多用户，但数据可用性问题更严重。</li>
+</ul>
+<h3 id="7-3-Sidechains"><a href="#7-3-Sidechains" class="headerlink" title="7.3 Sidechains"></a>7.3 Sidechains</h3><ul>
+<li>差异：<ul>
+<li><strong>Sidechains</strong>：独立区块链，安全性依赖自身共识。</li>
+<li><strong>状态通道</strong>：直接依赖主网，安全性更高。</li>
+</ul>
+</li>
+<li><strong>适用性</strong>：Sidechains适合独立生态，状态通道更贴近主网。</li>
+</ul>
+<hr>
+<h2 id="8-实现与工具"><a href="#8-实现与工具" class="headerlink" title="8. 实现与工具"></a>8. 实现与工具</h2><h3 id="8-1-开源项目"><a href="#8-1-开源项目" class="headerlink" title="8.1 开源项目"></a>8.1 开源项目</h3><ul>
+<li><strong>Connext</strong>：支持跨链状态通道。</li>
+<li><strong>Kchannels</strong>：高效支付通道实现。</li>
+<li><strong>Perun</strong>：通用状态通道框架。</li>
+<li><strong>Raiden</strong>：以太坊支付通道网络。</li>
+<li><strong>Statechannels.org</strong>：社区驱动的状态通道资源。</li>
+</ul>
+<h3 id="8-2-集成示例"><a href="#8-2-集成示例" class="headerlink" title="8.2 集成示例"></a>8.2 集成示例</h3><ul>
+<li><p>DApp集成：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">{</span> ethers <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"ethers"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> channelContract <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ethers<span class="token punctuation">.</span>Contract</span><span class="token punctuation">(</span>address<span class="token punctuation">,</span> abi<span class="token punctuation">,</span> provider<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">openChannel</span><span class="token punctuation">(</span>participants<span class="token punctuation">,</span> deposits<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> tx <span class="token operator">=</span> <span class="token keyword">await</span> channelContract<span class="token punctuation">.</span><span class="token function">openChannel</span><span class="token punctuation">(</span>participants<span class="token punctuation">,</span> deposits<span class="token punctuation">,</span> <span class="token punctuation">{</span> value<span class="token punctuation">:</span> totalDeposit <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">await</span> tx<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">closeChannel</span><span class="token punctuation">(</span>stateHash<span class="token punctuation">,</span> nonce<span class="token punctuation">,</span> signatures<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> tx <span class="token operator">=</span> <span class="token keyword">await</span> channelContract<span class="token punctuation">.</span><span class="token function">closeChannel</span><span class="token punctuation">(</span>stateHash<span class="token punctuation">,</span> nonce<span class="token punctuation">,</span> signatures<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">await</span> tx<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<ul>
+<li><strong>说明</strong>：通过ethers.js与合约交互，完成通道管理。</li>
+</ul>
+<hr>
+<h2 id="9-未来发展"><a href="#9-未来发展" class="headerlink" title="9. 未来发展"></a>9. 未来发展</h2><h3 id="9-1-与Rollups结合"><a href="#9-1-与Rollups结合" class="headerlink" title="9.1 与Rollups结合"></a>9.1 与Rollups结合</h3><ul>
+<li><strong>前景</strong>：在Rollups上部署状态通道合约，降低开闭成本。</li>
+<li><strong>案例</strong>：Optimism上运行支付通道，Gas费降至主网1/10。</li>
+</ul>
+<h3 id="9-2-动态参与者"><a href="#9-2-动态参与者" class="headerlink" title="9.2 动态参与者"></a>9.2 动态参与者</h3><ul>
+<li><strong>挑战</strong>：支持人数变化需优化合约设计。</li>
+<li><strong>研究</strong>：Perun等项目探索多方状态通道。</li>
+</ul>
+<h3 id="9-3-去中心化中介"><a href="#9-3-去中心化中介" class="headerlink" title="9.3 去中心化中介"></a>9.3 去中心化中介</h3><ul>
+<li><strong>方向</strong>：通过DAO或分布式网络取代单一中介，提升虚拟通道去中心化程度。</li>
+</ul>
+<hr>
+<h2 id="10-总结"><a href="#10-总结" class="headerlink" title="10. 总结"></a>10. 总结</h2><p>状态通道是以太坊Layer 2的重要组成部分，通过链下交易实现高吞吐量、低成本和隐私保护。它特别适合固定参与者的高频场景，如支付、微交易和简单DApp。虽然在线要求、数据可用性和流动性限制存在挑战，虚拟通道和瞭望塔等改进提升了其实用性。与Rollups等方案相比，状态通道在特定用例中仍具优势，未来与Layer 2生态的融合将进一步释放其潜力。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-kuo-rong-zhi-ce-lian/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/22.png" class="responsive-img" alt="ETH中的扩容之侧链">
+                            
+                            <span class="card-title">ETH中的扩容之侧链</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                侧链是独立于以太坊运行的独立区块链，通过双向桥梁与以太坊主网连接。 侧链可以有单独的区块参数和共识算法，它们通常是为高效处理交易而设计的。 但是，使用侧链需要权衡取舍，因为它们未继承以太坊的安全属性。 与二层网络扩容解决方案不同，侧链不会将
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-kuo-rong-zhi-ling-zhi-shi-juan-die/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/27.png" class="responsive-img" alt="ETH中的扩容之零知识卷叠">
+                            
+                            <span class="card-title">ETH中的扩容之零知识卷叠</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                零知识卷叠（ZK 卷叠）是二层网络扩容解决方案，通过将计算和状态存储转移到链下进行提高了以太坊主网吞吐量。 零知识卷叠可以处理一个批次中的数千笔交易，但仅将一部分最少量的摘要数据发布到主网。 这些摘要数据确定了应对以太坊状态进行的变化以及一
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">383.6k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

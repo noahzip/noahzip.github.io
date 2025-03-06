@@ -1,0 +1,1123 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH启动自己的以太坊节点, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="运行你自己的节点为你提供各种好处，打开新的可能性，并为支持生态系统提供帮助。 这个页面将引导你启动自己的节点，并参与验证以太坊交易。
+注意，在合并之后，运行以太坊节点需要两种客户端，即执行层 (EL) 客户端和共识层 (CL) 客户端。 本">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH启动自己的以太坊节点 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH启动自己的以太坊节点</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        8.5k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        30 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>运行你自己的节点为你提供各种好处，打开新的可能性，并为支持生态系统提供帮助。 这个页面将引导你启动自己的节点，并参与验证以太坊交易。</p>
+<p>注意，在<a href="https://ethereum.org/zh/roadmap/merge/">合并</a>之后，运行以太坊节点需要两种客户端，即<strong>执行层 (EL)</strong> 客户端和<strong>共识层 (CL)</strong> 客户端。 本页面将展示如何安装、配置和连接这两种客户端以运行以太坊节点。</p>
+<h2 id="选择一种方式"><a href="#选择一种方式" class="headerlink" title="选择一种方式"></a>选择一种方式</h2><p>要启动自己的以太坊节点，第一步是选择你的运行方式。 根据要求和各种可能性，你必须选择客户端实现（执行客户端和共识客户端）、环境（硬件、系统）和客户端设置参数。</p>
+<p>本页面将指导你做出这些决定，并帮助你找到运行以太坊实例的最合适方式。</p>
+<p>要选择客户端实现，请查看所有可用的主网就绪<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#execution-clients">执行客户端</a>和<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#consensus-clients">共识客户端</a>，并了解<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/client-diversity/">客户端多样性</a>。</p>
+<p>决定是在自己的<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/run-a-node/#local-vs-cloud">硬件还是云端</a>运行软件，同时考虑客户端的<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/run-a-node/#requirements">要求</a>。</p>
+<p>准备好环境后，使用带有高级选项的终端，通过<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/run-a-node/#automatized-setup">初学者友好界面</a>或<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/run-a-node/#manual-setup">手动</a>安装所选客户端。</p>
+<p>在节点运行和同步后，你便随时可以<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/run-a-node/#using-the-node">使用该节点</a>，但请务必留意节点的<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/run-a-node/#operating-the-node">维护</a>。</p>
+<p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/run-a-node/diagram.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Frun-a-node%2Fdiagram.png&amp;w=1920&amp;q=75" alt="客户端设置"></a></p>
+<h3 id="运行环境和硬件设施"><a href="#运行环境和硬件设施" class="headerlink" title="运行环境和硬件设施"></a>运行环境和硬件设施</h3><h4 id="本地或云端"><a href="#本地或云端" class="headerlink" title="本地或云端"></a>本地或云端</h4><p>以太坊客户端能够在消费级电脑上运行，并且不需要任何专用硬件，例如矿机。 因此，你可以根据需要选择多种节点部署方案。 简而言之，我们考虑在本地物理计算机和云端服务器上运行节点：</p>
+<ul>
+<li><strong>云端</strong><ul>
+<li>服务商提供了高可用的服务器以及静态公共 IP 地址</li>
+<li>获得专用或虚拟服务器比自己搭建更加方便</li>
+<li>取舍是：是否需要信赖云服务商三方</li>
+<li>由于全节点所需的存储大小，租用服务器的价格可能会很高</li>
+</ul>
+</li>
+<li><strong>自有硬件</strong><ul>
+<li>更去信任并且更有主动权</li>
+<li>只需一次性投入</li>
+<li>可以购买预先配置好的机器</li>
+<li>你必须亲自准备并维护机器和网络，并有可能亲自对机器和网络进行故障排除</li>
+</ul>
+</li>
+</ul>
+<p>上面两种方案各有优点，总结如上。 如果你正在寻找云端解决方案，除了许多传统云计算服务商外，还有一些专注于部署以太坊节点的服务商， 查看<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/nodes-as-a-service/">节点即服务</a>，了解有关托管节点的更多选项。</p>
+<h4 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h4><p>不过，一个抗审查的去中心化网络不应该依赖于云服务提供商。 而且，在自己的本地硬件上运行节点对该生态系统来说更健康。 从<a href="https://www.ethernodes.org/networkType/Hosting">估算数据(opens in a new tab)</a>来看，在云端运行大部分节点可能引发单点故障。</p>
+<p>以太坊客户端可以在你的计算机、笔记本电脑、服务器甚至单板计算机上运行。 虽然可以在你的个人计算机上运行客户端，但为你的节点配备一台专用机器可以显著提高其性能和安全性，同时最大限度地减少对你的主计算机的影响。</p>
+<p>使用自己的硬件非常容易。 一般人可以选择一些简单的选项，技术水平较高的人士则可以在高级设置当中进行抉择。 接下来，我们了解一下在你的机器上运行以太坊客户端的要求和方法。</p>
+<h4 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h4><p>硬件要求因客户端不同而异，但通常不是很高，因为节点只需保持同步即可。 不要将其与需要更多算力的挖矿混淆。 不过，功能更强大的硬件的确可以优化同步时间和性能。</p>
+<p>在安装任何客户端之前，请确保计算机有足够的资源运行它。 你可以在下面找到最低要求和推荐要求。</p>
+<p>硬件的瓶颈通常是磁盘空间。 同步以太坊区块链是一种高强度的输入/输出密集型操作，并且需要大量空间。 最好使用在同步完成后还有数百 GB 可用空间的<strong>固态硬盘 (SSD)</strong>。</p>
+<p>数据库的大小和初始同步速度取决于所选客户端、其配置和<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#sync-modes">同步策略</a>。</p>
+<p>你还要确保网络连接没有<a href="https://wikipedia.org/wiki/Data_cap">带宽限制(opens in a new tab)</a>。 我们建议你使用不计流量的网络连接，因为初始同步和广播到网络的数据可能超过你的限额。</p>
+<h5 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h5><p>所有客户端都支持主流操作系统——Linux、MacOS、Windows。 这意味着你可以在普通台式机或服务器上运行节点，并在这些设备上安装最适合你的操作系统 (OS)。 为了避免出现潜在的问题和安全漏洞，请确保你的操作系统为最新。</p>
+<h5 id="最低要求"><a href="#最低要求" class="headerlink" title="最低要求"></a>最低要求</h5><ul>
+<li>2 核以上 CPU</li>
+<li>8 GB 内存</li>
+<li>2 TB 固态硬盘</li>
+<li>10 MB/秒以上带宽</li>
+</ul>
+<h5 id="推荐的规格要求"><a href="#推荐的规格要求" class="headerlink" title="推荐的规格要求"></a>推荐的规格要求</h5><ul>
+<li>4 核以上高速 CPU</li>
+<li>16GB 以上内存</li>
+<li>2TB 以上高速固态硬盘</li>
+<li>25 MB/秒以上带宽</li>
+</ul>
+<p>你选择的同步模式和客户端将影响磁盘空间要求，但我们估计了下面每种客户端需要的磁盘空间。</p>
+<table>
+<thead>
+<tr>
+<th>客户端</th>
+<th>磁盘大小（快照同步）</th>
+<th>磁盘大小（完整归档）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Besu</td>
+<td>800GB 以上</td>
+<td>12TB 以上</td>
+</tr>
+<tr>
+<td>Erigon</td>
+<td>未提供</td>
+<td>2.5TB 以上</td>
+</tr>
+<tr>
+<td>Geth</td>
+<td>500GB+</td>
+<td>12TB 以上</td>
+</tr>
+<tr>
+<td>Nethermind</td>
+<td>500GB+</td>
+<td>12TB 以上</td>
+</tr>
+<tr>
+<td>Reth</td>
+<td>未提供</td>
+<td>2.2TB 以上</td>
+</tr>
+</tbody></table>
+<ul>
+<li>注意：Erigon 和 Reth 不支持快照同步，但能支持完全修剪（Erigon 约需 2TB，Reth 约需 1.2TB）</li>
+</ul>
+<p>对于共识客户端，空间要求也取决于客户端实现和启用的功能（例如验证者、罚没者），但通常需要另外 200GB 磁盘空间存储信标数据。 由于验证者数量巨大，带宽负载也会增加。 你可以<a href="https://mirror.xyz/0x934e6B4D7eee305F8C9C42b46D6EEA09CcFd5EDc/b69LBy8p5UhcGJqUAmT22dpvdkU-Pulg2inrhoS9Mbc">在此分析中找到关于共识客户端要求的详细信息(opens in a new tab)</a>。</p>
+<h4 id="即插即用解决方案"><a href="#即插即用解决方案" class="headerlink" title="即插即用解决方案"></a>即插即用解决方案</h4><p>即插即用解决方案是使用自身硬件运行节点的最简单方式。 来自供应商的预配置机器提供最简洁的体验：订购、连接、运行。 一切都已预配置好并自动运行，你可以通过直观的指南和仪表板监测和控制软件。</p>
+<ul>
+<li><a href="https://dappnode.io/">DappNode(opens in a new tab)</a></li>
+<li><a href="https://ava.do/">Avado(opens in a new tab)</a></li>
+</ul>
+<h4 id="在单板计算机上运行以太坊"><a href="#在单板计算机上运行以太坊" class="headerlink" title="在单板计算机上运行以太坊"></a>在单板计算机上运行以太坊</h4><p>运行以太坊节点的一种经济简便的方法是使用单板计算机，甚至可以使用 ARM 架构的单板机，如树莓派。 <a href="https://ethereum-on-arm-documentation.readthedocs.io/en/latest/">ARM 上的以太坊(opens in a new tab)</a>为树莓派和其他 ARM 单板机提供便于运行的多种执行客户端和共识客户端映像。</p>
+<p>这类小型、实惠且高效的设备非常适合在家中运行节点，但请记住它们的性能有限。</p>
+<h2 id="启动节点"><a href="#启动节点" class="headerlink" title="启动节点"></a>启动节点</h2><p>实际的客户端设置可以使用自动启动器完成，或者通过直接设置客户端软件手动完成。</p>
+<p>对于初级用户，推荐的方法是使用启动器，这种软件可以指导你完成安装并自动执行客户端设置过程。 但是，如果你有一些终端使用经验，手动设置步骤应该很容易完成。</p>
+<h3 id="引导式设置"><a href="#引导式设置" class="headerlink" title="引导式设置"></a>引导式设置</h3><p>一些用户友好的项目旨在改善客户端设置体验。 这些启动器提供自动客户端安装和配置，有些甚至提供图形界面用于引导式设置和监测客户端。</p>
+<p>以下是一些可以帮助你安装和控制客户端的项目，只需单击几下即可：</p>
+<ul>
+<li><a href="https://docs.dappnode.io/docs/user/getting-started/choose-your-path">DappNode(opens in a new tab)</a> - DappNode 不仅仅可以在供应商提供的机器上安装。 该软件、实际的节点启动器和具有许多功能的控制中心可以在任意硬件上使用。</li>
+<li><a href="https://eth-docker.net/">eth-docker(opens in a new tab)</a> - 使用 Docker 进行的自动化设置专注于简便和安全的质押，它需要用户具备基本的终端和 Docker 知识。我们推荐进阶用户可以选择此项目。</li>
+<li><a href="https://stereum.net/ethereum-node-setup/">Stereum(opens in a new tab)</a> - 通过 SSH 连接在远程服务器上安装客户端的启动器，配备 GUI 设置指南、控制中心和许多其他功能。</li>
+<li><a href="https://www.nicenode.xyz/">NiceNode(opens in a new tab)</a> - 提供简便用户体验的启动器，可在你的计算机上运行节点。 只需选择客户端并单击几下即可启动它们。 仍在开发中。</li>
+<li><a href="https://docs.sedge.nethermind.io/docs/intro">Sedge(opens in a new tab)</a> - 节点设置工具，使用 CLI 向导自动生成 Docker 配置。 由 Nethermind 使用 Go 编写。</li>
+</ul>
+<h3 id="手动客户端设置"><a href="#手动客户端设置" class="headerlink" title="手动客户端设置"></a>手动客户端设置</h3><p>另一种选择是手动下载、验证和配置客户端软件。 即使一些客户端提供图形界面，手动设置仍然需要一些基本的终端使用技能，但它可以提供更多功能。</p>
+<p>如上所述，设置自己的以太坊节点需要运行一对共识客户端和执行客户端。 一些客户端可能包括另一类型的轻客户端，并且无需任何其他软件即可同步。 但是，完全去信任验证需要同时实现这两种客户端。</p>
+<h4 id="获取客户端软件"><a href="#获取客户端软件" class="headerlink" title="获取客户端软件"></a>获取客户端软件</h4><p>首先，你需要获取自己喜欢的<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#execution-clients">执行客户端</a>和<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#consensus-clients">共识客户端</a>软件。</p>
+<p>你可以仅下载适合你的操作系统和架构的可执行应用或安装包。 始终验证下载安装包的签名和校验和。 一些客户端还提供存储库或 Docker 映像，以简化安装和更新。 所有客户端都是开源的，因此你也可以使用源代码构建它们。 这是一种更高阶的方法，但在某些情况下，你可能需要这么做。</p>
+<p>上述客户端列表中的链接文档提供各个客户端的安装说明。</p>
+<p>以下是客户端的发布页面，你可以在其中找到它们的预构建二进制文件或安装说明：</p>
+<h5 id="执行客户端"><a href="#执行客户端" class="headerlink" title="执行客户端"></a>执行客户端</h5><ul>
+<li><a href="https://github.com/hyperledger/besu/releases">Besu(opens in a new tab)</a></li>
+<li><a href="https://github.com/ledgerwatch/erigon/releases">Erigon(opens in a new tab)</a></li>
+<li><a href="https://geth.ethereum.org/downloads/">Geth(opens in a new tab)</a></li>
+<li><a href="https://downloads.nethermind.io/">Nethermind(opens in a new tab)</a></li>
+<li><a href="https://reth.rs/installation/installation.html">Reth(opens in a new tab)</a></li>
+</ul>
+<p>另外值得注意的是，客户端多样性有关<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/client-diversity/#execution-layer">执行层的问题</a>之一。 我们建议读者考虑运行非主流执行客户端。</p>
+<h5 id="共识客户端"><a href="#共识客户端" class="headerlink" title="共识客户端"></a>共识客户端</h5><ul>
+<li><a href="https://github.com/sigp/lighthouse/releases/latest">Lighthouse(opens in a new tab)</a></li>
+<li><a href="https://chainsafe.github.io/lodestar/install/source/">Lodestar(opens in a new tab)</a>（不提供预构建的二进制文件，仅提供 Docker 映像或使用源代码进行构建）</li>
+<li><a href="https://github.com/status-im/nimbus-eth2/releases/latest">Nimbus(opens in a new tab)</a></li>
+<li><a href="https://github.com/prysmaticlabs/prysm/releases/latest">Prysm(opens in a new tab)</a></li>
+<li><a href="https://github.com/ConsenSys/teku/releases">Teku(opens in a new tab)</a></li>
+</ul>
+<p><a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/client-diversity/">客户端多样性</a>对于运行验证者的共识节点来说至关重要。 如果大多数验证者都在运行单一客户端实现，网络安全就会面临风险。 因此，我们建议考虑选择非主流客户端。</p>
+<p><a href="https://clientdiversity.org/">查看最新的网络客户端使用情况(opens in a new tab)</a>，并了解关于<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/client-diversity/">客户端多样性</a>的更多信息。</p>
+<h5 id="验证软件"><a href="#验证软件" class="headerlink" title="验证软件"></a>验证软件</h5><p>从互联网下载软件时，建议验证其完整性。 此步骤是可选的，但特别是对于像以太坊客户端这样的关键基础设施，务必要了解潜在的攻击向量并避免它们。 如果下载了预构建的二进制文件，则需要信任它，并冒着攻击者将可执行文件替换为恶意文件的风险。</p>
+<p>开发者使用他们的 PGP 密钥签署已发布的二进制文件，这样你就可以通过加密方式验证你正在运行他们创建的软件。 你只需要获取开发者使用的公钥，公钥可以在客户端发布页面或文档中找到。 下载客户端版本及其签名后，你可以使用 PGP 实现（例如 <a href="https://gnupg.org/download/index.html">GnuPG(opens in a new tab)</a>）轻松验证它们。 查看有关在 <a href="https://www.tecmint.com/verify-pgp-signature-downloaded-software/">Linux(opens in a new tab)</a> 或 <a href="https://freedom.press/training/verifying-open-source-software/">Windows/MacOS(opens in a new tab)</a> 上使用 <code>gpg</code> 验证开源软件的教程。</p>
+<p>另一种验证方式是确保所下载软件的哈希（一种唯一的加密指纹）与开发者提供的哈希相符。 这种方式甚至比使用 PGP 更容易，并且一些客户端仅提供此选项。 只需在下载的软件上运行哈希函数并将其与发布页面中的哈希进行比较。 例如：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">sha256sum teku-22.6.1.tar.gz
+9b2f8c1f8d4dab0404ce70ea314ff4b3c77e9d27aff9d1e4c1933a5439767dde<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="客户端设置"><a href="#客户端设置" class="headerlink" title="客户端设置"></a>客户端设置</h4><p>安装、下载或编译客户端软件后，你就可以运行它了。 这仅意味着必须使用正确的配置执行客户端。 客户端提供丰富的配置选项，你可以通过它们启用各种功能。</p>
+<p>我们从可以显著影响客户端性能和数据使用的选项开始介绍。 <a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#sync-modes">同步模式</a>是指下载和验证区块链数据的不同方法。 在启动节点前，你应该决定使用哪种网络和同步模式。 最重要的考虑因素是客户端需要的磁盘空间和同步时间。 关注客户端文档以便确定默认的同步模式。 如果默认的同步模式不适合你，请根据安全级别、可用数据和成本选择另一种同步模式。 除了同步算法之外，你还可以设置修剪不同类型的旧数据。 修剪可以删除过时的数据，例如删除最近区块上无法访问的状态树节点。</p>
+<p>其他基本配置选项包括：选择网络（主网或测试网）、为远程过程调用或 WebSocket 启用超文本传输协议端点等。 你可以在客户端相关文档中找到所有功能和选项。 你可以通过使用对应的标记在 CLI 或配置文件中直接执行客户端，以便设置不同的客户端配置。 每种客户端都有一点差异；有关配置选项的详细信息，请始终参阅其官方文档或帮助页面。</p>
+<p>进行测试时，你可能更愿意在其中一个测试网上运行客户端。 <a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#execution-clients">参阅受支持网络概览</a>。</p>
+<p>要了解如何运行具有基本配置的执行客户端，请见下一节中的示例。</p>
+<h4 id="启动执行客户端"><a href="#启动执行客户端" class="headerlink" title="启动执行客户端"></a>启动执行客户端</h4><p>启动以太坊客户端软件之前，请最后检查环境是否已就绪。 例如，请确保：</p>
+<ul>
+<li>针对所选的网络和同步模式，磁盘空间足够。</li>
+<li>内存和 CPU 未被其他程序停止。</li>
+<li>操作系统已更新至最新版本。</li>
+<li>系统有正确的时间和日期。</li>
+<li>路由器和防火墙接受监听端口上的连接。 默认情况下，以太坊客户端使用监听 (TCP) 端口和发现端口 (UDP)，两者默认均在 30303 上。</li>
+</ul>
+<p>首先在测试网上运行客户端，这有助于确保一切都正常运行。</p>
+<p>你需要在一开始就声明所有非默认的客户端配置。 你可以使用标记或配置文件来声明你的首选配置。 每种客户端的功能集和配置语法都不同。 请查看你的客户端相关文档，了解具体细节。</p>
+<p>执行客户端和共识客户端通过<a href="https://github.com/ethereum/execution-apis/tree/main/src/engine">引擎应用程序接口(opens in a new tab)</a>中指定的经过身份验证的端点进行通信。 为了连接到共识客户端，执行客户端必须在已知路径上生成 <a href="https://jwt.io/"><code>jwtsecret</code>(opens in a new tab)</a>。 出于安全和稳定性的原因，客户端应该在同一台机器上运行，并且两种客户端都必须知道该路径，因为该路径用于验证它们之间的本地远程过程调用连接。 执行客户端还必须为经过身份验证的应用程序接口定义一个监听端口。</p>
+<p>此令牌由客户端软件自动生成，但在某些情况下，你可能需要自己生成它。 你可以使用 <a href="https://www.openssl.org/">OpenSSL(opens in a new tab)</a> 生成该令牌：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">1openssl rand -hex 32 > jwtsecret<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="运行执行客户端"><a href="#运行执行客户端" class="headerlink" title="运行执行客户端"></a>运行执行客户端</h4><p>本节将指导你启动执行客户端。 它仅提供基本配置示例，该示例将使用以下设置启动客户端：</p>
+<ul>
+<li>指定要连接的网络，在我们的示例中为主网<ul>
+<li>你也可以选择<a href="https://ethereum.org/zh/developers/docs/networks/">任一测试网络</a>，用于设置的初步测试</li>
+</ul>
+</li>
+<li>定义数据目录，包括区块链在内的所有数据都将存储在其中<ul>
+<li>确保用真实路径代替该路径，例如指向外置驱动器的路径</li>
+</ul>
+</li>
+<li>启用与客户端通信的接口<ul>
+<li>包括用于与共识客户端通信的 JSON-RPC 和引擎应用程序接口</li>
+</ul>
+</li>
+<li>为经过身份验证的应用程序接口定义<code>jwtsecret</code>的路径<ul>
+<li>确保将示例路径替换为客户端可以访问的真实路径，例如 <code>/tmp/jwtsecret</code></li>
+</ul>
+</li>
+</ul>
+<p>请记住，这只是一个基本示例，所有其他设置都将设置为默认值。 请关注每种客户端的相关文档以了解默认的值、设置和功能。 有关更多功能的信息，例如运行验证者、监测等，请参考具体客户端的相关文档。</p>
+<blockquote>
+<p>请注意，示例中的反斜杠 <code>\</code> 仅用于设置格式；配置标记可以在一行中定义。</p>
+</blockquote>
+<h5 id="运行-Besu"><a href="#运行-Besu" class="headerlink" title="运行 Besu"></a>运行 Besu</h5><p>此示例在主网上启动 Besu，将区块链数据以默认格式存储在 <code>/data/ethereum</code> 下，启用 JSON-RPC 和引擎远程过程调用以连接共识客户端。 使用令牌 <code>jwtsecret</code> 对引擎应用程序接口进行身份验证，并且只允许来自 <code>localhost</code> 的调用。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">besu --network=mainnet \
+    --data-path=/data/ethereum \
+    --rpc-http-enabled=true \
+    --engine-rpc-enabled=true \
+    --engine-host-allowlist="*" \
+    --engine-jwt-enabled=true \
+    --engine-jwt-secret=/path/to/jwtsecret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Besu 还带有一个启动器选项，它会询问一系列问题并生成配置文件。 使用以下命令运行交互式启动器：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">besu --Xlauncher<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><a href="https://besu.hyperledger.org/en/latest/HowTo/Get-Started/Starting-node/">Besu 相关文档(opens in a new tab)</a>包含更多选项和配置详细信息。</p>
+<h5 id="运行-Erigon"><a href="#运行-Erigon" class="headerlink" title="运行 Erigon"></a>运行 Erigon</h5><p>此示例在主网上启动 Erigon，将区块链数据存储在 <code>/data/ethereum</code> 下，启用 JSON-RPC，定义允许的命名空间，并启用身份验证以连接由 <code>jwtsecret</code> 路径定义的共识客户端。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">erigon --chain mainnet \
+    --datadir /data/ethereum  \
+    --http --http.api=engine,eth,web3,net \
+    --authrpc.jwtsecret=/path/to/jwtsecret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>默认情况下，Erigon 使用 8GB 机械硬盘执行完全同步，这将产生超过 2TB 的归档数据。 确保 <code>datadir</code> 指向有足够可用空间的磁盘，或者考虑使用可以修剪不同类型数据的 <code>--prune</code> 标记。 查看 Erigon 的 <code>--help</code> 了解更多信息。</p>
+<h5 id="运行-Geth"><a href="#运行-Geth" class="headerlink" title="运行 Geth"></a>运行 Geth</h5><p>此示例在主网上启动 Geth，将区块链数据存储在 <code>/data/ethereum</code> 下，启用 JSON-RPC 并定义允许的命名空间。 它还会启用身份验证（以便连接需要使用 <code>jwtsecret</code> 路径的共识客户端）以及定义允许哪些连接的选项，在我们的示例中仅允许来自 <code>localhost</code> 的连接。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">1geth --mainnet \
+2    --datadir "/data/ethereum" \
+3    --http --authrpc.addr localhost \
+4    --authrpc.vhosts="localhost" \
+5    --authrpc.port 8551
+6    --authrpc.jwtsecret=/path/to/jwtsecret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看<a href="https://geth.ethereum.org/docs/fundamentals/command-line-options">相关文档中的所有配置选项(opens in a new tab)</a>，并了解关于<a href="https://geth.ethereum.org/docs/getting-started/consensus-clients">运行 Geth 和共识客户端(opens in a new tab)</a>的更多信息。</p>
+<h5 id="运行-Nethermind"><a href="#运行-Nethermind" class="headerlink" title="运行 Nethermind"></a>运行 Nethermind</h5><p>Nethermind 提供各种<a href="https://docs.nethermind.io/nethermind/first-steps-with-nethermind/getting-started">安装选项(opens in a new tab)</a>。 该软件包附带各种二进制文件，包括一个带有引导式设置的启动器，它将帮助你以交互方式创建配置。 或者，你会找到可执行文件 Runner，并且可以使用配置标记运行它。 默认情况下已启用 JSON-RPC。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">1Nethermind.Runner --config mainnet \
+2    --datadir /data/ethereum \
+3    --JsonRpc.JwtSecretFile=/path/to/jwtsecret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>Nethermind 相关文档提供了有关运行 Nethermind 和共识客户端的<a href="https://docs.nethermind.io/nethermind/first-steps-with-nethermind/running-nethermind-post-merge">完整指南(opens in a new tab)</a>。</p>
+<p>执行客户端将启动其核心功能及所选端点，并开始寻找对等节点。 成功发现对等节点后，该客户端开始同步。 执行客户端将等待来自共识客户端的连接。 当客户端成功同步到最新状态时，最新的区块链数据将可用。</p>
+<h5 id="运行-Reth"><a href="#运行-Reth" class="headerlink" title="运行 Reth"></a>运行 Reth</h5><p>此示例使用默认数据位置在主网上启动 Reth。 启用 JSON-RPC 和引擎远程过程调用身份验证以连接由 <code>jwtsecret</code> 路径定义的共识客户端，并仅允许来自 <code>localhost</code> 的调用。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">1reth node \
+2    --authrpc.jwtsecret /path/to/jwtsecret \
+3    --authrpc.addr 127.0.0.1 \
+4    --authrpc.port 8551<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看[配置 Reth(opens in a new tab)](<a href="https://reth.rs/run/config.html?highlight=data">https://reth.rs/run/config.html?highlight=data</a> directory#configuring-reth) 以了解更多关于默认数据目录的信息。 <a href="https://reth.rs/run/mainnet.html">Reth 的相关文档(opens in a new tab)</a>包含更多选项和配置详情。</p>
+<h4 id="启动共识客户端"><a href="#启动共识客户端" class="headerlink" title="启动共识客户端"></a>启动共识客户端</h4><p>共识客户端必须以正确的端口配置启动，才能与执行客户端建立本地远程过程调用连接。 它在运行时必须使用公开的执行客户端端口作为配置参数。</p>
+<p>共识客户端还需要执行客户端的 <code>jwt-secret</code> 的路径，以便对它们之间的远程过程调用连接进行身份验证。 与上面的执行示例类似，每种共识客户端都有一个配置标记，该标记使用 jwt 令牌文件的路径作为参数。 此路径必须与提供给执行客户端的 <code>jwt-secret</code> 路径一致。</p>
+<p>如果你打算运行验证者，确保添加一个配置标记以指定接收费用的以太坊地址。 这是为你的验证者积攒以太币奖励的地址。 每种共识客户端都有一个将以太坊地址作为参数的选项，例如 <code>--suggested-fee-recipient=0xabcd1</code>。</p>
+<p>在测试网上启动信标节点时，可以使用公共端点进行<a href="https://notes.ethereum.org/@launchpad/checkpoint-sync">检查点同步(opens in a new tab)</a>，从而大大节省同步时间。</p>
+<h4 id="运行共识客户端"><a href="#运行共识客户端" class="headerlink" title="运行共识客户端"></a>运行共识客户端</h4><h5 id="运行-Lighthouse"><a href="#运行-Lighthouse" class="headerlink" title="运行 Lighthouse"></a>运行 Lighthouse</h5><p>在运行 Lighthouse 之前，请在 <a href="https://lighthouse-book.sigmaprime.io/installation.html">Lighthouse 手册(opens in a new tab)</a>中详细了解如何安装和配置它。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">lighthouse beacon_node \
+    --network mainnet \
+    --datadir /data/ethereum \
+    --http \
+    --execution-endpoint http://127.0.0.1:8551 \
+    --execution-jwt /path/to/jwtsecret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="运行-Lodestar"><a href="#运行-Lodestar" class="headerlink" title="运行 Lodestar"></a>运行 Lodestar</h5><p>通过编译或下载 Docker 映像来安装 Lodestar 软件。 在<a href="https://chainsafe.github.io/lodestar/">相关文档(opens in a new tab)</a>和更全面的<a href="https://hackmd.io/@philknows/rk5cDvKmK">设置指南(opens in a new tab)</a>中了解更多信息。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">lodestar beacon \
+    --rootDir="/data/ethereum" \
+    --network=mainnet \
+    --eth1.enabled=true \
+    --execution.urls="http://127.0.0.1:8551" \
+    --jwt-secret="/path/to/jwtsecret"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="运行-Nimbus"><a href="#运行-Nimbus" class="headerlink" title="运行 Nimbus"></a>运行 Nimbus</h5><p>Nimbus 包括共识客户端和执行客户端。 它也可以在各种设备上运行，甚至可以在算力很一般的设备上运行。 <a href="https://nimbus.guide/quick-start.html">安装依赖项和 Nimbus(opens in a new tab)</a> 后，你可以运行它的共识客户端：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">nimbus_beacon_node \
+    --network=mainnet \
+    --web3-url=http://127.0.0.1:8551 \
+    --rest \
+    --jwt-secret="/path/to/jwtsecret"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="运行-Prysm"><a href="#运行-Prysm" class="headerlink" title="运行 Prysm"></a>运行 Prysm</h5><p>Prysm 带有脚本，可实现轻松自动安装。 详细信息可以在 <a href="https://docs.prylabs.network/docs/install/install-with-script">Prysm 相关文档(opens in a new tab)</a>中找到。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">./prysm.sh beacon-chain \
+    --mainnet \
+    --datadir /data/ethereum  \
+    --execution-endpoint=http://localhost:8551  \
+    --jwt-secret=/path/to/jwtsecret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="运行-Teku"><a href="#运行-Teku" class="headerlink" title="运行 Teku"></a>运行 Teku</h5><pre class="line-numbers language-sh"><code class="language-sh">teku --network mainnet \
+    --data-path "/data/ethereum" \
+    --ee-endpoint http://localhost:8551 \
+    --ee-jwt-secret-file "/path/to/jwtsecret"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当共识客户端连接到执行客户端读取存款合约并识别验证者时，它也连接到其他对等信标节点并开始从创世块同步共识时隙。 信标节点达到当前时段后，信标应用程序接口将可供验证者使用。 了解关于<a href="https://eth2docs.vercel.app/">信标节点应用程序接口(opens in a new tab)</a>的更多信息。</p>
+<h3 id="添加验证者"><a href="#添加验证者" class="headerlink" title="添加验证者"></a>添加验证者</h3><p>共识客户端充当验证者要连接的信标节点。 每种共识客户端都有自己的验证者软件，后者在各自的相关文档中都有详细描述。</p>
+<p>运行自己的验证者便可以进行<a href="https://ethereum.org/zh/staking/solo/">单独质押</a>，这是支持以太坊网络的最有影响的去信任方法。 然而，单独质押需要存入 32 个以太币。 若想在自己的节点上运行验证者并质押较少数量的以太币，你可能会对由无需许可的节点运营商组成的去中心化池感兴趣，例如 <a href="https://rocketpool.net/node-operators">Rocket Pool(opens in a new tab)</a>。</p>
+<p>开始质押和生成验证者密钥的最简单方法是使用 <a href="https://holesky.launchpad.ethereum.org/">Holesky 测试网质押启动板(opens in a new tab)</a>，它允许你通过<a href="https://notes.ethereum.org/@launchpad/holesky">在 Holesky 上运行节点(opens in a new tab)</a>来测试你的设置。 当准备好使用主网时，你可以使用<a href="https://launchpad.ethereum.org/">主网质押启动板(opens in a new tab)</a>重复这些步骤。</p>
+<p>研读<a href="https://ethereum.org/zh/staking/">质押页面</a>以了解质押选项概述。</p>
+<h3 id="使用节点"><a href="#使用节点" class="headerlink" title="使用节点"></a>使用节点</h3><p>执行客户端提供<a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/">远程过程调用应用程序接口端点</a>；在以太坊网络上，你可以通过多种方式使用这些端点提交交易、与智能合约交互或部署智能合约：</p>
+<ul>
+<li>使用合适的协议（例如，<code>curl</code>）手动调用端点</li>
+<li>附加提供的控制台（例如 <code>geth attach</code>）</li>
+<li>使用 Web3 库在应用中实现端点，例如 <a href="https://web3py.readthedocs.io/en/stable/overview.html#overview">web3.py(opens in a new tab)</a> 和 <a href="https://github.com/ethers-io/ethers.js/">ethers(opens in a new tab)</a></li>
+</ul>
+<p>不同的客户端有不同的远程过程调用端点实现。 不过，你可以选择一种标准 JSON-RPC 与每种客户端搭配使用。 想要了解概况，<a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/">请阅读 JSON-RPC 文档</a>。 需要从以太坊网络中获取信息的应用，可以使用此远程过程调用。 例如，受欢迎的钱包 MetaMask 可让你<a href="https://metamask.zendesk.com/hc/en-us/articles/360015290012-Using-a-Local-Node">连接到自己的远程过程调用端点(opens in a new tab)</a>，该端点具有卓越的隐私和安全优势。</p>
+<p>共识客户端都公开一个<a href="https://ethereum.github.io/beacon-APIs">信标应用程序接口(opens in a new tab)</a>，可用于检查共识客户端的状态，或者通过使用 <a href="https://curl.se/">Curl(opens in a new tab)</a> 等工具发送请求来下载区块和共识数据。 更多相关信息可在每种共识客户端的相关文档中找到。</p>
+<h4 id="访问远程过程调用"><a href="#访问远程过程调用" class="headerlink" title="访问远程过程调用"></a>访问远程过程调用</h4><p>执行客户端 JSON-RPC 的默认端口是 <code>8545</code>，但可以在配置中修改本地端点的端口。 默认情况下，远程过程调用接口只能在计算机的本地主机上访问。 为了让该端口可被远程访问，你可以通过将地址改为 <code>0.0.0.0</code> 公开它。 这样就可以通过本地网络或公共互联网协议地址访问该端口。 大多数情况下，你还需要在路由器上设置端口转发。</p>
+<p>在互联网上公开端口时应保持谨慎，因为这会让互联网上的任何人都可以控制你的节点。 恶意行为者可以通过访问你的节点让你的系统下线，或者如果你将客户端用作钱包，他们会窃取你的资金。</p>
+<p>解决该问题的办法是，禁止修改可能有危害的远程过程调用方法。 例如，对于 Geth，你可以使用标记 <code>—http.api web3,eth,txpool</code> 声明可修改的方法。</p>
+<p>开发边缘层应用程序接口或 Web 服务器应用（如 Nginx）并将它们连接到客户端的本地地址和端口，这样做可扩展对远程过程调用接口的访问。 利用中间层还让开发者能够设置远程过程调用接口的安全 <code>https</code> 连接证书。</p>
+<p>设置 Web 服务器、代理或面向外部的表现层状态转换应用程序接口，并不是访问节点的远程过程调用端点的唯一方法。 另一种设置可公开访问端点且保护隐私的方法是，将节点托管在自己的 <a href="https://www.torproject.org/">Tor(opens in a new tab)</a> 洋葱服务上。 这将让你在本地网络外部无需静态公共互联网协议地址或开放的端口也能访问此远程过程调用端口。 然而，使用此配置可能只允许通过 Tor 网络访问远程过程调用端点，但并非所有应用程序都支持 Tor 网络，从而可能导致发生连接问题。</p>
+<p>为此，你必须创建自己的<a href="https://community.torproject.org/onion-services/">洋葱服务(opens in a new tab)</a>。 查看有关洋葱服务设置的<a href="https://community.torproject.org/onion-services/setup/">相关文档(opens in a new tab)</a>以托管你自己的节点。 你可以将其指向具有远程过程调用端口代理的 Web 服务器，或者直接指向远程过程调用。</p>
+<p>最后，访问内部网络最流行的方式之一是通过虚拟专用网连接。 根据你的用例和需要访问节点的用户数，也许可以选择安全的虚拟专用网连接。 <a href="https://openvpn.net/">OpenVPN(opens in a new tab)</a> 是一种功能完善的安全套接层虚拟专用网，它使用行业标准安全套接字层/传输层安全协议实现了开放式系统互联二层或三层安全网络扩展，支持基于证书、智能卡和/或用户名/密码凭据的灵活客户端身份验证方法，并允许用户或群组特定的访问控制策略（使用应用于虚拟专用网虚拟接口的防火墙规则）。</p>
+<h3 id="运行节点"><a href="#运行节点" class="headerlink" title="运行节点"></a>运行节点</h3><p>你应该定期监控你的节点，确保它正常运行。 你可能还需要偶尔对它进行维护。</p>
+<h4 id="保持节点在线"><a href="#保持节点在线" class="headerlink" title="保持节点在线"></a>保持节点在线</h4><p>你的节点不必一直在线，但你应该尽可能让节点保持在线，使其与网络保持同步。 你可以将其关闭以重新启动，但请记住：</p>
+<ul>
+<li>如果正在向磁盘写入最近的网络状态，关闭节点可能需要花费几分钟。</li>
+<li>强制关闭会破坏数据库，这可能需要你重新同步整个节点。</li>
+<li>客户端将无法与网络同步，重启后，客户端需要重新同步。 虽然节点可以从它最近一次关闭的位置开始同步，但此过程需要的时间取决于它离线的时间。</li>
+</ul>
+<p><em>但是，共识层的验证者节点就需要一直在线。</em>验证者节点离线将影响所有依赖它的服务。 如果你是为了<em>质押</em>而运行节点，应该尽可能地减少停机时间。</p>
+<h4 id="创建客户端服务"><a href="#创建客户端服务" class="headerlink" title="创建客户端服务"></a>创建客户端服务</h4><p>考虑创建一个在启动时自动运行客户端的服务。 例如，在 Linux 服务器上，最佳做法是创建一种服务，例如使用 <code>systemd</code>，为有限权限的用户执行配置正确的客户端并自动重启。</p>
+<h4 id="更新客户端"><a href="#更新客户端" class="headerlink" title="更新客户端"></a>更新客户端</h4><p>你应该通过安装最新的安全补丁、功能和<a href="https://ethereum.org/zh/eips/">以太坊改进提案</a>，让客户端软件更新到最新版本。 特别是在<a href="https://ethereum.org/zh/history/">硬分叉</a>之前，确保运行正确的客户端版本。</p>
+<blockquote>
+<p>在重要的网络更新之前，以太坊基金会在其<a href="https://blog.ethereum.org/">博客(opens in a new tab)</a>上发布相关文章。 你可以<a href="https://blog.ethereum.org/category/protocol#subscribe">订阅这些公告(opens in a new tab)</a>，以便在你的节点需要更新时收到邮件通知。</p>
+</blockquote>
+<p>更新客户端非常简单。 每种客户端在其相关文档中都有具体说明，但通常更新过程仅包括下载最新版本并使用正确的可执行文件重启而已。 客户端应该会从上一次中断的位置继续，但请应用所有更新。</p>
+<p>每种客户端实现都有一个人类可读的版本字符串，该字符串在点对点协议中使用但也可以从命令行访问。 该版本字符串让用户可以检查他们运行的客户端版本是否正确，并支持区块浏览器和用来量化网络上特定客户端分布的其他分析工具。 有关版本字符串的更多信息，请参阅各客户端相关文档。</p>
+<h4 id="运行额外服务"><a href="#运行额外服务" class="headerlink" title="运行额外服务"></a>运行额外服务</h4><p>运行自己的节点，可以让你使用需要直接访问以太坊客户端远程过程调用的服务。 这些服务构建在以太坊上，如<a href="https://ethereum.org/zh/developers/docs/scaling/#layer-2-scaling">二层网络解决方案</a>、钱包后端、区块浏览器、开发者工具和其他以太坊基础设施。</p>
+<h4 id="监测节点"><a href="#监测节点" class="headerlink" title="监测节点"></a>监测节点</h4><p>为了正确监测节点，请考虑收集指标。 客户端提供了指标端点，因此你可以获得有关节点的全面数据。 使用 <a href="https://www.influxdata.com/get-influxdb/">InfluxDB(opens in a new tab)</a> 或 <a href="https://prometheus.io/">Prometheus(opens in a new tab)</a> 等工具创建数据库，并且可以在 <a href="https://grafana.com/">Grafana(opens in a new tab)</a> 等软件中将其可视化并转换成图表。 在可视化节点和整个网络时，Grafana 有许多设置和各种仪表版可供使用。 例如，查看<a href="https://ethereum.org/zh/developers/tutorials/monitoring-geth-with-influxdb-and-grafana/">有关监测 Geth 的教程</a>。</p>
+<p>在监测过程中，请务必密切关注机器的性能。 在节点初始同步期间，客户端软件可能会占用大量 CPU 和内存资源。 除了 Grafana，你也可以使用操作系统自带的 <code>htop</code> 或 <code>uptime</code> 等工具来监测节点。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-wang-luo/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/8.png" class="responsive-img" alt="ETH中的网络">
+                            
+                            <span class="card-title">ETH中的网络</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以太坊网络是一组使用以太坊协议进行通信的互联计算机。 以太坊只有一个主网，但可以创建符合相同协议规则的独立网络用于测试和开发。 有许多独立的“网络”遵循该协议，但彼此之间没有交互。 你甚至可以在自己的计算机上本地启动一个以太坊网络，以测试你
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/05/ethzhong-de-jie-dian-he-ke-hu-duan/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="ETH中的节点和客户端简介">
+                            
+                            <span class="card-title">ETH中的节点和客户端简介</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以太坊是一个由计算机组成的分布式网络，这些计算机运行可验证区块和交易数据的软件，称为节点。 该软件必须在你的计算机上运行，才能将其转化为以太坊节点。 一个节点由两个独立的软件（名为“客户端”）构成。
+什么是节点和客户端？“节点”是指任何以太
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">383.6k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

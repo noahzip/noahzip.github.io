@@ -258,26 +258,27 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/20/rustbian-liang-he-ke-bian-xing/">
+                        <a href="/2025/02/22/rustzhong-de-veczhu-yi-shi-xiang/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/10.png" class="responsive-img" alt="Rust变量和可变性">
+                                    <img src="/medias/featureimages/20.png" class="responsive-img" alt="Rust中的Vec的一些注意事项与思考">
                                 
-                                <span class="card-title">Rust变量和可变性</span>
+                                <span class="card-title">Rust中的Vec的一些注意事项与思考</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    1. 引言在本节中，我们将介绍 Rust 中的变量和如何使用它们。Rust 对于变量的默认处理方式是不可变的，但它也提供了在需要时声明可变变量的方法。
-2. 变量的默认不可变性Rust 中的变量默认是不可变的。也就是说，声明一个变量后，我们
+                                    vec.len() 方法详解vec.len() 方法用于获取 Vec&lt;T&gt; 中的元素个数，它不会改变 vec 的所有权，也不会影响 vec 的可变性。
+fn main() {
+    let vec = vec![1, 2, 3
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                                 <span class="publish-author">
                                     
@@ -298,29 +299,29 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/20/guessnumber/">
+                        <a href="/2025/02/22/rustzhong-de-vector-xiang-liang-/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Guess Number">
+                                    <img src="/medias/featureimages/2.png" class="responsive-img" alt="Rust中的Vector(向量)">
                                 
-                                <span class="card-title">Guess Number</span>
+                                <span class="card-title">Rust中的Vector(向量)</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    1. 项目结构与初始化
-创建新项目：通过 cargo new guessing_game 命令创建一个名为 guessing_game 的 Rust 项目。
-项目包含的文件：
-Cargo.toml：项目的元数据文件，包含项目的配置信息。
-s
+                                    Rust 中的 Vector (向量) 是一种动态存储的数组，允许在运行期增加或删除元素。
+
+1. 创建 VectorRust 中使用 Vec&lt;T&gt; 来实现 Vector。例如：
+fn main() {
+    let v: V
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                                 <span class="publish-author">
                                     
@@ -341,25 +342,25 @@ s
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/20/hello-cargo/">
+                        <a href="/2025/02/22/rustxiang-mu-guan-li-package-cratehe-mo-kuai-module/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/27.png" class="responsive-img" alt="Hello, Cargo!">
+                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Rust项目管理Package,Crate和模块Module">
                                 
-                                <span class="card-title">Hello, Cargo!</span>
+                                <span class="card-title">Rust项目管理Package,Crate和模块Module</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    1. 简介Cargo是 Rust 的构建系统和包管理器。大多数 Rustacean 们使用 Cargo 来管理他们的 Rust 项目，因为它可以为你处理很多任务，比如构建代码、下载依赖库，以及编译这些库。（我们把代码所需要的库叫做依赖 de
+                                    Rust 提供了一套强大的模块系统，帮助开发者管理不断增长的项目。本章介绍如何组织 Rust 代码，使其结构清晰、可维护性强。内容涵盖 包（Packages）、Crates、模块（Modules）、路径（Paths）、use 关键字和文件拆
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                                 <span class="publish-author">
                                     
@@ -380,30 +381,27 @@ s
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/20/rustan-zhuang-yu-helloworld/">
+                        <a href="/2025/02/21/rustzhong-de-mei-ju-eunm-/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/12.png" class="responsive-img" alt="Rust 安装与 HelloWorld">
+                                    <img src="/medias/featureimages/16.png" class="responsive-img" alt="Rust 中的枚举(Enum)">
                                 
-                                <span class="card-title">Rust 安装与 HelloWorld</span>
+                                <span class="card-title">Rust 中的枚举(Enum)</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    1. 官方文档安装指引可以通过以下链接访问 Rust 官方的安装文档：
-官方安装文档
+                                    枚举是 Rust 中非常强大的功能，它允许我们将多个可能的值组合在一起，并且可以关联数据，甚至可以定义具有多种变体的枚举类型。以下是本节内容的详细总结：
 
-1.1 Windows 系统安装页面对于 Windows 用户，可以访问以下链接下载适用于 Windows 系统的安装工具：
-Windows 安装页面
-
+1. 什么是枚举（Enum）？枚举（enum）允许我们定义一个数据类型，它可以是一组
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                                 <span class="publish-author">
                                     
@@ -424,36 +422,33 @@ Windows 安装页面
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2022/07/28/mysqlsuo/">
+                        <a href="/2025/02/21/rust-fang-fa-yu-fa-method-syntax-/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/16.png" class="responsive-img" alt="MySQL的锁">
+                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Rust 方法语法(Method Syntax)">
                                 
-                                <span class="card-title">MySQL的锁</span>
+                                <span class="card-title">Rust 方法语法(Method Syntax)</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    MySQL的锁1. MySQL 锁结构我们前⾯讨论了对于当前读是需要通过加锁来实现的，那这个加锁，到底是加的⼀个什么锁呢？或者说这个锁的结构是什么样的
-⾸先对于这样⼀条记录：
-
-最开始它是没有锁的； 
-当⼀个事务想要对这条记录做编辑时，就得
+                                    Rust 提供了一种 方法（method） 语法，让我们可以将行为与结构体（struct）、枚举（enum）或 trait 关联起来。这一节介绍了 如何定义和调用方法、self 的作用、方法 vs 关联函数的区别 等内容。
+1. 方法的定义
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-28
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                                 <span class="publish-author">
                                     
                                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                                         
-                                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                         
                                     
@@ -467,34 +462,33 @@ Windows 安装页面
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2022/07/24/mysqlshi-wu/">
+                        <a href="/2025/02/21/rust-jie-gou-ti-shi-li/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/6.png" class="responsive-img" alt="MySQL事务">
+                                    <img src="/medias/featureimages/25.png" class="responsive-img" alt="Rust结构体示例及Debug trait调试">
                                 
-                                <span class="card-title">MySQL事务</span>
+                                <span class="card-title">Rust结构体示例及Debug trait调试</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    MySQL事务引言我们前面讨论了⼏种⽇志的物理结构和各种的作⽤，现在可以来看看MySQL事务了；
-MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程中肯定都使⽤过，所以具体的⽤法这些这⾥就不再讲了；
-我们这⾥就只根据实际情况来讲讲
+                                    一个使用结构体的示例程序为了理解何时会需要使用结构体，让我们编写一个计算长方形面积的程序。我们会从单独的变量开始，接着重构程序直到使用结构体替代他们为止。  
+1. 结构体的基本使用示例程序的目标是计算一个矩形的面积。最初，直接使用 单独的
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-24
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                                 <span class="publish-author">
                                     
                                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                                         
-                                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                         
                                     
@@ -508,34 +502,34 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2022/07/19/mysqlzhi-redolog-undolog-binlog-/">
+                        <a href="/2025/02/21/rust-jie-gou-ti-structs-/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/1.png" class="responsive-img" alt="MySQL ⽇志（Redolog Undolog Binlog）">
+                                    <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Rust 结构体(Structs)">
                                 
-                                <span class="card-title">MySQL ⽇志（Redolog Undolog Binlog）</span>
+                                <span class="card-title">Rust 结构体(Structs)</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    MySQL ⽇志（Redolog Undolog Binlog）1. Redolog在前⾯我们对Redolog下过⼀个定义：它是崩溃⽇志，⽤来⽀持崩溃恢复的；为什么需要它呢？ 
+                                    结构体（struct）是 Rust 中用于组织相关数据的一种方式，类似于其他语言中的类（class）或结构体（struct）。Rust 的结构体可以帮助我们将多个值组合在一起，形成更具语义的复杂数据类型，从而提升代码的可读性和可维护性。
 
-因为MySQL为了提⾼⾃⼰的性能，避免⼤量的磁盘随机IO的发
+
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-19
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                                 <span class="publish-author">
                                     
                                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                                         
-                                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                         
                                     
@@ -549,33 +543,34 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2022/07/13/mysqlsuo-yin-zhi-ji-hua-yu-sqlyou-hua/">
+                        <a href="/2025/02/21/rustzhong-de-qie-pian-the-slice-type-/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="MySQL索引执⾏计划与SQL优化">
+                                    <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Rust中切片 （The slice type）">
                                 
-                                <span class="card-title">MySQL索引执⾏计划与SQL优化</span>
+                                <span class="card-title">Rust中切片 （The slice type）</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    MySQL索引执⾏计划与SQL优化1. MySQL多表join的实现⽅式1.1基本概念：
-驱动表与被驱动表：在多表join查询时，先从⼀个表中查询出来⼀批数据，再根据这批数据去另外⼀个表中进⾏关联查询或者筛选，那第⼀个表就是驱动表，第⼆个表
+                                    切片是 Rust 中的一个重要概念，它提供了一种引用数据部分的方式，而无需复制数据本身。切片允许你对集合（如数组、Vec、String）的一部分进行操作，同时保持对原始数据的引用。
+
+1. 切片的基本概念在 Rust 中，切片（slice）
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-13
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                                 <span class="publish-author">
                                     
                                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                                         
-                                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                         
                                     
@@ -589,33 +584,32 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2022/07/08/mysqlsuo-yin-ying-jie-shao/">
+                        <a href="/2025/02/21/rustzhong-yin-yong-de-shi-yong-chang-jing/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="MySQL索引应⽤介绍">
+                                    <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Rust中引用的使用场景">
                                 
-                                <span class="card-title">MySQL索引应⽤介绍</span>
+                                <span class="card-title">Rust中引用的使用场景</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    MySQL索引应⽤介绍1. 索引分类MyIsam 存储引擎中索引的存储格式
-在MyIsam中，也是通过B+树作为索引的数据结构，但是跟InnoDB不同的是，MyIsam的索引⽂件和数据⽂件是分开的，使⽤.MYI来表示索引⽂件，使⽤.MYD来
+                                    在 Rust 中，&amp; 是一个非常重要的符号，主要用于创建 引用（borrow）。引用允许你借用某个值的所有权，而不需要把值本身传递到函数中。&amp; 和 &amp;mut 都是用来获取引用的方式，但有一些细微的区别和使用场景。理解
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-08
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                                 <span class="publish-author">
                                     
                                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                                         
-                                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                         
                                     
@@ -629,35 +623,33 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2022/07/07/mysqlsuo-yin-jie-gou-jie-shao/">
+                        <a href="/2025/02/21/rustyin-yong-yu-jie-yong/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/10.png" class="responsive-img" alt="MySQL索引结构介绍">
+                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Rust中的引用与借用">
                                 
-                                <span class="card-title">MySQL索引结构介绍</span>
+                                <span class="card-title">Rust中的引用与借用</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    MySQL索引结构介绍在介绍索引之前，我们先思考⼀下如果没有索引的时候，要查找会有什么问题？
-
-如果是根据主键ID查找：
-⾸先是多个数据⻚，这个时候可以根据每个数据⻚的Infimum指向的最⼩记录，可以判断当前ID跟这⼀⻚的最⼩ID之间的关
+                                    前面我们讨论了：在 Rust 中，借用（Borrowing） 允许你在不转移所有权的情况下使用数据。这一节详细讨论了如何通过引用（References）来借用数据以及相关的规则，确保内存安全和避免数据竞争。
+1. 什么是引用（Referen
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-07
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                                 <span class="publish-author">
                                     
                                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                                         
-                                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                         
                                     
@@ -671,34 +663,33 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2022/07/05/mysqlbiao-kong-jian-shu-ju-shu-ju-de-wu-li-cun-chu/">
+                        <a href="/2025/02/21/rustzhong-de-suo-you-quan-ownership/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="MySQL中表空间、数据⻚、数据⾏的物理存储">
+                                    <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Rust中的所有权Ownership">
                                 
-                                <span class="card-title">MySQL中表空间、数据⻚、数据⾏的物理存储</span>
+                                <span class="card-title">Rust中的所有权Ownership</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    MySQL中表空间、数据⻚、数据⾏的物理存储1. MySQL 各数据所在⽬录MySQL的配置⽂件都是 /etc/my.cnf
-[root@localhost mysql]# cat /etc/my.cnf
-# For advice on h
+                                    Rust 的所有权（Ownership）系统是其内存管理的核心之一，它没有垃圾回收（GC）机制，通过所有权系统，Rust 在编译时就能保证内存使用的安全性，避免了程序运行时的内存管理问题。
+1. 所有权的基本规则Rust 的所有权系统依赖于
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-05
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
                             </span>
                                 <span class="publish-author">
                                     
                                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                                         
-                                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                         
                                     
@@ -712,34 +703,33 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2022/07/04/innodbyin-qing-de-jia-gou-she-ji/">
+                        <a href="/2025/02/20/rustkong-zhi-liu/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/8.png" class="responsive-img" alt="InnoDB引擎的架构设计">
+                                    <img src="/medias/featureimages/2.png" class="responsive-img" alt="Rust 控制流">
                                 
-                                <span class="card-title">InnoDB引擎的架构设计</span>
+                                <span class="card-title">Rust 控制流</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    以⼀个Update语句，了解InnoDB引擎的架构设计1.buffer pool读写操作InnoDB存储引擎使⽤了buffer pool内存缓冲区来提升性能；
-
-读操作：如果要读的数据⻚在内存buffer pool中时，就直接从内存中读取后
+                                    Rust 提供了多种控制流结构，包括 if 表达式、循环（loop、while、for）以及 match 表达式。这些结构允许你根据不同的条件执行代码。
+1. if 表达式Rust 的 if 语句不仅仅是条件判断语句，它也可以作为表达式使用
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-04
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
                             </span>
                                 <span class="publish-author">
                                     
                                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                                         
-                                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
+                                            <a href="/categories/Rust/" class="post-category">
+                                    Rust
                                 </a>
                                         
                                     
@@ -768,7 +758,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">5 / 10</div>
+            <div class="center-align b-text-gray">5 / 11</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -802,7 +792,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">285.3k</span>&nbsp;字
+						class="white-color">383.6k</span>&nbsp;字
              
             
 

@@ -1,0 +1,1344 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中工作量证明POW, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="工作量证明 (POW)以太坊网络最初采用一种称为工作量证明 (PoW) 的共识机制。 这种机制允许以太坊网络的节点就以太坊区块链上记录的所有信息的状态达成共识，并防止某些产生经济影响的攻击。 然而，以太坊在 2022 年终结了工作量证明并开">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中工作量证明POW | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中工作量证明POW</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        9.3k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        36 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="工作量证明-POW"><a href="#工作量证明-POW" class="headerlink" title="工作量证明 (POW)"></a>工作量证明 (POW)</h2><p>以太坊网络最初采用一种称为<strong><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/">工作量证明 (PoW)</a></strong> 的共识机制。 这种机制允许以太坊网络的节点就以太坊区块链上记录的所有信息的状态达成共识，并防止某些产生经济影响的攻击。 然而，以太坊在 2022 年终结了工作量证明并开始采用<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">权益证明</a>。</p>
+<p>工作量证明现已弃用。 以太坊不再使用工作量证明作为其部分共识机制。 它改用权益证明。 阅读有关<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">权益证明</a>和<a href="https://ethereum.org/zh/staking/">质押</a>的更多信息。</p>
+<h3 id="什么是工作量证明-POW"><a href="#什么是工作量证明-POW" class="headerlink" title="什么是工作量证明 (POW)"></a>什么是工作量证明 (POW)</h3><p>中本聪共识采用工作量证明，一度允许去中心化的以太坊网络对帐户余额和交易顺序等达成共识（即所有节点都同意）。 这种机制防止用户“重复支付”他们的货币，同时确保极难攻击或操作以太坊区块链。 这些安全特性现在由权益证明提供，后者采用称为 <a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/gasper/">Gasper</a> 的共识机制。</p>
+<h3 id="工作量证明和挖矿"><a href="#工作量证明和挖矿" class="headerlink" title="工作量证明和挖矿"></a>工作量证明和挖矿</h3><p>工作量证明是一种基础性算法，它为矿工在工作量证明区块链上进行的工作设置难度和规则。 挖矿就是“工作”本身。 挖矿是向区块链中添加有效区块。 这很重要，因为链的长度有助于网络跟随区块链的正确分叉。 “工作”完成得越多，链越长，区块编号就越大，就更能确定网络达到最新状态。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/mining/">有关挖矿的更多信息</a></p>
+<h3 id="以太坊的工作量证明机制如何运作？"><a href="#以太坊的工作量证明机制如何运作？" class="headerlink" title="以太坊的工作量证明机制如何运作？"></a>以太坊的工作量证明机制如何运作？</h3><p>以太坊交易处理到区块中。 在现已弃用的工作量证明以太坊中，每个区块包含：</p>
+<ul>
+<li>区块的难度，例如：3,324,092,183,262,715</li>
+<li>混合哈希（mixHash），例如：<code>0x44bca881b07a6a09f83b130798072441705d9a665c5ac8bdf2f39a3cdf3bee29</code></li>
+<li>nonce–例如：<code>0xd3ee432b4fb3d26b</code></li>
+</ul>
+<p>这些区块数据与工作量证明直接相关。</p>
+<h4 id="工作量证明机制"><a href="#工作量证明机制" class="headerlink" title="工作量证明机制"></a>工作量证明机制</h4><p>工作量证明协议 Ethash 要求矿工经过激烈的试错竞赛，找到一个区块的随机数。 只有具备有效随机数的区块才能加入区块链中。</p>
+<p>当矿工们争相创建区块时，他们会反复通过一个数学函数放置一个数据集，此数据集只能通过下载和运行整条区块链获得（矿工们都是这样做的）。 该数据集用来产生一个低于目标随机数的混合哈希，而此目标随机数由区块难度决定。 做到这些最好的方式是试错。</p>
+<p>难度决定了哈希的目标值。 目标值越小，有效哈希的集合就越小。 一旦生成哈希，其他矿工和客户端就很容易验证哈希。 即使一条交易记录出现改变，整个哈希就会变得完全不同，表示出现欺诈。</p>
+<p>哈希使得欺诈更容易被发现。 此外，工作量证明作为一个流程，同样有效威慑了对区块链的攻击。</p>
+<h4 id="工作量证明和安全性"><a href="#工作量证明和安全性" class="headerlink" title="工作量证明和安全性"></a>工作量证明和安全性</h4><p>激励矿工在以太坊主链上挖矿。 对于一小部分矿工而言，没有任何激励措施让他们去开辟一条自己的新链 - 因为这破坏了体系。 区块链依赖于唯一状态来判断真实性。</p>
+<p>工作量证明的目标是延长链。 最长的链是最可信的有效链，因为需要完成最多的计算工作来生成它。 在以太坊的工作量证明体系中，几乎不可能创建新的区块来清除交易、创建虚假交易或维护第二条链。 那是因为恶意矿工总是需要比其他人更快地解出区块随机数。</p>
+<p>要持续创建恶意但有效的区块，恶意矿工将需要超过 51% 的网络挖矿算力才能击败其他人。 这种海量的“工作”需要大量昂贵的算力，而且消耗的能源甚至可能超过攻击所得的收益。</p>
+<h4 id="工作量证明的经济模型"><a href="#工作量证明的经济模型" class="headerlink" title="工作量证明的经济模型"></a>工作量证明的经济模型</h4><p>工作量证明还负责向系统中发行新货币并激励矿工完成工作。</p>
+<p>自<a href="https://ethereum.org/zh/history/#constantinople">君士坦丁堡升级</a>以来，成功创建区块的矿工将获得两个新铸造的以太币及部分交易费作为奖励。 叔块也会获得 1.75 个以太币的补偿。 叔块是由一个矿工创建的有效区块，几乎与此同时另一个矿工创建了规范区块。要确定规范区块，最终取决于哪条链构建于第一个区块之上。 叔块通常是由于网络延迟而出现。</p>
+<h3 id="最终确定性"><a href="#最终确定性" class="headerlink" title="最终确定性"></a>最终确定性</h3><p>如果交易属于一个无法更改的区块时，它就在以太坊上具有“最终确定性”。</p>
+<p>由于矿工以去中心化的方式工作，有可能同时开采出两个有效区块。 这就产生了一个临时分叉。 最后，在后续区块被开采出并添加到其中一条链使其更长时，这条链就会成为被接受的链。</p>
+<p>但更复杂的是，在临时分叉上被拒绝的交易可能没有包含在被接受的主链上。 这意味着区块是可逆的。 因此，最终确定性是指你在认为交易不可逆之前需要等待的一段时间。 在以前的工作量证明以太坊中，一个特定区块 <code>N</code> 之后开采出的区块越多，就更加确信区块 <code>N</code> 内的交易是成功的且不可回滚。 现在，基于权益证明机制，最终确定是区块的明确属性，而不再是概率性的。</p>
+<h3 id="工作量证明能源消耗"><a href="#工作量证明能源消耗" class="headerlink" title="工作量证明能源消耗"></a>工作量证明能源消耗</h3><p>对工作量证明提出的一项主要批评是保证网络安全所需的能源消耗。 为了维持安全和去中心化，采用工作量证明的以太坊每年消耗大量能源。 在即将过渡到权益证明之际，以太坊矿工的总能源消耗大约为 70 亿千瓦时/年（大约与捷克共和国相当 - 数据来自 2022 年 7 月 18 日 <a href="https://digiconomist.net/">digiconomist(opens in a new tab)</a>）。</p>
+<h3 id="优点和缺点"><a href="#优点和缺点" class="headerlink" title="优点和缺点"></a>优点和缺点</h3><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>工作量证明并无对错。 你不需要以太币来启动，出块奖励允许你从 0 ETH 获得正的收益。 而在<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">权益证明</a>中，你需要以太币来启动获取收益的过程。</td>
+<td>工作量证明消耗了大量能源，对环境不利。</td>
+</tr>
+<tr>
+<td>工作量证明是一个经过考验和测试的共识机制，多年来一直保持了比特币和以太坊的安全性和去中心化。</td>
+<td>如果你想要挖矿，需要花大量的启动资金去购买专业设备。</td>
+</tr>
+<tr>
+<td>与权益证明方式相比，工作量证明是比较容易实施的。</td>
+<td>因为算力的不断增加，矿池可能会主导挖矿过程，导致中心化和安全风险。</td>
+</tr>
+</tbody></table>
+<h3 id="与权益证明对比"><a href="#与权益证明对比" class="headerlink" title="与权益证明对比"></a>与权益证明对比</h3><p>从更高层面上看，权益证明和工作量证明的最终目标相同，即帮助去中心化网络安全地达成共识。 但它们在实现方式和人员上有些不同：</p>
+<ul>
+<li>权益证明 (PoS) 让质押 ETH 不再需要算力。</li>
+<li>权益证明 (PoS) 将矿工替换为验证者。 验证者通过质押他们的 ETH 来创建新的区块。</li>
+<li>验证者不会竞争创建区块，而是由算法随机选择。</li>
+<li>终局性是很清晰的：在特定的检查节点，如果 2/3 验证者确定了区块，这个区块将被视为最终状态。 验证者必须在区块压上自己全部质押，因此如果他们试图串通更改区块链，他们就会失去他们的全部质押。</li>
+</ul>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">有关权益证明的更多信息</a></p>
+<h2 id="挖矿"><a href="#挖矿" class="headerlink" title="挖矿"></a>挖矿</h2><p>工作量证明不再是以太坊共识机制的基础，这意味着挖矿已终结。 取而代之的是，以太坊将由质押了以太币的验证者保护。 你可以立即开始质押以太币。 阅读更多关于<a href="https://ethereum.org/zh/roadmap/merge/">合并</a>、<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">权益证明</a>和<a href="https://ethereum.org/zh/staking/">质押</a>的信息。 此页面仅展示历史内容。</p>
+<h3 id="以太坊挖矿是什么？"><a href="#以太坊挖矿是什么？" class="headerlink" title="以太坊挖矿是什么？"></a>以太坊挖矿是什么？</h3><p>挖矿是指创建要添加到以太坊区块链的交易块的过程，在以太坊现已弃用的工作量证明架构中进行。</p>
+<p>挖矿一词源于将加密货币比作黄金的比喻。 黄金或贵金属很稀缺，数字代币也很稀缺，在工作量证明体系中，只能通过挖矿增加总量。 在工作量证明以太坊中，只能通过挖矿进行发行。 然而，与黄金或贵金属不同，以太坊挖矿也是一种通过在区块链中创建、验证、发布和传播区块来保护网络的方式。</p>
+<p>以太币挖矿 = 保护网络安全</p>
+<p>挖矿是任何工作量证明区块链的命脉。 在过渡到权益证明之前，以太坊矿工，即运行软件的计算机，利用它的时间和算力处理交易并产生区块。</p>
+<h3 id="为什么存在矿工？"><a href="#为什么存在矿工？" class="headerlink" title="为什么存在矿工？"></a>为什么存在矿工？</h3><p>在以太坊这样的去中心化系统中，需要确保每个人都同意交易的顺序。 矿工通过解决计算难题来产生区块并保护网络免受攻击，从而帮助实现这一目标。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/">关于工作量证明的更多信息</a></p>
+<p>以前任何人都能使用他们的计算机在以太坊网络上挖矿。 然而，并非每个人都可以通过挖矿实现以太币 (ETH) 获利。 在大多数情况下，矿工必须购买专用计算机硬件，并且能够获得廉价能源。 普通计算机不太可能获得足够的区块奖励来支付相关的挖矿成本。</p>
+<h4 id="挖矿成本"><a href="#挖矿成本" class="headerlink" title="挖矿成本"></a>挖矿成本</h4><ul>
+<li>建造和维护矿机所需硬件的潜在成本</li>
+<li>矿机的电力成本</li>
+<li>如果你在矿池中挖矿，这些矿池通常对矿池生成的每个区块收取固定百分比的费用</li>
+<li>支持矿机的潜在成本（通风、能源监测、电线等）</li>
+</ul>
+<p>要进一步探索挖矿收益，请使用挖矿收益计算器，例如 <a href="https://etherscan.io/ether-mining-calculator">Etherscan(opens in a new tab)</a> 提供的挖矿收益计算器。</p>
+<h3 id="如何挖掘以太坊交易"><a href="#如何挖掘以太坊交易" class="headerlink" title="如何挖掘以太坊交易"></a>如何挖掘以太坊交易</h3><p>以下内容将简要介绍如何在以太坊工作量证明中挖掘交易。 在<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/#transaction-execution-ethereum-pos">这里</a>可以找到对以太坊权益证明中该过程的类比介绍。</p>
+<ol>
+<li><p>用户编写和通过一些<a href="https://ethereum.org/zh/developers/docs/accounts/">帐户</a>私钥来签署<a href="https://ethereum.org/zh/developers/docs/transactions/">交易</a>请求。</p>
+</li>
+<li><p>用户通过一些<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/">节点</a>将自己的交易请求广播到整个以太坊网络。</p>
+</li>
+<li><p>在听到新的转账请求时，每个以太坊网络节点会添加这笔交易到本地的内存池，这些内存池包括他们收到的没有被添加到区块链以承认的所有转账请求。</p>
+</li>
+<li><p>在这个时候，一个挖矿节点将几十或上百个交易请求汇总到潜在</p>
+<p>区块</p>
+<p>中，从而尽量多收取</p>
+<p>交易</p>
+<p>手续费，同时保证不超出区块燃料限制。 采矿节点将：</p>
+<ol>
+<li>验证每个交易请求的有效性（例如没有人试图将以太币从他们没有签名的帐户中转移出来，请求是否有格式错误等），然后执行请求的本地代码，改变本地副本 EVM 的状态。 矿工获得每个交易请求的转账的手续费到他们的帐户。</li>
+<li>一旦在本地 EVM 副本上验证并执行了块中的所有转账请求，就开始为潜在块生成工作证明“合法性证书”。</li>
+</ol>
+</li>
+<li><p>最终，矿工将完成为包含我们特定交易请求的区块生成的证书。 然后，矿工广播完成的区块，其中包括证书和校验新 EVM 状态。</p>
+</li>
+<li><p>其他节点将收到新的区块。 他们将验证证书，执行区块上所有的转账（包括最初由用户广播的交易），然后校验新 EVM 状态，之后执行所有满足 EVM 校验和的转账。 只有这样，这些节点才会将该块附加到区块链的尾部，并接受新的 EVM 状态作为新的规范状态。</p>
+</li>
+<li><p>每个节点将从其未完成的本地内存池的转账请求中删除新区块中已经存在的转账请求。</p>
+</li>
+<li><p>加入网络的新节点将按顺序下载所有块，包括未被打包的交易块。 初始化本地 EVM 副本（作为空白状态的 EVM 开始），在本地 EVM 副本上执行每个块中的每个转账，校验各块的校验和。</p>
+</li>
+</ol>
+<p>每个交易都只会被挖掘（首次包含在新区块中并传播）一次，但在推进规范以太坊虚拟机状态的过程中，每个参与者都会执行和验证交易。 这凸显出区块链的核心准则之一：<strong>不信任，就验证</strong>。</p>
+<h3 id="叔块"><a href="#叔块" class="headerlink" title="叔块"></a>叔块</h3><p>基于工作量证明的区块挖掘是概率性的，这意味着有时由于网络延迟而同时公布了两个有效的区块。 在这种情况下，协议必须确定最长链(因此大多数即是最“有效的”)，同时针对已提交但未被包含的有效区块，给予矿工部分奖励以确保公平。 这促使网络进一步去中心化，因为小矿工群体可能面临更大的延迟，但仍然可以通过叔块奖励获得收益。</p>
+<p>对于父区块的同级区块来说，“ommer”一词不分性别，因而为首选，但有时也被称为“uncle”（叔）。 <strong>因为以太坊切换到权益证明机制后，叔块就不会被挖掘了</strong>，因为每个时隙中只选择了一名提议者。 通过查看被挖掘叔块的<a href="https://ycharts.com/indicators/ethereum_uncle_rate">历史图表(opens in a new tab)</a>，你可以看到这种变化。</p>
+<h2 id="挖矿算法"><a href="#挖矿算法" class="headerlink" title="挖矿算法"></a>挖矿算法</h2><h2 id="DAGGER-HASHIMOTO"><a href="#DAGGER-HASHIMOTO" class="headerlink" title="DAGGER-HASHIMOTO"></a>DAGGER-HASHIMOTO</h2><p>Dagger-Hashimoto 是以太坊挖矿算法的原始研究实现和规范。 但是，Dagger-Hashimoto 已被 <a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/mining/mining-algorithms/dagger-hashimoto/#ethash">Ethash</a> 取代。 在 2022 年 9 月 15 日实施<a href="https://ethereum.org/zh/roadmap/merge/">合并</a>后，挖矿完全关闭。 此后，以太坊采用<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">权益证明</a>机制保护安全。 本页面展示与历史有关的内容，其中的信息不再与合并后的以太坊相关。</p>
+<h3 id="DAGGER-HASHIMOTO-算法"><a href="#DAGGER-HASHIMOTO-算法" class="headerlink" title="DAGGER-HASHIMOTO 算法"></a>DAGGER-HASHIMOTO 算法</h3><p>Dagger-Hashimoto 旨在实现两个目标：</p>
+<ol>
+<li><strong>ASIC 抗性</strong>：为算法打造专用硬件的益处应尽可能小。</li>
+<li><strong>轻量级客户端可验证性</strong>：区块应能被轻量级客户端高效验证。</li>
+</ol>
+<p>在作出进一步修改后，我们还要具体说明如何在必要时实现第三个目标，但要以增加复杂性为代价：</p>
+<p><strong>完整链存储</strong>：挖矿需要存储完整的区块链状态（因为以太坊状态子树的不规则结构，我们预计将有可能进行一些修改，特别是一些经常用到的合约，但我们希望尽量减少这种情况）。</p>
+<h3 id="有向无环图世代"><a href="#有向无环图世代" class="headerlink" title="有向无环图世代"></a>有向无环图世代</h3><p>以下算法代码将在 Python 中定义。 首先，我们定义了 <code>encode_int</code>，用于将指定精度的无符号整数封送为字符串。 同时还定义了它的逆函数。</p>
+<pre class="line-numbers language-python"><code class="language-python">NUM_BITS <span class="token operator">=</span> <span class="token number">512</span>
+
+<span class="token keyword">def</span> <span class="token function">encode_int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">"Encode an integer x as a string of 64 characters using a big-endian scheme"</span>
+    o <span class="token operator">=</span> <span class="token string">''</span>
+    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>NUM_BITS <span class="token operator">/</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        o <span class="token operator">=</span> chr<span class="token punctuation">(</span>x <span class="token operator">%</span> <span class="token number">256</span><span class="token punctuation">)</span> <span class="token operator">+</span> o
+        x <span class="token operator">//=</span> <span class="token number">256</span>
+    <span class="token keyword">return</span> o
+
+<span class="token keyword">def</span> <span class="token function">decode_int</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">"Unencode an integer x from a string using a big-endian scheme"</span>
+    x <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> c <span class="token keyword">in</span> s<span class="token punctuation">:</span>
+        x <span class="token operator">*=</span> <span class="token number">256</span>
+        x <span class="token operator">+=</span> ord<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>接下来我们假设 <code>sha3</code> 是一个需要输入整数，然后输出整数的函数，而 <code>dbl_sha3</code> 是一个 double-sha3 函数；如果将此引用代码转换为实现，使用以下代码：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> pyethereum <span class="token keyword">import</span> utils
+<span class="token keyword">def</span> <span class="token function">sha3</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token punctuation">(</span>int<span class="token punctuation">,</span> long<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> encode_int<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> decode_int<span class="token punctuation">(</span>utils<span class="token punctuation">.</span>sha3<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">dbl_sha3</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token punctuation">(</span>int<span class="token punctuation">,</span> long<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> encode_int<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> decode_int<span class="token punctuation">(</span>utils<span class="token punctuation">.</span>sha3<span class="token punctuation">(</span>utils<span class="token punctuation">.</span>sha3<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>该算法使用的参数有：</p>
+<pre class="line-numbers language-python"><code class="language-python">SAFE_PRIME_512 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">512</span> <span class="token operator">-</span> <span class="token number">38117</span>     <span class="token comment" spellcheck="true"># Largest Safe Prime less than 2**512</span>
+
+params <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token string">"n"</span><span class="token punctuation">:</span> <span class="token number">4000055296</span> <span class="token operator">*</span> <span class="token number">8</span> <span class="token operator">//</span> NUM_BITS<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true"># Size of the dataset (4 Gigabytes); MUST BE MULTIPLE OF 65536</span>
+      <span class="token string">"n_inc"</span><span class="token punctuation">:</span> <span class="token number">65536</span><span class="token punctuation">,</span>                   <span class="token comment" spellcheck="true"># Increment in value of n per period; MUST BE MULTIPLE OF 65536</span>
+                                        <span class="token comment" spellcheck="true"># with epochtime=20000 gives 882 MB growth per year</span>
+      <span class="token string">"cache_size"</span><span class="token punctuation">:</span> <span class="token number">2500</span><span class="token punctuation">,</span>               <span class="token comment" spellcheck="true"># Size of the light client's cache (can be chosen by light</span>
+                                        <span class="token comment" spellcheck="true"># client; not part of the algo spec)</span>
+      <span class="token string">"diff"</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">14</span><span class="token punctuation">,</span>                    <span class="token comment" spellcheck="true"># Difficulty (adjusted during block evaluation)</span>
+      <span class="token string">"epochtime"</span><span class="token punctuation">:</span> <span class="token number">100000</span><span class="token punctuation">,</span>              <span class="token comment" spellcheck="true"># Length of an epoch in blocks (how often the dataset is updated)</span>
+      <span class="token string">"k"</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>                           <span class="token comment" spellcheck="true"># Number of parents of a node</span>
+      <span class="token string">"w"</span><span class="token punctuation">:</span> w<span class="token punctuation">,</span>                          <span class="token comment" spellcheck="true"># Used for modular exponentiation hashing</span>
+      <span class="token string">"accesses"</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>                  <span class="token comment" spellcheck="true"># Number of dataset accesses during hashimoto</span>
+      <span class="token string">"P"</span><span class="token punctuation">:</span> SAFE_PRIME_512               <span class="token comment" spellcheck="true"># Safe Prime for hashing and random number generation</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>P</code> 在这种情况下为优先选择，因此 <code>log₂(P)</code> 仅略小于 512。512 对应于我们用来代表我们数目的 512 字节。 请注意，实际上只需要存储有向无环图的后半部分，因此，实际内存要求最初为 1 GB，每年增长 441 MB。</p>
+<h4 id="Dagger-建图"><a href="#Dagger-建图" class="headerlink" title="Dagger 建图"></a>Dagger 建图</h4><p>Dagger 建图基本式的定义如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">produce_dag</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> seed<span class="token punctuation">,</span> length<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    P <span class="token operator">=</span> params<span class="token punctuation">[</span><span class="token string">"P"</span><span class="token punctuation">]</span>
+    picker <span class="token operator">=</span> init <span class="token operator">=</span> pow<span class="token punctuation">(</span>sha3<span class="token punctuation">(</span>seed<span class="token punctuation">)</span><span class="token punctuation">,</span> params<span class="token punctuation">[</span><span class="token string">"w"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> P<span class="token punctuation">)</span>
+    o <span class="token operator">=</span> <span class="token punctuation">[</span>init<span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> length<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> picker <span class="token operator">=</span> <span class="token punctuation">(</span>picker <span class="token operator">*</span> init<span class="token punctuation">)</span> <span class="token operator">%</span> P
+        <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token string">"k"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            x <span class="token operator">^</span><span class="token operator">=</span> o<span class="token punctuation">[</span>x <span class="token operator">%</span> i<span class="token punctuation">]</span>
+        o<span class="token punctuation">.</span>append<span class="token punctuation">(</span>pow<span class="token punctuation">(</span>x<span class="token punctuation">,</span> params<span class="token punctuation">[</span><span class="token string">"w"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> P<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> o<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>基本上，建图从单个节点 <code>sha3(seed)</code> 开始，然后根据随机的先前节点按顺序添加到其他节点上。 创建一个新的节点后，将计算种子的模块化能力，以随机选择一些小于 <code>i</code> 的索引（使用上述 <code>x % i</code>），并且使用这些索引上的节点值进行计算，以产生新的 <code>x</code> 值，随后该值被提供给一个小的工作量证明函数（基于 XOR），最终在索引 <code>i</code> 生成图值。 这种特殊设计背后的基本原理是强制按顺序访问有向无环图。如果当前值未知，则无法确定要访问的下一个有向无环图的值。 最后，模幂运算会使结果更加恶化。</p>
+<p>这种算法依赖于数字理论的若干结果。 讨论情况见下文附录。</p>
+<h3 id="轻量级客户端评估"><a href="#轻量级客户端评估" class="headerlink" title="轻量级客户端评估"></a>轻量级客户端评估</h3><p>上述构图旨在实现图中每个节点的重构，只计算少量节点的子树，并且仅需少量的辅助内存。 请注意，当 k=1 时，子树只是一个上升到有向无环图第一个元素的值链。</p>
+<p>轻量级客户端中，有向无环图的计算函数如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">quick_calc</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> seed<span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    w<span class="token punctuation">,</span> P <span class="token operator">=</span> params<span class="token punctuation">[</span><span class="token string">"w"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> params<span class="token punctuation">[</span><span class="token string">"P"</span><span class="token punctuation">]</span>
+    cache <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token keyword">def</span> <span class="token function">quick_calc_cached</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> p <span class="token keyword">in</span> cache<span class="token punctuation">:</span>
+            <span class="token keyword">pass</span>
+        <span class="token keyword">elif</span> p <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            cache<span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">=</span> pow<span class="token punctuation">(</span>sha3<span class="token punctuation">(</span>seed<span class="token punctuation">)</span><span class="token punctuation">,</span> w<span class="token punctuation">,</span> P<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            x <span class="token operator">=</span> pow<span class="token punctuation">(</span>sha3<span class="token punctuation">(</span>seed<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>p <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> w<span class="token punctuation">,</span> P<span class="token punctuation">)</span>
+            <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token string">"k"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                x <span class="token operator">^</span><span class="token operator">=</span> quick_calc_cached<span class="token punctuation">(</span>x <span class="token operator">%</span> p<span class="token punctuation">)</span>
+            cache<span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">=</span> pow<span class="token punctuation">(</span>x<span class="token punctuation">,</span> w<span class="token punctuation">,</span> P<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cache<span class="token punctuation">[</span>p<span class="token punctuation">]</span>
+
+    <span class="token keyword">return</span> quick_calc_cached<span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>本质上，它只是对上述算法的重写，删除了计算整个有向无环图值的循环，并用递归调用或缓存查找替换了早期的节点查找。 请注意，对于 <code>k=1</code> 的情况，缓存是不必要的，尽管进一步的优化实际上预先计算了有向无环图的前几千个值，并将其作为静态缓存进行计算；有关此代码实现，请参见附录。</p>
+<h3 id="有向无环图的双倍缓冲"><a href="#有向无环图的双倍缓冲" class="headerlink" title="有向无环图的双倍缓冲"></a>有向无环图的双倍缓冲</h3><p>在完整客户端中，使用了上述公式生成的 2 个有向无环图的<a href="https://wikipedia.org/wiki/Multiple_buffering"><em>双倍缓冲</em>(opens in a new tab)</a>。 具体概念是，根据上述参数，每个 <code>epochtime</code> 生成一个有向无环图。 但客户端使用的并非是最新生成的有向无环图，而是前一个。 这样做的好处是，有向无环图可以随着时间的推移而被替换掉，无需包含矿工必须突然重新计算所有数据的步骤。 否则，定期的链处理可能会突然暂时放缓，并大幅提高中心化程度。 因此，在重新计算所有数据之前的几分钟时间内，存在 51% 的攻击风险。</p>
+<p>要生成用于块工作计算的有向无环图集，算法如下：</p>
+<pre class="line-numbers language-python"><code class="language-python">
+<span class="token keyword">def</span> <span class="token function">get_prevhash</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">from</span> pyethereum<span class="token punctuation">.</span>blocks <span class="token keyword">import</span> GENESIS_PREVHASH
+    <span class="token keyword">from</span> pyethereum <span class="token keyword">import</span> chain_manager
+    <span class="token keyword">if</span> n <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> hash_to_int<span class="token punctuation">(</span>GENESIS_PREVHASH<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        prevhash <span class="token operator">=</span> chain_manager<span class="token punctuation">.</span>index<span class="token punctuation">.</span>get_block_by_number<span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> decode_int<span class="token punctuation">(</span>prevhash<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">get_seedset</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    seedset <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    seedset<span class="token punctuation">[</span><span class="token string">"back_number"</span><span class="token punctuation">]</span> <span class="token operator">=</span> block<span class="token punctuation">.</span>number <span class="token operator">-</span> <span class="token punctuation">(</span>block<span class="token punctuation">.</span>number <span class="token operator">%</span> params<span class="token punctuation">[</span><span class="token string">"epochtime"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    seedset<span class="token punctuation">[</span><span class="token string">"back_hash"</span><span class="token punctuation">]</span> <span class="token operator">=</span> get_prevhash<span class="token punctuation">(</span>seedset<span class="token punctuation">[</span><span class="token string">"back_number"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    seedset<span class="token punctuation">[</span><span class="token string">"front_number"</span><span class="token punctuation">]</span> <span class="token operator">=</span> max<span class="token punctuation">(</span>seedset<span class="token punctuation">[</span><span class="token string">"back_number"</span><span class="token punctuation">]</span> <span class="token operator">-</span> params<span class="token punctuation">[</span><span class="token string">"epochtime"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    seedset<span class="token punctuation">[</span><span class="token string">"front_hash"</span><span class="token punctuation">]</span> <span class="token operator">=</span> get_prevhash<span class="token punctuation">(</span>seedset<span class="token punctuation">[</span><span class="token string">"front_number"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> seedset
+
+<span class="token keyword">def</span> <span class="token function">get_dagsize</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> params<span class="token punctuation">[</span><span class="token string">"n"</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token punctuation">(</span>block<span class="token punctuation">.</span>number <span class="token operator">//</span> params<span class="token punctuation">[</span><span class="token string">"epochtime"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">*</span> params<span class="token punctuation">[</span><span class="token string">"n_inc"</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">get_daggerset</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    dagsz <span class="token operator">=</span> get_dagsize<span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span>
+    seedset <span class="token operator">=</span> get_seedset<span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> seedset<span class="token punctuation">[</span><span class="token string">"front_hash"</span><span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># No back buffer is possible, just make front buffer</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token string">"front"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"dag"</span><span class="token punctuation">:</span> produce_dag<span class="token punctuation">(</span>params<span class="token punctuation">,</span> seedset<span class="token punctuation">[</span><span class="token string">"front_hash"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dagsz<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                          <span class="token string">"block_number"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token string">"front"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"dag"</span><span class="token punctuation">:</span> produce_dag<span class="token punctuation">(</span>params<span class="token punctuation">,</span> seedset<span class="token punctuation">[</span><span class="token string">"front_hash"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dagsz<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                          <span class="token string">"block_number"</span><span class="token punctuation">:</span> seedset<span class="token punctuation">[</span><span class="token string">"front_number"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token string">"back"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"dag"</span><span class="token punctuation">:</span> produce_dag<span class="token punctuation">(</span>params<span class="token punctuation">,</span> seedset<span class="token punctuation">[</span><span class="token string">"back_hash"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dagsz<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                         <span class="token string">"block_number"</span><span class="token punctuation">:</span> seedset<span class="token punctuation">[</span><span class="token string">"back_number"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="HASHIMOTO"><a href="#HASHIMOTO" class="headerlink" title="HASHIMOTO"></a>HASHIMOTO</h3><p>初始 Hashimoto 旨在将区块链用作数据集，执行从区块链中选择 N 个索引的计算，收集这些索引处的交易，对这些数据执行 XOR，并返回结果哈希值。 Thaddeus Dryja 的初始算法（为了保持一致性，被转化成 Python），具体如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">orig_hashimoto</span><span class="token punctuation">(</span>prev_hash<span class="token punctuation">,</span> merkle_root<span class="token punctuation">,</span> list_of_transactions<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    hash_output_A <span class="token operator">=</span> sha256<span class="token punctuation">(</span>prev_hash <span class="token operator">+</span> merkle_root <span class="token operator">+</span> nonce<span class="token punctuation">)</span>
+    txid_mix <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        shifted_A <span class="token operator">=</span> hash_output_A <span class="token operator">>></span> i
+        transaction <span class="token operator">=</span> shifted_A <span class="token operator">%</span> len<span class="token punctuation">(</span>list_of_transactions<span class="token punctuation">)</span>
+        txid_mix <span class="token operator">^</span><span class="token operator">=</span> list_of_transactions<span class="token punctuation">[</span>transaction<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> i
+    <span class="token keyword">return</span> txid_mix <span class="token operator">^</span> <span class="token punctuation">(</span>nonce <span class="token operator">&lt;&lt;</span> <span class="token number">192</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>不幸的是，虽然 Hashimoto 被视为内存硬件，但它依靠的是 256 位计算，计算量非常之大。 然而，Dagger-Hashimoto 在索引其数据集时仅使用最低有效 64 位来解决此问题。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">hashimoto</span><span class="token punctuation">(</span>dag<span class="token punctuation">,</span> dagsize<span class="token punctuation">,</span> params<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    m <span class="token operator">=</span> dagsize <span class="token operator">/</span> <span class="token number">2</span>
+    mix <span class="token operator">=</span> sha3<span class="token punctuation">(</span>encode_int<span class="token punctuation">(</span>nonce<span class="token punctuation">)</span> <span class="token operator">+</span> header<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token string">"accesses"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        mix <span class="token operator">^</span><span class="token operator">=</span> dag<span class="token punctuation">[</span>m <span class="token operator">+</span> <span class="token punctuation">(</span>mix <span class="token operator">%</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">64</span><span class="token punctuation">)</span> <span class="token operator">%</span> m<span class="token punctuation">]</span>
+    <span class="token keyword">return</span> dbl_sha3<span class="token punctuation">(</span>mix<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用双 SHA3 可以实现零数据、近乎即时的预验证，仅验证是否提供了正确的中间值。 此工作量证明的外层对专用集成电路高度友好且相当薄弱，但它的存在使分布式拒绝服务变得更加困难，因为必须完成少量工作才能生成不会立即被拒绝的区块。 以下为轻量级客户端版本：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">quick_hashimoto</span><span class="token punctuation">(</span>seed<span class="token punctuation">,</span> dagsize<span class="token punctuation">,</span> params<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    m <span class="token operator">=</span> dagsize <span class="token operator">//</span> <span class="token number">2</span>
+    mix <span class="token operator">=</span> sha3<span class="token punctuation">(</span>nonce <span class="token operator">+</span> header<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token string">"accesses"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        mix <span class="token operator">^</span><span class="token operator">=</span> quick_calc<span class="token punctuation">(</span>params<span class="token punctuation">,</span> seed<span class="token punctuation">,</span> m <span class="token operator">+</span> <span class="token punctuation">(</span>mix <span class="token operator">%</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">64</span><span class="token punctuation">)</span> <span class="token operator">%</span> m<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> dbl_sha3<span class="token punctuation">(</span>mix<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="挖矿与验证"><a href="#挖矿与验证" class="headerlink" title="挖矿与验证"></a>挖矿与验证</h3><p>现在，将它们全部整合到挖矿算法中：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">mine</span><span class="token punctuation">(</span>daggerset<span class="token punctuation">,</span> params<span class="token punctuation">,</span> block<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">from</span> random <span class="token keyword">import</span> randint
+    nonce <span class="token operator">=</span> randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">64</span><span class="token punctuation">)</span>
+    <span class="token keyword">while</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        result <span class="token operator">=</span> hashimoto<span class="token punctuation">(</span>daggerset<span class="token punctuation">,</span> get_dagsize<span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                           params<span class="token punctuation">,</span> decode_int<span class="token punctuation">(</span>block<span class="token punctuation">.</span>prevhash<span class="token punctuation">)</span><span class="token punctuation">,</span> nonce<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> result <span class="token operator">*</span> params<span class="token punctuation">[</span><span class="token string">"diff"</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">256</span><span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+        nonce <span class="token operator">+=</span> <span class="token number">1</span>
+        <span class="token keyword">if</span> nonce <span class="token operator">>=</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">64</span><span class="token punctuation">:</span>
+            nonce <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">return</span> nonce<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以下为验证算法：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">verify</span><span class="token punctuation">(</span>daggerset<span class="token punctuation">,</span> params<span class="token punctuation">,</span> block<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    result <span class="token operator">=</span> hashimoto<span class="token punctuation">(</span>daggerset<span class="token punctuation">,</span> get_dagsize<span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                       params<span class="token punctuation">,</span> decode_int<span class="token punctuation">(</span>block<span class="token punctuation">.</span>prevhash<span class="token punctuation">)</span><span class="token punctuation">,</span> nonce<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> result <span class="token operator">*</span> params<span class="token punctuation">[</span><span class="token string">"diff"</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">256</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>轻量级客户端的友好验证：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">light_verify</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    seedset <span class="token operator">=</span> get_seedset<span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span>
+    result <span class="token operator">=</span> quick_hashimoto<span class="token punctuation">(</span>seedset<span class="token punctuation">[</span><span class="token string">"front_hash"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> get_dagsize<span class="token punctuation">(</span>params<span class="token punctuation">,</span> block<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                             params<span class="token punctuation">,</span> decode_int<span class="token punctuation">(</span>block<span class="token punctuation">.</span>prevhash<span class="token punctuation">)</span><span class="token punctuation">,</span> nonce<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> result <span class="token operator">*</span> params<span class="token punctuation">[</span><span class="token string">"diff"</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">256</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>另外，请注意 Dagger-Hashimoto 对区块头有着额外的要求：</p>
+<ul>
+<li>为了使双层验证起效，区块头必须同时具有随机数和中间值 pre-sha3</li>
+<li>在某处，区块头必须存储当前种子集的 sha3</li>
+</ul>
+<h3 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h3><p><em>还有哪些社区资源对你有所帮助？ 请编辑本页面并添加！</em></p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>如前所述，用于生成有向无环图的随机数生成依赖于数论的一些结果。 Lehmer 随机数生成程序是 <code>picker</code> 变量的基础，因此我们首先确保它具有很宽的周期。 其次，只要一开始 <code>x ∈ [2,P-2]</code>，我们便能证明 <code>pow(x,3,P)</code> 不会将 <code>x</code> 映射到 <code>1</code> 或 <code>P-1</code>。 最后，我们证明 <code>pow(x,3,P)</code> 在被视为散列函数时具有较低的冲突率。</p>
+<h4 id="Lehmer-随机数生成程序"><a href="#Lehmer-随机数生成程序" class="headerlink" title="Lehmer 随机数生成程序"></a>Lehmer 随机数生成程序</h4><p>虽然 <code>produce_dag</code> 函数不需要生成无偏随机数，但潜在的威胁是 <code>seed**i % P</code> 只取少数几个值。 这可以为矿工识别模式提供优势。</p>
+<p>为了避免这种情况，可采用数论结果。 <a href="https://en.wikipedia.org/wiki/Safe_prime"><em>安全素数</em>(opens in a new tab)</a>定义为素数 <code>P</code>，从而 <code>(P-1)/2</code> 也是素数。 <a href="https://en.wikipedia.org/wiki/Multiplicative_group_of_integers_modulo_n">乘数组(opens in a new tab)</a>中 <code>x</code> 的<em>顺序</em> （乘数组 <code>ℤ/nℤ</code>）定义为最小 <code>m</code>，以使</p>
+<pre><code>1xᵐ mod P ≡ 1</code></pre><p>鉴于这些定义，我们得到：</p>
+<blockquote>
+<p>观察 1。 令 <code>x</code> 成为乘法组 <code>ℤ/Pℤ</code> 的一员，以获得安全素数 <code>P</code>。 如果 <code>x mod P ≠ 1 mod P</code> 和 <code>x mod P ≠ P-1 mod P</code>，那么 <code>x</code> 的顺序是 <code>P-1</code> 或 <code>(P-1)/2</code>。</p>
+</blockquote>
+<p><em>证明</em>。 由于 <code>P</code> 是一个安全素数，那么根据 [Lagrange’s Theorem][lagrange]，我们得到 <code>x</code> 的顺序为 <code>1</code>、<code>2</code>、<code>(P-1)/2</code> 或 <code>P-1</code>。</p>
+<p><code>x</code> 的顺序不能是 <code>1</code>，因为根据费马小定理，我们得出：</p>
+<pre><code>1xP-1 mod P ≡ 1</code></pre><p>因此，<code>x</code> 必须是 <code>ℤ/nℤ</code> 的乘法单位，并且是唯一的乘法单位。 由于我们假设 <code>x ≠ 1</code>，所以这是不可能的。</p>
+<p><code>x</code> 的顺序不能是 <code>2</code>，除非 <code>x = P-1</code>，因为这将违反 <code>P</code> 是素数的事实。</p>
+<p>从以上命题中，我们可以知道，迭代 <code>(picker * init) % P</code> 的循环长度至少为 <code>(P-1)/2</code>。 这是因为我们选择 <code>P</code> 作为安全素数，强度几乎翻倍，且 <code>init</code> 处于 <code>[2,2**256+1]</code> 区间内。 考虑到 <code>P</code> 的量级，我们不应期待模幂运算具有周期性。</p>
+<p>在有向无环图中分配第一个单元时（变量标签为 <code>init</code>），我们会计算 <code>pow(sha3(seed) + 2, 3, P)</code>。 初看起来，这并不能保证结果既不是 <code>1</code> 也不是 <code>P-1</code>。 然而，既然 <code>P-1</code> 是一个安全素数，我们还提供以下额外保证，这是观察 1 的必然结果：</p>
+<blockquote>
+<p>观察 2。 令 <code>x</code> 成为乘法组 <code>ℤ/Pℤ</code> 的一员，以获得安全素数 <code>P</code>，并让 <code>w</code> 成为自然数。 如果 <code>x mod P ≠ 1 mod P</code>、<code>x mod P ≠ P-1 mod P</code>，且 <code>w mod P ≠ P-1 mod P</code>、<code>w mod P ≠ 0 mod P</code>，那么 <code>xʷ mod P ≠ 1 mod P</code> 且 <code>xʷ mod P ≠ P-1 mod P</code></p>
+</blockquote>
+<h4 id="模幂运算用作散列函数"><a href="#模幂运算用作散列函数" class="headerlink" title="模幂运算用作散列函数"></a>模幂运算用作散列函数</h4><p>对于特定的 <code>P</code> 值和 <code>w</code> 值，函数 <code>pow(x, w, P)</code> 可能存在许多冲突。 例如，<code>pow(x,9,19)</code> 的值只能接受 <code>{1,18}</code>。</p>
+<p>鉴于 <code>P</code> 为素数，可以使用以下结果，选择一个用于模幂运算哈希函数的适当 <code>w</code> 值：</p>
+<blockquote>
+<p>观察 3。 令 <code>P</code> 为素数；当且仅当用于 <code>ℤ/Pℤ</code> 中所有 <code>a</code> 和 <code>b</code> 满足以下条件时，<code>w</code> 和 <code>P-1</code> 才能为互素。</p>
+<pre><code>aʷ mod P ≡ bʷ mod P`，当且仅当 `a mod P ≡ b mod P</code></pre></blockquote>
+<p>因此，鉴于 <code>P</code> 为素数，且 <code>w</code> 与 <code>P-1</code> 为互素，我们得出 <code>|{pow(x, w, P) : x ∈ ℤ}| = P</code>，表示散列函数具有尽可能小的冲突率。</p>
+<p>在特殊情况下，<code>P</code> 是我们选择的安全素数，那么 <code>P-1</code> 仅有系数 1、2、<code>(P-1)/2</code> 和 <code>P-1</code>。 由于 <code>P</code> &gt; 7，我们知道 3 与 <code>P-1</code> 互素，因此 <code>w=3</code> 满足上述命题。</p>
+<h3 id="更有效的缓存评估算法"><a href="#更有效的缓存评估算法" class="headerlink" title="更有效的缓存评估算法"></a>更有效的缓存评估算法</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">quick_calc</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> seed<span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    cache <span class="token operator">=</span> produce_dag<span class="token punctuation">(</span>params<span class="token punctuation">,</span> seed<span class="token punctuation">,</span> params<span class="token punctuation">[</span><span class="token string">"cache_size"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> quick_calc_cached<span class="token punctuation">(</span>cache<span class="token punctuation">,</span> params<span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">quick_calc_cached</span><span class="token punctuation">(</span>cache<span class="token punctuation">,</span> params<span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    P <span class="token operator">=</span> params<span class="token punctuation">[</span><span class="token string">"P"</span><span class="token punctuation">]</span>
+    <span class="token keyword">if</span> p <span class="token operator">&lt;</span> len<span class="token punctuation">(</span>cache<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> cache<span class="token punctuation">[</span>p<span class="token punctuation">]</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> pow<span class="token punctuation">(</span>cache<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> p <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> P<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token string">"k"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            x <span class="token operator">^</span><span class="token operator">=</span> quick_calc_cached<span class="token punctuation">(</span>cache<span class="token punctuation">,</span> params<span class="token punctuation">,</span> x <span class="token operator">%</span> p<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> pow<span class="token punctuation">(</span>x<span class="token punctuation">,</span> params<span class="token punctuation">[</span><span class="token string">"w"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> P<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">quick_hashimoto</span><span class="token punctuation">(</span>seed<span class="token punctuation">,</span> dagsize<span class="token punctuation">,</span> params<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    cache <span class="token operator">=</span> produce_dag<span class="token punctuation">(</span>params<span class="token punctuation">,</span> seed<span class="token punctuation">,</span> params<span class="token punctuation">[</span><span class="token string">"cache_size"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> quick_hashimoto_cached<span class="token punctuation">(</span>cache<span class="token punctuation">,</span> dagsize<span class="token punctuation">,</span> params<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">quick_hashimoto_cached</span><span class="token punctuation">(</span>cache<span class="token punctuation">,</span> dagsize<span class="token punctuation">,</span> params<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    m <span class="token operator">=</span> dagsize <span class="token operator">//</span> <span class="token number">2</span>
+    mask <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">64</span> <span class="token operator">-</span> <span class="token number">1</span>
+    mix <span class="token operator">=</span> sha3<span class="token punctuation">(</span>encode_int<span class="token punctuation">(</span>nonce<span class="token punctuation">)</span> <span class="token operator">+</span> header<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token string">"accesses"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        mix <span class="token operator">^</span><span class="token operator">=</span> quick_calc_cached<span class="token punctuation">(</span>cache<span class="token punctuation">,</span> params<span class="token punctuation">,</span> m <span class="token operator">+</span> <span class="token punctuation">(</span>mix <span class="token operator">&amp;</span> mask<span class="token punctuation">)</span> <span class="token operator">%</span> m<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> dbl_sha3<span class="token punctuation">(</span>mix<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="ETHASH"><a href="#ETHASH" class="headerlink" title="ETHASH"></a>ETHASH</h2><p>Ethash 是以太坊的工作量证明挖矿算法。 工作量证明现在已经被<strong>完全关闭</strong>，取而代之，以太坊现在使用<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">权益证明</a>来保证安全。 阅读更多关于<a href="https://ethereum.org/zh/roadmap/merge/">合并</a>、<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos/">权益证明</a>和<a href="https://ethereum.org/zh/staking/">质押</a>的信息。 此页面是为了满足对历史的兴趣！</p>
+<p><a href="https://github.com/ethereum/wiki/wiki/Ethash">Ethash(opens in a new tab)</a> 是 <a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/mining/mining-algorithms/dagger-hashimoto/">Dagger-Hashimoto</a> 算法的修改版本。 Ethash 工作量证明是<a href="https://wikipedia.org/wiki/Memory-hard_function">内存密集型(opens in a new tab)</a>算法，这被认为使算法可抵御专用集成电路。 Ethash 专用集成电路最终被开发出来，但在工作量证明被关闭之前，图形处理单元挖矿仍然是一个可行的选择。 Ethash 仍然用于在其他非以太坊工作量证明网络上挖掘其他币。</p>
+<h3 id="ETHASH-是如何工作的？"><a href="#ETHASH-是如何工作的？" class="headerlink" title="ETHASH 是如何工作的？"></a>ETHASH 是如何工作的？</h3><p>内存硬度通过工作量证明算法实现，需要根据随机数和区块头选择固定资源子集。 该资源（大小为几 GB）称为有向无环图。 有向无环图每 30000 个区块更改一次（大约 125 小时的窗口，称为一个时段（大约 5.2 天）），需要一段时间才能生成。 由于有向无环图仅依赖于区块高度，因此可以预先生成，但如果没有，则客户端需要等到此过程结束才能生成区块。 如果客户端没有提前预生成和缓存有向无环图，网络可能会在每个时段过渡时遇到严重的区块延迟。 请注意，不需要生成有向无环图即可验证，工作量证明本质上允许使用低端中央处理器和小内存进行验证。</p>
+<p>该算法采取的一般路线如下：</p>
+<ol>
+<li>有一个<strong>种子</strong>，可以通过扫描区块头直到该点来为每个区块计算种子。</li>
+<li>从种子中可以计算出 <strong>16 MB 的伪随机缓存</strong>。 轻量级客户端存储缓存。</li>
+<li>我们可以从缓存中生成一个 <strong>1 GB 数据集</strong>，数据集中每个项目仅依赖于一小部分缓存中的项目。 全客户端和矿工存储数据集。 数据集随着时间的流逝而呈线性增长。</li>
+<li>采矿会抢走数据集的随机片段并将它们散列在一起。 可以通过使用缓存来重新生成你需要的数据集中的特定区块，以较低的内存进行验证，以使你只需要存储缓存。</li>
+</ol>
+<p>每隔 30000 个区块更新一次大数据集，因此，矿工的绝大部分工作都是读取数据集，而不是对其进行修改。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>我们采用以下定义：</p>
+<pre><code>WORD_BYTES = 4                    # bytes in word
+DATASET_BYTES_INIT = 2**30        # bytes in dataset at genesis
+DATASET_BYTES_GROWTH = 2**23      # dataset growth per epoch
+CACHE_BYTES_INIT = 2**24          # bytes in cache at genesis
+CACHE_BYTES_GROWTH = 2**17        # cache growth per epoch
+CACHE_MULTIPLIER=1024             # Size of the DAG relative to the cache
+EPOCH_LENGTH = 30000              # blocks per epoch
+MIX_BYTES = 128                   # width of mix
+HASH_BYTES = 64                   # hash length in bytes
+DATASET_PARENTS = 256             # number of parents of each dataset element
+CACHE_ROUNDS = 3                  # number of rounds in cache production
+ACCESSES = 64                     # number of accesses in hashimoto loop</code></pre><h4 id="使用“SHA3”"><a href="#使用“SHA3”" class="headerlink" title="使用“SHA3”"></a>使用“SHA3”</h4><p>以太坊的开发恰逢 SHA3 标准的制定， 标准进程对最终确定的哈希算法的填充做了后期改动，使得以太坊的 “sha3_256”和“sha3_512”哈希值不是标准的 sha3 哈希值，而是在其他情况下 常被称为“Keccak-256”和“Keccak-512”的变量。 讨论请见<a href="https://eips.ethereum.org/EIPS/eip-1803">此处(opens in a new tab)</a>、<a href="http://ethereum.stackexchange.com/questions/550/which-cryptographic-hash-function-does-ethereum-use">此处(opens in a new tab)</a>或<a href="http://bitcoin.stackexchange.com/questions/42055/what-is-the-approach-to-calculate-an-ethereum-address-from-a-256-bit-private-key/42057#42057">此处(opens in a new tab)</a>。</p>
+<p>请记住这一点，因为下面的算法描述中提到了“sha3”哈希值。</p>
+<h3 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h3><p>Ethash 的缓存和数据集的参数取决于区块号。 缓存大小和数据集大小都呈线性增长；然而，我们总是取低于线性增长阈值的最高素数，以降低意外规律导致循环行为的风险。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">get_cache_size</span><span class="token punctuation">(</span>block_number<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    sz <span class="token operator">=</span> CACHE_BYTES_INIT <span class="token operator">+</span> CACHE_BYTES_GROWTH <span class="token operator">*</span> <span class="token punctuation">(</span>block_number <span class="token operator">//</span> EPOCH_LENGTH<span class="token punctuation">)</span>
+    sz <span class="token operator">-=</span> HASH_BYTES
+    <span class="token keyword">while</span> <span class="token operator">not</span> isprime<span class="token punctuation">(</span>sz <span class="token operator">/</span> HASH_BYTES<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        sz <span class="token operator">-=</span> <span class="token number">2</span> <span class="token operator">*</span> HASH_BYTES
+    <span class="token keyword">return</span> sz
+
+<span class="token keyword">def</span> <span class="token function">get_full_size</span><span class="token punctuation">(</span>block_number<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    sz <span class="token operator">=</span> DATASET_BYTES_INIT <span class="token operator">+</span> DATASET_BYTES_GROWTH <span class="token operator">*</span> <span class="token punctuation">(</span>block_number <span class="token operator">//</span> EPOCH_LENGTH<span class="token punctuation">)</span>
+    sz <span class="token operator">-=</span> MIX_BYTES
+    <span class="token keyword">while</span> <span class="token operator">not</span> isprime<span class="token punctuation">(</span>sz <span class="token operator">/</span> MIX_BYTES<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        sz <span class="token operator">-=</span> <span class="token number">2</span> <span class="token operator">*</span> MIX_BYTES
+    <span class="token keyword">return</span> sz
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>附录中提供了数据集和缓存大小值表。</p>
+<h3 id="缓存生成"><a href="#缓存生成" class="headerlink" title="缓存生成"></a>缓存生成</h3><p>现在，我们来指定生成缓存的函数：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">mkcache</span><span class="token punctuation">(</span>cache_size<span class="token punctuation">,</span> seed<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> cache_size <span class="token operator">//</span> HASH_BYTES
+
+    <span class="token comment" spellcheck="true"># Sequentially produce the initial dataset</span>
+    o <span class="token operator">=</span> <span class="token punctuation">[</span>sha3_512<span class="token punctuation">(</span>seed<span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        o<span class="token punctuation">.</span>append<span class="token punctuation">(</span>sha3_512<span class="token punctuation">(</span>o<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># Use a low-round version of randmemohash</span>
+    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>CACHE_ROUNDS<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            v <span class="token operator">=</span> o<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">%</span> n
+            o<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> sha3_512<span class="token punctuation">(</span>map<span class="token punctuation">(</span>xor<span class="token punctuation">,</span> o<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token number">-1</span><span class="token operator">+</span>n<span class="token punctuation">)</span> <span class="token operator">%</span> n<span class="token punctuation">]</span><span class="token punctuation">,</span> o<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> o
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>缓存生成过程中，先按顺序填充 32 MB 内存，然后从 <a href="http://www.hashcash.org/papers/memohash.pdf"><em>严格内存硬哈希函数</em> (2014)(opens in a new tab)</a> 执行两次 Sergio Demian Lerner 的 <em>RandMemoHash</em> 算法。 输出一组 524288 个 64 字节值。</p>
+<h3 id="数据聚合函数"><a href="#数据聚合函数" class="headerlink" title="数据聚合函数"></a>数据聚合函数</h3><p>我们使用灵感来自 <a href="https://en.wikipedia.org/wiki/Fowler–Noll–Vo_hash_function">FNV 哈希(opens in a new tab)</a>的算法，在部分情况下，这种算法可用作逻辑异或的不相关替代。 请注意，我们使用全 32 位输入乘以素数，与之相对地，FNV-1 spec 用 1 个字节（8 个字节）依次乘以素数。</p>
+<pre class="line-numbers language-python"><code class="language-python">FNV_PRIME <span class="token operator">=</span> <span class="token number">0x01000193</span>
+<span class="token keyword">def</span> <span class="token function">fnv</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>v1 <span class="token operator">*</span> FNV_PRIME<span class="token punctuation">)</span> <span class="token operator">^</span> v2<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">32</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>请注意，即使黄皮书也指出 fnv 为 v1*(FNV_PRIME ^ v2)，所有当前实现始终采用上述定义。</p>
+<h3 id="完整数据集计算"><a href="#完整数据集计算" class="headerlink" title="完整数据集计算"></a>完整数据集计算</h3><p>整个 1 GB 数据集中每个 64 字节项目的计算如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">calc_dataset_item</span><span class="token punctuation">(</span>cache<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> len<span class="token punctuation">(</span>cache<span class="token punctuation">)</span>
+    r <span class="token operator">=</span> HASH_BYTES <span class="token operator">//</span> WORD_BYTES
+    <span class="token comment" spellcheck="true"># initialize the mix</span>
+    mix <span class="token operator">=</span> copy<span class="token punctuation">.</span>copy<span class="token punctuation">(</span>cache<span class="token punctuation">[</span>i <span class="token operator">%</span> n<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    mix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">^</span><span class="token operator">=</span> i
+    mix <span class="token operator">=</span> sha3_512<span class="token punctuation">(</span>mix<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># fnv it with a lot of random cache nodes based on i</span>
+    <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>DATASET_PARENTS<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        cache_index <span class="token operator">=</span> fnv<span class="token punctuation">(</span>i <span class="token operator">^</span> j<span class="token punctuation">,</span> mix<span class="token punctuation">[</span>j <span class="token operator">%</span> r<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        mix <span class="token operator">=</span> map<span class="token punctuation">(</span>fnv<span class="token punctuation">,</span> mix<span class="token punctuation">,</span> cache<span class="token punctuation">[</span>cache_index <span class="token operator">%</span> n<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> sha3_512<span class="token punctuation">(</span>mix<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>基本上，我们将来自 256 个伪随机选择的缓存节点的数据聚集起来求哈希值，以计算数据集节点。 然后生成整个数据集：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">calc_dataset</span><span class="token punctuation">(</span>full_size<span class="token punctuation">,</span> cache<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>calc_dataset_item<span class="token punctuation">(</span>cache<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>full_size <span class="token operator">//</span> HASH_BYTES<span class="token punctuation">)</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="主循环"><a href="#主循环" class="headerlink" title="主循环"></a>主循环</h3><p>现在，我们指定了类似“hashimoto”的主要循环。在此循环中，我们聚合整个数据集的数据，以生成特定区块头和随机数的最终值。 在下面的代码中，<code>header</code> 代表一个<em>被截断</em>区块头的递归长度前缀表示的 SHA3-256 <em>哈希值</em>。被截断是指区块头被截去了 <strong>mixHash</strong> 和<strong>随机数</strong>字段。 <code>nonce</code> 是指一个 64 位无符号整数的八个字节，按大端序排列。 因此 <code>nonce[::-1]</code> 是上述值的八字节小端序表示：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">hashimoto</span><span class="token punctuation">(</span>header<span class="token punctuation">,</span> nonce<span class="token punctuation">,</span> full_size<span class="token punctuation">,</span> dataset_lookup<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> full_size <span class="token operator">/</span> HASH_BYTES
+    w <span class="token operator">=</span> MIX_BYTES <span class="token operator">//</span> WORD_BYTES
+    mixhashes <span class="token operator">=</span> MIX_BYTES <span class="token operator">/</span> HASH_BYTES
+    <span class="token comment" spellcheck="true"># combine header+nonce into a 64 byte seed</span>
+    s <span class="token operator">=</span> sha3_512<span class="token punctuation">(</span>header <span class="token operator">+</span> nonce<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># start the mix with replicated s</span>
+    mix <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>MIX_BYTES <span class="token operator">/</span> HASH_BYTES<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        mix<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># mix in random dataset nodes</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>ACCESSES<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        p <span class="token operator">=</span> fnv<span class="token punctuation">(</span>i <span class="token operator">^</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> mix<span class="token punctuation">[</span>i <span class="token operator">%</span> w<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token punctuation">(</span>n <span class="token operator">//</span> mixhashes<span class="token punctuation">)</span> <span class="token operator">*</span> mixhashes
+        newdata <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>MIX_BYTES <span class="token operator">/</span> HASH_BYTES<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            newdata<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>dataset_lookup<span class="token punctuation">(</span>p <span class="token operator">+</span> j<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        mix <span class="token operator">=</span> map<span class="token punctuation">(</span>fnv<span class="token punctuation">,</span> mix<span class="token punctuation">,</span> newdata<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># compress mix</span>
+    cmix <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>mix<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        cmix<span class="token punctuation">.</span>append<span class="token punctuation">(</span>fnv<span class="token punctuation">(</span>fnv<span class="token punctuation">(</span>fnv<span class="token punctuation">(</span>mix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> mix<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> mix<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> mix<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        <span class="token string">"mix digest"</span><span class="token punctuation">:</span> serialize_hash<span class="token punctuation">(</span>cmix<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">"result"</span><span class="token punctuation">:</span> serialize_hash<span class="token punctuation">(</span>sha3_256<span class="token punctuation">(</span>s<span class="token operator">+</span>cmix<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">hashimoto_light</span><span class="token punctuation">(</span>full_size<span class="token punctuation">,</span> cache<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> hashimoto<span class="token punctuation">(</span>header<span class="token punctuation">,</span> nonce<span class="token punctuation">,</span> full_size<span class="token punctuation">,</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> calc_dataset_item<span class="token punctuation">(</span>cache<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">hashimoto_full</span><span class="token punctuation">(</span>full_size<span class="token punctuation">,</span> dataset<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> hashimoto<span class="token punctuation">(</span>header<span class="token punctuation">,</span> nonce<span class="token punctuation">,</span> full_size<span class="token punctuation">,</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> dataset<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>基本上，我们保持着一个宽 128 字节的“混合物”，并多次按顺序从整个数据集中获取 128 字节，并使用 <code>fnv</code> 函数将其与混合物结合起来。 使用 128 字节的序列访问，以便每轮算法总是能从随机访问内存获取完整的页面，从而尽量减少转译后备缓冲区的疏忽，而专用集成电路在理论上能够避免这些疏忽。</p>
+<p>如果此算法的输出低于所需目标，即证明随机数是有效的。 请注意，在最后额外应用 <code>sha3_256</code> 将确保中间随机数的存在。提供此证据可以证明至少做了少量工作；而且此快速外部工作量证明验证可以用于反分布式拒绝服务目的。 也可提供统计保证，说明结果是一个无偏 256 位数字。</p>
+<h3 id="挖矿-1"><a href="#挖矿-1" class="headerlink" title="挖矿"></a>挖矿</h3><p>挖矿算法定义如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">mine</span><span class="token punctuation">(</span>full_size<span class="token punctuation">,</span> dataset<span class="token punctuation">,</span> header<span class="token punctuation">,</span> difficulty<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># zero-pad target to compare with hash on the same digit</span>
+    target <span class="token operator">=</span> zpad<span class="token punctuation">(</span>encode_int<span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">**</span><span class="token number">256</span> <span class="token operator">//</span> difficulty<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token keyword">from</span> random <span class="token keyword">import</span> randint
+    nonce <span class="token operator">=</span> randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">64</span><span class="token punctuation">)</span>
+    <span class="token keyword">while</span> hashimoto_full<span class="token punctuation">(</span>full_size<span class="token punctuation">,</span> dataset<span class="token punctuation">,</span> header<span class="token punctuation">,</span> nonce<span class="token punctuation">)</span> <span class="token operator">></span> target<span class="token punctuation">:</span>
+        nonce <span class="token operator">=</span> <span class="token punctuation">(</span>nonce <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">64</span>
+    <span class="token keyword">return</span> nonce<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="定义种子哈希"><a href="#定义种子哈希" class="headerlink" title="定义种子哈希"></a>定义种子哈希</h3><p>为了计算用于在给定区块上挖掘的种子哈希值，我们使用以下算法：</p>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">get_seedhash</span><span class="token punctuation">(</span>block<span class="token punctuation">)</span><span class="token punctuation">:</span>
+     s <span class="token operator">=</span> <span class="token string">'\x00'</span> <span class="token operator">*</span> <span class="token number">32</span>
+     <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>block<span class="token punctuation">.</span>number <span class="token operator">//</span> EPOCH_LENGTH<span class="token punctuation">)</span><span class="token punctuation">:</span>
+         s <span class="token operator">=</span> serialize_hash<span class="token punctuation">(</span>sha3_256<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token keyword">return</span> s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>请注意，为了顺利挖矿和验证，我们建议在单个线程中预先计算未来的种子哈希值和数据集。</p>
+<h3 id="延伸阅读-1"><a href="#延伸阅读-1" class="headerlink" title="延伸阅读"></a>延伸阅读</h3><p><em>还有哪些社区资源对你有所帮助？ 请编辑本页面并添加！</em></p>
+<h3 id="附录-1"><a href="#附录-1" class="headerlink" title="附录"></a>附录</h3><p>如果你有兴趣将上述 python spec 作为代码运行，则应在头部添加以下代码。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> sha3<span class="token punctuation">,</span> copy
+<span class="token comment" spellcheck="true"># Assumes little endian bit ordering (same as Intel architectures)</span>
+<span class="token keyword">def</span> <span class="token function">decode_int</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> int<span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token keyword">if</span> s <span class="token keyword">else</span> <span class="token number">0</span>
+<span class="token keyword">def</span> <span class="token function">encode_int</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    a <span class="token operator">=</span> <span class="token string">"%x"</span> <span class="token operator">%</span> s
+    <span class="token keyword">return</span> <span class="token string">''</span> <span class="token keyword">if</span> s <span class="token operator">==</span> <span class="token number">0</span> <span class="token keyword">else</span> <span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">*</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> a<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token keyword">def</span> <span class="token function">zpad</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> length<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> s <span class="token operator">+</span> <span class="token string">'\x00'</span> <span class="token operator">*</span> max<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> length <span class="token operator">-</span> len<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">serialize_hash</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span>zpad<span class="token punctuation">(</span>encode_int<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> h<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">deserialize_hash</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>decode_int<span class="token punctuation">(</span>h<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i<span class="token operator">+</span>WORD_BYTES<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">,</span> WORD_BYTES<span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">def</span> <span class="token function">hash_words</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> sz<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>x<span class="token punctuation">,</span> list<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> serialize_hash<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    y <span class="token operator">=</span> h<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> deserialize_hash<span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">serialize_cache</span><span class="token punctuation">(</span>ds<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span>serialize_hash<span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token keyword">for</span> h <span class="token keyword">in</span> ds<span class="token punctuation">]</span><span class="token punctuation">)</span>
+serialize_dataset <span class="token operator">=</span> serialize_cache
+<span class="token comment" spellcheck="true"># sha3 hash function, outputs 64 bytes</span>
+<span class="token keyword">def</span> <span class="token function">sha3_512</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> hash_words<span class="token punctuation">(</span><span class="token keyword">lambda</span> v<span class="token punctuation">:</span> sha3<span class="token punctuation">.</span>sha3_512<span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">.</span>digest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">sha3_256</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> hash_words<span class="token punctuation">(</span><span class="token keyword">lambda</span> v<span class="token punctuation">:</span> sha3<span class="token punctuation">.</span>sha3_256<span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">.</span>digest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">xor</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> a <span class="token operator">^</span> b
+<span class="token keyword">def</span> <span class="token function">isprime</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> int<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+         <span class="token keyword">if</span> x <span class="token operator">%</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+             <span class="token keyword">return</span> <span class="token boolean">False</span>
+    <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="数据大小"><a href="#数据大小" class="headerlink" title="数据大小"></a>数据大小</h4><p>以下查找表列表显示了大约 2048 个数据大小和缓存大小时段。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token number">1def</span> get_datasize<span class="token punctuation">(</span>block_number<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token number">2</span>    <span class="token keyword">return</span> data_sizes<span class="token punctuation">[</span>block_number <span class="token operator">//</span> EPOCH_LENGTH<span class="token punctuation">]</span>
+<span class="token number">3</span>
+<span class="token number">4def</span> get_cachesize<span class="token punctuation">(</span>block_number<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token number">5</span>    <span class="token keyword">return</span> cache_sizes<span class="token punctuation">[</span>block_number <span class="token operator">//</span> EPOCH_LENGTH<span class="token punctuation">]</span>
+<span class="token number">6</span>
+7data_sizes <span class="token operator">=</span> <span class="token punctuation">[</span>
+<span class="token number">81073739904</span><span class="token punctuation">,</span> <span class="token number">1082130304</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+
+cache_sizes <span class="token operator">=</span> <span class="token punctuation">[</span>
+<span class="token number">16776896</span><span class="token punctuation">,</span> <span class="token number">16907456</span><span class="token punctuation">,</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-lian-qiao/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/26.png" class="responsive-img" alt="ETH中的链桥">
+                            
+                            <span class="card-title">ETH中的链桥</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                随着一层网络区块链和二层网络扩容解决方案的激增，以及越来越多的去中心化应用程序跨链，跨链通信和资产转移需求已成为网络基础设施的重要组成部分。 存在不同类型的链桥就是为了帮助解决这种需求。
+对链桥的需求链桥的存在是为了连接区块链网络。 它们实
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-quan-yi-zheng-ming-pos/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/16.png" class="responsive-img" alt="ETH中权益证明POS">
+                            
+                            <span class="card-title">ETH中权益证明POS</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                GASPERasper 是友好的最终确定性工具 Gasper (Casper-FFG) 和 LMD-GHOST 分叉选择算法的组合。 它们组成了一种共识机制，使采用权益证明的以太坊保持安全。 Casper 是一种能将特定区块更新为“最终确定
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">383.6k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

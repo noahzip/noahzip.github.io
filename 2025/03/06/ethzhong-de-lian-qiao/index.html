@@ -1,0 +1,933 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的链桥, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="随着一层网络区块链和二层网络扩容解决方案的激增，以及越来越多的去中心化应用程序跨链，跨链通信和资产转移需求已成为网络基础设施的重要组成部分。 存在不同类型的链桥就是为了帮助解决这种需求。
+对链桥的需求链桥的存在是为了连接区块链网络。 它们实">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的链桥 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/26.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的链桥</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-06
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.6k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        12 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>随着一层网络区块链和二层网络<a href="https://ethereum.org/zh/developers/docs/scaling/">扩容</a>解决方案的激增，以及越来越多的去中心化应用程序跨链，跨链通信和资产转移需求已成为网络基础设施的重要组成部分。 存在不同类型的链桥就是为了帮助解决这种需求。</p>
+<h2 id="对链桥的需求"><a href="#对链桥的需求" class="headerlink" title="对链桥的需求"></a>对链桥的需求</h2><p>链桥的存在是为了连接区块链网络。 它们实现了区块链之间的连通性和互操作性。</p>
+<p>区块链存在于孤立的环境中，这意味着区块链之间本来就无法进行交易和通信。 因此，虽然某个生态系统内可能存在大量的活动和创新，但它会由于缺乏与其他生态系统的连通性和互操作性而受到限制。</p>
+<p>链桥提供了一种让孤立的区块链环境相互连通的途径。 它们在区块链之间建立了一条传输路线，让代币、信息、任意数据甚至<a href="https://ethereum.org/zh/developers/docs/smart-contracts/">智能合约</a>调用都可以从一条区块链转移到另一条。</p>
+<h2 id="链桥的优点"><a href="#链桥的优点" class="headerlink" title="链桥的优点"></a>链桥的优点</h2><p>简而言之，链桥解锁了大量应用场景，它允许区块链网络之间交换数据和转移资产。</p>
+<p>区块链具有独特的优势、缺点和应用程序构建方法（例如速度、吞吐量、高成本等）。 链桥有助于整个加密生态系统的发展，它能够让区块链利用彼此的创新。</p>
+<p>对于开发者，链桥可以实现以下功能：</p>
+<ul>
+<li>跨链传输任何数据、信息和资产。</li>
+<li>解锁协议的新功能和应用场景，因为链桥扩展了协议可以提供的设计空间。 例如，最初部署在以太坊主网上用于提供流动性矿池的协议，可以为所有兼容以太坊虚拟机的链提供流动资金池。</li>
+<li>可以利用不同区块链的优势的机会。 例如，开发者可以通过将去中心化应用程序部署在多个卷叠上来享受不同二层网络解决方案带来的较低费用，而侧链和用户可以在它们之间建立链桥。</li>
+<li>不同区块链生态系统的开发者之间相互协作，构建新产品。</li>
+<li>吸引来自不同生态系统的用户和社区使用他们的去中心化应用程序。</li>
+</ul>
+<h2 id="链桥是如何工作的？"><a href="#链桥是如何工作的？" class="headerlink" title="链桥是如何工作的？"></a>链桥是如何工作的？</h2><p>虽然<a href="https://li.fi/knowledge-hub/blockchain-bridges-and-classification/">链桥设计(opens in a new tab)</a>多种多样，但以下三种方便资产跨链转移的方法脱颖而出：</p>
+<ul>
+<li><strong>锁定并铸币 –</strong> 锁定源链上的资产并在目标链上铸币。</li>
+<li><strong>销毁并铸币 –</strong> 销毁源链上的资产并在目标链上铸币。</li>
+<li><strong>原子交换 –</strong> 通过第三方将源链上的资产与目标链上的资产交换。</li>
+</ul>
+<h2 id="链桥类型"><a href="#链桥类型" class="headerlink" title="链桥类型"></a>链桥类型</h2><p>链桥通常可以分为以下几类之一：</p>
+<ul>
+<li><strong>原生链桥 –</strong> 这些链桥通常用于加强特定区块链上的流动性，使用户更容易将资金转移到生态系统。 例如，<a href="https://bridge.arbitrum.io/">Arbitrum 链桥(opens in a new tab)</a>的目的就是为了方便用户从以太坊主网桥接到 Arbitrum。 其他此链类桥包括 Polygon PoS 链桥、<a href="https://app.optimism.io/bridge">Optimism 网关(opens in a new tab)</a>等。</li>
+<li><strong>基于验证者或预言机的链桥 –</strong> 这些链桥依赖于外部验证者组或预言机来验证跨链转移。 例如：Multichain 与 Across。</li>
+<li><strong>通用信息传递链桥 –</strong> 这些链桥可以跨链传输资产、信息和任意数据。 例如：Axelar、LayerZero 与 Nomad。</li>
+<li><strong>流动性网络 –</strong> 这些链桥主要是通过原子交换将资产从一条链转移到另一条链。 一般来讲，它们不支持跨链信息传递。 例如：Connext 与 Hop。</li>
+</ul>
+<h2 id="权衡利弊"><a href="#权衡利弊" class="headerlink" title="权衡利弊"></a>权衡利弊</h2><p>没有完美的链桥解决方案。 有的只是为了实现目的而进行的权衡利弊。 开发者和用户可以根据以下因素评估链桥：</p>
+<ul>
+<li><strong>安全性 –</strong> 谁来验证系统？ 通常，由外部验证者保护的链桥不如由区块链验证者在本地保护的链桥安全。</li>
+<li><strong>便利性 –</strong> 完成一笔交易需要多长时间，用户需要签署多少笔交易? 对于开发者来说，集成一个链桥需要多长时间，这个过程有多复杂?</li>
+<li><strong>连通性 –</strong> 一个链桥可以连接哪些不同的目标链（卷叠、侧链、其他一层网络区块链等），集成一条新区块链有多难?</li>
+<li><strong>传递更复杂数据的能力 –</strong> 链桥能够跨链传输信息和更复杂的任意数据，还是只支持跨链资产转移？</li>
+<li><strong>成本效益 –</strong> 通过链桥跨链转移资产的成本是多少？ 通常情况下，链桥收取固定或变动的费用，具体取决于燃料成本和特定路线的流动性。 根据确保链桥安全所需的资本来评估链桥的成本效益也是至关重要的。</li>
+</ul>
+<p>在较高层面上，链桥可以分为需信任链桥和去信任链桥。</p>
+<ul>
+<li><strong>需信任链桥 –</strong> 需信任链桥由外部验证。 它们使用一组外部验证者（具有多重签名的联盟、多方计算系统、预言机网络）跨链发送数据。 因此，它们可以提供出色的连通性，并完全支持跨链通用信息传递。 在速度和成本效益方面它们通常也表现良好。 但这些是以安全性为代价的，因为用户必须依赖链桥的安全性。</li>
+<li><strong>去信任 –</strong> 这类链桥依靠它们连接的区块链及其验证者来传输信息和代币。 它们是“去信任”的，因为它们没有增加新的信任假设（区块链除外）。 因此，我们认为去信任链桥比可信链桥更安全。</li>
+</ul>
+<p>为了根据其他因素评估去信任链桥，我们须将其分为通用信息传递链桥和流动性网络。</p>
+<ul>
+<li><strong>通用信息传递链桥 –</strong> 这些链桥在安全性和跨链传输更复杂数据的能力方面表现卓越。 通常，它们还具有良好的成本效益。 然而，这些优点通常以轻客户端链桥（例如 IBC）的连通性以及使用欺诈证明的乐观链桥（例如 Nomad）的速度劣势作为代价。</li>
+<li><strong>流动性网络 –</strong> 这些链桥使用原子交换转移资产，并且是本地验证系统(即，它们使用底层区块链的验证者验证交易）。 因此，它们在安全性和速度方面表现出色。 此外，流动性网络具有不错的成本效益和良好的连通性。 然而，最大的折衷之处是它们无法传递更复杂的数据 — 因为它们不支持跨链信息传递。</li>
+</ul>
+<h2 id="链桥相关风险"><a href="#链桥相关风险" class="headerlink" title="链桥相关风险"></a>链桥相关风险</h2><p>去中心化金融领域中<a href="https://rekt.news/leaderboard/">最大的三次黑客攻击(opens in a new tab)</a>都是链桥造成的，而且链桥目前仍处于开发阶段早期。 使用任何链桥都有以下风险：</p>
+<ul>
+<li><strong>智能合约风险 –</strong> 虽然许多链桥已经成功通过了审计，但只需智能合约中的一个缺陷就会使资产暴露在黑客攻击中（例如：<a href="https://rekt.news/wormhole-rekt/">Solana 的 Wormhole 链桥(opens in a new tab)</a>）。</li>
+<li><strong>系统性金融风险</strong> – 许多链桥使用包装资产在新的链上铸造规范化的原始资产。 这使生态系统面临系统性风险，正如我们所看到的那样，包装代币遭到利用。</li>
+<li><strong>交易对手风险 –</strong> 一些链桥采用可信设计，这要求用户依靠一种假设，即验证者不会串通起来窃取用户的资金。 用户需要信任这些第三方参与者，这使他们面临一些风险，比如跑路、审查和其他恶意活动。</li>
+<li><strong>未解决的问题 –</strong> 考虑到链桥处于发展阶段初期，还有许多关于链桥在不同市场条件下如何表现的问题都尚未解决，如网络拥塞期和在发生网络级攻击或状态回滚等不可预见的事件时。 这种不确定性带来了一定的风险，且风险程度目前仍然未知。</li>
+</ul>
+<h2 id="去中心化应用程序如何使用链桥？"><a href="#去中心化应用程序如何使用链桥？" class="headerlink" title="去中心化应用程序如何使用链桥？"></a>去中心化应用程序如何使用链桥？</h2><p>下面介绍一些实际应用，在这些应用中，开发者可以考虑链桥并让他们的去中心化应用程序跨链：</p>
+<h3 id="集成桥接"><a href="#集成桥接" class="headerlink" title="集成桥接"></a>集成桥接</h3><p>对于开发者来说，有很多方法可以添加对链桥的支持：</p>
+<ol>
+<li><strong>构建自己的链桥 –</strong> 构建安全可靠的链桥并不容易，特别是在选择一种进一步将信任最小化的方式时。 此外，还需要与可伸缩性和互操作性研究相关的多年经验和技术专长。 另外，还需要一支亲力亲为的团队来维护链桥，并吸引足够的流动性使其可行。</li>
+<li><strong>向用户展示多种链桥选项 –</strong> 很多<a href="https://ethereum.org/zh/developers/docs/dapps/">去中心化应用程序</a>要求用户拥有原生代币才可与它们交互。 为了使用户能够访问他们的代币，去中心化应用程序在其网站上提供了不同的链桥选项。 然而，这种方法是权宜之计，因为它使用户离开去中心化应用程序界面但仍需要用户与其他去中心化应用程序和链桥交互。 这是一种繁琐的上手体验，会增加出错的范围。</li>
+<li><strong>集成一个链桥 –</strong>该解决方案不需要去中心化应用程序将用户发送到外部链桥和去中心化交易所接口。 这让去中心化应用程序能够改善用户的上手体验。 然而，这种方法有其局限性：<ul>
+<li>链桥的评估和维护既困难又耗时。</li>
+<li>选用一个链桥将造成单点故障和依赖性。</li>
+<li>去中心化应用程序受限于链桥的能力。</li>
+<li>光有链桥可能还不够。 去中心化应用程序可能需要去中心化交易所来提供更多功能，比如跨链交换。</li>
+</ul>
+</li>
+<li><strong>集成多个链桥 –</strong> 该解决方案解决了许多与集成单个链桥相关的问题。 然而，它也有局限性，因为集成多个链桥会消耗资源，并给开发者带来技术和通信开销 — 这是加密货币领域最稀缺的资源。</li>
+<li><strong>集成链桥聚合器 –</strong> 去中心化应用程序另一个选择是集成链桥聚合解决方案，使它们能够访问多个链桥。 链桥聚合器继承了所有链桥的优点，因此不受任何单一链桥能力的限制。 值得注意的是，链桥聚合器通常维护链桥集成，这使去中心化应用程序避免了管控链桥集成技术和操作方面的麻烦。</li>
+</ol>
+<p>尽管如此，链桥聚合器也有其局限性。 比如说，虽然它们可以提供较多的链桥选择，但除了聚合器平台上提供的链桥外，市场上通常还有更多的链桥。 此外，像链桥一样，链桥聚合器也面临智能合约和技术风险（更多的智能合约 = 更多的风险）。</p>
+<p>如果去中心化应用程序计划集成链桥或聚合器，那么根据集成的深度会有不同的选择。 例如，如果只是进行前端集成以改善用户上手体验，去中心化应用程序将集成小组件。 然而，如果整合是为了探索更深层次的跨链策略，如质押、流动性矿池等，去中心化应用程序就集成软件开发工具包或应用程序接口。</p>
+<h3 id="在多条链上部署去中心化应用程序"><a href="#在多条链上部署去中心化应用程序" class="headerlink" title="在多条链上部署去中心化应用程序"></a>在多条链上部署去中心化应用程序</h3><p>要在多条链上部署去中心化应用程序 (dapp)，开发者可以使用 <a href="https://www.alchemy.com/">Alchemy(opens in a new tab)</a>、<a href="https://hardhat.org/">安全帽(opens in a new tab)</a>和 <a href="https://moralis.io/">Moralis(opens in a new tab)</a> 等开发平台。 这些平台通常提供可组合的插件，能够支持去中心化应用程序跨链。 例如，开发者可以使用<a href="https://github.com/wighawag/hardhat-deploy">安全帽部署插件(opens in a new tab)</a>提供的确定性部署代理。</p>
+<h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><ul>
+<li><a href="https://moralis.io/how-to-build-cross-chain-dapps/">如何构建跨链去中心化应用程序(opens in a new tab)</a></li>
+<li><a href="https://youtu.be/WZWCzsB1xUE">构建跨链非同质化代币市场(opens in a new tab)</a></li>
+<li><a href="https://www.youtube.com/watch?v=ehv70kE1QYo">Moralis：构建跨链非同质化代币去中心化应用程序(opens in a new tab)</a></li>
+</ul>
+<h3 id="监控跨链合约活动"><a href="#监控跨链合约活动" class="headerlink" title="监控跨链合约活动"></a>监控跨链合约活动</h3><p>要监控跨链合约活动，开发者可以使用子图和 Tenderly 等开发者平台实时观察智能合约。 这类平台上还有一些工具，提供更强大的跨链活动数据监控功能，例如，检查有没有<a href="https://docs.soliditylang.org/en/v0.8.14/contracts.html?highlight=events#events">合约触发的事件(opens in a new tab)</a>等。</p>
+<h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><ul>
+<li><a href="https://thegraph.com/en/">图表(opens in a new tab)</a></li>
+<li><a href="https://tenderly.co/">Tenderly(opens in a new tab)</a></li>
+</ul>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
+<li><a href="https://ethereum.org/zh/bridges/">区块链链桥</a> — ethereum.org</li>
+<li><a href="https://medium.com/1kxnetwork/blockchain-bridges-5db6afac44f8">区块链链桥：构建加密网络的网络(opens in a new tab)</a> 2021 年 9 月 8 日 - Dmitriy Berenzon</li>
+<li><a href="https://blog.connext.network/the-interoperability-trilemma-657c2cf69f17">互操作性的三难困境(opens in a new tab)</a> 2021 年 10 月 1 日 – Arjun Bhuptani</li>
+<li><a href="https://blog.celestia.org/clusters/">群集：可信链桥和信任最小化链桥如何打造多链格局(opens in a new tab)</a> 2021 年 10 月 4 日 – Mustafa Al-Bassam</li>
+<li><a href="https://blog.li.fi/li-fi-with-bridges-trust-is-a-spectrum-354cd5a1a6d8">LI.FI：有了链桥，信任就是一种范围(opens in a new tab)</a> 2022 年 4 月 28 日 – Arjun Chand</li>
+</ul>
+<p>此外，以下是 <a href="https://twitter.com/_prestwich">James Prestwich(opens in a new tab)</a> 的一些有颇有见解的讲解，可以帮助我们更深入地理解链桥：</p>
+<ul>
+<li><a href="https://youtu.be/ZQJWMiX4hT0">构建链桥，而非构建有围墙的花园(opens in a new tab)</a></li>
+<li><a href="https://youtu.be/b0mC-ZqN8Oo">破坏链桥(opens in a new tab)</a></li>
+<li><a href="https://youtu.be/c7cm2kd20j8">为何链桥在销毁？(opens in a new tab)</a></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-quan-wei-zheng-ming-poa/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="ETH中的权威证明POA">
+                            
+                            <span class="card-title">ETH中的权威证明POA</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                权威证明 (PoA) 是一种基于信誉的共识算法，它是权益证明的一个修改版本。 主要应用于私有链、测试网以及本地开发网络。 权威证明是一种基于信誉的共识算法，它与权益证明中基于质押的机制不同，要求信任一组经授权的签名者来生成区块。
+什么是权威
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-gong-zuo-liang-zheng-ming-pow/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="ETH中工作量证明POW">
+                            
+                            <span class="card-title">ETH中工作量证明POW</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                工作量证明 (POW)以太坊网络最初采用一种称为工作量证明 (PoW) 的共识机制。 这种机制允许以太坊网络的节点就以太坊区块链上记录的所有信息的状态达成共识，并防止某些产生经济影响的攻击。 然而，以太坊在 2022 年终结了工作量证明并开
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">383.6k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
