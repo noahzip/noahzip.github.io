@@ -1,0 +1,989 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的网络层, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="以太坊是一个由数千个节点组成的点对点网络，节点之间必须能够使用标准化协议相互通信。 “网络层”是使节点能够找到彼此并交换信息的协议栈。 可交换信息包括网络上的“广播”信息（一对多通信），以及特定节点之间的交换请求和答复（一对一通信）。 每个">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的网络层 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的网络层</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-07
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-07
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        6.5k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        22 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>以太坊是一个由数千个节点组成的点对点网络，节点之间必须能够使用标准化协议相互通信。 “网络层”是使节点能够找到彼此并交换信息的协议栈。 可交换信息包括网络上的“广播”信息（一对多通信），以及特定节点之间的交换请求和答复（一对一通信）。 每个节点必须遵守特定的网络规则，以确保发送和接收正确的信息。</p>
+<p>客户端软件由两部分组成（执行客户端和共识客户端），它们都具有各自的网络堆栈。 除了与其他以太坊节点进行通信外，执行客户端和共识客户端还必须互相通信。 本页介绍了用以实现这种通信的协议。</p>
+<p>执行客户端通过执行层的点对点网络广播交易信息。 这需要经验证的对等点之间进行加密通信。 当一个验证者被选中来提议区块时，该节点本地交易池中的交易将会通过一个本地远程过程调用连接传递至共识客户端，然后再将其打包进信标区块。 之后，共识客户端将在它们的对等网络中广播信标区块。 广播过程需要两个独立的对等网络：一个连接执行客户端，负责交易的广播；另一个连接共识客户端，负责区块的广播。</p>
+<h2 id="执行层"><a href="#执行层" class="headerlink" title="执行层"></a>执行层</h2><p>执行层的网络协议分为两个堆栈：</p>
+<ul>
+<li>发现堆栈：建立在用户数据报协议之上，并使新节点能够找到相应节点并连接</li>
+<li>DevP2P 堆栈：建立在传输控制协议之上，并使节点能够交换信息</li>
+</ul>
+<p>这两个堆栈并行作用， 发现堆栈将新的网络参与者输送到网络中，DevP2P 则使它们进行交互。</p>
+<h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><p>发现是在网络中寻找其他节点的过程。 该过程使用一小组引导节点（即地址<a href="https://github.com/ethereum/go-ethereum/blob/master/params/bootnodes.go">硬编码(opens in a new tab)</a>为客户端的节点，以便它们能被立即找到，并将客户端连接至对等点）进行引导。 这些引导节点旨在将新节点引入一组对等点，这是它们唯一的目的。它们不参与普通的客户端任务，例如同步链，仅在第一次使用客户端时使用。</p>
+<p>节点与引导节点交互所使用的协议是 <a href="https://medium.com/coinmonks/a-brief-overview-of-kademlia-and-its-use-in-various-decentralized-platforms-da08a7f72b8f">Kademlia(opens in a new tab)</a> 的修改版，它使用<a href="https://en.wikipedia.org/wiki/Distributed_hash_table">分布式散列表(opens in a new tab)</a>共享节点列表。 每个节点都有一版此表格，其中包含连接到最近节点所需的信息。 这个“最近”不是指地理距离，而是由节点 ID 的相似性来界定的。 每个节点的表格都会定期刷新，作为一种安全特性。 例如，在 <a href="https://github.com/ethereum/devp2p/tree/master/discv5">Discv5(opens in a new tab)</a> 中，发现协议节点也可以发送显示客户端支持的子协议的聚合发现服务，以便对等点协调通信所用的协议。</p>
+<p>发现过程从 PING-PONG 游戏开始。 一个成功的 PING-PONG 将新节点“连接”到一个启动节点。 提醒引导节点有新节点进入网络的初始消息为 <code>PING</code>。 此 <code>PING</code> 包括关于新节点、引导节点和过期时间戳的哈希信息。 引导节点接收到 <code>PING</code> 返回 <code>PONG</code>，其中包含 <code>PING</code> 哈希值。 如果 <code>PING</code> 和 <code>PONG</code> 的哈希值相匹配，新节点和引导节点之间的连接就会得到验证，然后就认为它们已经“绑定”。</p>
+<p>绑定之后，新节点即可向引导节点发送 <code>FIND-NEIGHBOURS</code> 请求。 引导节点返回的数据包含一个新节点可以连接的节点列表。 如果这两个节点没有绑定，<code>FIND-NEIGHBOURS</code> 请求将失败，新节点将无法进入网络。</p>
+<p>新节点从引导节点收到邻居节点列表后，就会开始与每个邻居节点交换 PING-PONG。 成功的 PING-PONG 将新节点与邻居节点绑定在一起，以实现消息交换。</p>
+<pre><code>1启动客户端 --&gt; 连接到 bootnode --&gt; 绑定到 bootnode --&gt; 寻找邻居--&gt; 绑定到邻居。</code></pre><p>执行客户端目前使用 <a href="https://github.com/ethereum/devp2p/blob/master/discv4.md">Discv4(opens in a new tab)</a> 发现协议，并且正在积极迁移到 <a href="https://github.com/ethereum/devp2p/tree/master/discv5">Discv5(opens in a new tab)</a> 协议。</p>
+<h4 id="ENR：以太坊节点记录"><a href="#ENR：以太坊节点记录" class="headerlink" title="ENR：以太坊节点记录"></a>ENR：以太坊节点记录</h4><p><a href="https://ethereum.org/zh/developers/docs/networking-layer/network-addresses/">以太坊节点记录 (ENR)</a> 是一个包含三个基本元素的对象：签名（根据某种商定的身份识别方案创建的记录内容的散列）、跟踪记录更改的序号和键:值对的任意列表。 这种格式不会过时，使新对等点之间身份识别信息的交换更加容易，并且是以太坊节点的首选<a href="https://ethereum.org/zh/developers/docs/networking-layer/network-addresses/">网络地址</a>格式。</p>
+<h4 id="发现为什么建立在UDP协议上？"><a href="#发现为什么建立在UDP协议上？" class="headerlink" title="发现为什么建立在UDP协议上？"></a>发现为什么建立在UDP协议上？</h4><p>UDP协议不支持任何错误检查、重新发送失败的数据包，或者动态地打开和关闭连接；相反，它只是将连续的信息流发送至目标，无论它们是否被对方成功接收。 这种最简化的功能会产生最少的连接开销，从而使这种连接非常迅速。 对于发现而言，如果某个节点只想让其它节点知道它的存在以便它与某个对等点建立正式的连接，UDP协议就已经足够了。 然而，对网络协议栈的其余部分来说，UDP协议就不那么合适了。 节点之间的信息交流相当复杂，因此需要一个功能更完善的协议来支持重新发送、错误检查等。 TCP协议带来更多功能所产生的额外连接开销是值得的。 因此，对等网络协议栈中的大多数协议在TCP协议之上运行。</p>
+<h3 id="DevP2P"><a href="#DevP2P" class="headerlink" title="DevP2P"></a>DevP2P</h3><p>DevP2P 本身就是以太坊为建立和维护对等网络而实施的一整套协议。 新节点进入网络后，它们的交互由 <a href="https://github.com/ethereum/devp2p">DevP2P(opens in a new tab)</a> 堆栈中的协议管控。 这些操作均基于传输控制协议，包括 RLPx 传输协议、线路协议和若干子协议。 <a href="https://github.com/ethereum/devp2p/blob/master/rlpx.md">RLPx(opens in a new tab)</a> 是管理启动、验证和维护节点之间会话的协议。 使用 RLP（递归长前缀）的 RLPx 对消息进行编码。递归长度前缀是一种非常节省空间的编码方法，可将数据编码成最小结构，以便在节点之间发送。</p>
+<p>两个节点之间的 RLPx 会话始于初始的加密握手。 这需要节点发送身份验证消息，然后等待对方进行验证。 成功验证后，对方会生成身份确认信息，并将信息返回初始节点。 这是一个密钥交换过程，使节点能够私下安全地进行沟通。 成功的加密握手会触发两个节点“在线”互相发送“hello”消息。 线路协议则通过成功地交换“hello”信息发起。</p>
+<p>Hello 消息包含：</p>
+<ul>
+<li>协议版本</li>
+<li>客戶端 ID</li>
+<li>端口</li>
+<li>节点 ID</li>
+<li>支持的子协议列表</li>
+</ul>
+<p>成功交互需要这些信息，因为它们定义节点之间共享的能力并配置通信。 另外还有个子协议协调过程，届时会将每个节点支持的子协议列表进行对比，并能将两个节点共用的子协议用于会话。</p>
+<p>除了“hello”消息之外，线路协议还可以发送一个“disconnect”消息，以警告对等点连接将被断开。 线路协议还包含定期发送的 PING 和 PONG 消息，以使会话保持开放。 因此，RLPx 和线路协议之间信息交换为节点之间的通信奠定了基础，并为根据特定子协议交换有用的信息提供了平台。</p>
+<h3 id="子协议"><a href="#子协议" class="headerlink" title="子协议"></a>子协议</h3><h4 id="线路协议"><a href="#线路协议" class="headerlink" title="线路协议"></a>线路协议</h4><p>连接对等点并启动 RLPx 会话后，线路协议定义了对等点间的通信方式。 起初，线路协议定义了三项主要任务：链同步、区块传播和交易交换。 但是当以太坊切换至权益证明之后，区块传播和链同步变为共识层的一部分。 交易交换仍由执行客户端负责。 交易交换所是指在节点之间交换待处理的交易，以便区块构建者能够选择其中一些交易放到下一区块中。 有关这些任务的详细信息可从<a href="https://github.com/ethereum/devp2p/blob/master/caps/eth.md">这里(opens in a new tab)</a>获取。 支持这些子协议的客户端通过 <a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/">JSON-RPC</a> 将自己公开给网络中的其它部分。</p>
+<h4 id="les（以太坊轻客户端子协议）"><a href="#les（以太坊轻客户端子协议）" class="headerlink" title="les（以太坊轻客户端子协议）"></a>les（以太坊轻客户端子协议）</h4><p>这是用于同步轻量级客户端的最小协议。 传统上很少使用这一协议，因为全部节点都要求在没有任何奖励的情况下向轻量级客户端提供数据。 执行客户端的默认行为不是通过以太坊轻客户端子协议为轻量级客户端数据提供服务。 更多信息请见以太坊轻客户端子协议<a href="https://github.com/ethereum/devp2p/blob/master/caps/les.md">规范(opens in a new tab)</a>。</p>
+<h4 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h4><p><a href="https://github.com/ethereum/devp2p/blob/master/caps/snap.md#ethereum-snapshot-protocol-snap">快照协议(opens in a new tab)</a>是一种可选扩展，该扩展使对等点能够交换最近状态的快照，从而无需下载默克尔前缀树的内部节点就能验证帐户信息和存储的数据。</p>
+<h4 id="Wit（见证协议）"><a href="#Wit（见证协议）" class="headerlink" title="Wit（见证协议）"></a>Wit（见证协议）</h4><p><a href="https://github.com/ethereum/devp2p/blob/master/caps/wit.md#ethereum-witness-protocol-wit">见证协议(opens in a new tab)</a>也是一种可选扩展，可以使对等点交换彼此的状态见证，从而帮助客户端与链端同步。</p>
+<h4 id="耳语"><a href="#耳语" class="headerlink" title="耳语"></a>耳语</h4><p>耳语协议旨在实现对等节点之间的安全消息传输，无需向区块链写入任何信息。 它曾是 DevP2P 线路协议的一部分，但现在已经弃用。 其他<a href="https://wakunetwork.com/">相关项目(opens in a new tab)</a>也存在类似目标。</p>
+<h2 id="共识层"><a href="#共识层" class="headerlink" title="共识层"></a>共识层</h2><p>共识客户端参与具有不同规范的单独对等网络。 共识客户端需要参与区块广播，以便它们可以从对等点接收新区块，并在轮到它们成为区块提议者时进行广播。 与执行层类似，此过程首先需要一个发现协议，以便节点可以找到对等节点并建立安全会话，以交换区块、认证等。</p>
+<h3 id="发现-1"><a href="#发现-1" class="headerlink" title="发现"></a>发现</h3><p>与执行客户端类似，共识客户端使用基于用户数据报协议的 <a href="https://github.com/ethereum/consensus-specs/blob/dev/specs/phase0/p2p-interface.md#the-discovery-domain-discv5">discv5(opens in a new tab)</a> 寻找对等点。 Discv5 的共识层实现与执行客户端的不同之处仅在于它包含一个将 discv5 连接到 <a href="https://libp2p.io/">libP2P(opens in a new tab)</a> 堆栈的适配器，而且弃用了 DevP2P。 执行层的 RLPx 会话已被弃用，取而代之的是 libP2P 的噪声安全信道握手。</p>
+<h3 id="以太坊节点记录"><a href="#以太坊节点记录" class="headerlink" title="以太坊节点记录"></a>以太坊节点记录</h3><p>共识节点的以太坊节点记录包括节点的公钥、IP 地址、用户数据报协议和传输控制协议端口，以及两个共识特定字段：证明子网位字段和 <code>eth2</code> 密钥。 前者使节点更容易找到参与特定证明广播子网络的对等点。 <code>eth2</code> 密钥包含有关节点正在使用的以太坊分叉的版本信息，以确保对等点连接到正确的以太坊。</p>
+<h3 id="libP2P"><a href="#libP2P" class="headerlink" title="libP2P"></a>libP2P</h3><p>LibP2P 堆栈支持发现后的所有通信。 根据其以太坊节点记录的定义，客户端可以在 IPv4 和/或 IPv6 上拨号和收听。 LibP2P 层上的协议可以细分为广播和请求-响应域。</p>
+<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>广播域包括必须在整个网络中快速传播的所有信息。 这包括信标块、证明、认证、退出和罚没。 这是使用 libP2P gossipsub v1 传输的，并且依赖于在每个节点本地存储的各种元数据，包括要接收和传输的广播有效载荷的上限。 有关广播域的详细信息可在<a href="https://github.com/ethereum/consensus-specs/blob/dev/specs/phase0/p2p-interface.md#the-gossip-domain-gossipsub">此处(opens in a new tab)</a>找到。</p>
+<h3 id="请求-响应"><a href="#请求-响应" class="headerlink" title="请求-响应"></a>请求-响应</h3><p>请求-响应域包含客户端从其对等点请求特定信息的协议。 示例包括请求匹配某些根哈希值或在一定时隙范围内的特定信标块。 响应总是以快速压缩的简单序列化编码字节的形式返回。</p>
+<h2 id="为什么共识客户端更偏好简单序列化而不是递归长度前缀？"><a href="#为什么共识客户端更偏好简单序列化而不是递归长度前缀？" class="headerlink" title="为什么共识客户端更偏好简单序列化而不是递归长度前缀？"></a>为什么共识客户端更偏好简单序列化而不是递归长度前缀？</h2><p>SSZ 代表简单序列化。 它使用固定偏移量，可以轻松解码编码消息的各个部分，而无需解码整个结构，这对于共识客户端非常有用，因为它可以有效地从编码消息中获取特定信息。 它还专门设计用于与默克尔协议集成，并提升与默克尔化有关的效率。 由于共识层中的所有哈希值都是默克尔树根，因此这带来了显著的改进。 简单序列化还保证了值的唯一表示。</p>
+<h2 id="连接执行客户端和共识客户端"><a href="#连接执行客户端和共识客户端" class="headerlink" title="连接执行客户端和共识客户端"></a>连接执行客户端和共识客户端</h2><p>共识客户端和执行客户端同时运行。 它们需要彼此连接，这样共识客户端才能向执行客户端提供指令，后者也才能向前者传送需要纳入信标区块的交易捆绑包。 两个客户端之间的通信可通过本地远程过程调用连接实现。 名为<a href="https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md">“引擎-API”(opens in a new tab)</a>的应用程序接口定义两个客户端之间发送的指令。 由于两个客户端共用同一个网络身份，因此它们也共享同一个以太坊节点记录 (ENR)，其中包含了每个客户端单独的密钥（eth1 密钥和 eth2 密钥）。</p>
+<p>下面显示了控制流摘要，括号中是相关的网络堆栈。</p>
+<h3 id="当共识客户端不是区块生产者时："><a href="#当共识客户端不是区块生产者时：" class="headerlink" title="当共识客户端不是区块生产者时："></a>当共识客户端不是区块生产者时：</h3><ul>
+<li>共识客户端通过区块广播协议接收区块（共识对等网络）</li>
+<li>共识客户端预先验证区块，即确保它来自具有正确元数据的有效发送人</li>
+<li>区块中的交易作为执行有效载荷发送到执行层（本地远程过程调用连接）</li>
+<li>执行层执行交易并验证区块头中的状态（即检查哈希匹配度）</li>
+<li>执行层将验证数据传回共识层，现认为区块已验证（本地远程过程调用连接）</li>
+<li>共识层将区块添加到自己的区块链头并对其进行证明，通过网络广播认证（共识对等网络）</li>
+</ul>
+<h3 id="当共识客户端是区块生产者时："><a href="#当共识客户端是区块生产者时：" class="headerlink" title="当共识客户端是区块生产者时："></a>当共识客户端是区块生产者时：</h3><ul>
+<li>共识客户端收到通知，指出它将成为下一个区块的生产者（共识对等网络）</li>
+<li>共识层在执行客户端调用 <code>create block</code> 方法（本地远程过程调用）</li>
+<li>执行层访问由交易广播协议填充的交易内存池（执行对等网络）</li>
+<li>执行客户端将交易打包为一个区块、执行交易并生成一个区块哈希</li>
+<li>共识客户端从执行客户端获取交易和区块哈希，并将它们加入信标区块（本地远程过程调用）</li>
+<li>共识客户端通过区块广播协议广播区块（共识对等网络）</li>
+<li>其他客户端通过区块广播协议接收提议的区块，并如上所述进行验证（共识对等网络）</li>
+</ul>
+<p>区块被足够多的验证者认证后，就会被添加到链头，经过合理化并最终确定。</p>
+<p><a href="https://ethereum.org/content/developers/docs/networking-layer/cons_client_net_layer.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fcons_client_net_layer.png&amp;w=1920&amp;q=75" alt="img"></a><a href="https://ethereum.org/content/developers/docs/networking-layer/exe_client_net_layer.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fexe_client_net_layer.png&amp;w=1920&amp;q=75" alt="img"></a></p>
+<p>共识客户端和执行客户端的网络层示意图，取自 <a href="https://ethresear.ch/t/eth1-eth2-client-relationship/7248">ethresear.ch(opens in a new tab)</a></p>
+<h2 id="网络地址"><a href="#网络地址" class="headerlink" title="网络地址"></a>网络地址</h2><p>以太坊节点必须用一些基本信息来表明身份，才能连接到其他节点。 为了确保任何潜在对等点能够解析这些信息，它以任何以太坊节点能够理解的三种标准化格式之一进行传递：multiadder、enode 或以太坊节点记录 (ENR)。 以太坊节点记录是以太坊网络地址的现行标准。</p>
+<h3 id="MULTIADDR"><a href="#MULTIADDR" class="headerlink" title="MULTIADDR"></a>MULTIADDR</h3><p>原始以太坊节点地址格式为“multiaddr”（“多地址”的缩写）。 Multiaddr 是一种通用格式，用于对等网络。 地址以键值对表示，键与值之间用正斜杠隔开。 例如，使用 IPv4 地址 <code>192.168.22.27</code> 监听 TCP 端口 <code>33000</code> 的节点可能具有以下类似的 multiaddr：</p>
+<pre><code>/ip4/192.168.22.27/tcp/33000</code></pre><p>对于以太坊节点，multiaddr 包含节点 ID（其公钥的哈希值）：</p>
+<pre><code>/ip4/192.168.22.27/tcp/33000/p2p/5t7Nv7dG2d6ffbvAiewVsEwWweU3LdebSqX2y1bPrW8br</code></pre><h3 id="ENODE"><a href="#ENODE" class="headerlink" title="ENODE"></a>ENODE</h3><p>Enode 使用 URL 地址格式来识别以太坊节点。 十六进制节点 ID 编码为 URL 的用户名部分，采用 @ 符号与主机分隔开来。 主机名只能作为 IP 地址给出；不允许给出 DNS 名称。 主机名部分中的端口是 TCP 监听端口。 如果传输控制协议和用户数据报协议（发现）端口不同，用户数据报协议端口将被指定为查询参数“disposport”</p>
+<p>在下面的例子中，节点 URL 描述了一个 IP 地址为 <code>10.3.58.6</code>、TCP 端口为 <code>30303</code>、UDP 发现端口为 <code>30301</code> 的节点。</p>
+<pre><code>enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@10.3.58.6:30303?discport=30301</code></pre><h3 id="以太坊节点记录-ENR"><a href="#以太坊节点记录-ENR" class="headerlink" title="以太坊节点记录 (ENR)"></a>以太坊节点记录 (ENR)</h3><p>以太坊节点记录 (ENR) 是以太坊网络地址的标准格式。 这种地址取代了 multiaddr 和 enode。 由于它们使节点之间能够进行更多的信息交流，因而尤其实用。 以太坊节点记录包含一个签名、序列号和字段，详细说明了用于生成和验证签名的身份识别方案。 以太坊节点记录还可以填充为采用键值对格式的任意数据。 这些键值对包含节点的 IP 地址和节点能够使用的子协议的信息。 共识客户端使用<a href="https://github.com/ethereum/consensus-specs/blob/dev/specs/phase0/p2p-interface.md#enr-structure">特定的以太坊节点记录结构(opens in a new tab)</a>来识别引导节点，并包括一个 <code>eth2</code> 字段，其中包含有关当前以太坊分叉和认证信息传播子网的信息。上述子网将节点连接至证明被整合在一起的特定对等点集。</p>
+<h2 id="门户网络"><a href="#门户网络" class="headerlink" title="门户网络"></a>门户网络</h2><p>以太坊是由运行以太坊客户端软件的计算机组成的网络。 其中每一台电脑都称为“节点”。 客户端软件让节点能够发送和接收以太坊网络上的数据，并根据以太坊协议规则验证数据。 节点在其磁盘存储中保存大量历史数据，并且当它们从网络上的其他节点接收到新的数据包（即区块）时就添加到里面。 对于始终检查一个节点是否具有和网络其他部分一致的信息，这是必不可少的。 这意味着运行一个节点需要大量磁盘空间。 一些节点操作也需要占用大量 RAM。</p>
+<p>为了解决这一磁盘存储问题，开发出了“轻”节点，它从全节点请求信息，而不是自己存储数据。 但是，这意味着轻节点无法独立验证信息，而是信任另一个节点。 它也意味着全节点需要承担额外的工作来服务那些轻节点。</p>
+<p>门户网络是一种针对以太坊的新型网络设计，旨在通过在整个网络以小数据块的形式分享必要的数据，解决“轻”节点的数据可用性问题，让轻节点无需信任全节点或者向其增加额外压力。</p>
+<p>关于<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/">节点和客户端</a>的更多信息</p>
+<h3 id="为什么需要门户网络"><a href="#为什么需要门户网络" class="headerlink" title="为什么需要门户网络"></a>为什么需要门户网络</h3><p>以太坊节点在本地存储以太坊区块链的全部或部分副本。 这个本地副本用来验证交易并确保节点追随正确的链。 这些本地存储的数据让节点能够独立验证传入的数据是否正确有效，而无需信任任何其他实体。</p>
+<p>区块链以及相关状态和收据数据的本地副本占用节点硬盘中的大量空间。 例如，要运行使用 <a href="https://geth.ethereum.org/">Geth(opens in a new tab)</a> 搭配一种共识客户端的节点，推荐 2TB 硬盘。 快照同步只存储近期一组区块的链数据，采用这种同步时，Geth 一般占用约 650 GB的磁盘空间但是所需空间以每周大概 14GB 的速度增长（你可以定期将节点删除到 650 GB）。</p>
+<p>这意味着运行节点的成本相当昂贵，因为大量的磁盘空间必须专门给以太坊使用。 以太坊路线图上针对这个问题有几种解决方案，包括<a href="https://ethereum.org/zh/roadmap/statelessness/#history-expiry">历史数据到期</a>、<a href="https://ethereum.org/zh/roadmap/statelessness/#state-expiry">状态数据到期</a>和<a href="https://ethereum.org/zh/roadmap/statelessness/">无状态性</a>。 但是，这些方案很可能要好几年才能实现。 还有不自己保存链数据副本的<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/light-clients/">轻节点</a>，它们从全节点请求需要的数据。 然而，这意味着轻节点必须信任全节点会提供诚实的数据，并会给全节点带来压力，它们不得不提供轻节点所需的数据。</p>
+<p>门户网络旨在提供一种可选方案，让轻节点无需信任全节点或者不会让全节点显著增加工作量，就可以获得需要的数据。 其运作原理是为以太坊节点引入了一种在整个网络中分享数据的新方式。</p>
+<h3 id="门户网络如何运作？"><a href="#门户网络如何运作？" class="headerlink" title="门户网络如何运作？"></a>门户网络如何运作？</h3><p>以太坊节点有着严格的协议，协议定义节点如何相互通信。 执行客户端使用一组子协议 <a href="https://ethereum.org/zh/developers/docs/networking-layer/#devp2p">DevP2P</a> 通信，而共识客户端使用一组不同的子协议 <a href="https://ethereum.org/zh/developers/docs/networking-layer/#libp2p">libP2P</a>。 这些子协议定义了可以在节点间传送的数据类型。</p>
+<p><a href="https://ethereum.org/content/developers/docs/networking-layer/portal-network/portal-network-devp2p-libp2p.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fportal-network%2Fportal-network-devp2p-libp2p.png&amp;w=1920&amp;q=75" alt="devP2P 和 libP2P"></a></p>
+<p>节点还能通过 <a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/">JSON-RPC 应用程序接口</a>提供特定数据，这就是应用程序和钱包与以太坊节点交换信息的方式。 但是，这些都不是为轻客户端提供数据的理想协议。</p>
+<p>轻客户端目前不能通过 DevP2P 或 libP2p 请求特定的链数据，因为这些协议只用于支持链同步和区块与交易的传播。 轻客户端不想要下载这类信息，因为那将无法让它们保持“轻量”。</p>
+<p>JSON-RPC 也不是轻客户端请求数据的理想选择，因为它必须要连接到能够提供数据的特定全节点或中心化远程过程调用提供者。 这意味着轻客户端必须信任特定节点或提供者是诚实的，并且全节点很可能不得不处理来自许多轻客户端的大量请求，这提高了它们对带宽的要求.</p>
+<p>门户网络的关键是重新思考整个设计，为轻量化专门设计，摆脱现有以太坊客户端的设计限制。</p>
+<p>门户网络的核心理念是采用目前网络堆栈的精华部分，它利用<a href="https://en.wikipedia.org/wiki/Distributed_hash_table">分布式哈希表(opens in a new tab)</a>，通过轻量级 DevP2P 风格的对等去中心化网络提供轻客户端所需的信息，比如历史数据和当前链头的身份（与 Bittorrent 类似）。</p>
+<p>这种想法是将以太坊全部历史数据的一小部分和一些特定节点职责添加给每个节点。 然后，通过搜索所请求的特定数据的存储节点，从中检索数据完成请求。</p>
+<p>这颠覆了轻节点请求数据的普通模式，即查找单个节点然后请求它们筛选并提供大量数据；相反，轻节点快速筛选大型节点网络，其中每个节点处理少量数据。</p>
+<p>目标是允许去中心化轻量级门户客户端网络：</p>
+<ul>
+<li>跟踪链头</li>
+<li>同步最近的和历史链数据</li>
+<li>检索状态数据</li>
+<li>广播交易</li>
+<li>使用<a href="https://ethereum.org/zh/developers/docs/evm/">以太坊虚拟机</a>执行交易</li>
+</ul>
+<p>这种网络设计的优势在于：</p>
+<ul>
+<li>减少对中心化提供者的依赖</li>
+<li>减少网络带宽使用</li>
+<li>最小化或零同步</li>
+<li>可供资源有限的设备访问（&lt;1 GB 内存、&lt;100 MB 磁盘、1 个 CPU）</li>
+</ul>
+<p>下表展示了门户网络可提供的现有客户端的功能，让用户可在极低资源设备上访问它们。</p>
+<h3 id="门户网络-1"><a href="#门户网络-1" class="headerlink" title="门户网络"></a>门户网络</h3><table>
+<thead>
+<tr>
+<th>信标轻客户端</th>
+<th>状态网络</th>
+<th>交易广播</th>
+<th>历史数据网络</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>信标链轻节点</td>
+<td>帐户与合约存储</td>
+<td>轻量内存池</td>
+<td>区块头</td>
+</tr>
+<tr>
+<td>协议数据</td>
+<td></td>
+<td></td>
+<td>区块体</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>收据</td>
+</tr>
+</tbody></table>
+<h3 id="默认支持客户端多样性"><a href="#默认支持客户端多样性" class="headerlink" title="默认支持客户端多样性"></a>默认支持客户端多样性</h3><p>门户网络开发者一开始还做出了设计选择：构建三种不同的门户网络客户端。</p>
+<p>这些门户网络客户端如下：</p>
+<ul>
+<li><a href="https://github.com/ethereum/trin">Trin(opens in a new tab)</a>：用 Rust 编写</li>
+<li><a href="https://nimbus.team/docs/fluffy.html">Fluffy(opens in a new tab)</a>：用 Nim 编写</li>
+<li><a href="https://github.com/ethereumjs/ultralight">Ultralight(opens in a new tab)</a>：用 Typescript 编写</li>
+<li><a href="https://github.com/optimism-java/shisui">Shisui(opens in a new tab)</a>：用 Go 编写</li>
+</ul>
+<p>多种独立客户端实现提升了以太坊网络的弹性和去中心化。</p>
+<p>如果一种客户端遇到问题或者出现漏洞，其他客户端能继续平稳运行，防止单点故障。 另外，多样化的客户端实现促进了创新和竞争，推动改进并降低生态系统内的单一作物风险。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/07/ethzhong-de-mo-ke-er-pa-te-li-xia-zi-dian-shu/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="ETH中的默克尔帕特里夏字典树">
+                            
+                            <span class="card-title">ETH中的默克尔帕特里夏字典树</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以太坊的状态（全体帐户、余额与智能合约）被编码进一个特殊版本的数据结构中，在计算机科学中，这种数据结构通常称为默克尔树。 这种结构可用于许多加密学应用，因为它在树中保存的所有单独数据之间创建了可验证的关系，产生一个可用于证明数据的单独根值。
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/07/ethzhong-de-qu-kuai-lian-shu-ju-cun-chu-ce-lue/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="ETH中的区块链数据存储策略">
+                            
+                            <span class="card-title">ETH中的区块链数据存储策略</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                有多种通过区块链储存信息的方式，不论是直接在区块链上储存，或是用区块链保护信息安全：
+
+EIP-4844 二进制大对象
+调用数据
+具有一层网络机制的链下
+合约“代码”
+事件
+以太坊虚拟机存储
+
+使用方法的选择基于几个标准：
+
+信息来源。 调
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">412.5k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

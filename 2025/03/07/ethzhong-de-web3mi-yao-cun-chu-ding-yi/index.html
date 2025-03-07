@@ -1,0 +1,964 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的Web3密钥存储定义, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Web3密钥存储定义规范了一种标准化的方法，用于加密和存储以太坊私钥，主要由钱包软件（如 MetaMask、Geth）使用。本文档将详细介绍其背景、文件结构、加密与解密流程，以及代码示例。
+
+1. 背景与目的1.1 什么是 Web3 密钥存">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的Web3密钥存储定义 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的Web3密钥存储定义</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-07
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-07
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        960
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        4 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Web3密钥存储定义规范了一种标准化的方法，用于加密和存储以太坊私钥，主要由钱包软件（如 MetaMask、Geth）使用。本文档将详细介绍其背景、文件结构、加密与解密流程，以及代码示例。</p>
+<hr>
+<h2 id="1-背景与目的"><a href="#1-背景与目的" class="headerlink" title="1. 背景与目的"></a>1. 背景与目的</h2><h3 id="1-1-什么是-Web3-密钥存储？"><a href="#1-1-什么是-Web3-密钥存储？" class="headerlink" title="1.1 什么是 Web3 密钥存储？"></a>1.1 什么是 Web3 密钥存储？</h3><p><strong>定义</strong>：Web3 密钥存储是一种 JSON 格式的文件规范，用于安全存储以太坊账户的私钥。</p>
+<p><strong>目的</strong>：</p>
+<ul>
+<li>保护私钥免受未经授权的访问。</li>
+<li>便于跨钱包软件移植私钥。</li>
+</ul>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>用户通过密码加密私钥，生成密钥存储文件。</li>
+<li>钱包软件（如 Geth）读取文件，解密后访问私钥。</li>
+</ul>
+<h3 id="1-2-历史背景"><a href="#1-2-历史背景" class="headerlink" title="1.2 历史背景"></a>1.2 历史背景</h3><ul>
+<li><strong>起源</strong>：由以太坊社区提出，最初用于 Geth 客户端。</li>
+<li><strong>标准化</strong>：现已成为以太坊生态中的事实标准，许多钱包软件（如 MetaMask、MyEtherWallet）遵循该规范。</li>
+</ul>
+<hr>
+<h2 id="2-密钥存储文件结构"><a href="#2-密钥存储文件结构" class="headerlink" title="2. 密钥存储文件结构"></a>2. 密钥存储文件结构</h2><h3 id="2-1-JSON-格式"><a href="#2-1-JSON-格式" class="headerlink" title="2.1 JSON 格式"></a>2.1 JSON 格式</h3><ul>
+<li><strong>文件扩展名</strong>：通常为 <code>.json</code></li>
+<li><strong>典型文件名</strong>：<code>UTC--YYYY-MM-DDTHH:MM:SS.SSSZ--&lt;UUID&gt;</code><ul>
+<li><strong>UTC 时间戳</strong>：文件创建时间。</li>
+<li><strong>UUID</strong>：唯一标识。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-JSON-字段解析"><a href="#2-2-JSON-字段解析" class="headerlink" title="2.2 JSON 字段解析"></a>2.2 JSON 字段解析</h3><p>以下是密钥存储文件的核心字段：</p>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"7e41e9e1-b477-44e2-a6ae-be50625b0a8f"</span><span class="token punctuation">,</span>
+  <span class="token property">"address"</span><span class="token operator">:</span> <span class="token string">"aa8fb2d7630a64715577e399ff3ed5f5c4938389"</span><span class="token punctuation">,</span>
+  <span class="token property">"crypto"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"ciphertext"</span><span class="token operator">:</span> <span class="token string">"d2b4bf81bd0c7ebbcfde07c8d4f3057f5405eabf897f0a01566a3fb9"</span><span class="token punctuation">,</span>
+    <span class="token property">"cipherparams"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"iv"</span><span class="token operator">:</span> <span class="token string">"c22c0d01e5f11ac2ea6ddd78e2578f22"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"cipher"</span><span class="token operator">:</span> <span class="token string">"aes-128-ctr"</span><span class="token punctuation">,</span>
+    <span class="token property">"kdf"</span><span class="token operator">:</span> <span class="token string">"scrypt"</span><span class="token punctuation">,</span>
+    <span class="token property">"kdfparams"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"dklen"</span><span class="token operator">:</span> <span class="token number">32</span><span class="token punctuation">,</span>
+      <span class="token property">"salt"</span><span class="token operator">:</span> <span class="token string">"c3b875d218ca0e0eafe0e561a31747f6e735f7e0bc9d3a0aa1f7ec22c10e65de"</span><span class="token punctuation">,</span>
+      <span class="token property">"n"</span><span class="token operator">:</span> <span class="token number">8192</span><span class="token punctuation">,</span>
+      <span class="token property">"r"</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+      <span class="token property">"p"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"mac"</span><span class="token operator">:</span> <span class="token string">"f123d0ae24dde42f07a2512c54f0d69191577ae8fb1ab92b6a5f1e64f0d9e5e8"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>字段解析</strong>：</p>
+<ul>
+<li><code>version</code>：当前版本为 <code>3</code>。</li>
+<li><code>id</code>：唯一标识该密钥存储文件。</li>
+<li><code>address</code>：以太坊账户地址（无 <code>0x</code> 前缀）。</li>
+<li><code>crypto</code>：包含加密相关数据。<ul>
+<li><code>ciphertext</code>：加密的私钥。</li>
+<li><code>cipherparams.iv</code>：初始化向量。</li>
+<li><code>cipher</code>：加密算法（如 <code>aes-128-ctr</code>）。</li>
+<li><code>kdf</code>：密钥派生函数（如 <code>scrypt</code> 或 <code>pbkdf2</code>）。</li>
+<li><code>mac</code>：消息认证码，确保数据完整性。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-加密与解密流程"><a href="#3-加密与解密流程" class="headerlink" title="3. 加密与解密流程"></a>3. 加密与解密流程</h2><h3 id="3-1-加密流程"><a href="#3-1-加密流程" class="headerlink" title="3.1 加密流程"></a>3.1 加密流程</h3><ol>
+<li><strong>用户输入密码</strong>。</li>
+<li><strong>密钥派生</strong>：使用 KDF（如 <code>scrypt</code>）从密码生成密钥。</li>
+<li><strong>加密私钥</strong>：<ul>
+<li>取派生密钥前 16 字节进行 AES-128-CTR 加密。</li>
+<li>生成 <code>ciphertext</code>。</li>
+</ul>
+</li>
+<li><strong>生成 MAC</strong>：<pre class="line-numbers language-text"><code class="language-text">mac = keccak256(derived_key[16:32] || ciphertext)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><strong>保存 JSON 文件</strong>。</li>
+</ol>
+<h3 id="3-2-解密流程"><a href="#3-2-解密流程" class="headerlink" title="3.2 解密流程"></a>3.2 解密流程</h3><ol>
+<li><strong>读取 JSON 文件</strong>。</li>
+<li><strong>密钥派生</strong>：根据 <code>kdfparams</code> 重新生成 <code>derived_key</code>。</li>
+<li><strong>验证 MAC</strong>，确保数据未被篡改。</li>
+<li><strong>解密私钥</strong>。</li>
+</ol>
+<hr>
+<h2 id="4-代码示例"><a href="#4-代码示例" class="headerlink" title="4. 代码示例"></a>4. 代码示例</h2><h3 id="4-1-生成密钥存储文件（JavaScript）"><a href="#4-1-生成密钥存储文件（JavaScript）" class="headerlink" title="4.1 生成密钥存储文件（JavaScript）"></a>4.1 生成密钥存储文件（JavaScript）</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> password <span class="token operator">=</span> <span class="token string">"your_password_here"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> privateKey <span class="token operator">=</span> <span class="token string">"your_private_key_in_hex"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> salt <span class="token operator">=</span> crypto<span class="token punctuation">.</span><span class="token function">randomBytes</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> iv <span class="token operator">=</span> crypto<span class="token punctuation">.</span><span class="token function">randomBytes</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> kdfParams <span class="token operator">=</span> <span class="token punctuation">{</span> n<span class="token punctuation">:</span> <span class="token number">8192</span><span class="token punctuation">,</span> r<span class="token punctuation">:</span> <span class="token number">8</span><span class="token punctuation">,</span> p<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> dklen<span class="token punctuation">:</span> <span class="token number">32</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> derivedKey <span class="token operator">=</span> <span class="token function">scrypt</span><span class="token punctuation">(</span>password<span class="token punctuation">,</span> salt<span class="token punctuation">,</span> kdfParams<span class="token punctuation">.</span>n<span class="token punctuation">,</span> kdfParams<span class="token punctuation">.</span>r<span class="token punctuation">,</span> kdfParams<span class="token punctuation">.</span>p<span class="token punctuation">,</span> kdfParams<span class="token punctuation">.</span>dklen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> cipherKey <span class="token operator">=</span> derivedKey<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> cipher <span class="token operator">=</span> crypto<span class="token punctuation">.</span><span class="token function">createCipheriv</span><span class="token punctuation">(</span><span class="token string">'aes-128-ctr'</span><span class="token punctuation">,</span> cipherKey<span class="token punctuation">,</span> iv<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> ciphertext <span class="token operator">=</span> Buffer<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token punctuation">[</span>cipher<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>privateKey<span class="token punctuation">,</span> <span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cipher<span class="token punctuation">.</span><span class="token function">final</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> mac <span class="token operator">=</span> <span class="token function">keccak256</span><span class="token punctuation">(</span>Buffer<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token punctuation">[</span>derivedKey<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ciphertext<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-2-解密密钥存储文件"><a href="#4-2-解密密钥存储文件" class="headerlink" title="4.2 解密密钥存储文件"></a>4.2 解密密钥存储文件</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> keystore <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token string">'keystore.json'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> crypto <span class="token punctuation">}</span> <span class="token operator">=</span> keystore<span class="token punctuation">;</span>
+<span class="token keyword">const</span> derivedKey <span class="token operator">=</span> <span class="token function">scrypt</span><span class="token punctuation">(</span>password<span class="token punctuation">,</span> Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>crypto<span class="token punctuation">.</span>kdfparams<span class="token punctuation">.</span>salt<span class="token punctuation">,</span> <span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> computedMac <span class="token operator">=</span> <span class="token function">keccak256</span><span class="token punctuation">(</span>Buffer<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token punctuation">[</span>derivedKey<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>crypto<span class="token punctuation">.</span>ciphertext<span class="token punctuation">,</span> <span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>computedMac<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>crypto<span class="token punctuation">.</span>mac<span class="token punctuation">,</span> <span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'Invalid password'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> cipherKey <span class="token operator">=</span> derivedKey<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> decipher <span class="token operator">=</span> crypto<span class="token punctuation">.</span><span class="token function">createDecipheriv</span><span class="token punctuation">(</span><span class="token string">'aes-128-ctr'</span><span class="token punctuation">,</span> cipherKey<span class="token punctuation">,</span> Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>crypto<span class="token punctuation">.</span>cipherparams<span class="token punctuation">.</span>iv<span class="token punctuation">,</span> <span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> privateKey <span class="token operator">=</span> Buffer<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token punctuation">[</span>decipher<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>crypto<span class="token punctuation">.</span>ciphertext<span class="token punctuation">,</span> <span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> decipher<span class="token punctuation">.</span><span class="token function">final</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="5-安全性与注意事项"><a href="#5-安全性与注意事项" class="headerlink" title="5. 安全性与注意事项"></a>5. 安全性与注意事项</h2><h3 id="5-1-安全性特性"><a href="#5-1-安全性特性" class="headerlink" title="5.1 安全性特性"></a>5.1 安全性特性</h3><ul>
+<li><strong>AES-128-CTR</strong> 提供强加密。</li>
+<li><strong>scrypt/PBKDF2</strong> 增加暴力破解难度。</li>
+<li><strong>MAC 机制</strong> 防止密文篡改。</li>
+</ul>
+<h3 id="5-2-注意事项"><a href="#5-2-注意事项" class="headerlink" title="5.2 注意事项"></a>5.2 注意事项</h3><ul>
+<li><strong>使用强密码</strong>，防止被破解。</li>
+<li><strong>合理设置 KDF 参数</strong>，如 <code>n=8192</code> 平衡安全性与性能。</li>
+<li><strong>文件存储安全</strong>，避免泄露。</li>
+</ul>
+<hr>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><ul>
+<li><strong>Web3 密钥存储</strong> 是一种标准化的私钥管理方案。</li>
+<li><strong>JSON 结构</strong> 规范化密钥存储方式。</li>
+<li><strong>加密流程</strong> 采用 AES-128-CTR + KDF + MAC 保护私钥安全。</li>
+<li><strong>代码示例</strong> 提供实现细节，方便开发者参考。</li>
+</ul>
+<p>如需更深入探讨某部分（如优化 KDF 参数或 Rust 实现），请告诉我！</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/07/ethers-rszhi-gou-jian-yi-tai-fang-xiang-mu/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="ethers-rs之构建以太坊项目">
+                            
+                            <span class="card-title">ethers-rs之构建以太坊项目</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                本节介绍如何使用 ethers-rs（一个Rust语言的以太坊库）初始化新项目、配置传输方式，并连接到以太坊节点。通过 ethers-rs，开发者可以与以太坊区块链交互，例如查询区块号、发送交易或调用智能合约。本文档将逐步讲解设置过程，并为
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/07/ethzhong-de-jian-dan-xu-lie-hua/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="ETH中的简单序列化">
+                            
+                            <span class="card-title">ETH中的简单序列化</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                简单序列化 (SSZ) 是信标链上使用的序列化方法。 这种方法取代了除对等点发现协议以外的共识层各处执行层上所用的递归长度前缀序列化。 简单序列化设计具有确定性，也可以有效地进行默克尔化。 可以认为，简单序列化有两个组成部分：序列化方案和默
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">412.5k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

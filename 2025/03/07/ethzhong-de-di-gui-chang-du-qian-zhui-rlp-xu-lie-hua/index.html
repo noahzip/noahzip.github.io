@@ -1,0 +1,963 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的递归长度前缀 (RLP) 序列化, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="递归长度前缀 (RLP) 序列化广泛用于以太坊的执行客户端。 数据在节点之间以节省空间的格式传输，而递归长度前缀可使这一过程标准化。 递归长度前缀的目的在于，对任意嵌套的二进制数据数组进行编码，而递归长度前缀是用于序列化以太坊执行层中对象的">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的递归长度前缀 (RLP) 序列化 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的递归长度前缀 (RLP) 序列化</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-07
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-07
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.9k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        7 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>递归长度前缀 (RLP) 序列化广泛用于以太坊的执行客户端。 数据在节点之间以节省空间的格式传输，而递归长度前缀可使这一过程标准化。 递归长度前缀的目的在于，对任意嵌套的二进制数据数组进行编码，而递归长度前缀是用于序列化以太坊执行层中对象的主要编码方法。 递归长度前缀的主要目的是对结构进行编码；除正整数外，递归长度前缀将特定数据类型（例如字符串、浮点数）的编码委托给更高阶协议。 正整数必须以不带前导零的大端二进制形式表示（从而使整数值零相当于空字节数组）。 任何使用递归长度前缀的高阶协议都必须将带前导零的反序列化正整数视为无效。</p>
+<p>更多信息请见<a href="https://ethereum.github.io/yellowpaper/paper.pdf#page=19">以太坊黄皮书（附录 B）(opens in a new tab)</a>。</p>
+<p>要使用递归长度前缀对字典进行编码，建议的两种规范形式为：</p>
+<ul>
+<li>使用 <code>[[k1,v1],[k2,v2]...]</code> 加上按字典顺序排列的键</li>
+<li>像以太坊一样使用更高级别的前缀树编码</li>
+</ul>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>递归长度前缀编码函数接受一个项目。 该项目的定义如下：</p>
+<ul>
+<li>一个字符串（即字节数组）是一个项目</li>
+<li>项目列表也是一个项目</li>
+<li>正整数是一个项目</li>
+</ul>
+<p>例如，以下所有都是项目：</p>
+<ul>
+<li>空字符串；</li>
+<li>包含单词“cat”的字符串；</li>
+<li>包含任意数量字符串的列表；</li>
+<li>以及更复杂的数据结构，例如 <code>["cat", ["puppy", "cow"], "horse", [[]], "pig", [""], "sheep"]</code>。</li>
+<li>数字 <code>100</code></li>
+</ul>
+<p>请注意，在本页其余部分的上下文中，“字符串”表示“一定数量的二进制数据字节”；不使用特殊编码，并且不隐含任何有关字符串内容的知识（除非针对非最小正整数的规则要求如此）。</p>
+<p>递归长度前缀编码的定义如下：</p>
+<ul>
+<li>对于正整数，将其转换为最短字节数组，其大端解释为整数，然后根据以下规则编码为字符串。</li>
+<li>对于值在 <code>[0x00, 0x7f]</code>（十进制 <code>[0, 127]</code>）范围内的单个字节，该字节即是它自己的递归长度前缀编码。</li>
+<li>否则，如果字符串的长度为 0-55 个字节，则递归长度前缀编码包含一个值为 <strong>0x80</strong>（十进制 128）的单字节，加上该字符串之后字符串的长度。 因此，第一个字节的范围是 <code>[0x80, 0xb7]</code>（十进制 <code>[128, 183]</code>）。</li>
+<li>如果字符串的长度超过 55 个字节，则递归长度前缀编码由一个值为 <strong>0xb7</strong>（十进制为 183）的单个字节，加上二进制字符串长度的以字节为单位的长度，后跟字符串的长度，然后是字符串。 例如，一个长 1024 字节的字符串将被编码为 <code>\xb9\x04\x00</code>（十进制 <code>185, 4, 0</code>）后跟该字符串。 在这里，<code>0xb9</code> (183 + 2 = 185) 为第一个字节，然后是表示实际字符串长度的 2 个字节 <code>0x0400</code>（十进制 1024）。 因此，第一个字节的范围是 <code>[0xb8, 0xbf]</code>（十进制 <code>[184, 191]</code>）。</li>
+<li>如果字符串的长度为 2^64 字节或更长，则可能不会对其进行编码。</li>
+<li>如果列表的总有效载荷长度（即其所有经过递归长度前缀编码的项目的组合长度）为 0-55 个字节，则递归长度前缀编码包含一个值为 <strong>0xc0</strong> 的单字节，加上有效载荷长度，后跟一串项目的递归长度前缀编码。 因此，第一个字节的范围是 <code>[0xc0, 0xf7]</code>（十进制 <code>[192, 247]</code>）。</li>
+<li>如果列表的总有效载荷长度超过 55 个字节，则递归长度前缀编码包含一个值为 <strong>0xf7</strong> 的单字节，加上二进制格式的有效载荷长度的以字节为单位的长度，后跟有效载荷的长度，然后是项目递归长度前缀编码串。 因此，第一个字节的范围是 <code>[0xf8, 0xff]</code>（十进制 <code>[248, 255]</code>）。</li>
+</ul>
+<p>对应的代码为：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">rlp_encode</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>input<span class="token punctuation">,</span>str<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">and</span> ord<span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0x80</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> input
+        <span class="token keyword">return</span> encode_length<span class="token punctuation">(</span>len<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0x80</span><span class="token punctuation">)</span> <span class="token operator">+</span> input
+    <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>input<span class="token punctuation">,</span> list<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        output <span class="token operator">=</span> <span class="token string">''</span>
+        <span class="token keyword">for</span> item <span class="token keyword">in</span> input<span class="token punctuation">:</span>
+            output <span class="token operator">+=</span> rlp_encode<span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> encode_length<span class="token punctuation">(</span>len<span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0xc0</span><span class="token punctuation">)</span> <span class="token operator">+</span> output
+
+<span class="token keyword">def</span> <span class="token function">encode_length</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span> offset<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> L <span class="token operator">&lt;</span> <span class="token number">56</span><span class="token punctuation">:</span>
+         <span class="token keyword">return</span> chr<span class="token punctuation">(</span>L <span class="token operator">+</span> offset<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> L <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token operator">**</span><span class="token number">8</span><span class="token punctuation">:</span>
+         BL <span class="token operator">=</span> to_binary<span class="token punctuation">(</span>L<span class="token punctuation">)</span>
+         <span class="token keyword">return</span> chr<span class="token punctuation">(</span>len<span class="token punctuation">(</span>BL<span class="token punctuation">)</span> <span class="token operator">+</span> offset <span class="token operator">+</span> <span class="token number">55</span><span class="token punctuation">)</span> <span class="token operator">+</span> BL
+     <span class="token keyword">raise</span> Exception<span class="token punctuation">(</span><span class="token string">"input too long"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">to_binary</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">''</span>
+    <span class="token keyword">return</span> to_binary<span class="token punctuation">(</span>int<span class="token punctuation">(</span>x <span class="token operator">/</span> <span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> chr<span class="token punctuation">(</span>x <span class="token operator">%</span> <span class="token number">256</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ul>
+<li>字符串“dog”= [ 0x83, ‘d’, ‘o’, ‘g’ ]</li>
+<li>列表 [ “cat”, “dog” ] = <code>[ 0xc8, 0x83, 'c', 'a', 't', 0x83, 'd', 'o', 'g' ]</code></li>
+<li>空字符串 (‘null’) = <code>[ 0x80 ]</code></li>
+<li>空列表 = <code>[ 0xc0 ]</code></li>
+<li>整数 0 = <code>[ 0x80 ]</code></li>
+<li>字节 ‘\x00’ = <code>[ 0x00 ]</code></li>
+<li>字节 ‘\x0f’ = <code>[ 0x0f ]</code></li>
+<li>字节 ‘\x04\x00’ = <code>[ 0x82, 0x04, 0x00 ]</code></li>
+<li>3 的<a href="http://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers">集合论表示(opens in a new tab)</a>，<code>[ [], [[]], [ [], [[]] ] ] = [ 0xc7, 0xc0, 0xc1, 0xc0, 0xc3, 0xc0, 0xc1, 0xc0 ]</code></li>
+<li>字符串“Lorem ipsum dolor sit amet, consectetur adipisicing elit”= <code>[ 0xb8, 0x38, 'L', 'o', 'r', 'e', 'm', ' ', ... , 'e', 'l', 'i', 't' ]</code></li>
+</ul>
+<h2 id="递归长度前缀解码"><a href="#递归长度前缀解码" class="headerlink" title="递归长度前缀解码"></a>递归长度前缀解码</h2><p>根据递归长度前缀编码的规则和过程，递归长度前缀译码的输入被视为一个二进制数据数组。 递归长度前缀解码过程如下：</p>
+<ol>
+<li>根据输入数据的第一个字节（即前缀），解码数据类型、实际数据的长度和偏移量；</li>
+<li>根据数据的类型和偏移量，遵循正整数的最小编码规则，对数据进行相应的解码；</li>
+<li>继续解码输入的其余部分；</li>
+</ol>
+<p>其中，解码数据类型和偏移量的规则如下：</p>
+<ol>
+<li>如果第一个字节（即前缀）的范围是 [0x00, 0x7f]，则数据为字符串，并且字符串本身就是第一个字节；</li>
+<li>如果第一个字节的范围是 [0x80, 0xb7]，则数据为字符串，并且第一个字节后跟长度等于第一个字节减去 0x80 的字符串；</li>
+<li>如果第一个字节的范围是 [0xb8, 0xbf]，则数据为字符串，第一个字节后跟长度等于第一字节减去 0xb7 的字符串长度，而字符串则跟在字符串长度后面</li>
+<li>如果第一个字节的范围是 [0xc0, 0xf7]，则数据为列表，第一字节后跟列表中所有项目的递归长度前缀编码串，而列表的总有效载荷等于第一字节减去 0xc0。</li>
+<li>如果第一个字节的范围是 [0xf8, 0xff]，则数据为列表，第一个字节后跟长度等于第一字节减去 0xf7 的总有效载荷，而列表所有项目的递归长度前缀编码串则跟在列表的总有效载荷之后；</li>
+</ol>
+<p>对应的代码为：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">rlp_decode</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> len<span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span>
+    output <span class="token operator">=</span> <span class="token string">''</span>
+    <span class="token punctuation">(</span>offset<span class="token punctuation">,</span> dataLen<span class="token punctuation">,</span> type<span class="token punctuation">)</span> <span class="token operator">=</span> decode_length<span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> type <span class="token keyword">is</span> str<span class="token punctuation">:</span>
+        output <span class="token operator">=</span> instantiate_str<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>input<span class="token punctuation">,</span> offset<span class="token punctuation">,</span> dataLen<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> type <span class="token keyword">is</span> list<span class="token punctuation">:</span>
+        output <span class="token operator">=</span> instantiate_list<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>input<span class="token punctuation">,</span> offset<span class="token punctuation">,</span> dataLen<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    output <span class="token operator">+=</span> rlp_decode<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>input<span class="token punctuation">,</span> offset <span class="token operator">+</span> dataLen<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> output
+
+<span class="token keyword">def</span> <span class="token function">decode_length</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    length <span class="token operator">=</span> len<span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> length <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> Exception<span class="token punctuation">(</span><span class="token string">"input is null"</span><span class="token punctuation">)</span>
+    prefix <span class="token operator">=</span> ord<span class="token punctuation">(</span>input<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> prefix <span class="token operator">&lt;=</span> <span class="token number">0x7f</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> str<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> prefix <span class="token operator">&lt;=</span> <span class="token number">0xb7</span> <span class="token operator">and</span> length <span class="token operator">></span> prefix <span class="token operator">-</span> <span class="token number">0x80</span><span class="token punctuation">:</span>
+        strLen <span class="token operator">=</span> prefix <span class="token operator">-</span> <span class="token number">0x80</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> strLen<span class="token punctuation">,</span> str<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> prefix <span class="token operator">&lt;=</span> <span class="token number">0xbf</span> <span class="token operator">and</span> length <span class="token operator">></span> prefix <span class="token operator">-</span> <span class="token number">0xb7</span> <span class="token operator">and</span> length <span class="token operator">></span> prefix <span class="token operator">-</span> <span class="token number">0xb7</span> <span class="token operator">+</span> to_integer<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>input<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> prefix <span class="token operator">-</span> <span class="token number">0xb7</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        lenOfStrLen <span class="token operator">=</span> prefix <span class="token operator">-</span> <span class="token number">0xb7</span>
+        strLen <span class="token operator">=</span> to_integer<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>input<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> lenOfStrLen<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> lenOfStrLen<span class="token punctuation">,</span> strLen<span class="token punctuation">,</span> str<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> prefix <span class="token operator">&lt;=</span> <span class="token number">0xf7</span> <span class="token operator">and</span> length <span class="token operator">></span> prefix <span class="token operator">-</span> <span class="token number">0xc0</span><span class="token punctuation">:</span>
+        listLen <span class="token operator">=</span> prefix <span class="token operator">-</span> <span class="token number">0xc0</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> listLen<span class="token punctuation">,</span> list<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> prefix <span class="token operator">&lt;=</span> <span class="token number">0xff</span> <span class="token operator">and</span> length <span class="token operator">></span> prefix <span class="token operator">-</span> <span class="token number">0xf7</span> <span class="token operator">and</span> length <span class="token operator">></span> prefix <span class="token operator">-</span> <span class="token number">0xf7</span> <span class="token operator">+</span> to_integer<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>input<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> prefix <span class="token operator">-</span> <span class="token number">0xf7</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        lenOfListLen <span class="token operator">=</span> prefix <span class="token operator">-</span> <span class="token number">0xf7</span>
+        listLen <span class="token operator">=</span> to_integer<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>input<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> lenOfListLen<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> lenOfListLen<span class="token punctuation">,</span> listLen<span class="token punctuation">,</span> list<span class="token punctuation">)</span>
+    <span class="token keyword">raise</span> Exception<span class="token punctuation">(</span><span class="token string">"input does not conform to RLP encoding form"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">to_integer</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    length <span class="token operator">=</span> len<span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> length <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> Exception<span class="token punctuation">(</span><span class="token string">"input is null"</span><span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> length <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> ord<span class="token punctuation">(</span>b<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> ord<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> to_integer<span class="token punctuation">(</span>substr<span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">256</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/07/ethzhong-de-jian-dan-xu-lie-hua/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="ETH中的简单序列化">
+                            
+                            <span class="card-title">ETH中的简单序列化</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                简单序列化 (SSZ) 是信标链上使用的序列化方法。 这种方法取代了除对等点发现协议以外的共识层各处执行层上所用的递归长度前缀序列化。 简单序列化设计具有确定性，也可以有效地进行默克尔化。 可以认为，简单序列化有两个组成部分：序列化方案和默
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/07/ethzhong-de-mo-ke-er-pa-te-li-xia-zi-dian-shu/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="ETH中的默克尔帕特里夏字典树">
+                            
+                            <span class="card-title">ETH中的默克尔帕特里夏字典树</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以太坊的状态（全体帐户、余额与智能合约）被编码进一个特殊版本的数据结构中，在计算机科学中，这种数据结构通常称为默克尔树。 这种结构可用于许多加密学应用，因为它在树中保存的所有单独数据之间创建了可验证的关系，产生一个可用于证明数据的单独根值。
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">412.5k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

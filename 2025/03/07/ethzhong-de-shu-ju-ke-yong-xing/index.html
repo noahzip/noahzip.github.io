@@ -1,0 +1,873 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ETH中的数据可用性, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="“不信任，验证”是以太坊中通用的信条。 这种观念是指，你的节点可以通过执行从对等节点接收的区块中的所有交易来独立验证它收到的信息是正确的，以此来确保提议的更改与其独立计算出的更改完全一致。 这意味着节点无需相信区块的发送者是诚实的。 但如果">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>ETH中的数据可用性 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ETH中的数据可用性</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-07
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-07
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.3k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        11 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>“不信任，验证”是以太坊中通用的信条。 这种观念是指，你的节点可以通过执行从对等节点接收的区块中的所有交易来独立验证它收到的信息是正确的，以此来确保提议的更改与其独立计算出的更改完全一致。 这意味着节点无需相信区块的发送者是诚实的。 但如果数据遗失，就无法验证。</p>
+<p><strong>数据可用性</strong>是指用户能够确信，验证区块所需的数据确实可供所有网络参与者使用。 对于在以太坊一层网络上的全节点来说，数据可用性相对简单；全节点下载每个区块中所有数据的副本 - 这些数据<em>必须</em>可用才能使下载得以进行。 数据缺失的区块将被丢弃，而不是添加进区块链。 这就是“链上数据可用性”，是单片式区块链的特征。 无法欺骗全节点让其接受无效交易，因为它们自己下载并执行所有交易。 然而，对于模块化区块链、二层网络卷叠和轻客户端来说，数据可用性局面更加复杂，需要更加复杂的验证程序。</p>
+<h2 id="数据可用性问题"><a href="#数据可用性问题" class="headerlink" title="数据可用性问题"></a>数据可用性问题</h2><p>数据可用性问题是指，需要向整个网络证明正在被添加到区块链中的某些汇总交易数据确实代表一组有效的交易，但在证明时不需要所有节点下载所有数据。 完整的交易数据是独立验证块所必需的，但要求所有节点下载所有交易数据是对扩容的阻碍。 解决数据可用性问题的目的是充分保证，自己不下载和存储数据的网络参与者可以使用全部交易数据进行验证。</p>
+<p>对于需要可靠的数据可用性保障但无法自己下载和处理交易数据的网络参与者，<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/light-clients/">轻节点</a>和<a href="https://ethereum.org/zh/developers/docs/scaling/">二层网络卷叠</a>是两个重要示例。 无需下载交易数据是轻节点之所以轻量并让卷叠成为有效扩容解决方案的原因。</p>
+<p>对于无需下载并存储数据以验证区块的未来<a href="https://ethereum.org/zh/roadmap/statelessness/">“无状态”</a>以太坊客户端，数据可用性也是一个重要关切点。 无状态客户端仍需要确认数据<em>在某处</em>可用并且已被正确处理。</p>
+<h2 id="数据可用性解决方案"><a href="#数据可用性解决方案" class="headerlink" title="数据可用性解决方案"></a>数据可用性解决方案</h2><h3 id="数据可用性采样-DAS"><a href="#数据可用性采样-DAS" class="headerlink" title="数据可用性采样 (DAS)"></a>数据可用性采样 (DAS)</h3><p>数据可用性采样 (DAS) 是网络在不给任何单个节点带来过多压力的情况下检查数据是否可用的一种方法。 每个节点（包括非质押节点）下载全部数据中随机选择的数据小子集。 成功地下载样本便可以非常肯定地确认所有数据都是可用的。 这依赖于数据纠删码，即用冗余信息扩展给定的数据集（实现方法是将一个称为<em>多项式</em>的函数与数据拟合，并在额外的点上对该多项式进行评估）。 这样可以在必要时从冗余数据中恢复原始数据。 这种数据创建的结果是，如果原始数据中的<em>任何</em>部分不可用，那么<em>一半</em>的扩展数据将丢失！ 每个节点下载的数据样本量可以进行调整，以便<em>在</em>实际上不到一半的数据可用时，每个客户端采样的数据片段<em>极有可能</em>至少缺失一个。</p>
+<p>DAS 将用于确保汇总运营商在实施<a href="https://ethereum.org/zh/roadmap/danksharding/#what-is-danksharding">完整 Danksharding</a> 后提供其交易数据。 以太坊节点将使用上述冗余方案，随机采样二进制大对象中提供的交易数据，以确保所有数据都存在。 同样的技术也可用于确保区块生产者让将其所有数据可用，以保护轻客户端的安全。 同样，在<a href="https://ethereum.org/zh/roadmap/pbs/">提议者-构建者分离</a>的情况下，只要求区块构建者处理整个区块，其他验证者将使用数据可用性采样进行验证。</p>
+<h3 id="数据可用性委员会"><a href="#数据可用性委员会" class="headerlink" title="数据可用性委员会"></a>数据可用性委员会</h3><p>数据可用性委员会 (DAC) 是提供或证明数据可用性的可信参与方。 可以使用数据可用性委员会而非数据可用性采样，或者可以<a href="https://hackmd.io/@vbuterin/sharding_proposal#Why-not-use-just-committees-and-not-DAS">两者结合(opens in a new tab)</a>使用。 数据可用性委员会提供的安全保证取决于具体设置。 例如，以太坊使用随机抽样的验证者子集来证明轻节点的数据可用性。</p>
+<p>一些 Validium 也使用数据可用性委员会。 数据可用性委员会是一组可信节点，它们在线下存储数据副本。 在出现争议时，需要通过数据可用性委员会来确保数据可用。 数据可用性委员会的成员还需要发布链上认证来证明这些数据确实是可用的。 有些 Validium 使用权益证明 (PoS) 验证者系统代替数据可用性委员会。 在该系统中，任何人都能成为验证者并在链下存储数据。 然而，他们必须提供“保证金”，并且保证金存入到智能合约中。 在发生恶意行为时，例如验证者隐藏数据，保证金会被罚没。 权益证明数据可用性委员会在安全性方面明显优于一般数据可用性委员，因为它们直接激励诚实的行为。</p>
+<h2 id="数据可用性与轻节点"><a href="#数据可用性与轻节点" class="headerlink" title="数据可用性与轻节点"></a>数据可用性与轻节点</h2><p><a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/light-clients/">轻节点</a>需要验证收到的区块头的正确性，不用下载区块数据。 轻节点轻量化的代价就是无法像全节点那样在本地独立地重新执行交易以验证区块头。</p>
+<p>以太坊轻节点信任由 512 个验证者组成的随机验证者组，该验证者组被分配到一个<em>同步委员会</em>。 同步委员会充当数据可用性委员会，使用加密签名向轻节点表明区块头中的数据是正确的。 同步委员会每天都刷新。 每个区块头都提醒轻节点哪些验证者应签核<em>下一个</em>区块，这样轻节点就不会被骗相信假装成真正同步委员会的恶意小组。</p>
+<p>但是，如果攻击者<em>确实</em>想方设法向轻节点传输了恶意区块头，并使轻节点相信它是由诚实的同步委员会签核的，会发生什么？ 在这种情况下，攻击者可能会添加无效的交易，而轻节点将会盲目地接受它们，因为轻节点无法独立验证汇总在区块头中的所有状态变化。 为了防止这种情况，轻节点可以使用欺诈证明。</p>
+<p>欺诈证明的工作原理如下：全节点发现一个无效状态转换在网络上广播时，可以快速生成证明已提议状态转换不可能源自给定一组交易的一小段数据，并把这段数据广播到对等节点。 轻节点可以选取这些欺诈证明并用来丢弃有害的区块头，确保它们和全节点留在相同的诚实区块链上。</p>
+<p>这仰仗于全节点能够访问完整的交易数据。 广播有害区块头并且不提供交易数据的攻击者可能能够阻止全节点生成欺诈证明。 全节点也许可以发出关于有害区块的警告，但没有证据来证明它们的警告，因为没有可用于生成证明据的数据！</p>
+<p>数据可用性采样可以解决这个数据可用性问题。 轻节点下载完整状态数据的小随机片段，并使用这些样本验证完整数据集可用。 在下载 N 个随机片段后，对完整数据的可用性做出错误估计的真实可能性是可以计算的（<a href="https://dankradfeist.de/ethereum/2019/12/20/data-availability-checks.html">如果是 100 个数据片段，则概率是 10^-30(opens in a new tab)</a>，也就是说几乎不可能）。</p>
+<p>即使出现错误估计，仅仅隐藏几个字节的攻击，可能不会被发出随机数据请求的客户端所察觉。 纠删码通过重建丢失的小数据片段来解决这个问题，这些数据片段可用来检查提议的状态变化。 然后，可以使用重建的数据构建欺诈证明，防止轻节点接受有害的区块头。</p>
+<p><strong>注意：</strong>数据可用性采样和欺诈证明尚未在权益证明以太坊轻客户端上实现，但它们已经在规划中，很可能采取基于 ZK-SNARK 证明的形式。 目前，轻客户端依赖于一种数据可用性委员会：它们验证同步委员会的身份，然后信任接收到的已签名区块头。</p>
+<h2 id="数据可用性和二层网络卷叠"><a href="#数据可用性和二层网络卷叠" class="headerlink" title="数据可用性和二层网络卷叠"></a>数据可用性和二层网络卷叠</h2><p><a href="https://ethereum.org/zh/layer-2/">二层网络扩容方案</a>（例如卷叠）通过在链下处理交易减少交易费用并增加以太坊的吞吐量。 卷叠交易是分批次压缩并发布到以太坊上。 批次表示将成千上万单个链下交易打包到以太坊上的单个交易中。 这减少了基础层的拥塞并降低了用户费用。</p>
+<p>然而，只有提议的状态变化可被独立验证并确认是应用所有单独链下交易的结果时，才能信任发布到以太坊上的“汇总”交易。 如果卷叠运营者不提供进行此验证所需的交易数据，那么它们可以将不正确的数据发送至以太坊。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/scaling/optimistic-rollups/">乐观卷叠</a>将压缩交易数据发布到以太坊并等待一定时间（通常为 7 天），以便独立验证者检查数据。 如果有任何验证者发现问题，它们可以生成欺诈证明并用来质疑卷叠。 这将导致链回滚并丢弃无效区块。 只有在数据可用时，才能实现这一点。 目前，乐观卷叠有两种方式将交易数据发布到一层网络。 有些卷叠使数据以 <code>CALLDATA</code> 的形式永久可用，并永久存在于链上。 随着 EIP-4844 的实施，一些卷叠将其交易数据发布到更便宜的二进制大对象存储中。 它不是永久存储。 独立验证者必须在数据从以太坊第 1 层删除之前约 18 天内查询二进制大对象并提出挑战。 通过以太坊协议，数据可用性仅在一个短暂的固定窗口期内得到保证。 此后，数据可用性成为以太坊生态系统中其他实体的责任。 任何节点都可以使用数据可用性采样来验证数据可用性，即下载二进制大对象数据的随机小样本。</p>
+<p><a href="https://ethereum.org/zh/developers/docs/scaling/zk-rollups/">零知识 (ZK) 卷叠</a>无需发布交易数据，因为零知识有效性证明可保证状态转换的正确性。 然而，数据可用性依然是一个问题，因为在不访问其状态数据的情况下我们无法担保零知识卷叠的功能（或与之交互）。 例如，如果运营者隐瞒了卷叠状态的细节，用户就无法知道自己的余额。 而且，用户也不能使用新添加区块中的信息来执行状态更新。</p>
+<h2 id="数据可用性与数据可检索性"><a href="#数据可用性与数据可检索性" class="headerlink" title="数据可用性与数据可检索性"></a>数据可用性与数据可检索性</h2><p>数据可用性不同于数据可检索性。 数据可用性是一种保障，它确保全节点能够访问和验证与某个特定区块相关的全部交易。 然而，数据也不见得始终可以访问。</p>
+<p>数据可检索性是指节点从区块链中检索<em>历史信息</em>的能力。 验证新区块不需要此历史数据，历史数据仅用于将全节点与创世区块同步或者满足具体的历史数据请求。</p>
+<p>核心以太坊协议主要涉及数据可用性，而不是数据可检索性。 数据可检索性可由第三方管理的少数归档节点提供，或者可以通过去中心化文件存储（如 <a href="https://www.ethportal.net/">Portal Network(opens in a new tab)</a>）来分散到整个网络。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/07/ethzhong-de-qu-kuai-lian-shu-ju-cun-chu-ce-lue/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="ETH中的区块链数据存储策略">
+                            
+                            <span class="card-title">ETH中的区块链数据存储策略</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                有多种通过区块链储存信息的方式，不论是直接在区块链上储存，或是用区块链保护信息安全：
+
+EIP-4844 二进制大对象
+调用数据
+具有一层网络机制的链下
+合约“代码”
+事件
+以太坊虚拟机存储
+
+使用方法的选择基于几个标准：
+
+信息来源。 调
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/06/ethzhong-de-kuo-rong-zhi-validium/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="ETH中的扩容之VALIDIUM">
+                            
+                            <span class="card-title">ETH中的扩容之VALIDIUM</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Validium 是一种扩容解决方案，使用零知识卷叠等有效性证明来执行交易的完整性，但它不在以太坊主网上存储交易数据。 虽然链下数据可用性是一种折衷方案，但它可以显著提升可扩展性（Validium 每秒可以处理约 9000 笔交易，甚至更多
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">412.5k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

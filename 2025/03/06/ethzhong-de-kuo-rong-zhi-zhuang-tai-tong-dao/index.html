@@ -209,7 +209,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -382,9 +382,9 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>状态通道（State Channels）是以太坊链下扩展的重要解决方案，允许参与者在链下安全、高效地进行交易，仅需在以太坊主网（Ethereum Mainnet）上执行两次链上操作：开启和关闭通道。本文详细探讨状态通道的原理、实现、应用场景及其优缺点，基于截至2025年2月12日的最新信息（原作者：@wackerow）。通过约5000字的篇幅，我们将全面解析这一技术及其在区块链扩展性中的地位。 —</p>
+                <p>状态通道（State Channels）是以太坊链下扩展的重要解决方案，允许参与者在链下安全、高效地进行交易，仅需在以太坊主网（Ethereum Mainnet）上执行两次链上操作：开启和关闭通道。本文详细探讨状态通道的原理、实现、应用场景及其优缺点，基于截至2025年2月12日的最新信息（原作者：@wackerow）。通过约5000字的篇幅，我们将全面解析这一技术及其在区块链扩展性中的地位</p>
 <h2 id="1-背景与动机"><a href="#1-背景与动机" class="headerlink" title="1. 背景与动机"></a>1. 背景与动机</h2><h3 id="1-1-以太坊扩展性挑战"><a href="#1-1-以太坊扩展性挑战" class="headerlink" title="1.1 以太坊扩展性挑战"></a>1.1 以太坊扩展性挑战</h3><p>以太坊作为公共区块链，因其分布式架构面临扩展性瓶颈。所有节点需执行每笔链上交易并达成共识，导致交易吞吐量受限于硬件性能（约15-30 TPS）。为保持去中心化，区块大小和出块时间受到严格限制。然而，随着DeFi、NFT和DApp的普及，网络拥堵和高Gas费用成为用户痛点。 传统的Layer 1优化（如分片）需多年研发，而Layer 2方案（如Rollups、状态通道）提供即时解决方案。状态通道通过将交易移至链下，极大提升吞吐量并降低成本，同时保留主网的安全性。 </p>
-<h3 id="1-2-状态通道的起源"><a href="#1-2-状态通道的起源" class="headerlink" title="1.2 状态通道的起源"></a>1.2 状态通道的起源</h3><p>状态通道的概念源于比特币的支付通道（如闪电网络），旨在解决小额支付的高费用问题。以太坊将其扩展为通用状态通道，支持复杂智能合约逻辑。2015年，Jeff Coleman首次提出状态通道概念，随后成为以太坊早期扩展方案之一。 — </p>
+<h3 id="1-2-状态通道的起源"><a href="#1-2-状态通道的起源" class="headerlink" title="1.2 状态通道的起源"></a>1.2 状态通道的起源</h3><p>状态通道的概念源于比特币的支付通道（如闪电网络），旨在解决小额支付的高费用问题。以太坊将其扩展为通用状态通道，支持复杂智能合约逻辑。2015年，Jeff Coleman首次提出状态通道概念，随后成为以太坊早期扩展方案之一。</p>
 <h2 id="2-什么是状态通道？"><a href="#2-什么是状态通道？" class="headerlink" title="2. 什么是状态通道？"></a>2. 什么是状态通道？</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>状态通道是一种点对点协议，允许两方（或多方）在链下执行任意次数的交易，仅将最终结果提交至区块链。它通过密码学证明链下交易的合法性，并依赖多重签名（Multisig）智能合约确保资金安全。 </p>
 <h3 id="2-2-核心特性"><a href="#2-2-核心特性" class="headerlink" title="2.2 核心特性"></a>2.2 核心特性</h3><ul>
 <li><strong>链下执行</strong>：交易无需广播至主网，减少网络负载。 </li>
@@ -395,9 +395,7 @@
 <h3 id="2-3-类型"><a href="#2-3-类型" class="headerlink" title="2.3 类型"></a>2.3 类型</h3><ul>
 <li><p><strong>支付通道</strong>：专注于资金转移，如ETH或代币支付。 </p>
 </li>
-<li><ul>
-<li><strong>状态通道</strong>：支持通用状态更新，如智能合约变量变化。 —</li>
-</ul>
+<li><p><strong>状态通道</strong>：支持通用状态更新，如智能合约变量变化。</p>
 <h2 id="3-工作原理"><a href="#3-工作原理" class="headerlink" title="3. 工作原理"></a>3. 工作原理</h2></li>
 </ul>
 <p>态通道的运作分为三个阶段：开启、使用和关闭。以下详细分解每个阶段。 </p>
@@ -407,13 +405,13 @@
 <li><p><strong>部署合约</strong>：参与者在主网上部署多重签名智能合约。 </p>
 <ol>
 <li><strong>资金锁定</strong>：各方存入ETH或其他代币作为保证金和交易限额。  </li>
-<li><strong>初始状态</strong>：共同签名初始状态（余额、变量等），作为通道的“创世状态”。 -</li>
+<li><strong>初始状态</strong>：共同签名初始状态（余额、变量等），作为通道的“创世状态”。 </li>
 </ol>
 </li>
 <li><p><strong>作用</strong>： </p>
 <ul>
 <li>锁定资金充当“虚拟账本”，支持链下交易。  </li>
-<li>保证金防止恶意行为，若违规可被罚没。 - </li>
+<li>保证金防止恶意行为，若违规可被罚没。 -</li>
 </ul>
 <ol>
 <li><strong>示例</strong>：  Alice和Bob各存入10 ETH，初始状态为 <code>{Alice: 10, Bob: 10}</code>。</li>
@@ -720,7 +718,7 @@
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/22.png" class="responsive-img" alt="ETH中的扩容之侧链">
+                                <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="ETH中的扩容之侧链">
                             
                             <span class="card-title">ETH中的扩容之侧链</span>
                         </div>
@@ -761,7 +759,7 @@
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/27.png" class="responsive-img" alt="ETH中的扩容之零知识卷叠">
+                                <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="ETH中的扩容之零知识卷叠">
                             
                             <span class="card-title">ETH中的扩容之零知识卷叠</span>
                         </div>
@@ -940,7 +938,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">383.6k</span>&nbsp;字
+						class="white-color">412.5k</span>&nbsp;字
              
             
 

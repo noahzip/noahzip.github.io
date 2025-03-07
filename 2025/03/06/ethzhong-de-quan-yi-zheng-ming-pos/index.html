@@ -209,7 +209,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -601,20 +601,17 @@
 <p>每个时隙中只选择一个区块提议者。 在正常情况下，单个区块生产者会在他们专属的时隙中创建并发布单个区块。 为同一个时隙创建两个区块是一种可罚没的行为，通常被称为“模棱两可”。</p>
 <h3 id="区块是如何创建的？"><a href="#区块是如何创建的？" class="headerlink" title="区块是如何创建的？"></a>区块是如何创建的？</h3><p>区块提议者预计会广播一个已签名的信标链区块，该区块建立在根据他们自己在本地运行的分叉选择算法所看到的最近链头之上。 分叉选择算法会应用上一个时隙留下的任何排队认证，然后在其历史记录中查找具有最大累积认证权重的区块。 该区块便是由提议者创建的新区块的父区块。</p>
 <p>区块提议者通过从其自己的本地数据库和链视图中收集数据来创建区块。 区块的内容如下代码片段所示：</p>
-<pre class="line-numbers language-rust"><code class="language-rust">1class <span class="token function">BeaconBlockBody</span><span class="token punctuation">(</span>Container<span class="token punctuation">)</span><span class="token punctuation">:</span>
-<span class="token number">2</span>    randao_reveal<span class="token punctuation">:</span> BLSSignature
-<span class="token number">3</span>    eth1_data<span class="token punctuation">:</span> Eth1Data
-<span class="token number">4</span>    graffiti<span class="token punctuation">:</span> Bytes32
-<span class="token number">5</span>    proposer_slashings<span class="token punctuation">:</span> List<span class="token punctuation">[</span>ProposerSlashing<span class="token punctuation">,</span> MAX_PROPOSER_SLASHINGS<span class="token punctuation">]</span>
-<span class="token number">6</span>    attester_slashings<span class="token punctuation">:</span> List<span class="token punctuation">[</span>AttesterSlashing<span class="token punctuation">,</span> MAX_ATTESTER_SLASHINGS<span class="token punctuation">]</span>
-<span class="token number">7</span>    attestations<span class="token punctuation">:</span> List<span class="token punctuation">[</span>Attestation<span class="token punctuation">,</span> MAX_ATTESTATIONS<span class="token punctuation">]</span>
-<span class="token number">8</span>    deposits<span class="token punctuation">:</span> List<span class="token punctuation">[</span>Deposit<span class="token punctuation">,</span> MAX_DEPOSITS<span class="token punctuation">]</span>
-<span class="token number">9</span>    voluntary_exits<span class="token punctuation">:</span> List<span class="token punctuation">[</span>SignedVoluntaryExit<span class="token punctuation">,</span> MAX_VOLUNTARY_EXITS<span class="token punctuation">]</span>
-<span class="token number">10</span>    sync_aggregate<span class="token punctuation">:</span> SyncAggregate
-<span class="token number">11</span>    execution_payload<span class="token punctuation">:</span> ExecutionPayload
-
-显示全部<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><code>randao_reveal</code> 字段取一个可验证的随机值，该值是区块提议者通过签署当前的时段编号创建的。 <code>eth1_data</code> 是就区块提议者对存款合约的看法进行的投票，包括存款默克尔树的根和使新存款能够被验证的总存款数。 <code>graffiti</code> 是一个可选字段，可以用来在区块中添加一条消息。 <code>proposer_slashings</code> 和 <code>attester_slashings</code> 字段包含了某些验证者根据区块提议者对链的看法已经犯下可罚没行为的证据。 <code>deposits</code> 是区块提议者所知道的新验证者存款的列表，<code>voluntary_exits</code> 是区块提议者从共识层广播网络上监听到的希望退出的验证者的列表。 <code>sync_aggregate</code> 是一个向量，显示哪些验证者之前被分配到一个同步委员会（服务于轻量客户端数据的验证者子集）并参与了数据签名。</p>
+<pre><code>class BeaconBlockBody(Container):
+    randao_reveal: BLSSignature
+    eth1_data: Eth1Data
+    graffiti: Bytes32
+    proposer_slashings: List[ProposerSlashing, MAX_PROPOSER_SLASHINGS]
+    attester_slashings: List[AttesterSlashing, MAX_ATTESTER_SLASHINGS]
+    attestations: List[Attestation, MAX_ATTESTATIONS]
+    deposits: List[Deposit, MAX_DEPOSITS]
+    voluntary_exits: List[SignedVoluntaryExit, MAX_VOLUNTARY_EXITS]
+    sync_aggregate: SyncAggregate
+    execution_payload: ExecutionPayload</code></pre><p><code>randao_reveal</code> 字段取一个可验证的随机值，该值是区块提议者通过签署当前的时段编号创建的。 <code>eth1_data</code> 是就区块提议者对存款合约的看法进行的投票，包括存款默克尔树的根和使新存款能够被验证的总存款数。 <code>graffiti</code> 是一个可选字段，可以用来在区块中添加一条消息。 <code>proposer_slashings</code> 和 <code>attester_slashings</code> 字段包含了某些验证者根据区块提议者对链的看法已经犯下可罚没行为的证据。 <code>deposits</code> 是区块提议者所知道的新验证者存款的列表，<code>voluntary_exits</code> 是区块提议者从共识层广播网络上监听到的希望退出的验证者的列表。 <code>sync_aggregate</code> 是一个向量，显示哪些验证者之前被分配到一个同步委员会（服务于轻量客户端数据的验证者子集）并参与了数据签名。</p>
 <p><code>execution_payload</code> 使得关于交易的信息可以在执行和共识客户端之间传递。 <code>execution_payload</code> 是一个被嵌套在信标链区块内部的执行数据区块。 <code>execution_payload</code> 中的字段反映了以太坊黄皮书中概述的区块结构，只不过其中没有叔块，并且 <code>prev_randao</code> 取代了 <code>difficulty</code>。 执行客户端可以访问它在自己的广播网络上监听到的本地交易池。 这些交易在本地执行，以生成一个被称为“后状态”的更新的状态树。 这些交易被包括在 <code>execution_payload</code> 中名为 <code>transactions</code> 的列表中，后状态则在 <code>state-root</code> 字段中提供。</p>
 <p>所有这些数据都被收集在一个信标链区块中，经过签名并广播给区块提议者的对等者，再由他们传播给他们的对等者，以此类推。</p>
 <p>阅读更多关于<a href="https://ethereum.org/zh/developers/docs/blocks/">区块剖析</a>的内容。</p>
@@ -759,7 +756,7 @@
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="ETH中工作量证明POW">
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="ETH中工作量证明POW">
                             
                             <span class="card-title">ETH中工作量证明POW</span>
                         </div>
@@ -800,7 +797,7 @@
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/8.png" class="responsive-img" alt="ETH中的网络">
+                                <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="ETH中的网络">
                             
                             <span class="card-title">ETH中的网络</span>
                         </div>
@@ -979,7 +976,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">383.6k</span>&nbsp;字
+						class="white-color">412.5k</span>&nbsp;字
              
             
 
