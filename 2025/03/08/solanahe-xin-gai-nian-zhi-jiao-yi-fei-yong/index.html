@@ -1,0 +1,993 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Solana核心概念之交易费用, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Solana区块链有几种不同类型的费用和成本开销，这些费用是使用该无准入要求的网络所产生的。它们可以分为几种特定类型：
+
+交易费用 - 给验证者处理交易/指令的费用
+优先级费用 - 一种可选费用，用于提高交易被处理的顺序
+租金 - 为了在链">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>Solana核心概念之交易费用 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Solana核心概念之交易费用</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-08
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-08
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        4.5k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        15 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Solana区块链有几种不同类型的费用和成本开销，这些费用是使用该无准入要求的网络所产生的。它们可以分为几种特定类型：</p>
+<ul>
+<li><strong>交易费用</strong> - 给验证者处理交易/指令的费用</li>
+<li><strong>优先级费用</strong> - 一种可选费用，用于提高交易被处理的顺序</li>
+<li><strong>租金</strong> - 为了在链上存储数据而预留的余额</li>
+</ul>
+<h2 id="交易费用"><a href="#交易费用" class="headerlink" title="交易费用"></a>交易费用</h2><p>在Solana区块链上的链上程序中处理的逻辑（指令）所支付的小额费用被称为“交易费”。</p>
+<p>当每个<a href="https://solana.com/zh/docs/core/transactions#transaction">交易</a>（包含一个或多个<a href="https://solana.com/zh/docs/core/transactions#instruction">指令</a>）通过网络发送时，它会被当前的验证者中的领导者处理。一旦被确认为全局状态交易，这个交易费就会支付给网络，以帮助支持Solana区块链的经济激励模型。</p>
+<blockquote>
+<p>注意：</p>
+<p>交易费用不同于账户数据存储的<a href="https://solana.com/zh/docs/core/fees#rent">租金</a>。交易费用是为了在 Solana 网络上处理指令而支付的，而租金是为了在区块链上存储账户数据而预留的余额，且可以回收。</p>
+</blockquote>
+<p>目前，基础Solana交易费设定为每个签名5k lamports的静态值。在这个基础费用之上，可以添加任何额外的<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#优先级费用">优先级费用</a>。</p>
+<h3 id="为什么要支付交易费？"><a href="#为什么要支付交易费？" class="headerlink" title="为什么要支付交易费？"></a>为什么要支付交易费？</h3><p>交易费用在Solana<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#基本经济设计">经济模型设计</a>中体现出了许多好处，主要是：</p>
+<ul>
+<li>为验证者网络提供处理交易所需的CPU/GPU计算资源的补偿</li>
+<li>通过引入交易的真实成本来减少网络垃圾</li>
+<li>通过协议设定的每笔交易的最低费用金额，为网络提供长期的经济稳定性</li>
+</ul>
+<h3 id="基础经济模型设计"><a href="#基础经济模型设计" class="headerlink" title="基础经济模型设计"></a>基础经济模型设计</h3><p>许多区块链网络（包括比特币和以太坊）依赖基于通货膨胀的协议的奖励来在短期内保护网络。长期来看，这些网络将越来越依赖于交易费用来维持安全性。</p>
+<p>Solana也是如此。具体说来：</p>
+<ul>
+<li>每笔交易费用的固定比例（最初是50%）被<em>烧毁</em>（销毁），剩余的部分归当前处理交易的<a href="https://solana.com/zh/docs/terminology#leader">领导者</a>所有。</li>
+<li>预先设置好的全局通货膨胀率为分配给<a href="https://docs.solanalabs.com/operations">Solana 验证者</a>的<a href="https://docs.solanalabs.com/implemented-proposals/staking-rewards">奖励</a>提供了来源</li>
+</ul>
+<h3 id="费用收取"><a href="#费用收取" class="headerlink" title="费用收取"></a>费用收取</h3><p>交易必须至少有一个账户已签署交易并是可写入的。这些<em>可写入的签名者帐户</em>首先在帐户列表中序列化，其中第一个始终用作“<em>费用支付者</em>”。</p>
+<p>在任何交易指令被处理之前，费用支付者的账户<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/runtime/src/bank.rs#L4045-L4064">余额将被扣除</a>以支付交易费用。如果费用支付者的余额不足以支付交易费用，交易处理将终止并导致交易失败。</p>
+<p>如果余额足够，费用将被扣除，然后交易的指令将开始执行。如果任何指令导致错误，交易处理将停止并最终在Solana账本中记录为失败的交易。对于这些失败的交易，运行时仍会收取费用。</p>
+<p>如果任何指令返回错误或违反运行时限制，则除交易费用扣除外的所有帐户更改都将回滚。这是因为验证者网络已经花费了计算资源来收集交易并执行初始处理。</p>
+<h3 id="费用分配"><a href="#费用分配" class="headerlink" title="费用分配"></a>费用分配</h3><p>交易费用被<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/runtime/src/bank/fee_distribution.rs#L55-L64">部分销毁</a>，剩余费用由产生相应交易包含在其中的区块验证者收取。具体来说， <a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/sdk/program/src/fee_calculator.rs#L79">50%被销毁</a>，<a href="https://github.com/anza-xyz/agave/blob/e621336acad4f5d6e5b860eaa1b074b01c99253c/runtime/src/bank/fee_distribution.rs#L58-L62">50%分配给</a>产生区块的验证者。</p>
+<h3 id="为什么要烧毁一些费用？"><a href="#为什么要烧毁一些费用？" class="headerlink" title="为什么要烧毁一些费用？"></a>为什么要烧毁一些费用？</h3><p>如上所述，每笔交易费用的固定比例被烧毁（销毁）。这是为了巩固SOL的经济价值，从而维持网络的安全性。与交易费用完全被烧毁的计划不同，领导者仍然被激励在他们的槽中包含尽可能多的交易（创建区块的机会）。</p>
+<p>烧毁的费用还有助于防止恶意验证者通过在<a href="https://solana.com/zh/docs/terminology#fork">分叉</a>选择中被选中来审查交易。</p>
+<h4 id="攻击示例："><a href="#攻击示例：" class="headerlink" title="攻击示例："></a>攻击示例：<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#攻击示例"></a></h4><p>在有恶意或审查领导者的<a href="https://solana.com/zh/docs/terminology#proof-of-history-poh">历史证明(PoH)</a>分叉的情况下：</p>
+<ul>
+<li>由于审查导致的费用损失，我们预计销毁的总费用将<em>低于</em>比较下的诚实分叉</li>
+<li>如果审查领导者要补偿这些损失的协议费用，他们将不得不自己更换分叉上烧毁的费用</li>
+<li>从而可能首先减少审查的动机</li>
+</ul>
+<h3 id="计算交易费用"><a href="#计算交易费用" class="headerlink" title="计算交易费用"></a>计算交易费用</h3><p>给定交易的全部费用是根据两个主要部分计算的：</p>
+<ul>
+<li>每个签名的静态设置基础费用，以及</li>
+<li>在交易期间使用的计算资源，以“<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#计算单元"><em>计算单元</em></a>”计量</li>
+</ul>
+<p>由于每个交易可能需要不同数量的计算资源，每个交易都会作为计算预算的一部分分配最大数量的计算单元。</p>
+<h2 id="计算预算"><a href="#计算预算" class="headerlink" title="计算预算"></a>计算预算</h2><p>为了防止计算资源的滥用，每个交易都被分配了一个“计算预算”。这个预算指定了有关<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#计算单元">计算单元</a>的详细信息，包括：</p>
+<ul>
+<li>交易可能执行的不同类型操作所关联的计算成本（每个操作消耗的计算单元）</li>
+<li>交易可以消耗的最大计算单元数量（计算单元限制）</li>
+<li>交易必须遵守的操作边界（如账户数据大小限制）</li>
+</ul>
+<p>当交易消耗其整个计算预算（计算预算耗尽），或超过例如尝试超过 <a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/program-runtime/src/compute_budget.rs#L138">最大调用堆栈深度</a> 或<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#账户数据大小限制">最大加载账户</a>数据大小限制等边界时，运行时将终止处理交易并返回错误。导致交易失败且状态不更改（除了<a href="https://solana.com/zh/docs/core/fees#fee-collection">收取</a>交易费用）。</p>
+<h3 id="账户数据大小限制"><a href="#账户数据大小限制" class="headerlink" title="账户数据大小限制"></a>账户数据大小限制</h3><p>交易可以通过包含一个<code>SetLoadedAccountsDataSizeLimit</code>指令（不得超过运行时的绝对最大值）来指定它允许加载的账户数据的最大字节数。如果没有提供<code>SetLoadedAccountsDataSizeLimit</code>，则交易默认使用运行时的<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/program-runtime/src/compute_budget_processor.rs#L137-L139">MAX_LOADED_ACCOUNTS_DATA_SIZE_BYTES</a> 值。</p>
+<p>可以使用<code>ComputeBudgetInstruction::set_loaded_accounts_data_size_limit</code>函数创建此指令：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> instruction <span class="token operator">=</span> ComputeBudgetInstruction<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">set_loaded_accounts_data_size_limit</span><span class="token punctuation">(</span><span class="token number">100_000</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="计算单元"><a href="#计算单元" class="headerlink" title="计算单元"></a>计算单元</h3><p>链上每笔交易执行的所有操作都需要验证者在处理时消耗不同数量的计算资源（计算成本）。这些资源消耗的最小度量单位称为“计算单元”。</p>
+<p>在处理交易时，计算单元会被链上执行的每条指令（消耗预算）逐步消耗。由于每条指令执行不同的逻辑（写入帐户、CPI、执行系统调用等），因此每条指令可能消耗<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/program-runtime/src/compute_budget.rs#L133-L178">不同数量</a>的计算单元。</p>
+<blockquote>
+<p>注意：</p>
+<p>程序可以记录有关其计算使用情况的详细信息，包括其分配的计算预算中剩余的金额。有关详细信息，请参阅<a href="https://solana.com/zh/docs/programs/debugging#monitoring-compute-budget-consumption">程序调试</a>。您还可以在本指南中找到有关<a href="https://solana.com/zh/developers/guides/advanced/how-to-optimize-compute">优化计算使用情况</a>的详细信息。</p>
+</blockquote>
+<p>每笔交易都有一个<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#计算单元限制">计算单元限制</a>，要么是由运行时设置的默认限制，要么是通过显式请求更高的限制。当交易超出其计算单元限制时处理将被停止，从而导致交易失败。</p>
+<p>以下是一些产生计算成本的常见操作：</p>
+<ul>
+<li>执行指令</li>
+<li>在程序之间传递数据</li>
+<li>执行系统调用</li>
+<li>使用系统变量</li>
+<li>使用 <code>msg!</code> 宏记录日志</li>
+<li>记录公钥</li>
+<li>创建程序地址（PDAs）</li>
+<li>跨程序调用（CPI）</li>
+<li>加密操作</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<p>对于<a href="https://solana.com/zh/docs/core/cpi">跨程序调用</a>，调用的指令将继承其父级的计算预算和限制。如果调用的指令消耗了事务的剩余预算，或者超出了边界，则整个调用链和顶级交易处理将终止。</p>
+</blockquote>
+<p>您可以在Solana运行时的<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/program-runtime/src/compute_budget.rs#L19-L123">ComputeBudget</a>中找到有关消耗计算单元的所有操作的更多详细信息。</p>
+<h3 id="计算单元限制"><a href="#计算单元限制" class="headerlink" title="计算单元限制"></a>计算单元限制</h3><p>每笔交易都有一个可以使用的最大计算单元数 （CU），称为“<em>计算单元限制</em>”。每个交易，Solana 运行时的绝对最大计算单元限制为<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/program-runtime/src/compute_budget_processor.rs#L19">140万CU</a>，并将默认请求的最大限制设置为每条指令<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/program-runtime/src/compute_budget_processor.rs#L18">每条指令20万CU</a>。</p>
+<p>交易可以通过包含单个 <code>SetComputeUnitLimit</code> 指令来请求更具体和最佳的计算单元限制。可以是上限或下限。但它可能永远不会要求高于每笔交易的绝对最大限制。</p>
+<p>虽然交易的默认计算单位限制在大多数情况下适用于简单交易，但它们通常不是最佳的（对于运行时和用户）。对于更复杂的交易，例如调用执行多个 CPI 的程序，您可能需要为交易请求更高的计算单位限制。</p>
+<p>请求交易的最佳计算单元限制，对于帮助您降低交易费用并帮助在网络上更好地安排交易至关重要。钱包、dApp 和其他服务应确保其计算单元请求是最佳的，以便为其用户提供最佳体验。</p>
+<blockquote>
+<p>注意：</p>
+<p>有关更多详细信息和最佳实践，请阅读这篇关于 <a href="https://solana.com/zh/developers/guides/advanced/how-to-request-optimal-compute">请求最佳计算限制</a>的指南。</p>
+</blockquote>
+<h3 id="计算单元价格"><a href="#计算单元价格" class="headerlink" title="计算单元价格"></a>计算单元价格</h3><p>当交易希望支付更高的费用以提高其处理优先级时，它可以设置一个“计算单元价格”。此价格与<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#计算单元限制">计算单元限制</a>结合使用，将用于确定交易的优先级费用。</p>
+<p>默认情况下，没有设置<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/program-runtime/src/compute_budget_processor.rs#L38">计算单元价格</a>，因此没有额外的优先级费用。</p>
+<h2 id="优先级费用"><a href="#优先级费用" class="headerlink" title="优先级费用"></a>优先级费用</h2><p>作为<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#计算预算">计算预算</a>的一部分，运行时支持交易支付一个<strong>可选</strong>的费用，称为“优先级费用”。支付这笔额外费用有助于提高交易在处理时优先于其他交易的方式，从而缩短执行时间。</p>
+<h3 id="如何计算优先级费用"><a href="#如何计算优先级费用" class="headerlink" title="如何计算优先级费用"></a>如何计算优先级费用</h3><p><strong>优先级费用</strong> = <strong>计算单元限制</strong> X <strong>计算单元价格</strong></p>
+<p>这些值可以通过包含以下计算预算指令来每笔交易设置一次：</p>
+<ul>
+<li><a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/sdk/src/compute_budget.rs#L47-L50">SetComputeUnitLimit</a> - 设置交易可以消耗的最大计算单元数</li>
+<li><a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/sdk/src/compute_budget.rs#L52-L55">SetComputeUnitPrice</a> - 设置交易愿意支付的额外费用以提高其优先级</li>
+</ul>
+<p>如果没有提供<code>SetComputeUnitLimit</code>指令，则将使用<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#计算单元限制">默认计算单元限制</a>。</p>
+<p>如果没有提供<code>SetComputeUnitPrice</code>指令，则交易将默认为没有额外的提高费用，并且优先级最低（即没有优先级费用）。</p>
+<h3 id="如何设置优先级费用"><a href="#如何设置优先级费用" class="headerlink" title="如何设置优先级费用"></a>如何设置优先级费用</h3><p>交易的优先级费用是通过包含一个<code>SetComputeUnitPrice</code>指令，并可选地包含一个<code>SetComputeUnitLimit</code>指令来设置的。运行时将使用这些值来计算优先级费用，该费用将用于确定区块内给定交易的优先级。</p>
+<p>您可以通过它们的Rust或<code>@solana/web3.js</code>函数来创建这些指令。然后，每条指令都可以包含在交易中，并像往常一样发送到集群。另见下面的<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#优先级费用最佳实践">最佳实践</a>。</p>
+<p>与Solana交易中的其他指令不同，计算预算指令<strong>不需要</strong>任何账户。包含任意其他类型的指令的交易将失败。</p>
+<blockquote>
+<p>小心: 事务只能包含每种类型的计算预算指令中的一种。重复的指令类型将导致 <code>TransactionError::DuplicateInstruction</code> 错误，并最终导致交易失败。</p>
+</blockquote>
+<h4 id="Rust"><a href="#Rust" class="headerlink" title="Rust"></a>Rust<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#rust"></a></h4><p>rust<code>solana-sdk</code>包，包含用于 <code>ComputeBudgetInstruction</code> 制作用于设置计算单位限制和计算单位价格的指令的函数</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> instruction <span class="token operator">=</span> ComputeBudgetInstruction<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">set_compute_unit_limit</span><span class="token punctuation">(</span><span class="token number">300_000</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> instruction <span class="token operator">=</span> ComputeBudgetInstruction<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">set_compute_unit_price</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#javascript"></a></h4><p><code>@solana/web3.js</code>库在<a href="https://solana-labs.github.io/solana-web3.js/classes/ComputeBudgetProgram.html">ComputeBudgetProgram</a>类中包含了用于设置计算单元限制和计算单元价格的指令的函数：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> instruction <span class="token operator">=</span> ComputeBudgetProgram<span class="token punctuation">.</span><span class="token function">setComputeUnitLimit</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  units<span class="token punctuation">:</span> 300_000<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> instruction <span class="token operator">=</span> ComputeBudgetProgram<span class="token punctuation">.</span><span class="token function">setComputeUnitPrice</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  microLamports<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="优先级费用最佳实践"><a href="#优先级费用最佳实践" class="headerlink" title="优先级费用最佳实践"></a>优先级费用最佳实践</h3><p>您可以在下面找到有关优先费用最佳实践的一般信息。您还可以在本指南中找到有关<a href="https://solana.com/zh/developers/guides/advanced/how-to-request-optimal-compute">如何请求交易计算</a>的更多详细信息，包括如何模拟交易以确定其近似计算使用情况。</p>
+<h4 id="请求最小计算单元"><a href="#请求最小计算单元" class="headerlink" title="请求最小计算单元"></a>请求最小计算单元</h4><p>交易应请求执行所需的最小计算单元数，以最大程度地降低费用。另请注意，当请求的计算单位数超过已执行事务实际消耗的计算单位数时，不会调整费用。</p>
+<h4 id="获取最近的优先级费用"><a href="#获取最近的优先级费用" class="headerlink" title="获取最近的优先级费用"></a>获取最近的优先级费用</h4><p>在将交易发送到集群之前，您可以使用<code>getRecentPrioritizationFees</code>RPC方法获取节点处理的最近区块内支付的最近优先级费用列表。</p>
+<p>然后，您可以使用此数据来估算交易的适当优先级费用，以便（a）更好地确保集群处理交易，以及（b）最大限度地减少支付的费用。</p>
+<h2 id="租金"><a href="#租金" class="headerlink" title="租金"></a>租金</h2><p>存入每个<a href="https://solana.com/zh/docs/core/accounts">Solana 账户</a>以使其相关数据在链上可用的费用称为“租金”。这笔费用在每个账户的正常 lamport 余额中扣留，并在账户关闭时收回。</p>
+<blockquote>
+<p>注意：</p>
+<p>租金与<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#交易费用">交易费用</a>不同。租金是“支付”（在账户中预扣）以保持数据存储在Solana区块链上，并且可以回收。而交易费用是支付给网络处理<a href="https://www.solana-cn.com/SolanaDocumention/core/transactions.html#指令">指令</a>的。</p>
+</blockquote>
+<p>所有账户都必须保持足够高的lamport余额（相对于其分配的空间），以成为<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#免租金状态">免租金状态</a>并保持在Solana区块链上。任何试图将账户余额减少到低于其租金豁免最低余额的交易都将失败（除非余额刚好减少到零）。</p>
+<p>当账户所有者不再希望将此数据保留在链上并在全球状态下可用时，所有者可以关闭账户并回收租金存款。</p>
+<p>这是通过将账户的全部lamport余额提取（转移）到另一个账户（即您的钱包）来实现的。通过将账户余额精确减少到<code>0</code>，运行时将通过“<a href="https://www.solana-cn.com/SolanaDocumention/core/fees.html#垃圾回收">垃圾回收</a>”把该账户及其关联数据从网络中移除。</p>
+<h3 id="租金率"><a href="#租金率" class="headerlink" title="租金率"></a>租金率</h3><p>Solana 租金是在整个网络的基础上设置的，主要基于运行时设置的“<a href="https://github.com/anza-xyz/agave/blob/b7bbe36918f23d98e2e73502e3c4cba78d395ba9/sdk/program/src/rent.rs#L27-L34">每年每字节的lamports</a>”。 目前，租金费率是一个静态数值，存储在<a href="https://docs.solanalabs.com/runtime/sysvars#rent">租金系统变量</a>中。</p>
+<p>此租金率用于计算在帐户内为分配给帐户的空间（即可以存储在帐户中的数据量）预扣的确切租金金额。账户分配的空间越多，预扣的租金押金就越高。</p>
+<h3 id="免租金"><a href="#免租金" class="headerlink" title="免租金"></a>免租金</h3><p>账户必须保持大于在链上存储其各自数据所需的最低限度的 lamport 余额。这被称为“<em>免租金</em>”，该余额称为“<em>免租金最低余额</em>”。</p>
+<blockquote>
+<p>注意：</p>
+<p>Solana 上的新帐户（和程序）<strong>需要</strong>初始化足够的 lamports 才能免租。但情况并非总是如此。以前，运行时会定期自动从每个帐户收取低于其最低余额的费用，以免除租金。最终将这些帐户的余额减少到零，并从全局状态中回收垃圾（除非手动充值）。</p>
+</blockquote>
+<p>在创建新帐户的过程中，您必须确保存入足够的 lamports 以高于此最低余额。任何低于此最低阈值的行为都将导致交易失败。</p>
+<p>每次帐户的余额减少时，运行时都会执行检查，以查看帐户是否仍高于此最低余额以免除租金。除非他们将最终余额减少到精确 <code>0</code> （关闭账户），否则会导致账户余额低于免租金门槛的交易将失败。</p>
+<p>免租金账户的具体最低余额取决于区块链当前的<a href="https://solana.com/zh/docs/core/fees#rent-rate">租金率</a>和账户想要分配的所需存储空间量（账户大小）。因此，建议使用 <code>getMinimumBalanceForRentExemption</code> RPC端点来计算给定帐户大小的特定余额。</p>
+<p>所需的租金存款金额也可以通过<a href="https://docs.solanalabs.com/cli/usage#solana-rent"><code>solana rent</code> CLI子命令</a>来估算：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">solana rent 15000
+
+# output
+Rent per byte-year: 0.00000348 SOL
+Rent per epoch: 0.000288276 SOL
+Rent-exempt minimum: 0.10529088 SOL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>未保持 lamport 余额大于零的帐户将在称为垃圾回收的过程中从网络中删除。此过程有助于减少不再使用/维护的数据的网络范围存储。</p>
+<p>在交易成功将帐户余额减少到精确 <code>0</code> 后，运行时会自动进行垃圾回收。任何试图将账户余额降低到其租金豁免最低余额（不完全为零）的交易都将失败。</p>
+<blockquote>
+<p>警告：</p>
+<p>请务必注意，垃圾回收发生在事务执行完成后。如果有通过将账户余额减少到零来“关闭”账户的指令，则可以通过稍后的指令在同一笔交易中“重新打开”该账户。如果在“关闭”指令中未清除账户状态，则后面的“重新打开”指令将具有相同的账户状态。这是一个安全问题，因此最好知道垃圾回收生效的确切时间。</p>
+</blockquote>
+<p>即使帐户已从网络中删除（通过垃圾回收），它可能仍具有与其地址关联的交易（过去的历史记录或将来）。即使 Solana 区块浏览器可能会显示“未找到账户”类型的消息，您仍然可以查看与该账户关联的交易历史记录。</p>
+<p>您可以阅读验证者<a href="https://docs.solanalabs.com/implemented-proposals/persistent-account-storage#garbage-collection">实施的垃圾回收提案 </a>以了解更多信息。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/08/solanahe-xin-gai-nian-zhi-cheng-xu/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Solana核心概念之程序">
+                            
+                            <span class="card-title">Solana核心概念之程序</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                程序在 Solana 生态系统中，“智能合约”被称为程序。每个程序都是一个链上账户，用于存储可执行逻辑，并组织成特定的功能，称为指令。
+有关 Solana 程序的其他主题，请参阅本文档的“部署程序”部分下包含的页面。
+关键点
+程序是包含可执
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-08
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/08/solanahe-xin-gai-nian-zhi-jiao-yi-yu-zhi-ling/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Solana核心概念之交易与指令">
+                            
+                            <span class="card-title">Solana核心概念之交易与指令</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                交易与指令在Solana上，我们发送交易与网络进行交互。交易包括一个或多个 指令，每个指令代表一个要处理的具体操作。指令的执行逻辑存储在部署到Solana网络的程序上，每个程序都存储自己的指令集。
+以下是有关如何执行交易的关键细节：
+
+执行
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-08
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">444.2k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+</body>
+</html>

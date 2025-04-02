@@ -526,7 +526,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 <li><p>这些版本不是真实存在的，而是通过当前记录加上undo log计算得出，</p>
 </li>
 <li><p>多个事务执行时生成的多个版本（多个快照）是由undo log的DB_ROLL_OTR指针所串联起来的，形成了一个undo log版本链</p>
-<p>  <img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803165100483.png" alt="undo log版本链"></p>
+<p>  <img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803165100483.png" alt="undo log版本链"></p>
 </li>
 <li><p>版本链的头节点就是当前记录的最新值</p>
 </li>
@@ -548,7 +548,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 </li>
 </ul>
 <p>数据版本的可见性规则基于数据各版本的trx_id和ReadView比较得出</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803172001068.png" alt="ReadView"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803172001068.png" alt="ReadView"></p>
 <p>  对于一个事务进行快照读时，当前版本数据的trx_id有如下几种可能：</p>
 <ul>
 <li><p>数据版本的trx_id小于min_trx_id，表明这个版本是已提交事务（或当前事务）生成的，数据可见</p>
@@ -556,14 +556,14 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 事务A（trx_id=1）更新value=1并提交，则数据版本中value=1，trx_id=1
 事务B（trx_id=2）开启进行快照读，ReadView：
         m_ids=[2],min_trx_id=2,min_trx_id=3(m_ids最大值+1)
-此时：数据版本中 trx_id=1&lt;min_trx_id,则可见此版本，读取value=1</code></pre><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803181757034.png" alt="trx_id小于min_trx_id"></p>
+此时：数据版本中 trx_id=1&lt;min_trx_id,则可见此版本，读取value=1</code></pre><p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803181757034.png" alt="trx_id小于min_trx_id"></p>
 </li>
 <li><p>数据版本的trx_id大于等于max_trx_id，表明这个版本是由未来启动的事务生成的，数据不可见</p>
 </li>
 <li><p>数据版本的min_trx_id&lt;trx_id&lt;max_trx_id，有两种情况：</p>
 <ul>
 <li><p>a.若trx_id在m_ids中，表示这个版本是由未提交事务生成的，数据不可见。</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803183532829.png" alt="min_trx_id<trx_id<max_trx_id"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803183532829.png" alt="min_trx_id<trx_id<max_trx_id"></p>
 <pre><code>原始value =0 ，trx_id=0
 事务A（trx_id=1）更新value=1未提交，数据版本中value=1，trx_id=1
 事务B（trx_id=2）更新value=2未提交（配图事务B描述有误，应为事务B未提交版本），数据版本中value=2，trx_id=2（undo log的ptr指向上一个版本）
@@ -572,7 +572,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 此时：数据版本中 min_trx_id&lt;trx_id=2&lt;max_trx_id,处于min和max之间，则不可见此版本，根据当前数据中的DB_ROLL_PTR找到undo log,undo log中上一条的记录的trx_id=1，同样也处于处于min和max之间，版本不可见，再根据undo log的DB_ROLL_PTR找到上一条undolog，这条记录的trx_id=0,小于min，则此版本可见，读取value=0</code></pre></li>
 <li><p>b.若trx_id不在m_ids中，表示这个版本是由已提交事务生成的，数据可见。</p>
 </li>
-<li><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803183844697.png" alt="min_trx_id<trx_id=2<max_trx_id"></p>
+<li><p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220803183844697.png" alt="min_trx_id<trx_id=2<max_trx_id"></p>
 </li>
 </ul>
 <pre><code>原始value =0 ，trx_id=0
@@ -921,7 +921,7 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -1073,10 +1073,5 @@ MySQL事务的话，我想⼤家应该都很熟悉了，在⽇常开发的过程
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

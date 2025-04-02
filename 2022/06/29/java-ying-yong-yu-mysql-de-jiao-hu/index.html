@@ -412,7 +412,7 @@ MySQL驱动
 </ul>
 <p>一般来说，我们的系统是部署在Tomcat中的，或者现在的springboot内置的 Tomcat，一个Tomcat服务器中是有多个线程的（Tomcat8默认为200个线程），也就是说这些线程是可以同时接收多个请求，然后并发的处理的；</p>
 <p>那把这些过程串联起来就是：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170146290.png" alt="image-20220629170146290"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170146290.png" alt="image-20220629170146290"></p>
 <ol>
 <li>部署在 Tomcat 中的Java应用，会通过数据库连接池创建一定数量的数据库连接；</li>
 <li>Tomcat 中也会有多个线程，可以同时接收用户的请求；</li>
@@ -423,7 +423,7 @@ MySQL驱动
 <p>执行之后，MySQL的连接管理器就会去验证你的账户密码和权限等；如果验证通过，就可以通过命令行来执行MySQL命令了；<br>这个客户端的连接，MySQL服务端会维护一定的时间长度（默认是8小时），也就是说如果你8小时客户端没有操作，连接管理器会自动将这个连接给断开（不然也是白白浪费资源维护这个连接，也就是要维护执行过程中使用到内存之类的资源）；</p>
 <p>当MySQL服务端接收到一个 SQL请求之后，也就是说从一个网络连接中接收到网络请求；那这个时候肯定就需要有一个线程来从网络连接中读取和解析请求；<br>也就是得到一个 SQL语句，转交给SQL接口去执行，完成底层数据的增删改查；</p>
 <p>为了执行SQL语句，MySQL的 Server层，设计了如下的 组件：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170240075.png" alt="image-20220629170240075"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220629170240075.png" alt="image-20220629170240075"></p>
 <p>以这条 SQL 语句为例，解释一下：</p>
 <pre><code>select id, name, age from user where id = 1;</code></pre><ul>
 <li><h4 id="解析器：对-SQL-语句做解析，也就是要让MySQL知道你这条-SQL语句，是要做什么；"><a href="#解析器：对-SQL-语句做解析，也就是要让MySQL知道你这条-SQL语句，是要做什么；" class="headerlink" title="解析器：对 SQL 语句做解析，也就是要让MySQL知道你这条 SQL语句，是要做什么；"></a>解析器：对 SQL 语句做解析，也就是要让MySQL知道你这条 SQL语句，是要做什么；</h4><ul>
@@ -754,7 +754,7 @@ MySQL驱动
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -906,10 +906,5 @@ MySQL驱动
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

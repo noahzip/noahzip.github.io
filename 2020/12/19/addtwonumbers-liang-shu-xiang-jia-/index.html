@@ -395,7 +395,7 @@ Explanation: 342 + 465 = 807.
 链接：https://leetcode-cn.com/problems/add-two-numbers</code></pre><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><ul>
 <li>将两个链表看成是相同长度的进行遍历，如果一个链表较短则在后面面补 0，比如 999 + 99 = 999 + 990 = 8901<br>每一位计算的同时需要考虑上一位的进位问题，而当前位计算结束后同样需要更新进位值<br>小技巧：对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。</li>
 </ul>
-<p>  <img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/12/18/HndhBC7DaGxsAWI.png" alt="1.png"></p>
+<p>  <img src="https://i.loli.net/2020/12/18/HndhBC7DaGxsAWI.png" alt="1.png"></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> ListNode <span class="token function">addTwoNumbers</span><span class="token punctuation">(</span>ListNode l1<span class="token punctuation">,</span> ListNode l2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
        <span class="token comment" spellcheck="true">//用于标识头部的指针</span>
@@ -732,7 +732,7 @@ Explanation: 342 + 465 = 807.
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -884,10 +884,5 @@ Explanation: 342 + 465 = 807.
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

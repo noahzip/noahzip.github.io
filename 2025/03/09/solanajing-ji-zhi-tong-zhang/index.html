@@ -1,0 +1,966 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Solana中的长期经济体, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Solana 的加密经济系统旨在促进一个健康、可持续发展的长期经济体，其参与者激励机制与网络的安全性和去中心化相匹配。该经济体的主要参与者是验证者节点 (validator-client)。下面将讨论他们对网络的贡献、状态验证及其所需的激励">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>Solana中的长期经济体 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Solana中的长期经济体</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-09
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-09
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        5.8k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        19 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Solana 的加密经济系统旨在促进一个健康、可持续发展的长期经济体，其参与者激励机制与网络的安全性和去中心化相匹配。该经济体的主要参与者是验证者节点 (validator-client)。下面将讨论他们对网络的贡献、状态验证及其所需的激励机制。</p>
+<p>参与者收入的主要渠道包括协议奖励和交易费用。协议奖励根据预先定义的通胀发行计划，通过通胀发行来产生。这些奖励将构成分配给验证者节点的总协议奖励，剩余部分则来自交易费用。在网络的早期，根据预定义的发行计划发放的协议奖励可能会成为吸引参与者加入网络的主要激励措施。</p>
+<p>这些基于协议的奖励按照周期计算，并分配给活跃的委托权益和验证者集（根据验证者佣金）。正如下文所述，每年的通货膨胀率基于预先确定的通货紧缩计划。这为网络提供了供应可预测性，从而支持长期的经济稳定和安全。</p>
+<p>交易费是在参与者之间的转账过程中，附加于网络交互，作为激励和补偿，以促进和执行提出的交易。下面还将讨论通过部分销毁每笔交易费来实现长期经济稳定性和分叉保护的机制。</p>
+<h2 id="通胀计划"><a href="#通胀计划" class="headerlink" title="通胀计划"></a>通胀计划</h2><p>网络的 <em>通胀计划</em> 由三个独特的参数描述：<code>初始通胀率</code> 、<code>通货紧缩率</code> 和 <code>长期通胀率</code>。在考虑这些数字时，需要考虑许多因素：</p>
+<ul>
+<li>通过通胀发行的 SOL 的很大一部分将按照质押者的 SOL 质押比例分配给质押者们。我们希望确保通胀计划的设计能够为委托 SOL 的代币持有者和验证服务提供者（通过从质押收益中收取的佣金）带来合理的质押收益。</li>
+<li><em>质押收益率</em> 的主要驱动因素是抵押的 SOL 数量除以 SOL 总量（占抵押总 SOL 的百分比）。因此，在确定初始通胀参数时，理解代币在验证者之间的分配和委托是重要的因素。</li>
+<li>收益调节是当前研究的一个领域，它将影响 <em>质押收益</em>。这里的讨论和下面的模型没有考虑这一点。</li>
+<li>总体代币发行量 - 例如: 我们预期 <em>10</em> 年或 <em>20</em> 年后当前的总供应量会是多少？</li>
+<li>长期稳定的通胀是一个重要的考虑因素，不仅对验证者生态系统和 Solana 基金会资助计划的可持续性至关重要，还应该考虑到预期的代币损失和随时间的销毁。</li>
+<li>我们预期网络使用增长的速度，作为 <em>通货紧缩率</em> 的一个考虑因素。随着时间的推移，我们计划降低通胀率，并期望使用量会增长。</li>
+</ul>
+<p>根据这些考虑因素以及随后社区对初始设计的讨论，Solana 基金会提出了以下通胀计划参数：</p>
+<ul>
+<li>初始通胀率: 8%</li>
+<li>通货紧缩率: -15%</li>
+<li>长期通胀率: 1.5%</li>
+</ul>
+<p>这些参数定义了提议的 <em>通胀计划</em>。下面我们展示这些参数的影响。这些图表仅显示了通胀发行的影响，按照上述参数化的通胀计划。它们<strong>不包括</strong>其他可能影响总供应的因素，如费用/租金燃烧、削减或其他不可预见的未来代币销毁事件。因此，这里展示的是 SOL 通过通胀发行的<strong>上限</strong>。</p>
+<p>在上述图表中，我们看到了根据上面提议的通胀参数，随时间变化的年度通胀率百分比。</p>
+<p>同样地，在这里我们看到 SOL 的 <em>当前总供应量</em> [MM]随时间的变化，假设初始的 <em>当前总供应量</em> 为<code>488,587,349 SOL</code>（即，对于这个例子，我们以<code>2020-01-25</code>的 <em>当前总供应量</em> 为基准，并从那天开始模拟通胀）。</p>
+<p>抛开验证器的正常运行时间和佣金不谈，预期的质押收益和调整后的质押收益指标主要取决于网络中质押的 SOL 的百分比。因此，我们可以模拟 <em>质押收益</em>，如果我们引入一个额外的参数 <em>质押 SOL 的百分比</em>：</p>
+<p>这个参数必须进行估算，因为它是代币持有者和质押激励的动态属性。这里展示的 <em>质押 SOL 的百分比</em> 值从 60% 到 90% 不等，我们认为这涵盖了我们预期观察到的可能范围，这是基于来自投资者和验证者社区的反馈，以及在可比较的权益证明协议上观察到的情况。</p>
+<p>同样，上述显示了一个质押者在 Solana 网络上，按照指定的 <em>通胀计划*，随时间可能期望得到的 *质押收益</em> 的示例。这是一个理想化的 <em>质押收益*，因为它忽略了验证器正常运行时间对奖励的影响、验证器佣金、潜在的收益限制以及潜在的削减事件。此外，它还忽略了 *质押 SOL 的百分比</em> 在设计上是动态的 。当考虑到 <em>代币稀释</em> 时，这个 <strong>通胀表</strong> 所设置的经济激励措施会更明显（请参见下面的 <em>调整后的质押收益率</em> 部分）。</p>
+<h2 id="通胀相关术语"><a href="#通胀相关术语" class="headerlink" title="通胀相关术语"></a>通胀相关术语</h2><p>在讨论通胀和相关组成部分（例如奖励/收益率/利息）时会出现许多术语，我们尝试在这里定义和澄清一些常用的概念:</p>
+<h3 id="当前总供应量-SOL"><a href="#当前总供应量-SOL" class="headerlink" title="当前总供应量 [SOL]"></a>当前总供应量 [SOL]</h3><p>已生成（通过创世区块或协议通胀）的代币总量（包括锁定和未锁定的代币），减去任何已被销毁的代币（通过交易费用或其他机制）或被削减的代币。在网络启动时，创世区块中创建了 <code>500,000,000 SOL</code>。从那时起，当前总供应量已因交易费的销毁和计划中的代币减持事件而减少。Solana 的当前总供应量可以在此页面找到 <a href="https://explorer.solana.com/supply">https://explorer.solana.com/supply</a></p>
+<h3 id="通胀率"><a href="#通胀率" class="headerlink" title="通胀率 [%]"></a>通胀率 [%]</h3><p>Solana 协议将根据预定的通胀计划（下文讨论）自动创建新代币。<em>通胀率</em>[%]是任何时刻当前总供应量的年化增长率。</p>
+<h3 id="通胀计划-1"><a href="#通胀计划-1" class="headerlink" title="通胀计划"></a>通胀计划</h3><p>一个随时间确定性描述代币发行的过程。Solana 基金会提出了一个反通胀的 <em>通胀计划</em>。也就是说，通胀从最高值开始，随着时间的推移，通胀率逐渐降低，直到稳定在一个预先设定的长期通胀率（详见下文讨论）。这个计划完全且唯一地由三个数字参数化：</p>
+<ul>
+<li><strong>初始通胀率 [%]</strong>: 通胀首次启用时的起 <em>始通胀率</em>。代币发行率只能从这一点开始降低。</li>
+<li><strong>通缩率 [%]</strong>: <em>通胀率</em> 降低的速率。</li>
+<li><strong>长期通胀率 [%]</strong>: 预 <em>期通胀率</em> 长期稳定。</li>
+</ul>
+<h3 id="有效的通胀率"><a href="#有效的通胀率" class="headerlink" title="有效的通胀率 [%]"></a>有效的通胀率 [%]</h3><p>Solana 网络在考虑了可能减少 <em>当前总供应量</em> 的其他因素后实际观察到的通胀率。注意，代币的创造不能超出 <em>通胀计划</em> 所描述的范围之外。</p>
+<ul>
+<li>尽管 <em>通胀计划</em> 决定了协议如何发行 SOL，但这忽略了由于各种原因在生态系统中同时消除代币的情况。主要的代币燃烧机制是每笔交易费的一部分被燃烧。每笔交易费中有 50% 被燃烧，剩余的费用由处理该交易的验证者保留。</li>
+<li>在对 <em>有效通胀率</em> 进行全面分析时，还应考虑诸如私钥丢失和削减事件等其他因素。例如，据估计有 BTC 总量中的 10-20% 已经丢失且无法恢复，并且网络可能会以每年 1-2% 的速率经历类似的损失。</li>
+</ul>
+<h3 id="质押收益"><a href="#质押收益" class="headerlink" title="质押收益 [%]"></a>质押收益 [%]</h3><p>在网络上质押 SOL 所获得的回报率（也称为 <em>利息*）。它通常以年化率的形式报价（例如，”网络的 *质押收益</em> 目前是每年 10%”）。</p>
+<ul>
+<li><em>质押收益</em> 对于希望避免因通胀（下面将讨论的程度）而导致代币稀释的验证者和代币持有者来说非常重要。</li>
+<li>通胀发行的全部（100%）将被分配给质押 SOL 的代币持有者，将根据他们各自质押的 SOL 数量按比例获得相应的份额；同时，也会分配给那些对其委托的 SOL 收取佣金的验证者。<ul>
+<li>未来可能会考虑随着引入 <em>归档者</em>（Archivers）进入经济体系，对通胀发行进行额外的分配。归档者是提供去中心化存储服务的网络参与者，也应该通过来自通胀发行的代币分配来激励他们提供这项服务。同样，早期的设计指定了一部分通胀发行固定比例分配给基金会的金库，用于运营费用和未来的赠款。然而，通胀发行将不会分配任何部分给基金会。</li>
+</ul>
+</li>
+<li><em>质押收益</em> 可以根据通胀计划以及在任何特定时间被质押的 <em>当前总供应量</em> 的比例来计算。明确的关系由以下公式给出：</li>
+</ul>
+<h3 id="代币稀释"><a href="#代币稀释" class="headerlink" title="代币稀释 [%]"></a>代币稀释 [%]</h3><p>稀释在这里被定义为由于新代币的引入，在较大集合中一组代币的比例代表性发生变化。实际上，我们讨论的是由于通胀发行的引入和在网络中的分配，导致质押或未质押代币的稀释。如下所示，尽管稀释影响每一个代币持有者，但质押和未质押代币之间的相对稀释应该是未质押代币持有者主要关心的问题。质押代币将按比例接收通胀发行的分配，这应该能够缓解质押代币持有者的稀释担忧。即，由于 <em>通胀</em> 造成的稀释被分配给质押代币持有者的新代币所抵消，从而抵消了通胀对该群体的“稀释”效应。</p>
+<h3 id="调整后的质押收益"><a href="#调整后的质押收益" class="headerlink" title="调整后的质押收益 [%]"></a>调整后的质押收益 [%]</h3><p>对质押代币的收益潜力进行全面评估时，应该考虑质押的 <em>代币稀释</em> 及其对 <em>质押收益</em> 的影响。为此，我们定义 <em>调整后的质押收益</em> 为由于通胀发行分配而导致质押代币的分数供应所有权的变化。即，通胀的积极稀释效应。</p>
+<h2 id="质押"><a href="#质押" class="headerlink" title="质押"></a>质押</h2><p>你可以通过将你的代币委托给处理交易和运行网络的验证者来进行质押。</p>
+<p>委托质押是一种共同风险共同回报的财务模型，可能会为长期委托的代币持有者提供回报。这是通过使代币持有者（委托人）和他们委托的验证者之间的财务激励保持一致来实现的。</p>
+<p>委托给验证者的质押越多，这个验证者被选中将新交易写入账本的频率就越高。验证者写入的交易越多，验证者及其委托人获得的奖励就越多。配置系统以能够处理更多交易的验证者会按比例获得更多的奖励，并且因为他们保持网络运行尽可能快速和顺畅。</p>
+<p>验证者在运行和维护其系统时会产生成本，这部分成本以收取奖励的百分比形式转嫁给委托人，这种费用被称为<em>佣金</em>。由于验证者获得的奖励越多，委托给他们的质押就越多，他们可能会相互竞争，提供更低的佣金费率来吸引委托人。</p>
+<p>在通过称为削减( <em>slashing</em> )的过程进行质押时，你可能会面临失去代币的风险。削减涉及因故意的恶意行为（例如创建无效交易或审查某些类型的交易或网络参与者）而移除并销毁验证者委托质押的一部分。</p>
+<p>当一个验证者被削减时，所有委托质押给该验证者的代币持有者都会失去他们委托的一部分。虽然这意味着代币持有者会立即遭受损失，同时这也意味着验证者由于总委托量减少而损失未来的奖励。有关惩罚路线图的更多详细信息可以在<a href="https://docs.solanalabs.com/proposals/optimistic-confirmation-and-slashing#slashing-roadmap">此处</a>找到。</p>
+<p>奖励和削减机制使得验证者和代币持有者的利益一致，这有助于保持网络的安全性、稳定性和高性能。</p>
+<h3 id="我怎么质押我的SOL代币"><a href="#我怎么质押我的SOL代币" class="headerlink" title="我怎么质押我的SOL代币?"></a>我怎么质押我的SOL代币?</h3><p>你可以通过将你的代币转移到支持质押的钱包来进行 SOL 质押。该钱包提供了创建质押账户和进行委托的步骤。</p>
+<p><strong>支持的钱包</strong></p>
+<p>许多网页和移动钱包支持 Solana 质押操作。请向你最喜欢的钱包的维护者咨询状态。</p>
+<p><strong>Solana 命令行工具</strong></p>
+<ul>
+<li>Solana 命令行工具可以与CLI生成的密钥对文件钱包、纸质钱包或连接的 Ledger Nano 一起执行所有质押操作。 <a href="https://docs.solanalabs.com/cli/examples/delegate-stake">使用 Solana 命令行工具的质押命令</a>.</li>
+</ul>
+<p><strong>创建一个质押账户</strong></p>
+<p>根据钱包的指示创建一个质押账户。这个账户将与用于简单发送和接收代币的账户类型不同。</p>
+<p><strong>选择一个验证者</strong></p>
+<p>遵循钱包的指示来选择一个验证者。您可以从下面的链接中获取有关潜在性能良好的验证者的信息。Solana 基金会不推荐任何特定的验证者。</p>
+<p>solanabeach.io 网站由我们的验证者之一 Staking Facilities 建立和维护，它提供了一些关于整个网络的高级图形信息，以及每个验证者列表和一些最近的每个验证者的性能统计信息。</p>
+<ul>
+<li><a href="https://solanabeach.io/">https://solanabeach.io</a></li>
+</ul>
+<p>要查看区块生产统计信息，请使用 Solana 命令行工具：</p>
+<ul>
+<li><code>solana validators</code></li>
+<li><code>solana block-production</code></li>
+</ul>
+<p>Solana 团队不会就如何解释这些信息提供建议。请自行做好尽职调查。</p>
+<p><strong>委托你的质押</strong></p>
+<p>遵循钱包的说明，将你的质押委托给你选择的验证者。</p>
+<h3 id="质押编程"><a href="#质押编程" class="headerlink" title="质押编程"></a>质押编程</h3><p>为了最大限度地提高 Solana 网络上的质押分配、去中心化和抗审查性，可以以编程的方式进行质押。团队和社区开发了几个链上和链下程序，使赌注更易于管理。</p>
+<p><strong>Stake-o-matic 又称自动委托机器人</strong></p>
+<p>这个链下程序管理着由中央机构质押的大量验证者。Solana 基金会使用自动委托机器人定期将其权益委托给满足特定性能要求的“无违约”验证者。</p>
+<p><strong>质押池</strong></p>
+<p>这个链上程序将SOL汇集在一起由领导者质押，允许 SOL 持有者在自身不管理质押的情况下质押并获得奖励。用户存入 SOL 以换取代表他们在质押池中的所有权的 SPL 代币（质押衍生品）。池子的领导者根据他们的策略存入 SOL，可能使用上面所述的一种自动委派机器人。随着质押获得奖励，池子和池子代币的价值按比例增长。最后，池子代币持有者可以将 SPL 代币发送回质押池以赎回 SOL，从而以更少的工作量参与去中心化。有关更多信息请参阅<a href="https://spl.solana.com/stake-pool">SPL 质押池文档</a>。</p>
+<h2 id="质押账户"><a href="#质押账户" class="headerlink" title="质押账户"></a>质押账户</h2><p>在 Solana 上，质押账户可以用来将代币委托给网络上的验证者，以潜在地为质押账户的所有者赚取奖励。质押账户的创建和管理与传统的钱包地址不同，后者被称为系统账户。系统账户只能在网络上发送和接收 SOL，而质押账户支持更复杂的操作，以管理代币的委托。</p>
+<p>Solana 上的质押账户也不同于您可能熟悉的其他权益证明区块链网络中的质押账户。本文档描述了 Solana 质押账户的高级结构和功能。</p>
+<h3 id="账户地址"><a href="#账户地址" class="headerlink" title="账户地址"></a>账户地址</h3><p>每个质押账户都有一个独特的地址，可以用来在命令行或任何网络浏览器工具中查找账户信息。然而，与持有地址密钥对( keypair )的钱包地址不同，持有者可以控制钱包，与质押账户地址关联的密钥对并不一定对账户有任何控制权。实际上，质押账户的地址甚至可能不存在密钥对或私钥。</p>
+<p>一个质押账户的地址拥有密钥对文件的唯一情况是当 <a href="https://docs.solanalabs.com/cli/examples/delegate-stake#create-a-stake-account">使用命令行工具创建质押账户</a>. 首先创建一个新的密钥对文件，仅以确保质押账户的地址是新的且唯一的。</p>
+<h3 id="理解账户权限"><a href="#理解账户权限" class="headerlink" title="理解账户权限"></a>理解账户权限</h3><p>某些类型的账户可能会有一个或多个与给定账户关联的签署权限。账户权限用于为其控制的账户签署特定交易。这与一些其他区块链网络不同，在那些网络中，与账户地址关联的密钥对持有者控制账户的所有活动。</p>
+<p>每个质押账户都指定有两个签署权限，分别由它们各自的地址确定，每个地址都被授权在质押账户上执行特定操作。</p>
+<p>质押权限用于签署以下操作的交易：</p>
+<ul>
+<li>委托质押</li>
+<li>取消质押委托</li>
+<li>分割质押账户, 从现有账户中分割一部分资金，创建一个新的质押账户</li>
+<li>将两个质押账户合并为一个</li>
+<li>设置新的质押权限</li>
+</ul>
+<p>提现权限签署以下交易:</p>
+<ul>
+<li>将未委托的质押提取到钱包地址</li>
+<li>设置新的提现权限</li>
+<li>设置新的质押权限</li>
+</ul>
+<p>质押权限和提现权限在创建质押账户时设置，并可以随时更改为授权新的签名地址。质押权限和提现权限可以是同一个地址，也可以是两个不同的地址。</p>
+<p>撤回权限的密钥对对账户拥有更多的控制权，因为它需要用来变现质押账户中的代币，并且如果质押权限的密钥对丢失或被泄露，它还可以用来重置质押权限。</p>
+<p>在管理质押账户时，确保撤回权限的安全，防止丢失或被盗，是至关重要的。</p>
+<h3 id="多重委托"><a href="#多重委托" class="headerlink" title="多重委托"></a>多重委托</h3><p>每个质押账户在同一时间只能被用来委托给一个验证者。账户中的所有代币要么被委托，要么未被委托，或者正处于被委托或未被委托的过程中。如果你想将你的代币的一部分委托给一个验证者，或者委托给多个验证者，你必须创建多个质押账户。</p>
+<p>这可以通过从含有一些代币的钱包地址创建多个质押账户来实现，或者通过创建一个单一的大型质押账户，然后使用质押权限将账户分割成多个具有你选择的代币余额的账户。</p>
+<p>相同的质押和撤回权限可以分配给多个质押账户。</p>
+<h3 id="合并质押账户"><a href="#合并质押账户" class="headerlink" title="合并质押账户"></a>合并质押账户</h3><p>两个具有相同权限和锁定条件的质押账户可以合并成一个单一的质押账户。在没有额外条件的情况下，以下状态的两个质押账户之间可以进行合并：</p>
+<ul>
+<li>两个已停用的质押</li>
+<li>在其激活周期内，将不活跃的质押转换为活跃的质押</li>
+</ul>
+<p>对于以下几种情况，投票公钥（voter pubkey）和投票信用（vote credits）必须匹配:</p>
+<ul>
+<li>两个已激活的质押</li>
+<li>在激活周期内，共享激活时期的两个激活中的账户</li>
+</ul>
+<p>所有其他的质押状态组合将无法合并，包括所有“过渡”状态，即质押正在激活或停用，并且具有非零的有效质押。</p>
+<h3 id="委托预热和冷却"><a href="#委托预热和冷却" class="headerlink" title="委托预热和冷却"></a>委托预热和冷却</h3><p>当质押账户被委托，或者委托被停用时，该操作不会立即生效。</p>
+<p>委托或停用操作需要经过几个<a href="https://solana.com/zh/docs/terminology#epoch">周期</a>才能完成，在包含指令的交易提交到集群后，每个周期边界都会有部分委托变得活跃或不活跃。</p>
+<p>这里对单个周期内可以委托或撤销的总质押量也有限制，以防止整个网络的质押发生突发性的大幅变化。由于预热和冷却过程取决于其他网络参与者的行为，它们的确切持续时间难以预测。有关预热和冷却时间的详细信息可以在<a href="https://docs.solanalabs.com/consensus/stake-delegation-and-rewards#stake-warmup-cooldown-withdrawal">这里</a>找到。</p>
+<p>在每个周期内，可以委托或停用的总权益数量是有限的，以防止整个网络的质押发生大规模的突发性变化。由于预热（warmup）和冷却（cooldown）过程依赖于其他网络参与者的行为，因此它们的确切持续时间很难预测。有关预热和冷却时间的详细信息可以在<a href="https://docs.solanalabs.com/consensus/stake-delegation-and-rewards#stake-warmup-cooldown-withdrawal">这里</a>找到。</p>
+<h3 id="锁仓"><a href="#锁仓" class="headerlink" title="锁仓"></a>锁仓</h3><p>质押账户可以设置锁仓时间，以防止其持有的代币在达到特定日期或周期之前被提取。在锁仓期间，质押账户仍可以进行委托、取消委托或拆分，并且其质押权限可以正常更改。只有将资金提取到另一个钱包或更新提款权限是不被允许的。</p>
+<p>锁仓只能在首次创建质押账户时添加，但可以稍后由 <em>锁仓机构</em> 或 <em>托管人</em> 修改，<em>锁仓机构</em> 或 <em>托管人</em> 的地址也在创建质押账户时设置。</p>
+<h3 id="销毁质押账户"><a href="#销毁质押账户" class="headerlink" title="销毁质押账户"></a>销毁质押账户</h3><p>在 Solana 网络上，像其他类型的账户一样，如果一个质押账户的余额为0 SOL，它将不再被追踪。如果一个质押账户没有被委托，并且它包含的所有代币都被提取到一个钱包地址，那么在那个地址上的账户实际上就被销毁了，需要手动重新创建账户，才能再次使用该账户。</p>
+<h3 id="查看质押账户"><a href="#查看质押账户" class="headerlink" title="查看质押账户"></a>查看质押账户</h3><p>质押账户的详细信息可以通过在<a href="http://explorer.solana.com/accounts">Solana Explorer</a>中复制并粘贴账户地址到搜索栏来查看。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+                </div>
+                <div class="card">
+                    <a href="/2025/03/09/solanajing-ji-zhi-tong-zhang/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Solana中的长期经济体">
+                            
+                            <span class="card-title">Solana中的长期经济体</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Solana 的加密经济系统旨在促进一个健康、可持续发展的长期经济体，其参与者激励机制与网络的安全性和去中心化相匹配。该经济体的主要参与者是验证者节点 (validator-client)。下面将讨论他们对网络的贡献、状态验证及其所需的激励
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/09/solanagao-ji-gai-nian-zhi-zhuang-tai-ya-suo/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Solana高级概念之状态压缩">
+                            
+                            <span class="card-title">Solana高级概念之状态压缩</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Solana 状态压缩是一种在链上存储链下数据指纹（哈希）并用于安全验证的方法。有效利用 Solana 账本的安全性来验证链下数据的完整性，确保其未被篡改。
+通过状态压缩, Solana 程序和 dApp 能够以较低的成本使用链上存储空间来
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">444.2k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+</body>
+</html>

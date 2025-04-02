@@ -1,0 +1,958 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Solana高级概念之交易重试, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="重试交易在 Solana 网络中，看似有效的交易有时会在被包含进区块之前被丢弃。这种情况常发生在网络拥塞期间，此时 RPC 节点无法将交易重新广播给领导者节点。对于最终用户来说，他们的交易可能看起来完全消失了。虽然 RPC 节点配备了通用重">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>Solana高级概念之交易重试 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Solana高级概念之交易重试</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-09
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-09
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.8k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        10 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="重试交易"><a href="#重试交易" class="headerlink" title="重试交易"></a>重试交易</h2><p>在 Solana 网络中，看似有效的交易有时会在被包含进区块之前被丢弃。这种情况常发生在网络拥塞期间，此时 RPC 节点无法将交易重新广播给<a href="https://solana.com/docs/terminology#leader">领导者</a>节点。对于最终用户来说，他们的交易可能看起来完全消失了。虽然 RPC 节点配备了通用重播算法，但应用程序开发人员也可以根据需要开发自己的自定义重播逻辑。</p>
+<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><ul>
+<li>节点将尝试使用通用算法重新广播交易</li>
+<li>应用程序开发人员可以实现自己的自定义重播逻辑</li>
+<li>开发人员应该利用 <code>sendTransaction</code> JSON-RPC 方法上的 <code>maxRetries</code> 参数</li>
+<li>开发人员应启用预检检查以在提交交易之前引发错误</li>
+<li>在重新签署任何交易之前，确保初始交易的区块哈希已过期非常重要</li>
+</ul>
+<h2 id="交易过程"><a href="#交易过程" class="headerlink" title="交易过程"></a>交易过程</h2><h3 id="客户如何提交交易"><a href="#客户如何提交交易" class="headerlink" title="客户如何提交交易"></a>客户如何提交交易</h3><p>在 Solana 中，没有内存池的概念。所有交易，无论是通过编程方式发起还是由最终用户发起，都会直接路由到领导者节点，以便将它们打包成区块。有两种主要方式可以将交易发送给领导者：</p>
+<ol>
+<li>通过 RPC 服务器和 <code>sendTransaction</code> JSON-RPC 方法进行代理</li>
+<li>通过 <a href="https://docs.rs/solana-client/latest/solana_client/tpu_client/index.html">TPU Client </a>直接与领导者节点联系 绝大多数最终用户将通过 RPC 服务器提交交易。当客户端提交交易时，接收 RPC 节点将依次尝试将交易广播给当前和下一个领导者节点。在领导者节点处理交易之前，除了客户端和中继 RPC 节点所知之外，没有任何交易记录。对于 TPU 客户端，重播和领导者节点转发完全由客户端软件处理。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309152755016.png" alt="交易提交过程"></p>
+<h3 id="RPC-节点如何广播交易"><a href="#RPC-节点如何广播交易" class="headerlink" title="RPC 节点如何广播交易"></a>RPC 节点如何广播交易</h3><p>RPC 节点通过 <code>sendTransaction</code> 接收到交易后，会将交易转换为 UDP 数据包，然后转发给相关领导者。 UDP 允许验证者快速相互通信，但不提供有关交易交付的任何保证。</p>
+<p>由于 Solana 的领导者节点时间表在每个 <a href="https://solana.com/docs/terminology#epoch">epoch</a>（约 2 天）之前都是已知的，因此 RPC 节点将直接向当前和下一个领导者节点广播其交易。这与以太坊等其他八卦协议形成鲜明对比，后者在整个网络中随机且广泛地传播交易。默认情况下，RPC 节点将尝试每两秒将交易转发给领导者节点，直到交易最终确定或交易的区块哈希过期（150 个区块或截至撰写本文时约 1 分 19 秒）。如果未完成的重播队列大小大于 <a href="https://github.com/solana-labs/solana/blob/bfbbc53dac93b3a5c6be9b4b65f679fdb13e41d9/send-transaction-service/src/send_transaction_service.rs#L20">10,000 个交易</a>，则新提交的交易将被丢弃。 RPC 操作员可以调整命令行<a href="https://github.com/solana-labs/solana/blob/bfbbc53dac93b3a5c6be9b4b65f679fdb13e41d9/validator/src/main.rs#L1172">参数</a>来更改此重试逻辑的默认行为。</p>
+<p>当 RPC 节点广播交易时，它将尝试将交易转发到领导者节点的<a href="https://github.com/solana-labs/solana/blob/cd6f931223181d5a1d47cba64e857785a175a760/core/src/validator.rs#L867">交易处理单元 (TPU)</a>。 TPU 分五个不同的阶段处理交易：</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana/blob/cd6f931223181d5a1d47cba64e857785a175a760/core/src/fetch_stage.rs#L21">Fetch Stage</a></li>
+<li><a href="https://github.com/solana-labs/solana/blob/cd6f931223181d5a1d47cba64e857785a175a760/core/src/tpu.rs#L91">SigVerify Stage</a></li>
+<li><a href="https://github.com/solana-labs/solana/blob/cd6f931223181d5a1d47cba64e857785a175a760/core/src/banking_stage.rs#L249">Banking Stage</a></li>
+<li><a href="https://github.com/solana-labs/solana/blob/cd6f931223181d5a1d47cba64e857785a175a760/poh/src/poh_service.rs">Proof of History Service</a></li>
+<li><a href="https://github.com/solana-labs/solana/blob/cd6f931223181d5a1d47cba64e857785a175a760/core/src/tpu.rs#L136">Broadcast Stage</a></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309153144257.png" alt="RPC交易广播"></p>
+<p>在这五个阶段中，Fetch Stage 负责接收交易。在获取阶段，验证器将根据三个端口对传入交易进行分类：</p>
+<ul>
+<li>tpu 处理常规交易，例如代币转移、NFT 铸币和程序指令</li>
+<li>tpu_vote 专注于投票交易</li>
+<li>tpu_forwards 将未处理的数据包转发给下一个领导者节点</li>
+</ul>
+<p>有关 TPU 的更多信息，请参阅 <a href="https://jito-labs.medium.com/solana-validator-101-transaction-processing-90bcdc271143">Jito Labs</a> 撰写的这篇精彩文章。</p>
+<h2 id="交易如何被丢弃"><a href="#交易如何被丢弃" class="headerlink" title="交易如何被丢弃"></a>交易如何被丢弃</h2><p>在整个交易过程中，在某些情况下交易可能会无意中从网络中丢失。</p>
+<h3 id="在处理交易之前"><a href="#在处理交易之前" class="headerlink" title="在处理交易之前"></a>在处理交易之前</h3><p>如果网络丢弃一笔交易，它很可能会在领导者节点处理该交易之前这样做。 UDP 数据包丢失是发生这种情况的最简单原因。在网络负载严重的时期，验证器也可能会因处理所需的大量交易而不堪重负。虽然验证器可以通过 tpu_forwards 转发剩余交易，但可以转发的数据量是有限的。此外，每个转发仅限于验证器之间的单跳。也就是说，<code>tpu_forwards</code> 端口上收到的交易不会转发到其他验证器。</p>
+<p>还有两个鲜为人知的原因可能会导致交易在处理之前被删除。第一个场景涉及通过 RPC 池提交的交易。有时，RPC 池的一部分可能会远远领先于池的其余部分。当池中的节点需要协同工作时，这可能会导致问题。在这个例子中，交易的 recentBlockhash 是从池的高级部分（后端 A）查询的。当交易被提交到池的滞后部分（后端 B）时，节点将无法识别高级区块哈希并会丢弃交易。如果开发人员对 <code>sendTransaction</code> 启用预检检查，则可以在交易提交时检测到这一点。</p>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309153600405.png" alt="RPC池提交的交易"></p>
+<p>临时网络分叉也可能导致交易丢失。如果验证者在银行阶段重播其区块的速度很慢，它可能最终会创建一个少数派分叉。当客户端构建交易时，交易可能会引用仅存在于少数派叉上的 <code>recentBlockhash</code>。提交交易后，集群可以在处理交易之前切换出少数派分叉。在这种情况下，由于找不到区块哈希，交易被丢弃。</p>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309153702213.png" alt="临时网络分叉"></p>
+<h3 id="交易处理之后和最终确定之前"><a href="#交易处理之后和最终确定之前" class="headerlink" title="交易处理之后和最终确定之前"></a>交易处理之后和最终确定之前</h3><p>如果交易引用来自少数分叉的 <code>recentBlockhash</code>，则该交易仍然有可能被处理。然而，在这种情况下，它将由少数分叉上的领导者节点处理。当这个领导者节点试图与网络的其他部分共享其处理过的交易时，它将无法与不识别少数分叉的大多数验证者达成共识。此时，交易将在最终确定之前被删除。</p>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309153858281.png" alt="交易处理之后和最终确定之前"></p>
+<h2 id="处理丢弃的交易"><a href="#处理丢弃的交易" class="headerlink" title="处理丢弃的交易"></a>处理丢弃的交易</h2><p>虽然 RPC 节点会尝试重新广播交易，但它们采用的算法是通用的，并且通常不适合特定应用程序的需求。为了应对网络拥塞，应用程序开发人员应该定制自己的重播逻辑。</p>
+<h3 id="深入了解-sendTransaction"><a href="#深入了解-sendTransaction" class="headerlink" title="深入了解 sendTransaction"></a>深入了解 sendTransaction</h3><p><code>sendTransaction</code> RPC 方法是开发人员用于提交交易的主要工具。 <code>sendTransaction</code> 只负责将交易从客户端中继到 RPC 节点。如果节点收到交易，<code>sendTransaction</code> 将返回可用于跟踪交易的交易 id。成功的响应并不表明交易是否将由集群处理或完成。</p>
+<h3 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h3><ul>
+<li><code>stringtransaction: string</code>- 完全签名的交易，作为编码字符串</li>
+<li>(optional) <code>configuration: object</code><ul>
+<li><code>skipPreflight</code>: <code>boolean</code> - 如果为 true，则跳过预检交易检查（默认值：false）</li>
+<li>(optional) <code>preflightCommitment</code>: <code>string</code> - 用于针对银行槽进行预检模拟的承诺级别（默认值：“最终确定”）。</li>
+<li>(optional) <code>encoding</code>: <code>string</code> - 用于交易数据的编码。 “base58”（慢）或“base64”。 （默认值：“base58”）。</li>
+<li>(optional) <code>maxRetries</code>: <code>usize</code> - RPC 节点重试向领导者节点发送交易的最大次数。如果未提供此参数，RPC 节点将重试交易，直到交易完成或区块哈希过期。</li>
+</ul>
+</li>
+</ul>
+<p><strong>返回值:</strong></p>
+<ul>
+<li><code>transaction id</code>: <code>string</code> - 嵌入交易中的第一个交易签名，作为 base-58 编码的字符串。此交易 ID 可以与 <code>getSignatureStatuses</code> 一起使用来轮询状态更新。</li>
+</ul>
+<h2 id="自定义重播逻辑"><a href="#自定义重播逻辑" class="headerlink" title="自定义重播逻辑"></a>自定义重播逻辑</h2><p>Solana 提供了 <code>sendTransaction</code> API 的 <code>maxRetries</code> 参数，允许开发人员自定义交易重播逻辑。<code>maxRetries</code> 将覆盖 RPC 节点的默认重试逻辑，允许开发人员在合理的范围内手动控制重试过程。</p>
+<p>手动重试交易的常见模式涉及临时存储来自 getLatestBlockhash 的 <code>LastValidBlockHeight</code>。一旦隐藏，应用程序就可以轮询集群的区块高度并以适当的时间间隔手动重试交易。在网络拥塞时，将 <code>maxRetries</code> 设置为 0 并通过自定义算法手动重播是有利的。虽然某些应用程序可能采用指数退避算法，但其他应用程序（例如 Mango）选择以恒定间隔不断重新提交交易，直到发生超时。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  Keypair<span class="token punctuation">,</span>
+  Connection<span class="token punctuation">,</span>
+  LAMPORTS_PER_SOL<span class="token punctuation">,</span>
+  SystemProgram<span class="token punctuation">,</span>
+  Transaction<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@solana/web3.js"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> nacl <span class="token keyword">from</span> <span class="token string">"tweetnacl"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> sleep <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ms<span class="token punctuation">:</span> number<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> ms<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> payer <span class="token operator">=</span> Keypair<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> toAccount <span class="token operator">=</span> Keypair<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>publicKey<span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> connection <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Connection</span><span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:8899"</span><span class="token punctuation">,</span> <span class="token string">"confirmed"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> airdropSignature <span class="token operator">=</span> <span class="token keyword">await</span> connection<span class="token punctuation">.</span><span class="token function">requestAirdrop</span><span class="token punctuation">(</span>
+    payer<span class="token punctuation">.</span>publicKey<span class="token punctuation">,</span>
+    LAMPORTS_PER_SOL
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">await</span> connection<span class="token punctuation">.</span><span class="token function">confirmTransaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span> signature<span class="token punctuation">:</span> airdropSignature <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> blockhashResponse <span class="token operator">=</span> <span class="token keyword">await</span> connection<span class="token punctuation">.</span><span class="token function">getLatestBlockhashAndContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> lastValidBlockHeight <span class="token operator">=</span> blockhashResponse<span class="token punctuation">.</span>context<span class="token punctuation">.</span>slot <span class="token operator">+</span> <span class="token number">150</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> transaction <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Transaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    feePayer<span class="token punctuation">:</span> payer<span class="token punctuation">.</span>publicKey<span class="token punctuation">,</span>
+    blockhash<span class="token punctuation">:</span> blockhashResponse<span class="token punctuation">.</span>value<span class="token punctuation">.</span>blockhash<span class="token punctuation">,</span>
+    lastValidBlockHeight<span class="token punctuation">:</span> lastValidBlockHeight<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>
+    SystemProgram<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      fromPubkey<span class="token punctuation">:</span> payer<span class="token punctuation">.</span>publicKey<span class="token punctuation">,</span>
+      toPubkey<span class="token punctuation">:</span> toAccount<span class="token punctuation">,</span>
+      lamports<span class="token punctuation">:</span> <span class="token number">1000000</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> message <span class="token operator">=</span> transaction<span class="token punctuation">.</span><span class="token function">serializeMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> signature <span class="token operator">=</span> nacl<span class="token punctuation">.</span>sign<span class="token punctuation">.</span><span class="token function">detached</span><span class="token punctuation">(</span>message<span class="token punctuation">,</span> payer<span class="token punctuation">.</span>secretKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  transaction<span class="token punctuation">.</span><span class="token function">addSignature</span><span class="token punctuation">(</span>payer<span class="token punctuation">.</span>publicKey<span class="token punctuation">,</span> Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>signature<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> rawTransaction <span class="token operator">=</span> transaction<span class="token punctuation">.</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> blockheight <span class="token operator">=</span> <span class="token keyword">await</span> connection<span class="token punctuation">.</span><span class="token function">getBlockHeight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>blockheight <span class="token operator">&lt;</span> lastValidBlockHeight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    connection<span class="token punctuation">.</span><span class="token function">sendRawTransaction</span><span class="token punctuation">(</span>rawTransaction<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      skipPreflight<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    blockheight <span class="token operator">=</span> <span class="token keyword">await</span> connection<span class="token punctuation">.</span><span class="token function">getBlockHeight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当应用程序通过 <code>getLatestBlockhash</code> 获取最新区块哈希时，应用程序应指定其预期的承诺级别。通过将其承诺设置为 <code>confirmed</code>（已确认投票）或 <code>finalized</code> 最终确定（ <code>confirmed</code> 确认后约 30 个区块），应用程序可以避免从少数分叉中轮询区块哈希。</p>
+<p>如果应用程序可以访问负载均衡器后面的多个 RPC 节点，可以选择在不同节点之间分配工作负载。对于处理数据密集型请求（例如 <code>getProgramAccounts</code>）的节点，其响应速度可能较慢，因此不适合转发交易。对于处理时间敏感交易的应用程序，建议使用专用的 RPC 节点，仅用于处理 <code>sendTransaction</code> 请求。</p>
+<h3 id="跳过预检的成本"><a href="#跳过预检的成本" class="headerlink" title="跳过预检的成本"></a>跳过预检的成本</h3><p>默认情况下，<code>sendTransaction</code> 将在提交交易之前执行三项预检检查。具体来说，<code>sendTransaction</code> 将：</p>
+<ul>
+<li>验证所有签名均有效</li>
+<li>检查引用的区块哈希是否在最近 150 个区块内</li>
+<li>根据 <code>preflightCommitment</code> 指定的银行槽模拟交易</li>
+</ul>
+<p>如果这三个预检检查中的任何一个失败，<code>sendTransaction</code> 将在提交交易之前引发错误。预检检查通常是丢失交易和允许客户端优雅地处理错误之间的区别。为了确保解决这些常见错误，建议开发人员将 <code>skipPreflight</code> 设置为 false。</p>
+<h3 id="何时重新签署交易"><a href="#何时重新签署交易" class="headerlink" title="何时重新签署交易"></a>何时重新签署交易</h3><p>即使经过多次重播尝试，有时仍需要客户端重新签署交易。在重新签署任何交易之前，必须确保原始交易的区块哈希已失效。如果原始区块哈希仍然有效，则两笔交易都可能被网络接受，导致交易混乱。</p>
+<p>在 Solana 中，只要交易引用的区块哈希早于从 <code>getLatestBlockhash</code> 获取的 <code>lastValidBlockHeight</code>，就可以安全地丢弃该交易。开发人员可以通过查询 <code>getEpochInfo</code> 并与响应中的 <code>blockHeight</code> 进行比较来跟踪 <code>lastValidBlockHeight</code>。一旦区块哈希失效，客户端可以使用新获取的区块哈希重新签名交易。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/09/solanagao-ji-gai-nian-zhi-zhuang-tai-ya-suo/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Solana高级概念之状态压缩">
+                            
+                            <span class="card-title">Solana高级概念之状态压缩</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Solana 状态压缩是一种在链上存储链下数据指纹（哈希）并用于安全验证的方法。有效利用 Solana 账本的安全性来验证链下数据的完整性，确保其未被篡改。
+通过状态压缩, Solana 程序和 dApp 能够以较低的成本使用链上存储空间来
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/09/solanagao-ji-gai-nian-zhi-jiao-yi-chong-shi/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Solana高级概念之交易确认及过期">
+                            
+                            <span class="card-title">Solana高级概念之交易确认及过期</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                对于许多新开发者来说，在构建应用程序时，与交易确认相关的问题很常见。本文旨在加深对 Solana 区块链上确认机制的整体理解，同时提供一些推荐的最佳实践。
+交易简要背景在深入了解 Solana 交易确认和到期的工作原理之前，我们先简要了解以
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">444.2k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+</body>
+</html>

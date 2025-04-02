@@ -450,7 +450,7 @@
 <li>在看到盲区块提案时，运行构建者应用程序接口的构建者可能会用完整的执行有效负载响应。 这样，验证者可以创建一个“已签名”信标区块并在整个网络中传播。</li>
 <li>如果区块构建者未能及时响应，使用构建者应用程序接口的验证者仍有可能在本地构建区块，这样他们就不会错过区块提出奖励。 然而，验证者不能使用当前披露的交易或另一个集合创建另一个区块，因为这相当于<em>模棱两可</em>（对同一时隙内的两个区块签名），这是一种可受到惩罚的恶行。</li>
 </ol>
-<p>构建者应用程序接口的一个示例实现是 <a href="https://github.com/flashbots/mev-boost">MEV Boost(opens in a new tab)</a>，它是对 <a href="https://docs.flashbots.net/Flashbots-auction/overview/">Flashbots 拍卖机制(opens in a new tab)</a>的改进，旨在抑制最大可提取价值在以太坊上的负面外部性。 Flashbots 拍卖允许权益证明下的验证者将构建可获利区块的工作外包给专门的参与方，称为<strong>搜索者</strong>。<a href="https://ethereum.org/content/developers/docs/mev/mev.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fmev%2Fmev.png&amp;w=1920&amp;q=75" alt="详细展示最大可提取价值 (MEV) 流程的图表"></a></p>
+<p>构建者应用程序接口的一个示例实现是 <a href="https://github.com/flashbots/mev-boost">MEV Boost(opens in a new tab)</a>，它是对 <a href="https://docs.flashbots.net/Flashbots-auction/overview/">Flashbots 拍卖机制(opens in a new tab)</a>的改进，旨在抑制最大可提取价值在以太坊上的负面外部性。 Flashbots 拍卖允许权益证明下的验证者将构建可获利区块的工作外包给专门的参与方，称为<strong>搜索者</strong>。<a href="https://ethereum.org/content/developers/docs/mev/mev.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fmev%2Fmev.png&amp;w=1920&amp;q=75" alt="详细展示最大可提取价值 (MEV) 流程的图表"></a></p>
 <p>搜索者寻找利润丰厚的最大可提取价值机会，并向区块提议者发送交易包以及<a href="https://en.wikipedia.org/wiki/First-price_sealed-bid_auction">价格密封出价(opens in a new tab)</a>，以将交易包纳入到区块中。 运行 mev-geth（go-ethereum (Geth) 客户端的分叉版本）的验证者只需要选择利润最高的交易包，并将其纳为新区块的一部分。 为了避免区块提议者（验证者）收到垃圾交易和无效交易，交易包先通过<strong>中继者</strong>验证然后再到达提议者处。</p>
 <p>MEV Boost 运行机制与原来的 Flashbots 拍卖相同，但增加了一些针对以太坊向权益证明过渡的新功能。 搜索者仍然寻找有利润的交易以便添加到区块中，但一类新的名为<strong>构建者</strong>的专门参与方负责将交易聚合并打包到区块中。 构建者接受搜索者提供的价格密封出价，并进行优化以找到利润最大的排序。</p>
 <p>中继者仍然负责验证交易包并将它们传送给提议者。 然而，MEV Boost 通过存储构建者发送的区块体和验证者发送的区块头，引入了负责提供<a href="https://ethereum.org/zh/developers/docs/data-availability/">数据可用性</a>的<strong>托管</strong>。 对于托管，连接到中继的验证者请求可用的执行有效负载，并使用 MEV Boost 的排序算法选择出价 + 最大可提取价值小费最高的有效负载标头。</p>
@@ -758,7 +758,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -910,10 +910,5 @@
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

@@ -390,7 +390,7 @@
 <li><strong>共识客户端：</strong>（也称为信标节点、CL 客户端或旧称“以太坊 2”客户端）实现权益证明共识算法，使网络能够根据来自执行客户端的经验证数据达成一致。 此外还有名为“验证者”的第三种软件，它们可被添加到共识客户端中，使节点能参与保护网络安全。</li>
 </ul>
 <p>这些客户端软件相互协作，以追踪以太坊的链头，并允许用户与以太坊网络进行交互。 这种模块化设计称为<a href="https://vitalik.eth.limo/general/2022/02/28/complexity.html">封装复杂性(opens in a new tab)</a>，包含多个协同运作的软件。 此方法让无缝实施<a href="https://ethereum.org/zh/roadmap/merge/">合并</a>变得更简单，客户端软件更易于维护和开发，并且还能重复利用各个客户端（例如在<a href="https://ethereum.org/zh/layer-2/">二层网络生态系统</a>当中）。</p>
-<p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/eth1eth2client.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Feth1eth2client.png&amp;w=1920&amp;q=75" alt="关联执行和共识客户端"></a>关联执行与共识客户端的简化图。</p>
+<p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/eth1eth2client.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Feth1eth2client.png&amp;w=1920&amp;q=75" alt="关联执行和共识客户端"></a>关联执行与共识客户端的简化图。</p>
 <h3 id="客户端多样性"><a href="#客户端多样性" class="headerlink" title="客户端多样性"></a>客户端多样性</h3><p>不同团队开发的各种编程语言中都有<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#execution-clients">执行客户端</a>和<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#consensus-clients">共识客户端</a>。</p>
 <p>多种客户端实现减少了对于单一代码库的依赖，使网络更强大。 它的理想目标是实现多样性，即没有任何客户端在网络中占据主导地位，从而排除潜在的单点故障。 语言多样化有助于拓宽开发者社区，并允许他们用自己喜欢的语言创建集成。</p>
 <p>了解有关<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/client-diversity/">客户端多样性</a>的更多信息。</p>
@@ -494,7 +494,7 @@
 <li>你可以使用<strong>进程间通信 (IPC)</strong> 连接到节点，或者重写节点将你的程序作为插件加载。 这样可以减少网络延迟，例如在使用 web3 库处理大量数据时或者当你需要尽快替换交易时（即抢先交易）会带来很大帮助。</li>
 <li>你可以直接质押以太币以保护网络并获得奖励。 请参见<a href="https://ethereum.org/zh/staking/solo/">单独质押</a>以便开始操作。</li>
 </ul>
-<p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/nodes.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Fnodes.png&amp;w=1920&amp;q=75" alt="如何通过你的应用和节点访问以太坊"></a></p>
+<p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/nodes.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Fnodes.png&amp;w=1920&amp;q=75" alt="如何通过你的应用和节点访问以太坊"></a></p>
 <h3 id="对网络的好处"><a href="#对网络的好处" class="headerlink" title="对网络的好处"></a>对网络的好处</h3><p>多样化的节点对于以太坊的健康、安全和运行弹性非常重要。</p>
 <ul>
 <li>全节点强制执行共识规则，因此无法欺骗它们接受不遵循规则的区块。 这在网络中提供了额外的安全性，因为如果所有节点都是轻节点，不进行完整验证，验证者可能会攻击网络。</li>
@@ -733,7 +733,7 @@
 <p>在实践中，这意味着你的节点会连接到远程服务，以下载最近的最终确定状态并从该点继续验证数据。 提供数据的第三方会受到信任，因此要谨慎选择。</p>
 <h2 id="节点架构"><a href="#节点架构" class="headerlink" title="节点架构"></a>节点架构</h2><p>当以太坊使用<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/">工作量证明</a>时，执行客户端足以运行以太坊全节点。 然而，在实施<a href="https://ethereum.org/zh/developers/docs/consensus-mechanisms/pow/">权益证明</a>以后，执行客户端需要与另一种名为<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#consensus-clients">“共识客户端”</a>的软件搭配使用。</p>
 <p>以下图表显示了两种以太坊客户端之间的关系。 这两种客户端与其各自的点对点（对等）网络连接。 分离对等网络是有必要的，因为执行客户端通过它们的对等网络广播交易，确保它们能够管理自己的本地交易池，同时共识客户端通过它们的对等网络广播区块，保证共识和链增长。</p>
-<p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/node-architecture/node-architecture-text-background.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Fnode-architecture%2Fnode-architecture-text-background.png&amp;w=1920&amp;q=75" alt="img"></a></p>
+<p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/node-architecture/node-architecture-text-background.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Fnode-architecture%2Fnode-architecture-text-background.png&amp;w=1920&amp;q=75" alt="img"></a></p>
 <p>要使这种双客户端结构发挥作用，共识客户端必须能够将大量交易传递给执行客户端。 在本地执行交易是客户端验证交易未违反任何以太坊规则的方式，并确保提议的以太坊状态更新是正确的。 同样，当节点被选为区块生产者时，共识客户端必须能够从 Geth 请求各种交易，以便将它们添加到新的区块，并通过执行它们来更新全局状态。 本地远程过程调用连接使用<a href="https://github.com/ethereum/execution-apis/blob/main/src/engine/common.md">引擎应用程序接口(opens in a new tab)</a>处理这种跨客户端通信。</p>
 <h2 id="执行客户端的作用是什么？"><a href="#执行客户端的作用是什么？" class="headerlink" title="执行客户端的作用是什么？"></a>执行客户端的作用是什么？</h2><p>执行客户端负责交易处理、交易广播、状态管理和支持以太坊虚拟机（<a href="https://ethereum.org/zh/developers/docs/evm/">以太坊虚拟机</a>）。 然而，它<strong>不</strong>负责区块构建、区块广播或处理共识逻辑。 这些都是共识客户端的责任。</p>
 <p>执行客户端会创建执行有效负载——交易列表、更新状态树和其他与执行相关的数据。 共识客户端在每个区块中添加执行有效负载。 执行客户端还要在新的区块中重新执行交易，以确保其有效性。 执行交易在执行客户端的嵌入式计算机中完成，这些计算机被称为<a href="https://ethereum.org/zh/developers/docs/evm/">以太坊虚拟机 (EVM)</a>。</p>
@@ -795,7 +795,7 @@
 <p>更糟糕的是，当拥有三分之二多数节点的客户端出现严重漏洞，可能会导致链<a href="https://www.symphonious.net/2021/09/23/what-happens-if-beacon-chain-consensus-fails/">错误地分叉并最终确定(opens in a new tab)</a>，让大量验证者困陷在无效链上。 如果这些验证者想重新加入正确的链，他们将面临罚没或缓慢而昂贵的自愿退出和重新激活过程。 罚没的轻重随过错节点数量而异，三分之二的大多数将受到最严重的惩罚（32 个以太币）。</p>
 <p>尽管这些情况不太可能发生，但为了降低这类风险，以太坊生态系统可以使客户端均衡分布在活跃节点上。 理想情况下，任何共识客户端任何时候都不会达到总节点数的 33%。</p>
 <h3 id="共担责任"><a href="#共担责任" class="headerlink" title="共担责任"></a>共担责任</h3><p>采用主流客户端也需要人力成本。 这给小型开发团队带来了过多的压力和责任。 客户端多样性程度越低，维护主流客户端的开发者的责任负担就越大。 将这一责任分摊到多个团队，既有利于以太坊节点网络的健康，也有益于相关人员的健康。</p>
-<h2 id="客户端多样性现状"><a href="#客户端多样性现状" class="headerlink" title="客户端多样性现状"></a>客户端多样性现状</h2><p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/client-diversity/client-diversity.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Fclient-diversity%2Fclient-diversity.png&amp;w=1920&amp;q=75" alt="显示客户端多样性的饼状图"></a><em>图表数据来自 <a href="https://ethernodes.org/">ethernodes.org(opens in a new tab)</a> 和 <a href="https://clientdiversity.org/">clientdiversity.org(opens in a new tab)</a></em></p>
+<h2 id="客户端多样性现状"><a href="#客户端多样性现状" class="headerlink" title="客户端多样性现状"></a>客户端多样性现状</h2><p><a href="https://ethereum.org/content/developers/docs/nodes-and-clients/client-diversity/client-diversity.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnodes-and-clients%2Fclient-diversity%2Fclient-diversity.png&amp;w=1920&amp;q=75" alt="显示客户端多样性的饼状图"></a><em>图表数据来自 <a href="https://ethernodes.org/">ethernodes.org(opens in a new tab)</a> 和 <a href="https://clientdiversity.org/">clientdiversity.org(opens in a new tab)</a></em></p>
 <p>上面的两个饼图显示了执行层和共识层客户端多样性现状的快照（在 2022 年 1 月撰写本文时）。 在执行层，<a href="https://geth.ethereum.org/">Geth(opens in a new tab)</a> 占据绝对主导地位，<a href="https://openethereum.github.io/">Open Ethereum (opens in a new tab)</a> 以极大的差距位居第二，<a href="https://github.com/ledgerwatch/erigon">Erigon(opens in a new tab)</a> 和 <a href="https://nethermind.io/">Nethermind(opens in a new tab)</a> 分别占据第三和第四，其他客户端加起来占网络的比例不到 1%。 共识层最常用的客户端 <a href="https://prysmaticlabs.com/#projects">Prysm(opens in a new tab)</a> 不像 Geth 那样占据绝对主导地位，但仍占有网络的 60% 以上。 <a href="https://lighthouse.sigmaprime.io/">Lighthouse(opens in a new tab)</a> 和 <a href="https://consensys.net/knowledge-base/ethereum-2/teku/">Teku(opens in a new tab)</a> 分别占据约 20% 和约 14%，其他客户端很少使用。</p>
 <p>2022 年 1 月 23 日，从 <a href="https://ethernodes.org/">Ethernodes(opens in a new tab)</a> 获得执行层数据。 共识客户端的数据来自 <a href="https://github.com/sigp/blockprint">Michael Sproul(opens in a new tab)</a>。 共识客户端数据更难获取，因为共识层客户端并不总是具有可以用来识别它们的明确痕迹。 这些数据是使用分类算法生成的，该算法有时会混淆一些非主流客户端（点击<a href="https://twitter.com/sproulM_/status/1440512518242197516">此处(opens in a new tab)</a>了解更多详细信息）。 在上图中，这些含糊的分类使用了“/”符号进行处理（例如 Nimbus/Teku）。 尽管如此，很明显大部分网络都在运行 Prysm。 这些数据是一组固定区块的快照（在本例中为时隙 2048001 与 2164916 之间的信标区块），Prysm 的主导地位曾经一度更高，超过 68%。 尽管只是快照，但上图中的数值可以让你清晰地了解客户端多样性现状的全局。</p>
 <p>现在，可以在 <a href="https://clientdiversity.org/">clientdiversity.org(opens in a new tab)</a> 查阅最新的共识层客户端多样性数据。</p>
@@ -1117,7 +1117,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -1269,10 +1269,5 @@
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

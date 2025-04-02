@@ -418,7 +418,7 @@
 <li><code>codeHash</code> - 该哈希表示以太坊虚拟机 (EVM) 上的帐户<em>代码</em>。 合约帐户具有编程的代码片段，可以执行不同的操作。 如果帐户收到消息调用，则执行此 EVM 代码。 与其他帐户字段不同，不能更改。 所有代码片段都被保存在状态数据库的相应哈希下，供后续检索。 此哈希值称为 codeHash。 对于外部所有的帐户，codeHash 字段是空字符串的哈希。</li>
 <li><code>storageRoot</code> – 有时被称为存储哈希。 Merkle Patricia trie 根节点的 256 位哈希已编码了帐户的存储内容（256 位整数值映射），并编码为 Trie，作为来自 256 的 Keccak 256 位哈希的映射位整数键，用于 RLP 编码的256位整数值。 此 Trie 对此帐户存储内容的哈希进行编码，默认情况下为空。</li>
 </ul>
-<p><a href="https://ethereum.org/content/translations/zh/developers/docs/accounts/accounts.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Faccounts%2Faccounts.png&amp;w=1920&amp;q=75" alt="显示帐户组成部分的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/accounts/accounts.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Faccounts%2Faccounts.png&amp;w=1920&amp;q=75" alt="显示帐户组成部分的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
 <h2 id="外部持有的帐户和密钥对"><a href="#外部持有的帐户和密钥对" class="headerlink" title="外部持有的帐户和密钥对"></a>外部持有的帐户和密钥对</h2><p>帐户由一对加密密钥组成：公钥和私钥。 它们有助于证明交易实际上是由发送者签名的，并防止伪造。 你的私钥是你用来签名交易的密钥，所以它保障你对与自己帐户相关的资金进行管理。 你从未真正持有加密货币，你持有私钥 – 资金总是在以太坊的账本上。</p>
 <p>这将防止恶意参与者广播虚假交易，因为你总是可以验证交易的发送者。</p>
 <p>如果 Alice 想要从她自己的帐户发送 ETH 到 Bob 的帐户，Alice 需要创建交易请求并将其发送到网络进行验证。 以太坊对公钥加密的使用确保了 Alice 可以证明她最初发起了交易请求。 没有加密机制，恶意对手 Eve 可以简单地公开广播一个看起来像“从 Alice 的帐户发送 5 ETH 到 Eve 帐户”的请求。而且没有人能够证实请求不是由 Alice 发送。</p>
@@ -746,7 +746,7 @@ WARN [10-28|16:19:09.306] Please remember your password!
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -898,10 +898,5 @@ WARN [10-28|16:19:09.306] Please remember your password!
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

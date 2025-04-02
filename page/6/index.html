@@ -258,27 +258,25 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/21/rustzhong-de-mei-ju-eunm-/">
+                        <a href="/2025/02/27/rustzhong-de-die-dai-qi/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Rust 中的枚举(Enum)">
+                                    <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Rust中的迭代器">
                                 
-                                <span class="card-title">Rust 中的枚举(Enum)</span>
+                                <span class="card-title">Rust中的迭代器</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    枚举是 Rust 中非常强大的功能，它允许我们将多个可能的值组合在一起，并且可以关联数据，甚至可以定义具有多种变体的枚举类型。以下是本节内容的详细总结：
-
-1. 什么是枚举（Enum）？枚举（enum）允许我们定义一个数据类型，它可以是一组
+                                    1. 迭代器概述Rust 中的迭代器是一个实现了 Iterator trait 的对象。迭代器通过 next 方法返回集合的元素，并且每次迭代返回的是一个 Option 类型的值（即 Some(item) 或 None）。next 方法会持
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-27
                             </span>
                                 <span class="publish-author">
                                     
@@ -299,26 +297,25 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/21/rust-fang-fa-yu-fa-method-syntax-/">
+                        <a href="/2025/02/27/rustde-bi-bao/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Rust 方法语法(Method Syntax)">
+                                    <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Rust中的闭包">
                                 
-                                <span class="card-title">Rust 方法语法(Method Syntax)</span>
+                                <span class="card-title">Rust中的闭包</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    Rust 提供了一种 方法（method） 语法，让我们可以将行为与结构体（struct）、枚举（enum）或 trait 关联起来。这一节介绍了 如何定义和调用方法、self 的作用、方法 vs 关联函数的区别 等内容。
-1. 方法的定义
+                                    Rust 中的闭包(Closures)是匿名函数，允许在函数内定义并传递行为。闭包是一种功能强大的工具，允许你在执行时捕获周围环境中的变量，并且能够传递给其他函数进行使用。闭包与普通函数不同之处在于，闭包可以捕获其调用环境中的变量，并且能够
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-27
                             </span>
                                 <span class="publish-author">
                                     
@@ -339,26 +336,28 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/21/rust-jie-gou-ti-shi-li/">
+                        <a href="/2025/02/27/rustgou-jian-ming-ling-xing-grep/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Rust结构体示例及Debug trait调试">
+                                    <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Rust构建命令行grep">
                                 
-                                <span class="card-title">Rust结构体示例及Debug trait调试</span>
+                                <span class="card-title">Rust构建命令行grep</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    一个使用结构体的示例程序为了理解何时会需要使用结构体，让我们编写一个计算长方形面积的程序。我们会从单独的变量开始，接着重构程序直到使用结构体替代他们为止。  
-1. 结构体的基本使用示例程序的目标是计算一个矩形的面积。最初，直接使用 单独的
+                                    创建一个命令行工具，能够读取指定文件并搜索用户输入的字符串。我们将结合文件I/O、命令行参数、错误处理、环境变量等知识，实现一个高效、健壮的命令行工具。
+代码实现lib.rs 代码
+use std::fs;
+use std::error::
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-27
                             </span>
                                 <span class="publish-author">
                                     
@@ -379,27 +378,29 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/21/rust-jie-gou-ti-structs-/">
+                        <a href="/2025/02/26/rustzhong-de-ce-shi/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Rust 结构体(Structs)">
+                                    <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Rust中的测试">
                                 
-                                <span class="card-title">Rust 结构体(Structs)</span>
+                                <span class="card-title">Rust中的测试</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    结构体（struct）是 Rust 中用于组织相关数据的一种方式，类似于其他语言中的类（class）或结构体（struct）。Rust 的结构体可以帮助我们将多个值组合在一起，形成更具语义的复杂数据类型，从而提升代码的可读性和可维护性。
+                                    Rust 提供了内置的测试框架，允许开发者编写和运行测试来确保代码的正确性。
+1.如何编写测试Rust 中的测试函数是用来验证非测试代码是否按照期望的方式运行的。测试函数体通常执行如下三种操作：
 
-
+设置任何所需的数据或状态
+运行需要测试的代
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-26
                             </span>
                                 <span class="publish-author">
                                     
@@ -420,27 +421,25 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/21/rustzhong-de-qie-pian-the-slice-type-/">
+                        <a href="/2025/02/24/sheng-ming-zhou-qi-yu-yin-yong-you-xiao-xing/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Rust中切片 （The slice type）">
+                                    <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Rust中的生命周期和引用有效性">
                                 
-                                <span class="card-title">Rust中切片 （The slice type）</span>
+                                <span class="card-title">Rust中的生命周期和引用有效性</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    切片是 Rust 中的一个重要概念，它提供了一种引用数据部分的方式，而无需复制数据本身。切片允许你对集合（如数组、Vec、String）的一部分进行操作，同时保持对原始数据的引用。
-
-1. 切片的基本概念在 Rust 中，切片（slice）
+                                    Rust 中的每一个引用都有其 生命周期（lifetime），也就是引用保持有效的作用域。大部分时候生命周期是隐含并可以推断的，正如大部分时候类型也是可以推断的一样。类似于当因为有多种可能类型的时候不得不注明类型，也会出现引用的生命周期以一
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-24
                             </span>
                                 <span class="publish-author">
                                     
@@ -461,25 +460,26 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/21/rustzhong-yin-yong-de-shi-yong-chang-jing/">
+                        <a href="/2025/02/24/rustzhong-trait/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Rust中引用的使用场景">
+                                    <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Rust中的trait">
                                 
-                                <span class="card-title">Rust中引用的使用场景</span>
+                                <span class="card-title">Rust中的trait</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    在 Rust 中，&amp; 是一个非常重要的符号，主要用于创建 引用（borrow）。引用允许你借用某个值的所有权，而不需要把值本身传递到函数中。&amp; 和 &amp;mut 都是用来获取引用的方式，但有一些细微的区别和使用场景。理解
+                                    1. 什么是 Trait？在 Rust 中，trait 类似于其他语言中的接口（interface）。它定义了一组方法签名，供实现该 trait 的类型定义具体行为。
+1.1 定义 Trait使用trait关键字,trait 定义是一种将方
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-24
                             </span>
                                 <span class="publish-author">
                                     
@@ -500,26 +500,26 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/21/rustyin-yong-yu-jie-yong/">
+                        <a href="/2025/02/24/rustzhong-de-fan-xing/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Rust中的引用与借用">
+                                    <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Rust中的泛型">
                                 
-                                <span class="card-title">Rust中的引用与借用</span>
+                                <span class="card-title">Rust中的泛型</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    前面我们讨论了：在 Rust 中，借用（Borrowing） 允许你在不转移所有权的情况下使用数据。这一节详细讨论了如何通过引用（References）来借用数据以及相关的规则，确保内存安全和避免数据竞争。
-1. 什么是引用（Referen
+                                    Rust 允许我们使用泛型Generics为函数签名或结构体等项创建定义，这样它们就可以用于多种不同的具体数据类型。让我们看看如何使用泛型定义函数、结构体、枚举和方法，然后我们将讨论泛型如何影响代码性能。
+在函数定义中使用泛型下面展示了两个
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-24
                             </span>
                                 <span class="publish-author">
                                     
@@ -540,26 +540,30 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/21/rustzhong-de-suo-you-quan-ownership/">
+                        <a href="/2025/02/24/rustcuo-wu-chu-li-zong-jie/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Rust中的所有权Ownership">
+                                    <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Rust中的错误处理">
                                 
-                                <span class="card-title">Rust中的所有权Ownership</span>
+                                <span class="card-title">Rust中的错误处理</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    Rust 的所有权（Ownership）系统是其内存管理的核心之一，它没有垃圾回收（GC）机制，通过所有权系统，Rust 在编译时就能保证内存使用的安全性，避免了程序运行时的内存管理问题。
-1. 所有权的基本规则Rust 的所有权系统依赖于
+                                    Rust 提供了两种主要的错误处理方式：
+
+不可恢复错误（Unrecoverable Errors）：使用 panic! 宏。
+可恢复错误（Recoverable Errors）：使用 Result&lt;T, E&gt; 类型。
+
+错误处
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-24
                             </span>
                                 <span class="publish-author">
                                     
@@ -580,26 +584,27 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/20/rustkong-zhi-liu/">
+                        <a href="/2025/02/22/rustji-he-lian-xi-ti/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Rust 控制流">
+                                    <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Rust集合练习题">
                                 
-                                <span class="card-title">Rust 控制流</span>
+                                <span class="card-title">Rust集合练习题</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    Rust 提供了多种控制流结构，包括 if 表达式、循环（loop、while、for）以及 match 表达式。这些结构允许你根据不同的条件执行代码。
-1. if 表达式Rust 的 if 语句不仅仅是条件判断语句，它也可以作为表达式使用
+                                     Rust 集合的练习题，涵盖了常见的数据结构如 Vec 和 HashMap 的应用，帮助加深对 Rust 的理解。
+1. 计算给定整数序列的平均数（mean）、中位数（mid）和众数（mode）以下是计算平均数、中位数和众数的代码实现：
+
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                                 <span class="publish-author">
                                     
@@ -620,26 +625,26 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/20/rusthan-shu-ru-he-gong-zuo/">
+                        <a href="/2025/02/22/rustzhong-de-ha-xi-ying-she-hash-map-/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Rust 函数如何工作">
+                                    <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Rust中的哈希映射(Hash Map)">
                                 
-                                <span class="card-title">Rust 函数如何工作</span>
+                                <span class="card-title">Rust中的哈希映射(Hash Map)</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    1. 引言在 Rust 中，函数是程序的基本构建块之一，允许我们封装一段代码，使其能够多次调用。Rust 提供了多种不同形式的函数，包括带参数和返回值的函数。理解函数的工作方式是编写 Rust 程序的基础。
-2. 定义函数Rust 中的函数
+                                    哈希映射是一个存储键值对（key-value pairs）的集合。每个键是唯一的，通过键可以快速访问对应的值。Rust 提供了标准库中的 HashMap 类型来实现哈希映射。
+1. 导入 std::collections::HashMap在
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                                 <span class="publish-author">
                                     
@@ -660,26 +665,30 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/20/rustshu-ju-lei-xing/">
+                        <a href="/2025/02/22/rustzhong-de-zi-fu-chuan-string/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Rus中的数据类型">
+                                    <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Rust中的字符串">
                                 
-                                <span class="card-title">Rus中的数据类型</span>
+                                <span class="card-title">Rust中的字符串</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    1. 引言Rust 提供了多种数据类型，用来处理不同类型的数据。Rust 是静态类型语言，在编译时每个变量的类型就会被确定。理解这些数据类型对于编写高效且安全的程序至关重要。
-2. 基本数据类型Rust 的基本数据类型可以分为标量类型和复合
+                                    Rust 中的字符串有两种主要类型：
+
+String：动态堆分配的、可变的字符串类型。
+&amp;str：不可变的字符串切片类型，通常作为对 String 的引用。
+
+Rust 通过所有权、借用等机制管理字符串内存。以下将介绍如何创建、使用
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                                 <span class="publish-author">
                                     
@@ -700,30 +709,27 @@
             
                 <div class="article col s12 m6 l4" data-aos="zoom-in">
                     <div class="card">
-                        <a href="/2025/02/20/rust-xiang-mu-jie-gou-yu-mo-kuai-xi-tong-xiang-jie/">
+                        <a href="/2025/02/22/rustzhong-de-veczhu-yi-shi-xiang/">
                             <div class="card-image">
                                 
                                     
-                                    <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Rust 项目结构与模块系统详解">
+                                    <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Rust中的Vec的一些注意事项与思考">
                                 
-                                <span class="card-title">Rust 项目结构与模块系统详解</span>
+                                <span class="card-title">Rust中的Vec的一些注意事项与思考</span>
                             </div>
                         </a>
 
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    1. 项目结构的设计当你执行 cargo new ripgrep 时，Rust 为你创建了一个 项目（crate），它默认会有两个文件：
-
-src/lib.rs：用来定义库代码的文件。
-src/main.rs：用来定义可执行程序的文件。
-
-
+                                    vec.len() 方法详解vec.len() 方法用于获取 Vec&lt;T&gt; 中的元素个数，它不会改变 vec 的所有权，也不会影响 vec 的可变性。
+fn main() {
+    let vec = vec![1, 2, 3
                                 
                             </div>
                             <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-02-22
                             </span>
                                 <span class="publish-author">
                                     
@@ -759,7 +765,7 @@ src/main.rs：用来定义可执行程序的文件。
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">6 / 12</div>
+            <div class="center-align b-text-gray">6 / 13</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -793,7 +799,7 @@ src/main.rs：用来定义可执行程序的文件。
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -945,10 +951,5 @@ src/main.rs：用来定义可执行程序的文件。
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

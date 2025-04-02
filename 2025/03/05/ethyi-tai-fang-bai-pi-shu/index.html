@@ -451,7 +451,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="3-状态转换系统"><a href="#3-状态转换系统" class="headerlink" title="3.状态转换系统"></a>3.状态转换系统</h2><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305130801729.png" alt="状态转换系统"></p>
+<h2 id="3-状态转换系统"><a href="#3-状态转换系统" class="headerlink" title="3.状态转换系统"></a>3.状态转换系统</h2><p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305130801729.png" alt="状态转换系统"></p>
 <p>从技术角度讲，诸如比特币等<strong>加密货币账本可视作一种状态转换系统</strong>，该系统有一个“状态”，由全部现存比特币的所有权状态和一个“状态转换函数”组成，状态转换函数以状态和交易为输入并输出新状态作为结果</p>
 <pre><code>APPLY(S,TX) -&gt; S' or ERROR</code></pre><p>例如，在标准的银行系统中，状态就是一个资产负债表，一笔交易是一个从A帐户向B帐户转账$X的请求，状态转换函数将从A帐户中减去$X，向B帐户增加$X。 如果A帐户的余额在第一步中小于$X，状态转换函数就会返回错误提示。 所以，可以如此定义：</p>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token function">APPLY</span><span class="token punctuation">(</span><span class="token punctuation">{</span> Alice<span class="token punctuation">:</span> $<span class="token number">50</span><span class="token punctuation">,</span> Bob<span class="token punctuation">:</span> $<span class="token number">50</span> <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token string">"send $20 from Alice to Bob"</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">{</span> Alice<span class="token punctuation">:</span> $<span class="token number">30</span><span class="token punctuation">,</span> Bob<span class="token punctuation">:</span> $<span class="token number">70</span> <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -468,7 +468,7 @@
 <li>在移除所有输入 <code>UTXO</code> 且添加所有输出 <code>UTXO</code> 后，返回 <code>S</code>。</li>
 </ol>
 <p>假设Alice想给Bob发送11.7 BTC。 首先，Alice将寻找她拥有的一组总数至少为11.7 BTC的可用UTXO。 事实上，Alice不太可能正好有11.7 BTC；假设她能得到的最小数额是6+4+2=12。 所以，她可以创建一笔有三个输入和两个输出的交易。 第一个输出为11.7 BTC，所有者是Bob的地址，第二个输出为剩下的0.3 BTC找零，所有者是Alice自己。</p>
-<h2 id="4-区块与挖矿"><a href="#4-区块与挖矿" class="headerlink" title="4.区块与挖矿"></a>4.区块与挖矿</h2><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305132724811.png" alt="区块"></p>
+<h2 id="4-区块与挖矿"><a href="#4-区块与挖矿" class="headerlink" title="4.区块与挖矿"></a>4.区块与挖矿</h2><p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305132724811.png" alt="区块"></p>
 <h3 id="1-区块"><a href="#1-区块" class="headerlink" title="1.区块"></a>1.区块</h3><p>如果我们拥有可信任的中心化服务机构，状态转换系统可以很容易地实现；可以简单地将上述功能准确编码，使用中心化服务器的硬盘来记录状态。 </p>
 <p>然而，我们想把比特币构建成去中心化货币系统，为了确保每个人都同意交易的顺序，我们需要将状态转换系统与一个共识系统结合起来。 </p>
 <p>比特币的去中心化共识进程要求网络中的节点不断尝试将交易打包成“区块”。 网络计划大约每十分钟产生一个区块，每个区块包含一个时间戳、一个随机数、一个对上一个区块的引用（即哈希）和上一区块生成以来发生的所有交易列表。 随着时间推移就创建出了一个持续增长的区块链，它不断地更新，从而能够代表比特币账本的最新状态。</p>
@@ -560,7 +560,7 @@
 <li><p><strong>攻击成功</strong>：通过这个过程，攻击者成功地通过分叉操控了交易的顺序，完成了“双重支付”，即既得到了商品，又保留了比特币。</p>
 </li>
 </ol>
-<h2 id="5-默克尔树与比特币简化支付确认（SPV）"><a href="#5-默克尔树与比特币简化支付确认（SPV）" class="headerlink" title="5.默克尔树与比特币简化支付确认（SPV）"></a>5.<strong>默克尔树与比特币简化支付确认（SPV）</strong></h2><h3 id="1-默克尔树"><a href="#1-默克尔树" class="headerlink" title="1.默克尔树"></a><strong>1.默克尔树</strong></h3><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305143501480.png" alt="默克尔树"></p>
+<h2 id="5-默克尔树与比特币简化支付确认（SPV）"><a href="#5-默克尔树与比特币简化支付确认（SPV）" class="headerlink" title="5.默克尔树与比特币简化支付确认（SPV）"></a>5.<strong>默克尔树与比特币简化支付确认（SPV）</strong></h2><h3 id="1-默克尔树"><a href="#1-默克尔树" class="headerlink" title="1.默克尔树"></a><strong>1.默克尔树</strong></h3><p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305143501480.png" alt="默克尔树"></p>
 <ul>
 <li>默克尔树是比特币区块的核心数据结构，它帮助在区块链中有效地存储和验证交易数据。</li>
 <li>区块头包含区块的元数据，如时间戳、上一个区块的哈希、以及默克尔树根的哈希。默克尔树根是通过哈希算法构建的，它代表了区块内所有交易数据的整体哈希值。</li>
@@ -616,7 +616,7 @@
 <li>未使用的 Gas 将退还给交易发起者。</li>
 </ul>
 <p>Gas 费用计算公式：</p>
-<pre><code>交易费用 = Gas 使用量 × Gas 价格</code></pre><h2 id="7-以太坊架构"><a href="#7-以太坊架构" class="headerlink" title="7. 以太坊架构"></a>7. 以太坊架构</h2><h3 id="1-以太坊状态转换函数"><a href="#1-以太坊状态转换函数" class="headerlink" title="1.以太坊状态转换函数"></a>1.以太坊状态转换函数</h3><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305144805699.png" alt="以太坊状态转换"></p>
+<pre><code>交易费用 = Gas 使用量 × Gas 价格</code></pre><h2 id="7-以太坊架构"><a href="#7-以太坊架构" class="headerlink" title="7. 以太坊架构"></a>7. 以太坊架构</h2><h3 id="1-以太坊状态转换函数"><a href="#1-以太坊状态转换函数" class="headerlink" title="1.以太坊状态转换函数"></a>1.以太坊状态转换函数</h3><p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305144805699.png" alt="以太坊状态转换"></p>
 <p>以太坊状态转换函数 <code>APPLY(S,TX) -&gt; S'</code> 可如下定义：</p>
 <ol>
 <li><p>检查交易格式是否正确（即具有正确数量的值）、签名是否有效以及 Nonce 值是否与发送者帐户中的 Nonce 值匹配。 若否，则返回错误。</p>
@@ -691,7 +691,7 @@
 <p><strong>5. EVM 的优化与挑战</strong></p>
 <p>EVM 由于其图灵完备性和灵活性，能够支持多种复杂的智能合约，但它的执行速度相对较慢，尤其在合约执行时消耗大量<code>gas</code>的情况下。此外，EVM 的资源消耗问题也是开发者需要考虑的重要因素，如何在保证安全的同时优化合约代码、减少 gas 消耗，是开发者在编写智能合约时的关键挑战之一。</p>
 <p>通过引入不同的优化技术，如 <code>JIT（即时编译）</code>和其他虚拟机优化，EVM 的执行效率有所提升，但其核心设计理念和执行模型依然是基于计算资源消耗来保证安全与去中心化的。</p>
-<h3 id="4-以太坊区块链"><a href="#4-以太坊区块链" class="headerlink" title="4.以太坊区块链"></a>4.以太坊区块链</h3><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305150630125.png" alt="以太坊区块链"></p>
+<h3 id="4-以太坊区块链"><a href="#4-以太坊区块链" class="headerlink" title="4.以太坊区块链"></a>4.以太坊区块链</h3><p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250305150630125.png" alt="以太坊区块链"></p>
 <p>以太坊区块链与比特币区块链在架构上有显著差异。与比特币不同，<strong>以太坊的区块不仅包含交易列表，还包含最新的状态副本</strong>。此外，区块中还存储了区块编号、难度等值。</p>
 <p><strong>以太坊的基本区块验证流程：</strong></p>
 <ol>
@@ -867,7 +867,7 @@ C50: (run one step of a program and record the change in storage)<span aria-hidd
 <td>52.0%</td>
 </tr>
 </tbody></table>
-<h4 id="长期供应增长率（百分比）"><a href="#长期供应增长率（百分比）" class="headerlink" title="长期供应增长率（百分比）"></a>长期供应增长率（百分比）</h4><p><a href="https://ethereum.org/content/whitepaper/ethereum-inflation.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fwhitepaper%2Fethereum-inflation.png&amp;w=1920&amp;q=75" alt="以太坊通货膨胀"></a></p>
+<h4 id="长期供应增长率（百分比）"><a href="#长期供应增长率（百分比）" class="headerlink" title="长期供应增长率（百分比）"></a>长期供应增长率（百分比）</h4><p><a href="https://ethereum.org/content/whitepaper/ethereum-inflation.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fwhitepaper%2Fethereum-inflation.png&amp;w=1920&amp;q=75" alt="以太坊通货膨胀"></a></p>
 <p><em>尽管采用了线性发行方式，然而和比特币一样，以太币的长期供应增长率也趋于零。</em></p>
 <p>上述模型提供了两个主要选项：(1) 捐赠池的存在和规模，以及 (2) 永久增长的线性供应的存在，而比特币采用了限制供应的方法。 捐赠池存在的理由如下。 如果捐赠池不存在，并且线性发行量减少到总发售量的 0.217 倍以实现相同的通货膨胀率，那么以太币总量将减少 16.5％，而每个单位的价值将增加 19.8％。 因此为了均衡，将会多发售 19.8% 的以太币，所以每个单位的价值将再次与以前完全一样。 之后，该组织还将拥有 1.198 倍的比特币，可以考虑将其分成两部分：原有的比特币和增加的 0.198 倍比特币。 因此，这种情况<em>完全等同于</em>捐赠，但有一个重要区别：该组织仅持有比特币，因而没有动力支持以太币单位的价值。</p>
 <p>永久性线性供应增长模型降低了有些人认为比特币财富过度集中的风险，并为生活在当前和未来的人提供了获取货币单位的公平机会，同时又保留了让人获取并持有以太币的强效激励措施，因为长期来看，用百分比表示的“供应增长率”将趋于零。 我们还推测，由于加密货币总是会因为不小心、死亡等原因而丢失，而加密货币的损失可以被模拟为每年总供应量的百分比，因此流通中的货币总供应量实际上最终会稳定在一个等于每年发行量除以损失率的数值上（例如，在损失率为 1% 时，一旦供应量达到 26 倍，那么每年将有 0.26 倍被开采，0.26 倍丢失，形成一个平衡点）。</p>
@@ -1179,7 +1179,7 @@ C50: (run one step of a program and record the change in storage)<span aria-hidd
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -1331,10 +1331,5 @@ C50: (run one step of a program and record the change in storage)<span aria-hidd
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

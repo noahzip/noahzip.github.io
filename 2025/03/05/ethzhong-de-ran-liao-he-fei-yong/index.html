@@ -388,7 +388,7 @@
 <h2 id="什么是燃料？"><a href="#什么是燃料？" class="headerlink" title="什么是燃料？"></a>什么是燃料？</h2><p>燃料是指在以太坊网络上执行特定操作所需的计算工作量。</p>
 <p>由于每笔以太坊交易都需要使用计算资源来执行，因此必须为这些资源付费，以确保以太坊不容易受到垃圾信息的攻击，并且不会陷入无限的计算循环。 计算费用以燃料费的形式支付。</p>
 <p>燃料费是<strong>用于执行某些操作的燃料数量，乘以每单位燃料的成本</strong>。 无论交易成功与否，都要支付燃料费。</p>
-<p><a href="https://ethereum.org/content/developers/docs/gas/gas.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fgas%2Fgas.png&amp;w=1920&amp;q=75" alt="显示以太坊虚拟机操作所需燃料的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p><a href="https://ethereum.org/content/developers/docs/gas/gas.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fgas%2Fgas.png&amp;w=1920&amp;q=75" alt="显示以太坊虚拟机操作所需燃料的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
 <p>燃料费必须用以太坊的本币支付，即以太币 (ETH)。 燃料通常以 gwei 计价，gwei 是以太币的一种计量单位。 一个 gwei 等于一个以太币的十亿分之一（0.000000001 个以太币，或 10-9 个以太币）。</p>
 <p>比如，你可以说你的燃料费是 1 gwei，而不说 0.000000001 个以太币。</p>
 <p>“Gwei” 是 “giga-wei” 的缩写，意思是 “十亿个 wei”。 一个 gwei 等于十亿个 wei。 Wei 本身（以 <a href="https://www.investopedia.com/terms/b/bmoney.asp">b-money(opens in a new tab)</a> 的发明者 <a href="https://wikipedia.org/wiki/Wei_Dai">Wei Dai(opens in a new tab)</a> 的名字命名）是以太币的最小单位。</p>
@@ -509,7 +509,7 @@
 <h3 id="实践中的燃料费计算"><a href="#实践中的燃料费计算" class="headerlink" title="实践中的燃料费计算"></a>实践中的燃料费计算</h3><p>你可以明确说明自己愿意支付多少交易执行费。 然而，大多数钱包提供商会自动设置推荐的交易费（基础费 + 推荐的优先费）来降低用户操作的复杂程度。</p>
 <h2 id="为什么存在燃料费？"><a href="#为什么存在燃料费？" class="headerlink" title="为什么存在燃料费？"></a>为什么存在燃料费？</h2><p>简而言之，燃料费有助于确保以太坊网络的安全。 在网络上执行的每次计算都需要收费，这样可以防止不良行为者给网络带来垃圾信息。 为了防止代码中出现无意或恶意的无限循环或其他计算浪费，要求每笔交易对可以采用的代码执行计算步骤设置一个限制。 基本计算单位是“燃料”。</p>
 <p>尽管交易中包含费用限制，但交易中未使用的所有燃料将退还给用户（即退还 <code>max fee - (base fee + tip)</code>）。</p>
-<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/gas-tx.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Fgas-tx.png&amp;w=1920&amp;q=75" alt="未使用燃料退还示意图"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/gas-tx.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Fgas-tx.png&amp;w=1920&amp;q=75" alt="未使用燃料退还示意图"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
 <h2 id="什么是燃料限额？"><a href="#什么是燃料限额？" class="headerlink" title="什么是燃料限额？"></a>什么是燃料限额？</h2><p>燃料限额是指你愿意在交易中消耗的最大燃料数量。 涉及<a href="https://ethereum.org/zh/developers/docs/smart-contracts/">智能合约</a>的更复杂交易需要进行更多的计算工作，因此相比简单的支付，它们需要更高的燃料限额。 标准以太币转账要求燃料限额为 21,000 单位燃料。</p>
 <p>例如，如果你对简单的以太币转账设置 50,000 单位燃料限额，以太坊虚拟机将消耗 21,000 单位，你将收到剩余的 29,000 单位。 然而，如果你设置的燃料太少，比如说，对于简单的以太币转账，设置燃料限额为 20,000 单位，以太坊虚拟机将消耗 20,000 单位燃料并尝试执行交易，但最后不会完成。 然后，以太坊虚拟机回滚所有变化，但由于验证者已经完成了价值 20k 单位燃料的工作，这些燃料就被消耗了。</p>
 <h2 id="为什么燃料费会变得如此高？"><a href="#为什么燃料费会变得如此高？" class="headerlink" title="为什么燃料费会变得如此高？"></a>为什么燃料费会变得如此高？</h2><p>燃料费高是由于以太坊广受欢迎。 如果需求量太大，用户必须提供更高的小费，力争使出价高于其他用户的交易。 小费越高，交易进入下一个区块的可能性就越大。 此外，更复杂的智能合约应用可能会执行许多操作来支持其功能，使它们消耗大量的燃料。</p>
@@ -819,7 +819,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -971,10 +971,5 @@
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

@@ -387,7 +387,7 @@
                 <p>交易是由帐户发出，带密码学签名的指令。 帐户将发起交易以更新以太坊网络的状态。 最简单的交易是将 ETH 从一个帐户转到另一个帐户。</p>
 <h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>为了帮助你更好地理解这个页面，我们建议先阅读<a href="https://ethereum.org/zh/developers/docs/accounts/">帐户</a>和我们的<a href="https://ethereum.org/zh/developers/docs/intro-to-ethereum/">以太坊简介</a>。</p>
 <h2 id="什么是交易？"><a href="#什么是交易？" class="headerlink" title="什么是交易？"></a>什么是交易？</h2><p>以太坊交易是指由外部持有帐户发起的行动，换句话说，是指由人管理而不是智能合约管理的帐户。 例如，如果 Bob 发送 Alice 1 ETH，则 Bob 的帐户必须减少 1 ETH，而 Alice 的帐户必须增加 1 ETH。 交易会造成状态的改变。</p>
-<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/tx.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Ftx.png&amp;w=1920&amp;q=75" alt="显示交易导致状态更改的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/tx.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Ftx.png&amp;w=1920&amp;q=75" alt="显示交易导致状态更改的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
 <p>改变 EVM 状态的交易需要广播到整个网络。 任何节点都可以广播在以太坊虚拟机上执行交易的请求；此后，验证者将执行交易并将由此产生的状态变化传播到网络的其他部分。</p>
 <p>交易需要付费并且必须包含在一个有效区块中。 为了使本概述更加简洁，我们将另行介绍燃料费和验证。</p>
 <p>所提交的交易包括下列信息：</p>
@@ -481,7 +481,7 @@
 <p>Alice 的帐户将会增加 <strong>+1.0 ETH</strong></p>
 <p>基础费将会燃烧 <strong>-0.00399 ETH</strong></p>
 <p>验证者获得 <strong>0.000210 个以太币</strong>的小费</p>
-<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/gas-tx.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Fgas-tx.png&amp;w=1920&amp;q=75" alt="未使用燃料退还示意图"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/transactions/gas-tx.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Ftransactions%2Fgas-tx.png&amp;w=1920&amp;q=75" alt="未使用燃料退还示意图"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
 <p>任何未用于交易的燃料都会退还给用户帐户。</p>
 <h3 id="智能合约交互"><a href="#智能合约交互" class="headerlink" title="智能合约交互"></a>智能合约交互</h3><p>任何涉及智能合约的交易都需要燃料。</p>
 <p>智能合约还可以包含被称为 <a href="https://docs.soliditylang.org/en/latest/contracts.html#view-functions"><code>view</code>(opens in a new tab)</a> 或 <a href="https://docs.soliditylang.org/en/latest/contracts.html#pure-functions"><code>pure</code>(opens in a new tab)</a> 的函数，这不会改变合约的状态。 像这样，从外部帐户调用这些函数不需要任何燃料。 这种情况下的 RPC 底层调用为 <a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/#eth_call"><code>eth_call</code></a>。</p>
@@ -792,7 +792,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -944,10 +944,5 @@
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

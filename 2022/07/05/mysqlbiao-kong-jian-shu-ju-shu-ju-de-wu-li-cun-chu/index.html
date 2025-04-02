@@ -514,9 +514,9 @@ drwxr-x---. 2 mysql mysql       4096 Jun  1 23:22 test //
 <p>很多个数据区分组（ExtendGroup），每个组中有256个数据区（Extend 256MB）,每个数据区中有64个数据页（1MB）,每个数据页中有很多数据行</p>
 </li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729104152244.png" alt="表空间结构"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729104152244.png" alt="表空间结构"></p>
 <h2 id="3-数据⾏的物理结构"><a href="#3-数据⾏的物理结构" class="headerlink" title="3.数据⾏的物理结构"></a>3.数据⾏的物理结构</h2><p>MySQL的数据⾏，有⼏种⾏格式，在创建表的时候就可以指定，这⾥我们⽤默认的COMPACT格式来讲解下⾯的东⻄；</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729141424118.png" alt="COMPACT行格式"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729141424118.png" alt="COMPACT行格式"></p>
 <h3 id="3-1-变⻓字段的存储格式："><a href="#3-1-变⻓字段的存储格式：" class="headerlink" title="3.1 变⻓字段的存储格式："></a><strong>3</strong>.<strong>1</strong> 变⻓字段的存储格式：</h3><p>我们都知道在MySQL中有⼀个数据类型是varchar(x)，这个varchar是变⻓字段，也就是说字段的⻓度不固定；</p>
 <p>（另外还有⼀些如VARBINARY(M)、TEXT、BLOG等类型的也是）那为了存储这种⻓度不固定的字段，是不是就需要额外的东⻄来记录各个字段真实的⻓度，不然你没法在物理结构上进⾏存储和读取的；也就是说这些编程字段占⽤的存储空间分为两部分：</p>
 <ul>
@@ -526,7 +526,7 @@ drwxr-x---. 2 mysql mysql       4096 Jun  1 23:22 test //
 </li>
 </ul>
 <p>在Compact⾏格式中，所有变⻓字段的真实数据占⽤的字节数都存放在开头部分，⼀起形成了⼀个变⻓字段列表：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729111612578.png" alt="变长字段列表"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729111612578.png" alt="变长字段列表"></p>
 <p><strong>这⾥为什么要逆序存储？</strong></p>
 <p>这⾥的逆序存储，是为了提⾼缓存命中率，我们可以看到每个字段与它对应的⻓度信息，在内存中的距离是更近的（当然这⾥只有位置靠前的字段）；这样可以提⾼⾼速缓存中的内存命中率；（算是⼀个⽐较巧妙的设计）</p>
 <h4 id="在这⾥做⼀个扩展："><a href="#在这⾥做⼀个扩展：" class="headerlink" title="在这⾥做⼀个扩展："></a>在这⾥做⼀个扩展：</h4><p><strong>⼤家应该都知道数组有哪些特性：</strong></p>
@@ -559,11 +559,11 @@ drwxr-x---. 2 mysql mysql       4096 Jun  1 23:22 test //
 <li>那我们是不是可以记录数组的每个元素的⻓度，然后只⽤存储特定⼤⼩的元素即可；这时，在遍历的时候就知道每个节点的⻓度（占⽤内存⼤⼩），根据每个元素的⻓度，不就可以实现访问到所有元素了吗；</li>
 </ul>
 <p>示例：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729133248673.png" alt="数组"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729133248673.png" alt="数组"></p>
 <p>其实，这⾥的扩展，也就是Redis中有⼀种数据结构，叫做压缩列表；它就是基于数组的思想，对于较⼩⻓度的字符串元素的空间进⾏压缩，也就是只分配它需要使⽤的⻓度的空间，然后增加⼀个length属性来记录每个元素的⼤⼩即可；</p>
 <h3 id="3-2-NULL值字段的存储格式："><a href="#3-2-NULL值字段的存储格式：" class="headerlink" title="3.2 NULL值字段的存储格式："></a><strong>3</strong>.<strong>2</strong> NULL值字段的存储格式：</h3><p>在MySQL中，可以让你设置允许某些字段为NULL的，这些允许设置为NULL的字段，如果未赋值，显示出来就为NULL；</p>
 <p>但是MySQL为了节约存储空间，并没有直接使⽤使⽤NULL这种字符串来存储空值的字段，⽽是直接使⽤⼆进制的bit位格式来存储；也就是⼀个bit位，代替了⾄少8个字节的存储空间；例如：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729141501575.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729141501575.png" alt="image"></p>
 <p>这样就可以根据变长字段长度列表和NULL值列表解析出有几个变长字段，有几个NULL值字段，并读取整行数据。</p>
 <h3 id="3-3-三个隐藏字段"><a href="#3-3-三个隐藏字段" class="headerlink" title="3.3 三个隐藏字段"></a><strong>3</strong>.<strong>3</strong> 三个隐藏字段</h3><p>InnoDB中，在每⾏数据⾥⾯，还会有⼀些隐藏字段，⽤来实现⼀些主键、事务、回滚等功能；分别为：</p>
 <ul>
@@ -625,9 +625,9 @@ drwxr-x---. 2 mysql mysql       4096 Jun  1 23:22 test //
 <td>列5<br><strong>6262626262</strong></td>
 </tr>
 </tbody></table>
-<h3 id="3-5-数据头（记录头）"><a href="#3-5-数据头（记录头）" class="headerlink" title="3.5 数据头（记录头）"></a><strong>3</strong>.<strong>5</strong> 数据头（记录头）</h3><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729145107252.png" alt="image"></p>
+<h3 id="3-5-数据头（记录头）"><a href="#3-5-数据头（记录头）" class="headerlink" title="3.5 数据头（记录头）"></a><strong>3</strong>.<strong>5</strong> 数据头（记录头）</h3><p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729145107252.png" alt="image"></p>
 <p>这⾥的数据头是数据⾏中⾮常重要的结构，它表示了这⾏数据的很多元数据信息，⼀共占⽤5个字节（也就是40bit位）；⾥⾯的各种属性为：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="C:%5CUsers%5Ckarakal%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220729143042383.png" alt="image"></p>
+<p><img src="C:%5CUsers%5Ckarakal%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220729143042383.png" alt="image"></p>
 <ul>
 <li><strong>两个预留位</strong>：可能就是历史原因，预留出来以防后续要使⽤的，但是没有使⽤；</li>
 <li><strong>deleted_flag</strong>：⽤来标记当前记录⾏是否被删除了；（<strong>0代表未被删除，1代表被删除</strong>）；<ul>
@@ -639,7 +639,7 @@ drwxr-x---. 2 mysql mysql       4096 Jun  1 23:22 test //
 <li><strong>min_rec_flag</strong>：这个是⽤于构建索引的，B+树中每层⾮叶⼦节点中的最⼩的⽬录项记录，会被添加这个标记（值赋为1）；在后⾯介绍索引的时候会再介绍；</li>
 <li>剩下的就放在后⾯讲数据⻚⾥⾯去融合；</li>
 </ul>
-<h2 id="4-数据⻚的物理结构"><a href="#4-数据⻚的物理结构" class="headerlink" title="4. 数据⻚的物理结构"></a><strong>4</strong>. 数据⻚的物理结构</h2><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729143409287.png" alt="数据页结构"></p>
+<h2 id="4-数据⻚的物理结构"><a href="#4-数据⻚的物理结构" class="headerlink" title="4. 数据⻚的物理结构"></a><strong>4</strong>. 数据⻚的物理结构</h2><p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729143409287.png" alt="数据页结构"></p>
 <p>这是数据⻚的结构总览，16KB⼤⼩的存储空间被划分成为了这些部分，不同部分有不同的功能；有的部分占⽤的字节数是确定的，⽽有的部分占⽤的字节数是不确定的；</p>
 <table>
 <thead>
@@ -688,7 +688,7 @@ drwxr-x---. 2 mysql mysql       4096 Jun  1 23:22 test //
 <h3 id="4-1-⽤户记录在数据⻚中的存储"><a href="#4-1-⽤户记录在数据⻚中的存储" class="headerlink" title="4.1 ⽤户记录在数据⻚中的存储"></a><strong>4</strong>.<strong>1</strong> ⽤户记录在数据⻚中的存储</h3><p>⽤户记录（数据⾏）在数据⻚中的存储格式</p>
 <p>MySQL中⽤户存储的数据⾏会按照指定的⾏格式存储到Records部分，但是在⼀开始⽣成⻚的时候，其实并没有UserRecords部分，每当插⼊⼀条记录时都会从FreeSpace部分（也就是尚未使⽤的存储空间）申请⼀个记录⼤⼩的空间，并将这个空间划分到UserRecords部分；</p>
 <p>当FreeSpace部分的空间全部被UserRecords部分替代掉之后，也就意味着这个⻚使⽤完了，此时如果还有新的记录插⼊，就需要去申请新的⻚了；</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729144835156.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729144835156.png" alt="image"></p>
 <p>为了更清晰的讲解后⾯数据⾏与数据⻚的组织构成，⽤⼀个简单的示例表举例：</p>
 <pre class="line-numbers language-MySQL"><code class="language-MySQL">mysql> CREATE TABLE page_demo(
   -> c1 INT,
@@ -701,7 +701,7 @@ drwxr-x---. 2 mysql mysql       4096 Jun  1 23:22 test //
 <pre class="line-numbers language-MySQL"><code class="language-MySQL">mysql> INSERT INTO page_demo VALUES(1, 100, 'aaaa'), (2, 200, 'bbbb'), (3, 300, 'cccc'), (4, 400, 'dddd'); 
 Query OK, 4 rows affected (0.00 sec) Records: 4 Duplicates: 0 Warnings: 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>为了⽅便⼤家分析这些记录在⻚的User Records部分中是怎么表示的，我把记录中头信息和实际的列数据都⽤⼗进制表示出来了（其实是⼀堆⼆进制位），所以这些记录的示意图就是：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729145410053.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729145410053.png" alt="image"></p>
 <p>看这个图的时候需要注意⼀下，各条记录在User Records中存储的时候并没有空隙，这⾥只是为了⼤家观看⽅便才把每条记录单独画在⼀⾏中。我们对照着这个图来看看记录头信息中的各个属性是啥意思：</p>
 <ul>
 <li><p><strong>delete_mask</strong> 这个属性标记着当前记录是否被删除，占⽤1个⼆进制位，值为0的时候代表记录并没有被删除，为1的时候代表记录被删除掉了。(将这个delete_mask位设置为1和将被删除的记录加⼊到垃圾 链表中其实是两个阶段)</p>
@@ -720,10 +720,10 @@ Query OK, 4 rows affected (0.00 sec) Records: 4 Duplicates: 0 Warnings: 0<span a
 <li><p>这其实是设计InnoDB⾃动给每个⻚⾥边⼉加了两个记录，由于这两个记录并不是我们⾃⼰插⼊的，所以有时候也称为伪记录或者虚拟记录。这两个伪记录⼀个代表最⼩记录，⼀个代表最⼤记录。</p>
 </li>
 <li><p>两条记录的构造⼗分简单，都是由5字节⼤⼩的记录头信息和8字节⼤⼩的⼀个固定的部分组成的</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729151741870.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729151741870.png" alt="image"></p>
 </li>
 <li><p>由于这两条记录不是我们⾃⼰定义的记录，所以它们并不存放在⻚的User Records部分，他们被单独放在⼀个称为Infimum + Supremum的部分</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729151910124.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729151910124.png" alt="image"></p>
 </li>
 <li><p>这两条记录也算是堆中的⼀部分，所以他们的 heap_no 最⼩，为 0， 1</p>
 </li>
@@ -747,7 +747,7 @@ Query OK, 4 rows affected (0.00 sec) Records: 4 Duplicates: 0 Warnings: 0<span a
 <li><p>下⼀条记录指得并不是按照我们插⼊顺序的下⼀条记录，⽽是按照主键值由⼩到⼤的顺序的下⼀条记录</p>
 </li>
 <li><p>⽽且规定Infimum记录（也就是最⼩记录） 的下⼀条记录就本⻚中主 键值最⼩的⽤户记录，⽽本⻚中主键值最⼤的⽤户记录的下⼀条记录就是 Supremum记录（也就是最⼤记录）</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729152054361.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729152054361.png" alt="image"></p>
 </li>
 <li><p>从图中可以看出来，我们的记录按照主键从⼩到⼤的顺序（<strong>这里体现了MySQL数据的有序性</strong>）形成了⼀个单链表（<strong>Infimum -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; Supremum</strong> ）。最⼤记录的next_record的值为0，这也就是说最⼤记录是没有下⼀条记录了，它是这个单链表中的最后⼀ 个节点。</p>
 <ul>
@@ -756,7 +756,7 @@ Query OK, 4 rows affected (0.00 sec) Records: 4 Duplicates: 0 Warnings: 0<span a
 </ul>
 </li>
 <li><p>如果从中删除掉⼀条记录，这个链表也是会跟着变化的，⽐如我们把第2条记录删掉：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729152156354.png" alt="image"> </p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729152156354.png" alt="image"> </p>
 </li>
 </ul>
 </li>
@@ -772,13 +772,13 @@ Query OK, 4 rows affected (0.00 sec) Records: 4 Duplicates: 0 Warnings: 0<span a
 </li>
 </ul>
 <p>如果我们再次把这条记录插⼊到表中，会发⽣什么事呢： </p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729154033421.png" alt="image-20220729154033421"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729154033421.png" alt="image-20220729154033421"></p>
 <p>从图中可以看到，InnoDB并没有因为新记录的插⼊⽽为它申请新的存储空间，⽽是直接<strong>复⽤了原来被删除记录的存储空间</strong></p>
 <p>所以，不论我们怎么对⻚中的记录做增删改操作，InnoDB始终会维护⼀条记录的单链表，链表中的各个节点是按照主键值由⼩到⼤的顺序连接起来的</p>
 </li>
 </ul>
 <h3 id="4-2-数据⻚中的其他属性"><a href="#4-2-数据⻚中的其他属性" class="headerlink" title="4.2 数据⻚中的其他属性"></a><strong>4</strong>.<strong>2</strong> 数据⻚中的其他属性</h3><h4 id="4-2-1-File-Header"><a href="#4-2-1-File-Header" class="headerlink" title="4.2.1 File Header"></a><strong>4</strong>.<strong>2</strong>.<strong>1</strong> File Header</h4><p>File Header通⽤于各种类型的数据⻚，也就是说各种类型的数据⻚都会以 File Header 作为第⼀个组成部分，⽤它来描述⼀些通⽤信息，占⽤固定的38 字节；由以下内容组成：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729154219782.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729154219782.png" alt="image"></p>
 <p>我觉得需要了解的就三个东⻄： </p>
 <ul>
 <li><p><strong>FIL_PAGE_OFFSET</strong>：⻚号；每个数据⻚都有⾃⼰的编号，InnoDB通过⻚号来唯⼀确定⼀个⻚； </p>
@@ -786,14 +786,14 @@ Query OK, 4 rows affected (0.00 sec) Records: 4 Duplicates: 0 Warnings: 0<span a
 <li><p><strong>FIL_PAGE_PREV</strong>：上⼀个数据⻚的⻚号；FIL_PAGE_NEXT：下⼀个数据⻚的⻚号； </p>
 </li>
 <li><p><strong>FIL_PAGE_TYPE</strong>：当前⻚的类型；InnoDB为了不同的⽬的将数据⻚分为不同的类型：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729154422969.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729154422969.png" alt="image"></p>
 <ul>
 <li>其中⽤来存放记录⾏的数据⻚类型其实就是 <strong>FIL_PAGE_INDEX</strong>，也是索引⻚</li>
 </ul>
 </li>
 </ul>
 <h4 id="4-2-2-Page-Header"><a href="#4-2-2-Page-Header" class="headerlink" title="4.2.2 Page Header"></a><strong>4</strong>.<strong>2</strong>.<strong>2</strong> Page Header</h4><p>Page Header <strong>⽤于记录存储在数据⻚中的记录的状态信息</strong>；如：数据⻚中已经存储了多少条记录、Free Space 在⻚⾯中的偏移量、⻚⽬录中存储了多少个槽等；</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729154546388.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729154546388.png" alt=""></p>
 <p>​             这些东⻄⼤概了解⼀下就⾏了，没必要去深究和记住；</p>
 <h4 id="4-2-3-Page-Directory"><a href="#4-2-3-Page-Directory" class="headerlink" title="4.2.3 Page Directory"></a><strong>4</strong>.<strong>2</strong>.<strong>3</strong> Page Directory</h4><p>Page Directory（⻚⽬录）；这个也是数据⻚中最重要的属性之⼀，<strong>它跟 Infimum + Supremum 、User Records ⼀起实现了记录⾏在数据⻚中的存储</strong>；</p>
 <p>从前⾯的介绍⾥⾯，我们应该知道了记录⾏在数据⻚中的存储格式为：Infimum+按每⾏主键ID值从⼩到⼤串联成的单向链表+Supremum；</p>
@@ -809,7 +809,7 @@ Query OK, 4 rows affected (0.00 sec) Records: 4 Duplicates: 0 Warnings: 0<span a
 <li>可以将这条记录看做这组记录的leader，<strong>它的数据头⾥⾯的n_owned属性会记录它这组⼀共有⼏条记录</strong>；</li>
 </ul>
 <p><strong>示意图：</strong></p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729155959265.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729155959265.png" alt="image"></p>
 <p><strong>InnoDB对每个分组中的记录条数</strong>是有规定的： </p>
 <ul>
 <li>对于<strong>最⼩记录所在的分组只能有 1 条记录</strong>，</li>
@@ -826,7 +826,7 @@ Query OK, 4 rows affected (0.00 sec) Records: 4 Duplicates: 0 Warnings: 0<span a
 <p>我们向表中加入了12条记录，现在就⼀共有16条正常的记录了（包括最⼩和最⼤记录），这些记录被分成了5个组，如图所示：</p>
 <pre class="line-numbers language-MySQL"><code class="language-MySQL">mysql> INSERT INTO page_demo VALUES(5, 500, 'eeee'), (6, 600, 'ffff'), (7, 700, 'gggg'), (8, 800, 'hhhh'), (9, 900, 'iiii'), (10, 1000, 'jjjj'), (11, 1100, 'kkkk'), (12, 1200, 'llll'), (13, 1300, 'mmmm'), (14, 1400, 'nnnn'), (15, 1500, 'oooo'), (16, 1600, 'pppp'); 
 Query OK, 12 rows affected (0.00 sec) Records: 12 Duplicates: 0 Warnings: 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="C:%5CUsers%5Ckarakal%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220729160357368.png" alt="image-20220729160357368"></p>
+<p><img src="C:%5CUsers%5Ckarakal%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220729160357368.png" alt="image-20220729160357368"></p>
 </li>
 </ul>
 <p>那设计了slot之后，⼜<strong>怎么来对数据⻚中的记录⾏进⾏查找</strong>呢？ </p>
@@ -1163,7 +1163,7 @@ Query OK, 12 rows affected (0.00 sec) Records: 12 Duplicates: 0 Warnings: 0<span
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -1315,10 +1315,5 @@ Query OK, 12 rows affected (0.00 sec) Records: 12 Duplicates: 0 Warnings: 0<span
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

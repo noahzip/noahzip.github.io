@@ -443,7 +443,7 @@
 <li>其他客户端通过区块广播协议接收提议的区块，并如上所述进行验证（共识对等网络）</li>
 </ul>
 <p>区块被足够多的验证者认证后，就会被添加到链头，经过合理化并最终确定。</p>
-<p><a href="https://ethereum.org/content/developers/docs/networking-layer/cons_client_net_layer.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fcons_client_net_layer.png&amp;w=1920&amp;q=75" alt="img"></a><a href="https://ethereum.org/content/developers/docs/networking-layer/exe_client_net_layer.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fexe_client_net_layer.png&amp;w=1920&amp;q=75" alt="img"></a></p>
+<p><a href="https://ethereum.org/content/developers/docs/networking-layer/cons_client_net_layer.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fcons_client_net_layer.png&amp;w=1920&amp;q=75" alt="img"></a><a href="https://ethereum.org/content/developers/docs/networking-layer/exe_client_net_layer.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fexe_client_net_layer.png&amp;w=1920&amp;q=75" alt="img"></a></p>
 <p>共识客户端和执行客户端的网络层示意图，取自 <a href="https://ethresear.ch/t/eth1-eth2-client-relationship/7248">ethresear.ch(opens in a new tab)</a></p>
 <h2 id="网络地址"><a href="#网络地址" class="headerlink" title="网络地址"></a>网络地址</h2><p>以太坊节点必须用一些基本信息来表明身份，才能连接到其他节点。 为了确保任何潜在对等点能够解析这些信息，它以任何以太坊节点能够理解的三种标准化格式之一进行传递：multiadder、enode 或以太坊节点记录 (ENR)。 以太坊节点记录是以太坊网络地址的现行标准。</p>
 <h3 id="MULTIADDR"><a href="#MULTIADDR" class="headerlink" title="MULTIADDR"></a>MULTIADDR</h3><p>原始以太坊节点地址格式为“multiaddr”（“多地址”的缩写）。 Multiaddr 是一种通用格式，用于对等网络。 地址以键值对表示，键与值之间用正斜杠隔开。 例如，使用 IPv4 地址 <code>192.168.22.27</code> 监听 TCP 端口 <code>33000</code> 的节点可能具有以下类似的 multiaddr：</p>
@@ -460,7 +460,7 @@
 <p>这意味着运行节点的成本相当昂贵，因为大量的磁盘空间必须专门给以太坊使用。 以太坊路线图上针对这个问题有几种解决方案，包括<a href="https://ethereum.org/zh/roadmap/statelessness/#history-expiry">历史数据到期</a>、<a href="https://ethereum.org/zh/roadmap/statelessness/#state-expiry">状态数据到期</a>和<a href="https://ethereum.org/zh/roadmap/statelessness/">无状态性</a>。 但是，这些方案很可能要好几年才能实现。 还有不自己保存链数据副本的<a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/light-clients/">轻节点</a>，它们从全节点请求需要的数据。 然而，这意味着轻节点必须信任全节点会提供诚实的数据，并会给全节点带来压力，它们不得不提供轻节点所需的数据。</p>
 <p>门户网络旨在提供一种可选方案，让轻节点无需信任全节点或者不会让全节点显著增加工作量，就可以获得需要的数据。 其运作原理是为以太坊节点引入了一种在整个网络中分享数据的新方式。</p>
 <h3 id="门户网络如何运作？"><a href="#门户网络如何运作？" class="headerlink" title="门户网络如何运作？"></a>门户网络如何运作？</h3><p>以太坊节点有着严格的协议，协议定义节点如何相互通信。 执行客户端使用一组子协议 <a href="https://ethereum.org/zh/developers/docs/networking-layer/#devp2p">DevP2P</a> 通信，而共识客户端使用一组不同的子协议 <a href="https://ethereum.org/zh/developers/docs/networking-layer/#libp2p">libP2P</a>。 这些子协议定义了可以在节点间传送的数据类型。</p>
-<p><a href="https://ethereum.org/content/developers/docs/networking-layer/portal-network/portal-network-devp2p-libp2p.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fportal-network%2Fportal-network-devp2p-libp2p.png&amp;w=1920&amp;q=75" alt="devP2P 和 libP2P"></a></p>
+<p><a href="https://ethereum.org/content/developers/docs/networking-layer/portal-network/portal-network-devp2p-libp2p.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fnetworking-layer%2Fportal-network%2Fportal-network-devp2p-libp2p.png&amp;w=1920&amp;q=75" alt="devP2P 和 libP2P"></a></p>
 <p>节点还能通过 <a href="https://ethereum.org/zh/developers/docs/apis/json-rpc/">JSON-RPC 应用程序接口</a>提供特定数据，这就是应用程序和钱包与以太坊节点交换信息的方式。 但是，这些都不是为轻客户端提供数据的理想协议。</p>
 <p>轻客户端目前不能通过 DevP2P 或 libP2p 请求特定的链数据，因为这些协议只用于支持链同步和区块与交易的传播。 轻客户端不想要下载这类信息，因为那将无法让它们保持“轻量”。</p>
 <p>JSON-RPC 也不是轻客户端请求数据的理想选择，因为它必须要连接到能够提供数据的特定全节点或中心化远程过程调用提供者。 这意味着轻客户端必须信任特定节点或提供者是诚实的，并且全节点很可能不得不处理来自许多轻客户端的大量请求，这提高了它们对带宽的要求.</p>
@@ -828,7 +828,7 @@ EIP-4844 二进制大对象
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -980,10 +980,5 @@ EIP-4844 二进制大对象
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

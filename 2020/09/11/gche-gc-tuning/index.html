@@ -448,14 +448,14 @@ Java: new ？
 <li>MajorGC = FGC</li>
 </ol>
 </li>
-<li><p>对象分配过程图<br><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3.png" alt=""></p>
+<li><p>对象分配过程图<br><img src="%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3.png" alt=""></p>
 </li>
 <li><p>动态年龄：（不重要）<br><a href="https://www.jianshu.com/p/989d3b06a49d">https://www.jianshu.com/p/989d3b06a49d</a></p>
 </li>
 <li><p>分配担保：（不重要）<br>YGC期间 survivor区空间不够了 空间担保直接进入老年代<br>参考：<a href="https://cloud.tencent.com/developer/article/1082730">https://cloud.tencent.com/developer/article/1082730</a></p>
 </li>
 </ol>
-<h4 id="5-常见的垃圾回收器"><a href="#5-常见的垃圾回收器" class="headerlink" title="5.常见的垃圾回收器"></a>5.常见的垃圾回收器</h4><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="%E5%B8%B8%E7%94%A8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8.png" alt="常用垃圾回收器"></p>
+<h4 id="5-常见的垃圾回收器"><a href="#5-常见的垃圾回收器" class="headerlink" title="5.常见的垃圾回收器"></a>5.常见的垃圾回收器</h4><p><img src="%E5%B8%B8%E7%94%A8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8.png" alt="常用垃圾回收器"></p>
 <ol>
 <li>垃圾回收器的发展路线，是随着内存越来越大的过程而演进<br>从分代算法演化到不分代算法<br>Serial算法 几十兆<br>Parallel算法 几个G<br>CMS 几十个G  - 承上启下，开始并发回收 -<br>.- 三色标记 - </li>
 <li>JDK诞生 Serial追随 提高效率，诞生了PS，为了配合CMS，诞生了PN，CMS是1.4版本后期引入，CMS是里程碑式的GC，它开启了并发回收的过程，但是CMS毛病较多，因此目前任何一个JDK版本默认是CMS<br>并发垃圾回收是因为无法忍受STW</li>
@@ -554,11 +554,11 @@ Java: new ？
 </ol>
 <h3 id="PS-GC日志详解"><a href="#PS-GC日志详解" class="headerlink" title="PS GC日志详解"></a>PS GC日志详解</h3><p>每种垃圾回收器的日志格式是不同的！</p>
 <p>PS日志格式</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="./GC%E6%97%A5%E5%BF%97%E8%AF%A6%E8%A7%A3.png" alt="GC日志详解"></p>
+<p><img src="./GC%E6%97%A5%E5%BF%97%E8%AF%A6%E8%A7%A3.png" alt="GC日志详解"></p>
 <p>heap dump部分：</p>
 <pre class="line-numbers language-java"><code class="language-java">eden space 5632K<span class="token punctuation">,</span> <span class="token number">94</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff980000</span><span class="token punctuation">,</span><span class="token number">0x00000000ffeb3e28</span><span class="token punctuation">,</span><span class="token number">0x00000000fff00000</span><span class="token punctuation">)</span>
                             后面的内存地址指的是，起始地址，使用空间结束地址，整体空间结束地址<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="GCHeapDump.png" alt="GCHeapDump"></p>
+<p><img src="GCHeapDump.png" alt="GCHeapDump"></p>
 <p>total = eden + 1个survivor</p>
 <h3 id="调优前的基础概念："><a href="#调优前的基础概念：" class="headerlink" title="调优前的基础概念："></a>调优前的基础概念：</h3><ol>
 <li>吞吐量：用户代码时间 /（用户代码执行时间 + 垃圾回收时间）</li>
@@ -1387,7 +1387,7 @@ public class T01_ThreadVisibility {
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -1539,10 +1539,5 @@ public class T01_ThreadVisibility {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

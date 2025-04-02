@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ethers-rs之构建以太坊项目, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="本节介绍如何使用 ethers-rs（一个Rust语言的以太坊库）初始化新项目、配置传输方式，并连接到以太坊节点。通过 ethers-rs，开发者可以与以太坊区块链交互，例如查询区块号、发送交易或调用智能合约。本文档将逐步讲解设置过程，并为">
+    <meta name="keywords" content="Solana高级概念之状态压缩, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Solana 状态压缩是一种在链上存储链下数据指纹（哈希）并用于安全验证的方法。有效利用 Solana 账本的安全性来验证链下数据的完整性，确保其未被篡改。
+通过状态压缩, Solana 程序和 dApp 能够以较低的成本使用链上存储空间来">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="white"/>
-    <title>ethers-rs之构建以太坊项目 | Sparks Fly</title>
+    <title>Solana高级概念之状态压缩 | Sparks Fly</title>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -209,12 +210,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ethers-rs之构建以太坊项目</h1>
+                    <h1 class="description center-align post-title">Solana高级概念之状态压缩</h1>
                 </div>
             </div>
         </div>
@@ -351,28 +352,28 @@
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                        2025-03-07
+                        2025-03-09
                     </div>
                 
 
                 
                     <div class="post-date info-break-policy">
                         <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
-                        2025-03-07
+                        2025-03-09
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1k
+                        3.1k
                     </div>
                 
 
                 
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        11 分
                     </div>
                 
 
@@ -382,124 +383,109 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本节介绍如何使用 <code>ethers-rs</code>（一个Rust语言的以太坊库）初始化新项目、配置传输方式，并连接到以太坊节点。通过 <code>ethers-rs</code>，开发者可以与以太坊区块链交互，例如查询区块号、发送交易或调用智能合约。本文档将逐步讲解设置过程，并为代码添加详细注释。</p>
-<hr>
-<h2 id="1-初始化新项目"><a href="#1-初始化新项目" class="headerlink" title="1. 初始化新项目"></a>1. 初始化新项目</h2><p>要使用 <code>ethers-rs</code> 创建以太坊项目，首先需要安装Rust工具链并初始化项目。以下是详细步骤：</p>
-<h3 id="1-1-安装Rust"><a href="#1-1-安装Rust" class="headerlink" title="1.1 安装Rust"></a>1.1 安装Rust</h3><ul>
-<li><p><strong>步骤</strong>：通过 <a href="https://www.rust-lang.org/tools/install">Rust 安装指南</a> 安装Rust和Cargo包管理器。</p>
-</li>
-<li><p>验证：安装完成后，运行以下命令检查版本：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">rustc --version cargo --version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-</ul>
-<h3 id="1-2-创建新项目"><a href="#1-2-创建新项目" class="headerlink" title="1.2 创建新项目"></a>1.2 创建新项目</h3><ul>
-<li><p>命令：运行以下命令生成新项目：</p>
-<pre class="line-numbers language-sh"><code class="language-sh"># 创建名为 my-project 的新Rust项目 
-cargo new my-project`<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-</ul>
+                <p>Solana 状态压缩是一种在链上存储链下数据指纹（哈希）并用于安全验证的方法。有效利用 Solana 账本的安全性来验证链下数据的完整性，确保其未被篡改。</p>
+<p>通过状态压缩, Solana 程序和 dApp 能够以较低的成本使用链上存储空间来安全存储数据，而不是昂贵的账户空间。</p>
+<p>这种压缩方法采用了一种特殊的二叉树结构（称为并发默克尔树）来创建每条数据（称为叶子）的哈希值，并将这些哈希值相互连接，最终只将根哈希值存储在链上。</p>
+<h2 id="什么是状态压缩？"><a href="#什么是状态压缩？" class="headerlink" title="什么是状态压缩？"></a>什么是状态压缩？</h2><p>状态压缩使用树形结构以确定性方式将链下数据加密地散列在一起，以计算最终的链上哈希值。</p>
+<p>这些树是通过以下过程创建的：</p>
 <ul>
-<li><p>结果：</p>
+<li>获取任何数据</li>
+<li>创建此数据的哈希值</li>
+<li>将此哈希值存储为树底部的叶子 <code>leaf</code></li>
+<li>然后将每个叶子对散列在一起，创建分支 <code>branch</code>节点</li>
+<li>然后将每个分支节点哈希在一起</li>
+<li>并将相邻的分支哈希在一起</li>
+<li>不断重复此过程，直到到达树的顶部，得到最终的根哈希 <code>root hash</code></li>
+</ul>
+<p>然后，将该根哈希存储在链上，作为链下数据完整性的验证证明。这使得任何人都能以加密方式验证所有链下数据的完整性，同时实际上只在链上存储了最少量的数据。因此，通过状态压缩，大大降低了存储和验证大量数据的成本。</p>
+<h2 id="默克尔树和并发默克尔树"><a href="#默克尔树和并发默克尔树" class="headerlink" title="默克尔树和并发默克尔树"></a>默克尔树和并发默克尔树</h2><p>Solana 的状态压缩使用了一种特殊类型的默克尔树，它允许对树进行多次更改，同时仍然保持树的完整性和有效性。</p>
+<p>这种特殊的树，被称为“并发默克尔树”，有效地在链上保留了树的“变更日志”。允许对同一棵树进行多次快速更改（即所有更改都在同一块中）, 直到证明失效。</p>
+<h3 id="什么是默克尔树？"><a href="#什么是默克尔树？" class="headerlink" title="什么是默克尔树？"></a>什么是默克尔树？</h3><p>Merkle 树，有时称为“哈希树”，是一种基于哈希的二叉树结构，其中每个叶节点都表示为其内部数据的加密哈希。每个非叶子节点（称为分支）都表示为其子叶子哈希的哈希。</p>
+<p>然后，每个分支也被散列在一起，一直到树的根节点，最终只剩下一个散列。这个最终的哈希值称为根哈希值或“根”，然后可以与“证明路径”结合使用来验证叶节点中存储的任何数据。</p>
+<p>通过重新哈希特定叶子的数据并沿着树的每个相邻分支散列（称为证明路径）来验证叶节点中存储的任何数据。将此“重新散列”与根散列进行比较是对底层叶数据的验证。如果它们匹配，则数据被验证为准确。如果不匹配，则叶数据已更改。</p>
+<p>无论何时需要，都可以通过简单地散列新叶数据并以与原始根相同的方式重新计算根散列来改变原始叶数据。然后使用这个新的根哈希来验证任何数据，并有效地使先前的根哈希和先前的证明无效。因此，对这些传统 merkle 树的每次改变都需要串行执行。</p>
+<blockquote>
+<p>INFO<br>使用 Merkle 树时，更改叶数据和计算新的根哈希的过程可能非常常见！虽然这是树的设计点之一，但它可能导致最明显的缺点之一：快速变化。</p>
+</blockquote>
+<h3 id="什么是并发默克尔树？"><a href="#什么是并发默克尔树？" class="headerlink" title="什么是并发默克尔树？"></a>什么是并发默克尔树？</h3><p>在 Solana 上，验证者可以在同一槽内接收到多个对传统 Merkle 树的更改请求。然而，每个叶数据更改仍然需要串行执行。这样的串行执行会导致在相同槽内对同一棵树进行多次更改的请求失败，因为前一个更改会使根哈希和证明无效。</p>
+<p>并发默克尔树解决了这个问题，它存储了最近的更改日志、根哈希以及生成该根哈希的证明。这个变更日志缓冲区存储在链上特定于每棵树的账户中，其大小由最大数量的变更日志记录（也称为 <code>maxBufferSize</code>）确定。</p>
+<p>当验证者在同一槽内接收到多个叶数据更改请求时，链上的并发默克尔树可以使用这个“变更日志缓冲区”作为更可接受的证明来源。这有效地允许在同一槽内对同一棵树进行最多 <code>maxBufferSize</code> 次的更改，从而显著提高了吞吐量。</p>
+<h3 id="调整并发默克尔树的大小"><a href="#调整并发默克尔树的大小" class="headerlink" title="调整并发默克尔树的大小"></a>调整并发默克尔树的大小</h3><p>在创建并发默克尔树时，有 3 个值将决定树的大小、创建树的成本以及树的并发更改数量：</p>
+<ol>
+<li><code>max depth</code> 最大深度</li>
+<li><code>max buffer size</code> 最大缓冲区大小</li>
+<li><code>canopy depth</code> 冠层深度</li>
+</ol>
+<h3 id="最大深度"><a href="#最大深度" class="headerlink" title="最大深度"></a>最大深度</h3><p>树的“最大深度”是从任何数据叶到树根的最大跳数。</p>
+<p>由于默克尔树是二叉树，因此每个叶子仅与另一个叶子相连；作为一对叶存在。</p>
+<p>因此，树的 <code>maxDepth</code> 用于通过简单的计算来确定要在树中存储的节点（也称为数据块或叶子）的最大数量：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">nodes_count <span class="token operator">=</span> <span class="token number">2</span> <span class="token operator">^</span> maxDepth<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>由于必须在创建树时设置树深度，因此必须决定希望树存储多少数据。然后使用上面的简单计算，确定存储数据的最低 <code>maxDepth</code>。</p>
+<h4 id="示例-1：铸造-100-nfts"><a href="#示例-1：铸造-100-nfts" class="headerlink" title="示例 1：铸造 100 nfts"></a>示例 1：铸造 100 nfts<a href="https://www.solana-cn.com/SolanaDocumention/advanced/state-compression.html#示例-1-铸造-100-nfts"></a></h4><p>如果想创建一棵树来存储 100 个压缩的 nft，至少需要“100 个叶子”或“100 个节点”。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// maxDepth=6 -> 64 nodes2^6 = 64</span>
+<span class="token comment" spellcheck="true">// maxDepth=7 -> 128 nodes2^7 = 128</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>必须使用 maxDepth 7 以确保我们可以存储所有数据。</p>
+<h4 id="示例-2：铸造-15000-nfts"><a href="#示例-2：铸造-15000-nfts" class="headerlink" title="示例 2：铸造 15000 nfts"></a>示例 2：铸造 15000 nfts<a href="https://www.solana-cn.com/SolanaDocumention/advanced/state-compression.html#示例-2-铸造-15000-nfts"></a></h4><p>如果想创建一棵树来存储 15000 个压缩的 nft，至少需要“15000 个叶子”或“15000 个节点”。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// maxDepth=13 -> 8192 nodes2^13 = 8192</span>
+<span class="token comment" spellcheck="true">// maxDepth=14 -> 16384 nodes2^14 = 16384</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>必须使用 maxDepth 14 以确保可以存储所有数据。</p>
+<h4 id="最大深度越高，成本越高"><a href="#最大深度越高，成本越高" class="headerlink" title="最大深度越高，成本越高"></a>最大深度越高，成本越高</h4><p>最大深度是创建并发默克尔树时的一个关键因素，因为它直接影响到树的存储能力和成本。较高的最大深度意味着树可以存储更多的数据指纹（或哈希），但也会增加创建树的成本。</p>
+<h3 id="最大缓冲区大小"><a href="#最大缓冲区大小" class="headerlink" title="最大缓冲区大小"></a>最大缓冲区大小</h3><p>最大缓冲区大小确定了树上可以发生的最大更改数量，而不会使根哈希无效。</p>
+<p>由于根哈希实际上是所有叶子数据的单个哈希，因此更改任何单个叶子都会使更改常规树的任何叶子的所有后续尝试所需的证明无效。</p>
+<p>但对于并发树，实际上存在这些证明的更新的变更日志。该变更日志缓冲区的大小是在树创建时通过 <code>maxBufferSize</code> 值进行调整和设置的。</p>
+<h3 id="冠层深度"><a href="#冠层深度" class="headerlink" title="冠层深度"></a>冠层深度</h3><p>冠层深度（或树冠大小）是指在链上缓存或存储的证明节点的数量。</p>
+<p>当对叶子执行更新操作时，例如转让所有权（例如出售压缩的 NFT），必须使用完整的证明路径来验证叶子的原始所有权，从而允许更新操作。此验证是使用完整的证明路径来正确计算当前根哈希（或通过链上“并发缓冲区”的任何缓存根哈希）来执行的。</p>
+<p>树的最大深度越大，执行此验证所需的证明节点就越多。例如，如果最大深度为 14，则总共需要使用 14 个证明节点来进行验证。随着树变得越来越大，完整的证明路径也变得越来越大。</p>
+<p>通常，每个证明节点都需要包含在每个树更新交易中。由于每个证明节点值在事务中占用 32 个字节（类似于提供公钥），因此较大的树将很快超过最大事务大小限制。</p>
+<p>进入 canopy。 Canopy 能够在链上存储一定数量的证明节点（对于任何给定的证明路径）。允许在每个更新交易中包含较少的证明节点，从而使总体交易大小保持在限制以下。</p>
+<p>例如，最大深度为 14 的树总共需要 14 个证明节点。如果 canopy 为 10，则每个更新交易只需要提交 4 个证明节点。</p>
+<h4 id="冠层深度值越大，成本越高"><a href="#冠层深度值越大，成本越高" class="headerlink" title="冠层深度值越大，成本越高"></a>冠层深度值越大，成本越高</h4><p><code>canopyDepth</code> 值也是创建树时的主要成本因素，因为将在创建树时预先支付此成本。 Canopy 深度越高，链上存储的数据证明节点越多，成本越高。</p>
+<h4 id="较小的冠层限制了可组合性"><a href="#较小的冠层限制了可组合性" class="headerlink" title="较小的冠层限制了可组合性"></a>较小的冠层限制了可组合性</h4><p>尽管树的冠层越高，创建成本就越高，但较小的冠层深度意味着每个更新事务需要包含更多的证明节点。随着需要提交的节点数量增加，交易规模也会增大，因此更容易超出交易规模限制。</p>
+<p>这不仅对树和叶子交互的 Solana 程序或 dApp 产生影响，对于任何试图与树/叶子进行交互的其他 Solana 程序或 dApp 也是如此。如果树需要太多的证明节点（由于较小的冠层深度），那么其他链上程序可以提供的任何额外操作都将受到指令大小以及证明节点列表大小的限制。这限制了可组合性，并可能限制了特定树的附加实用性。</p>
+<p>例如，如果树用于压缩 NFT 并且树冠深度非常低，则 NFT 市场可能只能支持简单的 NFT 传输。并且无法支持链上竞价系统或其他复杂功能。</p>
+<h2 id="创建一棵树的成本"><a href="#创建一棵树的成本" class="headerlink" title="创建一棵树的成本"></a>创建一棵树的成本</h2><p>创建并发默克尔树的成本基于树的大小参数：<code>maxDepth</code>、<code>maxBufferSize</code> 和 <code>canopyDepth</code>。这些值都用于计算树存在于链上所需的链上存储（以字节为单位）。</p>
+<p>一旦计算出所需的空间（以字节为单位），并使用 <code>getMinimumBalanceForRentExemption</code> RPC 方法，请求在链上分配此字节数的成本（以 lamports 为单位）。</p>
+<h3 id="在-JavaScript-中计算树成本"><a href="#在-JavaScript-中计算树成本" class="headerlink" title="在 JavaScript 中计算树成本"></a>在 JavaScript 中计算树成本</h3><p>在 <code>@solana/spl-account-compression</code> 包中，开发人员可以使用 <code>getConcurrentMerkleTreeAccountSize</code> 函数来计算给定树大小参数所需的空间。</p>
+<p>然后使用 <code>getMinimumBalanceForRentExemption</code> 函数获取为链上树分配所需空间的最终成本（以 lamports 为单位）。</p>
+<p>然后确定 lamports 的成本，以使此规模的帐户免租金，类似于任何其他帐户创建。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// 计算树空间</span>
+<span class="token keyword">const</span> requiredSpace <span class="token operator">=</span> <span class="token function">getConcurrentMerkleTreeAccountSize</span><span class="token punctuation">(</span>
+  maxDepth<span class="token punctuation">,</span>
+  maxBufferSize<span class="token punctuation">,</span>
+  canopyDepth
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 获取链上存储花费</span>
+<span class="token keyword">const</span> storageCost <span class="token operator">=</span> <span class="token keyword">await</span> connection<span class="token punctuation">.</span><span class="token function">getMinimumBalanceForRentExemption</span><span class="token punctuation">(</span>
+  requiredSpace
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="成本示例"><a href="#成本示例" class="headerlink" title="成本示例"></a>成本示例</h3><p>下面列出了不同树大小的几个示例成本，包括每个树可能有多少个叶节点：</p>
+<p><strong>示例 #1：16,384 个节点，成本为 0.222 SOL</strong></p>
 <ul>
-<li>生成 <code>my-project</code>目录，包含：<ul>
-<li><code>Cargo.toml</code>：项目配置文件。</li>
-<li><code>src/main.rs</code>：主代码文件。</li>
+<li>最大深度为 14，最大缓冲区大小为 64</li>
+<li>最大叶节点数：16,384</li>
+<li>创建树冠深度为 0 的成本约为 0.222 SOL</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3-添加依赖"><a href="#1-3-添加依赖" class="headerlink" title="1.3 添加依赖"></a>1.3 添加依赖</h3><ul>
-<li><p><strong>步骤</strong>：进入项目目录 my-project，编辑 <code>Cargo.toml</code>，相关依赖。</p>
-</li>
-<li><p>基础依赖配置：</p>
-<pre class="line-numbers language-toml"><code class="language-toml">[dependencies]
-ethers = "2.0"                    # ethers-rs核心库，提供与以太坊交互的功能
-tokio = { version = "1", features = ["macros"] }  # Tokio异步运行时，启用 macros 特性以支持异步宏 [tokio::main]
-eyre = "0.6"                      # 用于简洁的错误处理<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>从GitHub引用最新版本（可选）：</p>
-<pre class="line-numbers language-toml"><code class="language-toml">[dependencies]
-ethers = { git = "https://github.com/gakonst/ethers-rs" }  # 从GitHub主分支拉取最新代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><p>指定分支或提交：</p>
-<pre class="line-numbers language-toml"><code class="language-toml">[dependencies]
-ethers = { git = "https://github.com/gakonst/ethers-rs", branch = "branch-name" }  # 指定分支
-ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "84dda78" }        # 指定提交哈希<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
+<p><strong>示例 #2：16,384 个节点，成本 1.134 SOL</strong></p>
 <ul>
-<li><p>注意事项：</p>
+<li>最大深度为 14，最大缓冲区大小为 64</li>
+<li>最大叶节点数：16,384</li>
+<li>树冠深度 11 的创建成本约为 1.134 SOL</li>
+</ul>
+<p><strong>示例 #3：1,048,576 个节点，花费 1.673 SOL</strong></p>
 <ul>
-<li>使用Git依赖可能导致版本不稳定，生产环境建议使用固定版本号（如 “2.0”）以确保可复现性。</li>
+<li>最大深度为 20，最大缓冲区大小为 256</li>
+<li>最大叶节点数：1,048,576</li>
+<li>创建深度为 10 的树冠大约需要 1.673 SOL</li>
 </ul>
-</li>
-</ul>
-<hr>
-<h2 id="2-启用不同的传输方式"><a href="#2-启用不同的传输方式" class="headerlink" title="2. 启用不同的传输方式"></a>2. 启用不同的传输方式</h2><p><code>ethers-rs</code> 支持多种与以太坊节点通信的传输协议，包括<code>HTTP(S)</code>、<code>WebSocket</code>和<code>IPC</code>。需要在 <code>Cargo.toml</code> 中启用相应特性。</p>
-<h3 id="1-HTTP-S"><a href="#1-HTTP-S" class="headerlink" title="1. HTTP(S)"></a>1. HTTP(S)</h3><ul>
-<li><p><strong>描述</strong>：通过HTTP或HTTPS与以太坊节点通信，适用于大多数远程节点。</p>
-</li>
-<li><p><strong>配置</strong>：启用 <code>rustls</code>（推荐）或 <code>openssl</code> 特性：</p>
-<pre class="line-numbers language-toml"><code class="language-toml">[dependencies]
-ethers = { version = "2.0", features = ["rustls"] }  # 使用rustls进行HTTPS支持<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<h3 id="2-WebSocket"><a href="#2-WebSocket" class="headerlink" title="2.WebSocket"></a>2.WebSocket</h3><ul>
-<li><p><strong>描述</strong>：支持双向通信，适合实时订阅事件或交易。</p>
-</li>
-<li><p><strong>配置</strong>：</p>
-<pre class="line-numbers language-toml"><code class="language-toml">[dependencies]
-ethers = { version = "2.0", features = ["ws"] }  # 启用WebSocket支持<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<h3 id="3-IPC（进程间通信）"><a href="#3-IPC（进程间通信）" class="headerlink" title="3.IPC（进程间通信）"></a>3.IPC（进程间通信）</h3><ul>
-<li><p><strong>描述</strong>：用于与本地以太坊节点（如<code>Geth</code>）通信，效率高。</p>
-</li>
-<li><p><strong>配置</strong>：</p>
-<pre class="line-numbers language-toml"><code class="language-toml">[dependencies]
-ethers = { version = "2.0", features = ["ipc"] }  # 启用IPC支持<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<hr>
-<h2 id="3-连接到以太坊节点"><a href="#3-连接到以太坊节点" class="headerlink" title="3. 连接到以太坊节点"></a>3. 连接到以太坊节点</h2><p><code>ethers-rs</code> 通过<code>Provider（提供者）</code>与以太坊节点交互，提供者封装了<code>JSON-RPC</code>请求和响应。支持的功能包括：</p>
+<p><strong>示例 #4：1,048,576 个节点，花费 15.814 SOL</strong></p>
 <ul>
-<li><strong>查询当前区块号</strong>。</li>
-<li><strong>获取账户余额</strong>。</li>
-<li><strong>发送交易</strong>。</li>
-<li><strong>调用智能合约</strong>。</li>
-<li><strong>订阅事件日志</strong>。</li>
+<li>最大深度为 20，最大缓冲区大小为 256</li>
+<li>最大叶节点数：1,048,576</li>
+<li>树冠深度 15 的创建成本约为 15.814 SOL</li>
 </ul>
-<h3 id="3-1-示例代码：使用-Provider-获取区块号"><a href="#3-1-示例代码：使用-Provider-获取区块号" class="headerlink" title="3.1 示例代码：使用 Provider 获取区块号"></a>3.1 示例代码：使用 Provider 获取区块号</h3><p>以下是完整代码，展示了如何连接到以太坊节点并查询当前区块号：</p>
-<p>rust</p>
-<p>收起自动换行复制</p>
-<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 引入ethers库的预定义模块，包含常用类型和函数</span>
-<span class="token keyword">use</span> ethers<span class="token punctuation">:</span><span class="token punctuation">:</span>prelude<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">*</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// 定义以太坊节点的RPC URL常量，使用公开的HTTP端点</span>
-<span class="token keyword">const</span> RPC_URL<span class="token punctuation">:</span> <span class="token operator">&amp;</span>str <span class="token operator">=</span> <span class="token string">"https://eth.llamarpc.com"</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// 使用tokio异步运行时，主函数标记为异步</span>
-<span class="token attribute attr-name">#[tokio::main]</span>
-async <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Box<span class="token operator">&lt;</span>dyn std<span class="token punctuation">:</span><span class="token punctuation">:</span>error<span class="token punctuation">:</span><span class="token punctuation">:</span>Error<span class="token operator">>></span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 创建HTTP提供者，连接到指定RPC URL</span>
-    <span class="token comment" spellcheck="true">// try_from尝试将URL解析为Provider，失败则返回错误</span>
-    <span class="token keyword">let</span> provider <span class="token operator">=</span> Provider<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">&lt;</span>Http<span class="token operator">></span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">try_from</span><span class="token punctuation">(</span>RPC_URL<span class="token punctuation">)</span>?<span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">// 调用get_block_number方法，异步获取当前区块号</span>
-    <span class="token comment" spellcheck="true">// 返回类型为U64（ethers定义的64位无符号整数）</span>
-    <span class="token keyword">let</span> block_number<span class="token punctuation">:</span> U64 <span class="token operator">=</span> provider<span class="token punctuation">.</span><span class="token function">get_block_number</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>await?<span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">// 打印区块号</span>
-    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Current block number: {}"</span><span class="token punctuation">,</span> block_number<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">// 返回Ok表示成功执行</span>
-    <span class="token function">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
-<li><strong>错误处理</strong>：使用 <code>Box&lt;dyn std::error::Error&gt;</code>简化错误类型，生产环境中可细化为具体错误。</li>
-<li><strong>网络依赖</strong>：需确保<code>RPC URL</code>可用，可替换为其他节点（如<code>Infura</code>）。</li>
-</ul>
+<h2 id="压缩-NFT"><a href="#压缩-NFT" class="headerlink" title="压缩 NFT"></a>压缩 NFT<a href="https://www.solana-cn.com/SolanaDocumention/advanced/state-compression.html#压缩-nft"></a></h2><p>压缩 NFT 是 Solana 上状态压缩最流行的用例之一。通过压缩，一百万个 NFT 集合的铸造成本约为 50 SOL，而未压缩的等效集合则约为 12,000 SOL。</p>
+<p>如果有兴趣自己创建压缩 NFT，请阅读我们有关 <a href="https://solana.com/zh/developers/guides/javascript/compressed-nfts">铸造和传输压缩 NFT </a>的开发人员指南。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -571,26 +557,24 @@ async <span class="token keyword">fn</span> <span class="token function">main</s
                 <div class="article-badge left-badge text-color">
                     <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2025/03/07/ethers-rszhi-provider/">
+                    <a href="/2025/03/09/solanajing-ji-zhi-tong-zhang/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="ethers-rs之Provider">
+                                <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Solana中的长期经济体">
                             
-                            <span class="card-title">ethers-rs之Provider</span>
+                            <span class="card-title">Solana中的长期经济体</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Http 提供者（Provider）Http 提供者通过 HTTP 连接到以太坊节点，允许你发送 RPC 请求以获取数据、模拟合约调用、发送交易等。
-
-1.初始化 Http 提供者1. 使用 try_from 方法创建 Provider最简
+                                Solana 的加密经济系统旨在促进一个健康、可持续发展的长期经济体，其参与者激励机制与网络的安全性和去中心化相匹配。该经济体的主要参与者是验证者节点 (validator-client)。下面将讨论他们对网络的贡献、状态验证及其所需的激励
                             
                         </div>
                         <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
                         </span>
                             <span class="publish-author">
                                 
@@ -614,26 +598,24 @@ async <span class="token keyword">fn</span> <span class="token function">main</s
                     下一篇&nbsp;<i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="card">
-                    <a href="/2025/03/07/ethzhong-de-web3mi-yao-cun-chu-ding-yi/">
+                    <a href="/2025/03/09/solanagao-ji-gai-nian-zhi-jiao-yi-que-ren-ji-guo-qi/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="ETH中的Web3密钥存储定义">
+                                <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Solana高级概念之交易重试">
                             
-                            <span class="card-title">ETH中的Web3密钥存储定义</span>
+                            <span class="card-title">Solana高级概念之交易重试</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Web3密钥存储定义规范了一种标准化的方法，用于加密和存储以太坊私钥，主要由钱包软件（如 MetaMask、Geth）使用。本文档将详细介绍其背景、文件结构、加密与解密流程，以及代码示例。
-
-1. 背景与目的1.1 什么是 Web3 密钥存
+                                重试交易在 Solana 网络中，看似有效的交易有时会在被包含进区块之前被丢弃。这种情况常发生在网络拥塞期间，此时 RPC 节点无法将交易重新广播给领导者节点。对于最终用户来说，他们的交易可能看起来完全消失了。虽然 RPC 节点配备了通用重
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-07
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
                             </span>
                             <span class="publish-author">
                                 
@@ -799,7 +781,7 @@ async <span class="token keyword">fn</span> <span class="token function">main</s
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -951,10 +933,5 @@ async <span class="token keyword">fn</span> <span class="token function">main</s
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

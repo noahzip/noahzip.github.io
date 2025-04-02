@@ -1,0 +1,1088 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Solana核心概念之链上代币, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="代币是代表不同类别资产所有权的数字资产。 代币化使产权的数字化成为可能，是管理可替代和不可替代资产的基本组成部分。
+
+同质化代币代表相同类型和价值的可互换和可分割资产（例如 USDC）。
+非同质化代币（NFT）代表不可分割资产（例如艺术品）">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>Solana核心概念之链上代币 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Solana核心概念之链上代币</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-03-09
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-03-09
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.7k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        14 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>代币是代表不同类别资产所有权的数字资产。 代币化使产权的数字化成为可能，是管理可替代和不可替代资产的基本组成部分。</p>
+<ul>
+<li><strong>同质化代币</strong>代表相同类型和价值的可互换和可分割资产（例如 USDC）。</li>
+<li><strong>非同质化代币（NFT）</strong>代表不可分割资产（例如艺术品）的所有权。</li>
+</ul>
+<p>本节将介绍代币在 Solana 上如何表示的基础知识。这些被称为 SPL (<a href="https://github.com/solana-labs/solana-program-library">Solana 程序库</a>) 代币</p>
+<ul>
+<li><a href="https://solana.com/docs/core/tokens#token-program">代币程序</a>包含与网络上的代币（同质化和非同质化）交互的所有指令逻辑。</li>
+<li><a href="https://solana.com/docs/core/tokens#mint-account">铸币账户</a>代表一种特定类型的代币，并存储有关代币的全局元数据， 例如总供应量和铸币权限（授权创建代币新单位的地址）。</li>
+<li><a href="https://solana.com/docs/core/tokens#token-account">代币账户</a>跟踪特定地址拥有特定类型代币（铸币账户）的单位数量的个人所有权。</li>
+</ul>
+<blockquote>
+<p>INFO<br>代币程序目前有两个版本。原始<a href="https://github.com/solana-labs/solana-program-library/tree/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program">代币程序</a>和<a href="https://github.com/solana-labs/solana-program-library/tree/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program-2022">代币扩展程序</a>（Token2022）。代币扩展程序的功能与原始代币程序相同，但具有附加功能和改进。代币扩展程序是用于创建新代币（铸币账户）的推荐版本。</p>
+</blockquote>
+<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><ul>
+<li><strong>代币</strong>：代表对同质化（可互换）或非同质化（唯一）资产的所有权。</li>
+<li><strong>代币程序：</strong>包含与网络上同质化和非同质化代币交互的所有指令。</li>
+<li><strong>代币扩展程序：</strong>是代币程序的新版本，它包含其他功能，同时保持相同的核心功能。</li>
+<li><strong>Mint账户：</strong>代表网络上的唯一代币，并存储全局元数据，例如总供应量。</li>
+<li><strong>代币账户：</strong>跟踪特定铸币账户的个人代币所有权。</li>
+<li><strong>关联代币账户</strong>：是使用源自所有者和铸币账户地址的地址创建的代币账户。</li>
+</ul>
+<h2 id="代币程序"><a href="#代币程序" class="headerlink" title="代币程序"></a>代币程序</h2><p><a href="https://github.com/solana-labs/solana-program-library/tree/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program">代币程序</a> 包含与网络上的代币（同质化和非同质化）交互的所有指令逻辑。 Solana上的所有代币实际上是代币计划拥有的 <a href="https://solana.com/docs/core/accounts#data-account">数据账户</a>。</p>
+<p>您可以在 <a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program/src/instruction.rs">此处</a> 找到代币程序说明的完整列表。</p>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309103455496.png" alt="代币程序"></p>
+<p>一些常用的说明包括：</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program/src/processor.rs#L29">InitializeMint</a>:创建一个新的铸币账户来代表一种新型的代币。</li>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program/src/processor.rs#L84">InitializeAccount</a>:创建一个新的代币账户来持有特定类型代币（铸币厂）的单位。</li>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program/src/processor.rs#L522">MintTo</a>:创建特定类型代币的新单位，并将其添加到代币帐户。这增加了代币的供应，并且只能由铸币账户的铸币厂机构完成。</li>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program/src/processor.rs#L228">Transfer</a>:将特定类型代币的单位从一个代币账户转移到另一个代币账户。</li>
+</ul>
+<h3 id="Mint账户"><a href="#Mint账户" class="headerlink" title="Mint账户"></a>Mint账户</h3><p>Solana 上的代币由代币计划拥有的<a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program/src/state.rs#L18-L32">铸币账户</a> 的地址唯一标识。 此帐户实际上是特定代币的全局计数器，并存储以下数据：</p>
+<ul>
+<li><strong>供应量（Supply）</strong>：代币的总供应量</li>
+<li><strong>代币精度（Decimal）：</strong>代币小数精度位数</li>
+<li><strong>铸币权限（Mint Authority）：</strong>被授权创建代币新单位的账户，从而增加供应量</li>
+<li><strong>冻结权限（Freeze Authority）：</strong>有权冻代币从“代币账户”转移的账户</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309103807316.png" alt="Mint Account"></p>
+<p>存储在每个铸币厂帐户上的完整详细信息包括以下内容：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">struct</span> Mint <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/// Optional authority used to mint new tokens. The mint authority may only</span>
+    <span class="token comment" spellcheck="true">/// be provided during mint creation. If no mint authority is present</span>
+    <span class="token comment" spellcheck="true">/// then the mint has a fixed supply and no further tokens may be</span>
+    <span class="token comment" spellcheck="true">/// minted.</span>
+    <span class="token keyword">pub</span> mint_authority<span class="token punctuation">:</span> COption<span class="token operator">&lt;</span>Pubkey<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// Total supply of tokens.</span>
+    <span class="token keyword">pub</span> supply<span class="token punctuation">:</span> u64<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// Number of base 10 digits to the right of the decimal place.</span>
+    <span class="token keyword">pub</span> decimals<span class="token punctuation">:</span> u8<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// Is `true` if this structure has been initialized</span>
+    <span class="token keyword">pub</span> is_initialized<span class="token punctuation">:</span> bool<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// Optional authority to freeze token accounts.</span>
+    <span class="token keyword">pub</span> freeze_authority<span class="token punctuation">:</span> COption<span class="token operator">&lt;</span>Pubkey<span class="token operator">></span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>作为参考，这里是 <a href="https://explorer.solana.com/address/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC铸币账户</a>. 的Solana Explorer链接。</p>
+<h3 id="代币账户"><a href="#代币账户" class="headerlink" title="代币账户"></a>代币账户</h3><p>要跟踪特定代币的每个单位的个人所有权，必须创建代币计划拥有的另一种类型的数据帐户。此帐户称为 <a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program/src/state.rs#L89-L110">代币帐户</a> 。</p>
+<p>账户上最常引用的数据包括：</p>
+<ul>
+<li><strong>铸造（Mint）:</strong> 代币账户持有的代币类型</li>
+<li><strong>所有者（Owner）：</strong>被授权将代币转出代币账户的账户</li>
+<li><strong>金额（Amount）：</strong>代币账户当前持有的代币单位数量</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309104122301.png" alt="代币账户"></p>
+<p>存储在每个代币账户上的完整详细信息包括以下内容：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">struct</span> Account <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/// The mint associated with this account</span>
+    <span class="token keyword">pub</span> mint<span class="token punctuation">:</span> Pubkey<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// The owner of this account.</span>
+    <span class="token keyword">pub</span> owner<span class="token punctuation">:</span> Pubkey<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// The amount of tokens this account holds.</span>
+    <span class="token keyword">pub</span> amount<span class="token punctuation">:</span> u64<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// If `delegate` is `Some` then `delegated_amount` represents</span>
+    <span class="token comment" spellcheck="true">/// the amount authorized by the delegate</span>
+    <span class="token keyword">pub</span> delegate<span class="token punctuation">:</span> COption<span class="token operator">&lt;</span>Pubkey<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// The account's state</span>
+    <span class="token keyword">pub</span> state<span class="token punctuation">:</span> AccountState<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// If is_native.is_some, this is a native token, and the value logs the</span>
+    <span class="token comment" spellcheck="true">/// rent-exempt reserve. An Account is required to be rent-exempt, so</span>
+    <span class="token comment" spellcheck="true">/// the value is used by the Processor to ensure that wrapped SOL</span>
+    <span class="token comment" spellcheck="true">/// accounts do not drop below this threshold.</span>
+    <span class="token keyword">pub</span> is_native<span class="token punctuation">:</span> COption<span class="token operator">&lt;</span>u64<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// The amount delegated</span>
+    <span class="token keyword">pub</span> delegated_amount<span class="token punctuation">:</span> u64<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">/// Optional authority to close the account.</span>
+    <span class="token keyword">pub</span> close_authority<span class="token punctuation">:</span> COption<span class="token operator">&lt;</span>Pubkey<span class="token operator">></span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>为了让钱包拥有某个代币的单位数量，它需要为特定类型的代币（铸币）创建一个代币账户，将钱包指定为代币账户的所有者。</p>
+<p>一个钱包可以为同一类型的代币创建多个代币账户，但每个代币账户只能由一个钱包拥有，并持有一种代币的数量。</p>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309104441855.png" alt="Account Relationship"></p>
+<blockquote>
+<p>INFO<br>请注意，每个代币账户的数据都包含一个<code>owner</code>字段，用于识别谁对该特定代币账户拥有权限。这与 AccountInfo 中指定的程序所有者是分开的，<a href="https://solana.com/docs/core/accounts#accountinfo">AccountInfo</a>是所有代币帐户的代币程序。</p>
+</blockquote>
+<h3 id="关联代币账户"><a href="#关联代币账户" class="headerlink" title="关联代币账户"></a>关联代币账户</h3><p>为了简化为特定铸币和所有者查找代币账户地址的过程，我们经常使用关联代币账户。</p>
+<p>关联代币账户是一种代币账户，其地址是使用所有者的地址和铸币账户的地址确定派生的。 您可以将关联代币账户视为特定铸币厂和所有者的“默认”代币账户。</p>
+<p>重要的是要了解关联的代币账户不是不同类型的代币账户。它只是一个具有特定地址代币帐户。</p>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309104556056.png" alt="关联代币账户"></p>
+<p>这在 Solana 开发中引入了一个关键概念：<a href="https://solana.com/docs/core/pda">程序派生地址（PDA</a>。 从概念上讲，PDA提供了一种使用一些预定义输入生成地址的确定性方法。这使我们能够在以后轻松找到帐户的地址。</p>
+<p>这是一个 <a href="https://beta.solpg.io/656a2dd0fb53fa325bfd0c41">Solana Playground</a> 示例， 它派生了 USDC 关联代币账户地址和所有者。它将始终为同一铸币和所有者生成 <a href="https://explorer.solana.com/address/4kokFKCFMxpCpG41yLYkLEqXW8g1WPfCt2NC9KGivY6N">相同的地址</a>。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> getAssociatedTokenAddressSync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@solana/spl-token"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> associatedTokenAccountAddress <span class="token operator">=</span> <span class="token function">getAssociatedTokenAddressSync</span><span class="token punctuation">(</span>
+  USDC_MINT_ADDRESS<span class="token punctuation">,</span>
+  OWNER_ADDRESS<span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>具体而言，关联代币账户的地址是使用以下输入派生的。下面是一个<a href="https://beta.solpg.io/656a31d0fb53fa325bfd0c42">Solana Playground</a>示例，它生成的地址与上一个示例相同。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> PublicKey <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@solana/web3.js"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">[</span>PDA<span class="token punctuation">,</span> bump<span class="token punctuation">]</span> <span class="token operator">=</span> PublicKey<span class="token punctuation">.</span><span class="token function">findProgramAddressSync</span><span class="token punctuation">(</span>
+  <span class="token punctuation">[</span>
+    OWNER_ADDRESS<span class="token punctuation">.</span><span class="token function">toBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    TOKEN_PROGRAM_ID<span class="token punctuation">.</span><span class="token function">toBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    USDC_MINT_ADDRESS<span class="token punctuation">.</span><span class="token function">toBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  ASSOCIATED_TOKEN_PROGRAM_ID<span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于两个钱包持有相同类型代币的单位，每个钱包都需要自己的代币账户来获得特定的铸币账户。 下图演示了此帐户关系扩展。</p>
+<p><img src="https://raw.githubusercontent.com/NoahChen1994/picgo/main/img/20250309104754214.png" alt="Accounts Relationship Expanded"></p>
+<h2 id="代币示例"><a href="#代币示例" class="headerlink" title="代币示例"></a>代币示例</h2><p><a href="https://docs.solanalabs.com/cli"><code>spl-token</code> CLI</a> 可用于试验 SPL 代币。 在下面的示例中，我们将使用 <a href="https://beta.solpg.io/">Solana Playground</a> 终端直接在浏览器中运行 CLI 命令，而无需在本地安装 CLI。</p>
+<p>创建代币和账户需要 SOL 用于账户租金、存款和交易费用。如果这是您第一次使用 Solana Playground， 请创建一个 Playground 钱包并在 Playground 终端中运行该 <code>solana airdrop</code>命令。您还可以使用公共 <a href="https://faucet.solana.com/">Web 水龙头</a> 获取 devnet SOL。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">solana airdrop 2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>运行 <code>spl-token --help</code>以获取可用命令的完整说明。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token --help<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>或者，你可以使用以下命令在本地安装 spl-token CLI。这需要首先 <a href="https://rustup.rs/">安装 Rust</a>。</p>
+<blockquote>
+<p>INFO<br>在以下各节中，运行 CLI 命令时显示的帐户地址将与下面显示的示例输出不同。请使用 Playground 终端中显示的地址进行操作。例如，输出的地址 <code>create-token</code>是 Playground 钱包设置为铸币机构的铸币帐户。</p>
+</blockquote>
+<h3 id="创建新代币"><a href="#创建新代币" class="headerlink" title="创建新代币"></a>创建新代币</h3><p>要创建新代币（<a href="https://solana.com/docs/core/tokens#mint-account">mint 帐户</a> ），请在 Solana Playground 终端中运行以下命令。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token create-token<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>您应该会看到类似于以下内容的输出。您可以使用 <code>Address</code> 和 <code>Signature</code>. 在 <a href="https://explorer.solana.com/?cluster=devnet">Solana Explorer</a> 上检查代币和交易详细信息。</p>
+<p>在下面的示例输出中，新代币的唯一标识符（地址）为 <code>99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg</code> 。</p>
+<pre class="line-numbers language-console"><code class="language-console">Creating token 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg
+
+Address:  99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg
+Decimals:  9
+
+Signature: 44fvKfT1ezBUwdzrCys3fvCdFxbLMnNvBstds76QZyE6cXag5NupBprSXwxPTzzjrC3cA6nvUZaLFTvmcKyzxrm1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>新代币最初没有供应。你可以使用以下命令检查代币的当前供应情况：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token supply <TOKEN_ADDRESS><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>对新创建的代币运行 <code>supply</code> 命令将返回以下 <code>0</code> 值：</p>
+<pre><code>spl-token supply 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg</code></pre><p>在后台，创建一个新的铸币账户需要发送带有两条指令的交易。这是 <a href="https://beta.solpg.io/660ce32ecffcf4b13384d00f">Solana Playground</a> 上的一个 Javascript 示例。</p>
+<ol>
+<li>调用系统程序创建一个具有足够空间容纳铸币帐户数据的新帐户， 然后将所有权转移到代币程序。</li>
+<li>调用代币程序将新账户的数据初始化为铸币账户</li>
+</ol>
+<h3 id="创建代币账户"><a href="#创建代币账户" class="headerlink" title="创建代币账户"></a>创建代币账户</h3><p>要持有特定代币的单位，您必须首先创建一个<a href="https://solana.com/docs/core/tokens#token-account">代币账户</a>。 若要创建新的代币帐户，请使用以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token create-account [OPTIONS] <TOKEN_ADDRESS><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如，在 Solana Playground 终端中运行以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token create-account 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>返回以下输出：</p>
+<ul>
+<li><code>AfB7uwBEsGtrrBqPTVqEgzWed5XdYfM1psPNLmf7EeX9</code> 是为保存 <code>create-account</code>命令中指定的代币单位而创建代币帐户的地址。</li>
+</ul>
+<pre class="line-numbers language-console"><code class="language-console">Creating account AfB7uwBEsGtrrBqPTVqEgzWed5XdYfM1psPNLmf7EeX9
+
+Signature: 2BtrynuCLX9CNofFiaw6Yzbx6hit66pup9Sk7aFjwU2NEbFz7NCHD9w9sWhrCfEd73XveAGK1DxFpJoQZPXU9tS1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>默认情况下，该 <code>create-account</code>命令会创建一个<a href="https://solana.com/docs/core/tokens#associated-token-account">关联代币帐户</a>， 并将你的钱包地址作为代币帐户所有者。</p>
+<p>您可以使用以下命令创建具有不同所有者的代币帐户：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token create-account --owner <OWNER_ADDRESS> <TOKEN_ADDRESS><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如，运行以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token create-account --owner 2i3KvjDCZWxBsqcxBHpdEaZYQwQSYE6LXUMx5VjY5XrR 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>返回以下输出：</p>
+<pre class="line-numbers language-console"><code class="language-console">`Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt` is the address of the token account created to hold units of the token specified in the `create-account` command (`99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg`) and owned by the address specified following the `--owner` flag (`2i3KvjDCZWxBsqcxBHpdEaZYQwQSYE6LXUMx5VjY5XrR`). This is useful when you need to create a token account for another user.
+
+Creating account Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt
+
+Signature: 44vqKdfzspT592REDPY4goaRJH3uJ3Ce13G4BCuUHg35dVUbHuGTHvqn4ZjYF9BGe9QrjMfe9GmuLkQhSZCBQuEt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在后台，创建一个关联的代币账户需要调用 <a href="https://github.com/solana-labs/solana-program-library/tree/b1c44c171bc95e6ee74af12365cb9cbab68be76c/associated-token-account/program/src">关联代币程序</a> 的单个指令。这是 <a href="https://beta.solpg.io/660ce868cffcf4b13384d011">Solana Playground</a> 上的一个 Javascript 示例。</p>
+<p>关联代币程序使用<a href="https://solana.com/docs/core/cpi">跨程序调用</a> 来处理：</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/associated-token-account/program/src/tools/account.rs#L19">调用系统程序</a> 以使用提供的 PDA 作为新帐户的地址创建新帐户</li>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/associated-token-account/program/src/processor.rs#L138-L161">调用代币程序</a> 以初始化新帐户的代币帐户数据。</li>
+</ul>
+<p>或者，使用随机生成的密钥对（而不是关联的代币账户）创建新的代币账户需要发送包含两条指令的交易。 这是 <a href="https://beta.solpg.io/660ce716cffcf4b13384d010">Solana Playground</a> 上的一个 Javascript 示例。</p>
+<ol>
+<li>调用系统程序创建一个具有足够空间用于代币帐户数据的新帐户，然后将所有权转移给代币程序。</li>
+<li>调用代币程序，将新账户的数据初始化为代币账户</li>
+</ol>
+<h3 id="铸造代币"><a href="#铸造代币" class="headerlink" title="铸造代币"></a>铸造代币</h3><p>若要创建一定数量的代币，请使用以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token mint [OPTIONS] <TOKEN_ADDRESS> <TOKEN_AMOUNT> [--] [RECIPIENT_TOKEN_ACCOUNT_ADDRESS]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如，运行以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token mint 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg 100<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>返回以下输出：</p>
+<ul>
+<li><code>99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg</code> 是铸造代币的铸币账户的地址（增加总供应量）。</li>
+<li><code>AfB7uwBEsGtrrBqPTVqEgzWed5XdYfM1psPNLmf7EeX9</code>是你的钱包代币账户的地址，代币单位正在被铸造到（增加金额）。</li>
+</ul>
+<pre class="line-numbers language-sh"><code class="language-sh">Minting 100 tokens
+  Token: 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg
+  Recipient: AfB7uwBEsGtrrBqPTVqEgzWed5XdYfM1psPNLmf7EeX9
+
+Signature: 2NJ1m7qCraPSBAVxbr2ssmWZmBU9Jc8pDtJAnyZsZJRcaYCYMqq1oRY1gqA4ddQno3g3xcnny5fzr1dvsnFKMEqG<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>要将代币铸造到其他代币账户，请指定预期收件人代币账户的地址。例如，运行以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token mint 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg 100 -- Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>返回以下输出：</p>
+<pre class="line-numbers language-console"><code class="language-console">99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg is the address of the mint account that tokens are being minted for (increasing total supply).
+
+Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt is the address of the token account that units of the token are being minted to (increasing amount).<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-sh"><code class="language-sh">Minting 100 tokens
+  Token: 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg
+  Recipient: Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt
+
+Signature: 3SQvNM3o9DsTiLwcEkSPT1Edr14RgE2wC54TEjonEP2swyVCp2jPWYWdD6RwXUGpvDNUkKWzVBZVFShn5yntxVd7<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在后台，创建代币的新单位需要调用代币程序上的 MintTo 指令。该指令必须由铸币厂当局签署。该指令将代币的新单位铸造到代币账户中，并增加铸币账户的总供应量。这是 <a href="https://beta.solpg.io/660cea45cffcf4b13384d012">Solana Playground</a>上的一个 Javascript 示例。</p>
+<h3 id="转移代币"><a href="#转移代币" class="headerlink" title="转移代币"></a>转移代币</h3><p>若要在两个代币账户之间转移代币数量，请使用以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token transfer [OPTIONS] <TOKEN_ADDRESS> <TOKEN_AMOUNT> <RECIPIENT_ADDRESS
+or RECIPIENT_TOKEN_ACCOUNT_ADDRESS><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>例如，运行以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token transfer 99zqUzQGohamfYxyo8ykTEbi91iom3CLmwCA75FK5zTg 100 Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>返回以下输出：</p>
+<ul>
+<li><code>AfB7uwBEsGtrrBqPTVqEgzWed5XdYfM1psPNLmf7EeX9</code> 是要从中转移代币的代币账户的地址。 这将是要转移的指定代币的代币帐户的地址。</li>
+<li><code>Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt</code> 是要将代币转移到的代币账户的地址。</li>
+</ul>
+<pre class="line-numbers language-sh"><code class="language-sh">Transfer 100 tokens
+  Sender: AfB7uwBEsGtrrBqPTVqEgzWed5XdYfM1psPNLmf7EeX9
+  Recipient: Hmyk3FSw4cfsuAes7sanp2oxSkE9ivaH6pMzDzbacqmt
+
+Signature: 5y6HVwV8V2hHGLTVmTmdySRiEUCZnWmkasAvJ7J6m7JR46obbGKCBqUFgLpZu5zQGwM4Xy6GZ4M5LKd1h6Padx3o<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在后台，转移代币需要调用代币程序上的 <code>Transfer</code> 指令。此指令必须由发送方的代币账户的所有者签名。 该指令将代币单位从一个代币账户转移到另一个代币账户。这是 <a href="https://beta.solpg.io/660ced84cffcf4b13384d013">Solana Playground</a> 上的一个 Javascript 示例。</p>
+<p>请务必了解，发送方和接收方都必须具有要传输的特定类型的代币的现有代币帐户。 发送方可以在交易中包含其他说明，以创建接收方的代币账户，该账户通常是关联代币账户。</p>
+<h3 id="创建代币元数据"><a href="#创建代币元数据" class="headerlink" title="创建代币元数据"></a>创建代币元数据</h3><p>代币扩展计划允许将其他可自定义的元数据（例如名称、符号、图像链接）直接存储在 Mint 帐户上。</p>
+<p>INFO</p>
+<p>要使用 Token Extensions CLI 标志，请确保您已本地安装 CLI，版本 3.4.0 或更高版本： <code>cargo install --version 3.4.0 spl-token-cli</code></p>
+<p>若要创建启用了元数据扩展的新代币，请使用以下命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
+--enable-metadata<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>该命令返回以下输出：</p>
+<ul>
+<li><code>BdhzpzhTD1MFqBiwNdrRy4jFo2FHFufw3n9e8sVjJczP</code>是在启用元数据扩展的情况下创建的新代币的地址。</li>
+</ul>
+<pre class="line-numbers language-sh"><code class="language-sh">Creating token BdhzpzhTD1MFqBiwNdrRy4jFo2FHFufw3n9e8sVjJczP under program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
+To initialize metadata inside the mint, please run `spl-token initialize-metadata BdhzpzhTD1MFqBiwNdrRy4jFo2FHFufw3n9e8sVjJczP <YOUR_TOKEN_NAME> <YOUR_TOKEN_SYMBOL> <YOUR_TOKEN_URI>`, and sign with the mint authority.
+
+Address:  BdhzpzhTD1MFqBiwNdrRy4jFo2FHFufw3n9e8sVjJczP
+Decimals:  9
+
+Signature: 5iQofFeXdYhMi9uTzZghcq8stAaa6CY6saUwcdnELST13eNSifiuLbvR5DnRt311frkCTUh5oecj8YEvZSB3wfai<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一旦创建启用了元数据扩展的新代币后，请使用以下命令初始化元数据。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token initialize-metadata <TOKEN_MINT_ADDRESS> <YOUR_TOKEN_NAME>
+<YOUR_TOKEN_SYMBOL> <YOUR_TOKEN_URI><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>代币URI通常是指向要与代币关联的链下元数据的链接。你可以在 <a href="https://raw.githubusercontent.com/solana-developers/opos-asset/main/assets/DeveloperPortal/metadata.json">此处</a> 找到JSON格式的示例。</p>
+<p>例如，运行以下命令会将额外的元数据直接存储在指定的铸币帐户上：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">spl-token initialize-metadata BdhzpzhTD1MFqBiwNdrRy4jFo2FHFufw3n9e8sVjJczP "TokenName" "TokenSymbol" "https://raw.githubusercontent.com/solana-developers/opos-asset/main/assets/DeveloperPortal/metadata.json"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后，您可以在资源管理器中查找铸币帐户的地址以检查元数据。例如，这是在 <a href="https://solana.fm/address/BdhzpzhTD1MFqBiwNdrRy4jFo2FHFufw3n9e8sVjJczP?cluster=devnet-solana">SolanaFm</a> 资源管理器上启用元数据扩展时创建的代币。</p>
+<p>有关详细信息，请参阅 <a href="https://solana.com/developers/guides/token-extensions/metadata-pointer">元数据扩展指南</a> 。 有关各种代币扩展的更多详细信息，请参阅代币扩展 <a href="https://solana.com/developers/guides/token-extensions/getting-started">入门指南</a> 和 <a href="https://spl.solana.com/token-2022/extensions">SPL文档</a>。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/03/09/solanahe-xin-gai-nian-zhi-ji-qun-he-gong-gong-rpcduan-dian/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Solana核心概念之集群和公共RPC端点">
+                            
+                            <span class="card-title">Solana核心概念之集群和公共RPC端点</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Solana区块链有几个不同的验证节点组，称为集群。每个集群在整体生态系统中承担不同的任务，并包含专用的API节点来处理其各自集群的JSON-RPC请求。
+集群内的各个节点由第三方拥有和操作，每个节点都有一个公共端点。
+Solana公共RP
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/09/solanahe-xin-gai-nian-zhi-kua-cheng-xu-diao-yong-cpi-/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Solana核心概念之跨程序调用（CPI）">
+                            
+                            <span class="card-title">Solana核心概念之跨程序调用（CPI）</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                跨程序调用 (CPI) 是指一个程序调用另一个程序的指令。此机制允许 Solana 程序具有可组合性。
+您可以将指令视为程序向网络公开的 API 端点，将 CPI 视为一个 API 在内部调用另一个 API。
+
+当一个程序向另一个程序发起跨
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">444.2k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+</body>
+</html>

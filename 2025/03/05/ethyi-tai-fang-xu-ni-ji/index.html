@@ -390,7 +390,7 @@
 <p>虽然以太坊有自己的本机加密货币 (ETH)，遵循几乎完全相同的直观规则，但它也支持更强大的功能：<a href="https://ethereum.org/zh/developers/docs/smart-contracts/">智能合约</a>。 </p>
 <p>对于此更复杂的功能，需要一个更复杂的类比。 以太坊不是分布式账本，而是分布式<a href="https://wikipedia.org/wiki/Finite-state_machine">状态机器(opens in a new tab)</a>。 </p>
 <p>以太坊的状态是一个大型数据结构，它不仅保存所有帐户和余额，而且还保存一个<em>机器状态</em>，它可以根据预定义的一组规则在不同的区块之间进行更改，并且可以执行任意的机器代码。 在区块中更改状态的具体规则由 EVM 定义。</p>
-<p><a href="https://ethereum.org/content/translations/zh/developers/docs/evm/evm.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" alt="EVM 组成结构图"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p><a href="https://ethereum.org/content/translations/zh/developers/docs/evm/evm.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Ftranslations%2Fzh%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" alt="EVM 组成结构图"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
 <h2 id="以太坊状态转换函数"><a href="#以太坊状态转换函数" class="headerlink" title="以太坊状态转换函数"></a>以太坊状态转换函数</h2><p>EVM 的行为就像一个数学函数：在给定输入的情况下，它会产生确定性的输出。 因此，将以太坊更正式地描述为具有<strong>状态转换函数</strong>非常有帮助：</p>
 <pre><code>1Y(S, T)= S'</code></pre><p>给定一个旧的有效状态 <code>（S）</code>&gt; 和一组新的有效交易 <code>（T）</code>，以太坊状态转换函数 <code>Y（S，T）</code> 产生新的有效输出状态<code>S'</code></p>
 <h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>在以太坊环境中，状态是一种称为<a href="https://ethereum.org/zh/developers/docs/data-structures-and-encoding/patricia-merkle-trie/">改进版默克尔帕特里夏树</a>的巨大数据结构，它保存所有通过哈希关联在一起的<a href="https://ethereum.org/zh/developers/docs/accounts/">帐户</a>并可回溯到存储在区块链上的单个根哈希。</p>
@@ -400,7 +400,7 @@
 <p>在执行期间，EVM 会维护一个瞬态<em>内存</em>（作为字可寻址的字节数组），该内存不会在交易之间持久存在。</p>
 <p>然而，合约确实包含一个 Merkle Patricia <em>存储</em> trie（作为可字寻址的字数组），该 trie 与帐户和部分全局状态关联。</p>
 <p>已编译的智能合约字节码作为许多 EVM <a href="https://ethereum.org/zh/developers/docs/evm/opcodes/">opcodes</a>执行，它们执行标准的堆栈操作，例如 <code>XOR</code>、<code>AND</code>、<code>ADD</code>、<code>SUB</code>等。 EVM 还实现了一些区块链特定的堆栈操作，如 <code>ADDRESS</code>、<code>BALANCE</code>、<code>BLOCKHASH</code> 等。</p>
-<p><a href="https://ethereum.org/content/developers/docs/gas/gas.png"><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fgas%2Fgas.png&amp;w=1920&amp;q=75" alt="表明 EVM 操作需要 Gas 的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
+<p><a href="https://ethereum.org/content/developers/docs/gas/gas.png"><img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fgas%2Fgas.png&amp;w=1920&amp;q=75" alt="表明 EVM 操作需要 Gas 的图表"></a><em>示意图节选自<a href="https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf">以太坊虚拟机图解(opens in a new tab)</a></em></p>
 <h2 id="EVM-实现"><a href="#EVM-实现" class="headerlink" title="EVM 实现"></a>EVM 实现</h2><p>EVM 的所有实现都必须遵守以太坊黄皮书中描述的规范。</p>
 <p>在以太坊九年的历程中，以太坊虚拟机经过了几次修订，并且存在不同编程语言实现的以太坊虚拟机版本。</p>
 <p><a href="https://ethereum.org/zh/developers/docs/nodes-and-clients/#execution-clients">以太坊执行客户端</a>都包含一个以太坊虚拟机实现。 此外，还有多个独立的实现，包括：</p>
@@ -2124,7 +2124,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -2276,10 +2276,5 @@
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

@@ -402,9 +402,9 @@
 <h5 id="3-检查是否加载使用了配置中心的配置文件"><a href="#3-检查是否加载使用了配置中心的配置文件" class="headerlink" title="3.检查是否加载使用了配置中心的配置文件"></a>3.检查是否加载使用了配置中心的配置文件</h5><h5 id="4-检查被访问服务是否有项目名前缀"><a href="#4-检查被访问服务是否有项目名前缀" class="headerlink" title="4.检查被访问服务是否有项目名前缀"></a>4.检查被访问服务是否有项目名前缀</h5><h5 id="5-检查路径是否需要权限认证"><a href="#5-检查路径是否需要权限认证" class="headerlink" title="5.检查路径是否需要权限认证"></a>5.检查路径是否需要权限认证</h5><hr>
 <h4 id="跨域问题："><a href="#跨域问题：" class="headerlink" title="跨域问题："></a>跨域问题：</h4><p>出于安全考虑，远程调用遵循同源协议，简单来说就是<strong>协议名</strong>（http,https）、<strong>域名</strong>、<strong>端口名</strong>有任何一个不相同就会被禁止访问。</p>
 <p>具体的方式是常见的请求会发送一个哨兵去探路，返回200表示真正的请求能够发出。如果不允许跨域则403</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/08/06/ZxC6gByVan2bvSY.png" alt="99E_7RB4_35K294O_8@_1YO.png"></p>
+<p><img src="https://i.loli.net/2020/08/06/ZxC6gByVan2bvSY.png" alt="99E_7RB4_35K294O_8@_1YO.png"></p>
 <p><strong>常见的解决办法</strong>：</p>
-<h5 id="第一种方式：把前端和后端都部署到nginx。（更安全）"><a href="#第一种方式：把前端和后端都部署到nginx。（更安全）" class="headerlink" title="第一种方式：把前端和后端都部署到nginx。（更安全）"></a>第一种方式：把前端和后端都部署到nginx。（更安全）</h5><p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://i.loli.net/2020/08/06/wlPfOLqE8DNS4gz.png" alt="7OX_8R_@ZL79_CM~KCB@@5R.png"></p>
+<h5 id="第一种方式：把前端和后端都部署到nginx。（更安全）"><a href="#第一种方式：把前端和后端都部署到nginx。（更安全）" class="headerlink" title="第一种方式：把前端和后端都部署到nginx。（更安全）"></a>第一种方式：把前端和后端都部署到nginx。（更安全）</h5><p><img src="https://i.loli.net/2020/08/06/wlPfOLqE8DNS4gz.png" alt="7OX_8R_@ZL79_CM~KCB@@5R.png"></p>
 <h5 id="第二种方式：配置网关允许跨域"><a href="#第二种方式：配置网关允许跨域" class="headerlink" title="第二种方式：配置网关允许跨域"></a>第二种方式：配置网关允许跨域</h5><p>第一种配置方式：注册bean</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CorsConfig</span><span class="token punctuation">{</span>
@@ -754,7 +754,7 @@ public List&lt;CategoryEntity> listWithTree() {
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -906,10 +906,5 @@ public List&lt;CategoryEntity> listWithTree() {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>

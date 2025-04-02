@@ -421,7 +421,7 @@
 </ul>
 <p>所以，我们需要降低树的⾼度，怎么降低呢？</p>
 <p>就是使⽤多叉树了，每个节点中可以存储多个元素，每个节点的⼦节点数也可以是多个，那⾃然就降低树的⾼度了；示例：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729162916609.png" alt="多路查找树"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729162916609.png" alt="多路查找树"></p>
 <ul>
 <li>16个数据构成的⼆叉树中，树的⾼度是4，查找⼀个元素最多就需要4次磁盘IO； </li>
 <li>16个数据构成的多叉树中，树的⾼度变成了3，那查找⼀个元素最多就只需要3次磁盘IO； </li>
@@ -438,7 +438,7 @@
 <p>示例：</p>
 </li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729163243362.png" alt="B树"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729163243362.png" alt="B树"></p>
 <h4 id="B-树：是基于B树的⼀种变形树，也是⼀种多路查找树；⼀棵m阶的B-树："><a href="#B-树：是基于B树的⼀种变形树，也是⼀种多路查找树；⼀棵m阶的B-树：" class="headerlink" title="B+树：是基于B树的⼀种变形树，也是⼀种多路查找树；⼀棵m阶的B+树："></a>B+树：是基于B树的⼀种变形树，也是⼀种多路查找树；⼀棵m阶的B+树：</h4><ul>
 <li><p>树中每个节点最多含有m个孩⼦（⼦树），和m个元素；⾮叶⼦节点（中间节点）只存储索引，不存储真正的数据；</p>
 </li>
@@ -453,7 +453,7 @@
 <li>所以中间节点不存储数据，可以存储更多的元素作为索引，降低树的⾼度；</li>
 </ul>
 <p>示例：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729163507113.png" alt="B+树"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729163507113.png" alt="B+树"></p>
 </li>
 </ul>
 <h3 id="1-3-MySQL-为什么要使⽤-B-树-作为索引"><a href="#1-3-MySQL-为什么要使⽤-B-树-作为索引" class="headerlink" title="1.3 MySQL 为什么要使⽤ B+树 作为索引"></a><strong>1</strong>.<strong>3</strong> MySQL 为什么要使⽤ B+树 作为索引</h3><p><strong>⼀个数据结构，要⽤来作为索引的话，需要从两个⽅⾯进⾏考虑：查询效率和存储空间；并且MySQL还需要⽀持范围查询；</strong></p>
@@ -491,13 +491,13 @@
 </ul>
 <p>因此，MySQL选择了使⽤B+树作为索引的数据结构；</p>
 <h2 id="2-MySQL索引"><a href="#2-MySQL索引" class="headerlink" title="2. MySQL索引"></a><strong>2</strong>. MySQL索引</h2><h3 id="2-1-索引的数据格式"><a href="#2-1-索引的数据格式" class="headerlink" title="2.1 索引的数据格式"></a><strong>2</strong>.<strong>1</strong> 索引的数据格式</h3><p>假设⼀个表中有 3个字段：id、age、name；再往这个表中插⼊3条数据（id 分别为 1，3，5），此时的数据⻚简略显示为： </p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729165609899.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729165609899.png" alt="image"></p>
 <ul>
 <li>注意看上⾯的 record_type：2 表示最⼩记录、3表示最⼤记录、0表示普通记录</li>
 <li>数据⻚中的数据⾏都⽤单向链表连接起来了（这⾥省略了 slot）</li>
 </ul>
 <p>并且我们假设，⼀个数据⻚中最多存储3条数据，那我们再次插⼊三条数据（id 分别为 4， 7，8）时，这个数据⻚中就不够放了，所以需要再分裂出⼀个数据⻚： </p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729170008495.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729170008495.png" alt="image"></p>
 <ul>
 <li>此时，由于新插⼊数据中，id=4⽐前⼀个数据⻚中的id=5更⼩，⽽我们的数据⻚中的数据⾏是按照id从⼩到⼤排列的；</li>
 <li>所以需要把id=4的数据⾏移到第⼀个数据⻚，把id=5的数据⾏移到第⼆个数据⻚；</li>
@@ -516,11 +516,11 @@
 <li><strong>key</strong>：表示这个数据⻚中所有记录⾏的最⼩值（也就是主键ID最⼩值）；</li>
 <li><strong>page_no</strong>：表示这个数据⻚⻚号；</li>
 </ul>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729171053253.png" alt="页目录项"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729171053253.png" alt="页目录项"></p>
 <p>那这些⼀条⼀条的⽬录项，怎么存储或者说怎么组织数据结构呢？</p>
 <p>其实粗略看起来，它跟数据⾏⾮常相似，只是数据⾏存储的是主键ID+各个字段，那这个⽬录项存储的是最⼩ID+数据⻚号，其实基本⼀样了；</p>
 <p>那我们不就可以也使⽤数据⻚来存储这些⽬录项，存储这种的数据⻚就可以叫做<strong>⽬录项记录⻚</strong>：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729171746101.png" alt="⽬录项记录⻚"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729171746101.png" alt="⽬录项记录⻚"></p>
 <p>那这样怎么区分普通的记录⾏和⽬录项呢？、</p>
 <ul>
 <li>我们前⾯讲过，记录⾏的数据头中，有⼀个字段叫做<strong>record_type</strong>，它有4种取值：<ul>
@@ -540,7 +540,7 @@
 <li>⽬录项记录⻚的编号；</li>
 </ul>
 <p>示例：</p>
-<p><img src="/medias/loading/orange.square-circle-preloader.svg" data-original="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729174056649.png" alt="⽬录项记录⻚"></p>
+<p><img src="https://raw.githubusercontent.com/Mr-xinyichen/picgo/main/img/image-20220729174056649.png" alt="⽬录项记录⻚"></p>
 <p>ps:B+树的插⼊分裂等，会导致⻚号不连续；</p>
 <p>在数据⻚上⾯的⽬录项记录⻚就是索引⻚，它⾥⾯存储的⽬录项记录就是索引项；</p>
 <p>再回过头来看，这种数据⻚+索引⻚来组织出来的索引数据结构，就是⼀棵B+树；我们对照索引和B+树的特性来⼀起看看：</p>
@@ -911,7 +911,7 @@
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">412.5k</span>&nbsp;字
+						class="white-color">444.2k</span>&nbsp;字
              
             
 
@@ -1063,10 +1063,5 @@
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
 
 
-<script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</body>
 </html>
