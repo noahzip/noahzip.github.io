@@ -5,11 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Solana 发行 Token, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
-    <meta name="description" content="🚀 Solana 发行 Token 全流程命令整理📁 初始化目录mkdir new-token
+    <meta name="description" content="Solana 发行 Token 全流程命令整理初始化目录mkdir new-token
 cd new-token
 
-🔑 生成自定义前缀的钱包solana-keygen grind --starts-with noah:1
-👉">
+生成自定义前缀的钱包solana-keygen grind --starts-with noah:1
+选中一个结果，例如：
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -386,21 +387,20 @@ cd new-token
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="🚀-Solana-发行-Token-全流程命令整理"><a href="#🚀-Solana-发行-Token-全流程命令整理" class="headerlink" title="🚀 Solana 发行 Token 全流程命令整理"></a>🚀 Solana 发行 Token 全流程命令整理</h2><h3 id="📁-初始化目录"><a href="#📁-初始化目录" class="headerlink" title="📁 初始化目录"></a>📁 初始化目录</h3><pre class="line-numbers language-sh"><code class="language-sh">mkdir new-token
+                <h2 id="Solana-发行-Token-全流程命令整理"><a href="#Solana-发行-Token-全流程命令整理" class="headerlink" title="Solana 发行 Token 全流程命令整理"></a>Solana 发行 Token 全流程命令整理</h2><h3 id="初始化目录"><a href="#初始化目录" class="headerlink" title="初始化目录"></a>初始化目录</h3><pre class="line-numbers language-sh"><code class="language-sh">mkdir new-token
 cd new-token<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="🔑-生成自定义前缀的钱包"><a href="#🔑-生成自定义前缀的钱包" class="headerlink" title="🔑 生成自定义前缀的钱包"></a>🔑 生成自定义前缀的钱包</h3><pre class="line-numbers language-sh"><code class="language-sh">solana-keygen grind --starts-with noah:1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>👉 选中一个结果，例如：</p>
+<h3 id="生成自定义前缀的钱包"><a href="#生成自定义前缀的钱包" class="headerlink" title="生成自定义前缀的钱包"></a>生成自定义前缀的钱包</h3><pre class="line-numbers language-sh"><code class="language-sh">solana-keygen grind --starts-with noah:1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>选中一个结果，例如：</p>
 <pre class="line-numbers language-sh"><code class="language-sh">noahXTdc3UVyirQnV21CL4ZDf3S1GUrURhh2X7VN8xF<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <hr>
-<h3 id="📌-设置钱包和网络"><a href="#📌-设置钱包和网络" class="headerlink" title="📌 设置钱包和网络"></a>📌 设置钱包和网络</h3><pre class="line-numbers language-sh"><code class="language-sh">solana config set --keypair noahXTdc3UVyirQnV21CL4ZDf3S1GUrURhh2X7VN8xF.json
+<h3 id="设置钱包和网络"><a href="#设置钱包和网络" class="headerlink" title="设置钱包和网络"></a>设置钱包和网络</h3><pre class="line-numbers language-sh"><code class="language-sh">solana config set --keypair noahXTdc3UVyirQnV21CL4ZDf3S1GUrURhh2X7VN8xF.json
 solana config set --url https://api.devnet.solana.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="💸-获取测试币（手动打开网页领取）"><a href="#💸-获取测试币（手动打开网页领取）" class="headerlink" title="💸 获取测试币（手动打开网页领取）"></a>💸 获取测试币（手动打开网页领取）</h3><p><a href="https://faucet.solana.com">https://faucet.solana.com</a></p>
+<h3 id="获取测试币（手动打开网页领取）"><a href="#获取测试币（手动打开网页领取）" class="headerlink" title="获取测试币（手动打开网页领取）"></a>获取测试币（手动打开网页领取）</h3><p><a href="https://faucet.solana.com">https://faucet.solana.com</a></p>
 <p>然后检查余额：</p>
 <pre class="line-numbers language-sh"><code class="language-sh">solana balance<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<hr>
-<h3 id="🪙-创建-Token（带-metadata-支持）"><a href="#🪙-创建-Token（带-metadata-支持）" class="headerlink" title="🪙 创建 Token（带 metadata 支持）"></a>🪙 创建 Token（带 metadata 支持）</h3><p>先生成一个以 mnt 开头的地址：</p>
+<h3 id="创建-Token（带-metadata-支持）"><a href="#创建-Token（带-metadata-支持）" class="headerlink" title="创建 Token（带 metadata 支持）"></a>创建 Token（带 metadata 支持）</h3><p>先生成一个以 mnt 开头的地址：</p>
 <pre class="line-numbers language-sh"><code class="language-sh">solana-keygen grind --starts-with mnt:1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后使用这个文件创建 Token：</p>
 <pre class="line-numbers language-sh"><code class="language-sh">spl-token create-token \
@@ -408,7 +408,7 @@ solana config set --url https://api.devnet.solana.com<span aria-hidden="true" cl
   --enable-metadata \
   mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7.json<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="📝-准备-metadata-json-文件"><a href="#📝-准备-metadata-json-文件" class="headerlink" title="📝 准备 metadata.json 文件"></a>📝 准备 metadata.json 文件</h3><pre class="line-numbers language-sh"><code class="language-sh">vim metadata.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="准备-metadata-json-文件"><a href="#准备-metadata-json-文件" class="headerlink" title="准备 metadata.json 文件"></a>准备 metadata.json 文件</h3><pre class="line-numbers language-sh"><code class="language-sh">vim metadata.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>填入以下内容：</p>
 <pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"NOAH Token"</span><span class="token punctuation">,</span>
@@ -417,22 +417,22 @@ solana config set --url https://api.devnet.solana.com<span aria-hidden="true" cl
   <span class="token property">"image"</span><span class="token operator">:</span> <span class="token string">"https://pic.616pic.com/ys_bnew_img/00/20/06/ovfm8RUNEb.jpg"</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="🏷-初始化-Token-Metadata（只能初始化一次）"><a href="#🏷-初始化-Token-Metadata（只能初始化一次）" class="headerlink" title="🏷 初始化 Token Metadata（只能初始化一次）"></a>🏷 初始化 Token Metadata（只能初始化一次）</h3><pre class="line-numbers language-sh"><code class="language-sh">spl-token initialize-metadata \
+<h3 id="初始化-Token-Metadata（只能初始化一次）"><a href="#初始化-Token-Metadata（只能初始化一次）" class="headerlink" title="初始化 Token Metadata（只能初始化一次）"></a>初始化 Token Metadata（只能初始化一次）</h3><pre class="line-numbers language-sh"><code class="language-sh">spl-token initialize-metadata \
   mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7 \
   "NOAH TOKEN" \
   "NT" \
   metadata.json<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="✏️-后续修改-Metadata（如链接或图像）"><a href="#✏️-后续修改-Metadata（如链接或图像）" class="headerlink" title="✏️ 后续修改 Metadata（如链接或图像）"></a>✏️ 后续修改 Metadata（如链接或图像）</h3><p>把 <code>metadata.json</code> 上传到 GitHub 或其他平台，然后更新 URI：</p>
+<h3 id="后续修改-Metadata（如链接或图像）"><a href="#后续修改-Metadata（如链接或图像）" class="headerlink" title="后续修改 Metadata（如链接或图像）"></a>后续修改 Metadata（如链接或图像）</h3><p>把 <code>metadata.json</code> 上传到 GitHub 或其他平台，然后更新 URI：</p>
 <pre class="line-numbers language-sh"><code class="language-sh">spl-token update-metadata \
   mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7 \
   uri "https://raw.githubusercontent.com/NoahChen1994/picgo/main/metadata.json"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="🧾-创建-Token-Associated-Account"><a href="#🧾-创建-Token-Associated-Account" class="headerlink" title="🧾 创建 Token Associated Account"></a>🧾 创建 Token Associated Account</h3><pre class="line-numbers language-sh"><code class="language-sh">spl-token create-account mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="创建-Token-Associated-Account"><a href="#创建-Token-Associated-Account" class="headerlink" title="创建 Token Associated Account"></a>创建 Token Associated Account</h3><pre class="line-numbers language-sh"><code class="language-sh">spl-token create-account mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <hr>
-<h3 id="💰-铸造-Token-到自己的账户"><a href="#💰-铸造-Token-到自己的账户" class="headerlink" title="💰 铸造 Token 到自己的账户"></a>💰 铸造 Token 到自己的账户</h3><pre class="line-numbers language-sh"><code class="language-sh">spl-token mint mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7 1000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="铸造-Token-到自己的账户"><a href="#铸造-Token-到自己的账户" class="headerlink" title="铸造 Token 到自己的账户"></a>铸造 Token 到自己的账户</h3><pre class="line-numbers language-sh"><code class="language-sh">spl-token mint mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7 1000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <hr>
-<h3 id="✅-完成！"><a href="#✅-完成！" class="headerlink" title="✅ 完成！"></a>✅ 完成！</h3><p>你可以用以下命令查看你的 Token 和账户：</p>
+<h3 id="完成！"><a href="#完成！" class="headerlink" title="完成！"></a>完成！</h3><p>你可以用以下命令查看你的 Token 和账户：</p>
 <pre class="line-numbers language-sh"><code class="language-sh">spl-token accounts
 spl-token balance mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <script>
@@ -506,23 +506,23 @@ spl-token balance mntQaRUKPw138zvLPMCPpU6zUSUaBjQGtzGoq88g2D7<span aria-hidden="
                 <div class="article-badge left-badge text-color">
                     <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
                 <div class="card">
-                    <a href="/2025/04/10/solana-fa-xing-token/">
+                    <a href="/2025/04/10/solanafa-xing-nft/">
                         <div class="card-image">
                             
                                 
-                                <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Solana 发行 Token">
+                                <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Solana发行NFT">
                             
-                            <span class="card-title">Solana 发行 Token</span>
+                            <span class="card-title">Solana发行NFT</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                🚀 Solana 发行 Token 全流程命令整理📁 初始化目录mkdir new-token
-cd new-token
+                                初始化项目mkdir new-nft && cd new-nft
 
-🔑 生成自定义前缀的钱包solana-keygen grind --starts-with noah:1
-👉
+pnpm init
+
+pnpm add @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi-b
                             
                         </div>
                         <div class="publish-info">
@@ -738,7 +738,7 @@ d
 			
 			 
 				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
-						class="white-color">449k</span>&nbsp;字
+						class="white-color">448.6k</span>&nbsp;字
              
             
 
