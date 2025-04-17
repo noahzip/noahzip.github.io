@@ -1,0 +1,982 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Anchor程序的结构, 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="了解 Anchor 程序的结构，包括关键宏及其在简化 Solana 程序开发中的作用。
+Anchor 框架使用 Rust 宏 来减少样板代码，并简化编写 Solana 程序所需的常见安全检查的实现。
+Anchor 程序中主要的宏包括：
+
+d">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>Anchor程序的结构 | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Anchor程序的结构</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2025-04-07
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2025-04-07
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.4k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        5 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>了解 Anchor 程序的结构，包括关键宏及其在简化 Solana 程序开发中的作用。</p>
+<p>Anchor 框架使用 <a href="https://rust-book.cs.brown.edu/ch20-06-macros.html">Rust 宏</a> 来减少样板代码，并简化编写 Solana 程序所需的常见安全检查的实现。</p>
+<p>Anchor 程序中主要的宏包括：</p>
+<ul>
+<li><code>declare_id</code>：指定程序的链上地址。</li>
+<li><code>#[program]</code>：指定包含程序指令逻辑的模块。</li>
+<li><code>#[derive(Accounts)]</code>：用于结构体，表示指令所需的账户列表。</li>
+<li><code>#[account]</code>：用于结构体，为程序创建自定义账户类型。</li>
+</ul>
+<h2 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h2><p>以下是一个简单程序，展示了上述宏的用法，以帮助理解 Anchor 程序的基本结构。</p>
+<p>该程序包含一个名为 <code>initialize</code> 的指令，用于创建一个新账户（<code>NewAccount</code>），并使用 <code>u64</code> 值初始化。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// 引入 Anchor 框架的预置模块（包含常用宏、类型和功能）</span>
+<span class="token keyword">use</span> anchor_lang<span class="token punctuation">:</span><span class="token punctuation">:</span>prelude<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">*</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 声明本程序的程序 ID（Program ID），部署到链上时需替换为真实值</span>
+<span class="token function">declare_id!</span><span class="token punctuation">(</span><span class="token string">"11111111111111111111111111111111"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token attribute attr-name">#[program]</span> <span class="token comment" spellcheck="true">//Anchor 程序的主入口模块，定义一个叫 hello_anchor 的 Solana 程序（Program），里面会包含这个程序暴露给前端调用的所有处理逻辑</span>
+<span class="token keyword">mod</span> hello_anchor <span class="token punctuation">{</span>
+    <span class="token keyword">use</span> <span class="token keyword">super</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">*</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 主入口函数之一：initialize</span>
+    <span class="token comment" spellcheck="true">// 接收一个 Context（上下文对象）和一个参数 data（u64 类型）</span>
+    <span class="token comment" spellcheck="true">// 创建并初始化一个 NewAccount 类型的账户，并设置其 data 字段</span>
+    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">initialize</span><span class="token punctuation">(</span>ctx<span class="token punctuation">:</span> Context<span class="token operator">&lt;</span>Initialize<span class="token operator">></span><span class="token punctuation">,</span> data<span class="token punctuation">:</span> u64<span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 设置新账户的 data 字段为传入值</span>
+        ctx<span class="token punctuation">.</span>accounts<span class="token punctuation">.</span>new_account<span class="token punctuation">.</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 打印一条日志信息（在 Solana Explorer 中可见）</span>
+        <span class="token function">msg!</span><span class="token punctuation">(</span><span class="token string">"Changed data to: {}!"</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 定义「指令所需要的账户」，用于上下文验证和账户检查</span>
+<span class="token attribute attr-name">#[derive(Accounts)]</span>
+<span class="token comment" spellcheck="true">//'info 保证账户引用在程序执行期间是安全有效的</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> Initialize<span class="token operator">&lt;</span>'info<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 创建一个新账户，类型为 NewAccount</span>
+    #<span class="token punctuation">[</span><span class="token function">account</span><span class="token punctuation">(</span>
+        <span class="token comment" spellcheck="true">// - init：表示这是一个新账户，要初始化</span>
+        init<span class="token punctuation">,</span> 
+        <span class="token comment" spellcheck="true">// - payer = signer：签名者负责支付创建账户所需的租金</span>
+        payer <span class="token operator">=</span> signer<span class="token punctuation">,</span> 
+        <span class="token comment" spellcheck="true">// - space = 8 + 8：账户所需的存储空间，8 是 Anchor 的账户标识符（discriminator），另 8 是 u64 的字节数</span>
+        space <span class="token operator">=</span> <span class="token number">8</span> <span class="token operator">+</span> <span class="token number">8</span>
+    <span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">pub</span> new_account<span class="token punctuation">:</span> Account<span class="token operator">&lt;</span>'info<span class="token punctuation">,</span> NewAccount<span class="token operator">></span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//Anchor 提供的账户封装，用于访问 Solana 上的数据账户并自动反序列化为 T 类型</span>
+
+    <span class="token comment" spellcheck="true">// 签名者账户（mutable，因为它需要支付租金）</span>
+    #<span class="token punctuation">[</span><span class="token function">account</span><span class="token punctuation">(</span><span class="token keyword">mut</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">pub</span> signer<span class="token punctuation">:</span> Signer<span class="token operator">&lt;</span>'info<span class="token operator">></span><span class="token punctuation">,</span>
+
+    <span class="token comment" spellcheck="true">// 引用系统程序（用于创建账户）</span>
+    <span class="token keyword">pub</span> system_program<span class="token punctuation">:</span> Program<span class="token operator">&lt;</span>'info<span class="token punctuation">,</span> System<span class="token operator">></span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 定义「账户里的数据结构」，用于储存在区块链上的状态</span>
+<span class="token comment" spellcheck="true">// 默认使用 Anchor 的 #[account] 宏自动添加标识符等元数据</span>
+<span class="token attribute attr-name">#[account]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> NewAccount <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 存储一个 u64 类型的数据</span>
+    data<span class="token punctuation">:</span> u64<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个程序实现了一个非常典型的 Anchor 初始化账户逻辑。重点是：</p>
+<ul>
+<li><p><code>#[account(init)]</code> 的用法。</p>
+</li>
+<li><p><code>space = 8 + 8</code> 中的 <code>8</code> 是 Anchor 自动为每个账户分配的前缀 discriminator。</p>
+</li>
+<li><p><code>Context&lt;Initialize&gt;</code> 会自动帮你打包账户结构体。</p>
+</li>
+<li><p><code>Account</code> 是一个泛型结构体，它包含：</p>
+<ul>
+<li><strong>账户元数据</strong>（如账户地址、公钥、余额等）</li>
+<li><strong>账户数据反序列化后得到的 Rust 结构体</strong>，这里就是 <code>NewAccount</code></li>
+</ul>
+<p>📦 它的作用是：</p>
+<ol>
+<li>自动帮你<strong>反序列化</strong>账户数据为 <code>NewAccount</code></li>
+<li>自动做一些安全检查（比如检查账户是否是预期类型）</li>
+<li>允许你像操作普通 Rust 结构体那样操作 Solana 上的数据</li>
+</ol>
+</li>
+<li><p><code>'info</code> 生命周期告诉 Rust：这个账户在程序运行时有效</p>
+</li>
+</ul>
+<h2 id="declare-id-宏"><a href="#declare-id-宏" class="headerlink" title="declare_id! 宏"></a>declare_id! 宏</h2><p><code>declare_id!</code> 宏用于指定程序的链上地址（程序 ID）。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> anchor_lang<span class="token punctuation">:</span><span class="token punctuation">:</span>prelude<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">*</span><span class="token punctuation">;</span>
+
+<span class="token function">declare_id!</span><span class="token punctuation">(</span><span class="token string">"11111111111111111111111111111111"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>默认情况下，程序 ID 是生成的密钥对的公钥，路径为 <code>/target/deploy/your_program_name.json</code>。</p>
+<p>使用以下命令可以将 <code>declare_id</code> 中的值与实际生成的密钥同步：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">anchor keys sync<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这在你克隆了一个仓库，但该仓库的 <code>declare_id!</code> 值与你本地生成的不一致时非常有用。</p>
+<h2 id="program-属性"><a href="#program-属性" class="headerlink" title="#[program] 属性"></a>#[program] 属性</h2><p><code>#[program]</code> 属性用于标注包含所有指令处理函数的模块。模块内每个 <code>pub fn</code> 对应一个可被调用的指令。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[program]</span>
+<span class="token keyword">mod</span> hello_anchor <span class="token punctuation">{</span>
+    <span class="token keyword">use</span> <span class="token keyword">super</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">*</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">initialize</span><span class="token punctuation">(</span>ctx<span class="token punctuation">:</span> Context<span class="token operator">&lt;</span>Initialize<span class="token operator">></span><span class="token punctuation">,</span> data<span class="token punctuation">:</span> u64<span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        ctx<span class="token punctuation">.</span>accounts<span class="token punctuation">.</span>new_account<span class="token punctuation">.</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+        <span class="token function">msg!</span><span class="token punctuation">(</span><span class="token string">"Changed data to: {}!"</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="指令上下文（Instruction-Context）"><a href="#指令上下文（Instruction-Context）" class="headerlink" title="指令上下文（Instruction Context）"></a>指令上下文（Instruction Context）</h3><p>每个指令函数的第一个参数是 <code>Context&lt;T&gt;</code>，其中 <code>T</code> 是实现了 <code>Accounts</code> trait 的结构体，指定该指令所需的账户。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">initialize</span><span class="token punctuation">(</span>ctx<span class="token punctuation">:</span> Context<span class="token operator">&lt;</span>Initialize<span class="token operator">></span><span class="token punctuation">,</span> data<span class="token punctuation">:</span> u64<span class="token punctuation">)</span> <span class="token punctuation">-></span> Result<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>accounts<span class="token punctuation">.</span>new_account<span class="token punctuation">.</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+    <span class="token function">msg!</span><span class="token punctuation">(</span><span class="token string">"Changed data to: {}!"</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>Context</code> 提供以下字段：</p>
+<ul>
+<li><code>ctx.accounts</code>: 指令所需的账户</li>
+<li><code>ctx.program_id</code>: 当前程序的 ID</li>
+<li><code>ctx.remaining_accounts</code>: 额外传入但未声明的账户</li>
+<li><code>ctx.bumps</code>: PDA 的 bump 种子</li>
+</ul>
+<h2 id="derive-Accounts-宏"><a href="#derive-Accounts-宏" class="headerlink" title="#[derive(Accounts)] 宏"></a>#[derive(Accounts)] 宏</h2><p>该宏用于结构体，自动实现 <code>Accounts</code> trait，以声明指令所需的账户，并负责账户验证和序列化。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[derive(Accounts)]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> Initialize<span class="token operator">&lt;</span>'info<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token attribute attr-name">#[account(init, payer = signer, space = 8 + 8)]</span>
+    <span class="token keyword">pub</span> new_account<span class="token punctuation">:</span> Account<span class="token operator">&lt;</span>'info<span class="token punctuation">,</span> NewAccount<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// 签名者账户，必须 mutable（因为它将支付 lamports，因此余额会发生变化）</span>
+    #<span class="token punctuation">[</span><span class="token function">account</span><span class="token punctuation">(</span><span class="token keyword">mut</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">pub</span> signer<span class="token punctuation">:</span> Signer<span class="token operator">&lt;</span>'info<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token keyword">pub</span> system_program<span class="token punctuation">:</span> Program<span class="token operator">&lt;</span>'info<span class="token punctuation">,</span> System<span class="token operator">></span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="账户验证"><a href="#账户验证" class="headerlink" title="账户验证"></a>账户验证</h3><p>Anchor 通过两种方式验证账户的合法性：</p>
+<ul>
+<li><strong>账户约束（Account Constraints）</strong>：通过 <code>#[account(...)]</code> 属性添加约束，如 <code>init</code>、<code>mut</code>、<code>seeds</code> 等，用于确保账户满足特定条件。</li>
+<li><strong>账户类型（Account Types）</strong>：Anchor 提供内建账户类型（如 <code>Account&lt;T&gt;</code>、<code>Signer</code> 等），用于类型检查和自动验证。</li>
+</ul>
+<h2 id="account-属性"><a href="#account-属性" class="headerlink" title="#[account] 属性"></a>#[account] 属性</h2><p>用于为程序创建自定义账户结构，宏将实现自动序列化、反序列化、添加 discriminator（用于标识账户类型）等功能。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token attribute attr-name">#[account]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> NewAccount <span class="token punctuation">{</span>
+    data<span class="token punctuation">:</span> u64<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此宏还会在账户初始化时设置账户拥有者为当前程序 ID。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <div class="card">
+                    <a href="/2025/04/10/solanafa-xing-token/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Solana 发行 Token">
+                            
+                            <span class="card-title">Solana 发行 Token</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                🚀 Solana 发行 Token 全流程命令整理📁 初始化目录mkdir new-token
+cd new-token
+
+🔑 生成自定义前缀的钱包solana-keygen grind --starts-with noah:1
+👉
+                            
+                        </div>
+                        <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2025-04-10
+                        </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2025/03/09/solanajing-ji-zhi-tong-zhang/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Solana中的长期经济体">
+                            
+                            <span class="card-title">Solana中的长期经济体</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Solana 的加密经济系统旨在促进一个健康、可持续发展的长期经济体，其参与者激励机制与网络的安全性和去中心化相匹配。该经济体的主要参与者是验证者节点 (validator-client)。下面将讨论他们对网络的贡献、状态验证及其所需的激励
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2025-03-09
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/WEB3/" class="post-category">
+                                    WEB3
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">449k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+</body>
+</html>
