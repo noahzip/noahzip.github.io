@@ -35,6 +35,8 @@
     </summary>
     
     
+      <category term="{{ category.name }}" scheme="{{ url + category.path | uriencode }}"/>
+    
     
   </entry>
   

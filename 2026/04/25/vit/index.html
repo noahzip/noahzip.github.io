@@ -1,0 +1,1314 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Vision Transformer (ViT), 立身于大雪弥漫、浓雾障眼的山口，只能偶尔瞥见未必正确的路径，只需睁大双眼，昂起头颅，走好脚下的路，不管它通向何方。">
+    <meta name="description" content="Vision Transformer (ViT)
+参考论文：An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale，ICLR 2021核心结论：把">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="white"/>
+    <title>Vision Transformer (ViT) | Sparks Fly</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+
+        
+    </style>
+    <script src="/libs/jquery/jquery.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Sparks Fly" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/apple-touch-icon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Sparks Fly</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性 -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-home"></i>
+                    
+                    <span>首页</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/categories" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-bookmark"></i>
+                    
+                    <span>分类</span>
+                </a>
+
+            
+        </li>
+    
+        <li class="hide-on-med-and-down nav-item">
+
+            
+                <a href="/archives" class="waves-effect waves-light">
+                    
+                        <i class="fa fa-archive"></i>
+                    
+                    <span>归档</span>
+                </a>
+
+            
+        </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+            <img src="/medias/avatars/avatar.png"
+                 class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Sparks Fly</div>
+        <div class="logo-desc">
+            
+                Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+            <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/categories" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-bookmark"></i>
+                        
+                        分类
+                    </a>
+                
+            </li>
+        
+            <li class="m-nav-item">
+                
+                    <a href="/archives" class="waves-effect waves-light">
+                        
+                            <i class="fa fa-fw fa-archive"></i>
+                        
+                        归档
+                    </a>
+                
+            </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Vision Transformer (ViT)</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">Awsome</span>
+                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/AI/" class="post-category">
+                                    AI
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                        2026-04-25
+                    </div>
+                
+
+                
+                    <div class="post-date info-break-policy">
+                        <i class="fa fa-calendar-check-o fa-fw"></i>更新日期:&nbsp;&nbsp;
+                        2026-04-25
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.4k
+                    </div>
+                
+
+                
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        13 分
+                    </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Vision-Transformer-ViT"><a href="#Vision-Transformer-ViT" class="headerlink" title="Vision Transformer (ViT)"></a>Vision Transformer (ViT)</h1><blockquote>
+<p>参考论文：<strong>An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale</strong>，ICLR 2021<br>核心结论：把图像切成固定大小的 patch 后，几乎不引入卷积先验，直接使用标准 Transformer Encoder，也能在大规模预训练后达到或超过强 CNN 基线，并且训练计算成本更低。</p>
+</blockquote>
+<hr>
+<h2 id="0-一句话理解"><a href="#0-一句话理解" class="headerlink" title="0. 一句话理解"></a>0. 一句话理解</h2><p><strong>ViT 把一张图像切成一串 <code>16x16</code> 的 patch，把每个 patch 当作 NLP 里的 token，再交给标准 Transformer Encoder 做分类。</strong></p>
+<p><img src="https://raw.githubusercontent.com/noahzip/picgo/main/img/20260425224252265.png" alt="image-20260425224252128"></p>
+<p>这篇论文的重点不是“发明了复杂视觉模块”，而是证明：</p>
+<ul>
+<li>图像不一定必须先经过 CNN 才能用 Transformer。</li>
+<li>Transformer 缺少 CNN 的局部性和平移等变性，所以小数据上不占优。</li>
+<li>当预训练数据足够大时，模型可以从数据中学到视觉结构，规模化训练可以弥补甚至超过手工归纳偏置。</li>
+</ul>
+<hr>
+<h2 id="1-模型整体流程"><a href="#1-模型整体流程" class="headerlink" title="1. 模型整体流程"></a>1. 模型整体流程</h2><p><img src="https://raw.githubusercontent.com/noahzip/picgo/main/img/20260425224108243.png" alt="image-20260425224108030"></p>
+<p>以 <code>224x224</code> 输入、<code>16x16</code> patch 为例：</p>
+<pre class="line-numbers language-text"><code class="language-text">输入图像: 224 x 224 x 3
+patch 大小: 16 x 16
+patch 数量: (224 / 16) x (224 / 16) = 14 x 14 = 196
+每个 patch 展平维度: 16 x 16 x 3 = 768
+加上 class token 后序列长度: 196 + 1 = 197
+ViT-B/16 的隐藏维度 D: 768
+最终 Transformer 输入形状: 197 x 768<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="2-四个核心公式"><a href="#2-四个核心公式" class="headerlink" title="2. 四个核心公式"></a>2. 四个核心公式</h2><p><img src="https://raw.githubusercontent.com/noahzip/picgo/main/img/20260425224419246.png" alt="image-20260425224419165"></p>
+<h3 id="2-1-输入嵌入"><a href="#2-1-输入嵌入" class="headerlink" title="2.1 输入嵌入"></a>2.1 输入嵌入</h3><p>$$<br>\mathbf{z}<em>0 =<br>[\mathbf{x}</em>{class}; \mathbf{x}_p^1\mathbf{E}; \mathbf{x}_p^2\mathbf{E}; \dots; \mathbf{x}_p^N\mathbf{E}]</p>
+<ul>
+<li>\mathbf{E}_{pos}<br>$$</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>ViT-B/16 示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\mathbf{x}_p^i$</td>
+<td>第 $i$ 个展平后的 patch</td>
+<td>$1 \times 768$</td>
+</tr>
+<tr>
+<td>$\mathbf{E}$</td>
+<td>可训练线性投影矩阵</td>
+<td>$768 \times 768$</td>
+</tr>
+<tr>
+<td>$\mathbf{x}_{class}$</td>
+<td>可学习的分类 token</td>
+<td>$1 \times 768$</td>
+</tr>
+<tr>
+<td>$\mathbf{E}_{pos}$</td>
+<td>可学习位置编码</td>
+<td>$197 \times 768$</td>
+</tr>
+<tr>
+<td>$\mathbf{z}_0$</td>
+<td>Transformer Encoder 输入序列</td>
+<td>$197 \times 768$</td>
+</tr>
+</tbody></table>
+<p>关键点：</p>
+<ul>
+<li>$N = HW / P^2$，其中 $P$ 是 patch 边长。</li>
+<li>patch embedding 本质上是把每个图像块映射成一个 token embedding。</li>
+<li><code>[class] token</code> 继承自 BERT，最后用它代表整张图像。</li>
+<li>位置编码默认使用<strong>可学习的 1D position embedding</strong>，论文发现它与 2D 位置编码、相对位置编码相比没有明显劣势。</li>
+</ul>
+<h3 id="2-2-Self-Attention-块"><a href="#2-2-Self-Attention-块" class="headerlink" title="2.2 Self-Attention 块"></a>2.2 Self-Attention 块</h3><p>$$<br>\mathbf{z}’<em>\ell = \mathrm{MSA}(\mathrm{LN}(\mathbf{z}</em>{\ell - 1})) + \mathbf{z}_{\ell - 1}, \quad \ell = 1 \dots L<br>$$</p>
+<ul>
+<li><p>LN：LayerNorm（Pre-LN）</p>
+</li>
+<li><p>MSA：多头自注意力，全局信息交互</p>
+</li>
+<li><p><strong>+</strong>残差连接</p>
+</li>
+</ul>
+<p>作用：让每个 patch 能“看到”所有其他 patch，建模全局依赖。</p>
+<p>ViT 使用的是 <strong>Pre-LN</strong> 结构：先 LayerNorm，再进入 MSA，最后做残差连接。这样比原始 Post-LN 更利于深层 Transformer 训练稳定。</p>
+<h3 id="2-3-MLP-块"><a href="#2-3-MLP-块" class="headerlink" title="2.3 MLP 块"></a>2.3 MLP 块</h3><p>$$<br>\mathbf{z}_\ell = \mathrm{MLP}(\mathrm{LN}(\mathbf{z}’_\ell)) + \mathbf{z}’_\ell, \quad \ell = 1 \dots L<br>$$</p>
+<p>作用：对每个 token 独立进行非线性变换，增强特征表示。</p>
+<p>MLP 是两层全连接，中间使用 GELU：<br>$$<br>D \rightarrow D_{MLP} \rightarrow D<br>$$</p>
+<p>在 ViT-B/16 中：</p>
+<pre class="line-numbers language-text"><code class="language-text">768 -> 3072 -> 768<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="2-4-分类表示"><a href="#2-4-分类表示" class="headerlink" title="2.4 分类表示"></a>2.4 分类表示</h3><p>$$<br>\mathbf{y} = \mathrm{LN}(\mathbf{z}_L^0)<br>$$</p>
+<p>$\mathbf{z}_L^0$ 表示第 $L$ 层输出序列中的第 0 个 token，也就是 <code>[class] token</code>。它经过最终 LayerNorm 后作为图像表示，再送入分类头。</p>
+<hr>
+<h2 id="3-ViT-与原始-Transformer-的对应关系"><a href="#3-ViT-与原始-Transformer-的对应关系" class="headerlink" title="3. ViT 与原始 Transformer 的对应关系"></a>3. ViT 与原始 Transformer 的对应关系</h2><table>
+<thead>
+<tr>
+<th>原始 Transformer / BERT</th>
+<th>ViT 中的对应物</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>词 token</td>
+<td>图像 patch token</td>
+<td>把图像块当作词</td>
+</tr>
+<tr>
+<td>token embedding</td>
+<td>patch linear projection</td>
+<td>展平 patch 后线性投影</td>
+</tr>
+<tr>
+<td>position embedding</td>
+<td>patch position embedding</td>
+<td>保留空间位置信息</td>
+</tr>
+<tr>
+<td>Transformer Encoder</td>
+<td>Transformer Encoder</td>
+<td>几乎原样使用</td>
+</tr>
+<tr>
+<td><code>[CLS]</code> token</td>
+<td><code>[class]</code> token</td>
+<td>用于整图分类</td>
+</tr>
+<tr>
+<td>FFN</td>
+<td>MLP block</td>
+<td>两层全连接 + GELU</td>
+</tr>
+</tbody></table>
+<p><strong>本质公式：</strong></p>
+<pre class="line-numbers language-text"><code class="language-text">ViT = patchify(image) + linear projection + position embedding + Transformer Encoder<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="4-模型规模配置"><a href="#4-模型规模配置" class="headerlink" title="4. 模型规模配置"></a>4. 模型规模配置</h2><p>论文基于 BERT 的配置设计 ViT，并额外加入 Huge 版本。</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th align="right">Encoder 层数 L</th>
+<th align="right">隐藏维度 D</th>
+<th align="right">MLP 维度</th>
+<th align="right">Attention Heads</th>
+<th align="right">参数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ViT-Base</td>
+<td align="right">12</td>
+<td align="right">768</td>
+<td align="right">3072</td>
+<td align="right">12</td>
+<td align="right">86M</td>
+</tr>
+<tr>
+<td>ViT-Large</td>
+<td align="right">24</td>
+<td align="right">1024</td>
+<td align="right">4096</td>
+<td align="right">16</td>
+<td align="right">307M</td>
+</tr>
+<tr>
+<td>ViT-Huge</td>
+<td align="right">32</td>
+<td align="right">1280</td>
+<td align="right">5120</td>
+<td align="right">16</td>
+<td align="right">632M</td>
+</tr>
+</tbody></table>
+<p>命名方式：</p>
+<ul>
+<li><code>ViT-B/16</code>：Base 规模，patch 大小为 <code>16x16</code>。</li>
+<li><code>ViT-L/32</code>：Large 规模，patch 大小为 <code>32x32</code>。</li>
+<li>patch 越小，序列越长，计算越贵；因为 Self-Attention 对序列长度近似是二次复杂度。</li>
+</ul>
+<hr>
+<h2 id="5-归纳偏置：为什么-ViT-需要大数据"><a href="#5-归纳偏置：为什么-ViT-需要大数据" class="headerlink" title="5. 归纳偏置：为什么 ViT 需要大数据"></a>5. 归纳偏置：为什么 ViT 需要大数据</h2><p>CNN 的视觉先验很强：</p>
+<ul>
+<li><strong>局部性</strong>：卷积核只看邻域。</li>
+<li><strong>平移等变性</strong>：目标平移后特征响应也相应平移。</li>
+<li><strong>层次结构</strong>：低层边缘纹理，高层语义对象。</li>
+</ul>
+<p>ViT 的视觉先验很弱：</p>
+<ul>
+<li>只在输入阶段使用 patch 切分。</li>
+<li>只通过位置编码告诉模型 patch 的顺序。</li>
+<li>Self-Attention 是全局交互，不天然偏向局部邻域。</li>
+</ul>
+<p>论文结论很清晰：</p>
+<table>
+<thead>
+<tr>
+<th>数据规模</th>
+<th>表现倾向</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ImageNet 1.3M</td>
+<td>CNN / BiT 更强</td>
+<td>CNN 先验能提升小数据泛化</td>
+</tr>
+<tr>
+<td>ImageNet-21k 14M</td>
+<td>ViT 开始接近强 CNN</td>
+<td>数据规模开始支撑 Transformer</td>
+</tr>
+<tr>
+<td>JFT-300M 303M</td>
+<td>ViT 明显释放潜力</td>
+<td>大规模数据弥补归纳偏置不足</td>
+</tr>
+</tbody></table>
+<p>可以把它理解为：<strong>CNN 把“怎么看图”的经验写进架构，ViT 则尽量少写规则，把学习空间留给数据和规模。</strong></p>
+<hr>
+<h2 id="6-位置编码与高分辨率微调"><a href="#6-位置编码与高分辨率微调" class="headerlink" title="6. 位置编码与高分辨率微调"></a>6. 位置编码与高分辨率微调</h2><h3 id="6-1-为什么需要位置编码"><a href="#6-1-为什么需要位置编码" class="headerlink" title="6.1 为什么需要位置编码"></a>6.1 为什么需要位置编码</h3><p>Self-Attention 本身对输入顺序不敏感。如果不加位置编码，模型只知道有哪些 patch，不知道 patch 在图像中的上下左右关系。</p>
+<p>论文做法：</p>
+<ul>
+<li>默认使用可学习的 1D position embedding。</li>
+<li>不使用复杂的 2D-aware position embedding。</li>
+<li>附录实验显示：有位置编码明显优于没有位置编码；但 1D、2D、相对位置编码之间差异很小。</li>
+</ul>
+<p>论文观察到，训练后的位置编码会自然呈现 2D 结构：相邻 patch 的位置向量更相似，同一行、同一列也会表现出相似性。</p>
+<h3 id="6-2-高分辨率微调"><a href="#6-2-高分辨率微调" class="headerlink" title="6.2 高分辨率微调"></a>6.2 高分辨率微调</h3><p>预训练和微调常使用不同输入分辨率。例如预训练使用 <code>224x224</code>，微调使用 <code>384x384</code>、<code>512x512</code> 或 <code>518x518</code>。</p>
+<p>处理方式：</p>
+<ol>
+<li>保持 patch 大小不变。</li>
+<li>输入分辨率变大后，patch 数量变多，序列长度随之变长。</li>
+<li>Transformer 可以处理更长序列，但预训练的位置编码长度不匹配。</li>
+<li>对预训练位置编码按原始二维网格做 <strong>2D interpolation</strong>，映射到新分辨率网格。</li>
+</ol>
+<p>这是 ViT 中少数显式注入 2D 图像结构的位置之一。</p>
+<hr>
+<h2 id="7-预训练与微调设置"><a href="#7-预训练与微调设置" class="headerlink" title="7. 预训练与微调设置"></a>7. 预训练与微调设置</h2><h3 id="7-1-预训练"><a href="#7-1-预训练" class="headerlink" title="7.1 预训练"></a>7.1 预训练</h3><p>论文中的主要设置：</p>
+<ul>
+<li>优化器：Adam。</li>
+<li>batch size：4096。</li>
+<li>学习率：warmup 10k steps 后衰减。</li>
+<li>weight decay：大规模预训练常用 0.1。</li>
+<li>训练分辨率：224。</li>
+</ul>
+<p>数据集：</p>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th align="right">类别数</th>
+<th align="right">图像数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ImageNet</td>
+<td align="right">1k</td>
+<td align="right">1.3M</td>
+<td>中等规模基线</td>
+</tr>
+<tr>
+<td>ImageNet-21k</td>
+<td align="right">21k</td>
+<td align="right">14M</td>
+<td>公开大规模预训练</td>
+</tr>
+<tr>
+<td>JFT-300M</td>
+<td align="right">18k</td>
+<td align="right">303M</td>
+<td>内部超大规模预训练</td>
+</tr>
+</tbody></table>
+<h3 id="7-2-微调"><a href="#7-2-微调" class="headerlink" title="7.2 微调"></a>7.2 微调</h3><p>论文微调流程：</p>
+<ul>
+<li>移除预训练分类头。</li>
+<li>替换为新的零初始化线性层，输出目标数据集类别数。</li>
+<li>使用 SGD + momentum 0.9。</li>
+<li>batch size 为 512。</li>
+<li>通常使用更高分辨率，例如 384。</li>
+</ul>
+<p>注意：预训练阶段的分类头是带一个隐藏层的 MLP；微调阶段论文使用单层线性分类头。</p>
+<hr>
+<h2 id="8-关键实验结论"><a href="#8-关键实验结论" class="headerlink" title="8. 关键实验结论"></a>8. 关键实验结论</h2><h3 id="8-1-与-SOTA-对比"><a href="#8-1-与-SOTA-对比" class="headerlink" title="8.1 与 SOTA 对比"></a>8.1 与 SOTA 对比</h3><p>论文中 JFT-300M 预训练的 ViT-H/14 达到：</p>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th align="right">ViT-H/14 结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ImageNet</td>
+<td align="right">88.55%</td>
+</tr>
+<tr>
+<td>ImageNet-ReaL</td>
+<td align="right">90.72%</td>
+</tr>
+<tr>
+<td>CIFAR-10</td>
+<td align="right">99.50%</td>
+</tr>
+<tr>
+<td>CIFAR-100</td>
+<td align="right">94.55%</td>
+</tr>
+<tr>
+<td>Oxford-IIIT Pets</td>
+<td align="right">97.56%</td>
+</tr>
+<tr>
+<td>Oxford Flowers-102</td>
+<td align="right">99.68%</td>
+</tr>
+<tr>
+<td>VTAB 19 tasks</td>
+<td align="right">77.63%</td>
+</tr>
+</tbody></table>
+<p>同时预训练成本约为 <code>2.5k TPUv3-core-days</code>，低于论文对比中的 BiT-L <code>9.9k</code> 和 Noisy Student <code>12.3k</code>。</p>
+<h3 id="8-2-数据规模结论"><a href="#8-2-数据规模结论" class="headerlink" title="8.2 数据规模结论"></a>8.2 数据规模结论</h3><p>论文 Figure 3 / Figure 4 的核心信息：</p>
+<ul>
+<li>小数据预训练时，大 ViT 容易不如小 ViT，也不如 ResNet/BiT。</li>
+<li>数据规模变大后，大 ViT 才能超过小模型和 CNN。</li>
+<li>ResNet 在小数据上更稳，但性能更早平台化；ViT 对规模更敏感，上限更高。</li>
+</ul>
+<h3 id="8-3-计算效率结论"><a href="#8-3-计算效率结论" class="headerlink" title="8.3 计算效率结论"></a>8.3 计算效率结论</h3><p>论文 Figure 5 的结论：</p>
+<ul>
+<li>在 JFT-300M 预训练下，ViT 的性能 / 计算量权衡优于 ResNet。</li>
+<li>达到相似迁移性能时，ViT 约少用 <code>2-4x</code> 预训练计算量。</li>
+<li>Hybrid CNN + ViT 在小计算预算下略好，但模型变大后优势消失。</li>
+</ul>
+<h3 id="8-4-模型内部观察"><a href="#8-4-模型内部观察" class="headerlink" title="8.4 模型内部观察"></a>8.4 模型内部观察</h3><p>论文对 ViT 内部表示做了分析：</p>
+<ul>
+<li>第一层 patch projection 学到类似局部纹理基函数的滤波器。</li>
+<li>位置编码会学到二维空间拓扑。</li>
+<li>低层部分 attention head 已经能关注很大区域，说明 ViT 真的在使用全局信息。</li>
+<li>也有一些低层 head 保持局部注意力，类似 CNN 早期局部特征处理。</li>
+<li>随着层数加深，attention distance 整体增大。</li>
+</ul>
+<hr>
+<h2 id="9-工程实现要点"><a href="#9-工程实现要点" class="headerlink" title="9. 工程实现要点"></a>9. 工程实现要点</h2><h3 id="9-1-Patch-Embedding-的常见实现"><a href="#9-1-Patch-Embedding-的常见实现" class="headerlink" title="9.1 Patch Embedding 的常见实现"></a>9.1 Patch Embedding 的常见实现</h3><p>工程上通常不用手写切 patch + flatten，而是用一个卷积等价实现：</p>
+<pre class="line-numbers language-text"><code class="language-text">Conv2d(
+  in_channels=3,
+  out_channels=D,
+  kernel_size=P,
+  stride=P
+)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当 <code>kernel_size = stride = patch_size</code> 时，每个卷积窗口正好对应一个 patch，输出再展平成 token 序列即可。</p>
+<h3 id="9-2-推理部署注意点"><a href="#9-2-推理部署注意点" class="headerlink" title="9.2 推理部署注意点"></a>9.2 推理部署注意点</h3><ul>
+<li>固定输入分辨率时，position embedding 可以直接使用。</li>
+<li>动态分辨率或高分辨率迁移时，需要实现位置编码插值。</li>
+<li>patch 越小，token 数越多，显存和延迟增长明显。</li>
+<li>ViT-B/16 的参数量约 86M，FP32 大约 344MB；实际部署可用 FP16 / INT8 降低体积。</li>
+<li>分类任务直接取 class token；检测、分割任务通常会改造 token 输出或接任务头。</li>
+</ul>
+<h3 id="9-3-Patch-大小的权衡"><a href="#9-3-Patch-大小的权衡" class="headerlink" title="9.3 Patch 大小的权衡"></a>9.3 Patch 大小的权衡</h3><table>
+<thead>
+<tr>
+<th>Patch 大小</th>
+<th align="right">序列长度</th>
+<th align="right">计算成本</th>
+<th>表达能力</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>32x32</td>
+<td align="right">短</td>
+<td align="right">低</td>
+<td>细节较少</td>
+</tr>
+<tr>
+<td>16x16</td>
+<td align="right">中</td>
+<td align="right">中</td>
+<td>论文主流配置</td>
+</tr>
+<tr>
+<td>14x14</td>
+<td align="right">更长</td>
+<td align="right">更高</td>
+<td>ViT-H/14 精度更强</td>
+</tr>
+</tbody></table>
+<p>公式上，序列长度与 $1/P^2$ 成正比：</p>
+<p>$$<br>N = \frac{H}{P} \times \frac{W}{P}<br>$$</p>
+<p>所以把 patch 从 32 降到 16，序列长度会变成 4 倍，Self-Attention 的主要计算会显著增加。</p>
+<hr>
+<h2 id="10-常见疑问"><a href="#10-常见疑问" class="headerlink" title="10. 常见疑问"></a>10. 常见疑问</h2><h3 id="Q1：ViT-为什么把图像切成-patch，而不是直接对像素做-attention？"><a href="#Q1：ViT-为什么把图像切成-patch，而不是直接对像素做-attention？" class="headerlink" title="Q1：ViT 为什么把图像切成 patch，而不是直接对像素做 attention？"></a>Q1：ViT 为什么把图像切成 patch，而不是直接对像素做 attention？</h3><p>因为直接把每个像素当 token，序列长度太大。<code>224x224</code> 图像有 50176 个像素 token，Self-Attention 的复杂度接近 $O(N^2)$，不可承受。切成 <code>16x16</code> patch 后只有 196 个 patch token，计算量大幅下降。</p>
+<h3 id="Q2：ViT-相比-CNN-最大的优点是什么？"><a href="#Q2：ViT-相比-CNN-最大的优点是什么？" class="headerlink" title="Q2：ViT 相比 CNN 最大的优点是什么？"></a>Q2：ViT 相比 CNN 最大的优点是什么？</h3><p>全局建模能力强，并且架构高度可扩展，可以复用成熟的 Transformer 训练和部署经验。在大规模数据上，ViT 的性能 / 计算量权衡很好。</p>
+<h3 id="Q3：ViT-最大的缺点是什么？"><a href="#Q3：ViT-最大的缺点是什么？" class="headerlink" title="Q3：ViT 最大的缺点是什么？"></a>Q3：ViT 最大的缺点是什么？</h3><p>缺少 CNN 的视觉归纳偏置，小数据训练时泛化较弱，更依赖大规模预训练、正则化和数据增强。</p>
+<h3 id="Q4：为什么-1D-位置编码也能处理-2D-图像？"><a href="#Q4：为什么-1D-位置编码也能处理-2D-图像？" class="headerlink" title="Q4：为什么 1D 位置编码也能处理 2D 图像？"></a>Q4：为什么 1D 位置编码也能处理 2D 图像？</h3><p>因为 patch 按 raster order 展平成一维序列后，每个位置仍然唯一对应原图二维坐标。模型可以通过训练从这些位置向量中学习二维拓扑关系。论文实验表明，1D 可学习位置编码已经足够强。</p>
+<h3 id="Q5：高分辨率微调为什么要插值-position-embedding？"><a href="#Q5：高分辨率微调为什么要插值-position-embedding？" class="headerlink" title="Q5：高分辨率微调为什么要插值 position embedding？"></a>Q5：高分辨率微调为什么要插值 position embedding？</h3><p>输入分辨率变大后，patch 网格从例如 <code>14x14</code> 变成 <code>24x24</code>，位置编码数量不匹配。需要把预训练得到的二维位置编码网格插值到新的网格大小，否则新位置没有对应的位置向量。</p>
+<h3 id="Q6：ViT-中-class-token-和-global-average-pooling-哪个更好？"><a href="#Q6：ViT-中-class-token-和-global-average-pooling-哪个更好？" class="headerlink" title="Q6：ViT 中 class token 和 global average pooling 哪个更好？"></a>Q6：ViT 中 class token 和 global average pooling 哪个更好？</h3><p>论文主实验使用 class token，是为了贴近 BERT / Transformer 的文本分类做法。附录实验显示 class token 和 global average pooling 表现接近，但可能需要不同学习率。</p>
+<hr>
+<h2 id="11-易错点"><a href="#11-易错点" class="headerlink" title="11. 易错点"></a>11. 易错点</h2><ul>
+<li><strong>ViT 不是没有任何图像先验</strong>：patch 切分和高分辨率微调时的位置编码插值都注入了 2D 结构，只是远少于 CNN。</li>
+<li><strong>16x16 不是固定要求</strong>：论文常用 <code>/16</code>，也有 <code>/32</code>、<code>/14</code> 等配置。</li>
+<li><strong>ViT 不一定小数据更强</strong>：小数据上 CNN 的归纳偏置通常更有优势。</li>
+<li><strong>位置编码不是可有可无</strong>：没有位置编码会明显变差。</li>
+<li><strong>Transformer Encoder 几乎原样使用</strong>：ViT 的关键创新在输入表示和规模化验证，而不是 Encoder 内部结构。</li>
+</ul>
+<hr>
+<h2 id="12-学习检查清单"><a href="#12-学习检查清单" class="headerlink" title="12. 学习检查清单"></a>12. 学习检查清单</h2><table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>是否掌握</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能解释为什么图像 patch 可以类比 NLP token</td>
+<td>[ ]</td>
+</tr>
+<tr>
+<td>能写出 ViT 四个核心公式并说明维度</td>
+<td>[ ]</td>
+</tr>
+<tr>
+<td>能画出 patch embedding 到 class token 分类的完整流程</td>
+<td>[ ]</td>
+</tr>
+<tr>
+<td>能解释 CNN 与 ViT 的归纳偏置差异</td>
+<td>[ ]</td>
+</tr>
+<tr>
+<td>能说明为什么 ViT 依赖大规模预训练</td>
+<td>[ ]</td>
+</tr>
+<tr>
+<td>能解释高分辨率微调中的位置编码插值</td>
+<td>[ ]</td>
+</tr>
+<tr>
+<td>能说明 patch size 对序列长度和计算量的影响</td>
+<td>[ ]</td>
+</tr>
+<tr>
+<td>能说出 ViT-B、ViT-L、ViT-H 的核心配置差异</td>
+<td>[ ]</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="13-延伸阅读路线"><a href="#13-延伸阅读路线" class="headerlink" title="13. 延伸阅读路线"></a>13. 延伸阅读路线</h2><table>
+<thead>
+<tr>
+<th>方向</th>
+<th>推荐论文 / 模型</th>
+<th>与 ViT 的关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>图文多模态</td>
+<td>CLIP</td>
+<td>常用 ViT 作为图像编码器</td>
+</tr>
+<tr>
+<td>目标检测</td>
+<td>DETR</td>
+<td>将 Transformer 引入检测任务</td>
+</tr>
+<tr>
+<td>自监督预训练</td>
+<td>MAE</td>
+<td>用 masked image modeling 强化 ViT</td>
+</tr>
+<tr>
+<td>层级视觉 Transformer</td>
+<td>Swin Transformer</td>
+<td>引入窗口注意力和层级结构，增强视觉先验</td>
+</tr>
+<tr>
+<td>数据高效训练</td>
+<td>DeiT</td>
+<td>用蒸馏和训练技巧降低 ViT 对超大数据的依赖</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="14-总结"><a href="#14-总结" class="headerlink" title="14. 总结"></a>14. 总结</h2><p>ViT 的价值在于把视觉识别问题重新表述成序列建模问题：图像被切成 patch 序列，Transformer Encoder 负责全局信息交互，class token 聚合整图语义。它牺牲了一部分 CNN 天生具备的视觉归纳偏置，但换来了更强的规模化能力。论文真正证明的是：<strong>当数据和计算规模足够大时，简单、通用、可扩展的 Transformer 架构可以成为视觉识别的强基线。</strong></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                           
+                        </div>
+                    
+                </div>
+                <div class="post_share"
+                     style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+            <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+                <div class="article-badge left-badge text-color">
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+                </div>
+                <div class="card">
+                    <a href="/2026/04/25/vit/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Vision Transformer (ViT)">
+                            
+                            <span class="card-title">Vision Transformer (ViT)</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Vision Transformer (ViT)
+参考论文：An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale，ICLR 2021核心结论：把
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2026-04-25
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/AI/" class="post-category">
+                                    AI
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        
+        
+            <div class="article col s12 m6" data-aos="fade-up">
+                <div class="article-badge right-badge text-color">
+                    下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="card">
+                    <a href="/2026/04/17/wo-men-de-gu-shi/">
+                        <div class="card-image">
+                            
+                                
+                                <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Our story">
+                            
+                            <span class="card-title">Our story</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Our story一、初识2025年11月21日，我把简历在boss上发给了你。那时候我还不知道，这个普通的求职动作，会让我…
+三天后，你帮我约了面试。11月25日，面试反馈出来，我提供了总结文档，你夸我“牛”，我说是你的功劳。你发来语音，
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2026-04-17
+                            </span>
+                            <span class="publish-author">
+                                
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                        <a href="/categories/emotion/" class="post-category">
+                                    emotion
+                                </a>
+                                    
+                                
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+    <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fa fa-list"></i>
+        </a>
+    </div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换 TOC 目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2022</span>
+            <a href="/about" rel="external nofollow noreferrer">xinyichen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 
+            <br>
+			 <span id="sitetime">载入运行时间...</span>
+            
+            
+            
+            
+            <br>
+            
+			
+			 
+				&nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;<span
+						class="white-color">468.7k</span>&nbsp;字
+             
+            
+
+                
+                <script>
+                    function siteTime() {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "5";
+                        var startDate = "26";
+                        var startHour = "21";
+                        var startMinute = "10";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+                        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                            minutes);
+                        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                            diffMinutes * minutes) / seconds);
+                        if (startYear == todayYear) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffDays + " 天 " + diffHours +
+                                " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays +
+                                " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                        }
+                    }
+
+                    setInterval(siteTime, 1000);
+                </script>
+            
+
+        </div>
+        <!-- <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> -->
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<!-- 异步加载 search.js -->
+<script src="/js/search.js"></script>
+
+<!-- 延迟加载 search.xml -->
+<script type="text/javascript">
+    $(function () {
+        // 延迟500毫秒加载搜索数据，避免阻塞页面加载
+        setTimeout(function () {
+            searchFunc("/search.xml", 'searchInput', 'searchResult');
+        }, 500);
+    });
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- Baidu Analytics -->
+
+
+<!-- Baidu Push -->
+
+
+    <script src="/libs/others/clicklove.js" async="async"></script>
+
+
+
+
+<script type="text/javascript">
+    var OriginTitile = document.title,
+        st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "(oﾟvﾟ)ノ Hi", clearTimeout(st)) : (document.title =
+            "(*´∇｀*) 欢迎回来！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+
+<!-- 在线聊天工具  -->
+
+
+
+<!-- 背景 canvas-nest -->
+
+
+
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+
+
+</body>
+</html>
